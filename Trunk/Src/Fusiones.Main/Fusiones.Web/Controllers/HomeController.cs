@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Fusiones.Web.Controllers
 {
-    public class Home : Controller
+    public class HomeController : Controller
     {
         //
         // GET: /Home/
