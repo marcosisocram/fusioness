@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusiones.Web", "Fusiones.Web\Fusiones.Web.csproj", "{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.BackEnd", "Fusioness.BackEnd\Fusioness.BackEnd.csproj", "{35D59DDA-E931-464B-8C8B-4ED5255C1287}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.WebService", "Fusioness.WebService\Fusioness.WebService.csproj", "{F532595D-7C24-4DDF-8D79-5468D5C5034E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35D59DDA-E931-464B-8C8B-4ED5255C1287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D59DDA-E931-464B-8C8B-4ED5255C1287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D59DDA-E931-464B-8C8B-4ED5255C1287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D59DDA-E931-464B-8C8B-4ED5255C1287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F532595D-7C24-4DDF-8D79-5468D5C5034E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F532595D-7C24-4DDF-8D79-5468D5C5034E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F532595D-7C24-4DDF-8D79-5468D5C5034E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F532595D-7C24-4DDF-8D79-5468D5C5034E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
