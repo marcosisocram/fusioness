@@ -1,0 +1,17 @@
+﻿@model Fusioness.Models.Home.IndexModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+
+<h2>Opa Amigo!</h2>
+@using (Html.BeginForm("DoSomething", "Home", FormMethod.Post))
+{
+    @Html.LabelFor(m => m.User.Name)
+    @Html.TextBoxFor(m => m.User.Name)
+    <br />
+    @Html.LabelFor(m => m.User.Surname)
+    @Html.TextBoxFor(m => m.User.Surname)
+    <br />
+    <input type="submit" value="Send" />
+}
