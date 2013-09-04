@@ -1,18 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusiones.Web", "Fusiones.Web\Fusiones.Web.csproj", "{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness", "Fusioness\Fusioness.csproj", "{3403CB03-5DD8-4013-84BA-54CD213CDDBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.BackEnd", "Fusioness.BackEnd\Fusioness.BackEnd.csproj", "{35D59DDA-E931-464B-8C8B-4ED5255C1287}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.Tests", "Fusioness.Tests\Fusioness.Tests.csproj", "{DE8F7C20-2632-4C47-A92F-3ED40BEF4933}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.WebService", "Fusioness.WebService\Fusioness.WebService.csproj", "{F532595D-7C24-4DDF-8D79-5468D5C5034E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{45A656C6-4299-44BA-8B4D-2D85D314B4AC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F239E2BF-FDA3-4D4F-9DDA-45A1A1A2386B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{26540E02-CBE9-43DD-BAF2-249253D24350}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{3E5E1F37-4C5F-494E-BDB1-C00EEA1C43B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{24E2A3AF-6F5C-4DF9-A8FC-7CB1CBD7543D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{A4905ACA-1AE2-49AB-B675-AFA3B8309CCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.Entities", "Entities\Fusioness.Entities.csproj", "{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.Data", "Fusioness.Data\Fusioness.Data.csproj", "{844DDE8E-7F45-46A3-9A6F-F92B689A629B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.Business", "Fusioness.Business\Fusioness.Business.csproj", "{CABDAE19-201B-4E7D-A5D2-DF22D04DDF64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{685A339A-CECA-4FC6-9611-DD552607AF5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{17DAEE9A-AF16-4672-9760-40D0B624633A}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.Restful", "Fusioness.Restful\Fusioness.Restful.csproj", "{78B780FA-B0DF-4F5F-8ABE-920E7C08407A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,20 +38,40 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37438B1A-B4E2-4716-B01C-1FEDDFC456D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35D59DDA-E931-464B-8C8B-4ED5255C1287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35D59DDA-E931-464B-8C8B-4ED5255C1287}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35D59DDA-E931-464B-8C8B-4ED5255C1287}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35D59DDA-E931-464B-8C8B-4ED5255C1287}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F532595D-7C24-4DDF-8D79-5468D5C5034E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F532595D-7C24-4DDF-8D79-5468D5C5034E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F532595D-7C24-4DDF-8D79-5468D5C5034E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F532595D-7C24-4DDF-8D79-5468D5C5034E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3403CB03-5DD8-4013-84BA-54CD213CDDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3403CB03-5DD8-4013-84BA-54CD213CDDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3403CB03-5DD8-4013-84BA-54CD213CDDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3403CB03-5DD8-4013-84BA-54CD213CDDBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE8F7C20-2632-4C47-A92F-3ED40BEF4933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE8F7C20-2632-4C47-A92F-3ED40BEF4933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE8F7C20-2632-4C47-A92F-3ED40BEF4933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE8F7C20-2632-4C47-A92F-3ED40BEF4933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{844DDE8E-7F45-46A3-9A6F-F92B689A629B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844DDE8E-7F45-46A3-9A6F-F92B689A629B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844DDE8E-7F45-46A3-9A6F-F92B689A629B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844DDE8E-7F45-46A3-9A6F-F92B689A629B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABDAE19-201B-4E7D-A5D2-DF22D04DDF64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABDAE19-201B-4E7D-A5D2-DF22D04DDF64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABDAE19-201B-4E7D-A5D2-DF22D04DDF64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABDAE19-201B-4E7D-A5D2-DF22D04DDF64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B780FA-B0DF-4F5F-8ABE-920E7C08407A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B780FA-B0DF-4F5F-8ABE-920E7C08407A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B780FA-B0DF-4F5F-8ABE-920E7C08407A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B780FA-B0DF-4F5F-8ABE-920E7C08407A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3403CB03-5DD8-4013-84BA-54CD213CDDBC} = {45A656C6-4299-44BA-8B4D-2D85D314B4AC}
+		{DE8F7C20-2632-4C47-A92F-3ED40BEF4933} = {26540E02-CBE9-43DD-BAF2-249253D24350}
+		{CABDAE19-201B-4E7D-A5D2-DF22D04DDF64} = {3E5E1F37-4C5F-494E-BDB1-C00EEA1C43B0}
+		{844DDE8E-7F45-46A3-9A6F-F92B689A629B} = {24E2A3AF-6F5C-4DF9-A8FC-7CB1CBD7543D}
+		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C} = {A4905ACA-1AE2-49AB-B675-AFA3B8309CCB}
+		{78B780FA-B0DF-4F5F-8ABE-920E7C08407A} = {685A339A-CECA-4FC6-9611-DD552607AF5D}
 	EndGlobalSection
 EndGlobal
