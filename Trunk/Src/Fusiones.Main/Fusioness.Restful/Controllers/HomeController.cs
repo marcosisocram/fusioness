@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Fusioness.Restfull.Controllers
+namespace Fusioness.Restful.Controllers
 {
     public class HomeController : Controller
     {

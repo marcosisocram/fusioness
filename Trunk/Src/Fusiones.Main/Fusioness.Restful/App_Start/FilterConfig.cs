@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Fusioness.Restfull
+namespace Fusioness.Restful
 {
     public class FilterConfig
     {

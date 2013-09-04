@@ -7,9 +7,9 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Fusioness.Restfull.Areas.HelpPage.Models;
+using Fusioness.Restful.Areas.HelpPage.Models;
 
-namespace Fusioness.Restfull.Areas.HelpPage
+namespace Fusioness.Restful.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

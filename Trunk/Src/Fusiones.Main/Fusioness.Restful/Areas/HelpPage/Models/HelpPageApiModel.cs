@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
 
-namespace Fusioness.Restfull.Areas.HelpPage.Models
+namespace Fusioness.Restful.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

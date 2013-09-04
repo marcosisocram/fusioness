@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Fusioness.Restfull.Controllers
+namespace Fusioness.Restful.Controllers
 {
     public class ValuesController : ApiController
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Fusioness.Restfull.Areas.HelpPage.Models;
+using Fusioness.Restful.Areas.HelpPage.Models;
 
-namespace Fusioness.Restfull.Areas.HelpPage.Controllers
+namespace Fusioness.Restful.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

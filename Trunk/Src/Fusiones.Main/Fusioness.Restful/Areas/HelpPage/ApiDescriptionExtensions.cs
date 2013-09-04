@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace Fusioness.Restfull.Areas.HelpPage
+namespace Fusioness.Restful.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {
