@@ -12,6 +12,16 @@ namespace Fusioness.Data.Contracts
         /// 
         /// </summary>
         IUnityOfWork UnityOfWork { get;}
+        IQueryable<T> GetAll();
+        IQueryable<T> GetWhere(Expression<Func<T, bool>> predicate);
+        T GetByKey(T entity);
+        T Insert(T entity);
+        IEnumerable<T> Insert(IEnumerable<T> entities);
+        T Update(T entity);
+        IEnumerable<T> Update(IEnumerable<T> entities);
+        void Delete(T entity);
+        void Delete(IEnumerable<T> entities);
+        /*
         /// <summary>
         /// 
         /// </summary>
@@ -37,11 +47,13 @@ namespace Fusioness.Data.Contracts
         /// </summary>
         /// <param name="id"></param>
         void Delete(int id);
+        */
         /// <summary>
         /// 
         /// </summary>
         /// <param name="procedureName"></param>
         /// <param name="parameters"></param>
         IEnumerable<T> ExecuteProcedure(string procedureName, params object[] parameters);
+        
     }
 }

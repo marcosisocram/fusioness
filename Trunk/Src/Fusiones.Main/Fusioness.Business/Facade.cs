@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Fusioness.Business.Users;
+using Fusioness.Business.Usuarios;
 using Fusioness.Entities;
 
 namespace Fusioness.Business
@@ -11,7 +11,7 @@ namespace Fusioness.Business
     public class Facade
     {
         #region Properties
-        private UserBusiness User;
+        private UsuariosBusiness User;
         #endregion
 
         #region Constructor
@@ -25,15 +25,15 @@ namespace Fusioness.Business
         
         private Facade()
         {
-            User = new UserBusiness();
+            User = new UsuariosBusiness();
         }
         #endregion
 
         #region Methods
         #region Public
-        public void DoSomething(User user)
+        public void DoSomething(Usuario usuario)
         {
-            User.DoSomething(user);
+            User.DoSomething(usuario);
         }
         #endregion
 

@@ -39,9 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bicicleta.cs" />
+    <Compile Include="Contato.cs" />
+    <Compile Include="ConviteEvento.cs" />
+    <Compile Include="Coordenada.cs" />
+    <Compile Include="Dificuldade.cs" />
     <Compile Include="EntityBase.cs" />
+    <Compile Include="Evento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="QualidadeRota.cs" />
+    <Compile Include="Resposta.cs" />
+    <Compile Include="Rota.cs" />
+    <Compile Include="TipoCoordenada.cs" />
+    <Compile Include="TipoPista.cs" />
+    <Compile Include="TipoRota.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

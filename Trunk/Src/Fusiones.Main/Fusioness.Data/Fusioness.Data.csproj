@@ -48,13 +48,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FusionessContext.cs" />
-    <Compile Include="Mapping\UserMapping.cs" />
+    <Compile Include="Mapping\BicicletaMap.cs" />
+    <Compile Include="Mapping\ContatoMap.cs" />
+    <Compile Include="Mapping\ConviteEventoMap.cs" />
+    <Compile Include="Mapping\CoordenadaMap.cs" />
+    <Compile Include="Mapping\DificuldadeMap.cs" />
+    <Compile Include="Mapping\EventoMap.cs" />
+    <Compile Include="Mapping\QualidadeRotaMap.cs" />
+    <Compile Include="Mapping\RespostaMap.cs" />
+    <Compile Include="Mapping\RotaMap.cs" />
+    <Compile Include="Mapping\TipoCoordenadaMap.cs" />
+    <Compile Include="Mapping\TipoPistaMap.cs" />
+    <Compile Include="Mapping\TipoRotaMap.cs" />
+    <Compile Include="Mapping\UsuarioMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EFUnityOfWork.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Contracts\IUnityOfWork.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\UsuarioRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\Fusioness.Entities.csproj">
@@ -63,6 +75,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

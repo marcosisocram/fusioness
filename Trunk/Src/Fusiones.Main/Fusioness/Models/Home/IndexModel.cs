@@ -8,6 +8,6 @@ namespace Fusioness.Models.Home
 {
     public class IndexModel
     {
-        public User User { get; set; }
+        public Usuario User { get; set; }
     }
 }

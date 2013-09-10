@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fusioness.Entities
 {
+    [Serializable]
     public class EntityBase
     {
-        public int Id { get; set; }
+        
     }
 }
