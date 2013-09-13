@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class TipoPista : EntityBase
+    public class TipoPista : EntityBase
     {
         public TipoPista()
         {

@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class Dificuldade : EntityBase
+    public class Dificuldade : EntityBase
     {
         public Dificuldade()
         {

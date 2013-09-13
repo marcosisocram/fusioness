@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class Evento : EntityBase
+    public class Evento : EntityBase
     {
         public Evento()
         {

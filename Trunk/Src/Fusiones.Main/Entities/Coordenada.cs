@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class Coordenada : EntityBase
+    public class Coordenada : EntityBase
     {
         public int IdCoordenada { get; set; }
         public int IdRota { get; set; }

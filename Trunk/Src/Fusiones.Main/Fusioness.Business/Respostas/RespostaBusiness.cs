@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Fusioness.Business.Util;
 using Fusioness.Data;
 using Fusioness.Data.Contracts;
 using Fusioness.Data.Repositories;
 using Fusioness.Entities;
 
-namespace Fusioness.Business.Usuarios
+namespace Fusioness.Business.Respostas
 {
-    public class UsuariosBusiness : IUsuarioBusiness
+    public class RespostaBusiness : IRespostaBusiness
     {
         #region Properties
 
@@ -17,38 +21,30 @@ namespace Fusioness.Business.Usuarios
 
         #region Constructor
 
-        public UsuariosBusiness()
+        public RespostaBusiness()
         {
             _ConnectionString = ConnectionBuilder.GetConnection();
         }
 
-        public UsuariosBusiness(string connectionString)
+        public RespostaBusiness(string connectionString)
         {
             _ConnectionString = connectionString;
         }
-
         #endregion
 
         #region Methods
-
+        
         #region Public
-
-        public void DoSomething(Usuario usuario)
+        public Resposta ObterRespostaPorId(int id)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                IRepository<Usuario> repo = new UsuarioRepository(uow);
-                //... IRepository<Type> repo2 = new TypeRepository(uow); //the same IUnityOfWork
-                repo.Insert(usuario);
-                //...
-                uow.Commit();
+                return new RespostaRepository(uow).GetByKey(new Resposta{ IdResposta = id});
             }
         }
-
         #endregion
 
         #region Private
-
         #endregion
 
         #endregion

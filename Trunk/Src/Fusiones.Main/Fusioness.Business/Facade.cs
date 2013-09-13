@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Fusioness.Business.ConvitesEventos;
 using Fusioness.Business.Usuarios;
 using Fusioness.Entities;
 
@@ -11,7 +10,8 @@ namespace Fusioness.Business
     public class Facade
     {
         #region Properties
-        private UsuariosBusiness User;
+        private readonly IUsuarioBusiness UsuarioBus;
+        private readonly IConviteEventoBusiness ConviteEventoBus;
         #endregion
 
         #region Constructor
@@ -25,16 +25,44 @@ namespace Fusioness.Business
         
         private Facade()
         {
-            User = new UsuariosBusiness();
+            UsuarioBus = new UsuariosBusiness();
+            ConviteEventoBus = new ConviteEventoBusiness();
         }
+
         #endregion
 
         #region Methods
+        
         #region Public
+        
+        #region Usuario
+        
         public void DoSomething(Usuario usuario)
         {
-            User.DoSomething(usuario);
+            UsuarioBus.DoSomething(usuario);
         }
+
+        #endregion
+
+        #region ConviteEvento
+
+        public ConviteEvento ObterConviteFeitoAoUsuarioParaOEvento(Usuario convidado, Evento evento)
+        {
+            return ConviteEventoBus.ObterConviteFeitoAoUsuarioParaOEvento(convidado, evento);
+        }
+
+        public IList<ConviteEvento> ObterConvitesFeitosAoUsuario(Usuario convidado)
+        {
+            return ConviteEventoBus.ObterConvitesFeitosAoUsuario(convidado);
+        }
+
+        public ConviteEvento ResponderAoConvite(ConviteEvento convite, Resposta resposta)
+        {
+            return ConviteEventoBus.ResponderAoConvite(convite, resposta);
+        }
+
+        #endregion
+
         #endregion
 
         #region Private

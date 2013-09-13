@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class TipoCoordenada : EntityBase
+    public class TipoCoordenada : EntityBase
     {
         public TipoCoordenada()
         {

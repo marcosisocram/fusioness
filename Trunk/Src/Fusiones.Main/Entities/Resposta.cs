@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class Resposta : EntityBase
+    public class Resposta : EntityBase
     {
         public Resposta()
         {

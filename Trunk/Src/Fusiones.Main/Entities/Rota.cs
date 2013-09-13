@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class Rota : EntityBase
+    public class Rota : EntityBase
     {
         public Rota()
         {

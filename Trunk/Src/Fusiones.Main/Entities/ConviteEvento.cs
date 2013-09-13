@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class ConviteEvento : EntityBase
+    public class ConviteEvento : EntityBase
     {
         public int IdUsuario { get; set; }
         public int IdContato { get; set; }

@@ -65,6 +65,12 @@
     <Compile Include="EFUnityOfWork.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Contracts\IUnityOfWork.cs" />
+    <Compile Include="Repositories\ConviteEventoRepository.cs" />
+    <Compile Include="Repositories\ContatoRepository.cs" />
+    <Compile Include="Repositories\RotaRepository.cs" />
+    <Compile Include="Repositories\TipoRotaRepository.cs" />
+    <Compile Include="Repositories\RespostaRepository.cs" />
+    <Compile Include="Repositories\EventoRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
   </ItemGroup>

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Remoting.Contexts;
 using Fusioness.Data.Contracts;
 using Fusioness.Entities;
 
@@ -18,6 +16,7 @@ namespace Fusioness.Data.Repositories
         public IUnityOfWork UnityOfWork { get; private set; }
         private FusionessContext _Context { get; set; }
         private DbSet<T> _DbSet { get; set; }
+        private string[] _KeyNames { get; set; }
         #endregion
         
         #region Constructor
@@ -26,7 +25,9 @@ namespace Fusioness.Data.Repositories
             UnityOfWork = unityOfWork;
             _Context = (FusionessContext)UnityOfWork.Context;
             _DbSet = _Context.Set<T>();
+            _KeyNames = GetKeyNames();
         }
+
         #endregion
         
         #region Methods
@@ -43,7 +44,7 @@ namespace Fusioness.Data.Repositories
 
         public T GetByKey(T entity)
         {
-            return _DbSet.Find(entity);
+            return _DbSet.Find(GetKeysValues(entity));
         }
 
         public T Insert(T entity)
@@ -62,7 +63,7 @@ namespace Fusioness.Data.Repositories
         {
             var entityOnDataBase = GetByKey(entity);
             if (entityOnDataBase == null) return null;
-            _Context.Entry<T>(entityOnDataBase).CurrentValues.SetValues(entity);
+            _Context.Entry(entityOnDataBase).CurrentValues.SetValues(entity);
             UnityOfWork.Commit(false);
             return entity;
         }
@@ -82,7 +83,7 @@ namespace Fusioness.Data.Repositories
 
         public void Delete(IEnumerable<T> entities)
         {
-            entities.ToList().ForEach(e => Delete(e));
+            entities.ToList().ForEach(Delete);
         }
         /*
         public T GetByID(int id)
@@ -127,7 +128,26 @@ namespace Fusioness.Data.Repositories
         #endregion
         
         #region Private
+
+        private string[] GetKeyNames()
+        {
+            var objectSet = ((IObjectContextAdapter)_Context).ObjectContext.CreateObjectSet<T>();
+            return objectSet.EntitySet.ElementType.KeyMembers.Select(k => k.Name).ToArray();
+        }
+
+        private object[] GetKeysValues(T entity)
+        {
+            var type = typeof(T);
+            var keysValues = new object[_KeyNames.Length];
+            for (var i = 0; i < _KeyNames.Length; i++)
+            {
+                keysValues[i] = type.GetProperty(_KeyNames[i]).GetValue(entity, null);
+            }
+            return keysValues;
+        }
+        
         #endregion
+
         #endregion
     }
 }

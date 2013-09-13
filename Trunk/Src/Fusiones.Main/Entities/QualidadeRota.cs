@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class QualidadeRota : EntityBase
+    public class QualidadeRota : EntityBase
     {
         public QualidadeRota()
         {

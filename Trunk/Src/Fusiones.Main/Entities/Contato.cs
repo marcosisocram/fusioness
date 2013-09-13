@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
-    public partial class Contato : EntityBase
+    public class Contato : EntityBase
     {
         public Contato()
         {
