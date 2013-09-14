@@ -4,6 +4,7 @@ using System.Linq;
 using Fusioness.Business.ConvitesEventos;
 using Fusioness.Business.Usuarios;
 using Fusioness.Entities;
+using Fusioness.Business.Bicicletas;
 
 namespace Fusioness.Business
 {
@@ -12,6 +13,7 @@ namespace Fusioness.Business
         #region Properties
         private readonly IUsuarioBusiness UsuarioBus;
         private readonly IConviteEventoBusiness ConviteEventoBus;
+        private readonly IBicicletaBusiness BicicletaBus;
         #endregion
 
         #region Constructor
@@ -27,6 +29,7 @@ namespace Fusioness.Business
         {
             UsuarioBus = new UsuariosBusiness();
             ConviteEventoBus = new ConviteEventoBusiness();
+            BicicletaBus = new BicicletasBusiness();
         }
 
         #endregion
@@ -59,6 +62,15 @@ namespace Fusioness.Business
         public ConviteEvento ResponderAoConvite(ConviteEvento convite, Resposta resposta)
         {
             return ConviteEventoBus.ResponderAoConvite(convite, resposta);
+        }
+
+        #endregion
+
+        #region Bicicleta
+
+        public void InsertBicicleta(Bicicleta bicicleta)
+        {
+            BicicletaBus.InsertBicicleta(bicicleta);
         }
 
         #endregion

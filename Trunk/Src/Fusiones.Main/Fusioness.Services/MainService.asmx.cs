@@ -48,5 +48,25 @@ namespace Fusioness.Services
                 return new JavaScriptSerializer().Serialize("done with error!");
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string InsertBicicleta(string marca, string modelo)
+        {
+            try
+            {
+                var bicicleta = new Bicicleta();
+                bicicleta.Marca = marca;
+                bicicleta.Modelo = modelo;
+                bicicleta.IdUsuario = 7;
+
+                Facade.Instance.InsertBicicleta(bicicleta);
+                return new JavaScriptSerializer().Serialize("done successfully!");
+            }
+            catch
+            {
+                return new JavaScriptSerializer().Serialize("done with error!");
+            }
+        }
     }
 }
