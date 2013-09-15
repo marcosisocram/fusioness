@@ -137,7 +137,7 @@ namespace Fusioness.Services
             try
             {
                 return Facade.Instance.GetRotas(IdUsuario);
-                return new JavaScriptSerializer().Serialize("done successfully!");
+                //return new JavaScriptSerializer().Serialize("done successfully!");
             }
             catch
             {
