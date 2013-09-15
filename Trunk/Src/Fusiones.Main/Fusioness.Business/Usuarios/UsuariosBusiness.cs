@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Fusioness.Business.Util;
 using Fusioness.Data;
 using Fusioness.Data.Contracts;
@@ -53,6 +55,65 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
+
+        public void InsertUsuario(Usuario usuario)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Usuario> repo = new UsuarioRepository(uow);
+                    repo.Insert(usuario);
+                    uow.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: CREATE LOG
+                throw;
+            }
+        }
+
+        public List<Usuario> CarregarContatos(int idUsuario)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Usuario> repo = new UsuarioRepository(uow);
+                    repo.GetWhere(c => c.IdUsuario != idUsuario);
+                    return repo.GetAll().ToList();
+                    //uow.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: CREATE LOG
+                throw;
+            }
+        }
+        
+        public void AdicionarUsuarioARede(Contato contato)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Contato> repo = new ContatoRepository(uow);
+                    repo.Insert(contato);
+                    uow.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: CREATE LOG
+                throw;
+            }
+        }
+
+        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        {
+        }
         #endregion
 
         #region Private
