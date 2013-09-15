@@ -47,6 +47,10 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
+        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        {
+        }
+
         public Usuario ObterUsuarioPorId(int id)
         {
             using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
