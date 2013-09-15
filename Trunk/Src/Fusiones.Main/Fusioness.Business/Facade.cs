@@ -134,10 +134,10 @@ namespace Fusioness.Business
         {
             return EventoBus.CarregarEventos();
         }
-        public List<Evento> CarregarEventos()
-        {
-            return new List<Evento>();
-        }
+        //public List<Evento> CarregarEventos()
+        //{
+        //    return new List<Evento>();
+        //}
         #endregion
         
         #endregion
