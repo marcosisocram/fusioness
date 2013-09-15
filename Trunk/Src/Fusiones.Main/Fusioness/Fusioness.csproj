@@ -110,12 +110,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BicicletaController.cs" />
+    <Compile Include="Controllers\ContatoController.cs" />
+    <Compile Include="Controllers\RotaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Bicicletas\IndexModel.cs" />
+    <Compile Include="Models\Contato\IndexModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
+    <Compile Include="Models\Rotas\IndexModel.cs" />
+    <Compile Include="Models\Usuarios\IndexModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -137,6 +143,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Contato\Index.cshtml" />
+    <Content Include="Views\Rota\Index.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -214,6 +223,8 @@
           <DevelopmentServerPort>42774</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:15901/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:15901/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,0 +1,17 @@
+﻿@model Fusioness.Models.Rotas.IndexModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+
+<h2>@(TempData["MSG"] == null ? "Index" : TempData["MSG"])</h2>
+@using (Html.BeginForm("QualificarRota", "Rota", FormMethod.Post))
+{
+    <label>Rota:</label>
+    @Html.DropDownList("IdRota", (IEnumerable<SelectListItem>) new SelectList((System.Collections.IEnumerable)ViewData["rotasUsuario"],"IdRota","IdRota"))
+    <br />
+    <label>Tipo Rota:</label>
+    @Html.DropDownList("IdTipoRota", (IEnumerable<SelectListItem>) new SelectList((System.Collections.IEnumerable)ViewData["tiposDeRota"],"IdTipoRota","Descricao"))
+    <br />
+    <input type="submit" value="Send" />
+}

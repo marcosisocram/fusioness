@@ -44,6 +44,10 @@
     <Compile Include="Bicicletas\IBicicletaBusiness.cs" />
     <Compile Include="ConvitesEventos\ConviteEventoBusiness.cs" />
     <Compile Include="ConvitesEventos\IConviteEventoBusiness.cs" />
+    <Compile Include="TipoRota\TipoRotaBusiness.cs" />
+    <Compile Include="TipoRota\ITipoRotaBusiness.cs" />
+    <Compile Include="Rota\IRotaBusiness.cs" />
+    <Compile Include="Rota\RotaBusiness.cs" />
     <Compile Include="Eventos\IEventoBusiness.cs" />
     <Compile Include="Eventos\EventoBusiness.cs" />
     <Compile Include="Facade.cs" />
