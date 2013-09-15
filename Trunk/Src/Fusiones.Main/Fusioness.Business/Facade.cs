@@ -113,7 +113,7 @@ namespace Fusioness.Business
 
         public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
         {
-
+            UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
         }
     }
 }

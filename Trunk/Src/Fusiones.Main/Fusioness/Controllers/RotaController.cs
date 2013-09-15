@@ -22,7 +22,7 @@ namespace Fusioness.Controllers
         {
             MainService service = new MainService();
 
-            TempData["MSG"] = service.QualificarRota(model.rota.IdRota, model.rota.IdTipoRota);
+            //TempData["MSG"] = service.QualificarRota(model.rota.IdRota, model.rota.IdTipoRota);
             return RedirectToAction("index");
         }
     }

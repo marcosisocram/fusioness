@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BicicletaController.cs" />
-    <Compile Include="Controllers\ContatoControler.cs" />
+    <Compile Include="Controllers\ContatoController.cs" />
     <Compile Include="Controllers\RotaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
