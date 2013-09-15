@@ -61,11 +61,11 @@ namespace Fusioness.Services
                 bicicleta.IdUsuario = 7;
 
                 Facade.Instance.InsertBicicleta(bicicleta);
-                return new JavaScriptSerializer().Serialize("done successfully!");
+                return new JavaScriptSerializer().Serialize("Bicicleta Cadastrada com Sucesso!");
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return new JavaScriptSerializer().Serialize("Error ao Cadastrar Bicicleta!");
             }
         }
 
@@ -156,26 +156,50 @@ namespace Fusioness.Services
             }
         }
 
-        //[WebMethod]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        //public string CarregarRotas()
-        //{
-        //    try
-        //    {
-        //        List<Rota> rotas = Facade.Instance.CarregarRotas();
-        //        string str = "";
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GetRotas(int IdUsuario)
+        {
+            try
+            {
+                return Facade.Instance.GetRotas(IdUsuario);
+                //return new JavaScriptSerializer().Serialize("done successfully!");
+            }
+            catch
+            {
+                return new JavaScriptSerializer().Serialize("done with error!");
+            }
+        }
 
-        //        foreach (var rota in rotas)
-        //        {
-        //            str += rota.IdRota + "|";
-        //        }
-        //        return new JavaScriptSerializer().Serialize(str);
-        //    }
-        //    catch
-        //    {
-        //        return new JavaScriptSerializer().Serialize("done with error!");
-        //    }
-        //}
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string CarregarRotas()
+        {
+            try
+            {
+                return Facade.Instance.CarregarRotas();
+                //return new JavaScriptSerializer().Serialize("done successfully!");
+            }
+            catch
+            {
+                return new JavaScriptSerializer().Serialize("done with error!");
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string CarregarTipoRotas()
+        {
+            try
+            {
+                return Facade.Instance.CarregarTipoRotas();
+                //return new JavaScriptSerializer().Serialize("done successfully!");
+            }
+            catch
+            {
+                return new JavaScriptSerializer().Serialize("done with error!");
+            }
+        }
 
         //[WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]

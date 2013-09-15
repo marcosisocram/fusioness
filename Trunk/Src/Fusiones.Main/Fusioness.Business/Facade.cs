@@ -7,6 +7,7 @@ using Fusioness.Entities;
 using Fusioness.Business.Bicicletas;
 using Fusioness.Business.Eventos;
 using Fusioness.Business.Rotas;
+using Fusioness.Business.TiposRota;
 
 namespace Fusioness.Business
 {
@@ -18,6 +19,7 @@ namespace Fusioness.Business
         private readonly IRotaBusiness RotaBus;
         private readonly IConviteEventoBusiness ConviteEventoBus;
         private readonly IBicicletaBusiness BicicletaBus;
+        private readonly ITipoRotaBusiness TipoRotaBus;
         #endregion
 
         #region Constructor
@@ -34,6 +36,8 @@ namespace Fusioness.Business
             UsuarioBus = new UsuariosBusiness();
             ConviteEventoBus = new ConviteEventoBusiness();
             BicicletaBus = new BicicletasBusiness();
+            RotaBus = new RotaBusiness();
+            TipoRotaBus = new TipoRotaBusiness();
         }
 
         #endregion
@@ -101,24 +105,41 @@ namespace Fusioness.Business
 
         #region Rota
 
-        public List<Rota> CarregarRotas()
+        public string CarregarRotas()
         {
             return RotaBus.CarregarRotas();
         }
-
-        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        public string GetRotas(int IdUsuario)
         {
-            UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+            return RotaBus.GetRotas(IdUsuario);
         }
+
+        public String CarregarTipoRotas()
+        {
+            return TipoRotaBus.GetTipoRotas();
+        }
+
+        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario) 
+        {
+            //UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+        }
+
+        
 
         #endregion
 
         #region Evento
-        public List<Evento> CarregarEventos()
+        
+        public string CarregarEventos()
         {
             return EventoBus.CarregarEventos();
         }
+        public List<Evento> CarregarEventos()
+        {
+            return new List<Evento>();
+        }
         #endregion
+        
         #endregion
 
         #region Private

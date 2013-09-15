@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Fusioness.Business.Util;
+using System.Linq;
 using Fusioness.Data;
 using Fusioness.Data.Contracts;
 using Fusioness.Data.Repositories;
@@ -34,17 +36,18 @@ namespace Fusioness.Business.Eventos
 
         #region Public
 
-        public List<Evento> CarregarEventos()
+        public string CarregarEventos()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<Evento> repo = new EventoRepository(uow);
-                //... IRepository<Type> repo2 = new TypeRepository(uow); //the same IUnityOfWork
-                //return repo.GetAll().ToList();
-                return new List<Evento>();
-
-                //...
-                //uow.Commit();
+                var evento = repo.GetAll();
+                StringBuilder sb = new StringBuilder();
+                evento.ToList().ForEach(c =>
+                {
+                    sb.AppendFormat("{0}:{1}.", c.IdEvento, c.IdEvento);
+                });
+                return sb.ToString();
             }
         }
         #endregion

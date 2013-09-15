@@ -129,9 +129,6 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
-        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
-        {
-        }
         #endregion
 
         #region Private

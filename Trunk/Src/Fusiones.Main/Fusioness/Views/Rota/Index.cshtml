@@ -5,14 +5,13 @@
 }
 
 <h2>@(TempData["MSG"] == null ? "Index" : TempData["MSG"])</h2>
-@using (Html.BeginForm("InsertBicicleta", "Bicicleta", FormMethod.Post))
+@using (Html.BeginForm("QualificarRota", "Rota", FormMethod.Post))
 {
-    @Html.LabelFor(m => m.bicicleta.Modelo)
-    @Html.TextBoxFor(m => m.bicicleta.Modelo)
+    <label>Rota:</label>
+    @Html.DropDownList("IdRota", (IEnumerable<SelectListItem>) new SelectList((System.Collections.IEnumerable)ViewData["rotasUsuario"],"IdRota","IdRota"))
     <br />
-    
-    @Html.LabelFor(m => m.bicicleta.Marca)
-    @Html.TextBoxFor(m => m.bicicleta.Marca)
+    <label>Tipo Rota:</label>
+    @Html.DropDownList("IdTipoRota", (IEnumerable<SelectListItem>) new SelectList((System.Collections.IEnumerable)ViewData["tiposDeRota"],"IdTipoRota","Descricao"))
     <br />
     <input type="submit" value="Send" />
 }
