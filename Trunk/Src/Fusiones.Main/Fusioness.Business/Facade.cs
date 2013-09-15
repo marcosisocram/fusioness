@@ -45,6 +45,21 @@ namespace Fusioness.Business
             UsuarioBus.DoSomething(usuario);
         }
 
+        public void InsertUsuario(Usuario usuario)
+        {
+            UsuarioBus.InsertUsuario(usuario);
+        }
+
+        public List<Usuario> CarregarContatos(int idUsuario)
+        {
+            return UsuarioBus.CarregarContatos(idUsuario);
+        }
+
+        public void AdicionarUsuarioARede(Contato contato)
+        {
+            UsuarioBus.AdicionarUsuarioARede(contato);
+        }
+
         #endregion
 
         #region ConviteEvento

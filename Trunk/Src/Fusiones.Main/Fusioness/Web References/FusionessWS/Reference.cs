@@ -35,6 +35,10 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback InsertBicicletaOperationCompleted;
         
+        private System.Threading.SendOrPostCallback InsertUsuarioOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CarregarContatosOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -81,6 +85,12 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event InsertBicicletaCompletedEventHandler InsertBicicletaCompleted;
+        
+        /// <remarks/>
+        public event InsertUsuarioCompletedEventHandler InsertUsuarioCompleted;
+        
+        /// <remarks/>
+        public event CarregarContatosCompletedEventHandler CarregarContatosCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -170,6 +180,76 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InsertUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string InsertUsuario(string nome, string login, string senha, string email, int idade, char sexo, string UrlImagem) {
+            object[] results = this.Invoke("InsertUsuario", new object[] {
+                        nome,
+                        login,
+                        senha,
+                        email,
+                        idade,
+                        sexo,
+                        UrlImagem});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InsertUsuarioAsync(string nome, string login, string senha, string email, int idade, char sexo, string UrlImagem) {
+            this.InsertUsuarioAsync(nome, login, senha, email, idade, sexo, UrlImagem, null);
+        }
+        
+        /// <remarks/>
+        public void InsertUsuarioAsync(string nome, string login, string senha, string email, int idade, char sexo, string UrlImagem, object userState) {
+            if ((this.InsertUsuarioOperationCompleted == null)) {
+                this.InsertUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("InsertUsuario", new object[] {
+                        nome,
+                        login,
+                        senha,
+                        email,
+                        idade,
+                        sexo,
+                        UrlImagem}, this.InsertUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnInsertUsuarioOperationCompleted(object arg) {
+            if ((this.InsertUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertUsuarioCompleted(this, new InsertUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CarregarContatos", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string CarregarContatos(int idUsuario) {
+            object[] results = this.Invoke("CarregarContatos", new object[] {
+                        idUsuario});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CarregarContatosAsync(int idUsuario) {
+            this.CarregarContatosAsync(idUsuario, null);
+        }
+        
+        /// <remarks/>
+        public void CarregarContatosAsync(int idUsuario, object userState) {
+            if ((this.CarregarContatosOperationCompleted == null)) {
+                this.CarregarContatosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCarregarContatosOperationCompleted);
+            }
+            this.InvokeAsync("CarregarContatos", new object[] {
+                        idUsuario}, this.CarregarContatosOperationCompleted, userState);
+        }
+        
+        private void OnCarregarContatosOperationCompleted(object arg) {
+            if ((this.CarregarContatosCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CarregarContatosCompleted(this, new CarregarContatosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -253,6 +333,58 @@ namespace Fusioness.FusionessWS {
         private object[] results;
         
         internal InsertBicicletaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void InsertUsuarioCompletedEventHandler(object sender, InsertUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void CarregarContatosCompletedEventHandler(object sender, CarregarContatosCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CarregarContatosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CarregarContatosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
