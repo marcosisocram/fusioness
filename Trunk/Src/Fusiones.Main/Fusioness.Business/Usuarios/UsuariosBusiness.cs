@@ -45,6 +45,14 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
+        public Usuario ObterUsuarioPorId(int id)
+        {
+            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
+            {
+                return new UsuarioRepository(ouw).GetByKey(new Usuario { IdUsuario = id });
+            }
+        }
+
         #endregion
 
         #region Private
