@@ -8,6 +8,6 @@ namespace Fusioness.Business.Eventos
 {
     public interface IEventoBusiness
     {
-        List<Entities.Evento> CarregarEventos();
+        string CarregarEventos();
     }
 }

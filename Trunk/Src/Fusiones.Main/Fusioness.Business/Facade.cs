@@ -7,6 +7,7 @@ using Fusioness.Entities;
 using Fusioness.Business.Bicicletas;
 using Fusioness.Business.Eventos;
 using Fusioness.Business.Rotas;
+using Fusioness.Business.TiposRota;
 
 namespace Fusioness.Business
 {
@@ -18,6 +19,7 @@ namespace Fusioness.Business
         private readonly IRotaBusiness RotaBus;
         private readonly IConviteEventoBusiness ConviteEventoBus;
         private readonly IBicicletaBusiness BicicletaBus;
+        private readonly ITipoRotaBusiness TipoRotaBus;
         #endregion
 
         #region Constructor
@@ -34,6 +36,8 @@ namespace Fusioness.Business
             UsuarioBus = new UsuariosBusiness();
             ConviteEventoBus = new ConviteEventoBusiness();
             BicicletaBus = new BicicletasBusiness();
+            RotaBus = new RotaBusiness();
+            TipoRotaBus = new TipoRotaBusiness();
         }
 
         #endregion
@@ -101,19 +105,29 @@ namespace Fusioness.Business
         #endregion
         #endregion
 
-        public List<Rota> CarregarRotas()
+        public string CarregarRotas()
         {
             return RotaBus.CarregarRotas();
         }
 
-        public List<Evento> CarregarEventos()
+        public string CarregarEventos()
         {
             return EventoBus.CarregarEventos();
         }
 
         public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
         {
-            UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+            RotaBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+        }
+
+        public string GetRotas(int IdUsuario)
+        {
+            return RotaBus.GetRotas(IdUsuario);
+        }
+
+        public string CarregarTipoRotas()
+        {
+            return TipoRotaBus.GetTipoRotas();
         }
     }
 }
