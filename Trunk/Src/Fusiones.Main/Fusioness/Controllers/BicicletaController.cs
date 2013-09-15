@@ -21,8 +21,8 @@ namespace Fusioness.Controllers
         public ActionResult InsertBicicleta(IndexModel model)
         {
             MainService service = new MainService();
-
-            TempData["MSG"] = service.InsertBicicleta(model.bicicleta.Marca, model.bicicleta.Modelo);
+            int idUsuario = 7;
+            TempData["MSG"] = service.InsertBicicleta(model.bicicleta.Marca, model.bicicleta.Modelo, idUsuario);
             return RedirectToAction("index");
         }
     }
