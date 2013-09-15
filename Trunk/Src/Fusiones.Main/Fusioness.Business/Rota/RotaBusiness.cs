@@ -6,9 +6,9 @@ using Fusioness.Data.Contracts;
 using Fusioness.Data.Repositories;
 using Fusioness.Entities;
 
-namespace Fusioness.Business.Eventos
+namespace Fusioness.Business.Rotas
 {
-    public class EventoBusiness : IEventoBusiness
+    public class RotaBusiness : IRotaBusiness
     {
         #region Properties
 
@@ -18,12 +18,12 @@ namespace Fusioness.Business.Eventos
 
         #region Constructor
 
-        public EventoBusiness()
+        public RotaBusiness()
         {
             _ConnectionString = ConnectionBuilder.GetConnection();
         }
 
-        public EventoBusiness(string connectionString)
+        public RotaBusiness(string connectionString)
         {
             _ConnectionString = connectionString;
         }
@@ -34,19 +34,22 @@ namespace Fusioness.Business.Eventos
 
         #region Public
 
-        public List<Evento> CarregarEventos()
+        public List<Rota> CarregarRotas()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                IRepository<Evento> repo = new EventoRepository(uow);
+                IRepository<Rota> repo = new RotaRepository(uow);
                 //... IRepository<Type> repo2 = new TypeRepository(uow); //the same IUnityOfWork
                 //return repo.GetAll().ToList();
-                return new List<Evento>();
-
-                //...
-                //uow.Commit();
+                return new List<Rota>();
+                
             }
         }
+
+        #endregion
+
+        #region Private
+
         #endregion
 
         #endregion

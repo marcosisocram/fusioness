@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BicicletaController.cs" />
     <Compile Include="Controllers\ContatoControler.cs" />
+    <Compile Include="Controllers\RotaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -119,6 +120,7 @@
     <Compile Include="Models\Bicicletas\IndexModel.cs" />
     <Compile Include="Models\Contato\IndexModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
+    <Compile Include="Models\Rotas\IndexModel.cs" />
     <Compile Include="Models\Usuarios\IndexModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -143,6 +145,7 @@
     </Content>
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Contato\Index.cshtml" />
+    <Content Include="Views\Rota\Index.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

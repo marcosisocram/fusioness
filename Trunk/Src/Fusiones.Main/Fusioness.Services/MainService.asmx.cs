@@ -102,6 +102,7 @@ namespace Fusioness.Services
             {
                 List<Usuario> usuarios = Facade.Instance.CarregarContatos(idUsuario);
                 string str = "";
+
                 foreach (var usuario in usuarios)
                 {
                     str += usuario.Nome + "|" + usuario.IdUsuario + "|";   
@@ -113,5 +114,62 @@ namespace Fusioness.Services
                 return new JavaScriptSerializer().Serialize("done with error!");
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        {
+            try
+            {
+                Facade.Instance.QualificarRota(IdRota,IdTipoRota,IdUsuario);
+                return new JavaScriptSerializer().Serialize("done successfully!");
+            }
+            catch
+            {
+                return new JavaScriptSerializer().Serialize("done with error!");
+            }
+        }
+
+        //[WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //public string CarregarRotas()
+        //{
+        //    try
+        //    {
+        //        List<Rota> rotas = Facade.Instance.CarregarRotas();
+        //        string str = "";
+
+        //        foreach (var rota in rotas)
+        //        {
+        //            str += rota.IdRota + "|";
+        //        }
+        //        return new JavaScriptSerializer().Serialize(str);
+        //    }
+        //    catch
+        //    {
+        //        return new JavaScriptSerializer().Serialize("done with error!");
+        //    }
+        //}
+
+        //[WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //public string CarregarEventos()
+        //{
+        //    try
+        //    {
+        //        List<Evento> eventos = Facade.Instance.CarregarEventos();
+        //        string str = "";
+
+        //        foreach (var evento in eventos)
+        //        {
+        //            str += evento.IdEvento + "|";
+        //        }
+        //        return new JavaScriptSerializer().Serialize(str);
+        //    }
+        //    catch
+        //    {
+        //        return new JavaScriptSerializer().Serialize("done with error!");
+        //    }
+        //}
     }
 }
