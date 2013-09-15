@@ -61,11 +61,11 @@ namespace Fusioness.Services
                 bicicleta.IdUsuario = 7;
 
                 Facade.Instance.InsertBicicleta(bicicleta);
-                return new JavaScriptSerializer().Serialize("done successfully!");
+                return new JavaScriptSerializer().Serialize("Bicicleta Cadastrada com Sucesso!");
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return new JavaScriptSerializer().Serialize("Error ao Cadastrar Bicicleta!");
             }
         }
     }
