@@ -54,6 +54,11 @@ namespace Fusioness.Business
             UsuarioBus.InsertUsuario(usuario);
         }
 
+        public void UpdateUsuario(Usuario usuario)
+        {
+            UsuarioBus.UpdateUsuario(usuario);
+        }
+
         public List<Usuario> CarregarContatos(int idUsuario)
         {
             return UsuarioBus.CarregarContatos(idUsuario);
@@ -94,6 +99,26 @@ namespace Fusioness.Business
 
         #endregion
 
+        #region Rota
+
+        public List<Rota> CarregarRotas()
+        {
+            return RotaBus.CarregarRotas();
+        }
+
+        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        {
+            UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+        }
+
+        #endregion
+
+        #region Evento
+        public List<Evento> CarregarEventos()
+        {
+            return EventoBus.CarregarEventos();
+        }
+        #endregion
         #endregion
 
         #region Private
@@ -101,19 +126,10 @@ namespace Fusioness.Business
         #endregion
         #endregion
 
-        public List<Rota> CarregarRotas()
-        {
-            return RotaBus.CarregarRotas();
-        }
 
-        public List<Evento> CarregarEventos()
-        {
-            return EventoBus.CarregarEventos();
-        }
 
-        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
-        {
-            UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
-        }
+       
+
+       
     }
 }

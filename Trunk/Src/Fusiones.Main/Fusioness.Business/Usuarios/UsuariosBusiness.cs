@@ -74,6 +74,24 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
+        public void UpdateUsuario(Usuario usuario) 
+        {
+            try
+            {
+                using(IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Usuario> repo = new UsuarioRepository(uow);
+                    repo.Update(usuario);
+                    uow.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: CREATE LOG
+                throw;
+            }
+        }
+
         public List<Usuario> CarregarContatos(int idUsuario)
         {
             try
