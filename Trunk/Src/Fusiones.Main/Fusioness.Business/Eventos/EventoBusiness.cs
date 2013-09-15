@@ -34,6 +34,27 @@ namespace Fusioness.Business.Eventos
 
         #region Public
 
+        /// <summary>
+        /// DFD - Método para cadastrar um evento e consequentemente vincular a rota que está atrelada ao mesmo.
+        /// </summary>
+        /// <param name="evento"></param>
+        public void InsertEvento(Evento evento)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Evento> repo = new EventoRepository(uow);
+                    repo.Insert(evento);
+                    uow.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: CREATE LOG
+                throw;
+            }
+        }
         public List<Evento> CarregarEventos()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
