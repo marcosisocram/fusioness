@@ -10,7 +10,7 @@ namespace Fusioness.Business.ConvitesEventos
         /// </summary>
         /// <param name="convidado">Usuario convidado</param>
         IList<ConviteEvento> ObterConvitesFeitosAoUsuario(Usuario convidado);
-
+        
         /// <summary>
         /// Obtém o convite feito ao usuario
         /// </summary>

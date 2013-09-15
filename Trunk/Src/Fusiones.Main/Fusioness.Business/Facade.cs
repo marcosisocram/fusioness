@@ -4,6 +4,10 @@ using System.Linq;
 using Fusioness.Business.ConvitesEventos;
 using Fusioness.Business.Usuarios;
 using Fusioness.Entities;
+using Fusioness.Business.Bicicletas;
+using Fusioness.Business.Eventos;
+using Fusioness.Business.Rotas;
+using Fusioness.Business.TiposRota;
 
 namespace Fusioness.Business
 {
@@ -11,7 +15,11 @@ namespace Fusioness.Business
     {
         #region Properties
         private readonly IUsuarioBusiness UsuarioBus;
+        private readonly IEventoBusiness EventoBus;
+        private readonly IRotaBusiness RotaBus;
         private readonly IConviteEventoBusiness ConviteEventoBus;
+        private readonly IBicicletaBusiness BicicletaBus;
+        private readonly ITipoRotaBusiness TipoRotaBus;
         #endregion
 
         #region Constructor
@@ -27,6 +35,9 @@ namespace Fusioness.Business
         {
             UsuarioBus = new UsuariosBusiness();
             ConviteEventoBus = new ConviteEventoBusiness();
+            BicicletaBus = new BicicletasBusiness();
+            RotaBus = new RotaBusiness();
+            TipoRotaBus = new TipoRotaBusiness();
         }
 
         #endregion
@@ -40,6 +51,21 @@ namespace Fusioness.Business
         public void DoSomething(Usuario usuario)
         {
             UsuarioBus.DoSomething(usuario);
+        }
+
+        public void InsertUsuario(Usuario usuario)
+        {
+            UsuarioBus.InsertUsuario(usuario);
+        }
+
+        public List<Usuario> CarregarContatos(int idUsuario)
+        {
+            return UsuarioBus.CarregarContatos(idUsuario);
+        }
+
+        public void AdicionarUsuarioARede(Contato contato)
+        {
+            UsuarioBus.AdicionarUsuarioARede(contato);
         }
 
         #endregion
@@ -63,11 +89,45 @@ namespace Fusioness.Business
 
         #endregion
 
+        #region Bicicleta
+
+        public void InsertBicicleta(Bicicleta bicicleta)
+        {
+            BicicletaBus.InsertBicicleta(bicicleta);
+        }
+
+        #endregion
+
         #endregion
 
         #region Private
 
         #endregion
         #endregion
+
+        public string CarregarRotas()
+        {
+            return RotaBus.CarregarRotas();
+        }
+
+        public string CarregarEventos()
+        {
+            return EventoBus.CarregarEventos();
+        }
+
+        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        {
+            RotaBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+        }
+
+        public string GetRotas(int IdUsuario)
+        {
+            return RotaBus.GetRotas(IdUsuario);
+        }
+
+        public string CarregarTipoRotas()
+        {
+            return TipoRotaBus.GetTipoRotas();
+        }
     }
 }

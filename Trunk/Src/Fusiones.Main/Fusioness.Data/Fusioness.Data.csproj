@@ -67,6 +67,7 @@
     <Compile Include="EFUnityOfWork.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Contracts\IUnityOfWork.cs" />
+    <Compile Include="Repositories\BicicletaRepository.cs" />
     <Compile Include="Repositories\ConviteEventoRepository.cs" />
     <Compile Include="Repositories\ContatoRepository.cs" />
     <Compile Include="Repositories\RotaRepository.cs" />
