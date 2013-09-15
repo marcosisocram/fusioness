@@ -31,7 +31,7 @@ namespace Fusioness.Data.Mapping
 
             // Relationships
             this.HasRequired(t => t.Contato)
-                .WithMany(t => t.ConviteEventoes)
+                .WithMany(t => t.ConviteEventos)
                 .HasForeignKey(d => new { d.IdUsuario, d.IdContato });
             this.HasRequired(t => t.Evento)
                 .WithMany(t => t.ConviteEventos)

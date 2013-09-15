@@ -34,20 +34,11 @@ namespace Fusioness.Data.Mapping
             this.Property(t => t.Publico).HasColumnName("Publico");
 
             // Relationships
-            this.HasMany(t => t.Usuarios)
-                .WithMany(t => t.Eventos1)
-                .Map(m =>
-                    {
-                        m.ToTable("EventoUsuario");
-                        m.MapLeftKey("IdEvento");
-                        m.MapRightKey("IdUsuario");
-                    });
-
             this.HasRequired(t => t.Rota)
                 .WithMany(t => t.Eventos)
                 .HasForeignKey(d => d.IdRota);
             this.HasRequired(t => t.Usuario)
-                .WithMany(t => t.Eventos)
+                .WithMany(t => t.Eventoes)
                 .HasForeignKey(d => d.IdUsuario);
 
         }

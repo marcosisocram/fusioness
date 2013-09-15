@@ -5,39 +5,39 @@ using Fusioness.Entities;
 
 namespace Fusioness.Data.Mapping
 {
-    class EventoUsuarioMap : EntityTypeConfiguration<EventoUsuario>
+    public class EventoUsuarioMap : EntityTypeConfiguration<EventoUsuario>
     {
         public EventoUsuarioMap()
         {
-            // Primary Key
-            this.HasKey(t => new { t.IdUsuario, t.IdEvento });
+            HasKey(t => new { t.IdUsuario, t.IdEvento });
 
             // Properties
-            this.Property(t => t.IdUsuario)
+            Property(t => t.IdUsuario)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.IdEvento)
+            Property(t => t.IdEvento)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-                        
-            this.Property(t => t.StatusDescricao)                
+
+            Property(t => t.StatusDescricao)
                 .HasMaxLength(500);
 
-            this.ToTable("EventoUsuario");
-            this.Property(t => t.IdEvento).HasColumnName("IdUsuario");
-            this.Property(t => t.IdUsuario).HasColumnName("IdEvento");
-            this.Property(t => t.IdStatusEvento).HasColumnName("IdStatusEvento");
-            this.Property(t => t.StatusDescricao).HasColumnName("StatusDescricao");
+            // Table & Column Mappings
+            ToTable("EventoUsuario");
+            Property(t => t.IdUsuario).HasColumnName("IdUsuario");
+            Property(t => t.IdEvento).HasColumnName("IdEvento");
+            Property(t => t.IdStatusEvento).HasColumnName("IdStatusEvento");
+            Property(t => t.StatusDescricao).HasColumnName("StatusDescricao");
 
             // Relationships
-            this.HasRequired(t => t.Usuario)
-                .WithMany(t => t.EventosUsuarios)
-                .HasForeignKey(d => d.IdUsuario);
-            this.HasRequired(t => t.Evento)
-                .WithMany(t => t.EventosUsuarios)
+            HasRequired(t => t.Evento)
+                .WithMany(t => t.EventoUsuarios)
                 .HasForeignKey(d => d.IdEvento);
-            this.HasOptional(t => t.StatusEventos)
-               .WithMany(t => t.EventosUsuario)
-               .HasForeignKey(d => d.IdStatusEvento);
+            HasOptional(t => t.StatusEvento)
+                .WithMany(t => t.EventoUsuarios)
+                .HasForeignKey(d => d.IdStatusEvento);
+            HasRequired(t => t.Usuario)
+                .WithMany(t => t.EventoUsuarios)
+                .HasForeignKey(d => d.IdUsuario);
         }
     }
 }

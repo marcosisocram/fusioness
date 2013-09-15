@@ -6,7 +6,7 @@ namespace Fusioness.Entities
     {
         public Dificuldade()
         {
-            this.Rotas = new List<Rota>();
+            Rotas = new List<Rota>();
         }
 
         public int IdDificuldade { get; set; }

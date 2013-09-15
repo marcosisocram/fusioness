@@ -58,6 +58,11 @@ namespace Fusioness.Business
             UsuarioBus.InsertUsuario(usuario);
         }
 
+        public void UpdateUsuario(Usuario usuario)
+        {
+            UsuarioBus.UpdateUsuario(usuario);
+        }
+
         public List<Usuario> CarregarContatos(int idUsuario)
         {
             return UsuarioBus.CarregarContatos(idUsuario);
@@ -98,6 +103,43 @@ namespace Fusioness.Business
 
         #endregion
 
+        #region Rota
+
+        public string CarregarRotas()
+        {
+            return RotaBus.CarregarRotas();
+        }
+        public string GetRotas(int IdUsuario)
+        {
+            return RotaBus.GetRotas(IdUsuario);
+        }
+
+        public String CarregarTipoRotas()
+        {
+            return TipoRotaBus.GetTipoRotas();
+        }
+
+        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario) 
+        {
+            //UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+        }
+
+        
+
+        #endregion
+
+        #region Evento
+        
+        public string CarregarEventos()
+        {
+            return EventoBus.CarregarEventos();
+        }
+        //public List<Evento> CarregarEventos()
+        //{
+        //    return new List<Evento>();
+        //}
+        #endregion
+        
         #endregion
 
         #region Private
@@ -105,29 +147,10 @@ namespace Fusioness.Business
         #endregion
         #endregion
 
-        public string CarregarRotas()
-        {
-            return RotaBus.CarregarRotas();
-        }
 
-        public string CarregarEventos()
-        {
-            return EventoBus.CarregarEventos();
-        }
 
-        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
-        {
-            RotaBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
-        }
+       
 
-        public string GetRotas(int IdUsuario)
-        {
-            return RotaBus.GetRotas(IdUsuario);
-        }
-
-        public string CarregarTipoRotas()
-        {
-            return TipoRotaBus.GetTipoRotas();
-        }
+       
     }
 }
