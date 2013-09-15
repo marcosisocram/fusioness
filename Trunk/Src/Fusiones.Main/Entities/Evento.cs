@@ -7,7 +7,7 @@ namespace Fusioness.Entities
         public Evento()
         {
             this.ConviteEventos = new List<ConviteEvento>();
-            this.Usuarios = new List<Usuario>();
+            this.EventoUsuarios = new List<EventoUsuario>();
         }
 
         public int IdEvento { get; set; }
@@ -21,6 +21,6 @@ namespace Fusioness.Entities
         public virtual ICollection<ConviteEvento> ConviteEventos { get; set; }
         public virtual Rota Rota { get; set; }
         public virtual Usuario Usuario { get; set; }
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<EventoUsuario> EventoUsuarios { get; set; }
     }
 }
