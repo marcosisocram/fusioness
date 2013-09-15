@@ -96,24 +96,39 @@ namespace Fusioness.Business
 
         #endregion
 
-        #region Private
-
-        #endregion
         #endregion
 
+        #region Rota
         public List<Rota> CarregarRotas()
         {
             return RotaBus.CarregarRotas();
+        }
+        public void InsertRota(Rota rota)
+        {
+            RotaBus.InsertRota(rota);
+        }
+        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        {
+            UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+        }
+
+        #endregion
+
+        #region Evento
+
+        public void InsertEvento(Evento evento) 
+        {
+            EventoBus.InsertEvento(evento);
         }
 
         public List<Evento> CarregarEventos()
         {
             return EventoBus.CarregarEventos();
         }
+        #endregion
 
-        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
-        {
-            UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
-        }
+        
+
+        
     }
 }
