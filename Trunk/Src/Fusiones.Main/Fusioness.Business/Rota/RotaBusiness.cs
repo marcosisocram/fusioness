@@ -33,6 +33,27 @@ namespace Fusioness.Business.Rotas
         #region Methods
 
         #region Public
+        /// <summary>
+        /// DFD - Método que insere uma rota no banco de dados.
+        /// </summary>
+        /// <param name="rota"></param>
+        public void InsertRota(Rota rota)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Rota> repo = new RotaRepository(uow);
+                    repo.Insert(rota);
+                    uow.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: CREATE LOG
+                throw;
+            }
+        }
 
         public List<Rota> CarregarRotas()
         {
