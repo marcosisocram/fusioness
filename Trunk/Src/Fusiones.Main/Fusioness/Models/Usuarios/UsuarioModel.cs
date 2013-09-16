@@ -8,6 +8,6 @@ namespace Fusioness.Models.Usuarios
 {
     public class UsuarioModel
     {
-        public Usuario usuario { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }
