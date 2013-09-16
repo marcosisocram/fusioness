@@ -6,7 +6,7 @@ using Fusioness.Entities;
 
 namespace Fusioness.Models.Rotas
 {
-    public class IndexModel
+    public class RotaModel
     {
         public System.Collections.IEnumerable rotasUsuario
         {
