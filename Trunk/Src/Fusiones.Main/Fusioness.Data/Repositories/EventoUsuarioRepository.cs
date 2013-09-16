@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fusioness.Business.Eventos
+namespace Fusioness.Data.Repositories
 {
-    public interface IEventoBusiness
+    class EventoUsuarioRepository
     {
-        string CarregarEventos();
     }
 }

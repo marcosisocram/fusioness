@@ -1,23 +1,24 @@
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.ModelConfiguration;
 using Fusioness.Entities;
 
 namespace Fusioness.Data.Mapping
 {
-    public class TipoRotaMap : EntityTypeConfiguration<TipoRota>
+    public class StatusEventoMap : EntityTypeConfiguration<StatusEvento>
     {
-        public TipoRotaMap()
+        public StatusEventoMap()
         {
             // Primary Key
-            this.HasKey(t => t.IdTipoRota);
+            this.HasKey(t => t.IdStatusEvento);
 
             // Properties
             this.Property(t => t.Descricao)
                 .IsRequired()
-                .HasMaxLength(200);
+                .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("TipoRota");
-            this.Property(t => t.IdTipoRota).HasColumnName("IdTipoRota");
+            this.ToTable("StatusEvento");
+            this.Property(t => t.IdStatusEvento).HasColumnName("IdStatusEvento");
             this.Property(t => t.Descricao).HasColumnName("Descricao");
         }
     }

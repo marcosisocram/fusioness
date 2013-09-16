@@ -47,6 +47,19 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
+        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        {
+        }
+
+        public Usuario ObterUsuarioPorId(int id)
+        {
+            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
+            {
+                return new UsuarioRepository(ouw).GetByKey(new Usuario { IdUsuario = id });
+            }
+        }
+
+
         public void InsertUsuario(Usuario usuario)
         {
             try
@@ -55,6 +68,24 @@ namespace Fusioness.Business.Usuarios
                 {
                     IRepository<Usuario> repo = new UsuarioRepository(uow);
                     repo.Insert(usuario);
+                    uow.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: CREATE LOG
+                throw;
+            }
+        }
+
+        public void UpdateUsuario(Usuario usuario) 
+        {
+            try
+            {
+                using(IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Usuario> repo = new UsuarioRepository(uow);
+                    repo.Update(usuario);
                     uow.Commit();
                 }
             }
@@ -102,9 +133,6 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
-        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
-        {
-        }
         #endregion
 
         #region Private
