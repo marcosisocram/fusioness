@@ -36,6 +36,23 @@ namespace Fusioness.Business.Eventos
 
         #region Public
 
+        public void InsertEvento(Evento evento)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Evento> repo = new EventoRepository(uow);
+                    repo.Insert(evento);
+                    uow.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: CREATE LOG
+                throw;
+            }
+        }
         public List<Evento> CarregarEventos()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
