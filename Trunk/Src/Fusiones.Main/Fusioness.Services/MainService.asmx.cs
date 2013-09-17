@@ -96,6 +96,32 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string UpdateUsuario(int id, string nome, string login, string senha, string email, int idade, char sexo, string UrlImagem)
+        {
+            try
+            {
+                var usuario = new Usuario()
+                {
+                    IdUsuario = id,
+                    Nome = nome,
+                    Login = login,
+                    Senha = senha,
+                    Email = email,
+                    Idade = idade,
+                    Sexo = sexo.ToString(),
+                    UrlImagem = UrlImagem
+                };
+                Facade.Instance.UpdateUsuario(usuario);                
+                return new JavaScriptSerializer().Serialize("done successfully!");
+            }
+            catch
+            {
+                return new JavaScriptSerializer().Serialize("done with error!");
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string CarregarContatos(int idUsuario)
         {
             try
@@ -137,7 +163,7 @@ namespace Fusioness.Services
             try
             {
                 return Facade.Instance.GetRotas(IdUsuario);
-                //return new JavaScriptSerializer().Serialize("done successfully!");
+                return new JavaScriptSerializer().Serialize("done successfully!");
             }
             catch
             {

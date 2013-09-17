@@ -54,9 +54,11 @@
     <Compile Include="Mapping\CoordenadaMap.cs" />
     <Compile Include="Mapping\DificuldadeMap.cs" />
     <Compile Include="Mapping\EventoMap.cs" />
+    <Compile Include="Mapping\EventoUsuarioMap.cs" />
     <Compile Include="Mapping\QualidadeRotaMap.cs" />
     <Compile Include="Mapping\RespostaMap.cs" />
     <Compile Include="Mapping\RotaMap.cs" />
+    <Compile Include="Mapping\StatusEventoMap.cs" />
     <Compile Include="Mapping\TipoCoordenadaMap.cs" />
     <Compile Include="Mapping\TipoPistaMap.cs" />
     <Compile Include="Mapping\TipoRotaMap.cs" />

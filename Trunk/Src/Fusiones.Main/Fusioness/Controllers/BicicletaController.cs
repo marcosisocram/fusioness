@@ -18,11 +18,11 @@ namespace Fusioness.Controllers
             return View();
         }
 
-        public ActionResult InsertBicicleta(IndexModel model)
+        public ActionResult InsertBicicleta(BicicletaModel model)
         {
             MainService service = new MainService();
-
-            TempData["MSG"] = service.InsertBicicleta(model.bicicleta.Marca, model.bicicleta.Modelo);
+            int idUsuario = 7;
+            TempData["MSG"] = service.InsertBicicleta(model.Bicicleta.Marca, model.Bicicleta.Modelo, idUsuario);
             return RedirectToAction("index");
         }
     }

@@ -8,6 +8,6 @@ namespace Fusioness.Models.Contatos
 {
     public class IndexModel
     {
-        public Contato contato { get; set; }
+        public Contato Contato { get; set; }
     }
 }

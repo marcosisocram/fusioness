@@ -170,26 +170,28 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InsertBicicleta", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string InsertBicicleta(string marca, string modelo) {
+        public string InsertBicicleta(string marca, string modelo, int idUsuario) {
             object[] results = this.Invoke("InsertBicicleta", new object[] {
                         marca,
-                        modelo});
+                        modelo,
+                        idUsuario});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void InsertBicicletaAsync(string marca, string modelo) {
-            this.InsertBicicletaAsync(marca, modelo, null);
+        public void InsertBicicletaAsync(string marca, string modelo, int idUsuario) {
+            this.InsertBicicletaAsync(marca, modelo, idUsuario, null);
         }
         
         /// <remarks/>
-        public void InsertBicicletaAsync(string marca, string modelo, object userState) {
+        public void InsertBicicletaAsync(string marca, string modelo, int idUsuario, object userState) {
             if ((this.InsertBicicletaOperationCompleted == null)) {
                 this.InsertBicicletaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertBicicletaOperationCompleted);
             }
             this.InvokeAsync("InsertBicicleta", new object[] {
                         marca,
-                        modelo}, this.InsertBicicletaOperationCompleted, userState);
+                        modelo,
+                        idUsuario}, this.InsertBicicletaOperationCompleted, userState);
         }
         
         private void OnInsertBicicletaOperationCompleted(object arg) {

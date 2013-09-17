@@ -6,8 +6,8 @@ using Fusioness.Entities;
 
 namespace Fusioness.Models.Usuarios
 {
-    public class IndexModel
+    public class UsuarioModel
     {
-        public Usuario usuario { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

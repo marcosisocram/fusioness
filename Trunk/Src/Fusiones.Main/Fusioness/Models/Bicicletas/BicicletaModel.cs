@@ -6,8 +6,8 @@ using Fusioness.Entities;
 
 namespace Fusioness.Models.Bicicletas
 {
-    public class IndexModel
+    public class BicicletaModel
     {
-        public Bicicleta bicicleta { get; set; }
+        public Bicicleta Bicicleta { get; set; }
     }
 }
