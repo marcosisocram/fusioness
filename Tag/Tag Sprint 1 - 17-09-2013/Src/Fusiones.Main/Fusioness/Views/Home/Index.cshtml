@@ -1,0 +1,14 @@
+﻿@model Fusioness.Models.Home.IndexModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+<a href="/Usuario/">Registrar</a>
+<h2>@(TempData["MSG"] == null ? "Index" : TempData["MSG"])</h2>
+@using (Html.BeginForm("DoSomething", "Home", FormMethod.Post))
+{
+    @Html.LabelFor(m => m.User.Nome)
+    @Html.TextBoxFor(m => m.User.Nome)
+    <br />
+    <input type="submit" value="Send" />
+}

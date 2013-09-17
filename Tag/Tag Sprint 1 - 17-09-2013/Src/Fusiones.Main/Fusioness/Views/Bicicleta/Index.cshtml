@@ -1,0 +1,18 @@
+﻿@model Fusioness.Models.Bicicletas.BicicletaModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+
+<h2>@(TempData["MSG"] == null ? "Index" : TempData["MSG"])</h2>
+@using (Html.BeginForm("InsertBicicleta", "Bicicleta", FormMethod.Post))
+{
+    @Html.LabelFor(m => m.Bicicleta.Modelo)
+    @Html.TextBoxFor(m => m.Bicicleta.Modelo)
+    <br />
+    
+    @Html.LabelFor(m => m.Bicicleta.Marca)
+    @Html.TextBoxFor(m => m.Bicicleta.Marca)
+    <br />
+    <input type="submit" value="Send" />
+}

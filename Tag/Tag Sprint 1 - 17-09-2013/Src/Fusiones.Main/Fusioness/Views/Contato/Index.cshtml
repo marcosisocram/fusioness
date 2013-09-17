@@ -1,0 +1,16 @@
+﻿@model Fusioness.Models.Contatos.IndexModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+<h2>@(TempData["MSG"] == null ? "Index" : TempData["MSG"])</h2>
+@using (Html.BeginForm("AdicionarUsuarioARede", "ContatoControler", FormMethod.Post))
+{
+    @Html.LabelFor(m => m.contato.IdContato)
+    @Html.DropDownList("Nomes",(IEnumerable<SelectListItem>)ViewData["Nomes"])
+    <br />
+    @Html.LabelFor(m => m.contato.IdContato)
+    @Html.DropDownList("Nomes",(IEnumerable<SelectListItem>)ViewData["Nomes"])
+    <br />
+    <input type="submit" value="Send" />
+}
