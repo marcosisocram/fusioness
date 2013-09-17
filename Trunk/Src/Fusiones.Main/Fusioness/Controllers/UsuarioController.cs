@@ -23,14 +23,14 @@ namespace Fusioness.Controllers
         public ActionResult InsertUsuario(UsuarioModel model)
         {
             MainService service = new MainService();
-            TempData["MSG"] = service.InsertUsuario(model.usuario.Nome, model.usuario.Login, model.usuario.Senha, model.usuario.Email, model.usuario.Idade.Value, model.usuario.Sexo[0], model.usuario.UrlImagem);
+            TempData["MSG"] = service.InsertUsuario(model.Usuario.Nome, model.Usuario.Login, model.Usuario.Senha, model.Usuario.Email, model.Usuario.Idade.Value, model.Usuario.Sexo[0], model.Usuario.UrlImagem);
             return RedirectToAction("index");
         }
 
         public ActionResult UpdateUsuario(UsuarioModel model)
         {
             MainService service = new MainService();
-            //TempData["MSG"] = service.UpdateUsuario(model.usuario.IdUsuario, model.usuario.Nome, model.usuario.Login, model.usuario.Senha, model.usuario.Email, model.usuario.Idade.Value, model.usuario.Sexo[0], model.usuario.UrlImagem);
+            //TempData["MSG"] = service.UpdateUsuario(model.Usuario.IdUsuario, model.Usuario.Nome, model.Usuario.Login, model.Usuario.Senha, model.Usuario.Email, model.Usuario.Idade.Value, model.Usuario.Sexo[0], model.Usuario.UrlImagem);
             return RedirectToAction("index");
         
         }

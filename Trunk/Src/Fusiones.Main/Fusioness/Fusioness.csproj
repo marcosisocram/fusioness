@@ -117,11 +117,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Bicicletas\IndexModel.cs" />
-    <Compile Include="Models\Contato\IndexModel.cs" />
+    <Compile Include="Models\Bicicletas\BicicletaModel.cs" />
+    <Compile Include="Models\Contato\ContatoModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
-    <Compile Include="Models\Rotas\IndexModel.cs" />
-    <Compile Include="Models\Usuarios\IndexModel.cs" />
+    <Compile Include="Models\Rotas\RotaModel.cs" />
+    <Compile Include="Models\Usuarios\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -222,7 +222,6 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>42774</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:42774/</IISUrl>
           <IISUrl>http://localhost:15901/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://localhost:15901/</IISAppRootUrl>
