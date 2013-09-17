@@ -51,16 +51,13 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string InsertBicicleta(string marca, string modelo)
+        public string InsertBicicleta(string bicicletaSerializado)
         {
             try
             {
-                var bicicleta = new Bicicleta();
-                bicicleta.Marca = marca;
-                bicicleta.Modelo = modelo;
-                bicicleta.IdUsuario = 7;
+                Bicicleta bicicletaDesserializado = (Bicicleta)new JavaScriptSerializer().Deserialize(bicicletaSerializado, typeof(Bicicleta));
 
-                Facade.Instance.InsertBicicleta(bicicleta);
+                Facade.Instance.InsertBicicleta(bicicletaDesserializado);
                 return new JavaScriptSerializer().Serialize("Bicicleta Cadastrada com Sucesso!");
             }
             catch
