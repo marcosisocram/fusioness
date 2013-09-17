@@ -6,10 +6,8 @@ namespace Fusioness.Business.Rotas
 {
     public interface IRotaBusiness
     {
-        string CarregarRotas();
+        List<Rota> CarregarRotas();
 
-        void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario);
-
-        string GetRotas(int IdUsuario);
+        List<Rota> CarregarRotasPorUsuario(int IdUsuario);
     }
 }

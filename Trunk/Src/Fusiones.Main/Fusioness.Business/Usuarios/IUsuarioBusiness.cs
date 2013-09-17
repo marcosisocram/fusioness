@@ -12,7 +12,6 @@ namespace Fusioness.Business.Usuarios
         void UpdateUsuario(Usuario usuario);
 
         void AdicionarUsuarioARede(Contato contato);
-        void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario);
 
         List<Usuario> CarregarContatos(int idUsuario);
     }

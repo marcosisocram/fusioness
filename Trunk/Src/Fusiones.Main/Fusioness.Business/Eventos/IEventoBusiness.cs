@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fusioness.Entities;
 
 namespace Fusioness.Business.Eventos
 {
     public interface IEventoBusiness
     {
-        string CarregarEventos();
+        List<Evento> CarregarEventos();
     }
 }

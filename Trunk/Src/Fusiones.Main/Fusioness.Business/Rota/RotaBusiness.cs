@@ -36,49 +36,23 @@ namespace Fusioness.Business.Rotas
 
         #region Public
 
-        public string CarregarRotas()
+        public List<Rota> CarregarRotas()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<Rota> repo = new RotaRepository(uow);
                 var rotas = repo.GetAll();
-                StringBuilder sb = new StringBuilder();
-                rotas.ToList().ForEach(c =>
-                {
-                    sb.AppendFormat("{0}:{1}.", c.IdRota, c.IdRota);
-                });
-                return sb.ToString();
+                return rotas.ToList();
             }
         }
 
-        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
-        {
-            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
-            {
-                IRepository<Rota> repo = new RotaRepository(uow);
-                var rota = repo.GetWhere(c => c.IdRota == IdRota && c.IdUsuario == IdUsuario).FirstOrDefault();
-                if (rota == null)
-                {
-                    throw new Exception("rota inexistente");
-                }
-                rota.IdTipoRota = IdTipoRota;
-                repo.Update(rota);
-                uow.Commit();
-            }
-        }
-
-        public string GetRotas(int IdUsuario)
+        public List<Rota> CarregarRotasPorUsuario(int IdUsuario)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<Rota> repo = new RotaRepository(uow);
                 var rotas = repo.GetWhere(c => c.IdUsuario == IdUsuario);
-                StringBuilder sb = new StringBuilder();
-                rotas.ToList().ForEach(c =>
-                    {
-                        sb.AppendFormat("{0}:{1}.", c.IdRota, c.IdRota);
-                    });
-                return sb.ToString();
+                return rotas.ToList();
             }
 
         #endregion

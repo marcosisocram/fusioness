@@ -36,18 +36,13 @@ namespace Fusioness.Business.Eventos
 
         #region Public
 
-        public string CarregarEventos()
+        public List<Evento> CarregarEventos()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<Evento> repo = new EventoRepository(uow);
                 var evento = repo.GetAll();
-                StringBuilder sb = new StringBuilder();
-                evento.ToList().ForEach(c =>
-                {
-                    sb.AppendFormat("{0}:{1}.", c.IdEvento, c.IdEvento);
-                });
-                return sb.ToString();
+                return evento.ToList();
             }
         }
         #endregion
