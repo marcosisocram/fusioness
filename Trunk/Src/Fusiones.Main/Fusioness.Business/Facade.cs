@@ -105,13 +105,17 @@ namespace Fusioness.Business
 
         #region Rota
 
-        public string CarregarRotas()
+        public void InsertRota(Rota rota)
+        {
+            RotaBus.InsertRota(rota);
+        }
+        public List<Rota> CarregarRotas()
         {
             return RotaBus.CarregarRotas();
         }
-        public string GetRotas(int IdUsuario)
+        public List<Rota> CarregarRotasPorUsuario(int IdUsuario)
         {
-            return RotaBus.GetRotas(IdUsuario);
+            return RotaBus.CarregarRotasPorUsuario(IdUsuario);
         }
 
         public String CarregarTipoRotas()
@@ -130,27 +134,19 @@ namespace Fusioness.Business
 
         #region Evento
         
-        public string CarregarEventos()
+        public void InsertEvento(Evento evento)
+        {
+            EventoBus.InsertEvento(evento);
+        }
+        public List<Evento> CarregarEventos()
         {
             return EventoBus.CarregarEventos();
         }
-        //public List<Evento> CarregarEventos()
-        //{
-        //    return new List<Evento>();
-        //}
         #endregion
         
         #endregion
 
-        #region Private
-
         #endregion
-        #endregion
-
-
-
-       
-
        
     }
 }
