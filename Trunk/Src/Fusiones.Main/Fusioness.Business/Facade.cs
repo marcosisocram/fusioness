@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Fusioness.Business.ConvitesEventos;
 using Fusioness.Business.Usuarios;
 using Fusioness.Entities;
@@ -47,7 +45,12 @@ namespace Fusioness.Business
         #region Public
         
         #region Usuario
-        
+
+        public Usuario ValidarLogonUsuario(Usuario usuario)
+        {
+            return UsuarioBus.ValidarLogonUsuario(usuario);
+        }
+
         public void DoSomething(Usuario usuario)
         {
             UsuarioBus.DoSomething(usuario);
@@ -118,12 +121,12 @@ namespace Fusioness.Business
             return RotaBus.CarregarRotasPorUsuario(IdUsuario);
         }
 
-        public String CarregarTipoRotas()
+        public IList<TipoRota> CarregarTipoRotas()
         {
             return TipoRotaBus.GetTipoRotas();
         }
 
-        public void QualificarRota(int IdRota, int IdTipoRota, int IdUsuario) 
+        public void QualificarRota(Rota rota) 
         {
             //UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
         }

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using Fusioness.Entities;
 
 namespace Fusioness.Models.Contatos
 {
-    public class IndexModel
+    public class ContatoModel
     {
-        public Contato Contato { get; set; }
+        public string Mensagem { get; set; }
+        public Usuario UsuarioSelecionado { get; set; }
+        public IList<Usuario> ListaDeUsuarios { get; set; }
     }
 }

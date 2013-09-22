@@ -1,40 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Fusioness.FusionessWS;
+﻿using System.Web.Mvc;
 using Fusioness.Models.Usuarios;
 
 namespace Fusioness.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(UsuarioModel model)
         {
-            return View(new UsuarioModel());
-        }
-
-        public ActionResult Contato()
-        {
-            return View(new UsuarioModel());
+            return View(model);
         }
 
         public ActionResult InsertUsuario(UsuarioModel model)
         {
-            MainService service = new MainService();
-            TempData["MSG"] = service.InsertUsuario(model.Usuario.Nome, model.Usuario.Login, model.Usuario.Senha, model.Usuario.Email, model.Usuario.Idade.Value, model.Usuario.Sexo[0], model.Usuario.UrlImagem);
-            return RedirectToAction("index");
+            if (model.Usuario.IdUsuario > 0) return UpdateUsuario(model);
+
+            model.Mensagem = Servico.InsertUsuario(Serializer.Serialize(model.Usuario));
+            if(!string.IsNullOrWhiteSpace(model.Mensagem))ExibirModal(model.Mensagem);
+
+            return RedirectToAction("index", model);
         }
 
         public ActionResult UpdateUsuario(UsuarioModel model)
         {
-            MainService service = new MainService();
-            //TempData["MSG"] = service.UpdateUsuario(model.Usuario.IdUsuario, model.Usuario.Nome, model.Usuario.Login, model.Usuario.Senha, model.Usuario.Email, model.Usuario.Idade.Value, model.Usuario.Sexo[0], model.Usuario.UrlImagem);
-            return RedirectToAction("index");
+            model.Mensagem = Servico.UpdateUsuario(Serializer.Serialize(model.Usuario));
+            if (!string.IsNullOrWhiteSpace(model.Mensagem)) ExibirModal(model.Mensagem);
+            return RedirectToAction("index", model);
         
         }
-
-
     }
 }

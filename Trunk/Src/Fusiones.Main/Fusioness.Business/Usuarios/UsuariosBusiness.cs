@@ -35,6 +35,17 @@ namespace Fusioness.Business.Usuarios
 
         #region Public
 
+        public Usuario ValidarLogonUsuario(Usuario usuario)
+        {
+            if (usuario == null || string.IsNullOrWhiteSpace(usuario.Login) || string.IsNullOrWhiteSpace(usuario.Senha)) return null;
+
+            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
+            {
+                var retorno = new UsuarioRepository(ouw).GetWhere(u => u.Senha == usuario.Senha && u.Login == usuario.Login).FirstOrDefault();
+                return retorno;
+            }
+        }
+
         public void DoSomething(Usuario usuario)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))

@@ -8,6 +8,7 @@ namespace Fusioness.Business.Usuarios
     {
         void DoSomething(Usuario usuario);
 
+        Usuario ValidarLogonUsuario(Usuario usuario);
         void InsertUsuario(Usuario usuario);
         void UpdateUsuario(Usuario usuario);
 

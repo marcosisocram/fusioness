@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Fusioness.Business.Util;
 using Fusioness.Data;
 using Fusioness.Data.Contracts;
@@ -36,20 +35,15 @@ namespace Fusioness.Business.TiposRota
 
         #region Public
 
-        public string GetTipoRotas()
+        public IList<TipoRota> GetTipoRotas()
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<TipoRota> repo = new TipoRotaRepository(uow);
-                    var tiposRota = repo.GetAll();
-                    StringBuilder sb = new StringBuilder();
-                    tiposRota.ToList().ForEach(c =>
-                    {
-                        sb.AppendFormat("{0}:{1}.", c.IdTipoRota, c.Descricao);
-                    });
-                    return sb.ToString();
+                    var tiposRota = repo.GetAll().ToList();
+                    return tiposRota;
                 }
             }
             catch (Exception ex)

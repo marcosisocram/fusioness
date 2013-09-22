@@ -1,25 +1,34 @@
-﻿@{ Layout = null; }
+﻿@model Fusioness.Models.Account.AcessoModel
+@{Layout = null;}
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>LayoutBase</title>
-
-    @RenderSection("head", false)
+  <title>Logon</title>
   <script type="text/javascript">
     @{
       var titulo = TempData["MODAL_TITLE"] != null ? TempData["MODAL_TITLE"].ToString() : string.Empty;
       var mensagem = TempData["MODAL_CONTENT"] != null ? TempData["MODAL_CONTENT"].ToString() : string.Empty;
       var largura = TempData["MODAL_WIDTH"] != null ? TempData["MODAL_WIDTH"].ToString() : string.Empty;
     }
-
-    var mensagem = '@mensagem';
+    
+    var mensagem = '@(mensagem)';
     if(typeof(mensagem) !== 'undefined' && mensagem !== ''){
       alert(mensagem);
     }
+  
   </script>
 </head>
 <body>
-@RenderBody()
+@using(Html.BeginForm("Entrar", "Acesso", FormMethod.Post))
+{
+    @Html.LabelFor(m => m.UsuarioLogado.Login)
+    @Html.TextBoxFor(m => m.UsuarioLogado.Login)
+    <br />
+    @Html.LabelFor(m => m.UsuarioLogado.Senha)
+    @Html.PasswordFor(m => m.UsuarioLogado.Senha)
+    <br />
+    <input type="submit" value="Acessar"/>
+}
 </body>
 </html>

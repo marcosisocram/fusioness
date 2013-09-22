@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using Fusioness.Entities;
 
 namespace Fusioness.Business.TiposRota
 {
     public interface ITipoRotaBusiness
     {
-        string GetTipoRotas();
+        IList<TipoRota> GetTipoRotas();
     }
 }

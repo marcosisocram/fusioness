@@ -1,32 +1,32 @@
-﻿@model Fusioness.Models.Usuarios.IndexModel
+﻿@model Fusioness.Models.Usuarios.UsuarioModel
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/LayoutBase.cshtml";
+  ViewBag.Title = "Index";
+  Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
 
-<h2>@(TempData["MSG"] == null ? "Index" : TempData["MSG"])</h2>
 @using (Html.BeginForm("InsertUsuario", "Usuario", FormMethod.Post))
 {
-    @Html.LabelFor(m => m.usuario.Nome)
-    @Html.TextBoxFor(m => m.usuario.Nome)
-    <br />
-    @Html.LabelFor(m => m.usuario.Login)
-    @Html.TextBoxFor(m => m.usuario.Login)
-    <br />
-    @Html.LabelFor(m => m.usuario.Senha)
-    @Html.PasswordFor(m => m.usuario.Senha)
-    <br />
-    @Html.LabelFor(m => m.usuario.Email)
-    @Html.TextBoxFor(m => m.usuario.Email)
-    <br />
-    @Html.LabelFor(m => m.usuario.Idade)
-    @Html.TextBoxFor(m => m.usuario.Idade)
-    <br />
-    @Html.LabelFor(m => m.usuario.Sexo)
-    @Html.TextBoxFor(m => m.usuario.Sexo)
-    <br />
-    @Html.LabelFor(m => m.usuario.UrlImagem)
-    @Html.TextBoxFor(m => m.usuario.UrlImagem)
-    <br />
-    <input type="submit" value="Send" />
+  @Html.LabelFor(m => m.Usuario.Nome)
+  @Html.TextBoxFor(m => m.Usuario.Nome)
+  <br />
+  @Html.LabelFor(m => m.Usuario.Login)
+  @Html.TextBoxFor(m => m.Usuario.Login)
+  <br />
+  @Html.LabelFor(m => m.Usuario.Senha)
+  @Html.PasswordFor(m => m.Usuario.Senha)
+  <br />
+  @Html.LabelFor(m => m.Usuario.Email)
+  @Html.TextBoxFor(m => m.Usuario.Email)
+  <br />
+  @Html.LabelFor(m => m.Usuario.Idade)
+  @Html.TextBoxFor(m => m.Usuario.Idade)
+  <br />
+  @Html.LabelFor(m => m.Usuario.Sexo)
+  @Html.TextBoxFor(m => m.Usuario.Sexo)
+  <br />
+  @Html.LabelFor(m => m.Usuario.UrlImagem)
+  @Html.TextBoxFor(m => m.Usuario.UrlImagem)
+  <br />
+  @Html.HiddenFor(m => m.Usuario.IdUsuario)
+  <input type="submit" value="Send" />
 }

@@ -51,8 +51,11 @@ namespace Fusioness.Business.Rotas
             {
                 //TODO: CREATE LOG
                 throw;
-         
-        public List<Rota> CarregarRotas()
+            }
+        }
+
+        public
+            List<Rota> CarregarRotas()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {

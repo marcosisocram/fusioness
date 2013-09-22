@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
 
-<h2>@(TempData["MSG"] == null ? "Index" : TempData["MSG"])</h2>
 @using (Html.BeginForm("InsertBicicleta", "Bicicleta", FormMethod.Post))
 {
     @Html.LabelFor(m => m.Bicicleta.Modelo)

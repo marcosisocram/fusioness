@@ -10,25 +10,21 @@ using System.Web.Script.Serialization;
 
 namespace Fusioness.Controllers
 {
-    public class BicicletaController : Controller
+    public class BicicletaController : BaseController
     {
-        //
-        // GET: /Bicicleta/
-
-        public ActionResult Index()
+        public ActionResult Index(BicicletaModel model)
         {
+            if (!string.IsNullOrWhiteSpace(model.Mensagem)) ExibirModal(model.Mensagem);
             return View();
         }
 
         public ActionResult InsertBicicleta(BicicletaModel model)
         {
-            MainService service = new MainService();
-
             model.Bicicleta.IdUsuario = 7;
-            string bicicletaSerializado = new JavaScriptSerializer().Serialize(model.Bicicleta);            
-            
-            TempData["MSG"] = service.InsertBicicleta(bicicletaSerializado);
-            return RedirectToAction("index");
+            string bicicletaSerializado = Serializer.Serialize(model.Bicicleta);
+
+            model.Mensagem = Servico.InsertBicicleta(bicicletaSerializado);
+            return RedirectToAction("index", model);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Web;
+using System.Text;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -20,12 +20,33 @@ namespace Fusioness.Services
     [ScriptService]
     public class MainService : WebService
     {
+        public JavaScriptSerializer Serializer = new JavaScriptSerializer();
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ValidarLogonUsuario(string usuarioSerializado)
+        {
+            try
+            {
+                var usuario = Serializer.Deserialize<Usuario>(usuarioSerializado);
+                var usuarioValidado = Facade.Instance.ValidarLogonUsuario(usuario);
+                if (usuarioValidado == null || usuarioValidado.IdUsuario <= 0) throw new Exception("Usuário inválido.");
+                
+                // limpando para evitar referencia circular
+
+                return Serializer.Serialize(usuarioValidado);
+            }
+            catch (Exception ex)
+            {
+                return Serializer.Serialize(ex);
+            }
+        }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string HelloWorld()
         {
-            return new JavaScriptSerializer().Serialize("Hello World");
+            return Serializer.Serialize("Hello World");
         }
 
         [WebMethod]
@@ -34,18 +55,21 @@ namespace Fusioness.Services
         {
             try
             {
-                var usuario = new Usuario { Nome = nomeDoUsuario };
-                usuario.Login = "login";
-                usuario.Senha = "senha";
-                usuario.Email = "email";
-                usuario.Sexo = "M";
+                var usuario = new Usuario
+                {
+                    Nome = nomeDoUsuario,
+                    Login = "login",
+                    Senha = "senha",
+                    Email = "email",
+                    Sexo = "M"
+                };
 
                 Facade.Instance.DoSomething(usuario);
-                return new JavaScriptSerializer().Serialize("done successfully!");
+                return Serializer.Serialize("done successfully!");
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return Serializer.Serialize("done with error!");
             }
         }
 
@@ -55,65 +79,46 @@ namespace Fusioness.Services
         {
             try
             {
-                Bicicleta bicicletaDesserializado = (Bicicleta)new JavaScriptSerializer().Deserialize(bicicletaSerializado, typeof(Bicicleta));
+                var bicicletaDesserializado = Serializer.Deserialize<Bicicleta>(bicicletaSerializado);
 
                 Facade.Instance.InsertBicicleta(bicicletaDesserializado);
-                return new JavaScriptSerializer().Serialize("Bicicleta Cadastrada com Sucesso!");
+                return Serializer.Serialize("Bicicleta Cadastrada com Sucesso!");
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("Error ao Cadastrar Bicicleta!");
+                return Serializer.Serialize("Error ao Cadastrar Bicicleta!");
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string InsertUsuario(string nome, string login, string senha, string email, int idade, char sexo, string UrlImagem)
+        public string InsertUsuario(string usuarioSerializado)
         {
             try
             {
-                var usuario = new Usuario()
-                {
-                    Nome=nome,
-                    Login=login,
-                    Senha=senha,
-                    Email=email,
-                    Idade=idade,
-                    Sexo=sexo.ToString(),
-                    UrlImagem=UrlImagem
-                };
+                var usuario = Serializer.Deserialize<Usuario>(usuarioSerializado);
                 Facade.Instance.InsertUsuario(usuario);
-                return new JavaScriptSerializer().Serialize("done successfully!");
+                return Serializer.Serialize("done successfully!");
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return Serializer.Serialize("done with error!");
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string UpdateUsuario(int id, string nome, string login, string senha, string email, int idade, char sexo, string UrlImagem)
+        public string UpdateUsuario(string usuarioSerializado)
         {
             try
             {
-                var usuario = new Usuario()
-                {
-                    IdUsuario = id,
-                    Nome = nome,
-                    Login = login,
-                    Senha = senha,
-                    Email = email,
-                    Idade = idade,
-                    Sexo = sexo.ToString(),
-                    UrlImagem = UrlImagem
-                };
+                var usuario = Serializer.Deserialize<Usuario>(usuarioSerializado);
                 Facade.Instance.UpdateUsuario(usuario);                
-                return new JavaScriptSerializer().Serialize("done successfully!");
+                return Serializer.Serialize("done successfully!");
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return Serializer.Serialize("done with error!");
             }
         }
 
@@ -123,33 +128,27 @@ namespace Fusioness.Services
         {
             try
             {
-                List<Usuario> usuarios = Facade.Instance.CarregarContatos(idUsuario);
-                string str = "";
-
-                foreach (var usuario in usuarios)
-                {
-                    str += usuario.Nome + "|" + usuario.IdUsuario + "|";   
-                }
-                return new JavaScriptSerializer().Serialize(str);
+                return Serializer.Serialize(Facade.Instance.CarregarContatos(idUsuario));
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return Serializer.Serialize("done with error!");
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string QualificarRota(int IdRota, int IdTipoRota, int IdUsuario)
+        public string QualificarRota(string rotaSerializada)
         {
             try
             {
-                Facade.Instance.QualificarRota(IdRota,IdTipoRota,IdUsuario);
-                return new JavaScriptSerializer().Serialize("done successfully!");
+                var rota = Serializer.Deserialize<Rota>(rotaSerializada);
+                Facade.Instance.QualificarRota(rota);
+                return Serializer.Serialize("done successfully!");
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return Serializer.Serialize("done with error!");
             }
         }
 
@@ -159,12 +158,11 @@ namespace Fusioness.Services
         {
             try
             {
-                return Facade.Instance.GetRotas(IdUsuario);
-                return new JavaScriptSerializer().Serialize("done successfully!");
+                return Serializer.Serialize(Facade.Instance.CarregarRotasPorUsuario(IdUsuario));
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return Serializer.Serialize("done with error!");
             }
         }
 
@@ -174,12 +172,11 @@ namespace Fusioness.Services
         {
             try
             {
-                return Facade.Instance.CarregarRotas();
-                //return new JavaScriptSerializer().Serialize("done successfully!");
+                return Serializer.Serialize(Facade.Instance.CarregarRotas());
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return Serializer.Serialize("done with error!");
             }
         }
 
@@ -189,12 +186,11 @@ namespace Fusioness.Services
         {
             try
             {
-                return Facade.Instance.CarregarTipoRotas();
-                //return new JavaScriptSerializer().Serialize("done successfully!");
+                return Serializer.Serialize(Facade.Instance.CarregarTipoRotas());
             }
             catch
             {
-                return new JavaScriptSerializer().Serialize("done with error!");
+                return Serializer.Serialize("done with error!");
             }
         }
 
@@ -211,11 +207,11 @@ namespace Fusioness.Services
         //        {
         //            str += evento.IdEvento + "|";
         //        }
-        //        return new JavaScriptSerializer().Serialize(str);
+        //        return Serializer.Serialize(str);
         //    }
         //    catch
         //    {
-        //        return new JavaScriptSerializer().Serialize("done with error!");
+        //        return Serializer.Serialize("done with error!");
         //    }
         //}
     }

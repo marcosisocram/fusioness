@@ -3,40 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Fusioness.Entities;
 using Fusioness.FusionessWS;
 using Fusioness.Models.Rotas;
 
 namespace Fusioness.Controllers
 {
-    public class RotaController : Controller
+    public class RotaController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(RotaModel model)
         {
-            MainService service = new MainService();
-            //ViewData["rotasUsuario"] = new Fusioness.Models.Rotas.IndexModel().rotasUsuario;
-            //ViewData["tiposDeRota"] = new Fusioness.Models.Rotas.IndexModel().tiposRota;
-            var rotasUsuario = from x in service.GetRotas(4).Split(".".ToArray(),StringSplitOptions.RemoveEmptyEntries)
-                               let z = x.Split(':')
-                               select new
-                                   {
-                                       IdRota = z.FirstOrDefault()
-                                   };
-            var tiposDeRota = from x in service.CarregarTipoRotas().Split(".".ToArray(), StringSplitOptions.RemoveEmptyEntries)
-                              let z = x.Split(':')
-                              select new
-                              {
-                                  IdTipoRota = z.ElementAt(0),
-                                  Descricao = z.ElementAt(1),
-                              };
-            ViewData["rotasUsuario"] = rotasUsuario;
-            ViewData["tiposDeRota"] = tiposDeRota;
-            return View();
+            var rotasUsuario = Servico.GetRotas(4);
+            var tiposDeRota = Servico.CarregarTipoRotas();
+
+            model.RotasDoUsuario = Serializer.Deserialize<IList<Rota>>(rotasUsuario);
+            model.TiposDeRotas = Serializer.Deserialize<IList<TipoRota>>(tiposDeRota);
+
+            return View(model);
         }
 
-        public ActionResult QualificarRota(string IdRota, string IdTipoRota)
+        public ActionResult QualificarRota(RotaModel model)
         {
-            MainService service = new MainService();
-            TempData["MSG"] = service.QualificarRota(Convert.ToInt32(IdRota), Convert.ToInt32(IdTipoRota), 4);
+            var rota = new Rota
+            {
+                IdRota = model.RotaSelecionada.IdRota,
+                IdTipoRota = model.TiposDeRotaSelecionada.IdTipoRota,
+                IdUsuario = UsuarioLogado.IdUsuario
+            };
+
+            Servico.QualificarRota(Serializer.Serialize(rota));
             return RedirectToAction("index");
         }
     }

@@ -8,7 +8,7 @@ using Fusioness.Models.Home;
 
 namespace Fusioness.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -17,8 +17,6 @@ namespace Fusioness.Controllers
 
         public ActionResult DoSomething(IndexModel model)
         {
-            MainService service = new MainService();
-            TempData["MSG"] = service.DoSomething(model.User.Nome);
             return RedirectToAction("index");
         }
     }

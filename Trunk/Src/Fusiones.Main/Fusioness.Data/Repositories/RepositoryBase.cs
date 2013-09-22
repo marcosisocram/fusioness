@@ -24,6 +24,7 @@ namespace Fusioness.Data.Repositories
         {
             UnityOfWork = unityOfWork;
             _Context = (FusionessContext)UnityOfWork.Context;
+            _Context.Configuration.ProxyCreationEnabled = false;
             _DbSet = _Context.Set<T>();
             _KeyNames = GetKeyNames();
         }
