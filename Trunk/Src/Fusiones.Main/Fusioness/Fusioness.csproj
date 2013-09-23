@@ -164,6 +164,7 @@
     <Content Include="Web References\FusionessWS\Bicicleta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Views\Shared\_LayoutBaseAcesso.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

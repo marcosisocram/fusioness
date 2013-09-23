@@ -1,0 +1,25 @@
+﻿@model Fusioness.Models.Account.AcessoModel
+@{Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+  <title>Logon</title>
+  <script type="text/javascript">
+    @{
+      var titulo = TempData["MODAL_TITLE"] != null ? TempData["MODAL_TITLE"].ToString() : string.Empty;
+      var mensagem = TempData["MODAL_CONTENT"] != null ? TempData["MODAL_CONTENT"].ToString() : string.Empty;
+      var largura = TempData["MODAL_WIDTH"] != null ? TempData["MODAL_WIDTH"].ToString() : string.Empty;
+    }
+
+    var mensagem = '@(mensagem)';
+    if (typeof (mensagem) !== 'undefined' && mensagem !== '') {
+      alert(mensagem);
+    }
+
+  </script>
+</head>
+<body>
+@RenderBody()
+</body>
+</html>
