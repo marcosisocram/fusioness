@@ -8,6 +8,6 @@ namespace Fusioness.Business.Bicicletas
         /// Método responsável cadastrar uma bicicleta.
         /// </summary>
         /// <param name="bicicleta">bicicleta</param>
-        void InsertBicicleta(Bicicleta bicicleta);
+        Bicicleta InsertBicicleta(Bicicleta bicicleta);
     }
 }

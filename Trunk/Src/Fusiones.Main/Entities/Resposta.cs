@@ -6,11 +6,11 @@ namespace Fusioness.Entities
     {
         public Resposta()
         {
-            this.ConviteEventos = new List<ConviteEvento>();
+            ConviteEventos = new List<ConviteEvento>();
         }
 
         public int IdResposta { get; set; }
         public string Descricao { get; set; }
-        public virtual ICollection<ConviteEvento> ConviteEventos { get; set; }
+        public virtual List<ConviteEvento> ConviteEventos { get; set; }
     }
 }

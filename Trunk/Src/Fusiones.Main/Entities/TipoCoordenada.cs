@@ -6,11 +6,11 @@ namespace Fusioness.Entities
     {
         public TipoCoordenada()
         {
-            this.Coordenadas = new List<Coordenada>();
+            Coordenadas = new List<Coordenada>();
         }
 
         public int IdTipoCoordenada { get; set; }
         public string Descricao { get; set; }
-        public virtual ICollection<Coordenada> Coordenadas { get; set; }
+        public virtual List<Coordenada> Coordenadas { get; set; }
     }
 }

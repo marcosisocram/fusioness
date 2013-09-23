@@ -6,11 +6,11 @@ namespace Fusioness.Entities
     {
         public QualidadeRota()
         {
-            this.Rotas = new List<Rota>();
+            Rotas = new List<Rota>();
         }
 
         public int IdQualidadeRota { get; set; }
         public string Descricao { get; set; }
-        public virtual ICollection<Rota> Rotas { get; set; }
+        public virtual List<Rota> Rotas { get; set; }
     }
 }

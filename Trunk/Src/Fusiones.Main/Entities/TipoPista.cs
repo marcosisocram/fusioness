@@ -6,11 +6,11 @@ namespace Fusioness.Entities
     {
         public TipoPista()
         {
-            this.Rotas = new List<Rota>();
+            Rotas = new List<Rota>();
         }
 
         public int IdTipoPista { get; set; }
         public string Descricao { get; set; }
-        public virtual ICollection<Rota> Rotas { get; set; }
+        public virtual List<Rota> Rotas { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Fusioness.Entities
 {
@@ -7,11 +6,11 @@ namespace Fusioness.Entities
     {
         public StatusEvento()
         {
-            this.EventoUsuarios = new List<EventoUsuario>();
+            EventoUsuarios = new List<EventoUsuario>();
         }
 
         public int IdStatusEvento { get; set; }
         public string Descricao { get; set; }
-        public virtual ICollection<EventoUsuario> EventoUsuarios { get; set; }
+        public virtual List<EventoUsuario> EventoUsuarios { get; set; }
     }
 }

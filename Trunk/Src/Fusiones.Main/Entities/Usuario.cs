@@ -22,11 +22,11 @@ namespace Fusioness.Entities
         public int? Idade { get; set; }
         public string Sexo { get; set; }
         public string UrlImagem { get; set; }
-        public virtual ICollection<Bicicleta> Bicicletas { get; set; }
-        public virtual ICollection<Contato> Contatos { get; set; }
-        public virtual ICollection<Contato> Contatos1 { get; set; }
-        public virtual ICollection<Evento> Eventoes { get; set; }
-        public virtual ICollection<EventoUsuario> EventoUsuarios { get; set; }
-        public virtual ICollection<Rota> Rotas { get; set; }
+        public virtual List<Bicicleta> Bicicletas { get; set; }
+        public virtual List<Contato> Contatos { get; set; }
+        public virtual List<Contato> Contatos1 { get; set; }
+        public virtual List<Evento> Eventoes { get; set; }
+        public virtual List<EventoUsuario> EventoUsuarios { get; set; }
+        public virtual List<Rota> Rotas { get; set; }
     }
 }

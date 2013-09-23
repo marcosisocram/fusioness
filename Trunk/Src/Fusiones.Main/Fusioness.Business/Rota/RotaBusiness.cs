@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Fusioness.Business.Util;
 using Fusioness.Data;
 using Fusioness.Data.Contracts;
@@ -36,21 +35,21 @@ namespace Fusioness.Business.Rotas
 
         #region Public
 
-        public void InsertRota(Rota rota)
+        public Rota InsertRota(Rota rota)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Rota> repo = new RotaRepository(uow);
-                    repo.Insert(rota);
+                    rota = repo.Insert(rota);
                     uow.Commit();
                 }
+                return rota;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //TODO: CREATE LOG
-                throw;
+                return default(Rota);
             }
         }
 
@@ -76,9 +75,9 @@ namespace Fusioness.Business.Rotas
 
         #endregion
 
-            #region Private
+        #region Private
 
-            #endregion
+        #endregion
 
         #endregion
         }

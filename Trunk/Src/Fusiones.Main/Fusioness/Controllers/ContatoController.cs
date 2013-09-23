@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Fusioness.Entities;
 using Fusioness.Models.Contatos;
+using Fusioness.Models.Util;
 
 namespace Fusioness.Controllers
 {
@@ -9,8 +9,8 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(ContatoModel model)
         {
-            var usuariosSerializados = Servico.CarregarContatos(UsuarioLogado.IdUsuario);
-            model.ListaDeUsuarios = Serializer.Deserialize<IList<Usuario>>(usuariosSerializados);
+
+            model.ListaDeUsuarios = Servico.CarregarContatos(UsuarioLogado.IdUsuario).GetEntity<FusionessWS.Usuario, Usuario>();
             return View(model);
         }
 

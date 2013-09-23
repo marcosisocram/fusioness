@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Fusioness.FusionessWS;
+﻿using System.Web.Mvc;
 using Fusioness.Models.Bicicletas;
 using Fusioness.Entities;
-using System.Web.Script.Serialization;
+using Fusioness.Models.Util;
 
 namespace Fusioness.Controllers
 {
@@ -21,9 +16,10 @@ namespace Fusioness.Controllers
         public ActionResult InsertBicicleta(BicicletaModel model)
         {
             model.Bicicleta.IdUsuario = 7;
-            string bicicletaSerializado = Serializer.Serialize(model.Bicicleta);
+            
+            var bicicletaWS = model.Bicicleta.GetEntityService<Bicicleta, FusionessWS.Bicicleta>();
+            model.Bicicleta = Servico.InsertBicicleta(bicicletaWS).GetEntity<FusionessWS.Bicicleta, Bicicleta>();
 
-            model.Mensagem = Servico.InsertBicicleta(bicicletaSerializado);
             return RedirectToAction("index", model);
         }
     }

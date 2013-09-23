@@ -27,13 +27,14 @@ namespace Fusioness.FusionessWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="MainServiceSoap", Namespace="http://tempuri.org/")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EntityBase))]
     public partial class MainService : System.Web.Services.Protocols.SoapHttpClientProtocol {
-        
-        private System.Threading.SendOrPostCallback ValidarLogonUsuarioOperationCompleted;
         
         private System.Threading.SendOrPostCallback HelloWorldOperationCompleted;
         
         private System.Threading.SendOrPostCallback DoSomethingOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ValidarLogonUsuarioOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertBicicletaOperationCompleted;
         
@@ -90,13 +91,13 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public event ValidarLogonUsuarioCompletedEventHandler ValidarLogonUsuarioCompleted;
-        
-        /// <remarks/>
         public event HelloWorldCompletedEventHandler HelloWorldCompleted;
         
         /// <remarks/>
         public event DoSomethingCompletedEventHandler DoSomethingCompleted;
+        
+        /// <remarks/>
+        public event ValidarLogonUsuarioCompletedEventHandler ValidarLogonUsuarioCompleted;
         
         /// <remarks/>
         public event InsertBicicletaCompletedEventHandler InsertBicicletaCompleted;
@@ -121,35 +122,6 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event CarregarTipoRotasCompletedEventHandler CarregarTipoRotasCompleted;
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidarLogonUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string ValidarLogonUsuario(string usuarioSerializado) {
-            object[] results = this.Invoke("ValidarLogonUsuario", new object[] {
-                        usuarioSerializado});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ValidarLogonUsuarioAsync(string usuarioSerializado) {
-            this.ValidarLogonUsuarioAsync(usuarioSerializado, null);
-        }
-        
-        /// <remarks/>
-        public void ValidarLogonUsuarioAsync(string usuarioSerializado, object userState) {
-            if ((this.ValidarLogonUsuarioOperationCompleted == null)) {
-                this.ValidarLogonUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidarLogonUsuarioOperationCompleted);
-            }
-            this.InvokeAsync("ValidarLogonUsuario", new object[] {
-                        usuarioSerializado}, this.ValidarLogonUsuarioOperationCompleted, userState);
-        }
-        
-        private void OnValidarLogonUsuarioOperationCompleted(object arg) {
-            if ((this.ValidarLogonUsuarioCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ValidarLogonUsuarioCompleted(this, new ValidarLogonUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -180,24 +152,24 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DoSomething", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string DoSomething(string nomeDoUsuario) {
+        public Usuario DoSomething(Usuario usuario) {
             object[] results = this.Invoke("DoSomething", new object[] {
-                        nomeDoUsuario});
-            return ((string)(results[0]));
+                        usuario});
+            return ((Usuario)(results[0]));
         }
         
         /// <remarks/>
-        public void DoSomethingAsync(string nomeDoUsuario) {
-            this.DoSomethingAsync(nomeDoUsuario, null);
+        public void DoSomethingAsync(Usuario usuario) {
+            this.DoSomethingAsync(usuario, null);
         }
         
         /// <remarks/>
-        public void DoSomethingAsync(string nomeDoUsuario, object userState) {
+        public void DoSomethingAsync(Usuario usuario, object userState) {
             if ((this.DoSomethingOperationCompleted == null)) {
                 this.DoSomethingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDoSomethingOperationCompleted);
             }
             this.InvokeAsync("DoSomething", new object[] {
-                        nomeDoUsuario}, this.DoSomethingOperationCompleted, userState);
+                        usuario}, this.DoSomethingOperationCompleted, userState);
         }
         
         private void OnDoSomethingOperationCompleted(object arg) {
@@ -208,25 +180,54 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidarLogonUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Usuario ValidarLogonUsuario(Usuario usuario) {
+            object[] results = this.Invoke("ValidarLogonUsuario", new object[] {
+                        usuario});
+            return ((Usuario)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ValidarLogonUsuarioAsync(Usuario usuario) {
+            this.ValidarLogonUsuarioAsync(usuario, null);
+        }
+        
+        /// <remarks/>
+        public void ValidarLogonUsuarioAsync(Usuario usuario, object userState) {
+            if ((this.ValidarLogonUsuarioOperationCompleted == null)) {
+                this.ValidarLogonUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidarLogonUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("ValidarLogonUsuario", new object[] {
+                        usuario}, this.ValidarLogonUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnValidarLogonUsuarioOperationCompleted(object arg) {
+            if ((this.ValidarLogonUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ValidarLogonUsuarioCompleted(this, new ValidarLogonUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InsertBicicleta", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string InsertBicicleta(string bicicletaSerializado) {
+        public Bicicleta InsertBicicleta(Bicicleta bicicleta) {
             object[] results = this.Invoke("InsertBicicleta", new object[] {
-                        bicicletaSerializado});
-            return ((string)(results[0]));
+                        bicicleta});
+            return ((Bicicleta)(results[0]));
         }
         
         /// <remarks/>
-        public void InsertBicicletaAsync(string bicicletaSerializado) {
-            this.InsertBicicletaAsync(bicicletaSerializado, null);
+        public void InsertBicicletaAsync(Bicicleta bicicleta) {
+            this.InsertBicicletaAsync(bicicleta, null);
         }
         
         /// <remarks/>
-        public void InsertBicicletaAsync(string bicicletaSerializado, object userState) {
+        public void InsertBicicletaAsync(Bicicleta bicicleta, object userState) {
             if ((this.InsertBicicletaOperationCompleted == null)) {
                 this.InsertBicicletaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertBicicletaOperationCompleted);
             }
             this.InvokeAsync("InsertBicicleta", new object[] {
-                        bicicletaSerializado}, this.InsertBicicletaOperationCompleted, userState);
+                        bicicleta}, this.InsertBicicletaOperationCompleted, userState);
         }
         
         private void OnInsertBicicletaOperationCompleted(object arg) {
@@ -238,24 +239,24 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InsertUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string InsertUsuario(string usuarioSerializado) {
+        public Usuario InsertUsuario(Usuario usuario) {
             object[] results = this.Invoke("InsertUsuario", new object[] {
-                        usuarioSerializado});
-            return ((string)(results[0]));
+                        usuario});
+            return ((Usuario)(results[0]));
         }
         
         /// <remarks/>
-        public void InsertUsuarioAsync(string usuarioSerializado) {
-            this.InsertUsuarioAsync(usuarioSerializado, null);
+        public void InsertUsuarioAsync(Usuario usuario) {
+            this.InsertUsuarioAsync(usuario, null);
         }
         
         /// <remarks/>
-        public void InsertUsuarioAsync(string usuarioSerializado, object userState) {
+        public void InsertUsuarioAsync(Usuario usuario, object userState) {
             if ((this.InsertUsuarioOperationCompleted == null)) {
                 this.InsertUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertUsuarioOperationCompleted);
             }
             this.InvokeAsync("InsertUsuario", new object[] {
-                        usuarioSerializado}, this.InsertUsuarioOperationCompleted, userState);
+                        usuario}, this.InsertUsuarioOperationCompleted, userState);
         }
         
         private void OnInsertUsuarioOperationCompleted(object arg) {
@@ -267,24 +268,24 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string UpdateUsuario(string usuarioSerializado) {
+        public Usuario UpdateUsuario(Usuario usuario) {
             object[] results = this.Invoke("UpdateUsuario", new object[] {
-                        usuarioSerializado});
-            return ((string)(results[0]));
+                        usuario});
+            return ((Usuario)(results[0]));
         }
         
         /// <remarks/>
-        public void UpdateUsuarioAsync(string usuarioSerializado) {
-            this.UpdateUsuarioAsync(usuarioSerializado, null);
+        public void UpdateUsuarioAsync(Usuario usuario) {
+            this.UpdateUsuarioAsync(usuario, null);
         }
         
         /// <remarks/>
-        public void UpdateUsuarioAsync(string usuarioSerializado, object userState) {
+        public void UpdateUsuarioAsync(Usuario usuario, object userState) {
             if ((this.UpdateUsuarioOperationCompleted == null)) {
                 this.UpdateUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateUsuarioOperationCompleted);
             }
             this.InvokeAsync("UpdateUsuario", new object[] {
-                        usuarioSerializado}, this.UpdateUsuarioOperationCompleted, userState);
+                        usuario}, this.UpdateUsuarioOperationCompleted, userState);
         }
         
         private void OnUpdateUsuarioOperationCompleted(object arg) {
@@ -296,10 +297,10 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CarregarContatos", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string CarregarContatos(int idUsuario) {
+        public Usuario[] CarregarContatos(int idUsuario) {
             object[] results = this.Invoke("CarregarContatos", new object[] {
                         idUsuario});
-            return ((string)(results[0]));
+            return ((Usuario[])(results[0]));
         }
         
         /// <remarks/>
@@ -325,24 +326,24 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/QualificarRota", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string QualificarRota(string rotaSerializada) {
+        public Rota QualificarRota(Rota rota) {
             object[] results = this.Invoke("QualificarRota", new object[] {
-                        rotaSerializada});
-            return ((string)(results[0]));
+                        rota});
+            return ((Rota)(results[0]));
         }
         
         /// <remarks/>
-        public void QualificarRotaAsync(string rotaSerializada) {
-            this.QualificarRotaAsync(rotaSerializada, null);
+        public void QualificarRotaAsync(Rota rota) {
+            this.QualificarRotaAsync(rota, null);
         }
         
         /// <remarks/>
-        public void QualificarRotaAsync(string rotaSerializada, object userState) {
+        public void QualificarRotaAsync(Rota rota, object userState) {
             if ((this.QualificarRotaOperationCompleted == null)) {
                 this.QualificarRotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnQualificarRotaOperationCompleted);
             }
             this.InvokeAsync("QualificarRota", new object[] {
-                        rotaSerializada}, this.QualificarRotaOperationCompleted, userState);
+                        rota}, this.QualificarRotaOperationCompleted, userState);
         }
         
         private void OnQualificarRotaOperationCompleted(object arg) {
@@ -354,10 +355,10 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetRotas", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetRotas(int IdUsuario) {
+        public Rota[] GetRotas(int IdUsuario) {
             object[] results = this.Invoke("GetRotas", new object[] {
                         IdUsuario});
-            return ((string)(results[0]));
+            return ((Rota[])(results[0]));
         }
         
         /// <remarks/>
@@ -383,9 +384,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CarregarRotas", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string CarregarRotas() {
+        public Rota[] CarregarRotas() {
             object[] results = this.Invoke("CarregarRotas", new object[0]);
-            return ((string)(results[0]));
+            return ((Rota[])(results[0]));
         }
         
         /// <remarks/>
@@ -410,9 +411,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CarregarTipoRotas", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string CarregarTipoRotas() {
+        public TipoRota[] CarregarTipoRotas() {
             object[] results = this.Invoke("CarregarTipoRotas", new object[0]);
-            return ((string)(results[0]));
+            return ((TipoRota[])(results[0]));
         }
         
         /// <remarks/>
@@ -455,27 +456,1272 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void ValidarLogonUsuarioCompletedEventHandler(object sender, ValidarLogonUsuarioCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ValidarLogonUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Usuario : EntityBase {
         
-        private object[] results;
+        private int idUsuarioField;
         
-        internal ValidarLogonUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        private string nomeField;
+        
+        private string loginField;
+        
+        private string senhaField;
+        
+        private string emailField;
+        
+        private System.Nullable<int> idadeField;
+        
+        private string sexoField;
+        
+        private string urlImagemField;
+        
+        private Bicicleta[] bicicletasField;
+        
+        private Contato[] contatosField;
+        
+        private Contato[] contatos1Field;
+        
+        private Evento[] eventoesField;
+        
+        private EventoUsuario[] eventoUsuariosField;
+        
+        private Rota[] rotasField;
+        
+        /// <remarks/>
+        public int IdUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
         }
         
         /// <remarks/>
-        public string Result {
+        public string Nome {
             get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return this.nomeField;
+            }
+            set {
+                this.nomeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Login {
+            get {
+                return this.loginField;
+            }
+            set {
+                this.loginField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Senha {
+            get {
+                return this.senhaField;
+            }
+            set {
+                this.senhaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> Idade {
+            get {
+                return this.idadeField;
+            }
+            set {
+                this.idadeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Sexo {
+            get {
+                return this.sexoField;
+            }
+            set {
+                this.sexoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UrlImagem {
+            get {
+                return this.urlImagemField;
+            }
+            set {
+                this.urlImagemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Bicicleta[] Bicicletas {
+            get {
+                return this.bicicletasField;
+            }
+            set {
+                this.bicicletasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Contato[] Contatos {
+            get {
+                return this.contatosField;
+            }
+            set {
+                this.contatosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Contato[] Contatos1 {
+            get {
+                return this.contatos1Field;
+            }
+            set {
+                this.contatos1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Evento[] Eventoes {
+            get {
+                return this.eventoesField;
+            }
+            set {
+                this.eventoesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public EventoUsuario[] EventoUsuarios {
+            get {
+                return this.eventoUsuariosField;
+            }
+            set {
+                this.eventoUsuariosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Rota[] Rotas {
+            get {
+                return this.rotasField;
+            }
+            set {
+                this.rotasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Bicicleta : EntityBase {
+        
+        private int idBicicletaField;
+        
+        private int idUsuarioField;
+        
+        private string modeloField;
+        
+        private string marcaField;
+        
+        private Usuario usuarioField;
+        
+        /// <remarks/>
+        public int IdBicicleta {
+            get {
+                return this.idBicicletaField;
+            }
+            set {
+                this.idBicicletaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Modelo {
+            get {
+                return this.modeloField;
+            }
+            set {
+                this.modeloField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Marca {
+            get {
+                return this.marcaField;
+            }
+            set {
+                this.marcaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Usuario Usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                this.usuarioField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Resposta))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StatusEvento))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EventoUsuario))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TipoRota))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TipoPista))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(QualidadeRota))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Dificuldade))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TipoCoordenada))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Coordenada))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Rota))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Evento))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConviteEvento))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Contato))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Bicicleta))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Usuario))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class EntityBase {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Resposta : EntityBase {
+        
+        private int idRespostaField;
+        
+        private string descricaoField;
+        
+        private ConviteEvento[] conviteEventosField;
+        
+        /// <remarks/>
+        public int IdResposta {
+            get {
+                return this.idRespostaField;
+            }
+            set {
+                this.idRespostaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ConviteEvento[] ConviteEventos {
+            get {
+                return this.conviteEventosField;
+            }
+            set {
+                this.conviteEventosField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ConviteEvento : EntityBase {
+        
+        private int idUsuarioField;
+        
+        private int idContatoField;
+        
+        private int idEventoField;
+        
+        private System.Nullable<int> idRespostaField;
+        
+        private Contato contatoField;
+        
+        private Evento eventoField;
+        
+        private Resposta respostaField;
+        
+        /// <remarks/>
+        public int IdUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdContato {
+            get {
+                return this.idContatoField;
+            }
+            set {
+                this.idContatoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdEvento {
+            get {
+                return this.idEventoField;
+            }
+            set {
+                this.idEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdResposta {
+            get {
+                return this.idRespostaField;
+            }
+            set {
+                this.idRespostaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Contato Contato {
+            get {
+                return this.contatoField;
+            }
+            set {
+                this.contatoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Evento Evento {
+            get {
+                return this.eventoField;
+            }
+            set {
+                this.eventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Resposta Resposta {
+            get {
+                return this.respostaField;
+            }
+            set {
+                this.respostaField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Contato : EntityBase {
+        
+        private int idUsuarioField;
+        
+        private int idContatoField;
+        
+        private Usuario usuarioField;
+        
+        private Usuario usuario1Field;
+        
+        private ConviteEvento[] conviteEventosField;
+        
+        /// <remarks/>
+        public int IdUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdContato {
+            get {
+                return this.idContatoField;
+            }
+            set {
+                this.idContatoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Usuario Usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                this.usuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Usuario Usuario1 {
+            get {
+                return this.usuario1Field;
+            }
+            set {
+                this.usuario1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ConviteEvento[] ConviteEventos {
+            get {
+                return this.conviteEventosField;
+            }
+            set {
+                this.conviteEventosField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Evento : EntityBase {
+        
+        private int idEventoField;
+        
+        private int idUsuarioField;
+        
+        private int idRotaField;
+        
+        private string tituloField;
+        
+        private string descricaoField;
+        
+        private System.DateTime dataField;
+        
+        private string urlImagemField;
+        
+        private bool publicoField;
+        
+        private ConviteEvento[] conviteEventosField;
+        
+        private Rota rotaField;
+        
+        private Usuario usuarioField;
+        
+        private EventoUsuario[] eventoUsuariosField;
+        
+        /// <remarks/>
+        public int IdEvento {
+            get {
+                return this.idEventoField;
+            }
+            set {
+                this.idEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdRota {
+            get {
+                return this.idRotaField;
+            }
+            set {
+                this.idRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Titulo {
+            get {
+                return this.tituloField;
+            }
+            set {
+                this.tituloField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Data {
+            get {
+                return this.dataField;
+            }
+            set {
+                this.dataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UrlImagem {
+            get {
+                return this.urlImagemField;
+            }
+            set {
+                this.urlImagemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Publico {
+            get {
+                return this.publicoField;
+            }
+            set {
+                this.publicoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ConviteEvento[] ConviteEventos {
+            get {
+                return this.conviteEventosField;
+            }
+            set {
+                this.conviteEventosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Rota Rota {
+            get {
+                return this.rotaField;
+            }
+            set {
+                this.rotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Usuario Usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                this.usuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public EventoUsuario[] EventoUsuarios {
+            get {
+                return this.eventoUsuariosField;
+            }
+            set {
+                this.eventoUsuariosField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Rota : EntityBase {
+        
+        private int idRotaField;
+        
+        private int idUsuarioField;
+        
+        private System.Nullable<int> idTipoPistaField;
+        
+        private int idTipoRotaField;
+        
+        private System.Nullable<int> idDificuldadeField;
+        
+        private System.Nullable<int> idQualidadeRotaField;
+        
+        private Coordenada[] coordenadasField;
+        
+        private Dificuldade dificuldadeField;
+        
+        private Evento[] eventosField;
+        
+        private QualidadeRota qualidadeRotaField;
+        
+        private TipoPista tipoPistaField;
+        
+        private TipoRota tipoRotaField;
+        
+        private Usuario usuarioField;
+        
+        /// <remarks/>
+        public int IdRota {
+            get {
+                return this.idRotaField;
+            }
+            set {
+                this.idRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdTipoPista {
+            get {
+                return this.idTipoPistaField;
+            }
+            set {
+                this.idTipoPistaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdTipoRota {
+            get {
+                return this.idTipoRotaField;
+            }
+            set {
+                this.idTipoRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdDificuldade {
+            get {
+                return this.idDificuldadeField;
+            }
+            set {
+                this.idDificuldadeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdQualidadeRota {
+            get {
+                return this.idQualidadeRotaField;
+            }
+            set {
+                this.idQualidadeRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Coordenada[] Coordenadas {
+            get {
+                return this.coordenadasField;
+            }
+            set {
+                this.coordenadasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Dificuldade Dificuldade {
+            get {
+                return this.dificuldadeField;
+            }
+            set {
+                this.dificuldadeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Evento[] Eventos {
+            get {
+                return this.eventosField;
+            }
+            set {
+                this.eventosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public QualidadeRota QualidadeRota {
+            get {
+                return this.qualidadeRotaField;
+            }
+            set {
+                this.qualidadeRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public TipoPista TipoPista {
+            get {
+                return this.tipoPistaField;
+            }
+            set {
+                this.tipoPistaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public TipoRota TipoRota {
+            get {
+                return this.tipoRotaField;
+            }
+            set {
+                this.tipoRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Usuario Usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                this.usuarioField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Coordenada : EntityBase {
+        
+        private int idCoordenadaField;
+        
+        private int idRotaField;
+        
+        private System.Nullable<int> idTipoCoordenadaField;
+        
+        private double latitudeField;
+        
+        private double longitudeField;
+        
+        private System.Nullable<System.DateTime> dataField;
+        
+        private Rota rotaField;
+        
+        private TipoCoordenada tipoCoordenadaField;
+        
+        /// <remarks/>
+        public int IdCoordenada {
+            get {
+                return this.idCoordenadaField;
+            }
+            set {
+                this.idCoordenadaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdRota {
+            get {
+                return this.idRotaField;
+            }
+            set {
+                this.idRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdTipoCoordenada {
+            get {
+                return this.idTipoCoordenadaField;
+            }
+            set {
+                this.idTipoCoordenadaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Latitude {
+            get {
+                return this.latitudeField;
+            }
+            set {
+                this.latitudeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Longitude {
+            get {
+                return this.longitudeField;
+            }
+            set {
+                this.longitudeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> Data {
+            get {
+                return this.dataField;
+            }
+            set {
+                this.dataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Rota Rota {
+            get {
+                return this.rotaField;
+            }
+            set {
+                this.rotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public TipoCoordenada TipoCoordenada {
+            get {
+                return this.tipoCoordenadaField;
+            }
+            set {
+                this.tipoCoordenadaField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class TipoCoordenada : EntityBase {
+        
+        private int idTipoCoordenadaField;
+        
+        private string descricaoField;
+        
+        private Coordenada[] coordenadasField;
+        
+        /// <remarks/>
+        public int IdTipoCoordenada {
+            get {
+                return this.idTipoCoordenadaField;
+            }
+            set {
+                this.idTipoCoordenadaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Coordenada[] Coordenadas {
+            get {
+                return this.coordenadasField;
+            }
+            set {
+                this.coordenadasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Dificuldade : EntityBase {
+        
+        private int idDificuldadeField;
+        
+        private string descricaoField;
+        
+        private Rota[] rotasField;
+        
+        /// <remarks/>
+        public int IdDificuldade {
+            get {
+                return this.idDificuldadeField;
+            }
+            set {
+                this.idDificuldadeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Rota[] Rotas {
+            get {
+                return this.rotasField;
+            }
+            set {
+                this.rotasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class QualidadeRota : EntityBase {
+        
+        private int idQualidadeRotaField;
+        
+        private string descricaoField;
+        
+        private Rota[] rotasField;
+        
+        /// <remarks/>
+        public int IdQualidadeRota {
+            get {
+                return this.idQualidadeRotaField;
+            }
+            set {
+                this.idQualidadeRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Rota[] Rotas {
+            get {
+                return this.rotasField;
+            }
+            set {
+                this.rotasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class TipoPista : EntityBase {
+        
+        private int idTipoPistaField;
+        
+        private string descricaoField;
+        
+        private Rota[] rotasField;
+        
+        /// <remarks/>
+        public int IdTipoPista {
+            get {
+                return this.idTipoPistaField;
+            }
+            set {
+                this.idTipoPistaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Rota[] Rotas {
+            get {
+                return this.rotasField;
+            }
+            set {
+                this.rotasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class TipoRota : EntityBase {
+        
+        private int idTipoRotaField;
+        
+        private string descricaoField;
+        
+        private Rota[] rotasField;
+        
+        /// <remarks/>
+        public int IdTipoRota {
+            get {
+                return this.idTipoRotaField;
+            }
+            set {
+                this.idTipoRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Rota[] Rotas {
+            get {
+                return this.rotasField;
+            }
+            set {
+                this.rotasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class EventoUsuario : EntityBase {
+        
+        private int idUsuarioField;
+        
+        private int idEventoField;
+        
+        private System.Nullable<int> idStatusEventoField;
+        
+        private string statusDescricaoField;
+        
+        private Evento eventoField;
+        
+        private StatusEvento statusEventoField;
+        
+        private Usuario usuarioField;
+        
+        /// <remarks/>
+        public int IdUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdEvento {
+            get {
+                return this.idEventoField;
+            }
+            set {
+                this.idEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdStatusEvento {
+            get {
+                return this.idStatusEventoField;
+            }
+            set {
+                this.idStatusEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StatusDescricao {
+            get {
+                return this.statusDescricaoField;
+            }
+            set {
+                this.statusDescricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Evento Evento {
+            get {
+                return this.eventoField;
+            }
+            set {
+                this.eventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public StatusEvento StatusEvento {
+            get {
+                return this.statusEventoField;
+            }
+            set {
+                this.statusEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Usuario Usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                this.usuarioField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class StatusEvento : EntityBase {
+        
+        private int idStatusEventoField;
+        
+        private string descricaoField;
+        
+        private EventoUsuario[] eventoUsuariosField;
+        
+        /// <remarks/>
+        public int IdStatusEvento {
+            get {
+                return this.idStatusEventoField;
+            }
+            set {
+                this.idStatusEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public EventoUsuario[] EventoUsuarios {
+            get {
+                return this.eventoUsuariosField;
+            }
+            set {
+                this.eventoUsuariosField = value;
             }
         }
     }
@@ -524,10 +1770,36 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public Usuario Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Usuario)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ValidarLogonUsuarioCompletedEventHandler(object sender, ValidarLogonUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ValidarLogonUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ValidarLogonUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Usuario Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Usuario)(this.results[0]));
             }
         }
     }
@@ -550,10 +1822,10 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public Bicicleta Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Bicicleta)(this.results[0]));
             }
         }
     }
@@ -576,10 +1848,10 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public Usuario Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Usuario)(this.results[0]));
             }
         }
     }
@@ -602,10 +1874,10 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public Usuario Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Usuario)(this.results[0]));
             }
         }
     }
@@ -628,10 +1900,10 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public Usuario[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Usuario[])(this.results[0]));
             }
         }
     }
@@ -654,10 +1926,10 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public Rota Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Rota)(this.results[0]));
             }
         }
     }
@@ -680,10 +1952,10 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public Rota[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Rota[])(this.results[0]));
             }
         }
     }
@@ -706,10 +1978,10 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public Rota[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Rota[])(this.results[0]));
             }
         }
     }
@@ -732,10 +2004,10 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public string Result {
+        public TipoRota[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((TipoRota[])(this.results[0]));
             }
         }
     }

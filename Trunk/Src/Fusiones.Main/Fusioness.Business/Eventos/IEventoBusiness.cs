@@ -9,7 +9,7 @@ namespace Fusioness.Business.Eventos
 {
     public interface IEventoBusiness
     {
-        void InsertEvento(Evento evento);
+        Evento InsertEvento(Evento evento);
         List<Evento> CarregarEventos();
     }
 }

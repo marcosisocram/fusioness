@@ -46,10 +46,9 @@ namespace Fusioness.Business.TiposRota
                     return tiposRota;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //TODO: CREATE LOG
-                throw;
+                return new List<TipoRota>();
             }
         }
 

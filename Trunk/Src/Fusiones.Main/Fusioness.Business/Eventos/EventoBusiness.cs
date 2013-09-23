@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Fusioness.Business.Util;
 using System.Linq;
 using Fusioness.Data;
@@ -36,21 +35,21 @@ namespace Fusioness.Business.Eventos
 
         #region Public
 
-        public void InsertEvento(Evento evento)
+        public Evento InsertEvento(Evento evento)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Evento> repo = new EventoRepository(uow);
-                    repo.Insert(evento);
+                    evento = repo.Insert(evento);
                     uow.Commit();
                 }
+                return evento;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //TODO: CREATE LOG
-                throw;
+                return default(Evento);
             }
         }
         public List<Evento> CarregarEventos()

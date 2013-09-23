@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Fusioness.Entities;
-using Fusioness.FusionessWS;
 using Fusioness.Models.Rotas;
+using Fusioness.Models.Util;
 
 namespace Fusioness.Controllers
 {
@@ -13,11 +9,8 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(RotaModel model)
         {
-            var rotasUsuario = Servico.GetRotas(4);
-            var tiposDeRota = Servico.CarregarTipoRotas();
-
-            model.RotasDoUsuario = Serializer.Deserialize<IList<Rota>>(rotasUsuario);
-            model.TiposDeRotas = Serializer.Deserialize<IList<TipoRota>>(tiposDeRota);
+            model.RotasDoUsuario = Servico.GetRotas(4).GetEntity<FusionessWS.Rota, Rota>();
+            model.TiposDeRotas = Servico.CarregarTipoRotas().GetEntity<FusionessWS.TipoRota, TipoRota>();
 
             return View(model);
         }
@@ -29,9 +22,9 @@ namespace Fusioness.Controllers
                 IdRota = model.RotaSelecionada.IdRota,
                 IdTipoRota = model.TiposDeRotaSelecionada.IdTipoRota,
                 IdUsuario = UsuarioLogado.IdUsuario
-            };
+            }.GetEntityService<Rota, FusionessWS.Rota>();
 
-            Servico.QualificarRota(Serializer.Serialize(rota));
+            model.RotaSelecionada = Servico.QualificarRota(rota).GetEntity<FusionessWS.Rota, Rota>();
             return RedirectToAction("index");
         }
     }

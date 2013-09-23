@@ -2,20 +2,6 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-      <s:element name="ValidarLogonUsuario">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuarioSerializado" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ValidarLogonUsuarioResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ValidarLogonUsuarioResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="HelloWorld">
         <s:complexType />
       </s:element>
@@ -29,56 +15,318 @@
       <s:element name="DoSomething">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="nomeDoUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="Usuario">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Senha" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Idade" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Sexo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrlImagem" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Bicicletas" type="tns:ArrayOfBicicleta" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contatos" type="tns:ArrayOfContato" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contatos1" type="tns:ArrayOfContato" />
+              <s:element minOccurs="0" maxOccurs="1" name="Eventoes" type="tns:ArrayOfEvento" />
+              <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
+              <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EntityBase" />
+      <s:complexType name="Resposta">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdResposta" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ConviteEventos" type="tns:ArrayOfConviteEvento" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfConviteEvento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ConviteEvento" nillable="true" type="tns:ConviteEvento" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ConviteEvento">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdContato" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdResposta" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contato" type="tns:Contato" />
+              <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
+              <s:element minOccurs="0" maxOccurs="1" name="Resposta" type="tns:Resposta" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Contato">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdContato" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario1" type="tns:Usuario" />
+              <s:element minOccurs="0" maxOccurs="1" name="ConviteEventos" type="tns:ArrayOfConviteEvento" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Evento">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdRota" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Titulo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Data" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrlImagem" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Publico" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="ConviteEventos" type="tns:ArrayOfConviteEvento" />
+              <s:element minOccurs="0" maxOccurs="1" name="Rota" type="tns:Rota" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
+              <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Rota">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdRota" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdTipoPista" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdTipoRota" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdDificuldade" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdQualidadeRota" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Coordenadas" type="tns:ArrayOfCoordenada" />
+              <s:element minOccurs="0" maxOccurs="1" name="Dificuldade" type="tns:Dificuldade" />
+              <s:element minOccurs="0" maxOccurs="1" name="Eventos" type="tns:ArrayOfEvento" />
+              <s:element minOccurs="0" maxOccurs="1" name="QualidadeRota" type="tns:QualidadeRota" />
+              <s:element minOccurs="0" maxOccurs="1" name="TipoPista" type="tns:TipoPista" />
+              <s:element minOccurs="0" maxOccurs="1" name="TipoRota" type="tns:TipoRota" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCoordenada">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Coordenada" nillable="true" type="tns:Coordenada" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Coordenada">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdCoordenada" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdRota" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdTipoCoordenada" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Data" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Rota" type="tns:Rota" />
+              <s:element minOccurs="0" maxOccurs="1" name="TipoCoordenada" type="tns:TipoCoordenada" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TipoCoordenada">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdTipoCoordenada" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Coordenadas" type="tns:ArrayOfCoordenada" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Dificuldade">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdDificuldade" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfRota">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Rota" nillable="true" type="tns:Rota" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEvento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Evento" nillable="true" type="tns:Evento" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="QualidadeRota">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdQualidadeRota" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TipoPista">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdTipoPista" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TipoRota">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdTipoRota" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfEventoUsuario">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventoUsuario" nillable="true" type="tns:EventoUsuario" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventoUsuario">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdStatusEvento" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatusDescricao" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatusEvento" type="tns:StatusEvento" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="StatusEvento">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdStatusEvento" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Bicicleta">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdBicicleta" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Modelo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Marca" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfBicicleta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Bicicleta" nillable="true" type="tns:Bicicleta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContato">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Contato" nillable="true" type="tns:Contato" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="DoSomethingResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="DoSomethingResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DoSomethingResult" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarLogonUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarLogonUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidarLogonUsuarioResult" type="tns:Usuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="InsertBicicleta">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="bicicletaSerializado" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="InsertBicicletaResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="InsertBicicletaResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InsertBicicletaResult" type="tns:Bicicleta" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="InsertUsuario">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuarioSerializado" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="InsertUsuarioResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="InsertUsuarioResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InsertUsuarioResult" type="tns:Usuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="UpdateUsuario">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuarioSerializado" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="UpdateUsuarioResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="UpdateUsuarioResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateUsuarioResult" type="tns:Usuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -92,21 +340,26 @@
       <s:element name="CarregarContatosResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="CarregarContatosResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CarregarContatosResult" type="tns:ArrayOfUsuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfUsuario">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Usuario" nillable="true" type="tns:Usuario" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="QualificarRota">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="rotaSerializada" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="QualificarRotaResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="QualificarRotaResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QualificarRotaResult" type="tns:Rota" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -120,7 +373,7 @@
       <s:element name="GetRotasResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRotasResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetRotasResult" type="tns:ArrayOfRota" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -130,7 +383,7 @@
       <s:element name="CarregarRotasResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="CarregarRotasResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CarregarRotasResult" type="tns:ArrayOfRota" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -140,18 +393,17 @@
       <s:element name="CarregarTipoRotasResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="CarregarTipoRotasResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CarregarTipoRotasResult" type="tns:ArrayOfTipoRota" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfTipoRota">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TipoRota" nillable="true" type="tns:TipoRota" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="ValidarLogonUsuarioSoapIn">
-    <wsdl:part name="parameters" element="tns:ValidarLogonUsuario" />
-  </wsdl:message>
-  <wsdl:message name="ValidarLogonUsuarioSoapOut">
-    <wsdl:part name="parameters" element="tns:ValidarLogonUsuarioResponse" />
-  </wsdl:message>
   <wsdl:message name="HelloWorldSoapIn">
     <wsdl:part name="parameters" element="tns:HelloWorld" />
   </wsdl:message>
@@ -163,6 +415,12 @@
   </wsdl:message>
   <wsdl:message name="DoSomethingSoapOut">
     <wsdl:part name="parameters" element="tns:DoSomethingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarLogonUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarLogonUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ValidarLogonUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarLogonUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="InsertBicicletaSoapIn">
     <wsdl:part name="parameters" element="tns:InsertBicicleta" />
@@ -213,10 +471,6 @@
     <wsdl:part name="parameters" element="tns:CarregarTipoRotasResponse" />
   </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
-    <wsdl:operation name="ValidarLogonUsuario">
-      <wsdl:input message="tns:ValidarLogonUsuarioSoapIn" />
-      <wsdl:output message="tns:ValidarLogonUsuarioSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
       <wsdl:output message="tns:HelloWorldSoapOut" />
@@ -224,6 +478,10 @@
     <wsdl:operation name="DoSomething">
       <wsdl:input message="tns:DoSomethingSoapIn" />
       <wsdl:output message="tns:DoSomethingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarLogonUsuario">
+      <wsdl:input message="tns:ValidarLogonUsuarioSoapIn" />
+      <wsdl:output message="tns:ValidarLogonUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InsertBicicleta">
       <wsdl:input message="tns:InsertBicicletaSoapIn" />
@@ -260,15 +518,6 @@
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ValidarLogonUsuario">
-      <soap:operation soapAction="http://tempuri.org/ValidarLogonUsuario" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="HelloWorld">
       <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
       <wsdl:input>
@@ -280,6 +529,15 @@
     </wsdl:operation>
     <wsdl:operation name="DoSomething">
       <soap:operation soapAction="http://tempuri.org/DoSomething" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarLogonUsuario">
+      <soap:operation soapAction="http://tempuri.org/ValidarLogonUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -362,15 +620,6 @@
   </wsdl:binding>
   <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ValidarLogonUsuario">
-      <soap12:operation soapAction="http://tempuri.org/ValidarLogonUsuario" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="HelloWorld">
       <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
       <wsdl:input>
@@ -382,6 +631,15 @@
     </wsdl:operation>
     <wsdl:operation name="DoSomething">
       <soap12:operation soapAction="http://tempuri.org/DoSomething" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarLogonUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ValidarLogonUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

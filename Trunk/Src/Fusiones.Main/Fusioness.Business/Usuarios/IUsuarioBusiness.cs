@@ -9,10 +9,10 @@ namespace Fusioness.Business.Usuarios
         void DoSomething(Usuario usuario);
 
         Usuario ValidarLogonUsuario(Usuario usuario);
-        void InsertUsuario(Usuario usuario);
-        void UpdateUsuario(Usuario usuario);
+        Usuario InsertUsuario(Usuario usuario);
+        Usuario UpdateUsuario(Usuario usuario);
 
-        void AdicionarUsuarioARede(Contato contato);
+        Contato AdicionarUsuarioARede(Contato contato);
 
         List<Usuario> CarregarContatos(int idUsuario);
     }

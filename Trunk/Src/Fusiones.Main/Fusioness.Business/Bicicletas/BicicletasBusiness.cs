@@ -33,16 +33,17 @@ namespace Fusioness.Business.Bicicletas
 
         #region Public
 
-        public void InsertBicicleta(Bicicleta bicicleta)
+        public Bicicleta InsertBicicleta(Bicicleta bicicleta)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Bicicleta> repo = new BicicletaRepository(uow);                    
-                    repo.Insert(bicicleta);
+                    bicicleta = repo.Insert(bicicleta);
                     uow.Commit();
                 }
+                return bicicleta;
             }
             catch (Exception ex)
             {

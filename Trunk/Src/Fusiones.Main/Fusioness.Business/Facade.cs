@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Fusioness.Business.ConvitesEventos;
 using Fusioness.Business.Usuarios;
 using Fusioness.Entities;
@@ -56,14 +57,14 @@ namespace Fusioness.Business
             UsuarioBus.DoSomething(usuario);
         }
 
-        public void InsertUsuario(Usuario usuario)
+        public Usuario InsertUsuario(Usuario usuario)
         {
-            UsuarioBus.InsertUsuario(usuario);
+            return UsuarioBus.InsertUsuario(usuario);
         }
 
-        public void UpdateUsuario(Usuario usuario)
+        public Usuario UpdateUsuario(Usuario usuario)
         {
-            UsuarioBus.UpdateUsuario(usuario);
+            return UsuarioBus.UpdateUsuario(usuario);
         }
 
         public List<Usuario> CarregarContatos(int idUsuario)
@@ -71,9 +72,9 @@ namespace Fusioness.Business
             return UsuarioBus.CarregarContatos(idUsuario);
         }
 
-        public void AdicionarUsuarioARede(Contato contato)
+        public Contato AdicionarUsuarioARede(Contato contato)
         {
-            UsuarioBus.AdicionarUsuarioARede(contato);
+            return UsuarioBus.AdicionarUsuarioARede(contato);
         }
 
         #endregion
@@ -99,23 +100,25 @@ namespace Fusioness.Business
 
         #region Bicicleta
 
-        public void InsertBicicleta(Bicicleta bicicleta)
+        public Bicicleta InsertBicicleta(Bicicleta bicicleta)
         {
-            BicicletaBus.InsertBicicleta(bicicleta);
+            return BicicletaBus.InsertBicicleta(bicicleta);
         }
 
         #endregion
 
         #region Rota
 
-        public void InsertRota(Rota rota)
+        public Rota InsertRota(Rota rota)
         {
-            RotaBus.InsertRota(rota);
+            return RotaBus.InsertRota(rota);
         }
+        
         public List<Rota> CarregarRotas()
         {
             return RotaBus.CarregarRotas();
         }
+        
         public List<Rota> CarregarRotasPorUsuario(int IdUsuario)
         {
             return RotaBus.CarregarRotasPorUsuario(IdUsuario);
@@ -126,9 +129,10 @@ namespace Fusioness.Business
             return TipoRotaBus.GetTipoRotas();
         }
 
-        public void QualificarRota(Rota rota) 
+        public Rota QualificarRota(Rota rota) 
         {
             //UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
+            throw new NotImplementedException();
         }
 
         
@@ -136,11 +140,12 @@ namespace Fusioness.Business
         #endregion
 
         #region Evento
-        
-        public void InsertEvento(Evento evento)
+
+        public Evento InsertEvento(Evento evento)
         {
-            EventoBus.InsertEvento(evento);
+            return EventoBus.InsertEvento(evento);
         }
+        
         public List<Evento> CarregarEventos()
         {
             return EventoBus.CarregarEventos();

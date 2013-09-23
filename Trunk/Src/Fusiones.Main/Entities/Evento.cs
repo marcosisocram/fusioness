@@ -6,8 +6,8 @@ namespace Fusioness.Entities
     {
         public Evento()
         {
-            this.ConviteEventos = new List<ConviteEvento>();
-            this.EventoUsuarios = new List<EventoUsuario>();
+            ConviteEventos = new List<ConviteEvento>();
+            EventoUsuarios = new List<EventoUsuario>();
         }
 
         public int IdEvento { get; set; }
@@ -18,9 +18,9 @@ namespace Fusioness.Entities
         public System.DateTime Data { get; set; }
         public string UrlImagem { get; set; }
         public bool Publico { get; set; }
-        public virtual ICollection<ConviteEvento> ConviteEventos { get; set; }
+        public virtual List<ConviteEvento> ConviteEventos { get; set; }
         public virtual Rota Rota { get; set; }
         public virtual Usuario Usuario { get; set; }
-        public virtual ICollection<EventoUsuario> EventoUsuarios { get; set; }
+        public virtual List<EventoUsuario> EventoUsuarios { get; set; }
     }
 }

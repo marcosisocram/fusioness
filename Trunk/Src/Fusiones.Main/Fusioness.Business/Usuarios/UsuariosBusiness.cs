@@ -67,39 +67,39 @@ namespace Fusioness.Business.Usuarios
         }
 
 
-        public void InsertUsuario(Usuario usuario)
+        public Usuario InsertUsuario(Usuario usuario)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Usuario> repo = new UsuarioRepository(uow);
-                    repo.Insert(usuario);
+                    usuario = repo.Insert(usuario);
                     uow.Commit();
                 }
+                return usuario;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //TODO: CREATE LOG
-                throw;
+                return default(Usuario);
             }
         }
 
-        public void UpdateUsuario(Usuario usuario) 
+        public Usuario UpdateUsuario(Usuario usuario) 
         {
             try
             {
                 using(IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Usuario> repo = new UsuarioRepository(uow);
-                    repo.Update(usuario);
+                    usuario = repo.Update(usuario);
                     uow.Commit();
                 }
+                return usuario;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //TODO: CREATE LOG
-                throw;
+                return default(Usuario);
             }
         }
 
@@ -114,28 +114,27 @@ namespace Fusioness.Business.Usuarios
                     return repo.GetAll().ToList();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //TODO: CREATE LOG
-                throw;
+                return new List<Usuario>();
             }
         }
-        
-        public void AdicionarUsuarioARede(Contato contato)
+
+        public Contato AdicionarUsuarioARede(Contato contato)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Contato> repo = new ContatoRepository(uow);
-                    repo.Insert(contato);
+                    contato = repo.Insert(contato);
                     uow.Commit();
                 }
+                return contato;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //TODO: CREATE LOG
-                throw;
+                return default(Contato);
             }
         }
 

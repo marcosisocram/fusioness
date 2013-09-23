@@ -1,4 +1,3 @@
-
 namespace Fusioness.Entities
 {
     public class Bicicleta : EntityBase

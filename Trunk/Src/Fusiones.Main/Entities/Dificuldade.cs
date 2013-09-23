@@ -11,6 +11,6 @@ namespace Fusioness.Entities
 
         public int IdDificuldade { get; set; }
         public string Descricao { get; set; }
-        public virtual ICollection<Rota> Rotas { get; set; }
+        public virtual List<Rota> Rotas { get; set; }
     }
 }

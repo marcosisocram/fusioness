@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -24,26 +23,6 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string ValidarLogonUsuario(string usuarioSerializado)
-        {
-            try
-            {
-                var usuario = Serializer.Deserialize<Usuario>(usuarioSerializado);
-                var usuarioValidado = Facade.Instance.ValidarLogonUsuario(usuario);
-                if (usuarioValidado == null || usuarioValidado.IdUsuario <= 0) throw new Exception("Usuário inválido.");
-                
-                // limpando para evitar referencia circular
-
-                return Serializer.Serialize(usuarioValidado);
-            }
-            catch (Exception ex)
-            {
-                return Serializer.Serialize(ex);
-            }
-        }
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string HelloWorld()
         {
             return Serializer.Serialize("Hello World");
@@ -51,146 +30,144 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string DoSomething(string nomeDoUsuario)
+        public Usuario DoSomething(Usuario usuario)
         {
             try
             {
-                var usuario = new Usuario
-                {
-                    Nome = nomeDoUsuario,
-                    Login = "login",
-                    Senha = "senha",
-                    Email = "email",
-                    Sexo = "M"
-                };
-
                 Facade.Instance.DoSomething(usuario);
-                return Serializer.Serialize("done successfully!");
+                return usuario;
             }
             catch
             {
-                return Serializer.Serialize("done with error!");
+                return default(Usuario);
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string InsertBicicleta(string bicicletaSerializado)
+        public Usuario ValidarLogonUsuario(Usuario usuario)
         {
             try
             {
-                var bicicletaDesserializado = Serializer.Deserialize<Bicicleta>(bicicletaSerializado);
-
-                Facade.Instance.InsertBicicleta(bicicletaDesserializado);
-                return Serializer.Serialize("Bicicleta Cadastrada com Sucesso!");
+                usuario = Facade.Instance.ValidarLogonUsuario(usuario);
+                return usuario;
             }
-            catch
+            catch (Exception)
             {
-                return Serializer.Serialize("Error ao Cadastrar Bicicleta!");
+                return default(Usuario);
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string InsertUsuario(string usuarioSerializado)
+        public Bicicleta InsertBicicleta(Bicicleta bicicleta)
         {
             try
             {
-                var usuario = Serializer.Deserialize<Usuario>(usuarioSerializado);
-                Facade.Instance.InsertUsuario(usuario);
-                return Serializer.Serialize("done successfully!");
+                return Facade.Instance.InsertBicicleta(bicicleta);
             }
             catch
             {
-                return Serializer.Serialize("done with error!");
+                return default(Bicicleta);
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string UpdateUsuario(string usuarioSerializado)
+        public Usuario InsertUsuario(Usuario usuario)
         {
             try
             {
-                var usuario = Serializer.Deserialize<Usuario>(usuarioSerializado);
-                Facade.Instance.UpdateUsuario(usuario);                
-                return Serializer.Serialize("done successfully!");
+                usuario = Facade.Instance.InsertUsuario(usuario);
+                return usuario;
             }
             catch
             {
-                return Serializer.Serialize("done with error!");
+                return default(Usuario);
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string CarregarContatos(int idUsuario)
+        public Usuario UpdateUsuario(Usuario usuario)
         {
             try
             {
-                return Serializer.Serialize(Facade.Instance.CarregarContatos(idUsuario));
+                return Facade.Instance.UpdateUsuario(usuario);
             }
             catch
             {
-                return Serializer.Serialize("done with error!");
+                return default(Usuario);
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string QualificarRota(string rotaSerializada)
+        public List<Usuario> CarregarContatos(int idUsuario)
         {
             try
             {
-                var rota = Serializer.Deserialize<Rota>(rotaSerializada);
-                Facade.Instance.QualificarRota(rota);
-                return Serializer.Serialize("done successfully!");
+                return Facade.Instance.CarregarContatos(idUsuario);
             }
             catch
             {
-                return Serializer.Serialize("done with error!");
+                return new List<Usuario>();
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string GetRotas(int IdUsuario)
+        public Rota QualificarRota(Rota rota)
         {
             try
             {
-                return Serializer.Serialize(Facade.Instance.CarregarRotasPorUsuario(IdUsuario));
+                return Facade.Instance.QualificarRota(rota);
             }
             catch
             {
-                return Serializer.Serialize("done with error!");
+                return default(Rota);
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string CarregarRotas()
+        public List<Rota> GetRotas(int IdUsuario)
         {
             try
             {
-                return Serializer.Serialize(Facade.Instance.CarregarRotas());
+                return Facade.Instance.CarregarRotasPorUsuario(IdUsuario);
             }
             catch
             {
-                return Serializer.Serialize("done with error!");
+                return new List<Rota>();
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string CarregarTipoRotas()
+        public List<Rota> CarregarRotas()
         {
             try
             {
-                return Serializer.Serialize(Facade.Instance.CarregarTipoRotas());
+                return Facade.Instance.CarregarRotas();
             }
             catch
             {
-                return Serializer.Serialize("done with error!");
+                return new List<Rota>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<TipoRota> CarregarTipoRotas()
+        {
+            try
+            {
+                return Facade.Instance.CarregarTipoRotas().ToList();
+            }
+            catch
+            {
+                return new List<TipoRota>();
             }
         }
 

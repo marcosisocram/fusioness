@@ -3,7 +3,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Fusioness.Entities;
-using Fusioness.FusionessWS;
 using Fusioness.Models.Seguranca;
 
 namespace Fusioness.Controllers
@@ -12,12 +11,12 @@ namespace Fusioness.Controllers
     public class BaseController : Controller
     {
         #region Propriedades
-        private MainService _Servico;
-        public MainService Servico
+        private FusionessWS.MainService _Servico;
+        public FusionessWS.MainService Servico
         {
             get
             {
-                return _Servico ?? (_Servico = new MainService());
+                return _Servico ?? (_Servico = new FusionessWS.MainService());
             }
         }
 
@@ -84,7 +83,6 @@ namespace Fusioness.Controllers
         #endregion
 
         #region Privados
-
         #endregion
         #endregion
     }
