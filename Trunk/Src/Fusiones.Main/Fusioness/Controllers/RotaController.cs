@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
-using Fusioness.Entities;
 using Fusioness.Models.Rotas;
-using Fusioness.Models.Util;
+using Fusioness.FusionessWS;
 
 namespace Fusioness.Controllers
 {
@@ -9,8 +8,8 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(RotaModel model)
         {
-            model.RotasDoUsuario = Servico.GetRotas(4).GetEntity<FusionessWS.Rota, Rota>();
-            model.TiposDeRotas = Servico.CarregarTipoRotas().GetEntity<FusionessWS.TipoRota, TipoRota>();
+            model.RotasDoUsuario = Servico.GetRotas(4);
+            model.TiposDeRotas = Servico.CarregarTipoRotas();
 
             return View(model);
         }
@@ -22,9 +21,9 @@ namespace Fusioness.Controllers
                 IdRota = model.RotaSelecionada.IdRota,
                 IdTipoRota = model.TiposDeRotaSelecionada.IdTipoRota,
                 IdUsuario = UsuarioLogado.IdUsuario
-            }.GetEntityService<Rota, FusionessWS.Rota>();
+            };
 
-            model.RotaSelecionada = Servico.QualificarRota(rota).GetEntity<FusionessWS.Rota, Rota>();
+            model.RotaSelecionada = Servico.QualificarRota(rota);
             return RedirectToAction("index");
         }
     }

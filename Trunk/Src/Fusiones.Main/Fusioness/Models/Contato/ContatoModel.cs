@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Fusioness.Entities;
+using Fusioness.FusionessWS;
 
 namespace Fusioness.Models.Contatos
 {

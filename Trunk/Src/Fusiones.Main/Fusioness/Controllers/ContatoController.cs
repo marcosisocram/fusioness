@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
-using Fusioness.Entities;
 using Fusioness.Models.Contatos;
-using Fusioness.Models.Util;
 
 namespace Fusioness.Controllers
 {
@@ -9,8 +7,7 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(ContatoModel model)
         {
-
-            model.ListaDeUsuarios = Servico.CarregarContatos(UsuarioLogado.IdUsuario).GetEntity<FusionessWS.Usuario, Usuario>();
+            model.ListaDeUsuarios = Servico.CarregarContatos(UsuarioLogado.IdUsuario);
             return View(model);
         }
 

@@ -1,4 +1,4 @@
-﻿using Fusioness.Entities;
+﻿using Fusioness.FusionessWS;
 
 namespace Fusioness.Models.Home
 {

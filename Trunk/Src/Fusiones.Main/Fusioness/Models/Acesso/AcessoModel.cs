@@ -1,6 +1,6 @@
-﻿using Fusioness.Entities;
+﻿using Fusioness.FusionessWS;
 
-namespace Fusioness.Models.Account
+namespace Fusioness.Models.Acesso
 {
     public class AcessoModel
     {

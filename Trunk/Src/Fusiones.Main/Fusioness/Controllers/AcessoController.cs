@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using Fusioness.Entities;
-using Fusioness.Models.Account;
+using Fusioness.Models.Acesso;
 using Fusioness.Models.Seguranca;
-using Fusioness.Models.Util;
 
 namespace Fusioness.Controllers
 {
@@ -21,12 +19,7 @@ namespace Fusioness.Controllers
         {
             try
             {
-                //Converte para a entidade do WS
-                var usuarioWS = model.UsuarioLogado.GetEntityService<Usuario, FusionessWS.Usuario>();
-                usuarioWS = Servico.ValidarLogonUsuario(usuarioWS);
-
-                //Converte da entidade do WS 
-                model.UsuarioLogado = usuarioWS.GetEntity<FusionessWS.Usuario, Usuario>();
+                model.UsuarioLogado = Servico.ValidarLogonUsuario(model.UsuarioLogado);
                 if (model.UsuarioLogado == null || model.UsuarioLogado.IdUsuario <= 0) throw new Exception("Usuário inválido.");
                 EfetuarLogon(model.UsuarioLogado);
                 
