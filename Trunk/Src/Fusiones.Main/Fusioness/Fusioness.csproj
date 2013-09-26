@@ -123,6 +123,7 @@
     <Compile Include="Models\Bicicletas\BicicletaModel.cs" />
     <Compile Include="Models\Contato\ContatoModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
+    <Compile Include="App_Start\PaginaExtensions.cs" />
     <Compile Include="Models\Rotas\RotaModel.cs" />
     <Compile Include="Models\Seguranca\AutorizarAttribute.cs" />
     <Compile Include="Models\Seguranca\FusionessIdentity.cs" />
@@ -145,6 +146,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\bootplus-responsive.min.css" />
+    <Content Include="Content\css\bootplus.min.css" />
+    <Content Include="Content\css\font-awesome-ie7.min.css" />
+    <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery.js" />
     <Content Include="Global.asax" />
     <Content Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -157,6 +164,14 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_LayoutBaseAcesso.cshtml" />
+    <Content Include="Content\font\fontawesome-webfont.eot" />
+    <Content Include="Content\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\font\fontawesome-webfont.woff" />
+    <Content Include="Content\font\FontAwesome.otf" />
+    <Content Include="Views\Shared\_MenuSuperior.cshtml" />
+    <Content Include="Views\Shared\LayoutBase.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -185,13 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\LayoutBase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />

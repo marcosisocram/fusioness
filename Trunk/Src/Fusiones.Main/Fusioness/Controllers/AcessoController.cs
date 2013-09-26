@@ -32,7 +32,6 @@ namespace Fusioness.Controllers
             }
         }
 
-        [HttpPost]
         public ActionResult Sair(AcessoModel model)
         {
             EfetuarLogout();

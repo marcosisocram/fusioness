@@ -1,11 +1,21 @@
-﻿@{ Layout = null; }
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>LayoutBase</title>
+  <title>Bootplus 101 Template</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootplus -->
+  <link href="@Url.Content("~/Content/css/bootplus.min.css")" rel="stylesheet" media="screen">
+  <link href="@Url.Content("~/Content/css/bootplus-responsive.min.css")" rel="stylesheet" media="screen">
 
-    @RenderSection("head", false)
+  <script src="@Url.Content("~/Content/js/jquery.js")"></script>
+  <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+
+  <style type="text/css">
+    body {
+      padding-top: 46px;
+      padding-bottom: 40px;
+    }
+  </style>
   <script type="text/javascript">
     @{
       var titulo = TempData["MODAL_TITLE"] != null ? TempData["MODAL_TITLE"].ToString() : string.Empty;
@@ -13,13 +23,94 @@
       var largura = TempData["MODAL_WIDTH"] != null ? TempData["MODAL_WIDTH"].ToString() : string.Empty;
     }
 
-    var mensagem = '@mensagem';
-    if(typeof(mensagem) !== 'undefined' && mensagem !== ''){
-      alert(mensagem);
-    }
+    $(document).ready(function () {
+      //configuração do modal
+      var mensagem = '@mensagem';
+      if (mensagem.trim() !== '') {
+        $(window).load(function () { $('#divModalGlobal').modal('show'); });
+      }
+    });
   </script>
+  @RenderSection("head", false)
 </head>
 <body>
-@RenderBody()
+  <!-- Menu Superior -->
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="brand" href="#">Fusioness</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            @Html.MenuItem("Home", "Index", "Home")
+            @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
+            @Html.MenuItem("Contatos", "Index", "Contato")
+            @Html.MenuItem("Rotas", "Index", "Rota")
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+              <ul class="dropdown-menu">
+                @Html.MenuItem("Home", "Index", "Home")
+                @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
+                @Html.MenuItem("Contatos", "Index", "Contato")
+                @Html.MenuItem("Rotas", "Index", "Rota")
+              </ul>
+            </li>
+          </ul>
+          <ul class="pull-right nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
+              <ul class="dropdown-menu">
+                @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
+                @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
+                <li class="divider"></li>
+                <li>
+                  @Html.ActionLink("Efetuar Logout", "Sair", "Acesso")
+                </li>
+              </ul>
+            </li>
+          </ul>
+          
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    @RenderBody()
+
+    <footer>
+      <p>&copy; Fusioness 2013</p>
+    </footer>
+
+  </div>
+  <!-- /container -->
+
+  <!-- MODAL -->
+  <div id="divModalGlobal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">@titulo</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            @mensagem
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 </body>
 </html>
