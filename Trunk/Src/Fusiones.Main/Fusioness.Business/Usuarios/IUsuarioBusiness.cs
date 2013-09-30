@@ -6,14 +6,13 @@ namespace Fusioness.Business.Usuarios
 {
     public interface IUsuarioBusiness
     {
-        void DoSomething(Usuario usuario);
-
         Usuario ValidarLogonUsuario(Usuario usuario);
-        Usuario InsertUsuario(Usuario usuario);
-        Usuario UpdateUsuario(Usuario usuario);
-
-        Contato AdicionarUsuarioARede(Contato contato);
-
-        List<Usuario> CarregarContatos(int idUsuario);
+        Usuario InserirUsuario(Usuario usuario);
+        Usuario AlterarUsuario(Usuario usuario);
+        void RemoverUsuario(Usuario usuario);
+        Usuario ObterUsuarioPorId(Usuario usuario);
+        List<Usuario> ListarUsuarios();
+        Contato InserirContato(Contato contato);
+        List<Usuario> ListarContatosPorUsuario(Usuario usuario);
     }
 }

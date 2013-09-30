@@ -33,9 +33,7 @@ namespace Fusioness.Business.Eventos
 
         #region Methods
 
-        #region Public
-
-        public Evento InsertEvento(Evento evento)
+        public Evento InserirEvento(Evento evento)
         {
             try
             {
@@ -52,7 +50,48 @@ namespace Fusioness.Business.Eventos
                 return default(Evento);
             }
         }
-        public List<Evento> CarregarEventos()
+        public Evento AlterarEvento(Evento evento)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Evento> repo = new EventoRepository(uow);
+                    evento = repo.Update(evento);
+                    uow.Commit();
+                }
+                return evento;
+            }
+            catch (Exception)
+            {
+                return default(Evento);
+            }
+        }
+        public void RemoverEvento(Evento evento)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Evento> repo = new EventoRepository(uow);
+                    repo.Delete(evento);
+                    uow.Commit();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Evento ObterEventoPorId(Evento evento)
+        {
+            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
+            {
+                return new EventoRepository(ouw).GetByKey(new Evento { IdEvento = evento.IdEvento });
+            }
+        }
+        public List<Evento> ListarEventos()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
@@ -61,16 +100,6 @@ namespace Fusioness.Business.Eventos
                 return evento.ToList();
             }
         }
-
-        public Evento ObterEventoPorId(int id)
-        {
-            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
-            {
-                return new EventoRepository(ouw).GetByKey(new Evento { IdEvento = id });
-            }
-        }
-
-        #endregion
 
         #endregion
     }

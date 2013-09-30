@@ -1,13 +1,14 @@
 ﻿using Fusioness.Entities;
+using System.Collections.Generic;
 
 namespace Fusioness.Business.Bicicletas
 {
     public interface IBicicletaBusiness
     {
-        /// <summary>
-        /// Método responsável cadastrar uma bicicleta.
-        /// </summary>
-        /// <param name="bicicleta">bicicleta</param>
-        Bicicleta InsertBicicleta(Bicicleta bicicleta);
+        Bicicleta InserirBicicleta(Bicicleta bicicleta);
+        Bicicleta AlterarBicicleta(Bicicleta bicicleta);
+        void RemoverBicicleta(Bicicleta bicicleta);
+        Bicicleta ObterBicicletaPorId(Bicicleta bicicleta);
+        List<Bicicleta> ListarBicicletas();
     }
 }

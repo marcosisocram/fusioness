@@ -32,42 +32,8 @@ namespace Fusioness.Business.Usuarios
         #endregion
 
         #region Methods
-
-        #region Public
-
-        public Usuario ValidarLogonUsuario(Usuario usuario)
-        {
-            if (usuario == null || string.IsNullOrWhiteSpace(usuario.Login) || string.IsNullOrWhiteSpace(usuario.Senha)) return null;
-
-            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
-            {
-                var retorno = new UsuarioRepository(ouw).GetWhere(u => u.Senha == usuario.Senha && u.Login == usuario.Login).FirstOrDefault();
-                return retorno;
-            }
-        }
-
-        public void DoSomething(Usuario usuario)
-        {
-            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
-            {
-                IRepository<Usuario> repo = new UsuarioRepository(uow);
-                //... IRepository<Type> repo2 = new TypeRepository(uow); //the same IUnityOfWork
-                repo.Insert(usuario);
-                //...
-                uow.Commit();
-            }
-        }
-
-        public Usuario ObterUsuarioPorId(int id)
-        {
-            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
-            {
-                return new UsuarioRepository(ouw).GetByKey(new Usuario { IdUsuario = id });
-            }
-        }
-
-
-        public Usuario InsertUsuario(Usuario usuario)
+        
+        public Usuario InserirUsuario(Usuario usuario)
         {
             try
             {
@@ -85,11 +51,11 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
-        public Usuario UpdateUsuario(Usuario usuario) 
+        public Usuario AlterarUsuario(Usuario usuario)
         {
             try
             {
-                using(IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Usuario> repo = new UsuarioRepository(uow);
                     usuario = repo.Update(usuario);
@@ -103,24 +69,57 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
-        public List<Usuario> CarregarContatos(int idUsuario)
+        public void RemoverUsuario(Usuario usuario)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Usuario> repo = new UsuarioRepository(uow);
-                    repo.GetWhere(c => c.IdUsuario != idUsuario);
+                    repo.Delete(usuario);
+                    uow.Commit();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Usuario ObterUsuarioPorId(Usuario usuario)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                return new UsuarioRepository(uow).GetByKey(new Usuario { IdUsuario = usuario.IdUsuario });
+            }
+        }
+        public List<Usuario> ListarUsuarios()
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Usuario> repo = new UsuarioRepository(uow);
                     return repo.GetAll().ToList();
                 }
             }
             catch (Exception)
             {
-                return new List<Usuario>();
+                throw;
+            }
+        }
+        public Usuario ValidarLogonUsuario(Usuario usuario)
+        {
+            if (usuario == null || string.IsNullOrWhiteSpace(usuario.Login) || string.IsNullOrWhiteSpace(usuario.Senha)) return null;
+
+            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
+            {
+                var retorno = new UsuarioRepository(ouw).GetWhere(u => u.Senha == usuario.Senha && u.Login == usuario.Login).FirstOrDefault();
+                return retorno;
             }
         }
 
-        public Contato AdicionarUsuarioARede(Contato contato)
+        #region Contato
+        public Contato InserirContato(Contato contato)
         {
             try
             {
@@ -137,10 +136,22 @@ namespace Fusioness.Business.Usuarios
                 return default(Contato);
             }
         }
-
-        #endregion
-
-        #region Private
+        public List<Usuario> ListarContatosPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Usuario> repo = new UsuarioRepository(uow);
+                    repo.GetWhere(c => c.IdUsuario != usuario.IdUsuario);
+                    return repo.GetAll().ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return new List<Usuario>();
+            }
+        }
 
         #endregion
 

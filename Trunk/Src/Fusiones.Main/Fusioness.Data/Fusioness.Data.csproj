@@ -70,6 +70,7 @@
     <Compile Include="Repositories\BicicletaRepository.cs" />
     <Compile Include="Repositories\ConviteEventoRepository.cs" />
     <Compile Include="Repositories\ContatoRepository.cs" />
+    <Compile Include="Repositories\CoordenadaRepository.cs" />
     <Compile Include="Repositories\RotaRepository.cs" />
     <Compile Include="Repositories\TipoRotaRepository.cs" />
     <Compile Include="Repositories\RespostaRepository.cs" />

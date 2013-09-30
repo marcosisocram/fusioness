@@ -35,7 +35,7 @@ namespace Fusioness.Business.TiposRota
 
         #region Public
 
-        public IList<TipoRota> GetTipoRotas()
+        public List<TipoRota> ListarTipoRotas()
         {
             try
             {

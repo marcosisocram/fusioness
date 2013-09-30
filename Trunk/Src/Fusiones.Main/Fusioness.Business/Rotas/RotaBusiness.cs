@@ -32,10 +32,7 @@ namespace Fusioness.Business.Rotas
         #endregion
 
         #region Methods
-
-        #region Public
-
-        public Rota InsertRota(Rota rota)
+        public Rota InserirRota(Rota rota)
         {
             try
             {
@@ -52,9 +49,47 @@ namespace Fusioness.Business.Rotas
                 return default(Rota);
             }
         }
-
-        public
-            List<Rota> CarregarRotas()
+        public Rota AlterarRota(Rota rota)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Rota> repo = new RotaRepository(uow);
+                    rota = repo.Update(rota);
+                    uow.Commit();
+                }
+                return rota;
+            }
+            catch (Exception)
+            {
+                return default(Rota);
+            }
+        }
+        public void RemoverRota(Rota rota)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Rota> repo = new RotaRepository(uow);
+                    repo.Delete(rota);
+                    uow.Commit();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Rota ObterRotaPorId(Rota rota)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                return new RotaRepository(uow).GetByKey(new Rota { IdRota = rota.IdRota });
+            }
+        }
+        public List<Rota> ListarRotas()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
@@ -63,23 +98,16 @@ namespace Fusioness.Business.Rotas
                 return rotas.ToList();
             }
         }
-
-        public List<Rota> CarregarRotasPorUsuario(int IdUsuario)
+        public List<Rota> ListarRotasPorUsuario(Usuario usuario)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<Rota> repo = new RotaRepository(uow);
-                var rotas = repo.GetWhere(c => c.IdUsuario == IdUsuario);
+                var rotas = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario);
                 return rotas.ToList();
             }
-
-        #endregion
-
-        #region Private
-
-        #endregion
-
-        #endregion
         }
+
+        #endregion
     }
 }
