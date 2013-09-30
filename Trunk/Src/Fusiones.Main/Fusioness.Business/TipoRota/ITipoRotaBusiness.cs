@@ -5,6 +5,6 @@ namespace Fusioness.Business.TiposRota
 {
     public interface ITipoRotaBusiness
     {
-        IList<TipoRota> GetTipoRotas();
+        List<TipoRota> ListarTipoRotas();
     }
 }

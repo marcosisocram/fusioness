@@ -34,7 +34,7 @@ namespace Fusioness.Business
         {
             UsuarioBus = new UsuariosBusiness();
             ConviteEventoBus = new ConviteEventoBusiness();
-            BicicletaBus = new BicicletasBusiness();
+            BicicletaBus = new BicicletaBusiness();
             RotaBus = new RotaBusiness();
             TipoRotaBus = new TipoRotaBusiness();
             EventoBus = new EventoBusiness();
@@ -44,7 +44,6 @@ namespace Fusioness.Business
 
         #region Methods
         
-        #region Public
         
         #region Usuario
 
@@ -53,31 +52,34 @@ namespace Fusioness.Business
             return UsuarioBus.ValidarLogonUsuario(usuario);
         }
 
-        public void DoSomething(Usuario usuario)
+        public Usuario InserirUsuario(Usuario usuario)
         {
-            UsuarioBus.DoSomething(usuario);
+            return UsuarioBus.InserirUsuario(usuario);
         }
-
-        public Usuario InsertUsuario(Usuario usuario)
+        public Usuario AlterarUsuario(Usuario usuario)
         {
-            return UsuarioBus.InsertUsuario(usuario);
+            return UsuarioBus.AlterarUsuario(usuario);
         }
-
-        public Usuario UpdateUsuario(Usuario usuario)
+        public void RemoverUsuario(Usuario usuario)
         {
-            return UsuarioBus.UpdateUsuario(usuario);
+            UsuarioBus.RemoverUsuario(usuario);
         }
-
-        public List<Usuario> CarregarContatos(int idUsuario)
+        public Usuario ObterUsuarioPorId(Usuario usuario)
         {
-            return UsuarioBus.CarregarContatos(idUsuario);
+            return UsuarioBus.ObterUsuarioPorId(usuario);
         }
-
-        public Contato AdicionarUsuarioARede(Contato contato)
+        public List<Usuario> ListarUsuarios()
         {
-            return UsuarioBus.AdicionarUsuarioARede(contato);
+            return UsuarioBus.ListarUsuarios();
         }
-
+        public Contato InserirContato(Contato contato)
+        {
+            return UsuarioBus.InserirContato(contato);
+        }
+        public List<Usuario> ListarContatosPorUsuario(Usuario usuario)
+        {
+            return UsuarioBus.ListarContatosPorUsuario(usuario);
+        }
         #endregion
 
         #region ConviteEvento
@@ -100,65 +102,88 @@ namespace Fusioness.Business
         #endregion
 
         #region Bicicleta
-
-        public Bicicleta InsertBicicleta(Bicicleta bicicleta)
+        public Bicicleta InserirBicicleta(Bicicleta bicicleta)
         {
-            return BicicletaBus.InsertBicicleta(bicicleta);
+            return BicicletaBus.InserirBicicleta(bicicleta);
         }
-
+        public Bicicleta AlterarBicicleta(Bicicleta bicicleta)
+        {
+            return BicicletaBus.AlterarBicicleta(bicicleta);
+        }
+        public void RemoverBicicleta(Bicicleta bicicleta)
+        {
+            BicicletaBus.RemoverBicicleta(bicicleta);
+        }
+        public Bicicleta ObterBicicletaPorId(Bicicleta bicicleta)
+        {
+            return BicicletaBus.ObterBicicletaPorId(bicicleta);
+        }
+        public List<Bicicleta> ListarBicicletas()
+        {
+            return BicicletaBus.ListarBicicletas();
+        }
         #endregion
 
         #region Rota
-
-        public Rota InsertRota(Rota rota)
+        public Rota InserirRota(Rota rota)
         {
-            return RotaBus.InsertRota(rota);
+            return RotaBus.InserirRota(rota);
+        }
+        public Rota AlterarRota(Rota rota)
+        {
+            return RotaBus.AlterarRota(rota);
+        }
+        public void RemoverRota(Rota rota)
+        {
+            RotaBus.RemoverRota(rota);
+        }
+        public Rota ObterRotaPorId(Rota rota)
+        {
+            return RotaBus.ObterRotaPorId(rota);
+        }
+        public List<Rota> ListarRotas()
+        {
+            return RotaBus.ListarRotas();
+        }
+        public List<Rota> ListarRotasPorUsuario(Usuario usuario)
+        {
+            return RotaBus.ListarRotasPorUsuario(usuario);
         }
         
-        public List<Rota> CarregarRotas()
-        {
-            return RotaBus.CarregarRotas();
-        }
-        
-        public List<Rota> CarregarRotasPorUsuario(int IdUsuario)
-        {
-            return RotaBus.CarregarRotasPorUsuario(IdUsuario);
-        }
+        #endregion
 
-        public IList<TipoRota> CarregarTipoRotas()
+        #region TipoRota
+        public List<TipoRota> ListarTipoRotas()
         {
-            return TipoRotaBus.GetTipoRotas();
+            return TipoRotaBus.ListarTipoRotas();
         }
-
-        public Rota QualificarRota(Rota rota) 
-        {
-            //UsuarioBus.QualificarRota(IdRota, IdTipoRota, IdUsuario);
-            throw new NotImplementedException();
-        }
-
-        
 
         #endregion
 
         #region Evento
 
-        public Evento InsertEvento(Evento evento)
+        public Evento InserirEvento(Evento evento)
         {
-            return EventoBus.InsertEvento(evento);
+            return EventoBus.InserirEvento(evento);
         }
-        
-        public List<Evento> CarregarEventos()
+        public Evento AlterarEvento(Evento evento)
         {
-            return EventoBus.CarregarEventos();
+            return EventoBus.AlterarEvento(evento);
         }
-
-        public Evento ObterEventoPorId(int id)
+        public void RemoverEvento(Evento evento)
         {
-            return EventoBus.ObterEventoPorId(id);
+            EventoBus.RemoverEvento(evento);
+        }
+        public Evento ObterEventoPorId(Evento evento)
+        {
+            return EventoBus.ObterEventoPorId(evento);
+        }
+        public List<Evento> ListarEventos()
+        {
+            return EventoBus.ListarEventos();
         }
         #endregion
         
-        #endregion
 
         #endregion
        

@@ -156,14 +156,5 @@ namespace Fusioness.Business.Usuarios
         #endregion
 
         #endregion
-        public void DoSomething(Usuario usuario)
-        {
-            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
-            {
-                IRepository<Usuario> repo = new UsuarioRepository(uow);
-                repo.Insert(usuario);
-                uow.Commit();
-            }
-        }
     }
 }

@@ -6,8 +6,11 @@ namespace Fusioness.Business.Rotas
 {
     public interface IRotaBusiness
     {
-        Rota InsertRota(Rota rota);
-        List<Rota> CarregarRotas();
-        List<Rota> CarregarRotasPorUsuario(int IdUsuario);
+        Rota InserirRota(Rota rota);
+        Rota AlterarRota(Rota rota);
+        void RemoverRota(Rota rota);
+        Rota ObterRotaPorId(Rota rota);
+        List<Rota> ListarRotas();
+        List<Rota> ListarRotasPorUsuario(Usuario usuario);
     }
 }

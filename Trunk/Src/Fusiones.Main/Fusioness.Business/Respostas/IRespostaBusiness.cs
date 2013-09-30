@@ -9,6 +9,6 @@ namespace Fusioness.Business.Respostas
 {
     public interface IRespostaBusiness
     {
-        Resposta ObterRespostaPorId(int id);
+        Resposta ObterRespostaPorId(Resposta resposta);
     }
 }

@@ -30,21 +30,6 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Usuario DoSomething(Usuario usuario)
-        {
-            try
-            {
-                Facade.Instance.DoSomething(usuario);
-                return usuario;
-            }
-            catch
-            {
-                return default(Usuario);
-            }
-        }
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Usuario ValidarLogonUsuario(Usuario usuario)
         {
             try
@@ -60,11 +45,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Bicicleta InsertBicicleta(Bicicleta bicicleta)
+        public Bicicleta InserirBicicleta(Bicicleta bicicleta)
         {
             try
             {
-                return Facade.Instance.InsertBicicleta(bicicleta);
+                return Facade.Instance.InserirBicicleta(bicicleta);
             }
             catch
             {
@@ -74,11 +59,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Usuario InsertUsuario(Usuario usuario)
+        public Usuario InserirUsuario(Usuario usuario)
         {
             try
             {
-                usuario = Facade.Instance.InsertUsuario(usuario);
+                usuario = Facade.Instance.InserirUsuario(usuario);
                 return usuario;
             }
             catch
@@ -89,11 +74,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Usuario UpdateUsuario(Usuario usuario)
+        public Usuario AlterarUsuario(Usuario usuario)
         {
             try
             {
-                return Facade.Instance.UpdateUsuario(usuario);
+                return Facade.Instance.AlterarUsuario(usuario);
             }
             catch
             {
@@ -103,11 +88,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<Usuario> CarregarContatos(int idUsuario)
+        public List<Usuario> ListarContatosPorUsuario(Usuario usuario)
         {
             try
             {
-                return Facade.Instance.CarregarContatos(idUsuario);
+                return Facade.Instance.ListarContatosPorUsuario(usuario);
             }
             catch
             {
@@ -117,25 +102,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Rota QualificarRota(Rota rota)
+        public List<Rota> ListarRotasPorUsuario(Usuario usuario)
         {
             try
             {
-                return Facade.Instance.QualificarRota(rota);
-            }
-            catch
-            {
-                return default(Rota);
-            }
-        }
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<Rota> GetRotas(int IdUsuario)
-        {
-            try
-            {
-                return Facade.Instance.CarregarRotasPorUsuario(IdUsuario);
+                return Facade.Instance.ListarRotasPorUsuario(usuario);
             }
             catch
             {
@@ -145,11 +116,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<Rota> CarregarRotas()
+        public List<Rota> ListarRotas()
         {
             try
             {
-                return Facade.Instance.CarregarRotas();
+                return Facade.Instance.ListarRotas();
             }
             catch
             {
@@ -159,11 +130,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<TipoRota> CarregarTipoRotas()
+        public List<TipoRota> ListarTipoRotas()
         {
             try
             {
-                return Facade.Instance.CarregarTipoRotas().ToList();
+                return Facade.Instance.ListarTipoRotas();
             }
             catch
             {
@@ -173,11 +144,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<Evento> CarregarEventos()
+        public List<Evento> ListarEventos()
         {
             try
             {
-                return Facade.Instance.CarregarEventos().ToList();
+                return Facade.Instance.ListarEventos();
             }
             catch
             {
@@ -187,37 +158,16 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Evento ObterEventoPorId(int id)
+        public Evento ObterEventoPorId(Evento evento)
         {
             try
             {
-                return Facade.Instance.ObterEventoPorId(id); ;
+                return Facade.Instance.ObterEventoPorId(evento); ;
             }
             catch
             {
                 return new Evento();
             }
         }
-
-        //[WebMethod]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        //public string CarregarEventos()
-        //{
-        //    try
-        //    {
-        //        List<Evento> eventos = Facade.Instance.CarregarEventos();
-        //        string str = "";
-
-        //        foreach (var evento in eventos)
-        //        {
-        //            str += evento.IdEvento + "|";
-        //        }
-        //        return Serializer.Serialize(str);
-        //    }
-        //    catch
-        //    {
-        //        return Serializer.Serialize("done with error!");
-        //    }
-        //}
     }
 }

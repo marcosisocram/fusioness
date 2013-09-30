@@ -35,11 +35,11 @@ namespace Fusioness.Business.Respostas
         #region Methods
         
         #region Public
-        public Resposta ObterRespostaPorId(int id)
+        public Resposta ObterRespostaPorId(Resposta resposta)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                return new RespostaRepository(uow).GetByKey(new Resposta{ IdResposta = id});
+                return new RespostaRepository(uow).GetByKey(new Resposta{ IdResposta = resposta.IdResposta});
             }
         }
         #endregion

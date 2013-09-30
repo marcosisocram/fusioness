@@ -6,7 +6,6 @@ namespace Fusioness.Business.Usuarios
 {
     public interface IUsuarioBusiness
     {
-        void DoSomething(Usuario usuario);
         Usuario ValidarLogonUsuario(Usuario usuario);
         Usuario InserirUsuario(Usuario usuario);
         Usuario AlterarUsuario(Usuario usuario);

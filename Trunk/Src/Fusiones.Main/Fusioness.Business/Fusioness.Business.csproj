@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bicicletas\BicicletasBusiness.cs" />
-    <Compile Include="Bicicletas\IBicicletaBusiness.cs" />
-    <Compile Include="ConvitesEventos\ConviteEventoBusiness.cs" />
-    <Compile Include="ConvitesEventos\IConviteEventoBusiness.cs" />
+    <Compile Include="Bicicleta\BicicletaBusiness.cs" />
+    <Compile Include="Bicicleta\IBicicletaBusiness.cs" />
+    <Compile Include="ConviteEventos\ConviteEventoBusiness.cs" />
+    <Compile Include="ConviteEventos\IConviteEventoBusiness.cs" />
     <Compile Include="TipoRota\TipoRotaBusiness.cs" />
     <Compile Include="TipoRota\ITipoRotaBusiness.cs" />
     <Compile Include="Rota\IRotaBusiness.cs" />
@@ -53,8 +53,8 @@
     <Compile Include="Facade.cs" />
     <Compile Include="Respostas\IRespostaBusiness.cs" />
     <Compile Include="Respostas\RespostaBusiness.cs" />
-    <Compile Include="Usuarios\IUsuarioBusiness.cs" />
-    <Compile Include="Usuarios\UsuariosBusiness.cs" />
+    <Compile Include="Usuario\IUsuarioBusiness.cs" />
+    <Compile Include="Usuario\UsuariosBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ConnectionBuilder.cs" />
   </ItemGroup>

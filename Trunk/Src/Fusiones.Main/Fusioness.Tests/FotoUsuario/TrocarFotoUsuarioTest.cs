@@ -13,20 +13,22 @@ namespace Fusioness.Tests.AdcFotosUsuario
         public void TrocarFoto()
         {            
             var usuarioBus = new UsuariosBusiness();
-            var usuario = usuarioBus.ObterUsuarioPorId( 4 ); // Previamente cadastrado
+            var usuario = new Usuario() { IdUsuario = 4 };
+            usuario = usuarioBus.ObterUsuarioPorId(usuario); // Previamente cadastrado
             
             Assert.IsNotNull(usuario);
 
             usuario.UrlImagem = "http://lorempixel.com/50/50/people/2/"; // url de exemplo
 
-            usuarioBus.UpdateUsuario(usuario);
+            usuarioBus.AlterarUsuario(usuario);
 
-            var usuario2 = usuarioBus.ObterUsuarioPorId(4); // Previamente cadastrado
+            var usuario2 = new Usuario() { IdUsuario = 4 };
+            usuario2 = usuarioBus.ObterUsuarioPorId(usuario); // Previamente cadastrado
             Assert.IsTrue(usuario2.UrlImagem.Equals("http://lorempixel.com/50/50/people/2/"));
 
             //Voltando a imagem anterior
             usuario.UrlImagem = "http://lorempixel.com/50/50/people/1/"; // url de exemplo
-            usuarioBus.UpdateUsuario(usuario);
+            usuarioBus.AlterarUsuario(usuario);
         }
     }
 }
