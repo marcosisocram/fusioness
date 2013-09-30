@@ -171,6 +171,34 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Evento> CarregarEventos()
+        {
+            try
+            {
+                return Facade.Instance.CarregarEventos().ToList();
+            }
+            catch
+            {
+                return new List<Evento>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Evento ObterEventoPorId(int id)
+        {
+            try
+            {
+                return Facade.Instance.ObterEventoPorId(id); ;
+            }
+            catch
+            {
+                return new Evento();
+            }
+        }
+
         //[WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         //public string CarregarEventos()

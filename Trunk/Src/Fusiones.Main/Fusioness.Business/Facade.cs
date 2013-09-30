@@ -37,6 +37,7 @@ namespace Fusioness.Business
             BicicletaBus = new BicicletasBusiness();
             RotaBus = new RotaBusiness();
             TipoRotaBus = new TipoRotaBusiness();
+            EventoBus = new EventoBusiness();
         }
 
         #endregion
@@ -149,6 +150,11 @@ namespace Fusioness.Business
         public List<Evento> CarregarEventos()
         {
             return EventoBus.CarregarEventos();
+        }
+
+        public Evento ObterEventoPorId(int id)
+        {
+            return EventoBus.ObterEventoPorId(id);
         }
         #endregion
         

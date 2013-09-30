@@ -11,5 +11,6 @@ namespace Fusioness.Business.Eventos
     {
         Evento InsertEvento(Evento evento);
         List<Evento> CarregarEventos();
+        Evento ObterEventoPorId(int id);
     }
 }

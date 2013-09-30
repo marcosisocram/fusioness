@@ -113,6 +113,7 @@
     <Compile Include="Controllers\BaseControllerController.cs" />
     <Compile Include="Controllers\BicicletaController.cs" />
     <Compile Include="Controllers\ContatoController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\RotaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Models\Acesso\AcessoModel.cs" />
     <Compile Include="Models\Bicicletas\BicicletaModel.cs" />
     <Compile Include="Models\Contato\ContatoModel.cs" />
+    <Compile Include="Models\Eventos\EventoModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
     <Compile Include="App_Start\PaginaExtensions.cs" />
     <Compile Include="Models\Rotas\RotaModel.cs" />
@@ -172,6 +174,11 @@
     <Content Include="Views\Shared\LayoutBase.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Web References\FusionessWS\Evento.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\Evento\Index.cshtml" />
+    <Content Include="Views\Evento\Details.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

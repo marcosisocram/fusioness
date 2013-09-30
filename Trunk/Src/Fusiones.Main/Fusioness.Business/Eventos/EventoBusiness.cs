@@ -61,6 +61,15 @@ namespace Fusioness.Business.Eventos
                 return evento.ToList();
             }
         }
+
+        public Evento ObterEventoPorId(int id)
+        {
+            using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
+            {
+                return new EventoRepository(ouw).GetByKey(new Evento { IdEvento = id });
+            }
+        }
+
         #endregion
 
         #endregion

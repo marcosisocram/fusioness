@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="HelloWorld">
@@ -402,6 +402,30 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="TipoRota" nillable="true" type="tns:TipoRota" />
         </s:sequence>
       </s:complexType>
+      <s:element name="CarregarEventos">
+        <s:complexType />
+      </s:element>
+      <s:element name="CarregarEventosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CarregarEventosResult" type="tns:ArrayOfEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterEventoPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterEventoPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterEventoPorIdResult" type="tns:Evento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -470,6 +494,18 @@
   <wsdl:message name="CarregarTipoRotasSoapOut">
     <wsdl:part name="parameters" element="tns:CarregarTipoRotasResponse" />
   </wsdl:message>
+  <wsdl:message name="CarregarEventosSoapIn">
+    <wsdl:part name="parameters" element="tns:CarregarEventos" />
+  </wsdl:message>
+  <wsdl:message name="CarregarEventosSoapOut">
+    <wsdl:part name="parameters" element="tns:CarregarEventosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterEventoPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterEventoPorId" />
+  </wsdl:message>
+  <wsdl:message name="ObterEventoPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterEventoPorIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -514,6 +550,14 @@
     <wsdl:operation name="CarregarTipoRotas">
       <wsdl:input message="tns:CarregarTipoRotasSoapIn" />
       <wsdl:output message="tns:CarregarTipoRotasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CarregarEventos">
+      <wsdl:input message="tns:CarregarEventosSoapIn" />
+      <wsdl:output message="tns:CarregarEventosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterEventoPorId">
+      <wsdl:input message="tns:ObterEventoPorIdSoapIn" />
+      <wsdl:output message="tns:ObterEventoPorIdSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
@@ -617,6 +661,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CarregarEventos">
+      <soap:operation soapAction="http://tempuri.org/CarregarEventos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterEventoPorId">
+      <soap:operation soapAction="http://tempuri.org/ObterEventoPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -712,6 +774,24 @@
     </wsdl:operation>
     <wsdl:operation name="CarregarTipoRotas">
       <soap12:operation soapAction="http://tempuri.org/CarregarTipoRotas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarregarEventos">
+      <soap12:operation soapAction="http://tempuri.org/CarregarEventos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterEventoPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObterEventoPorId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
