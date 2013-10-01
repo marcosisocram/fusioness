@@ -14,7 +14,7 @@ namespace Fusioness.Controllers
         public ActionResult InsertBicicleta(BicicletaModel model)
         {
             model.Bicicleta.IdUsuario = 7;
-            model.Bicicleta = Servico.InsertBicicleta(model.Bicicleta);
+            model.Bicicleta = Servico.InserirBicicleta(model.Bicicleta);
 
             return RedirectToAction("index", model);
         }

@@ -8,23 +8,22 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(RotaModel model)
         {
-            model.RotasDoUsuario = Servico.GetRotas(4);
-            model.TiposDeRotas = Servico.CarregarTipoRotas();
+            //model.TiposDeDificuldade = Servico.ListarTiposDeDificuldade();
+            //model.TiposDePista = Servico.ListarTiposDePista();
+            //model.TiposDeQualidade = Servico.ListarTiposDeQualidade();
+            //model.TiposDeRotas = Servico.ListarTipoRotas();
 
             return View(model);
         }
 
-        public ActionResult QualificarRota(RotaModel model)
+        public ActionResult InserirOuAlterarRota(RotaModel model)
         {
-            var rota = new Rota
-            {
-                IdRota = model.RotaSelecionada.IdRota,
-                IdTipoRota = model.TiposDeRotaSelecionada.IdTipoRota,
-                IdUsuario = UsuarioLogado.IdUsuario
-            };
+            //if (model.Rota.IdRota > 0) model.Rota = Servico.AlterarRota(model.Rota);
+            //else model.Rota = Servico.InserirRota(model.Rota);
 
-            model.RotaSelecionada = Servico.QualificarRota(rota);
-            return RedirectToAction("index");
+            if (model.Rota == null || model.Rota.IdRota <= 0) ExibirModal("Erro ao cadastrar rota.");
+
+            return RedirectToAction("index", model.Rota);
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Fusioness.Models.Eventos
 {
     public class EventoModel
     {
-        public List<Evento> eventos { get; set; }
-        public Evento eventoSelecionado { get; set; }
+        public Evento Evento { get; set; }
+
+        public IList<Evento> ListaEventos { get; set; }
     }
 }

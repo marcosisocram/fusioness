@@ -179,6 +179,7 @@
     </Content>
     <Content Include="Views\Evento\Index.cshtml" />
     <Content Include="Views\Evento\Details.cshtml" />
+    <Content Include="Views\Rota\InserirRota.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

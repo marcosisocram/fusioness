@@ -1,29 +1,36 @@
 ﻿@model Fusioness.Models.Rotas.RotaModel
 @{
-  ViewBag.Title = "Index";
-  Layout = "~/Views/Shared/LayoutBase.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
 
 <!-- LINHA 1 -->
 <div class="row-fluid">
-  <!-- BLOCK -->
-  <div class="span12">
-    <div class="card">
-      <h2 class="card-heading simple">Cabeçalho - Bloco tamanho 12</h2>
-      <div class="card-body">
-        @using (Html.BeginForm("QualificarRota", "Rota", FormMethod.Post))
-        {
-          @Html.LabelFor(m => m.RotasDoUsuario)
-          @Html.DropDownListFor(m => m.RotaSelecionada.IdRota, new SelectList(Model.RotasDoUsuario, "IdRota", "IdRota"))
-          <br />
-          @Html.LabelFor(m => m.TiposDeRotas)
-          @Html.DropDownListFor(m => m.TiposDeRotaSelecionada.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
-          <br />
-          <input type="submit" value="Send" />
-        }
-      </div>
+    <!-- BLOCK -->
+    <div class="span12">
+        <div class="card">
+            <h2 class="card-heading simple">Cabeçalho - Bloco tamanho 12</h2>
+            <div class="card-body">
+                @using (Html.BeginForm("InserirOuAlterarRota", "Rota", FormMethod.Post))
+                {
+                    @Html.LabelFor(m => m.TiposDeRotas)
+                    @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
+                    <br />
+                    @Html.LabelFor(m => m.TiposDePista)
+                    @Html.DropDownListFor(m => m.Rota.IdTipoPista, new SelectList(Model.TiposDePista, "IdTipoPista", "Descricao"))
+                    <br />
+                    @Html.LabelFor(m => m.TiposDeDificuldade)
+                    @Html.DropDownListFor(m => m.Rota.IdDificuldade, new SelectList(Model.TiposDeDificuldade, "IdDificuldade", "Descricao"))
+                    <br />
+                    @Html.LabelFor(m => m.TiposDeQualidade)
+                    @Html.DropDownListFor(m => m.Rota.IdQualidadeRota, new SelectList(Model.TiposDeQualidade, "IdQualidadeRota", "Descricao"))
+                    <br />
+                    @Html.HiddenFor(m => m.Rota.IdRota)
+                    <input type="submit" value="Enviar" />
+                }
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- END BLOCK -->
+    <!-- END BLOCK -->
 </div>
 <!-- END LINHA 2 -->

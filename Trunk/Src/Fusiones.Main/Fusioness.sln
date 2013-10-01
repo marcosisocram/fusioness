@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20623.1 VSUPREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness", "Fusioness\Fusioness.csproj", "{3403CB03-5DD8-4013-84BA-54CD213CDDBC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A4E80E01-649C-4949-9F4B-463C0CC76D55} = {A4E80E01-649C-4949-9F4B-463C0CC76D55}

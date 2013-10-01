@@ -7,7 +7,7 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(ContatoModel model)
         {
-            model.ListaDeUsuarios = Servico.CarregarContatos(UsuarioLogado.IdUsuario);
+            model.ListaDeUsuarios = Servico.ListarContatosPorUsuario(UsuarioLogado);
             return View(model);
         }
 

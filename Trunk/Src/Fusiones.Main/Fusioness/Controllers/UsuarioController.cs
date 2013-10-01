@@ -13,14 +13,14 @@ namespace Fusioness.Controllers
         public ActionResult InsertUsuario(UsuarioModel model)
         {
             if (model.Usuario.IdUsuario > 0) return UpdateUsuario(model);
-            model.Usuario = Servico.InsertUsuario(model.Usuario);
+            model.Usuario = Servico.InserirUsuario(model.Usuario);
             
             return RedirectToAction("index", model);
         }
 
         public ActionResult UpdateUsuario(UsuarioModel model)
         {
-            model.Usuario = Servico.UpdateUsuario(model.Usuario);
+            model.Usuario = Servico.AlterarUsuario(model.Usuario);
             
             return RedirectToAction("index", model);
         
