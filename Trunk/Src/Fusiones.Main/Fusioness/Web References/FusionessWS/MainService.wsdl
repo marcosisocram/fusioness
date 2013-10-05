@@ -349,6 +349,58 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="InserirRota">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InserirRotaResult" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarRota">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlterarRotaResult" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverRota">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverRotaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObterRotaPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterRotaPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterRotaPorIdResult" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ListarRotas">
         <s:complexType />
       </s:element>
@@ -359,19 +411,34 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ListarTipoRotas">
+      <s:element name="ListarTiposRota">
         <s:complexType />
       </s:element>
-      <s:element name="ListarTipoRotasResponse">
+      <s:element name="ListarTiposRotaResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListarTipoRotasResult" type="tns:ArrayOfTipoRota" />
+            <s:element minOccurs="0" maxOccurs="1" name="ListarTiposRotaResult" type="tns:ArrayOfTipoRota" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ArrayOfTipoRota">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="TipoRota" nillable="true" type="tns:TipoRota" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListarTiposPista">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarTiposPistaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarTiposPistaResult" type="tns:ArrayOfTipoPista" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTipoPista">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TipoPista" nillable="true" type="tns:TipoPista" />
         </s:sequence>
       </s:complexType>
       <s:element name="ListarEventos">
@@ -442,17 +509,47 @@
   <wsdl:message name="ListarRotasPorUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarRotasPorUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="InserirRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:InserirRota" />
+  </wsdl:message>
+  <wsdl:message name="InserirRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:InserirRotaResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlterarRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:AlterarRota" />
+  </wsdl:message>
+  <wsdl:message name="AlterarRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:AlterarRotaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoverRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverRota" />
+  </wsdl:message>
+  <wsdl:message name="RemoverRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverRotaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterRotaPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterRotaPorId" />
+  </wsdl:message>
+  <wsdl:message name="ObterRotaPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterRotaPorIdResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarRotasSoapIn">
     <wsdl:part name="parameters" element="tns:ListarRotas" />
   </wsdl:message>
   <wsdl:message name="ListarRotasSoapOut">
     <wsdl:part name="parameters" element="tns:ListarRotasResponse" />
   </wsdl:message>
-  <wsdl:message name="ListarTipoRotasSoapIn">
-    <wsdl:part name="parameters" element="tns:ListarTipoRotas" />
+  <wsdl:message name="ListarTiposRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarTiposRota" />
   </wsdl:message>
-  <wsdl:message name="ListarTipoRotasSoapOut">
-    <wsdl:part name="parameters" element="tns:ListarTipoRotasResponse" />
+  <wsdl:message name="ListarTiposRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarTiposRotaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarTiposPistaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarTiposPista" />
+  </wsdl:message>
+  <wsdl:message name="ListarTiposPistaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarTiposPistaResponse" />
   </wsdl:message>
   <wsdl:message name="ListarEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarEventos" />
@@ -495,13 +592,33 @@
       <wsdl:input message="tns:ListarRotasPorUsuarioSoapIn" />
       <wsdl:output message="tns:ListarRotasPorUsuarioSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="InserirRota">
+      <wsdl:input message="tns:InserirRotaSoapIn" />
+      <wsdl:output message="tns:InserirRotaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlterarRota">
+      <wsdl:input message="tns:AlterarRotaSoapIn" />
+      <wsdl:output message="tns:AlterarRotaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverRota">
+      <wsdl:input message="tns:RemoverRotaSoapIn" />
+      <wsdl:output message="tns:RemoverRotaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterRotaPorId">
+      <wsdl:input message="tns:ObterRotaPorIdSoapIn" />
+      <wsdl:output message="tns:ObterRotaPorIdSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ListarRotas">
       <wsdl:input message="tns:ListarRotasSoapIn" />
       <wsdl:output message="tns:ListarRotasSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="ListarTipoRotas">
-      <wsdl:input message="tns:ListarTipoRotasSoapIn" />
-      <wsdl:output message="tns:ListarTipoRotasSoapOut" />
+    <wsdl:operation name="ListarTiposRota">
+      <wsdl:input message="tns:ListarTiposRotaSoapIn" />
+      <wsdl:output message="tns:ListarTiposRotaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarTiposPista">
+      <wsdl:input message="tns:ListarTiposPistaSoapIn" />
+      <wsdl:output message="tns:ListarTiposPistaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarEventos">
       <wsdl:input message="tns:ListarEventosSoapIn" />
@@ -577,6 +694,42 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InserirRota">
+      <soap:operation soapAction="http://tempuri.org/InserirRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarRota">
+      <soap:operation soapAction="http://tempuri.org/AlterarRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverRota">
+      <soap:operation soapAction="http://tempuri.org/RemoverRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterRotaPorId">
+      <soap:operation soapAction="http://tempuri.org/ObterRotaPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarRotas">
       <soap:operation soapAction="http://tempuri.org/ListarRotas" style="document" />
       <wsdl:input>
@@ -586,8 +739,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ListarTipoRotas">
-      <soap:operation soapAction="http://tempuri.org/ListarTipoRotas" style="document" />
+    <wsdl:operation name="ListarTiposRota">
+      <soap:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarTiposPista">
+      <soap:operation soapAction="http://tempuri.org/ListarTiposPista" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -679,6 +841,42 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InserirRota">
+      <soap12:operation soapAction="http://tempuri.org/InserirRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarRota">
+      <soap12:operation soapAction="http://tempuri.org/AlterarRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverRota">
+      <soap12:operation soapAction="http://tempuri.org/RemoverRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterRotaPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObterRotaPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarRotas">
       <soap12:operation soapAction="http://tempuri.org/ListarRotas" style="document" />
       <wsdl:input>
@@ -688,8 +886,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ListarTipoRotas">
-      <soap12:operation soapAction="http://tempuri.org/ListarTipoRotas" style="document" />
+    <wsdl:operation name="ListarTiposRota">
+      <soap12:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarTiposPista">
+      <soap12:operation soapAction="http://tempuri.org/ListarTiposPista" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

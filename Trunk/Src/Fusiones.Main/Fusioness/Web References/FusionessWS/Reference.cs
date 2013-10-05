@@ -44,9 +44,19 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarRotasPorUsuarioOperationCompleted;
         
+        private System.Threading.SendOrPostCallback InserirRotaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AlterarRotaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RemoverRotaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ObterRotaPorIdOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarRotasOperationCompleted;
         
-        private System.Threading.SendOrPostCallback ListarTipoRotasOperationCompleted;
+        private System.Threading.SendOrPostCallback ListarTiposRotaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarTiposPistaOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarEventosOperationCompleted;
         
@@ -112,10 +122,25 @@ namespace Fusioness.FusionessWS {
         public event ListarRotasPorUsuarioCompletedEventHandler ListarRotasPorUsuarioCompleted;
         
         /// <remarks/>
+        public event InserirRotaCompletedEventHandler InserirRotaCompleted;
+        
+        /// <remarks/>
+        public event AlterarRotaCompletedEventHandler AlterarRotaCompleted;
+        
+        /// <remarks/>
+        public event RemoverRotaCompletedEventHandler RemoverRotaCompleted;
+        
+        /// <remarks/>
+        public event ObterRotaPorIdCompletedEventHandler ObterRotaPorIdCompleted;
+        
+        /// <remarks/>
         public event ListarRotasCompletedEventHandler ListarRotasCompleted;
         
         /// <remarks/>
-        public event ListarTipoRotasCompletedEventHandler ListarTipoRotasCompleted;
+        public event ListarTiposRotaCompletedEventHandler ListarTiposRotaCompleted;
+        
+        /// <remarks/>
+        public event ListarTiposPistaCompletedEventHandler ListarTiposPistaCompleted;
         
         /// <remarks/>
         public event ListarEventosCompletedEventHandler ListarEventosCompleted;
@@ -325,6 +350,121 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirRota", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Rota InserirRota(Rota rota) {
+            object[] results = this.Invoke("InserirRota", new object[] {
+                        rota});
+            return ((Rota)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InserirRotaAsync(Rota rota) {
+            this.InserirRotaAsync(rota, null);
+        }
+        
+        /// <remarks/>
+        public void InserirRotaAsync(Rota rota, object userState) {
+            if ((this.InserirRotaOperationCompleted == null)) {
+                this.InserirRotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInserirRotaOperationCompleted);
+            }
+            this.InvokeAsync("InserirRota", new object[] {
+                        rota}, this.InserirRotaOperationCompleted, userState);
+        }
+        
+        private void OnInserirRotaOperationCompleted(object arg) {
+            if ((this.InserirRotaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InserirRotaCompleted(this, new InserirRotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AlterarRota", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Rota AlterarRota(Rota rota) {
+            object[] results = this.Invoke("AlterarRota", new object[] {
+                        rota});
+            return ((Rota)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AlterarRotaAsync(Rota rota) {
+            this.AlterarRotaAsync(rota, null);
+        }
+        
+        /// <remarks/>
+        public void AlterarRotaAsync(Rota rota, object userState) {
+            if ((this.AlterarRotaOperationCompleted == null)) {
+                this.AlterarRotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAlterarRotaOperationCompleted);
+            }
+            this.InvokeAsync("AlterarRota", new object[] {
+                        rota}, this.AlterarRotaOperationCompleted, userState);
+        }
+        
+        private void OnAlterarRotaOperationCompleted(object arg) {
+            if ((this.AlterarRotaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AlterarRotaCompleted(this, new AlterarRotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/RemoverRota", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RemoverRota(Rota rota) {
+            this.Invoke("RemoverRota", new object[] {
+                        rota});
+        }
+        
+        /// <remarks/>
+        public void RemoverRotaAsync(Rota rota) {
+            this.RemoverRotaAsync(rota, null);
+        }
+        
+        /// <remarks/>
+        public void RemoverRotaAsync(Rota rota, object userState) {
+            if ((this.RemoverRotaOperationCompleted == null)) {
+                this.RemoverRotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoverRotaOperationCompleted);
+            }
+            this.InvokeAsync("RemoverRota", new object[] {
+                        rota}, this.RemoverRotaOperationCompleted, userState);
+        }
+        
+        private void OnRemoverRotaOperationCompleted(object arg) {
+            if ((this.RemoverRotaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoverRotaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterRotaPorId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Rota ObterRotaPorId(Rota rota) {
+            object[] results = this.Invoke("ObterRotaPorId", new object[] {
+                        rota});
+            return ((Rota)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterRotaPorIdAsync(Rota rota) {
+            this.ObterRotaPorIdAsync(rota, null);
+        }
+        
+        /// <remarks/>
+        public void ObterRotaPorIdAsync(Rota rota, object userState) {
+            if ((this.ObterRotaPorIdOperationCompleted == null)) {
+                this.ObterRotaPorIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterRotaPorIdOperationCompleted);
+            }
+            this.InvokeAsync("ObterRotaPorId", new object[] {
+                        rota}, this.ObterRotaPorIdOperationCompleted, userState);
+        }
+        
+        private void OnObterRotaPorIdOperationCompleted(object arg) {
+            if ((this.ObterRotaPorIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterRotaPorIdCompleted(this, new ObterRotaPorIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarRotas", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public Rota[] ListarRotas() {
             object[] results = this.Invoke("ListarRotas", new object[0]);
@@ -352,29 +492,56 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarTipoRotas", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public TipoRota[] ListarTipoRotas() {
-            object[] results = this.Invoke("ListarTipoRotas", new object[0]);
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarTiposRota", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public TipoRota[] ListarTiposRota() {
+            object[] results = this.Invoke("ListarTiposRota", new object[0]);
             return ((TipoRota[])(results[0]));
         }
         
         /// <remarks/>
-        public void ListarTipoRotasAsync() {
-            this.ListarTipoRotasAsync(null);
+        public void ListarTiposRotaAsync() {
+            this.ListarTiposRotaAsync(null);
         }
         
         /// <remarks/>
-        public void ListarTipoRotasAsync(object userState) {
-            if ((this.ListarTipoRotasOperationCompleted == null)) {
-                this.ListarTipoRotasOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarTipoRotasOperationCompleted);
+        public void ListarTiposRotaAsync(object userState) {
+            if ((this.ListarTiposRotaOperationCompleted == null)) {
+                this.ListarTiposRotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarTiposRotaOperationCompleted);
             }
-            this.InvokeAsync("ListarTipoRotas", new object[0], this.ListarTipoRotasOperationCompleted, userState);
+            this.InvokeAsync("ListarTiposRota", new object[0], this.ListarTiposRotaOperationCompleted, userState);
         }
         
-        private void OnListarTipoRotasOperationCompleted(object arg) {
-            if ((this.ListarTipoRotasCompleted != null)) {
+        private void OnListarTiposRotaOperationCompleted(object arg) {
+            if ((this.ListarTiposRotaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ListarTipoRotasCompleted(this, new ListarTipoRotasCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.ListarTiposRotaCompleted(this, new ListarTiposRotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarTiposPista", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public TipoPista[] ListarTiposPista() {
+            object[] results = this.Invoke("ListarTiposPista", new object[0]);
+            return ((TipoPista[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarTiposPistaAsync() {
+            this.ListarTiposPistaAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ListarTiposPistaAsync(object userState) {
+            if ((this.ListarTiposPistaOperationCompleted == null)) {
+                this.ListarTiposPistaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarTiposPistaOperationCompleted);
+            }
+            this.InvokeAsync("ListarTiposPista", new object[0], this.ListarTiposPistaOperationCompleted, userState);
+        }
+        
+        private void OnListarTiposPistaOperationCompleted(object arg) {
+            if ((this.ListarTiposPistaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarTiposPistaCompleted(this, new ListarTiposPistaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1908,6 +2075,88 @@ namespace Fusioness.FusionessWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    public delegate void InserirRotaCompletedEventHandler(object sender, InserirRotaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InserirRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InserirRotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Rota Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Rota)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    public delegate void AlterarRotaCompletedEventHandler(object sender, AlterarRotaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AlterarRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AlterarRotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Rota Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Rota)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    public delegate void RemoverRotaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    public delegate void ObterRotaPorIdCompletedEventHandler(object sender, ObterRotaPorIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterRotaPorIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterRotaPorIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Rota Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Rota)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
     public delegate void ListarRotasCompletedEventHandler(object sender, ListarRotasCompletedEventArgs e);
     
     /// <remarks/>
@@ -1934,17 +2183,17 @@ namespace Fusioness.FusionessWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
-    public delegate void ListarTipoRotasCompletedEventHandler(object sender, ListarTipoRotasCompletedEventArgs e);
+    public delegate void ListarTiposRotaCompletedEventHandler(object sender, ListarTiposRotaCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ListarTipoRotasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class ListarTiposRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal ListarTipoRotasCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal ListarTiposRotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1954,6 +2203,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((TipoRota[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    public delegate void ListarTiposPistaCompletedEventHandler(object sender, ListarTiposPistaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarTiposPistaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarTiposPistaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public TipoPista[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((TipoPista[])(this.results[0]));
             }
         }
     }

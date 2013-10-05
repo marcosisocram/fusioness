@@ -9,9 +9,9 @@ namespace Fusioness.Controllers
         public ActionResult Index(RotaModel model)
         {
             //model.TiposDeDificuldade = Servico.ListarTiposDeDificuldade();
-            //model.TiposDePista = Servico.ListarTiposDePista();
+            model.TiposDePista = Servico.ListarTiposPista();
             //model.TiposDeQualidade = Servico.ListarTiposDeQualidade();
-            //model.TiposDeRotas = Servico.ListarTipoRotas();
+            model.TiposDeRotas = Servico.ListarTiposRota();
 
             return View(model);
         }

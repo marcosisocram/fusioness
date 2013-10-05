@@ -7,9 +7,9 @@ using Fusioness.Data.Contracts;
 using Fusioness.Data.Repositories;
 using Fusioness.Entities;
 
-namespace Fusioness.Business.TiposRota
+namespace Fusioness.Business.TiposPista
 {
-    class TipoRotaBusiness : ITipoRotaBusiness
+    class TipoPistaBusiness : ITipoPistaBusiness
     {
         #region Properties
 
@@ -19,12 +19,12 @@ namespace Fusioness.Business.TiposRota
 
         #region Constructor
 
-        public TipoRotaBusiness()
+        public TipoPistaBusiness()
         {
             _ConnectionString = ConnectionBuilder.GetConnection();
         }
 
-        public TipoRotaBusiness(string connectionString)
+        public TipoPistaBusiness(string connectionString)
         {
             _ConnectionString = connectionString;
         }
@@ -33,30 +33,22 @@ namespace Fusioness.Business.TiposRota
 
         #region Methods
 
-        #region Public
-
-        public List<TipoRota> ListarTiposRota()
+        public List<TipoPista> ListarTiposPista()
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
-                    IRepository<TipoRota> repo = new TipoRotaRepository(uow);
-                    var tiposRota = repo.GetAll().ToList();
-                    return tiposRota;
+                    IRepository<TipoPista> repo = new TipoPistaRepository(uow);
+                    var tiposPista = repo.GetAll().ToList();
+                    return tiposPista;
                 }
             }
             catch (Exception)
             {
-                return new List<TipoRota>();
+                return new List<TipoPista>();
             }
         }
-
-        #endregion
-
-        #region Private
-
-        #endregion
 
         #endregion
     }

@@ -114,6 +114,64 @@ namespace Fusioness.Services
             }
         }
 
+        #region Rotas
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Rota InserirRota(Rota rota)
+        {
+            try
+            {
+                return Facade.Instance.InserirRota(rota);
+            }
+            catch
+            {
+                return default(Rota);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Rota AlterarRota(Rota rota)
+        {
+            try
+            {
+                return Facade.Instance.AlterarRota(rota);
+            }
+            catch
+            {
+                return default(Rota);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverRota(Rota rota)
+        {
+            try
+            {
+                Facade.Instance.RemoverRota(rota);
+            }
+            catch
+            {
+                //TODO: LogFile();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Rota ObterRotaPorId(Rota rota)
+        {
+            try
+            {
+                return Facade.Instance.ObterRotaPorId(rota);
+            }
+            catch
+            {
+                return default(Rota);
+            }
+        }
+
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public List<Rota> ListarRotas()
@@ -128,19 +186,61 @@ namespace Fusioness.Services
             }
         }
 
+        #endregion
+
+        #region TipoRota
+
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<TipoRota> ListarTipoRotas()
+        public List<TipoRota> ListarTiposRota()
         {
             try
             {
-                return Facade.Instance.ListarTipoRotas();
+                return Facade.Instance.ListarTiposRota();
             }
             catch
             {
                 return new List<TipoRota>();
             }
         }
+
+        #endregion
+
+        #region TipoPista
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<TipoPista> ListarTiposPista()
+        {
+            try
+            {
+                return Facade.Instance.ListarTiposPista();
+            }
+            catch
+            {
+                return new List<TipoPista>();
+            }
+        }
+
+        #endregion
+
+        #region Dificuldade
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Dificuldade> ListarDificuldades()
+        {
+            try
+            {
+                return Facade.Instance.ListarDificuldades();
+            }
+            catch
+            {
+                return new List<Dificuldade>();
+            }
+        }
+
+        #endregion
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

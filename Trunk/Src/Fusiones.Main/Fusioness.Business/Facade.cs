@@ -7,6 +7,8 @@ using Fusioness.Business.Bicicletas;
 using Fusioness.Business.Eventos;
 using Fusioness.Business.Rotas;
 using Fusioness.Business.TiposRota;
+using Fusioness.Business.TiposPista;
+using Fusioness.Business.Dificuldades;
 
 namespace Fusioness.Business
 {
@@ -19,6 +21,8 @@ namespace Fusioness.Business
         private readonly IConviteEventoBusiness ConviteEventoBus;
         private readonly IBicicletaBusiness BicicletaBus;
         private readonly ITipoRotaBusiness TipoRotaBus;
+        private readonly ITipoPistaBusiness TipoPistaBus;
+        private readonly IDificuldadeBusiness DificuldadeBus;
         #endregion
 
         #region Constructor
@@ -38,12 +42,12 @@ namespace Fusioness.Business
             RotaBus = new RotaBusiness();
             TipoRotaBus = new TipoRotaBusiness();
             EventoBus = new EventoBusiness();
+            TipoPistaBus = new TipoPistaBusiness();
         }
 
         #endregion
 
         #region Methods
-        
         
         #region Usuario
 
@@ -153,9 +157,25 @@ namespace Fusioness.Business
         #endregion
 
         #region TipoRota
-        public List<TipoRota> ListarTipoRotas()
+        public List<TipoRota> ListarTiposRota()
         {
-            return TipoRotaBus.ListarTipoRotas();
+            return TipoRotaBus.ListarTiposRota();
+        }
+
+        #endregion
+
+        #region TipoPista
+        public List<TipoPista> ListarTiposPista()
+        {
+            return TipoPistaBus.ListarTiposPista();
+        }
+
+        #endregion
+
+        #region Dificuldade
+        public List<Dificuldade> ListarDificuldades()
+        {
+            return DificuldadeBus.ListarDificuldades();
         }
 
         #endregion
@@ -183,7 +203,6 @@ namespace Fusioness.Business
             return EventoBus.ListarEventos();
         }
         #endregion
-        
 
         #endregion
        
