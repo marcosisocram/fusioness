@@ -9,6 +9,7 @@ using Fusioness.Business.Rotas;
 using Fusioness.Business.TiposRota;
 using Fusioness.Business.TiposPista;
 using Fusioness.Business.Dificuldades;
+using Fusioness.Business.QualidadesRota;
 
 namespace Fusioness.Business
 {
@@ -23,6 +24,9 @@ namespace Fusioness.Business
         private readonly ITipoRotaBusiness TipoRotaBus;
         private readonly ITipoPistaBusiness TipoPistaBus;
         private readonly IDificuldadeBusiness DificuldadeBus;
+        private readonly IQualidadeRotaBusiness QualidadeRotaBus;
+
+
         #endregion
 
         #region Constructor
@@ -43,6 +47,9 @@ namespace Fusioness.Business
             TipoRotaBus = new TipoRotaBusiness();
             EventoBus = new EventoBusiness();
             TipoPistaBus = new TipoPistaBusiness();
+            DificuldadeBus = new DificuldadeBusiness();
+            QualidadeRotaBus = new QualidadeRotaBusiness();
+            
         }
 
         #endregion
@@ -176,6 +183,15 @@ namespace Fusioness.Business
         public List<Dificuldade> ListarDificuldades()
         {
             return DificuldadeBus.ListarDificuldades();
+        }
+
+        #endregion
+
+
+        #region QualidadeRota
+        public List<QualidadeRota> ListarQualidadesRota()
+        {
+            return QualidadeRotaBus.ListarQualidadesRota();
         }
 
         #endregion

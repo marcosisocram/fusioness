@@ -441,6 +441,36 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="TipoPista" nillable="true" type="tns:TipoPista" />
         </s:sequence>
       </s:complexType>
+      <s:element name="ListarDificuldades">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarDificuldadesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarDificuldadesResult" type="tns:ArrayOfDificuldade" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDificuldade">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Dificuldade" nillable="true" type="tns:Dificuldade" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListarQualidadesRota">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarQualidadesRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarQualidadesRotaResult" type="tns:ArrayOfQualidadeRota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfQualidadeRota">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="QualidadeRota" nillable="true" type="tns:QualidadeRota" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ListarEventos">
         <s:complexType />
       </s:element>
@@ -551,6 +581,18 @@
   <wsdl:message name="ListarTiposPistaSoapOut">
     <wsdl:part name="parameters" element="tns:ListarTiposPistaResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarDificuldadesSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarDificuldades" />
+  </wsdl:message>
+  <wsdl:message name="ListarDificuldadesSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarDificuldadesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarQualidadesRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarQualidadesRota" />
+  </wsdl:message>
+  <wsdl:message name="ListarQualidadesRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarQualidadesRotaResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarEventos" />
   </wsdl:message>
@@ -619,6 +661,14 @@
     <wsdl:operation name="ListarTiposPista">
       <wsdl:input message="tns:ListarTiposPistaSoapIn" />
       <wsdl:output message="tns:ListarTiposPistaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarDificuldades">
+      <wsdl:input message="tns:ListarDificuldadesSoapIn" />
+      <wsdl:output message="tns:ListarDificuldadesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarQualidadesRota">
+      <wsdl:input message="tns:ListarQualidadesRotaSoapIn" />
+      <wsdl:output message="tns:ListarQualidadesRotaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarEventos">
       <wsdl:input message="tns:ListarEventosSoapIn" />
@@ -750,6 +800,24 @@
     </wsdl:operation>
     <wsdl:operation name="ListarTiposPista">
       <soap:operation soapAction="http://tempuri.org/ListarTiposPista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarDificuldades">
+      <soap:operation soapAction="http://tempuri.org/ListarDificuldades" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarQualidadesRota">
+      <soap:operation soapAction="http://tempuri.org/ListarQualidadesRota" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -897,6 +965,24 @@
     </wsdl:operation>
     <wsdl:operation name="ListarTiposPista">
       <soap12:operation soapAction="http://tempuri.org/ListarTiposPista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarDificuldades">
+      <soap12:operation soapAction="http://tempuri.org/ListarDificuldades" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarQualidadesRota">
+      <soap12:operation soapAction="http://tempuri.org/ListarQualidadesRota" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

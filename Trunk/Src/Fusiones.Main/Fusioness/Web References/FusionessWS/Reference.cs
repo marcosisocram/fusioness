@@ -58,6 +58,10 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarTiposPistaOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarDificuldadesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarQualidadesRotaOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarEventosOperationCompleted;
         
         private System.Threading.SendOrPostCallback ObterEventoPorIdOperationCompleted;
@@ -141,6 +145,12 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarTiposPistaCompletedEventHandler ListarTiposPistaCompleted;
+        
+        /// <remarks/>
+        public event ListarDificuldadesCompletedEventHandler ListarDificuldadesCompleted;
+        
+        /// <remarks/>
+        public event ListarQualidadesRotaCompletedEventHandler ListarQualidadesRotaCompleted;
         
         /// <remarks/>
         public event ListarEventosCompletedEventHandler ListarEventosCompleted;
@@ -542,6 +552,60 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarTiposPistaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarTiposPistaCompleted(this, new ListarTiposPistaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarDificuldades", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Dificuldade[] ListarDificuldades() {
+            object[] results = this.Invoke("ListarDificuldades", new object[0]);
+            return ((Dificuldade[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarDificuldadesAsync() {
+            this.ListarDificuldadesAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ListarDificuldadesAsync(object userState) {
+            if ((this.ListarDificuldadesOperationCompleted == null)) {
+                this.ListarDificuldadesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarDificuldadesOperationCompleted);
+            }
+            this.InvokeAsync("ListarDificuldades", new object[0], this.ListarDificuldadesOperationCompleted, userState);
+        }
+        
+        private void OnListarDificuldadesOperationCompleted(object arg) {
+            if ((this.ListarDificuldadesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarDificuldadesCompleted(this, new ListarDificuldadesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarQualidadesRota", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public QualidadeRota[] ListarQualidadesRota() {
+            object[] results = this.Invoke("ListarQualidadesRota", new object[0]);
+            return ((QualidadeRota[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarQualidadesRotaAsync() {
+            this.ListarQualidadesRotaAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ListarQualidadesRotaAsync(object userState) {
+            if ((this.ListarQualidadesRotaOperationCompleted == null)) {
+                this.ListarQualidadesRotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarQualidadesRotaOperationCompleted);
+            }
+            this.InvokeAsync("ListarQualidadesRota", new object[0], this.ListarQualidadesRotaOperationCompleted, userState);
+        }
+        
+        private void OnListarQualidadesRotaOperationCompleted(object arg) {
+            if ((this.ListarQualidadesRotaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarQualidadesRotaCompleted(this, new ListarQualidadesRotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2229,6 +2293,58 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((TipoPista[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    public delegate void ListarDificuldadesCompletedEventHandler(object sender, ListarDificuldadesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarDificuldadesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarDificuldadesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Dificuldade[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Dificuldade[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    public delegate void ListarQualidadesRotaCompletedEventHandler(object sender, ListarQualidadesRotaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18213")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarQualidadesRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarQualidadesRotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public QualidadeRota[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((QualidadeRota[])(this.results[0]));
             }
         }
     }

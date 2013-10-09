@@ -21,12 +21,35 @@ namespace Fusioness.Services
     {
         public JavaScriptSerializer Serializer = new JavaScriptSerializer();
 
+        #region HelloWorld
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string HelloWorld()
         {
+
             return Serializer.Serialize("Hello World");
         }
+
+        #endregion
+        
+        #region Bicicleta
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Bicicleta InserirBicicleta(Bicicleta bicicleta)
+        {
+            try
+            {
+                return Facade.Instance.InserirBicicleta(bicicleta);
+            }
+            catch
+            {
+                return default(Bicicleta);
+            }
+        }
+
+        #endregion
+
+        #region Usuario
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -40,20 +63,6 @@ namespace Fusioness.Services
             catch (Exception)
             {
                 return default(Usuario);
-            }
-        }
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Bicicleta InserirBicicleta(Bicicleta bicicleta)
-        {
-            try
-            {
-                return Facade.Instance.InserirBicicleta(bicicleta);
-            }
-            catch
-            {
-                return default(Bicicleta);
             }
         }
 
@@ -100,19 +109,8 @@ namespace Fusioness.Services
             }
         }
 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<Rota> ListarRotasPorUsuario(Usuario usuario)
-        {
-            try
-            {
-                return Facade.Instance.ListarRotasPorUsuario(usuario);
-            }
-            catch
-            {
-                return new List<Rota>();
-            }
-        }
+        
+        #endregion
 
         #region Rotas
 
@@ -186,6 +184,20 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Rota> ListarRotasPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarRotasPorUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Rota>();
+            }
+        }
+
         #endregion
 
         #region TipoRota
@@ -242,6 +254,25 @@ namespace Fusioness.Services
 
         #endregion
 
+        #region QualidadeRota
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<QualidadeRota> ListarQualidadesRota()
+        {
+            try
+            {
+                return Facade.Instance.ListarQualidadesRota();
+            }
+            catch
+            {
+                return new List<QualidadeRota>();
+            }
+        }
+
+        #endregion
+
+        #region Evento
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public List<Evento> ListarEventos()
@@ -269,5 +300,7 @@ namespace Fusioness.Services
                 return new Evento();
             }
         }
+        #endregion
+        
     }
 }

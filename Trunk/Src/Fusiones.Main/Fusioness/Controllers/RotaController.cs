@@ -8,9 +8,9 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(RotaModel model)
         {
-            //model.TiposDeDificuldade = Servico.ListarTiposDeDificuldade();
+            model.TiposDeDificuldade = Servico.ListarDificuldades();
             model.TiposDePista = Servico.ListarTiposPista();
-            //model.TiposDeQualidade = Servico.ListarTiposDeQualidade();
+            model.TiposDeQualidade = Servico.ListarQualidadesRota();
             model.TiposDeRotas = Servico.ListarTiposRota();
 
             return View(model);
@@ -18,8 +18,10 @@ namespace Fusioness.Controllers
 
         public ActionResult InserirOuAlterarRota(RotaModel model)
         {
-            //if (model.Rota.IdRota > 0) model.Rota = Servico.AlterarRota(model.Rota);
-            //else model.Rota = Servico.InserirRota(model.Rota);
+            model.Rota.IdUsuario = this.UsuarioLogado.IdUsuario; 
+
+            if (model.Rota.IdRota > 0) model.Rota = Servico.AlterarRota(model.Rota);
+            else model.Rota = Servico.InserirRota(model.Rota);
 
             if (model.Rota == null || model.Rota.IdRota <= 0) ExibirModal("Erro ao cadastrar rota.");
 
