@@ -24,6 +24,7 @@ namespace Fusioness.Controllers
             else model.Rota = Servico.InserirRota(model.Rota);
 
             if (model.Rota == null || model.Rota.IdRota <= 0) ExibirModal("Erro ao cadastrar rota.");
+            else ExibirModal("Rota cadastrada com sucesso!");
 
             return RedirectToAction("index", model.Rota);
         }
