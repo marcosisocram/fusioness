@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.Services", "..\Fusiones.Main\Fusioness.Services\Fusioness.Services.csproj", "{A4E80E01-649C-4949-9F4B-463C0CC76D55}"
+	ProjectSection(ProjectDependencies) = postProject
+		{844DDE8E-7F45-46A3-9A6F-F92B689A629B} = {844DDE8E-7F45-46A3-9A6F-F92B689A629B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.Business", "..\Fusiones.Main\Fusioness.Business\Fusioness.Business.csproj", "{CABDAE19-201B-4E7D-A5D2-DF22D04DDF64}"
 EndProject
@@ -36,6 +39,7 @@ Global
 		{844DDE8E-7F45-46A3-9A6F-F92B689A629B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A26D06AF-EAB7-4AE7-912A-FFFF5111EC7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
