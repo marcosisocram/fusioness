@@ -121,10 +121,6 @@
       <Project>{844dde8e-7f45-46a3-9a6f-f92b689a629b}</Project>
       <Name>Fusioness.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fusioness\Fusioness.csproj">
-      <Project>{3403CB03-5DD8-4013-84BA-54CD213CDDBC}</Project>
-      <Name>Fusioness</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
