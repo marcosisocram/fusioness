@@ -10,6 +10,6 @@ namespace Fusioness.Models.Rotas
         public IList<TipoPista> TiposDePista { get; set; }
         public IList<Dificuldade> TiposDeDificuldade { get; set; }
         public IList<QualidadeRota> TiposDeQualidade{ get; set; }
-
+        public IList<Rota> ListaRotas { get; set; }
     }
 }

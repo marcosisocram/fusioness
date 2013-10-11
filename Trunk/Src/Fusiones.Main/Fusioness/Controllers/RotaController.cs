@@ -8,12 +8,22 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(RotaModel model)
         {
+            model.ListaRotas = Servico.ListarRotasPorUsuario(this.UsuarioLogado);
+            return View(model);
+        }
+
+        public ActionResult Details(int Id = 0)
+        {
+            RotaModel model = new RotaModel();
+
             model.TiposDeDificuldade = Servico.ListarDificuldades();
             model.TiposDePista = Servico.ListarTiposPista();
             model.TiposDeQualidade = Servico.ListarQualidadesRota();
             model.TiposDeRotas = Servico.ListarTiposRota();
+            model.Rota = new Rota() { IdRota = Id };
+            model.Rota = Servico.ObterRotaPorId(model.Rota);
 
-            return View(model);
+            return View("InserirAlterarRota", model);
         }
 
         public ActionResult InserirOuAlterarRota(RotaModel model)
