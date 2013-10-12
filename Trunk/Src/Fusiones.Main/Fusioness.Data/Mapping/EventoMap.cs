@@ -38,7 +38,7 @@ namespace Fusioness.Data.Mapping
                 .WithMany(t => t.Eventos)
                 .HasForeignKey(d => d.IdRota);
             this.HasRequired(t => t.Usuario)
-                .WithMany(t => t.Eventoes)
+                .WithMany(t => t.Eventos)
                 .HasForeignKey(d => d.IdUsuario);
 
         }

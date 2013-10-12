@@ -9,7 +9,7 @@ namespace Fusioness.Entities
             Bicicletas = new List<Bicicleta>();
             Contatos = new List<Contato>();
             Contatos1 = new List<Contato>();
-            Eventoes = new List<Evento>();
+            Eventos = new List<Evento>();
             EventoUsuarios = new List<EventoUsuario>();
             Rotas = new List<Rota>();
         }
@@ -25,7 +25,7 @@ namespace Fusioness.Entities
         public virtual List<Bicicleta> Bicicletas { get; set; }
         public virtual List<Contato> Contatos { get; set; }
         public virtual List<Contato> Contatos1 { get; set; }
-        public virtual List<Evento> Eventoes { get; set; }
+        public virtual List<Evento> Eventos { get; set; }
         public virtual List<EventoUsuario> EventoUsuarios { get; set; }
         public virtual List<Rota> Rotas { get; set; }
     }

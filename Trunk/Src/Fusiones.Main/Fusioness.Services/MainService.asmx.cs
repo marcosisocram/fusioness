@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -292,7 +291,7 @@ namespace Fusioness.Services
         {
             try
             {
-                return Facade.Instance.ObterEventoPorId(evento); ;
+                return Facade.Instance.ObterEventoPorId(evento);
             }
             catch
             {

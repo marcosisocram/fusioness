@@ -71,20 +71,14 @@ namespace Fusioness.Business.Usuarios
 
         public void RemoverUsuario(Usuario usuario)
         {
-            try
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
-                {
-                    IRepository<Usuario> repo = new UsuarioRepository(uow);
-                    repo.Delete(usuario);
-                    uow.Commit();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                IRepository<Usuario> repo = new UsuarioRepository(uow);
+                repo.Delete(usuario);
+                uow.Commit();
             }
         }
+
         public Usuario ObterUsuarioPorId(Usuario usuario)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
@@ -94,27 +88,20 @@ namespace Fusioness.Business.Usuarios
         }
         public List<Usuario> ListarUsuarios()
         {
-            try
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
-                {
-                    IRepository<Usuario> repo = new UsuarioRepository(uow);
-                    return repo.GetAll().ToList();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                IRepository<Usuario> repo = new UsuarioRepository(uow);
+                return repo.GetAll().ToList();
             }
         }
+
         public Usuario ValidarLogonUsuario(Usuario usuario)
         {
             if (usuario == null || string.IsNullOrWhiteSpace(usuario.Login) || string.IsNullOrWhiteSpace(usuario.Senha)) return null;
 
             using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
             {
-                var retorno = new UsuarioRepository(ouw).GetWhere(u => u.Senha == usuario.Senha && u.Login == usuario.Login).FirstOrDefault();
-                return retorno;
+                return new UsuarioRepository(ouw).GetWhere(u => u.Senha == usuario.Senha && u.Login == usuario.Login).FirstOrDefault();
             }
         }
 
