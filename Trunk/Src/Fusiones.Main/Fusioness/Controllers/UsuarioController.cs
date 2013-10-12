@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Fusioness.Models.Usuarios;
+using Fusioness.Models.Seguranca;
 
 namespace Fusioness.Controllers
 {
@@ -9,7 +10,8 @@ namespace Fusioness.Controllers
         {
             return View(model);
         }
-
+        
+        [PermiteAnonimo]
         public ActionResult InsertUsuario(UsuarioModel model)
         {
             if (model.Usuario.IdUsuario > 0) return UpdateUsuario(model);

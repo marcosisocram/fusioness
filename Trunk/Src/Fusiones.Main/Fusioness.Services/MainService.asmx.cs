@@ -57,8 +57,7 @@ namespace Fusioness.Services
         {
             try
             {
-                usuario = Facade.Instance.ValidarLogonUsuario(usuario);
-                return usuario;
+                return Facade.Instance.ValidarLogonUsuario(usuario);
             }
             catch (Exception)
             {
