@@ -235,10 +235,10 @@
     <Content Include="Views\Bicicleta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost/Fusioness.Services/MainService.asmx">
+    <WebReferenceUrl Include="http://127.0.0.1/Fusioness.Services/MainService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\FusionessWS\</RelPath>
-      <UpdateFromURL>http://localhost/Fusioness.Services/MainService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://127.0.0.1/Fusioness.Services/MainService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

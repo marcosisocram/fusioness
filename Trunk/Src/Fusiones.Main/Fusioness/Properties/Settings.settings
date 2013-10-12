@@ -8,5 +8,8 @@
     <Setting Name="Fusioness_FusionessWS_MainService_Release" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://fusionessapi.apphb.com/MainService.asmx</Value>
     </Setting>
+    <Setting Name="Fusioness_FusionessWS_MainService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://127.0.0.1/Fusioness.Services/MainService.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

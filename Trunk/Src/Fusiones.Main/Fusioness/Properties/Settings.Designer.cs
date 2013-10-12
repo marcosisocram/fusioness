@@ -42,5 +42,15 @@ namespace Fusioness.Properties {
                 return ((string)(this["Fusioness_FusionessWS_MainService_Release"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://127.0.0.1/Fusioness.Services/MainService.asmx")]
+        public string Fusioness_FusionessWS_MainService {
+            get {
+                return ((string)(this["Fusioness_FusionessWS_MainService"]));
+            }
+        }
     }
 }
