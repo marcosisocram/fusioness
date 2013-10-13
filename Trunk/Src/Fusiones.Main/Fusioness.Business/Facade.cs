@@ -129,9 +129,9 @@ namespace Fusioness.Business
         {
             return BicicletaBus.ObterBicicletaPorId(bicicleta);
         }
-        public List<Bicicleta> ListarBicicletas()
+        public List<Bicicleta> ListarBicicletas(Usuario usuario)
         {
-            return BicicletaBus.ListarBicicletas();
+            return BicicletaBus.ListarBicicletasPorUsuario(usuario);
         }
         #endregion
 
@@ -186,7 +186,6 @@ namespace Fusioness.Business
         }
 
         #endregion
-
 
         #region QualidadeRota
         public List<QualidadeRota> ListarQualidadesRota()

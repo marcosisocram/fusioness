@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Bicicletas\BicicletaBusiness.cs" />
     <Compile Include="Bicicletas\IBicicletaBusiness.cs" />
+    <Compile Include="ComentariosEvento\ComentarioEventoBusiness.cs" />
+    <Compile Include="ComentariosEvento\IComentarioEventoBusiness.cs" />
     <Compile Include="ConviteEventos\ConviteEventoBusiness.cs" />
     <Compile Include="ConviteEventos\IConviteEventoBusiness.cs" />
     <Compile Include="Coordenada\CoordenadaBusiness.cs" />

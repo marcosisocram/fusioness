@@ -7,9 +7,9 @@ using Fusioness.Data.Contracts;
 using Fusioness.Data.Repositories;
 using Fusioness.Entities;
 
-namespace Fusioness.Business.Bicicletas
+namespace Fusioness.Business.ComentariosEvento
 {
-    class BicicletaBusiness : IBicicletaBusiness
+    class ComentarioEventoBusiness : IComentarioEventoBusiness
     {
         #region Properties
 
@@ -19,12 +19,12 @@ namespace Fusioness.Business.Bicicletas
 
         #region Constructor
 
-        public BicicletaBusiness()
+        public ComentarioEventoBusiness()
         {
             _ConnectionString = ConnectionBuilder.GetConnection();
         }
 
-        public BicicletaBusiness(string connectionString)
+        public ComentarioEventoBusiness(string connectionString)
         {
             _ConnectionString = connectionString;
         }
@@ -33,17 +33,17 @@ namespace Fusioness.Business.Bicicletas
 
         #region Methods
 
-        public Bicicleta InserirBicicleta(Bicicleta bicicleta)
+        public ComentarioEvento InserirComentarioEvento(ComentarioEvento comentario)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
-                    IRepository<Bicicleta> repo = new BicicletaRepository(uow);                    
-                    bicicleta = repo.Insert(bicicleta);
+                    IRepository<ComentarioEvento> repo = new ComentarioEventoRepository(uow);                    
+                    comentario = repo.Insert(comentario);
                     uow.Commit();
                 }
-                return bicicleta;
+                return comentario;
             }
             catch (Exception)
             {
@@ -51,31 +51,32 @@ namespace Fusioness.Business.Bicicletas
             }
         }
 
-        public Bicicleta AlterarBicicleta(Bicicleta bicicleta)
+        public ComentarioEvento AlterarComentarioEvento(ComentarioEvento comentario)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
-                    IRepository<Bicicleta> repo = new BicicletaRepository(uow);
-                    bicicleta = repo.Update(bicicleta);
+                    IRepository<ComentarioEvento> repo = new ComentarioEventoRepository(uow);
+                    comentario = repo.Update(comentario);
                     uow.Commit();
                 }
-                return bicicleta;
+                return comentario;
             }
             catch (Exception)
             {
-                return default(Bicicleta);
+                return default(ComentarioEvento);
             }
         }
-        public void RemoverBicicleta(Bicicleta bicicleta)
+
+        public void RemoverComentarioEvento(ComentarioEvento comentario)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
-                    IRepository<Bicicleta> repo = new BicicletaRepository(uow);
-                    repo.Delete(bicicleta);
+                    IRepository<ComentarioEvento> repo = new ComentarioEventoRepository(uow);
+                    repo.Delete(comentario);
                     uow.Commit();
                 }
             }
@@ -84,22 +85,23 @@ namespace Fusioness.Business.Bicicletas
                 throw;
             }
         }
-        public Bicicleta ObterBicicletaPorId(Bicicleta bicicleta)
+
+        public ComentarioEvento ObterComentarioEventoPorId(ComentarioEvento comentario)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                return new BicicletaRepository(uow).GetByKey(new Bicicleta { IdBicicleta = bicicleta.IdBicicleta});
+                return new ComentarioEventoRepository(uow).GetByKey(new ComentarioEvento { IdComentarioEvento = comentario.IdComentarioEvento});
             }
         }
-        public List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario)
+        public List<ComentarioEvento> ListarComentariosPorEvento(Evento evento)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
-                    IRepository<Bicicleta> repo = new BicicletaRepository(uow);
-                    var bicicletas = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario);
-                    return bicicletas.ToList();
+                    IRepository<ComentarioEvento> repo = new ComentarioEventoRepository(uow);
+                    var comentarios = repo.GetWhere(c => c.IdEvento == evento.IdEvento);
+                    return comentarios.ToList();
                 }
             }
             catch (Exception)

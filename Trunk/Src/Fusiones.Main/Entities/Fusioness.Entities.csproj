@@ -51,7 +51,7 @@
     <Compile Include="QualidadeRota.cs" />
     <Compile Include="Resposta.cs" />
     <Compile Include="Rota.cs" />
-    <Compile Include="StatusEvento.cs" />
+    <Compile Include="ComentarioEvento.cs" />
     <Compile Include="TipoCoordenada.cs" />
     <Compile Include="TipoPista.cs" />
     <Compile Include="TipoRota.cs" />
