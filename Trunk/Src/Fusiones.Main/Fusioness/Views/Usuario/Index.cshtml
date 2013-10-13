@@ -1,7 +1,8 @@
 ﻿@model Fusioness.Models.Usuarios.UsuarioModel
 @{
-  ViewBag.Title = "Index";
-  Layout = "~/Views/Shared/LayoutBase.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+    Html.ValidationSummary("Create was unsuccessful. Please correct the errors and try again.");
 }
 
 <!-- LINHA 1 -->
@@ -15,24 +16,27 @@
         {
           @Html.LabelFor(m => m.Usuario.Nome)
           @Html.TextBoxFor(m => m.Usuario.Nome)
+          @Html.ValidationMessage("Nome")
           <br />
           @Html.LabelFor(m => m.Usuario.Login)
           @Html.TextBoxFor(m => m.Usuario.Login)
+          @Html.ValidationMessage("Login")
           <br />
           @Html.LabelFor(m => m.Usuario.Senha)
           @Html.PasswordFor(m => m.Usuario.Senha)
+          @Html.ValidationMessage("Senha")
           <br />
           @Html.LabelFor(m => m.Usuario.Email)
           @Html.TextBoxFor(m => m.Usuario.Email)
+          @Html.ValidationMessage("Email")
           <br />
           @Html.LabelFor(m => m.Usuario.Idade)
           @Html.TextBoxFor(m => m.Usuario.Idade)
+          @Html.ValidationMessage("Idade")
           <br />
           @Html.LabelFor(m => m.Usuario.Sexo)
           @Html.TextBoxFor(m => m.Usuario.Sexo)
-          <br />
-          @Html.LabelFor(m => m.Usuario.UrlImagem)
-          @Html.TextBoxFor(m => m.Usuario.UrlImagem)
+          @Html.ValidationMessage("Sexo")
           <br />
           @Html.HiddenFor(m => m.Usuario.IdUsuario)
           <input type="submit" value="Send" />
