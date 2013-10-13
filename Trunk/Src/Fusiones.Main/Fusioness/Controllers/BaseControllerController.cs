@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -41,6 +42,21 @@ namespace Fusioness.Controllers
             if (context == null || context.Session == null || context.Session.Count == 0) return null;
             var usuarioLogado = context.Session[CHAVE_USUARIO_LOGADO];
             return usuarioLogado != null ? (Usuario)usuarioLogado : null;
+        }
+
+        public static string ObterImagemUsuarioLogado(HttpContextBase context)
+        {
+            try
+            {
+                var usuario = ObterUsuarioLogado(context);
+                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir"];
+                return String.Format("{0}{1}", urlService, usuario.UrlImagem);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+            
         }
 
         public void EfetuarLogon(Usuario usuario)

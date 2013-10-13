@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Fusioness.Models.Usuarios;
 using Fusioness.Models.Seguranca;
+using System.Web;
 
 namespace Fusioness.Controllers
 {
@@ -86,5 +87,6 @@ namespace Fusioness.Controllers
             }
             return retorno;
         }
+        
     }
 }
