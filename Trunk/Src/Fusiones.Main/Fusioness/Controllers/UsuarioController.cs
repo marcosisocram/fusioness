@@ -10,6 +10,7 @@ namespace Fusioness.Controllers
         [PermiteAnonimo]
         public ActionResult Index(UsuarioModel model)
         {
+            model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             return View(model);
         }
         
