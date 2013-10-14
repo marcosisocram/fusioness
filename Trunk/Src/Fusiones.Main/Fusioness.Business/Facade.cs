@@ -129,7 +129,7 @@ namespace Fusioness.Business
         {
             return BicicletaBus.ObterBicicletaPorId(bicicleta);
         }
-        public List<Bicicleta> ListarBicicletas(Usuario usuario)
+        public List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario)
         {
             return BicicletaBus.ListarBicicletasPorUsuario(usuario);
         }

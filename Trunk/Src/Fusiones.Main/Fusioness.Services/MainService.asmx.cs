@@ -46,6 +46,63 @@ namespace Fusioness.Services
             }
         }
 
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Bicicleta AlterarBicicleta(Bicicleta bicicleta)
+        {
+            try
+            {
+                return Facade.Instance.AlterarBicicleta(bicicleta);
+            }
+            catch
+            {
+                return default(Bicicleta);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverBicicleta(Bicicleta bicicleta)
+        {
+            try
+            {
+                Facade.Instance.RemoverBicicleta(bicicleta);
+            }
+            catch
+            {
+                //TODO: LogFile();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Bicicleta ObterBicicletaPorId(Bicicleta bicicleta)
+        {
+            try
+            {
+                return Facade.Instance.ObterBicicletaPorId(bicicleta);
+            }
+            catch
+            {
+                return default(Bicicleta);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarBicicletasPorUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Bicicleta>();
+            }
+        }
+
         #endregion
 
         #region Usuario
