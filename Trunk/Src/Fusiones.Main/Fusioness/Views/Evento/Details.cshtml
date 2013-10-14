@@ -1,4 +1,5 @@
-﻿@model Fusioness.Models.Eventos.EventoModel
+﻿@using System.Activities.Expressions
+@model Fusioness.Models.Eventos.EventoModel
 @{
   ViewBag.Title = "Eventos";
   Layout = "~/Views/Shared/LayoutBase.cshtml";
@@ -8,24 +9,20 @@
   <!-- BLOCK -->
   <div class="span12">
     <div class="card">
-      <h2 class="card-heading simple">Lista de Eventos</h2>
+      <div class="card-heading">
+        @Html.ActionLink("Voltar", "Index", "Evento", new{ @class = "pull-right btn btn-primary"})
+        <h2 class="card-heading simple">Detalhe do Evento</h2>
+      </div>
       <div class="card-body">
-        <table class="table table-hover">
-            <thead>
-                <th>#</th>
-                <th>Título</th>
-                <th>Data</th>
-                <th>#</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="/Evento/Details/" class="btn btn-primary">Visualizar</a></td>
-                </tr>
-            </tbody>
-        </table>  
+        @Html.DisplayTextFor(m => m.Evento.Titulo) 
+        - @Html.DisplayTextFor(m => m.Evento.Usuario.Nome)
+        - @Html.DisplayTextFor(m => m.Evento.Data)
+        <br />
+        @Html.DisplayTextFor(m => m.Evento.Descricao)
+        <br />
+        @(Model.Evento.Publico ? "Publico" : "Privado")
+        <br />
+        @Html.DisplayTextFor(m => m.Evento.Rota.Dificuldade)
       </div>
     </div>
   </div>
@@ -36,6 +33,3 @@
 <div class="row-fluid">
   
   <!-- BLOCK -->
-
-  
-  

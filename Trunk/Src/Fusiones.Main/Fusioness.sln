@@ -28,8 +28,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{17DAEE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness.Services", "Fusioness.Services\Fusioness.Services.csproj", "{A4E80E01-649C-4949-9F4B-463C0CC76D55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusioness", "Fusioness\Fusioness.csproj", "{3403CB03-5DD8-4013-84BA-54CD213CDDBC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,10 +54,6 @@ Global
 		{A4E80E01-649C-4949-9F4B-463C0CC76D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4E80E01-649C-4949-9F4B-463C0CC76D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4E80E01-649C-4949-9F4B-463C0CC76D55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3403CB03-5DD8-4013-84BA-54CD213CDDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3403CB03-5DD8-4013-84BA-54CD213CDDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3403CB03-5DD8-4013-84BA-54CD213CDDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3403CB03-5DD8-4013-84BA-54CD213CDDBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
