@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Fusioness.Business.Util;
 using Fusioness.Data;
@@ -86,6 +87,7 @@ namespace Fusioness.Business.Usuarios
                 return new UsuarioRepository(uow).GetByKey(new Usuario { IdUsuario = usuario.IdUsuario });
             }
         }
+
         public List<Usuario> ListarUsuarios()
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
@@ -103,6 +105,32 @@ namespace Fusioness.Business.Usuarios
             {
                 return new UsuarioRepository(ouw).GetWhere(u => u.Senha == usuario.Senha && u.Login == usuario.Login).FirstOrDefault();
             }
+        }
+
+        public string InserirFotoUsuario(Usuario usuario, byte[] bytes, string filename, string dirbase)
+        {
+            try
+            {
+                string retorno = string.Empty;
+                var directory = Path.Combine(dirbase, "images");
+                var fname = String.Format("{0}/{1}{2}", directory, Path.GetFileNameWithoutExtension(Path.GetTempFileName()), Path.GetExtension(filename));
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                var fs = File.OpenWrite(fname);
+                fs.Write(bytes, 0, bytes.Count());
+                fs.Close();
+                retorno = Path.GetFileName(fname);
+                usuario.UrlImagem = retorno;
+                usuario = AlterarUsuario(usuario);
+                return retorno;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+            
         }
 
         #region Contato

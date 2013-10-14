@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -107,7 +109,21 @@ namespace Fusioness.Services
             }
         }
 
-        
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string InserirFotoUsuario(Usuario usuario, string filename, byte[] bytes)
+        {
+            try
+            {
+                string dirBase = Server.MapPath("~");
+                return Facade.Instance.InserirFotoUsuario(usuario, bytes, filename, dirBase);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
         #endregion
 
         #region Rotas
