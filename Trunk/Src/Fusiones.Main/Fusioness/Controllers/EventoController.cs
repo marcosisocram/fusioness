@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Fusioness.FusionessWS;
 using Fusioness.Models.Eventos;
 
 namespace Fusioness.Controllers
@@ -15,9 +12,9 @@ namespace Fusioness.Controllers
             return View(model);
         }
 
-        public ActionResult Details(EventoModel model)
+        public ActionResult Details(EventoModel model, int? id)
         {
-            model.Evento = Servico.ObterEventoPorId(model.Evento);
+            model.Evento = Servico.ObterEventoPorId(new Evento{IdEvento = id.HasValue ? id.Value : 0});
             return View(model);
         }
 
