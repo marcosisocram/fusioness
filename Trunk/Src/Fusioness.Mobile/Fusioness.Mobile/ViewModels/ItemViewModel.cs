@@ -12,65 +12,86 @@ namespace Fusioness.Mobile.ViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {
-        private string _lineOne;
+        private string _rotaNome;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
         /// </summary>
         /// <returns></returns>
-        public string LineOne
+        public string RotaNome
         {
             get
             {
-                return _lineOne;
+                return _rotaNome;
             }
             set
             {
-                if (value != _lineOne)
+                if (value != _rotaNome)
                 {
-                    _lineOne = value;
-                    NotifyPropertyChanged("LineOne");
+                    _rotaNome = value;
+                    NotifyPropertyChanged("RotaNome");
                 }
             }
         }
 
-        private string _lineTwo;
+        private string _eventoImagem;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
         /// </summary>
         /// <returns></returns>
-        public string LineTwo
+        public string EventoImagem
         {
             get
             {
-                return _lineTwo;
+                return _eventoImagem;
             }
             set
             {
-                if (value != _lineTwo)
+                if (value != _eventoImagem)
                 {
-                    _lineTwo = value;
-                    NotifyPropertyChanged("LineTwo");
+                    _eventoImagem = value;
+                    NotifyPropertyChanged("EventoImagem");
                 }
             }
         }
 
-        private string _lineThree;
+        private string _eventoTitulo;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
         /// </summary>
         /// <returns></returns>
-        public string LineThree
+        public string EventoTitulo
         {
             get
             {
-                return _lineThree;
+                return _eventoTitulo;
             }
             set
             {
-                if (value != _lineThree)
+                if (value != _eventoTitulo)
                 {
-                    _lineThree = value;
-                    NotifyPropertyChanged("LineThree");
+                    _eventoTitulo = value;
+                    NotifyPropertyChanged("EventoTitulo");
+                }
+            }
+        }
+
+        private string _eventoData;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string EventoData
+        {
+            get
+            {
+                return _eventoData;
+            }
+            set
+            {
+                if (value != _eventoData)
+                {
+                    _eventoData = value;
+                    NotifyPropertyChanged("EventoData");
                 }
             }
         }

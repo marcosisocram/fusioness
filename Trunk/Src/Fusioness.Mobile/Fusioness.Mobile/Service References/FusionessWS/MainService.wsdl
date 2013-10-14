@@ -12,31 +12,22 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ValidarLogonUsuario">
+      <s:element name="InserirBicicleta">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="Usuario">
+      <s:complexType name="Bicicleta">
         <s:complexContent mixed="false">
           <s:extension base="tns:EntityBase">
             <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdBicicleta" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Senha" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
-              <s:element minOccurs="1" maxOccurs="1" name="Idade" nillable="true" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Sexo" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="UrlImagem" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Bicicletas" type="tns:ArrayOfBicicleta" />
-              <s:element minOccurs="0" maxOccurs="1" name="Contatos" type="tns:ArrayOfContato" />
-              <s:element minOccurs="0" maxOccurs="1" name="Contatos1" type="tns:ArrayOfContato" />
-              <s:element minOccurs="0" maxOccurs="1" name="Eventoes" type="tns:ArrayOfEvento" />
-              <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
-              <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
+              <s:element minOccurs="0" maxOccurs="1" name="Modelo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Marca" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -86,6 +77,44 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:complexType name="Usuario">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Senha" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Idade" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Sexo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrlImagem" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Bicicletas" type="tns:ArrayOfBicicleta" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contatos" type="tns:ArrayOfContato" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contatos1" type="tns:ArrayOfContato" />
+              <s:element minOccurs="0" maxOccurs="1" name="Eventos" type="tns:ArrayOfEvento" />
+              <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
+              <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
+              <s:element minOccurs="0" maxOccurs="1" name="ComentariosEventos" type="tns:ArrayOfComentarioEvento" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfBicicleta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Bicicleta" nillable="true" type="tns:Bicicleta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContato">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Contato" nillable="true" type="tns:Contato" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEvento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Evento" nillable="true" type="tns:Evento" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="Evento">
         <s:complexContent mixed="false">
           <s:extension base="tns:EntityBase">
@@ -102,6 +131,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Rota" type="tns:Rota" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
               <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
+              <s:element minOccurs="0" maxOccurs="1" name="ComentariosEvento" type="tns:ArrayOfComentarioEvento" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -116,6 +146,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="IdTipoRota" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdDificuldade" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdQualidadeRota" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Coordenadas" type="tns:ArrayOfCoordenada" />
               <s:element minOccurs="0" maxOccurs="1" name="Dificuldade" type="tns:Dificuldade" />
               <s:element minOccurs="0" maxOccurs="1" name="Eventos" type="tns:ArrayOfEvento" />
@@ -175,11 +206,6 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Rota" nillable="true" type="tns:Rota" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="ArrayOfEvento">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Evento" nillable="true" type="tns:Evento" />
-        </s:sequence>
-      </s:complexType>
       <s:complexType name="QualidadeRota">
         <s:complexContent mixed="false">
           <s:extension base="tns:EntityBase">
@@ -224,67 +250,49 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
-              <s:element minOccurs="1" maxOccurs="1" name="IdStatusEvento" nillable="true" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="StatusDescricao" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
-              <s:element minOccurs="0" maxOccurs="1" name="StatusEvento" type="tns:StatusEvento" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:complexType name="StatusEvento">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:EntityBase">
-            <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="IdStatusEvento" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
+      <s:complexType name="ArrayOfComentarioEvento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ComentarioEvento" nillable="true" type="tns:ComentarioEvento" />
+        </s:sequence>
       </s:complexType>
-      <s:complexType name="Bicicleta">
+      <s:complexType name="ComentarioEvento">
         <s:complexContent mixed="false">
           <s:extension base="tns:EntityBase">
             <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="IdBicicleta" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdComentarioEvento" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Modelo" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Marca" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:complexType name="ArrayOfBicicleta">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Bicicleta" nillable="true" type="tns:Bicicleta" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="ArrayOfContato">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Contato" nillable="true" type="tns:Contato" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="ValidarLogonUsuarioResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ValidarLogonUsuarioResult" type="tns:Usuario" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="InserirBicicleta">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="InserirBicicletaResponse">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="InserirBicicletaResult" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarLogonUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarLogonUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidarLogonUsuarioResult" type="tns:Usuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -335,20 +343,6 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Usuario" nillable="true" type="tns:Usuario" />
         </s:sequence>
       </s:complexType>
-      <s:element name="ListarRotasPorUsuario">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ListarRotasPorUsuarioResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListarRotasPorUsuarioResult" type="tns:ArrayOfRota" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="InserirRota">
         <s:complexType>
           <s:sequence>
@@ -411,6 +405,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarRotasPorUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarRotasPorUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarRotasPorUsuarioResult" type="tns:ArrayOfRota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ListarTiposRota">
         <s:complexType />
       </s:element>
@@ -456,6 +464,21 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Dificuldade" nillable="true" type="tns:Dificuldade" />
         </s:sequence>
       </s:complexType>
+      <s:element name="ListarQualidadesRota">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarQualidadesRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarQualidadesRotaResult" type="tns:ArrayOfQualidadeRota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfQualidadeRota">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="QualidadeRota" nillable="true" type="tns:QualidadeRota" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ListarEventos">
         <s:complexType />
       </s:element>
@@ -488,17 +511,17 @@
   <wsdl:message name="HelloWorldSoapOut">
     <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
   </wsdl:message>
-  <wsdl:message name="ValidarLogonUsuarioSoapIn">
-    <wsdl:part name="parameters" element="tns:ValidarLogonUsuario" />
-  </wsdl:message>
-  <wsdl:message name="ValidarLogonUsuarioSoapOut">
-    <wsdl:part name="parameters" element="tns:ValidarLogonUsuarioResponse" />
-  </wsdl:message>
   <wsdl:message name="InserirBicicletaSoapIn">
     <wsdl:part name="parameters" element="tns:InserirBicicleta" />
   </wsdl:message>
   <wsdl:message name="InserirBicicletaSoapOut">
     <wsdl:part name="parameters" element="tns:InserirBicicletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarLogonUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarLogonUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ValidarLogonUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarLogonUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="InserirUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:InserirUsuario" />
@@ -517,12 +540,6 @@
   </wsdl:message>
   <wsdl:message name="ListarContatosPorUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarContatosPorUsuarioResponse" />
-  </wsdl:message>
-  <wsdl:message name="ListarRotasPorUsuarioSoapIn">
-    <wsdl:part name="parameters" element="tns:ListarRotasPorUsuario" />
-  </wsdl:message>
-  <wsdl:message name="ListarRotasPorUsuarioSoapOut">
-    <wsdl:part name="parameters" element="tns:ListarRotasPorUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="InserirRotaSoapIn">
     <wsdl:part name="parameters" element="tns:InserirRota" />
@@ -554,6 +571,12 @@
   <wsdl:message name="ListarRotasSoapOut">
     <wsdl:part name="parameters" element="tns:ListarRotasResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarRotasPorUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarRotasPorUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ListarRotasPorUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarRotasPorUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarTiposRotaSoapIn">
     <wsdl:part name="parameters" element="tns:ListarTiposRota" />
   </wsdl:message>
@@ -572,6 +595,12 @@
   <wsdl:message name="ListarDificuldadesSoapOut">
     <wsdl:part name="parameters" element="tns:ListarDificuldadesResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarQualidadesRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarQualidadesRota" />
+  </wsdl:message>
+  <wsdl:message name="ListarQualidadesRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarQualidadesRotaResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarEventos" />
   </wsdl:message>
@@ -589,13 +618,13 @@
       <wsdl:input message="tns:HelloWorldSoapIn" />
       <wsdl:output message="tns:HelloWorldSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="ValidarLogonUsuario">
-      <wsdl:input message="tns:ValidarLogonUsuarioSoapIn" />
-      <wsdl:output message="tns:ValidarLogonUsuarioSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="InserirBicicleta">
       <wsdl:input message="tns:InserirBicicletaSoapIn" />
       <wsdl:output message="tns:InserirBicicletaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarLogonUsuario">
+      <wsdl:input message="tns:ValidarLogonUsuarioSoapIn" />
+      <wsdl:output message="tns:ValidarLogonUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InserirUsuario">
       <wsdl:input message="tns:InserirUsuarioSoapIn" />
@@ -608,10 +637,6 @@
     <wsdl:operation name="ListarContatosPorUsuario">
       <wsdl:input message="tns:ListarContatosPorUsuarioSoapIn" />
       <wsdl:output message="tns:ListarContatosPorUsuarioSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="ListarRotasPorUsuario">
-      <wsdl:input message="tns:ListarRotasPorUsuarioSoapIn" />
-      <wsdl:output message="tns:ListarRotasPorUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InserirRota">
       <wsdl:input message="tns:InserirRotaSoapIn" />
@@ -633,6 +658,10 @@
       <wsdl:input message="tns:ListarRotasSoapIn" />
       <wsdl:output message="tns:ListarRotasSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarRotasPorUsuario">
+      <wsdl:input message="tns:ListarRotasPorUsuarioSoapIn" />
+      <wsdl:output message="tns:ListarRotasPorUsuarioSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <wsdl:input message="tns:ListarTiposRotaSoapIn" />
       <wsdl:output message="tns:ListarTiposRotaSoapOut" />
@@ -644,6 +673,10 @@
     <wsdl:operation name="ListarDificuldades">
       <wsdl:input message="tns:ListarDificuldadesSoapIn" />
       <wsdl:output message="tns:ListarDificuldadesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarQualidadesRota">
+      <wsdl:input message="tns:ListarQualidadesRotaSoapIn" />
+      <wsdl:output message="tns:ListarQualidadesRotaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarEventos">
       <wsdl:input message="tns:ListarEventosSoapIn" />
@@ -665,8 +698,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ValidarLogonUsuario">
-      <soap:operation soapAction="http://tempuri.org/ValidarLogonUsuario" style="document" />
+    <wsdl:operation name="InserirBicicleta">
+      <soap:operation soapAction="http://tempuri.org/InserirBicicleta" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -674,8 +707,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InserirBicicleta">
-      <soap:operation soapAction="http://tempuri.org/InserirBicicleta" style="document" />
+    <wsdl:operation name="ValidarLogonUsuario">
+      <soap:operation soapAction="http://tempuri.org/ValidarLogonUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -703,15 +736,6 @@
     </wsdl:operation>
     <wsdl:operation name="ListarContatosPorUsuario">
       <soap:operation soapAction="http://tempuri.org/ListarContatosPorUsuario" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarRotasPorUsuario">
-      <soap:operation soapAction="http://tempuri.org/ListarRotasPorUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -764,6 +788,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarRotasPorUsuario">
+      <soap:operation soapAction="http://tempuri.org/ListarRotasPorUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <soap:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
       <wsdl:input>
@@ -784,6 +817,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarDificuldades">
       <soap:operation soapAction="http://tempuri.org/ListarDificuldades" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarQualidadesRota">
+      <soap:operation soapAction="http://tempuri.org/ListarQualidadesRota" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -821,8 +863,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ValidarLogonUsuario">
-      <soap12:operation soapAction="http://tempuri.org/ValidarLogonUsuario" style="document" />
+    <wsdl:operation name="InserirBicicleta">
+      <soap12:operation soapAction="http://tempuri.org/InserirBicicleta" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -830,8 +872,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InserirBicicleta">
-      <soap12:operation soapAction="http://tempuri.org/InserirBicicleta" style="document" />
+    <wsdl:operation name="ValidarLogonUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ValidarLogonUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -859,15 +901,6 @@
     </wsdl:operation>
     <wsdl:operation name="ListarContatosPorUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarContatosPorUsuario" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarRotasPorUsuario">
-      <soap12:operation soapAction="http://tempuri.org/ListarRotasPorUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -920,6 +953,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarRotasPorUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ListarRotasPorUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <soap12:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
       <wsdl:input>
@@ -940,6 +982,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarDificuldades">
       <soap12:operation soapAction="http://tempuri.org/ListarDificuldades" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarQualidadesRota">
+      <soap12:operation soapAction="http://tempuri.org/ListarQualidadesRota" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

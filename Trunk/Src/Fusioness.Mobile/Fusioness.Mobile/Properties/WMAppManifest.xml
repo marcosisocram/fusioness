@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{53a76f5b-b279-4fed-be99-ed9ed705a3ee}" Title="Fusioness.Mobile" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Fusioness.Mobile author" Description="Sample description" Publisher="Fusioness.Mobile" PublisherID="{83845e7d-2683-4bc0-aa48-b568515fbec0}">
+  <App xmlns="" ProductID="{53a76f5b-b279-4fed-be99-ed9ed705a3ee}" Title="Fusioness" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Fusioness.Mobile author" Description="Sample description" Publisher="Fusioness.Mobile" PublisherID="{83845e7d-2683-4bc0-aa48-b568515fbec0}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -9,6 +9,8 @@
       <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_MAP" />
+      <Capability Name="ID_CAP_LOCATION" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="Views/Login.xaml" />
