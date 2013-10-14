@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Fusioness.Mobile.ViewModels;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace Fusioness.Mobile.Views
 {
@@ -26,9 +27,9 @@ namespace Fusioness.Mobile.Views
 
             usuario.Login = txtLogin.Text.ToString();
             usuario.Senha = txtSenha.Password.ToString();
-
+            
             servico.ValidarLogonUsuarioAsync(usuario);
-            servico.ValidarLogonUsuarioCompleted += servico_ValidarLogonUsuarioCompleted;
+            servico.ValidarLogonUsuarioCompleted += servico_ValidarLogonUsuarioCompleted;            
         }
 
         void servico_ValidarLogonUsuarioCompleted(object sender, FusionessWS.ValidarLogonUsuarioCompletedEventArgs e)
