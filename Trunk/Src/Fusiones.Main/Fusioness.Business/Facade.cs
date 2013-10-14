@@ -10,6 +10,7 @@ using Fusioness.Business.TiposRota;
 using Fusioness.Business.TiposPista;
 using Fusioness.Business.Dificuldades;
 using Fusioness.Business.QualidadesRota;
+using System.IO;
 
 namespace Fusioness.Business
 {
@@ -90,6 +91,10 @@ namespace Fusioness.Business
         public List<Usuario> ListarContatosPorUsuario(Usuario usuario)
         {
             return UsuarioBus.ListarContatosPorUsuario(usuario);
+        }
+        public string InserirFotoUsuario(Usuario usuario, byte[] bytes, string filename, string dirbase)
+        {
+            return UsuarioBus.InserirFotoUsuario(usuario,bytes,filename,dirbase);
         }
         #endregion
 
@@ -220,6 +225,6 @@ namespace Fusioness.Business
         #endregion
 
         #endregion
-       
+
     }
 }

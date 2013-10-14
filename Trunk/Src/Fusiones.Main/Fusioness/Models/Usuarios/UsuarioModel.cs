@@ -20,7 +20,6 @@ namespace Fusioness.Models.Usuarios
                 return _Usuario;
             }
             set { _Usuario = value; }
-        }
-        
+        }        
     }
 }

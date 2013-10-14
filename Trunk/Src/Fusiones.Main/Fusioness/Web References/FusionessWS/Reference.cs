@@ -42,6 +42,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarContatosPorUsuarioOperationCompleted;
         
+        private System.Threading.SendOrPostCallback InserirFotoUsuarioOperationCompleted;
+        
         private System.Threading.SendOrPostCallback InserirRotaOperationCompleted;
         
         private System.Threading.SendOrPostCallback AlterarRotaOperationCompleted;
@@ -121,6 +123,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarContatosPorUsuarioCompletedEventHandler ListarContatosPorUsuarioCompleted;
+        
+        /// <remarks/>
+        public event InserirFotoUsuarioCompletedEventHandler InserirFotoUsuarioCompleted;
         
         /// <remarks/>
         public event InserirRotaCompletedEventHandler InserirRotaCompleted;
@@ -327,6 +332,39 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarContatosPorUsuarioCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarContatosPorUsuarioCompleted(this, new ListarContatosPorUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirFotoUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string InserirFotoUsuario(Usuario usuario, string filename, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] bytes) {
+            object[] results = this.Invoke("InserirFotoUsuario", new object[] {
+                        usuario,
+                        filename,
+                        bytes});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InserirFotoUsuarioAsync(Usuario usuario, string filename, byte[] bytes) {
+            this.InserirFotoUsuarioAsync(usuario, filename, bytes, null);
+        }
+        
+        /// <remarks/>
+        public void InserirFotoUsuarioAsync(Usuario usuario, string filename, byte[] bytes, object userState) {
+            if ((this.InserirFotoUsuarioOperationCompleted == null)) {
+                this.InserirFotoUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInserirFotoUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("InserirFotoUsuario", new object[] {
+                        usuario,
+                        filename,
+                        bytes}, this.InserirFotoUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnInserirFotoUsuarioOperationCompleted(object arg) {
+            if ((this.InserirFotoUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InserirFotoUsuarioCompleted(this, new InserirFotoUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -685,7 +723,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -754,7 +792,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -783,7 +821,7 @@ namespace Fusioness.FusionessWS {
         
         private Contato[] contatos1Field;
         
-        private Evento[] eventoesField;
+        private Evento[] eventosField;
         
         private EventoUsuario[] eventoUsuariosField;
         
@@ -901,12 +939,12 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public Evento[] Eventoes {
+        public Evento[] Eventos {
             get {
-                return this.eventoesField;
+                return this.eventosField;
             }
             set {
-                this.eventoesField = value;
+                this.eventosField = value;
             }
         }
         
@@ -932,7 +970,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1001,7 +1039,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1095,7 +1133,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1248,7 +1286,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1416,7 +1454,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1523,7 +1561,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1583,7 +1621,7 @@ namespace Fusioness.FusionessWS {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Contato))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Usuario))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Bicicleta))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1592,7 +1630,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1637,7 +1675,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1682,7 +1720,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1776,7 +1814,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1821,7 +1859,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1866,7 +1904,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1911,7 +1949,7 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2107,6 +2145,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Usuario[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void InserirFotoUsuarioCompletedEventHandler(object sender, InserirFotoUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InserirFotoUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InserirFotoUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }

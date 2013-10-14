@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Fusioness.Mobile.ViewModels;
 
 namespace Fusioness.Mobile.Views
 {
@@ -34,10 +35,10 @@ namespace Fusioness.Mobile.Views
         {
             try
             {
-                FusionessWS.Usuario usuarioRetornado = e.Result;
-                if (usuarioRetornado != null)
+                LoginViewModel.usuarioLogado = e.Result;
+                if (LoginViewModel.usuarioLogado != null)
                 {                    
-                    NavigationService.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
                 else
                 {
