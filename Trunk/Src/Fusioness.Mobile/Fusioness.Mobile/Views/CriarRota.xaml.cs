@@ -36,7 +36,7 @@ namespace Fusioness.Mobile.Views
 
         private void MeuLocal()
         {
-            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default)
+            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
             {
                 MovementThreshold = 20
             };

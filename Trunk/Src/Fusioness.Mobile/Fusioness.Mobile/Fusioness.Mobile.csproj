@@ -207,6 +207,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Assets\add.png" />
+    <Content Include="Assets\BG_BIKE.png" />
     <Content Include="Assets\favs.addto.png" />
     <Content Include="Assets\location.png" />
     <Content Include="Assets\locationBlue.png" />
