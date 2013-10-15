@@ -287,6 +287,34 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Evento> ListarEventosPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarEventosPorUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Evento>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Evento AlterarEvento(Evento evento)
+        {
+            try
+            {
+                return Facade.Instance.AlterarEvento(evento);
+            }
+            catch
+            {
+                return default(Evento);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Evento ObterEventoPorId(Evento evento)
         {
             try

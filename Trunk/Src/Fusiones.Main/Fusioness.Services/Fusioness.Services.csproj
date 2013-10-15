@@ -103,9 +103,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>42134</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Fusioness.Services</IISUrl>
+          <IISUrl>http://127.0.0.1/Fusioness.Services</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost/Fusioness.Services</IISAppRootUrl>
+          <IISAppRootUrl>http://127.0.0.1/Fusioness.Services</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -184,6 +184,7 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\Rota\Details.cshtml" />
+    <Content Include="Views\Evento\InserirAlterarEvento.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
