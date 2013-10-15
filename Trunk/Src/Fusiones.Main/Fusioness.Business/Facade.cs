@@ -10,6 +10,7 @@ using Fusioness.Business.TiposRota;
 using Fusioness.Business.TiposPista;
 using Fusioness.Business.Dificuldades;
 using Fusioness.Business.QualidadesRota;
+using Fusioness.Business.ComentariosEvento;
 using System.IO;
 
 namespace Fusioness.Business
@@ -26,6 +27,7 @@ namespace Fusioness.Business
         private readonly ITipoPistaBusiness TipoPistaBus;
         private readonly IDificuldadeBusiness DificuldadeBus;
         private readonly IQualidadeRotaBusiness QualidadeRotaBus;
+        private readonly IComentarioEventoBusiness ComentarioEventoBus;
 
 
         #endregion
@@ -50,7 +52,7 @@ namespace Fusioness.Business
             TipoPistaBus = new TipoPistaBusiness();
             DificuldadeBus = new DificuldadeBusiness();
             QualidadeRotaBus = new QualidadeRotaBusiness();
-            
+            ComentarioEventoBus = new ComentarioEventoBusiness();
         }
 
         #endregion
@@ -166,6 +168,35 @@ namespace Fusioness.Business
             return RotaBus.ListarRotasPorUsuario(usuario);
         }
         
+        #endregion
+
+        #region ComentarioEvento
+
+        public ComentarioEvento InserirComentarioEvento(ComentarioEvento comentario)
+        {
+            return ComentarioEventoBus.InserirComentarioEvento(comentario);
+        }
+
+        public ComentarioEvento AlterarComentarioEvento(ComentarioEvento comentario)
+        {
+            return ComentarioEventoBus.AlterarComentarioEvento(comentario);
+        }
+
+        public void RemoverComentarioEvento(ComentarioEvento comentario)
+        {
+            ComentarioEventoBus.RemoverComentarioEvento(comentario);
+        }
+
+        public ComentarioEvento ObterComentarioEventoPorId(ComentarioEvento comentario)
+        {
+            return ComentarioEventoBus.ObterComentarioEventoPorId(comentario);
+        }
+
+        public List<ComentarioEvento> ListarComentariosPorEvento(Evento evento)
+        {
+            return ComentarioEventoBus.ListarComentariosPorEvento(evento);
+        }
+
         #endregion
 
         #region TipoRota

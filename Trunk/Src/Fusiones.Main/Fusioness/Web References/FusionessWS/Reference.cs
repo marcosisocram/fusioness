@@ -34,6 +34,14 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback InserirBicicletaOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AlterarBicicletaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RemoverBicicletaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ObterBicicletaPorIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarBicicletasPorUsuarioOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ValidarLogonUsuarioOperationCompleted;
         
         private System.Threading.SendOrPostCallback InserirUsuarioOperationCompleted;
@@ -56,6 +64,16 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarRotasPorUsuarioOperationCompleted;
         
+        private System.Threading.SendOrPostCallback InserirComentarioEventoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AlterarComentarioEventoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RemoverComentarioEventoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ObterComentarioEventoPorIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarComentariosPorEventoOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarTiposRotaOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarTiposPistaOperationCompleted;
@@ -65,6 +83,10 @@ namespace Fusioness.FusionessWS {
         private System.Threading.SendOrPostCallback ListarQualidadesRotaOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarEventosOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarEventosPorUsuarioOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AlterarEventoOperationCompleted;
         
         private System.Threading.SendOrPostCallback ObterEventoPorIdOperationCompleted;
         
@@ -113,6 +135,18 @@ namespace Fusioness.FusionessWS {
         public event InserirBicicletaCompletedEventHandler InserirBicicletaCompleted;
         
         /// <remarks/>
+        public event AlterarBicicletaCompletedEventHandler AlterarBicicletaCompleted;
+        
+        /// <remarks/>
+        public event RemoverBicicletaCompletedEventHandler RemoverBicicletaCompleted;
+        
+        /// <remarks/>
+        public event ObterBicicletaPorIdCompletedEventHandler ObterBicicletaPorIdCompleted;
+        
+        /// <remarks/>
+        public event ListarBicicletasPorUsuarioCompletedEventHandler ListarBicicletasPorUsuarioCompleted;
+        
+        /// <remarks/>
         public event ValidarLogonUsuarioCompletedEventHandler ValidarLogonUsuarioCompleted;
         
         /// <remarks/>
@@ -146,6 +180,21 @@ namespace Fusioness.FusionessWS {
         public event ListarRotasPorUsuarioCompletedEventHandler ListarRotasPorUsuarioCompleted;
         
         /// <remarks/>
+        public event InserirComentarioEventoCompletedEventHandler InserirComentarioEventoCompleted;
+        
+        /// <remarks/>
+        public event AlterarComentarioEventoCompletedEventHandler AlterarComentarioEventoCompleted;
+        
+        /// <remarks/>
+        public event RemoverComentarioEventoCompletedEventHandler RemoverComentarioEventoCompleted;
+        
+        /// <remarks/>
+        public event ObterComentarioEventoPorIdCompletedEventHandler ObterComentarioEventoPorIdCompleted;
+        
+        /// <remarks/>
+        public event ListarComentariosPorEventoCompletedEventHandler ListarComentariosPorEventoCompleted;
+        
+        /// <remarks/>
         public event ListarTiposRotaCompletedEventHandler ListarTiposRotaCompleted;
         
         /// <remarks/>
@@ -159,6 +208,12 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarEventosCompletedEventHandler ListarEventosCompleted;
+        
+        /// <remarks/>
+        public event ListarEventosPorUsuarioCompletedEventHandler ListarEventosPorUsuarioCompleted;
+        
+        /// <remarks/>
+        public event AlterarEventoCompletedEventHandler AlterarEventoCompleted;
         
         /// <remarks/>
         public event ObterEventoPorIdCompletedEventHandler ObterEventoPorIdCompleted;
@@ -216,6 +271,121 @@ namespace Fusioness.FusionessWS {
             if ((this.InserirBicicletaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.InserirBicicletaCompleted(this, new InserirBicicletaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AlterarBicicleta", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Bicicleta AlterarBicicleta(Bicicleta bicicleta) {
+            object[] results = this.Invoke("AlterarBicicleta", new object[] {
+                        bicicleta});
+            return ((Bicicleta)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AlterarBicicletaAsync(Bicicleta bicicleta) {
+            this.AlterarBicicletaAsync(bicicleta, null);
+        }
+        
+        /// <remarks/>
+        public void AlterarBicicletaAsync(Bicicleta bicicleta, object userState) {
+            if ((this.AlterarBicicletaOperationCompleted == null)) {
+                this.AlterarBicicletaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAlterarBicicletaOperationCompleted);
+            }
+            this.InvokeAsync("AlterarBicicleta", new object[] {
+                        bicicleta}, this.AlterarBicicletaOperationCompleted, userState);
+        }
+        
+        private void OnAlterarBicicletaOperationCompleted(object arg) {
+            if ((this.AlterarBicicletaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AlterarBicicletaCompleted(this, new AlterarBicicletaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/RemoverBicicleta", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RemoverBicicleta(Bicicleta bicicleta) {
+            this.Invoke("RemoverBicicleta", new object[] {
+                        bicicleta});
+        }
+        
+        /// <remarks/>
+        public void RemoverBicicletaAsync(Bicicleta bicicleta) {
+            this.RemoverBicicletaAsync(bicicleta, null);
+        }
+        
+        /// <remarks/>
+        public void RemoverBicicletaAsync(Bicicleta bicicleta, object userState) {
+            if ((this.RemoverBicicletaOperationCompleted == null)) {
+                this.RemoverBicicletaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoverBicicletaOperationCompleted);
+            }
+            this.InvokeAsync("RemoverBicicleta", new object[] {
+                        bicicleta}, this.RemoverBicicletaOperationCompleted, userState);
+        }
+        
+        private void OnRemoverBicicletaOperationCompleted(object arg) {
+            if ((this.RemoverBicicletaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoverBicicletaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterBicicletaPorId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Bicicleta ObterBicicletaPorId(Bicicleta bicicleta) {
+            object[] results = this.Invoke("ObterBicicletaPorId", new object[] {
+                        bicicleta});
+            return ((Bicicleta)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterBicicletaPorIdAsync(Bicicleta bicicleta) {
+            this.ObterBicicletaPorIdAsync(bicicleta, null);
+        }
+        
+        /// <remarks/>
+        public void ObterBicicletaPorIdAsync(Bicicleta bicicleta, object userState) {
+            if ((this.ObterBicicletaPorIdOperationCompleted == null)) {
+                this.ObterBicicletaPorIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterBicicletaPorIdOperationCompleted);
+            }
+            this.InvokeAsync("ObterBicicletaPorId", new object[] {
+                        bicicleta}, this.ObterBicicletaPorIdOperationCompleted, userState);
+        }
+        
+        private void OnObterBicicletaPorIdOperationCompleted(object arg) {
+            if ((this.ObterBicicletaPorIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterBicicletaPorIdCompleted(this, new ObterBicicletaPorIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarBicicletasPorUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Bicicleta[] ListarBicicletasPorUsuario(Usuario usuario) {
+            object[] results = this.Invoke("ListarBicicletasPorUsuario", new object[] {
+                        usuario});
+            return ((Bicicleta[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarBicicletasPorUsuarioAsync(Usuario usuario) {
+            this.ListarBicicletasPorUsuarioAsync(usuario, null);
+        }
+        
+        /// <remarks/>
+        public void ListarBicicletasPorUsuarioAsync(Usuario usuario, object userState) {
+            if ((this.ListarBicicletasPorUsuarioOperationCompleted == null)) {
+                this.ListarBicicletasPorUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarBicicletasPorUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("ListarBicicletasPorUsuario", new object[] {
+                        usuario}, this.ListarBicicletasPorUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnListarBicicletasPorUsuarioOperationCompleted(object arg) {
+            if ((this.ListarBicicletasPorUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarBicicletasPorUsuarioCompleted(this, new ListarBicicletasPorUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -540,6 +710,150 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirComentarioEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ComentarioEvento InserirComentarioEvento(ComentarioEvento comentario) {
+            object[] results = this.Invoke("InserirComentarioEvento", new object[] {
+                        comentario});
+            return ((ComentarioEvento)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InserirComentarioEventoAsync(ComentarioEvento comentario) {
+            this.InserirComentarioEventoAsync(comentario, null);
+        }
+        
+        /// <remarks/>
+        public void InserirComentarioEventoAsync(ComentarioEvento comentario, object userState) {
+            if ((this.InserirComentarioEventoOperationCompleted == null)) {
+                this.InserirComentarioEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInserirComentarioEventoOperationCompleted);
+            }
+            this.InvokeAsync("InserirComentarioEvento", new object[] {
+                        comentario}, this.InserirComentarioEventoOperationCompleted, userState);
+        }
+        
+        private void OnInserirComentarioEventoOperationCompleted(object arg) {
+            if ((this.InserirComentarioEventoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InserirComentarioEventoCompleted(this, new InserirComentarioEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AlterarComentarioEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ComentarioEvento AlterarComentarioEvento(ComentarioEvento comentario) {
+            object[] results = this.Invoke("AlterarComentarioEvento", new object[] {
+                        comentario});
+            return ((ComentarioEvento)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AlterarComentarioEventoAsync(ComentarioEvento comentario) {
+            this.AlterarComentarioEventoAsync(comentario, null);
+        }
+        
+        /// <remarks/>
+        public void AlterarComentarioEventoAsync(ComentarioEvento comentario, object userState) {
+            if ((this.AlterarComentarioEventoOperationCompleted == null)) {
+                this.AlterarComentarioEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAlterarComentarioEventoOperationCompleted);
+            }
+            this.InvokeAsync("AlterarComentarioEvento", new object[] {
+                        comentario}, this.AlterarComentarioEventoOperationCompleted, userState);
+        }
+        
+        private void OnAlterarComentarioEventoOperationCompleted(object arg) {
+            if ((this.AlterarComentarioEventoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AlterarComentarioEventoCompleted(this, new AlterarComentarioEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/RemoverComentarioEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RemoverComentarioEvento(ComentarioEvento comentario) {
+            this.Invoke("RemoverComentarioEvento", new object[] {
+                        comentario});
+        }
+        
+        /// <remarks/>
+        public void RemoverComentarioEventoAsync(ComentarioEvento comentario) {
+            this.RemoverComentarioEventoAsync(comentario, null);
+        }
+        
+        /// <remarks/>
+        public void RemoverComentarioEventoAsync(ComentarioEvento comentario, object userState) {
+            if ((this.RemoverComentarioEventoOperationCompleted == null)) {
+                this.RemoverComentarioEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoverComentarioEventoOperationCompleted);
+            }
+            this.InvokeAsync("RemoverComentarioEvento", new object[] {
+                        comentario}, this.RemoverComentarioEventoOperationCompleted, userState);
+        }
+        
+        private void OnRemoverComentarioEventoOperationCompleted(object arg) {
+            if ((this.RemoverComentarioEventoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoverComentarioEventoCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterComentarioEventoPorId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ComentarioEvento ObterComentarioEventoPorId(ComentarioEvento comentario) {
+            object[] results = this.Invoke("ObterComentarioEventoPorId", new object[] {
+                        comentario});
+            return ((ComentarioEvento)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterComentarioEventoPorIdAsync(ComentarioEvento comentario) {
+            this.ObterComentarioEventoPorIdAsync(comentario, null);
+        }
+        
+        /// <remarks/>
+        public void ObterComentarioEventoPorIdAsync(ComentarioEvento comentario, object userState) {
+            if ((this.ObterComentarioEventoPorIdOperationCompleted == null)) {
+                this.ObterComentarioEventoPorIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterComentarioEventoPorIdOperationCompleted);
+            }
+            this.InvokeAsync("ObterComentarioEventoPorId", new object[] {
+                        comentario}, this.ObterComentarioEventoPorIdOperationCompleted, userState);
+        }
+        
+        private void OnObterComentarioEventoPorIdOperationCompleted(object arg) {
+            if ((this.ObterComentarioEventoPorIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterComentarioEventoPorIdCompleted(this, new ObterComentarioEventoPorIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarComentariosPorEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ComentarioEvento[] ListarComentariosPorEvento(Evento evento) {
+            object[] results = this.Invoke("ListarComentariosPorEvento", new object[] {
+                        evento});
+            return ((ComentarioEvento[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarComentariosPorEventoAsync(Evento evento) {
+            this.ListarComentariosPorEventoAsync(evento, null);
+        }
+        
+        /// <remarks/>
+        public void ListarComentariosPorEventoAsync(Evento evento, object userState) {
+            if ((this.ListarComentariosPorEventoOperationCompleted == null)) {
+                this.ListarComentariosPorEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarComentariosPorEventoOperationCompleted);
+            }
+            this.InvokeAsync("ListarComentariosPorEvento", new object[] {
+                        evento}, this.ListarComentariosPorEventoOperationCompleted, userState);
+        }
+        
+        private void OnListarComentariosPorEventoOperationCompleted(object arg) {
+            if ((this.ListarComentariosPorEventoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarComentariosPorEventoCompleted(this, new ListarComentariosPorEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarTiposRota", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public TipoRota[] ListarTiposRota() {
             object[] results = this.Invoke("ListarTiposRota", new object[0]);
@@ -671,6 +985,64 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarEventosCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarEventosCompleted(this, new ListarEventosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarEventosPorUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Evento[] ListarEventosPorUsuario(Usuario usuario) {
+            object[] results = this.Invoke("ListarEventosPorUsuario", new object[] {
+                        usuario});
+            return ((Evento[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarEventosPorUsuarioAsync(Usuario usuario) {
+            this.ListarEventosPorUsuarioAsync(usuario, null);
+        }
+        
+        /// <remarks/>
+        public void ListarEventosPorUsuarioAsync(Usuario usuario, object userState) {
+            if ((this.ListarEventosPorUsuarioOperationCompleted == null)) {
+                this.ListarEventosPorUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarEventosPorUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("ListarEventosPorUsuario", new object[] {
+                        usuario}, this.ListarEventosPorUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnListarEventosPorUsuarioOperationCompleted(object arg) {
+            if ((this.ListarEventosPorUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarEventosPorUsuarioCompleted(this, new ListarEventosPorUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AlterarEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Evento AlterarEvento(Evento evento) {
+            object[] results = this.Invoke("AlterarEvento", new object[] {
+                        evento});
+            return ((Evento)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AlterarEventoAsync(Evento evento) {
+            this.AlterarEventoAsync(evento, null);
+        }
+        
+        /// <remarks/>
+        public void AlterarEventoAsync(Evento evento, object userState) {
+            if ((this.AlterarEventoOperationCompleted == null)) {
+                this.AlterarEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAlterarEventoOperationCompleted);
+            }
+            this.InvokeAsync("AlterarEvento", new object[] {
+                        evento}, this.AlterarEventoOperationCompleted, userState);
+        }
+        
+        private void OnAlterarEventoOperationCompleted(object arg) {
+            if ((this.AlterarEventoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AlterarEventoCompleted(this, new AlterarEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -827,6 +1199,8 @@ namespace Fusioness.FusionessWS {
         
         private Rota[] rotasField;
         
+        private ComentarioEvento[] comentariosEventosField;
+        
         /// <remarks/>
         public int IdUsuario {
             get {
@@ -965,6 +1339,16 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.rotasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ComentarioEvento[] ComentariosEventos {
+            get {
+                return this.comentariosEventosField;
+            }
+            set {
+                this.comentariosEventosField = value;
             }
         }
     }
@@ -1164,6 +1548,8 @@ namespace Fusioness.FusionessWS {
         
         private EventoUsuario[] eventoUsuariosField;
         
+        private ComentarioEvento[] comentariosEventoField;
+        
         /// <remarks/>
         public int IdEvento {
             get {
@@ -1283,6 +1669,16 @@ namespace Fusioness.FusionessWS {
                 this.eventoUsuariosField = value;
             }
         }
+        
+        /// <remarks/>
+        public ComentarioEvento[] ComentariosEvento {
+            get {
+                return this.comentariosEventoField;
+            }
+            set {
+                this.comentariosEventoField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1304,6 +1700,8 @@ namespace Fusioness.FusionessWS {
         private System.Nullable<int> idDificuldadeField;
         
         private System.Nullable<int> idQualidadeRotaField;
+        
+        private string descricaoField;
         
         private Coordenada[] coordenadasField;
         
@@ -1379,6 +1777,16 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.idQualidadeRotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Descricao {
+            get {
+                return this.descricaoField;
+            }
+            set {
+                this.descricaoField = value;
             }
         }
         
@@ -1607,7 +2015,7 @@ namespace Fusioness.FusionessWS {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Resposta))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StatusEvento))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ComentarioEvento))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EventoUsuario))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TipoRota))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TipoPista))]
@@ -1680,21 +2088,67 @@ namespace Fusioness.FusionessWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class StatusEvento : EntityBase {
+    public partial class ComentarioEvento : EntityBase {
         
-        private int idStatusEventoField;
+        private int idComentarioEventoField;
+        
+        private int idUsuarioField;
+        
+        private int idEventoField;
+        
+        private Evento eventoField;
+        
+        private Usuario usuarioField;
         
         private string descricaoField;
         
-        private EventoUsuario[] eventoUsuariosField;
-        
         /// <remarks/>
-        public int IdStatusEvento {
+        public int IdComentarioEvento {
             get {
-                return this.idStatusEventoField;
+                return this.idComentarioEventoField;
             }
             set {
-                this.idStatusEventoField = value;
+                this.idComentarioEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdEvento {
+            get {
+                return this.idEventoField;
+            }
+            set {
+                this.idEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Evento Evento {
+            get {
+                return this.eventoField;
+            }
+            set {
+                this.eventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Usuario Usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                this.usuarioField = value;
             }
         }
         
@@ -1705,16 +2159,6 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.descricaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public EventoUsuario[] EventoUsuarios {
-            get {
-                return this.eventoUsuariosField;
-            }
-            set {
-                this.eventoUsuariosField = value;
             }
         }
     }
@@ -1731,13 +2175,7 @@ namespace Fusioness.FusionessWS {
         
         private int idEventoField;
         
-        private System.Nullable<int> idStatusEventoField;
-        
-        private string statusDescricaoField;
-        
         private Evento eventoField;
-        
-        private StatusEvento statusEventoField;
         
         private Usuario usuarioField;
         
@@ -1762,43 +2200,12 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> IdStatusEvento {
-            get {
-                return this.idStatusEventoField;
-            }
-            set {
-                this.idStatusEventoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StatusDescricao {
-            get {
-                return this.statusDescricaoField;
-            }
-            set {
-                this.statusDescricaoField = value;
-            }
-        }
-        
-        /// <remarks/>
         public Evento Evento {
             get {
                 return this.eventoField;
             }
             set {
                 this.eventoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public StatusEvento StatusEvento {
-            get {
-                return this.statusEventoField;
-            }
-            set {
-                this.statusEventoField = value;
             }
         }
         
@@ -2041,6 +2448,88 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Bicicleta)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AlterarBicicletaCompletedEventHandler(object sender, AlterarBicicletaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AlterarBicicletaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AlterarBicicletaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Bicicleta Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Bicicleta)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void RemoverBicicletaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ObterBicicletaPorIdCompletedEventHandler(object sender, ObterBicicletaPorIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterBicicletaPorIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterBicicletaPorIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Bicicleta Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Bicicleta)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarBicicletasPorUsuarioCompletedEventHandler(object sender, ListarBicicletasPorUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarBicicletasPorUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarBicicletasPorUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Bicicleta[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Bicicleta[])(this.results[0]));
             }
         }
     }
@@ -2311,6 +2800,114 @@ namespace Fusioness.FusionessWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void InserirComentarioEventoCompletedEventHandler(object sender, InserirComentarioEventoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InserirComentarioEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InserirComentarioEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ComentarioEvento Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ComentarioEvento)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AlterarComentarioEventoCompletedEventHandler(object sender, AlterarComentarioEventoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AlterarComentarioEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AlterarComentarioEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ComentarioEvento Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ComentarioEvento)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void RemoverComentarioEventoCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ObterComentarioEventoPorIdCompletedEventHandler(object sender, ObterComentarioEventoPorIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterComentarioEventoPorIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterComentarioEventoPorIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ComentarioEvento Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ComentarioEvento)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarComentariosPorEventoCompletedEventHandler(object sender, ListarComentariosPorEventoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarComentariosPorEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarComentariosPorEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ComentarioEvento[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ComentarioEvento[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void ListarTiposRotaCompletedEventHandler(object sender, ListarTiposRotaCompletedEventArgs e);
     
     /// <remarks/>
@@ -2435,6 +3032,58 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Evento[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarEventosPorUsuarioCompletedEventHandler(object sender, ListarEventosPorUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarEventosPorUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarEventosPorUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Evento[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Evento[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AlterarEventoCompletedEventHandler(object sender, AlterarEventoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AlterarEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AlterarEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Evento Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Evento)(this.results[0]));
             }
         }
     }

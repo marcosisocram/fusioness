@@ -9,7 +9,7 @@ using Fusioness.Entities;
 
 namespace Fusioness.Business.ComentariosEvento
 {
-    class ComentarioEventoBusiness : IComentarioEventoBusiness
+    public class ComentarioEventoBusiness : IComentarioEventoBusiness
     {
         #region Properties
 

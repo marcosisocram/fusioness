@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="HelloWorld">
@@ -95,6 +95,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Eventos" type="tns:ArrayOfEvento" />
               <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
               <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
+              <s:element minOccurs="0" maxOccurs="1" name="ComentariosEventos" type="tns:ArrayOfComentarioEvento" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -130,6 +131,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Rota" type="tns:Rota" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
               <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
+              <s:element minOccurs="0" maxOccurs="1" name="ComentariosEvento" type="tns:ArrayOfComentarioEvento" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -144,6 +146,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="IdTipoRota" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdDificuldade" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdQualidadeRota" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Coordenadas" type="tns:ArrayOfCoordenada" />
               <s:element minOccurs="0" maxOccurs="1" name="Dificuldade" type="tns:Dificuldade" />
               <s:element minOccurs="0" maxOccurs="1" name="Eventos" type="tns:ArrayOfEvento" />
@@ -247,22 +250,27 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
-              <s:element minOccurs="1" maxOccurs="1" name="IdStatusEvento" nillable="true" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="StatusDescricao" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
-              <s:element minOccurs="0" maxOccurs="1" name="StatusEvento" type="tns:StatusEvento" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:complexType name="StatusEvento">
+      <s:complexType name="ArrayOfComentarioEvento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ComentarioEvento" nillable="true" type="tns:ComentarioEvento" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ComentarioEvento">
         <s:complexContent mixed="false">
           <s:extension base="tns:EntityBase">
             <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="IdStatusEvento" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdComentarioEvento" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
               <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -271,6 +279,58 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="InserirBicicletaResult" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarBicicleta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarBicicletaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlterarBicicletaResult" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverBicicleta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverBicicletaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObterBicicletaPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterBicicletaPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterBicicletaPorIdResult" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarBicicletasPorUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarBicicletasPorUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarBicicletasPorUsuarioResult" type="tns:ArrayOfBicicleta" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -427,6 +487,72 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="InserirComentarioEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="comentario" type="tns:ComentarioEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirComentarioEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InserirComentarioEventoResult" type="tns:ComentarioEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarComentarioEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="comentario" type="tns:ComentarioEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarComentarioEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlterarComentarioEventoResult" type="tns:ComentarioEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverComentarioEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="comentario" type="tns:ComentarioEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverComentarioEventoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObterComentarioEventoPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="comentario" type="tns:ComentarioEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterComentarioEventoPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterComentarioEventoPorIdResult" type="tns:ComentarioEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarComentariosPorEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarComentariosPorEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarComentariosPorEventoResult" type="tns:ArrayOfComentarioEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ListarTiposRota">
         <s:complexType />
       </s:element>
@@ -497,6 +623,34 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarEventosPorUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarEventosPorUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarEventosPorUsuarioResult" type="tns:ArrayOfEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlterarEventoResult" type="tns:Evento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ObterEventoPorId">
         <s:complexType>
           <s:sequence>
@@ -524,6 +678,30 @@
   </wsdl:message>
   <wsdl:message name="InserirBicicletaSoapOut">
     <wsdl:part name="parameters" element="tns:InserirBicicletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlterarBicicletaSoapIn">
+    <wsdl:part name="parameters" element="tns:AlterarBicicleta" />
+  </wsdl:message>
+  <wsdl:message name="AlterarBicicletaSoapOut">
+    <wsdl:part name="parameters" element="tns:AlterarBicicletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoverBicicletaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverBicicleta" />
+  </wsdl:message>
+  <wsdl:message name="RemoverBicicletaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverBicicletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterBicicletaPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterBicicletaPorId" />
+  </wsdl:message>
+  <wsdl:message name="ObterBicicletaPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterBicicletaPorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarBicicletasPorUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarBicicletasPorUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ListarBicicletasPorUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarBicicletasPorUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="ValidarLogonUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:ValidarLogonUsuario" />
@@ -591,6 +769,36 @@
   <wsdl:message name="ListarRotasPorUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarRotasPorUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="InserirComentarioEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:InserirComentarioEvento" />
+  </wsdl:message>
+  <wsdl:message name="InserirComentarioEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:InserirComentarioEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlterarComentarioEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:AlterarComentarioEvento" />
+  </wsdl:message>
+  <wsdl:message name="AlterarComentarioEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:AlterarComentarioEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoverComentarioEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverComentarioEvento" />
+  </wsdl:message>
+  <wsdl:message name="RemoverComentarioEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverComentarioEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterComentarioEventoPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterComentarioEventoPorId" />
+  </wsdl:message>
+  <wsdl:message name="ObterComentarioEventoPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterComentarioEventoPorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarComentariosPorEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarComentariosPorEvento" />
+  </wsdl:message>
+  <wsdl:message name="ListarComentariosPorEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarComentariosPorEventoResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarTiposRotaSoapIn">
     <wsdl:part name="parameters" element="tns:ListarTiposRota" />
   </wsdl:message>
@@ -621,6 +829,18 @@
   <wsdl:message name="ListarEventosSoapOut">
     <wsdl:part name="parameters" element="tns:ListarEventosResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarEventosPorUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarEventosPorUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ListarEventosPorUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarEventosPorUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlterarEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:AlterarEvento" />
+  </wsdl:message>
+  <wsdl:message name="AlterarEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:AlterarEventoResponse" />
+  </wsdl:message>
   <wsdl:message name="ObterEventoPorIdSoapIn">
     <wsdl:part name="parameters" element="tns:ObterEventoPorId" />
   </wsdl:message>
@@ -635,6 +855,22 @@
     <wsdl:operation name="InserirBicicleta">
       <wsdl:input message="tns:InserirBicicletaSoapIn" />
       <wsdl:output message="tns:InserirBicicletaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlterarBicicleta">
+      <wsdl:input message="tns:AlterarBicicletaSoapIn" />
+      <wsdl:output message="tns:AlterarBicicletaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverBicicleta">
+      <wsdl:input message="tns:RemoverBicicletaSoapIn" />
+      <wsdl:output message="tns:RemoverBicicletaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterBicicletaPorId">
+      <wsdl:input message="tns:ObterBicicletaPorIdSoapIn" />
+      <wsdl:output message="tns:ObterBicicletaPorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarBicicletasPorUsuario">
+      <wsdl:input message="tns:ListarBicicletasPorUsuarioSoapIn" />
+      <wsdl:output message="tns:ListarBicicletasPorUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ValidarLogonUsuario">
       <wsdl:input message="tns:ValidarLogonUsuarioSoapIn" />
@@ -680,6 +916,26 @@
       <wsdl:input message="tns:ListarRotasPorUsuarioSoapIn" />
       <wsdl:output message="tns:ListarRotasPorUsuarioSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="InserirComentarioEvento">
+      <wsdl:input message="tns:InserirComentarioEventoSoapIn" />
+      <wsdl:output message="tns:InserirComentarioEventoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlterarComentarioEvento">
+      <wsdl:input message="tns:AlterarComentarioEventoSoapIn" />
+      <wsdl:output message="tns:AlterarComentarioEventoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverComentarioEvento">
+      <wsdl:input message="tns:RemoverComentarioEventoSoapIn" />
+      <wsdl:output message="tns:RemoverComentarioEventoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterComentarioEventoPorId">
+      <wsdl:input message="tns:ObterComentarioEventoPorIdSoapIn" />
+      <wsdl:output message="tns:ObterComentarioEventoPorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarComentariosPorEvento">
+      <wsdl:input message="tns:ListarComentariosPorEventoSoapIn" />
+      <wsdl:output message="tns:ListarComentariosPorEventoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <wsdl:input message="tns:ListarTiposRotaSoapIn" />
       <wsdl:output message="tns:ListarTiposRotaSoapOut" />
@@ -700,6 +956,14 @@
       <wsdl:input message="tns:ListarEventosSoapIn" />
       <wsdl:output message="tns:ListarEventosSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarEventosPorUsuario">
+      <wsdl:input message="tns:ListarEventosPorUsuarioSoapIn" />
+      <wsdl:output message="tns:ListarEventosPorUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlterarEvento">
+      <wsdl:input message="tns:AlterarEventoSoapIn" />
+      <wsdl:output message="tns:AlterarEventoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ObterEventoPorId">
       <wsdl:input message="tns:ObterEventoPorIdSoapIn" />
       <wsdl:output message="tns:ObterEventoPorIdSoapOut" />
@@ -718,6 +982,42 @@
     </wsdl:operation>
     <wsdl:operation name="InserirBicicleta">
       <soap:operation soapAction="http://tempuri.org/InserirBicicleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarBicicleta">
+      <soap:operation soapAction="http://tempuri.org/AlterarBicicleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverBicicleta">
+      <soap:operation soapAction="http://tempuri.org/RemoverBicicleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterBicicletaPorId">
+      <soap:operation soapAction="http://tempuri.org/ObterBicicletaPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarBicicletasPorUsuario">
+      <soap:operation soapAction="http://tempuri.org/ListarBicicletasPorUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -824,6 +1124,51 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InserirComentarioEvento">
+      <soap:operation soapAction="http://tempuri.org/InserirComentarioEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarComentarioEvento">
+      <soap:operation soapAction="http://tempuri.org/AlterarComentarioEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverComentarioEvento">
+      <soap:operation soapAction="http://tempuri.org/RemoverComentarioEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterComentarioEventoPorId">
+      <soap:operation soapAction="http://tempuri.org/ObterComentarioEventoPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarComentariosPorEvento">
+      <soap:operation soapAction="http://tempuri.org/ListarComentariosPorEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <soap:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
       <wsdl:input>
@@ -869,6 +1214,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarEventosPorUsuario">
+      <soap:operation soapAction="http://tempuri.org/ListarEventosPorUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarEvento">
+      <soap:operation soapAction="http://tempuri.org/AlterarEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ObterEventoPorId">
       <soap:operation soapAction="http://tempuri.org/ObterEventoPorId" style="document" />
       <wsdl:input>
@@ -892,6 +1255,42 @@
     </wsdl:operation>
     <wsdl:operation name="InserirBicicleta">
       <soap12:operation soapAction="http://tempuri.org/InserirBicicleta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarBicicleta">
+      <soap12:operation soapAction="http://tempuri.org/AlterarBicicleta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverBicicleta">
+      <soap12:operation soapAction="http://tempuri.org/RemoverBicicleta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterBicicletaPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObterBicicletaPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarBicicletasPorUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ListarBicicletasPorUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -998,6 +1397,51 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InserirComentarioEvento">
+      <soap12:operation soapAction="http://tempuri.org/InserirComentarioEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarComentarioEvento">
+      <soap12:operation soapAction="http://tempuri.org/AlterarComentarioEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverComentarioEvento">
+      <soap12:operation soapAction="http://tempuri.org/RemoverComentarioEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterComentarioEventoPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObterComentarioEventoPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarComentariosPorEvento">
+      <soap12:operation soapAction="http://tempuri.org/ListarComentariosPorEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <soap12:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
       <wsdl:input>
@@ -1036,6 +1480,24 @@
     </wsdl:operation>
     <wsdl:operation name="ListarEventos">
       <soap12:operation soapAction="http://tempuri.org/ListarEventos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosPorUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ListarEventosPorUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarEvento">
+      <soap12:operation soapAction="http://tempuri.org/AlterarEvento" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

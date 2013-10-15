@@ -11,8 +11,11 @@
         <div class="card">
             <h2 class="card-heading simple">Cadastre sua rota!</h2>
             <div class="card-body">
-                @using (Html.BeginForm("InserirOuAlterarRota", "Rota", FormMethod.Post))
+                @using (Html.BeginForm("InserirAlterarRota", "Rota", FormMethod.Post))
                 {
+                    @Html.LabelFor(m => m.Rota.Descricao,"Descrição:")
+                    @Html.TextBoxFor(m => m.Rota.Descricao)
+                    <br />
                     @Html.LabelFor(m => m.TiposDeRotas,"Tipo da Rota:")
                     @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
                     <br />

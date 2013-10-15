@@ -271,6 +271,80 @@ namespace Fusioness.Services
 
         #endregion
 
+        #region ComentarioEvento
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public ComentarioEvento InserirComentarioEvento(ComentarioEvento comentario)
+        {
+            try
+            {
+                return Facade.Instance.InserirComentarioEvento(comentario);
+            }
+            catch
+            {
+                return default(ComentarioEvento);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public ComentarioEvento AlterarComentarioEvento(ComentarioEvento comentario)
+        {
+            try
+            {
+                return Facade.Instance.AlterarComentarioEvento(comentario);
+            }
+            catch
+            {
+                return default(ComentarioEvento);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverComentarioEvento(ComentarioEvento comentario)
+        {
+            try
+            {
+                Facade.Instance.RemoverComentarioEvento(comentario);
+            }
+            catch
+            {
+                //TODO: LogFile();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public ComentarioEvento ObterComentarioEventoPorId(ComentarioEvento comentario)
+        {
+            try
+            {
+                return Facade.Instance.ObterComentarioEventoPorId(comentario);
+            }
+            catch
+            {
+                return default(ComentarioEvento);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ComentarioEvento> ListarComentariosPorEvento(Evento evento)
+        {
+            try
+            {
+                return Facade.Instance.ListarComentariosPorEvento(evento);
+            }
+            catch
+            {
+                return new List<ComentarioEvento>();
+            }
+        }
+
+        #endregion
+
         #region TipoRota
 
         [WebMethod]

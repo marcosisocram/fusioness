@@ -11,30 +11,24 @@ namespace Fusioness.Controllers
         public ActionResult Index(UsuarioModel model)
         {
             model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
-            return View(model);
+            return View("Perfil", model);
         }
-        
+
         [PermiteAnonimo]
-        public ActionResult InsertUsuario(UsuarioModel model)
+        public ActionResult InserirAlterarUsuario(UsuarioModel model)
         {
             if (model.ValidarUsuario(ModelState))
             {
                 if (model.Usuario.IdUsuario > 0)
                 {
-                    return UpdateUsuario(model);
+                    Servico.AlterarUsuario(model.Usuario);
                 }
+
                 model.Usuario = Servico.InserirUsuario(model.Usuario);
                 return RedirectToAction("index", model);
             }
             return View("index", model);
         }
 
-        public ActionResult UpdateUsuario(UsuarioModel model)
-        {
-            model.Usuario = Servico.AlterarUsuario(model.Usuario);
-            
-            return RedirectToAction("index", model);
-        
-        }        
     }
 }
