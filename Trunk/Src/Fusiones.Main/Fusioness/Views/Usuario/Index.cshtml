@@ -1,45 +1,58 @@
 ﻿@model Fusioness.Models.Usuarios.UsuarioModel
 @{
-  ViewBag.Title = "Index";
-  Layout = "~/Views/Shared/LayoutBase.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
 
 <!-- LINHA 1 -->
 <div class="row-fluid">
-  <!-- BLOCK -->
-  <div class="span12">
-    <div class="card">
-      <h2 class="card-heading simple">Cabeçalho - Bloco tamanho 12</h2>
-      <div class="card-body">
-        @using (Html.BeginForm("InsertUsuario", "Usuario", FormMethod.Post))
-        {
-          @Html.LabelFor(m => m.Usuario.Nome)
-          @Html.TextBoxFor(m => m.Usuario.Nome)
-          <br />
-          @Html.LabelFor(m => m.Usuario.Login)
-          @Html.TextBoxFor(m => m.Usuario.Login)
-          <br />
-          @Html.LabelFor(m => m.Usuario.Senha)
-          @Html.PasswordFor(m => m.Usuario.Senha)
-          <br />
-          @Html.LabelFor(m => m.Usuario.Email)
-          @Html.TextBoxFor(m => m.Usuario.Email)
-          <br />
-          @Html.LabelFor(m => m.Usuario.Idade)
-          @Html.TextBoxFor(m => m.Usuario.Idade)
-          <br />
-          @Html.LabelFor(m => m.Usuario.Sexo)
-          @Html.TextBoxFor(m => m.Usuario.Sexo)
-          <br />
-          @Html.LabelFor(m => m.Usuario.UrlImagem)
-          @Html.TextBoxFor(m => m.Usuario.UrlImagem)
-          <br />
-          @Html.HiddenFor(m => m.Usuario.IdUsuario)
-          <input type="submit" value="Send" />
-        }
-      </div>
+    <!-- BLOCK -->
+    <div class="span12">
+        <div class="card">
+            <h2 class="card-heading simple">Cabeçalho - Bloco tamanho 12</h2>
+            <div class="card-body">
+                @using (Html.BeginForm("InsertUsuario", "Usuario", FormMethod.Post))
+                {
+                    <ul style="list-style:none;">
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Nome)
+                            @Html.TextBoxFor(m => m.Usuario.Nome)
+                            @Html.ValidationMessage("Nome", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Login)
+                            @Html.TextBoxFor(m => m.Usuario.Login) 
+                            @Html.ValidationMessage("Login", new { style = "margin-left:10px" })
+                            
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Senha)
+                            @Html.PasswordFor(m => m.Usuario.Senha) 
+                            @Html.ValidationMessage("Senha", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Email)
+                            @Html.TextBoxFor(m => m.Usuario.Email) 
+                            @Html.ValidationMessage("Email", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Idade)
+                            @Html.TextBoxFor(m => m.Usuario.Idade)
+                            @Html.ValidationMessage("Idade", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Sexo)
+                            @Html.TextBoxFor(m => m.Usuario.Sexo)
+                            @Html.ValidationMessage("Sexo", new { style = "margin-left:10px" })
+                        </li>
+                    </ul>
+                    <br />
+                    @Html.HiddenFor(m => m.Usuario.IdUsuario)
+                    <input type="submit" value="Registrar" />
+                }
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- END BLOCK -->
+    <!-- END BLOCK -->
 </div>
 <!-- END LINHA 2 -->

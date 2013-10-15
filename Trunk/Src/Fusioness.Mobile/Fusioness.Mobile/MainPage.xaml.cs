@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace Fusioness.Mobile
 {
@@ -28,6 +29,26 @@ namespace Fusioness.Mobile
             {
                 App.ViewModel.LoadData();
             }
+        }
+
+        private void btAdicionar_Click(object sender, EventArgs e)
+        {
+            if (PanoramaMain.SelectedItem == pnItemRota)
+            {
+                if (!NetworkInterface.GetIsNetworkAvailable())
+                    MessageBox.Show("Ative sua rede Wi-Fi ou conecte com a Rede Móvel para executar esta ação!", "Alerta", MessageBoxButton.OK);
+                else
+                {
+                    NavigationService.Navigate(new Uri("/Views/CriarRota.xaml", UriKind.Relative));
+                }
+            }
+            else if (PanoramaMain.SelectedItem == pnItemEvento)
+                MessageBox.Show("Adicionar Evento");
+        }
+
+        private void btPesquisar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Pesquisar");
         }
     }
 }

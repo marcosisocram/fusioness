@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Fusioness.FusionessWS;
 using Fusioness.Models.Eventos;
 using Fusioness.FusionessWS;
 
@@ -16,11 +13,12 @@ namespace Fusioness.Controllers
             return View(model);
         }
 
+
         public ActionResult Details(int Id = 0)
         {
             EventoModel model = new EventoModel();
             model.ListaRotas = Servico.ListarRotasPorUsuario(this.UsuarioLogado);
-            model.Evento = new Evento() { IdEvento = Id };            
+            model.Evento = new Evento() { IdEvento = Id };
             model.Evento = Servico.ObterEventoPorId(model.Evento);
 
             return View("InserirAlterarEvento", model);
@@ -43,6 +41,13 @@ namespace Fusioness.Controllers
             else ExibirModal("Rota cadastrada com sucesso!");*/
 
             return RedirectToAction("index", model.Evento);
+        }
+
+        public ActionResult Details(EventoModel model, int? id)
+        {
+            model.Evento = Servico.ObterEventoPorId(new Evento{IdEvento = id.HasValue ? id.Value : 0});
+            return View(model);
+
         }
 
     }

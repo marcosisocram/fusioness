@@ -22,5 +22,6 @@ namespace Fusioness.Entities
         public virtual Rota Rota { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual List<EventoUsuario> EventoUsuarios { get; set; }
+        public virtual List<ComentarioEvento> ComentariosEvento { get; set; }
     }
 }

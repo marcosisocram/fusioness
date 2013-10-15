@@ -9,6 +9,6 @@ namespace Fusioness.Business.Bicicletas
         Bicicleta AlterarBicicleta(Bicicleta bicicleta);
         void RemoverBicicleta(Bicicleta bicicleta);
         Bicicleta ObterBicicletaPorId(Bicicleta bicicleta);
-        List<Bicicleta> ListarBicicletas();
+        List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario);
     }
 }

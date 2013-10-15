@@ -17,7 +17,7 @@ namespace Fusioness.Data
         public DbSet<QualidadeRota> QualidadeRotas { get; set; }
         public DbSet<Resposta> Respostas { get; set; }
         public DbSet<Rota> Rotas { get; set; }
-        public DbSet<StatusEvento> StatusEventoes { get; set; }
+        public DbSet<ComentarioEvento> ComentariosEventos { get; set; }
         public DbSet<TipoCoordenada> TipoCoordenadas { get; set; }
         public DbSet<TipoPista> TipoPistas { get; set; }
         public DbSet<TipoRota> TipoRotas { get; set; }
@@ -47,7 +47,7 @@ namespace Fusioness.Data
             modelBuilder.Configurations.Add(new QualidadeRotaMap());
             modelBuilder.Configurations.Add(new RespostaMap());
             modelBuilder.Configurations.Add(new RotaMap());
-            modelBuilder.Configurations.Add(new StatusEventoMap());
+            modelBuilder.Configurations.Add(new ComentarioEventoMap());
             modelBuilder.Configurations.Add(new TipoCoordenadaMap());
             modelBuilder.Configurations.Add(new TipoPistaMap());
             modelBuilder.Configurations.Add(new TipoRotaMap());

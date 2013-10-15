@@ -10,6 +10,7 @@ using Fusioness.Business.TiposRota;
 using Fusioness.Business.TiposPista;
 using Fusioness.Business.Dificuldades;
 using Fusioness.Business.QualidadesRota;
+using System.IO;
 
 namespace Fusioness.Business
 {
@@ -91,6 +92,10 @@ namespace Fusioness.Business
         {
             return UsuarioBus.ListarContatosPorUsuario(usuario);
         }
+        public string InserirFotoUsuario(Usuario usuario, byte[] bytes, string filename, string dirbase)
+        {
+            return UsuarioBus.InserirFotoUsuario(usuario,bytes,filename,dirbase);
+        }
         #endregion
 
         #region ConviteEvento
@@ -129,9 +134,9 @@ namespace Fusioness.Business
         {
             return BicicletaBus.ObterBicicletaPorId(bicicleta);
         }
-        public List<Bicicleta> ListarBicicletas()
+        public List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario)
         {
-            return BicicletaBus.ListarBicicletas();
+            return BicicletaBus.ListarBicicletasPorUsuario(usuario);
         }
         #endregion
 
@@ -187,7 +192,6 @@ namespace Fusioness.Business
 
         #endregion
 
-
         #region QualidadeRota
         public List<QualidadeRota> ListarQualidadesRota()
         {
@@ -226,6 +230,6 @@ namespace Fusioness.Business
         #endregion
 
         #endregion
-       
+
     }
 }

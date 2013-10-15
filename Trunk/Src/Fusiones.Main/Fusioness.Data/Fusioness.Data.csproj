@@ -32,7 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -58,7 +59,7 @@
     <Compile Include="Mapping\QualidadeRotaMap.cs" />
     <Compile Include="Mapping\RespostaMap.cs" />
     <Compile Include="Mapping\RotaMap.cs" />
-    <Compile Include="Mapping\StatusEventoMap.cs" />
+    <Compile Include="Mapping\ComentarioEventoMap.cs" />
     <Compile Include="Mapping\TipoCoordenadaMap.cs" />
     <Compile Include="Mapping\TipoPistaMap.cs" />
     <Compile Include="Mapping\TipoRotaMap.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Repositories\ConviteEventoRepository.cs" />
     <Compile Include="Repositories\ContatoRepository.cs" />
     <Compile Include="Repositories\CoordenadaRepository.cs" />
+    <Compile Include="Repositories\ComentarioEventoRepository.cs" />
     <Compile Include="Repositories\QualidadeRepository.cs" />
     <Compile Include="Repositories\DificuldadeRepository.cs" />
     <Compile Include="Repositories\TipoPistaRepository.cs" />

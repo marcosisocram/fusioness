@@ -16,6 +16,7 @@ namespace Fusioness.Entities
         public int IdTipoRota { get; set; }
         public int? IdDificuldade { get; set; }
         public int? IdQualidadeRota { get; set; }
+        public string Descricao { get; set; }
         public virtual List<Coordenada> Coordenadas { get; set; }
         public virtual Dificuldade Dificuldade { get; set; }
         public virtual List<Evento> Eventos { get; set; }

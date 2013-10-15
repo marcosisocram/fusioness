@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Fusioness.Entities;
 
@@ -14,5 +15,6 @@ namespace Fusioness.Business.Usuarios
         List<Usuario> ListarUsuarios();
         Contato InserirContato(Contato contato);
         List<Usuario> ListarContatosPorUsuario(Usuario usuario);
+        string InserirFotoUsuario(Usuario usuario, byte[] bytes, string filename, string dirbase);
     }
 }

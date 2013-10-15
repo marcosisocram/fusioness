@@ -12,10 +12,10 @@
       <div class="card-body">
         <table class="table table-hover">
             <thead>
-                <th>#</th>
+                <th></th>
                 <th>Título</th>
                 <th>Data</th>
-                <th>#</th>
+                <th></th>
             </thead>
             <tbody>
             @foreach (var item in Model.ListaEventos)
@@ -24,7 +24,9 @@
                     <td>@item.IdEvento</td>
                     <td>@item.Titulo</td>
                     <td>@item.Data</td>
-                    <td><a href="/Evento/Details/@item.IdEvento" class="btn btn-primary">Visualizar</a></td>
+                  <td>
+                    @Html.ActionLink("Visualizar", "Details", "Evento", new{ id = item.IdEvento}, new { @class = "btn btn-primary" })
+                  </td>
                 </tr>
             }
             </tbody>

@@ -20,6 +20,7 @@ namespace Fusioness.Data.Mapping
             this.Property(t => t.IdTipoRota).HasColumnName("IdTipoRota");
             this.Property(t => t.IdDificuldade).HasColumnName("IdDificuldade");
             this.Property(t => t.IdQualidadeRota).HasColumnName("IdQualidadeRota");
+            this.Property(t => t.Descricao).HasColumnName("Descricao");
 
             // Relationships
             this.HasOptional(t => t.Dificuldade)

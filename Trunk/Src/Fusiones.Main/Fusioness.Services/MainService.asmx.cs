@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -43,6 +45,63 @@ namespace Fusioness.Services
             catch
             {
                 return default(Bicicleta);
+            }
+        }
+
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Bicicleta AlterarBicicleta(Bicicleta bicicleta)
+        {
+            try
+            {
+                return Facade.Instance.AlterarBicicleta(bicicleta);
+            }
+            catch
+            {
+                return default(Bicicleta);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverBicicleta(Bicicleta bicicleta)
+        {
+            try
+            {
+                Facade.Instance.RemoverBicicleta(bicicleta);
+            }
+            catch
+            {
+                //TODO: LogFile();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Bicicleta ObterBicicletaPorId(Bicicleta bicicleta)
+        {
+            try
+            {
+                return Facade.Instance.ObterBicicletaPorId(bicicleta);
+            }
+            catch
+            {
+                return default(Bicicleta);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarBicicletasPorUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Bicicleta>();
             }
         }
 
@@ -107,7 +166,21 @@ namespace Fusioness.Services
             }
         }
 
-        
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string InserirFotoUsuario(Usuario usuario, string filename, byte[] bytes)
+        {
+            try
+            {
+                string dirBase = Server.MapPath("~");
+                return Facade.Instance.InserirFotoUsuario(usuario, bytes, filename, dirBase);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
         #endregion
 
         #region Rotas

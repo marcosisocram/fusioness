@@ -91,14 +91,15 @@ namespace Fusioness.Business.Bicicletas
                 return new BicicletaRepository(uow).GetByKey(new Bicicleta { IdBicicleta = bicicleta.IdBicicleta});
             }
         }
-        public List<Bicicleta> ListarBicicletas()
+        public List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario)
         {
             try
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Bicicleta> repo = new BicicletaRepository(uow);
-                    return repo.GetAll().ToList();
+                    var bicicletas = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario);
+                    return bicicletas.ToList();
                 }
             }
             catch (Exception)
