@@ -14,5 +14,6 @@ namespace Fusioness.Business.Eventos
         void RemoverEvento(Evento evento);
         Evento ObterEventoPorId(Evento evento);
         List<Evento> ListarEventos();
+        List<Evento> ListarEventosPorUsuario(Usuario usuario);
     }
 }

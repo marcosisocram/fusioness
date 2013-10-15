@@ -101,6 +101,16 @@ namespace Fusioness.Business.Eventos
             }
         }
 
+        public List<Evento> ListarEventosPorUsuario(Usuario usuaio)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                IRepository<Evento> repo = new EventoRepository(uow);
+                var evento = repo.GetAll();
+                return evento.ToList();
+            }
+        }
+
         #endregion
     }
 }

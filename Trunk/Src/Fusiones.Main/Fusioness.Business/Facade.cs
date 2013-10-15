@@ -218,6 +218,11 @@ namespace Fusioness.Business
         {
             return EventoBus.ListarEventos();
         }
+        public List<Evento> ListarEventosPorUsuario(Usuario usuario)
+        {
+            return EventoBus.ListarEventosPorUsuario(usuario);
+        }
+
         #endregion
 
         #endregion

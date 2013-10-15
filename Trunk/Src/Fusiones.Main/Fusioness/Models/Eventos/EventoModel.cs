@@ -9,7 +9,7 @@ namespace Fusioness.Models.Eventos
     public class EventoModel
     {
         public Evento Evento { get; set; }
-
+        public IList<Rota> ListaRotas { get; set; }
         public IList<Evento> ListaEventos { get; set; }
     }
 }
