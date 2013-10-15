@@ -1,0 +1,47 @@
+﻿@model Fusioness.Models.Eventos.EventoModel
+@{
+    ViewBag.Title = "Convites";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+
+<!-- LINHA 1 -->
+<div class="row-fluid">
+  <!-- BLOCK -->
+  <div class="span12">
+    <div class="card">
+      <h2 class="card-heading simple">Convites de Eventos</h2>
+      <div class="card-body">
+          <table class="table table-hover">
+              <thead>
+                  <th></th>
+                  <th>Título</th>
+                  <th>Data</th>
+                  <th></th>
+              </thead>
+              <tbody>
+                @foreach (var item in Model.ListaEventos)
+                {
+                <tr>
+                    <td>@item.IdEvento</td>
+                    <td>@item.Titulo</td>
+                    <td>@item.Data</td>
+                    <td>
+                        @if (!Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).IdResposta.HasValue)
+                        {
+                            @Html.ActionLink("Rejeitar", "ResponderConviteEvento", "Evento", new {idEvento = item.IdEvento, aceito = false}, new {@class = "btn btn-danger"})
+                            @Html.ActionLink("Aceitar", "ResponderConviteEvento", "Evento", new {idEvento = item.IdEvento, aceito = true}, new {@class = "btn btn-primary"})
+                        }
+                        else
+                        {
+                            @(Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).Resposta.Descricao)
+                        }
+                    </td>
+                </tr>
+                }
+              </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+  <!-- END BLOCK -->
+</div><!-- END LINHA 1 -->

@@ -188,6 +188,10 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\Usuario\InserirAlterarUsuario.cshtml" />
+    <Content Include="Web References\FusionessWS\ConviteEvento.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\Evento\Convites.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -217,6 +221,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\FusionessWS\TipoPista.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\FusionessWS\Resposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
   </ItemGroup>

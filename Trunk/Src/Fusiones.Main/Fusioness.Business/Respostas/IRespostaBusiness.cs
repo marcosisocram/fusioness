@@ -10,5 +10,6 @@ namespace Fusioness.Business.Respostas
     public interface IRespostaBusiness
     {
         Resposta ObterRespostaPorId(Resposta resposta);
+        List<Resposta> ListarRespostas();
     }
 }

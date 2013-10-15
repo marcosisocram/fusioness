@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fusioness.Business.ConvitesEventos;
+using Fusioness.Business.Respostas;
 using Fusioness.Business.Usuarios;
 using Fusioness.Entities;
 using Fusioness.Business.Bicicletas;
@@ -28,6 +29,7 @@ namespace Fusioness.Business
         private readonly IDificuldadeBusiness DificuldadeBus;
         private readonly IQualidadeRotaBusiness QualidadeRotaBus;
         private readonly IComentarioEventoBusiness ComentarioEventoBus;
+        private readonly IRespostaBusiness RespostaBus;
 
 
         #endregion
@@ -53,6 +55,7 @@ namespace Fusioness.Business
             DificuldadeBus = new DificuldadeBusiness();
             QualidadeRotaBus = new QualidadeRotaBusiness();
             ComentarioEventoBus = new ComentarioEventoBusiness();
+            RespostaBus = new RespostaBusiness();
         }
 
         #endregion
@@ -101,6 +104,11 @@ namespace Fusioness.Business
         #endregion
 
         #region ConviteEvento
+
+        public IList<ConviteEvento> ListarConviteEventos()
+        {
+            return ConviteEventoBus.ListarConvitesEventos();
+        }
 
         public ConviteEvento ObterConviteFeitoAoUsuarioParaOEvento(Usuario convidado, Evento evento)
         {
@@ -249,9 +257,9 @@ namespace Fusioness.Business
         {
             return EventoBus.ObterEventoPorId(evento);
         }
-        public List<Evento> ListarEventos()
+        public List<Evento> ListarEventos(params int[] ids)
         {
-            return EventoBus.ListarEventos();
+            return EventoBus.ListarEventos(ids);
         }
         public List<Evento> ListarEventosPorUsuario(Usuario usuario)
         {
@@ -260,6 +268,12 @@ namespace Fusioness.Business
 
         #endregion
 
+        #region Respostas
+        public List<Resposta> ListarRespostas()
+        {
+            return RespostaBus.ListarRespostas();
+        }
+        #endregion
         #endregion
 
     }

@@ -60,26 +60,35 @@ namespace Fusioness.Business.ConvitesEventos
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     uow.OpenTransaction();
-                    
+
                     var conviteEventoRepo = new ConviteEventoRepository(uow);
                     var respostaRepo = new RespostaRepository(uow);
                     var respostaTemp = respostaRepo.GetByKey(resposta);
-                    var conviteTemp = conviteEventoRepo.GetByKey(convite);
+                    var conviteTemp = conviteEventoRepo.GetWhere(c => c.IdEvento == convite.IdEvento);
 
                     if (respostaTemp == null) throw new Exception("Resposta inválida.");
                     if (conviteTemp == null) throw new Exception("Convite inexistente.");
 
-                    conviteTemp.IdResposta = respostaTemp.IdResposta;
+                    foreach (var conviteEvento in conviteTemp) conviteEvento.IdResposta = respostaTemp.IdResposta;
+
                     conviteEventoRepo.Update(conviteTemp);
                     uow.Commit();
-                    
-                    return conviteTemp;
+
+                    return new ConviteEvento();
                 }
             }
             catch (Exception ex)
             {
                 //TODO: CREATE LOG
                 throw;
+            }
+        }
+
+        public IList<ConviteEvento> ListarConvitesEventos()
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                return new ConviteEventoRepository(uow).GetAll().ToList();
             }
         }
 

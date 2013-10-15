@@ -11,5 +11,6 @@ namespace Fusioness.Models.Eventos
         public Evento Evento { get; set; }
         public IList<Rota> ListaRotas { get; set; }
         public IList<Evento> ListaEventos { get; set; }
+        public IList<ConviteEvento> ListaConviteEventos { get; set; }
     }
 }

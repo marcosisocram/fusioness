@@ -614,8 +614,17 @@
         </s:sequence>
       </s:complexType>
       <s:element name="ListarEventos">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ids" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ListarEventosResponse">
         <s:complexType>
           <s:sequence>
@@ -665,6 +674,60 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarConvitesEventos">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarConvitesEventosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarConvitesEventosResult" type="tns:ArrayOfConviteEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterConvitesEventosDoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterConvitesEventosDoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterConvitesEventosDoUsuarioResult" type="tns:ArrayOfConviteEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResponderConviteEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="convite" type="tns:ConviteEvento" />
+            <s:element minOccurs="1" maxOccurs="1" name="resposta" nillable="true" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResponderConviteEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResponderConviteEventoResult" type="tns:ConviteEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarRespostas">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarRespostasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarRespostasResult" type="tns:ArrayOfResposta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfResposta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Resposta" nillable="true" type="tns:Resposta" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -847,6 +910,30 @@
   <wsdl:message name="ObterEventoPorIdSoapOut">
     <wsdl:part name="parameters" element="tns:ObterEventoPorIdResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarConvitesEventosSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarConvitesEventos" />
+  </wsdl:message>
+  <wsdl:message name="ListarConvitesEventosSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarConvitesEventosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterConvitesEventosDoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterConvitesEventosDoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ObterConvitesEventosDoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterConvitesEventosDoUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResponderConviteEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:ResponderConviteEvento" />
+  </wsdl:message>
+  <wsdl:message name="ResponderConviteEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:ResponderConviteEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarRespostasSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarRespostas" />
+  </wsdl:message>
+  <wsdl:message name="ListarRespostasSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarRespostasResponse" />
+  </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -967,6 +1054,22 @@
     <wsdl:operation name="ObterEventoPorId">
       <wsdl:input message="tns:ObterEventoPorIdSoapIn" />
       <wsdl:output message="tns:ObterEventoPorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarConvitesEventos">
+      <wsdl:input message="tns:ListarConvitesEventosSoapIn" />
+      <wsdl:output message="tns:ListarConvitesEventosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterConvitesEventosDoUsuario">
+      <wsdl:input message="tns:ObterConvitesEventosDoUsuarioSoapIn" />
+      <wsdl:output message="tns:ObterConvitesEventosDoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResponderConviteEvento">
+      <wsdl:input message="tns:ResponderConviteEventoSoapIn" />
+      <wsdl:output message="tns:ResponderConviteEventoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarRespostas">
+      <wsdl:input message="tns:ListarRespostasSoapIn" />
+      <wsdl:output message="tns:ListarRespostasSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
@@ -1241,6 +1344,42 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarConvitesEventos">
+      <soap:operation soapAction="http://tempuri.org/ListarConvitesEventos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterConvitesEventosDoUsuario">
+      <soap:operation soapAction="http://tempuri.org/ObterConvitesEventosDoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResponderConviteEvento">
+      <soap:operation soapAction="http://tempuri.org/ResponderConviteEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarRespostas">
+      <soap:operation soapAction="http://tempuri.org/ListarRespostas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1507,6 +1646,42 @@
     </wsdl:operation>
     <wsdl:operation name="ObterEventoPorId">
       <soap12:operation soapAction="http://tempuri.org/ObterEventoPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarConvitesEventos">
+      <soap12:operation soapAction="http://tempuri.org/ListarConvitesEventos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterConvitesEventosDoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ObterConvitesEventosDoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResponderConviteEvento">
+      <soap12:operation soapAction="http://tempuri.org/ResponderConviteEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarRespostas">
+      <soap12:operation soapAction="http://tempuri.org/ListarRespostas" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

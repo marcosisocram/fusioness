@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using Fusioness.FusionessWS;
 using Fusioness.Models.Eventos;
 using Fusioness.FusionessWS;
@@ -9,7 +11,7 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(EventoModel model)
         {
-            model.ListaEventos = Servico.ListarEventos();
+            model.ListaEventos = Servico.ListarEventos(new int[]{});
             return View(model);
         }
 
@@ -43,11 +45,23 @@ namespace Fusioness.Controllers
             return RedirectToAction("index", model.Evento);
         }
 
-        public ActionResult Details(EventoModel model, int? id)
+        public ActionResult Convites(EventoModel model)
         {
-            model.Evento = Servico.ObterEventoPorId(new Evento{IdEvento = id.HasValue ? id.Value : 0});
-            return View(model);
+            var respostas = Servico.ListarRespostas();
+            model.ListaConviteEventos = Servico.ObterConvitesEventosDoUsuario(UsuarioLogado);
 
+            foreach (var convite in model.ListaConviteEventos)
+                convite.Resposta = convite.IdResposta.HasValue ? respostas.First(r => r.IdResposta == convite.IdResposta) : respostas.First(r => r.IdResposta == 3);
+
+            if (model.ListaConviteEventos.Any())
+                model.ListaEventos = Servico.ListarEventos(model.ListaConviteEventos.Select(c => c.IdEvento).ToArray());
+            return View(model);
+        }
+
+        public ActionResult ResponderConviteEvento(int idEvento, bool aceito)
+        {
+            Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento }, aceito);
+            return RedirectToAction("Convites");
         }
 
     }

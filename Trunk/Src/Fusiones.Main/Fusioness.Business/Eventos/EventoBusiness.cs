@@ -91,13 +91,12 @@ namespace Fusioness.Business.Eventos
                 return new EventoRepository(ouw).GetByKey(new Evento { IdEvento = evento.IdEvento });
             }
         }
-        public List<Evento> ListarEventos()
+        public List<Evento> ListarEventos(params int[] ids)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                IRepository<Evento> repo = new EventoRepository(uow);
-                var evento = repo.GetAll();
-                return evento.ToList();
+                if (ids.Any()) return new EventoRepository(uow).GetWhere(e => ids.Any(id => id == e.IdEvento)).ToList();
+                return new EventoRepository(uow).GetAll().ToList();
             }
         }
 
