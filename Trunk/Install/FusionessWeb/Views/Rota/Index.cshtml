@@ -1,0 +1,42 @@
+﻿@model Fusioness.Models.Rotas.RotaModel
+@{
+  ViewBag.Title = "Rotas";
+  Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+<!-- LINHA 1 -->
+<div class="row-fluid">
+  <!-- BLOCK -->
+  <div class="span12">
+    <div class="card">
+      <h2 class="card-heading simple">Lista de Rotas</h2>
+      <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <th>Código da Rota</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.ListaRotas)
+            {
+                <tr>
+                    <td>@item.IdRota</td>
+                    <td>@item.Descricao</td>
+                    <td><a href="/Rota/Detalhar/@item.IdRota" class="btn btn-primary">Detalhes</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>  
+      </div>
+    </div>
+  </div>
+  <!-- END BLOCK -->
+</div><!-- END LINHA 2 -->
+
+<!-- LINHA 2 -->
+<div class="row-fluid">
+  
+  <!-- BLOCK -->
+
+  
+  

@@ -1,0 +1,39 @@
+﻿@model Fusioness.Models.Rotas.RotaModel
+@{
+    ViewBag.Title = "Inserir Rota";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+
+<!-- LINHA 1 -->
+<div class="row-fluid">
+    <!-- BLOCK -->
+    <div class="span12">
+        <div class="card">
+            <h2 class="card-heading simple">Cadastre sua rota!</h2>
+            <div class="card-body">
+                @using (Html.BeginForm("InserirAlterarRota", "Rota", FormMethod.Post))
+                {
+                    @Html.LabelFor(m => m.Rota.Descricao,"Descrição:")
+                    @Html.TextBoxFor(m => m.Rota.Descricao)
+                    <br />
+                    @Html.LabelFor(m => m.TiposDeRotas,"Tipo da Rota:")
+                    @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
+                    <br />
+                    @Html.LabelFor(m => m.TiposDePista, "Tipo da Pista:")
+                    @Html.DropDownListFor(m => m.Rota.IdTipoPista, new SelectList(Model.TiposDePista, "IdTipoPista", "Descricao"))
+                    <br />
+                    @Html.LabelFor(m => m.TiposDeDificuldade, "Nível de Dificuldade:")
+                    @Html.DropDownListFor(m => m.Rota.IdDificuldade, new SelectList(Model.TiposDeDificuldade, "IdDificuldade", "Descricao"))
+                    <br />
+                    @Html.LabelFor(m => m.TiposDeQualidade, "Nível de Qualidade:")
+                    @Html.DropDownListFor(m => m.Rota.IdQualidadeRota, new SelectList(Model.TiposDeQualidade, "IdQualidadeRota", "Descricao"))
+                    <br />
+                    @Html.HiddenFor(m => m.Rota.IdRota)
+                    <input type="submit" value="Enviar" />
+                }
+            </div>
+        </div>
+    </div>
+    <!-- END BLOCK -->
+</div>
+<!-- END LINHA 2 -->
