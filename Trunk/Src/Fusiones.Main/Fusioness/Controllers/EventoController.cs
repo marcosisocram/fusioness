@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web.Mvc;
 using Fusioness.FusionessWS;
 using Fusioness.Models.Eventos;
-using Fusioness.FusionessWS;
 
 namespace Fusioness.Controllers
 {
@@ -62,6 +61,12 @@ namespace Fusioness.Controllers
         {
             Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento }, aceito);
             return RedirectToAction("Convites");
+        }
+
+        public ActionResult ExcluirEvento(EventoModel model, int IdEvento)
+        {
+            Servico.RemoverEvento(new Evento() { IdEvento = IdEvento});
+            return RedirectToAction("index", model);
         }
 
     }
