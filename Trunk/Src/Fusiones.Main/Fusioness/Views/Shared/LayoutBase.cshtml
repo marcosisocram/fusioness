@@ -67,8 +67,20 @@
                 @Html.MenuItem("Eventos", "Index", "Evento")
               </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, USUARIO</a>
+                <ul class="dropdown-menu">
+                    @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
+                    @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
+                    <li class="divider"></li>
+                    <li>
+                        @Html.ActionLink("Efetuar Logout", "Sair", "Acesso")
+                    </li>
+                </ul>                
+            </li>
           </ul>
-          <ul class="pull-right nav">
+          <!-- 
+              <ul class="pull-right nav">
             <li class="dropdown">
               @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>*@
               <ul class="dropdown-menu">
@@ -80,7 +92,8 @@
                 </li>
               </ul>
             </li>
-          </ul>
+          </ul>-->
+            
           
         </div>
         <!--/.nav-collapse -->

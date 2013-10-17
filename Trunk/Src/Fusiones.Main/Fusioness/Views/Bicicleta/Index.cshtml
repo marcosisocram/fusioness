@@ -62,17 +62,19 @@
             <div class="card-body">
                 @using (Html.BeginForm("InsertBicicleta", "Bicicleta", FormMethod.Post))
                 {
-                     @Html.LabelFor(m => m.Bicicleta.Modelo)
-                     @Html.TextBoxFor(m => m.Bicicleta.Modelo)
+                    @Html.LabelFor(m => m.Bicicleta.Modelo)
+                    @Html.TextBoxFor(m => m.Bicicleta.Modelo)
+                    @Html.ValidationMessage("Modelo", new { style = "margin-left:10px" })
 
                     <br />
     
-                     @Html.LabelFor(m => m.Bicicleta.Marca)
-                     @Html.TextBoxFor(m => m.Bicicleta.Marca)
+                    @Html.LabelFor(m => m.Bicicleta.Marca)
+                    @Html.TextBoxFor(m => m.Bicicleta.Marca)
+                    @Html.ValidationMessage("Marca", new { style = "margin-left:10px" })
 
                     <br />
                     @Html.HiddenFor(m => m.Bicicleta.IdBicicleta)
-                    <input type="submit" value="Send" />
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
                  }
             </div>
         </div>
