@@ -18,17 +18,21 @@ namespace Fusioness.Controllers
 
         public ActionResult InsertBicicleta(BicicletaModel model)
         {
-            var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
-            model.Bicicleta.IdUsuario = usuario.IdUsuario;
-            if (model.Bicicleta.IdBicicleta > 0)
+            if (model.ValidarBicicleta(ModelState))
             {
-                Servico.AlterarBicicleta(model.Bicicleta);
+                var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+                model.Bicicleta.IdUsuario = usuario.IdUsuario;
+                if (model.Bicicleta.IdBicicleta > 0)
+                {
+                    Servico.AlterarBicicleta(model.Bicicleta);
+                }
+                else
+                {
+                    Servico.InserirBicicleta(model.Bicicleta);
+                }
+                model.Bicicleta = null;
             }
-            else
-            {
-                Servico.InserirBicicleta(model.Bicicleta);
-            }
-            model.Bicicleta = null;
+            
             return RedirectToAction("index", model);
         }
 
