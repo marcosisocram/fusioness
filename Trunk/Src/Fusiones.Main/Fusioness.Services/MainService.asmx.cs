@@ -475,6 +475,20 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverEvento(Evento evento)
+        {
+            try
+            {
+                Facade.Instance.RemoverEvento(evento);
+            }
+            catch
+            {
+                //TODO: LogFile();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Evento ObterEventoPorId(Evento evento)
         {
             try
