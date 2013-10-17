@@ -11,6 +11,7 @@ using Fusioness.Business.TiposPista;
 using Fusioness.Business.Dificuldades;
 using Fusioness.Business.QualidadesRota;
 using System.IO;
+using Fusioness.Business.Coordenadas;
 
 namespace Fusioness.Business
 {
@@ -26,6 +27,7 @@ namespace Fusioness.Business
         private readonly ITipoPistaBusiness TipoPistaBus;
         private readonly IDificuldadeBusiness DificuldadeBus;
         private readonly IQualidadeRotaBusiness QualidadeRotaBus;
+        private readonly ICoordenadaBusiness CoordenadaBus;
 
 
         #endregion
@@ -50,6 +52,7 @@ namespace Fusioness.Business
             TipoPistaBus = new TipoPistaBusiness();
             DificuldadeBus = new DificuldadeBusiness();
             QualidadeRotaBus = new QualidadeRotaBusiness();
+            CoordenadaBus = new CoordenadaBusiness();
             
         }
 
@@ -221,6 +224,13 @@ namespace Fusioness.Business
         public List<Evento> ListarEventos()
         {
             return EventoBus.ListarEventos();
+        }
+        #endregion
+
+        #region Coordenadas
+        public List<Coordenada> ListarCoordenadasPorRota(Rota rota)
+        {
+            return CoordenadaBus.ListarCoordenadasPorRota(rota);
         }
         #endregion
 

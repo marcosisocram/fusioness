@@ -372,6 +372,24 @@ namespace Fusioness.Services
             }
         }
         #endregion
-        
+
+        #region Coordenadas
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Coordenada> ListarCoordenadasPorRota(Rota rota)
+        {
+            try
+            {
+                return Facade.Instance.ListarCoordenadasPorRota(rota);
+            }
+            catch
+            {
+                return new List<Coordenada>();
+            }
+        }
+
+        #endregion
+
     }
 }

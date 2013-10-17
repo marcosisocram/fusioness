@@ -45,10 +45,11 @@
             <!--Panorama item three-->
             <phone:PanoramaItem x:Name="pnItemRota" Header="Rotas">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding Rotas}">
+                <phone:LongListSelector x:Name="llsRota" Margin="0,0,-22,0" ItemsSource="{Binding Rotas}" SelectionChanged="llsRota_SelectionChanged">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,-6,0,12">
+                                <TextBlock Text="{Binding IdRota}" Visibility="Collapsed"/>
                                 <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
                             </StackPanel>
                         </DataTemplate>
@@ -156,9 +157,9 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="btAdicionar" IconUri="/Assets/add.png" Text="Novo" Click="btAdicionar_Click"/>
-            <shell:ApplicationBarIconButton x:Name="btPesquisar" IconUri="/Assets/search.png" Text="Pesquisar" Click="btPesquisar_Click"/>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton x:Name="btAdicionar" IconUri="/Assets/Buttons/add.png" Text="Novo" Click="btAdicionar_Click"/>
+            <shell:ApplicationBarIconButton x:Name="btPesquisar" IconUri="/Assets/Buttons/search.png" Text="Pesquisar" Click="btPesquisar_Click"/>
 
             <!--
         <shell:ApplicationBar.MenuItems>

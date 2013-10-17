@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Net.NetworkInformation;
+using Fusioness.Mobile.ViewModels;
 
 namespace Fusioness.Mobile
 {
@@ -21,7 +22,7 @@ namespace Fusioness.Mobile
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
         }
-
+        
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -49,6 +50,14 @@ namespace Fusioness.Mobile
         private void btPesquisar_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Pesquisar");
+        }
+
+        private void llsRota_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
+
+            NavigationService.Navigate(new Uri("/Views/CriarRota.xaml?RotaId=" + res.RotaId.ToString(), UriKind.Relative));
+
         }
     }
 }

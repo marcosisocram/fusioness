@@ -9,8 +9,8 @@ using System.Windows;
 
 namespace Fusioness.Mobile.ViewModels
 {
-    static class LoginViewModel
+    class LoginViewModel
     {
-        public static FusionessWS.Usuario usuarioLogado = new FusionessWS.Usuario();
+        
     }
 }

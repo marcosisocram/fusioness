@@ -99,6 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Util\Global.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -145,6 +146,9 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarBicicletaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -157,13 +161,22 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirBicicletaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirFotoUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarBicicletasPorUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarContatosPorUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarCoordenadasPorRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarDificuldadesResponse.datasource">
@@ -187,10 +200,16 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterBicicletaPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterEventoPorIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterRotaPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.RemoverBicicletaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.RemoverRotaResponse.datasource">
@@ -206,16 +225,22 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Assets\add.png" />
     <Content Include="Assets\BG_BIKE.png" />
-    <Content Include="Assets\favs.addto.png" />
-    <Content Include="Assets\location.png" />
+    <Content Include="Assets\Buttons\add.png" />
+    <Content Include="Assets\Buttons\delete.png" />
+    <Content Include="Assets\Buttons\favs.addto.png" />
+    <Content Include="Assets\Buttons\pause.png" />
+    <Content Include="Assets\Buttons\play.png" />
+    <Content Include="Assets\Buttons\save.png" />
+    <Content Include="Assets\Buttons\search.png" />
     <Content Include="Assets\locationBlue.png" />
+    <Content Include="Assets\locationGray.png" />
     <Content Include="Assets\locationGreen.png" />
     <Content Include="Assets\locationPink.png" />
     <Content Include="Assets\PanoramaBackground.png" />
-    <Content Include="Assets\search.png" />
-    <Content Include="ServiceReferences.ClientConfig" />
+    <Content Include="ServiceReferences.ClientConfig">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Service References\FusionessWS\MainService.wsdl" />
   </ItemGroup>
   <ItemGroup>

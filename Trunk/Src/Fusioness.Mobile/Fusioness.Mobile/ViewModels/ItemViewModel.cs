@@ -12,6 +12,27 @@ namespace Fusioness.Mobile.ViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {
+        private int _rotaId;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public int RotaId
+        {
+            get
+            {
+                return _rotaId;
+            }
+            set
+            {
+                if (value != _rotaId)
+                {
+                    _rotaId = value;
+                    NotifyPropertyChanged("IdRota");
+                }
+            }
+        }
+
         private string _rotaNome;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.

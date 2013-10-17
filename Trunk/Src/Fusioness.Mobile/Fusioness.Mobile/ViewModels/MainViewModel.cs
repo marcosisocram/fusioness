@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Fusioness.Mobile.Resources;
 using System.Collections.Generic;
+using Fusioness.Mobile.Util;
 
 namespace Fusioness.Mobile.ViewModels
 {
@@ -64,7 +65,7 @@ namespace Fusioness.Mobile.ViewModels
         public void LoadData()
         {
             FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-            servico.ListarRotasPorUsuarioAsync(LoginViewModel.usuarioLogado);
+            servico.ListarRotasPorUsuarioAsync(Global.usuarioLogado);
             servico.ListarRotasPorUsuarioCompleted += servico_ListarRotasPorUsuarioCompleted;
             servico.ListarEventosAsync();
             servico.ListarEventosCompleted += servico_ListarEventosCompleted;
@@ -80,6 +81,7 @@ namespace Fusioness.Mobile.ViewModels
             {
                 this.Rotas.Add(new ItemViewModel()
                 {
+                    RotaId = item.IdRota,
                     RotaNome = item.Descricao.ToString()
                 });
             }            

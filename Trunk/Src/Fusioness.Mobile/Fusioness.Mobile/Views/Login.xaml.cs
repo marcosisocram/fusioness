@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Fusioness.Mobile.ViewModels;
 using Microsoft.Phone.Net.NetworkInformation;
+using Fusioness.Mobile.Util;
 
 namespace Fusioness.Mobile.Views
 {
@@ -18,7 +19,10 @@ namespace Fusioness.Mobile.Views
 
         public Login()
         {
-            InitializeComponent();
+            if (!NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Ative sua rede Wi-Fi ou conecte com a Rede Móvel para executar esta ação!");
+            else
+                InitializeComponent();
         }
 
         private void btEnviar_Click(object sender, RoutedEventArgs e)
@@ -36,19 +40,19 @@ namespace Fusioness.Mobile.Views
         {
             try
             {
-                LoginViewModel.usuarioLogado = e.Result;
-                if (LoginViewModel.usuarioLogado != null)
+                Global.usuarioLogado = e.Result;
+                if (Global.usuarioLogado != null)
                 {                    
                     NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
                 else
                 {
                     MessageBox.Show("Usuário inválido.");
-                }
+                }                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Usuário inválido.");
+                MessageBox.Show("Serviço indisponível no momento!");
             }
         }      
     }

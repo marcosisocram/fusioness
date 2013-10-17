@@ -5,7 +5,7 @@
     SampleProperty="Sample Text Property Value">
 
     <vm:MainViewModel.Rotas>
-        <vm:ItemViewModel RotaNome="design one"/>
+        <vm:ItemViewModel RotaNome="design one" RotaId="1"/>
         <vm:ItemViewModel RotaNome="design two"/>
         <vm:ItemViewModel RotaNome="design three"/>
         <vm:ItemViewModel RotaNome="design four"/>

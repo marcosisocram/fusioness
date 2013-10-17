@@ -282,6 +282,58 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AlterarBicicleta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarBicicletaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlterarBicicletaResult" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverBicicleta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverBicicletaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObterBicicletaPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterBicicletaPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterBicicletaPorIdResult" type="tns:Bicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarBicicletasPorUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarBicicletasPorUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarBicicletasPorUsuarioResult" type="tns:ArrayOfBicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ValidarLogonUsuario">
         <s:complexType>
           <s:sequence>
@@ -343,6 +395,22 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Usuario" nillable="true" type="tns:Usuario" />
         </s:sequence>
       </s:complexType>
+      <s:element name="InserirFotoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bytes" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirFotoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InserirFotoUsuarioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="InserirRota">
         <s:complexType>
           <s:sequence>
@@ -503,6 +571,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarCoordenadasPorRota">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarCoordenadasPorRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarCoordenadasPorRotaResult" type="tns:ArrayOfCoordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -516,6 +598,30 @@
   </wsdl:message>
   <wsdl:message name="InserirBicicletaSoapOut">
     <wsdl:part name="parameters" element="tns:InserirBicicletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlterarBicicletaSoapIn">
+    <wsdl:part name="parameters" element="tns:AlterarBicicleta" />
+  </wsdl:message>
+  <wsdl:message name="AlterarBicicletaSoapOut">
+    <wsdl:part name="parameters" element="tns:AlterarBicicletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoverBicicletaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverBicicleta" />
+  </wsdl:message>
+  <wsdl:message name="RemoverBicicletaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverBicicletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterBicicletaPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterBicicletaPorId" />
+  </wsdl:message>
+  <wsdl:message name="ObterBicicletaPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterBicicletaPorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarBicicletasPorUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarBicicletasPorUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ListarBicicletasPorUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarBicicletasPorUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="ValidarLogonUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:ValidarLogonUsuario" />
@@ -540,6 +646,12 @@
   </wsdl:message>
   <wsdl:message name="ListarContatosPorUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarContatosPorUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="InserirFotoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:InserirFotoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="InserirFotoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:InserirFotoUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="InserirRotaSoapIn">
     <wsdl:part name="parameters" element="tns:InserirRota" />
@@ -613,6 +725,12 @@
   <wsdl:message name="ObterEventoPorIdSoapOut">
     <wsdl:part name="parameters" element="tns:ObterEventoPorIdResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarCoordenadasPorRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarCoordenadasPorRota" />
+  </wsdl:message>
+  <wsdl:message name="ListarCoordenadasPorRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarCoordenadasPorRotaResponse" />
+  </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -621,6 +739,22 @@
     <wsdl:operation name="InserirBicicleta">
       <wsdl:input message="tns:InserirBicicletaSoapIn" />
       <wsdl:output message="tns:InserirBicicletaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlterarBicicleta">
+      <wsdl:input message="tns:AlterarBicicletaSoapIn" />
+      <wsdl:output message="tns:AlterarBicicletaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverBicicleta">
+      <wsdl:input message="tns:RemoverBicicletaSoapIn" />
+      <wsdl:output message="tns:RemoverBicicletaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterBicicletaPorId">
+      <wsdl:input message="tns:ObterBicicletaPorIdSoapIn" />
+      <wsdl:output message="tns:ObterBicicletaPorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarBicicletasPorUsuario">
+      <wsdl:input message="tns:ListarBicicletasPorUsuarioSoapIn" />
+      <wsdl:output message="tns:ListarBicicletasPorUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ValidarLogonUsuario">
       <wsdl:input message="tns:ValidarLogonUsuarioSoapIn" />
@@ -637,6 +771,10 @@
     <wsdl:operation name="ListarContatosPorUsuario">
       <wsdl:input message="tns:ListarContatosPorUsuarioSoapIn" />
       <wsdl:output message="tns:ListarContatosPorUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InserirFotoUsuario">
+      <wsdl:input message="tns:InserirFotoUsuarioSoapIn" />
+      <wsdl:output message="tns:InserirFotoUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InserirRota">
       <wsdl:input message="tns:InserirRotaSoapIn" />
@@ -686,6 +824,10 @@
       <wsdl:input message="tns:ObterEventoPorIdSoapIn" />
       <wsdl:output message="tns:ObterEventoPorIdSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarCoordenadasPorRota">
+      <wsdl:input message="tns:ListarCoordenadasPorRotaSoapIn" />
+      <wsdl:output message="tns:ListarCoordenadasPorRotaSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -700,6 +842,42 @@
     </wsdl:operation>
     <wsdl:operation name="InserirBicicleta">
       <soap:operation soapAction="http://tempuri.org/InserirBicicleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarBicicleta">
+      <soap:operation soapAction="http://tempuri.org/AlterarBicicleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverBicicleta">
+      <soap:operation soapAction="http://tempuri.org/RemoverBicicleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterBicicletaPorId">
+      <soap:operation soapAction="http://tempuri.org/ObterBicicletaPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarBicicletasPorUsuario">
+      <soap:operation soapAction="http://tempuri.org/ListarBicicletasPorUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -736,6 +914,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarContatosPorUsuario">
       <soap:operation soapAction="http://tempuri.org/ListarContatosPorUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserirFotoUsuario">
+      <soap:operation soapAction="http://tempuri.org/InserirFotoUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -851,6 +1038,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarCoordenadasPorRota">
+      <soap:operation soapAction="http://tempuri.org/ListarCoordenadasPorRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -865,6 +1061,42 @@
     </wsdl:operation>
     <wsdl:operation name="InserirBicicleta">
       <soap12:operation soapAction="http://tempuri.org/InserirBicicleta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarBicicleta">
+      <soap12:operation soapAction="http://tempuri.org/AlterarBicicleta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverBicicleta">
+      <soap12:operation soapAction="http://tempuri.org/RemoverBicicleta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterBicicletaPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObterBicicletaPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarBicicletasPorUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ListarBicicletasPorUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -901,6 +1133,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarContatosPorUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarContatosPorUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserirFotoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/InserirFotoUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1009,6 +1250,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObterEventoPorId">
       <soap12:operation soapAction="http://tempuri.org/ObterEventoPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarCoordenadasPorRota">
+      <soap12:operation soapAction="http://tempuri.org/ListarCoordenadasPorRota" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
