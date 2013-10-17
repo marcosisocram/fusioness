@@ -16,7 +16,7 @@
           <span>Contatos</span>
           @Html.DropDownListFor(m => m.UsuarioSelecionado.IdUsuario, new SelectList(Model.ListaDeUsuarios, "IdUsuario", "Nome"))
           <br />
-          <input type="submit" value="Send" />
+          <input type="submit" value="Salvar" class="btn btn-primary" />
         }
       </div>
     </div>

@@ -1,10 +1,10 @@
 ﻿@model Fusioness.Models.Bicicletas.BicicletaModel
 @{
-  ViewBag.Title = "Index";
-  Layout = "~/Views/Shared/LayoutBase.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
 
-<!-- LINHA 1 -->
+@*<!-- LINHA 1 -->
 <div class="row-fluid">
   <!-- BLOCK -->
   <div class="span12">
@@ -27,4 +27,62 @@
   </div>
   <!-- END BLOCK -->
 </div>
-<!-- END LINHA 2 -->  
+<!-- END LINHA 2 -->  *@
+<!-- LINHA 1 -->
+<div class="row-fluid">
+  <!-- BLOCK -->
+  <div class="span12">
+    <div class="card">
+      <h2 class="card-heading simple">Minhas bicicletas</h2>
+      <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Ações</th>
+            </thead>
+            <tbody>
+            @foreach (var bicicleta in Model.ListaBicicletasPorUsuario)
+            {
+                <tr>
+                    <td>@bicicleta.Marca</td>
+                    <td>@bicicleta.Modelo</td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditarBicicleta", "Bicicleta", new { IdBicicleta=bicicleta.IdBicicleta }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Excluir", "ExcluirBicicleta", "Bicicleta", new { IdBicicleta=bicicleta.IdBicicleta}, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>  
+      </div>
+    </div>
+      <div class="card">
+            <h2 class="card-heading simple">Add bicicleta</h2>
+            <div class="card-body">
+                @using (Html.BeginForm("InsertBicicleta", "Bicicleta", FormMethod.Post))
+                {
+                    @Html.LabelFor(m => m.Bicicleta.Modelo)
+                    @Html.TextBoxFor(m => m.Bicicleta.Modelo)
+                    @Html.ValidationMessage("Modelo", new { style = "margin-left:10px" })
+
+                    <br />
+    
+                    @Html.LabelFor(m => m.Bicicleta.Marca)
+                    @Html.TextBoxFor(m => m.Bicicleta.Marca)
+                    @Html.ValidationMessage("Marca", new { style = "margin-left:10px" })
+
+                    <br />
+                    @Html.HiddenFor(m => m.Bicicleta.IdBicicleta)
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                 }
+            </div>
+        </div>
+    </div>
+  <!-- END BLOCK -->
+</div><!-- END LINHA 2 -->
+
+<!-- LINHA 2 -->
+<div class="row-fluid"><//div>
+  
+  <!-- BLOCK -->

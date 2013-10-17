@@ -1,0 +1,83 @@
+﻿@model Fusioness.Models.Home.IndexModel
+@{
+  ViewBag.Title = "Index";
+  Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+<script type="text/javascript">
+    function ExibirModalMudarImagem()
+    {
+        $("#modalEditarImagem").modal('show');
+    }
+</script>
+<!-- FOTO -->
+<div class="span12" style="width:150px;height:150px;overflow:hidden;">
+    <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();"/>
+</div>
+<a href="/Usuario">Editar perfil</a>
+<!-- LINHA 1 -->
+<div class="row-fluid">
+  <!-- BLOCK -->
+  <div class="span12">
+    <div class="card">
+      <h2 class="card-heading simple">Bem vindo à maior rede social de ciclistas que você já viu...</h2>
+      <div class="card-body">
+        <p>Conecte-se agora mesmo a milhares de outros apaixonados por ciclismo. Interaja, proponha rotas e crie eventos.</p>
+        <p><a class="btn" href="#">Clique e encontre amigos!</a></p>
+      </div>
+    </div>
+  </div>
+  <!-- END BLOCK -->
+</div><!-- END LINHA 2 -->
+
+<!-- LINHA 2 -->
+<div class="row-fluid">
+  
+  <!-- BLOCK -->
+  <div class="span4">
+    <div class="card">
+      <h2 class="card-heading simple">Buscar Eventos</h2>
+      <div class="card-body">
+        @using (Html.BeginForm("DoSomething", "Home", FormMethod.Post))
+        {
+          @Html.LabelFor(m => m.User.Nome)
+          @Html.TextBoxFor(m => m.User.Nome)
+          <br />
+          <input type="submit" class="btn" value="Enviar" />
+        }
+      </div>
+    </div>
+  </div>
+  <!-- END BLOCK -->
+  
+  <!-- BLOCK -->
+  <div class="span8">
+    <div class="card">
+      <h2 class="card-heading simple">Últimas Rotas Cadastradas</h2>
+      <div class="card-body">
+        <p>AQUI VAI O MAPA COM AS ÚLTIMAS ROTAS.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo mollis cursus. Ut eu nulla at nibh pellentesque feugiat. Vestibulum ac euismod risus, ac molestie libero. Mauris mollis interdum nisi, non posuere dui auctor et. Ut pulvinar odio vel commodo sodales. Donec mi eros, elementum a ornare eu, placerat sit amet neque. Nunc suscipit dolor luctus lacus ornare, non consectetur enim condimentum. Curabitur iaculis magna eget sapien tincidunt, quis aliquet augue ornare. Vestibulum ullamcorper feugiat urna sed tincidunt. Nullam faucibus risus non luctus elementum. Cras tortor diam, molestie sit amet consectetur id, gravida ut ante. Morbi nec lorem suscipit, imperdiet enim at, condimentum risus. Quisque lacinia luctus nisi ut placerat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec a condimentum tellus. Nullam commodo molestie velit, sed hendrerit massa cursus molestie.</p>
+        <p><a class="btn input-block-level" href="#">Link Botão</a></p>
+      </div>
+    </div>
+  </div>
+  <!-- END BLOCK -->
+</div> <!-- END LINHA 2 -->
+
+<div id="modalEditarImagem" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    @using (Html.BeginForm("EnviarImagem", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Selecione a imagem</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <input type="file" id="image" name="image" />
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" type="submit">Save changes</button>
+    </div>
+    }
+</div>

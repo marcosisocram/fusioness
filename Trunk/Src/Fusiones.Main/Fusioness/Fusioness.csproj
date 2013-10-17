@@ -159,7 +159,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Perfil.cshtml" />
     <Content Include="Views\Contato\Index.cshtml" />
     <Content Include="Views\Rota\Index.cshtml" />
     <Content Include="Web References\FusionessWS\Bicicleta.datasource">
@@ -183,7 +183,15 @@
     <Content Include="Web References\FusionessWS\Dificuldade.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Views\Rota\Details.cshtml" />
+    <Content Include="Views\Evento\InserirAlterarEvento.cshtml" />
+    <Content Include="Web References\FusionessWS\ComentarioEvento.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\Usuario\InserirAlterarUsuario.cshtml" />
+    <Content Include="Web References\FusionessWS\ConviteEvento.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\Evento\Convites.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -213,6 +221,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\FusionessWS\TipoPista.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\FusionessWS\Resposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
   </ItemGroup>

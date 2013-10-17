@@ -1,0 +1,57 @@
+﻿@model Fusioness.Models.Acesso.AcessoModel
+@{ Layout = "~/Views/Shared/_LayoutBaseAcesso.cshtml"; }
+@section head
+{
+  <style type="text/css">
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #E5E5E5;
+    }
+
+    .form-signin {
+      border: 1px solid #D8D8D8;
+      border-bottom-width: 2px;
+      border-top-width: 0;
+      background-color: #FFF;
+      max-width: 350px;
+      padding: 19px 29px 29px;
+      margin: 0 auto 20px;
+      background-color: #fff;
+      border: 1px solid #F5F5F5;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+    }
+
+      .form-signin .form-signin-heading {
+        font-size: 24px;
+        font-weight: 300;
+      }
+
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+  </style>
+}
+@using (Html.BeginForm("Entrar", "Acesso", FormMethod.Post, new { @class = "form-signin" }))
+{
+  <h2 class="form-signin-heading">Efetue o Log-in</h2>
+  <input type="text" name="UsuarioLogado.Login" class="input-block-level" placeholder="Login">
+  <input type="password" name="UsuarioLogado.Senha" class="input-block-level" placeholder="Senha">
+  <button class="btn btn-primary" type="submit">
+    Acessar
+    <i class="icon-circle-arrow-right"></i>
+  </button>
+  <a href="/Usuario/InserirAlterarUsuario">Registrar</a>
+}
+

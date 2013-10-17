@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
@@ -20,6 +21,18 @@ namespace Fusioness.Services
     [ScriptService]
     public class MainService : WebService
     {
+        /// <summary>
+        /// Réplica da precarga do banco
+        /// </summary>
+        internal Resposta RespostasPrecarga(bool? resposta)
+        {
+            if (resposta.HasValue) // se há uma resposta informada obtém as resposta devida com base na precarga
+                return resposta.Value ? new Resposta { IdResposta = 2 } : new Resposta { IdResposta = 1 };
+
+            // se não houver resposta, retorna reposta "Não sei" (com base na precarga)
+            return new Resposta { IdResposta = 3 };
+        }
+
         public JavaScriptSerializer Serializer = new JavaScriptSerializer();
 
         #region HelloWorld
@@ -271,6 +284,80 @@ namespace Fusioness.Services
 
         #endregion
 
+        #region ComentarioEvento
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public ComentarioEvento InserirComentarioEvento(ComentarioEvento comentario)
+        {
+            try
+            {
+                return Facade.Instance.InserirComentarioEvento(comentario);
+            }
+            catch
+            {
+                return default(ComentarioEvento);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public ComentarioEvento AlterarComentarioEvento(ComentarioEvento comentario)
+        {
+            try
+            {
+                return Facade.Instance.AlterarComentarioEvento(comentario);
+            }
+            catch
+            {
+                return default(ComentarioEvento);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverComentarioEvento(ComentarioEvento comentario)
+        {
+            try
+            {
+                Facade.Instance.RemoverComentarioEvento(comentario);
+            }
+            catch
+            {
+                //TODO: LogFile();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public ComentarioEvento ObterComentarioEventoPorId(ComentarioEvento comentario)
+        {
+            try
+            {
+                return Facade.Instance.ObterComentarioEventoPorId(comentario);
+            }
+            catch
+            {
+                return default(ComentarioEvento);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ComentarioEvento> ListarComentariosPorEvento(Evento evento)
+        {
+            try
+            {
+                return Facade.Instance.ListarComentariosPorEvento(evento);
+            }
+            catch
+            {
+                return new List<ComentarioEvento>();
+            }
+        }
+
+        #endregion
+
         #region TipoRota
 
         [WebMethod]
@@ -346,15 +433,57 @@ namespace Fusioness.Services
         #region Evento
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<Evento> ListarEventos()
+        public List<Evento> ListarEventos(params int[] ids)
         {
             try
             {
-                return Facade.Instance.ListarEventos();
+                return Facade.Instance.ListarEventos(ids);
             }
             catch
             {
                 return new List<Evento>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Evento> ListarEventosPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarEventosPorUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Evento>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Evento AlterarEvento(Evento evento)
+        {
+            try
+            {
+                return Facade.Instance.AlterarEvento(evento);
+            }
+            catch
+            {
+                return default(Evento);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverEvento(Evento evento)
+        {
+            try
+            {
+                Facade.Instance.RemoverEvento(evento);
+            }
+            catch
+            {
+                //TODO: LogFile();
             }
         }
 
@@ -391,5 +520,65 @@ namespace Fusioness.Services
 
         #endregion
 
+
+        #region ConviteEvento
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ConviteEvento> ListarConvitesEventos()
+        {
+            try
+            {
+                return Facade.Instance.ListarConviteEventos().ToList();
+            }
+            catch
+            {
+                return new List<ConviteEvento>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ConviteEvento> ObterConvitesEventosDoUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ObterConvitesFeitosAoUsuario(usuario).ToList();
+            }
+            catch
+            {
+                return new List<ConviteEvento>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public ConviteEvento ResponderConviteEvento(ConviteEvento convite, bool? resposta)
+        {
+            try
+            {
+                return Facade.Instance.ResponderAoConvite(convite, RespostasPrecarga(resposta));
+            }
+            catch
+            {
+                return new ConviteEvento();
+            }
+        }
+        #endregion
+
+        #region Respostas
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Resposta> ListarRespostas()
+        {
+            try
+            {
+                return Facade.Instance.ListarRespostas();
+            }
+            catch
+            {
+                return new List<Resposta>();
+            }
+        }
+        #endregion
     }
 }

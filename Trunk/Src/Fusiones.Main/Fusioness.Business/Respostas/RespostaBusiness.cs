@@ -42,6 +42,13 @@ namespace Fusioness.Business.Respostas
                 return new RespostaRepository(uow).GetByKey(new Resposta{ IdResposta = resposta.IdResposta});
             }
         }
+        public List<Resposta> ListarRespostas()
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                return new RespostaRepository(uow).GetAll().ToList();
+            }
+        }
         #endregion
 
         #region Private

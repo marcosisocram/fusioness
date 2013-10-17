@@ -11,5 +11,15 @@ namespace Fusioness.Models.Rotas
         public IList<Dificuldade> TiposDeDificuldade { get; set; }
         public IList<QualidadeRota> TiposDeQualidade{ get; set; }
         public IList<Rota> ListaRotas { get; set; }
+
+        public void carregarParametrosView()
+        {
+            MainService Servico = new MainService();
+            
+            TiposDeDificuldade = Servico.ListarDificuldades();
+            TiposDePista = Servico.ListarTiposPista();
+            TiposDeQualidade = Servico.ListarQualidadesRota();
+            TiposDeRotas = Servico.ListarTiposRota();
+        }
     }
 }

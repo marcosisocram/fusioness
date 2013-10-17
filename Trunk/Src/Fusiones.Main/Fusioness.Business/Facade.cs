@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fusioness.Business.ConvitesEventos;
+using Fusioness.Business.Respostas;
 using Fusioness.Business.Usuarios;
 using Fusioness.Entities;
 using Fusioness.Business.Bicicletas;
@@ -10,6 +11,7 @@ using Fusioness.Business.TiposRota;
 using Fusioness.Business.TiposPista;
 using Fusioness.Business.Dificuldades;
 using Fusioness.Business.QualidadesRota;
+using Fusioness.Business.ComentariosEvento;
 using System.IO;
 using Fusioness.Business.Coordenadas;
 
@@ -28,6 +30,8 @@ namespace Fusioness.Business
         private readonly IDificuldadeBusiness DificuldadeBus;
         private readonly IQualidadeRotaBusiness QualidadeRotaBus;
         private readonly ICoordenadaBusiness CoordenadaBus;
+        private readonly IComentarioEventoBusiness ComentarioEventoBus;
+        private readonly IRespostaBusiness RespostaBus;
 
 
         #endregion
@@ -54,6 +58,8 @@ namespace Fusioness.Business
             QualidadeRotaBus = new QualidadeRotaBusiness();
             CoordenadaBus = new CoordenadaBusiness();
             
+            ComentarioEventoBus = new ComentarioEventoBusiness();
+            RespostaBus = new RespostaBusiness();
         }
 
         #endregion
@@ -102,6 +108,11 @@ namespace Fusioness.Business
         #endregion
 
         #region ConviteEvento
+
+        public IList<ConviteEvento> ListarConviteEventos()
+        {
+            return ConviteEventoBus.ListarConvitesEventos();
+        }
 
         public ConviteEvento ObterConviteFeitoAoUsuarioParaOEvento(Usuario convidado, Evento evento)
         {
@@ -171,6 +182,35 @@ namespace Fusioness.Business
         
         #endregion
 
+        #region ComentarioEvento
+
+        public ComentarioEvento InserirComentarioEvento(ComentarioEvento comentario)
+        {
+            return ComentarioEventoBus.InserirComentarioEvento(comentario);
+        }
+
+        public ComentarioEvento AlterarComentarioEvento(ComentarioEvento comentario)
+        {
+            return ComentarioEventoBus.AlterarComentarioEvento(comentario);
+        }
+
+        public void RemoverComentarioEvento(ComentarioEvento comentario)
+        {
+            ComentarioEventoBus.RemoverComentarioEvento(comentario);
+        }
+
+        public ComentarioEvento ObterComentarioEventoPorId(ComentarioEvento comentario)
+        {
+            return ComentarioEventoBus.ObterComentarioEventoPorId(comentario);
+        }
+
+        public List<ComentarioEvento> ListarComentariosPorEvento(Evento evento)
+        {
+            return ComentarioEventoBus.ListarComentariosPorEvento(evento);
+        }
+
+        #endregion
+
         #region TipoRota
         public List<TipoRota> ListarTiposRota()
         {
@@ -221,10 +261,15 @@ namespace Fusioness.Business
         {
             return EventoBus.ObterEventoPorId(evento);
         }
-        public List<Evento> ListarEventos()
+        public List<Evento> ListarEventos(params int[] ids)
         {
-            return EventoBus.ListarEventos();
+            return EventoBus.ListarEventos(ids);
         }
+        public List<Evento> ListarEventosPorUsuario(Usuario usuario)
+        {
+            return EventoBus.ListarEventosPorUsuario(usuario);
+        }
+
         #endregion
 
         #region Coordenadas
@@ -232,6 +277,12 @@ namespace Fusioness.Business
         {
             return CoordenadaBus.ListarCoordenadasPorRota(rota);
         }
+        #region Respostas
+        public List<Resposta> ListarRespostas()
+        {
+            return RespostaBus.ListarRespostas();
+        }
+        #endregion
         #endregion
 
         #endregion

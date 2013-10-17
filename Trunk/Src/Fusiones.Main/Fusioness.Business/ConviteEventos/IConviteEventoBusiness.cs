@@ -5,6 +5,8 @@ namespace Fusioness.Business.ConvitesEventos
 {
     public interface IConviteEventoBusiness
     {
+        IList<ConviteEvento> ListarConvitesEventos();
+
         /// <summary>
         /// Obtém a lista de convites de ventos feitos para um determinado usuario
         /// </summary>
