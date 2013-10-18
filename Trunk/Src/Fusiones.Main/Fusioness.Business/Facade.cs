@@ -273,16 +273,24 @@ namespace Fusioness.Business
         #endregion
 
         #region Coordenadas
+
+        public List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas)
+        {
+            return CoordenadaBus.InserirListaCoordenadas(listaCoordenadas);
+        }
+
         public List<Coordenada> ListarCoordenadasPorRota(Rota rota)
         {
             return CoordenadaBus.ListarCoordenadasPorRota(rota);
         }
+
         #region Respostas
         public List<Resposta> ListarRespostas()
         {
             return RespostaBus.ListarRespostas();
         }
         #endregion
+
         #endregion
 
         #endregion

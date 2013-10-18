@@ -31,6 +31,7 @@ namespace Fusioness.Controllers
             {
                 model.Rota.IdUsuario = this.UsuarioLogado.IdUsuario;
 
+                // ----------------------------Código MOCK apenas para ver se cadastra coordenadas corretamente.--------------------------
                 Coordenada c1 = new Coordenada();
                 c1.Latitude = -8.05076226;
                 c1.Longitude = -34.87983403;
@@ -39,16 +40,35 @@ namespace Fusioness.Controllers
                 c2.Latitude = -8.03076226;
                 c2.Longitude = -35.87983403;
 
-                model.Rota.Coordenadas = new Coordenada[2];
+                List<Coordenada> listaCoordenadas = new List<Coordenada>();
+                listaCoordenadas.Add(c1);
+                listaCoordenadas.Add(c2);
 
-                model.Rota.Coordenadas[0] = c1;
-                model.Rota.Coordenadas[1] = c2;
+                // ---------------------------Fim do código MOCK------------------------------------------------------------------------
 
-                if (model.Rota.IdRota > 0) model.Rota = Servico.AlterarRota(model.Rota);
-                else model.Rota = Servico.InserirRota(model.Rota);
 
-                if (model.Rota == null || model.Rota.IdRota <= 0) ExibirModal("Erro ao cadastrar rota.");
-                else ExibirModal("Rota cadastrada com sucesso!");
+                if (model.Rota.IdRota > 0)
+                {
+                    model.Rota = Servico.AlterarRota(model.Rota);
+                }
+                else 
+                {
+                    model.Rota = Servico.InserirRota(model.Rota);
+
+                    c1.IdRota = model.Rota.IdRota;
+                    c2.IdRota = model.Rota.IdRota;
+
+                    Servico.InserirListaCoordenadas(listaCoordenadas.ToArray());
+                }
+
+                if (model.Rota == null || model.Rota.IdRota <= 0)
+                {
+                    ExibirModal("Erro ao cadastrar rota.");
+                }
+                else
+                {
+                    ExibirModal("Rota cadastrada com sucesso!");
+                }
 
                 return RedirectToAction("index", model);
             }

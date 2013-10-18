@@ -9,48 +9,12 @@
     <!-- BLOCK -->
     <div class="span12">
         <div class="card">
-            <h2 class="card-heading simple">Cabeçalho - Bloco tamanho 12</h2>
-            <div class="card-body">
-                @using (Html.BeginForm("InsertUsuario", "Usuario", FormMethod.Post))
-                {
-                    <ul style="list-style:none;">
-                        <li>
-                            @Html.LabelFor(m => m.Usuario.Nome)
-                            @Html.TextBoxFor(m => m.Usuario.Nome)
-                            @Html.ValidationMessage("Nome", new { style = "margin-left:10px" })
-                        </li>
-                        <li>
-                            @Html.LabelFor(m => m.Usuario.Login)
-                            @Html.TextBoxFor(m => m.Usuario.Login) 
-                            @Html.ValidationMessage("Login", new { style = "margin-left:10px" })
-                            
-                        </li>
-                        <li>
-                            @Html.LabelFor(m => m.Usuario.Senha)
-                            @Html.PasswordFor(m => m.Usuario.Senha) 
-                            @Html.ValidationMessage("Senha", new { style = "margin-left:10px" })
-                        </li>
-                        <li>
-                            @Html.LabelFor(m => m.Usuario.Email)
-                            @Html.TextBoxFor(m => m.Usuario.Email) 
-                            @Html.ValidationMessage("Email", new { style = "margin-left:10px" })
-                        </li>
-                        <li>
-                            @Html.LabelFor(m => m.Usuario.Idade)
-                            @Html.TextBoxFor(m => m.Usuario.Idade)
-                            @Html.ValidationMessage("Idade", new { style = "margin-left:10px" })
-                        </li>
-                        <li>
-                            @Html.LabelFor(m => m.Usuario.Sexo)
-                            @Html.TextBoxFor(m => m.Usuario.Sexo)
-                            @Html.ValidationMessage("Sexo", new { style = "margin-left:10px" })
-                        </li>
-                    </ul>
-                    <br />
-                    @Html.HiddenFor(m => m.Usuario.IdUsuario)
-                    <input type="submit" value="Registrar" />
-                }
+            <h2 class="card-heading simple">Meu Perfil</h2>
+            
+            <div style="height:500px;" class="card-body">
+                AQUI DEVERÁ SER A´PÁGINA DE PERFIL DO USUÁRIO.
             </div>
+
         </div>
     </div>
     <!-- END BLOCK -->

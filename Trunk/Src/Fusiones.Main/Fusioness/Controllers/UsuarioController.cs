@@ -15,20 +15,35 @@ namespace Fusioness.Controllers
         }
 
         [PermiteAnonimo]
+        [HttpPost]
         public ActionResult InserirAlterarUsuario(UsuarioModel model)
         {
             if (model.ValidarUsuario(ModelState))
             {
                 if (model.Usuario.IdUsuario > 0)
                 {
-                    Servico.AlterarUsuario(model.Usuario);
+                    model.Usuario = Servico.AlterarUsuario(model.Usuario);
                 }
-
-                model.Usuario = Servico.InserirUsuario(model.Usuario);
-                return RedirectToAction("index", model);
+                else
+                {
+                    model.Usuario = Servico.InserirUsuario(model.Usuario);
+                }
+                return RedirectToAction("Index", model);
             }
-            return View("index", model);
+            else
+            {
+                return View(model);
+            }
         }
 
+        [PermiteAnonimo]
+        [HttpGet]
+        public ActionResult InserirAlterarUsuario()
+        {
+            return View();
+        }
+
+                
+        
     }
 }

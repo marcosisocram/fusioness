@@ -506,6 +506,20 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas)
+        {
+            try
+            {
+                return Facade.Instance.InserirListaCoordenadas(listaCoordenadas);
+            }
+            catch
+            {
+                return new List<Coordenada>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public List<Coordenada> ListarCoordenadasPorRota(Rota rota)
         {
             try

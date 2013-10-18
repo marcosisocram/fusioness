@@ -660,6 +660,16 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="RemoverEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverEventoResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="ObterEventoPorId">
         <s:complexType>
           <s:sequence>
@@ -671,6 +681,34 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ObterEventoPorIdResult" type="tns:Evento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirListaCoordenadas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaCoordenadas" type="tns:ArrayOfCoordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirListaCoordenadasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InserirListaCoordenadasResult" type="tns:ArrayOfCoordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarCoordenadasPorRota">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarCoordenadasPorRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarCoordenadasPorRotaResult" type="tns:ArrayOfCoordenada" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -904,11 +942,29 @@
   <wsdl:message name="AlterarEventoSoapOut">
     <wsdl:part name="parameters" element="tns:AlterarEventoResponse" />
   </wsdl:message>
+  <wsdl:message name="RemoverEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverEvento" />
+  </wsdl:message>
+  <wsdl:message name="RemoverEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverEventoResponse" />
+  </wsdl:message>
   <wsdl:message name="ObterEventoPorIdSoapIn">
     <wsdl:part name="parameters" element="tns:ObterEventoPorId" />
   </wsdl:message>
   <wsdl:message name="ObterEventoPorIdSoapOut">
     <wsdl:part name="parameters" element="tns:ObterEventoPorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="InserirListaCoordenadasSoapIn">
+    <wsdl:part name="parameters" element="tns:InserirListaCoordenadas" />
+  </wsdl:message>
+  <wsdl:message name="InserirListaCoordenadasSoapOut">
+    <wsdl:part name="parameters" element="tns:InserirListaCoordenadasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarCoordenadasPorRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarCoordenadasPorRota" />
+  </wsdl:message>
+  <wsdl:message name="ListarCoordenadasPorRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarCoordenadasPorRotaResponse" />
   </wsdl:message>
   <wsdl:message name="ListarConvitesEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarConvitesEventos" />
@@ -1051,9 +1107,21 @@
       <wsdl:input message="tns:AlterarEventoSoapIn" />
       <wsdl:output message="tns:AlterarEventoSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="RemoverEvento">
+      <wsdl:input message="tns:RemoverEventoSoapIn" />
+      <wsdl:output message="tns:RemoverEventoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ObterEventoPorId">
       <wsdl:input message="tns:ObterEventoPorIdSoapIn" />
       <wsdl:output message="tns:ObterEventoPorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InserirListaCoordenadas">
+      <wsdl:input message="tns:InserirListaCoordenadasSoapIn" />
+      <wsdl:output message="tns:InserirListaCoordenadasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarCoordenadasPorRota">
+      <wsdl:input message="tns:ListarCoordenadasPorRotaSoapIn" />
+      <wsdl:output message="tns:ListarCoordenadasPorRotaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesEventos">
       <wsdl:input message="tns:ListarConvitesEventosSoapIn" />
@@ -1335,8 +1403,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RemoverEvento">
+      <soap:operation soapAction="http://tempuri.org/RemoverEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ObterEventoPorId">
       <soap:operation soapAction="http://tempuri.org/ObterEventoPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserirListaCoordenadas">
+      <soap:operation soapAction="http://tempuri.org/InserirListaCoordenadas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarCoordenadasPorRota">
+      <soap:operation soapAction="http://tempuri.org/ListarCoordenadasPorRota" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1644,8 +1739,35 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RemoverEvento">
+      <soap12:operation soapAction="http://tempuri.org/RemoverEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ObterEventoPorId">
       <soap12:operation soapAction="http://tempuri.org/ObterEventoPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserirListaCoordenadas">
+      <soap12:operation soapAction="http://tempuri.org/InserirListaCoordenadas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarCoordenadasPorRota">
+      <soap12:operation soapAction="http://tempuri.org/ListarCoordenadasPorRota" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

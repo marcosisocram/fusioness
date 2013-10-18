@@ -51,6 +51,27 @@ namespace Fusioness.Business.Coordenadas
             }
         }
 
+        public List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Coordenada> repo = new CoordenadaRepository(uow);
+                    
+                    IEnumerable<Coordenada> listaInserir = listaCoordenadas;
+                    
+                    listaCoordenadas = repo.Insert(listaInserir).ToList();
+                    uow.Commit();
+                }
+                return listaCoordenadas;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Coordenada AlterarCoordenada(Coordenada coordenada)
         {
             try
