@@ -25,8 +25,8 @@
                     <td>@item.Titulo</td>
                     <td>@item.Data</td>
                   <td>
-                    @Html.ActionLink("Detalhes", "Details", "Evento", new{ id = item.IdEvento}, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Excluir", "Details", "Evento", new{ id = item.IdEvento}, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Detalhes", "Detalhar", "Evento", new{ id = item.IdEvento}, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Excluir", "ExcluirEvento", "Evento", new{ id = item.IdEvento}, new { @class = "btn btn-primary" })
                   </td>
                 </tr>
             }

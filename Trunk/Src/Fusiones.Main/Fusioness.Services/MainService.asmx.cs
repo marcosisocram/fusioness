@@ -534,7 +534,6 @@ namespace Fusioness.Services
 
         #endregion
 
-
         #region ConviteEvento
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

@@ -15,7 +15,7 @@ namespace Fusioness.Controllers
         }
 
 
-        public ActionResult Details(int Id = 0)
+        public ActionResult Detalhar(int Id = 0)
         {
             EventoModel model = new EventoModel();
             model.ListaRotas = Servico.ListarRotasPorUsuario(this.UsuarioLogado);
@@ -25,7 +25,8 @@ namespace Fusioness.Controllers
             return View("InserirAlterarEvento", model);
         }
 
-        public ActionResult InserirOuAlterarEvento(EventoModel model)
+        [HttpPost]
+        public ActionResult InserirAlterarEvento(EventoModel model)
         {
             model.Evento.IdUsuario = this.UsuarioLogado.IdUsuario;
 
@@ -42,6 +43,12 @@ namespace Fusioness.Controllers
             else ExibirModal("Rota cadastrada com sucesso!");*/
 
             return RedirectToAction("index", model.Evento);
+        }
+
+        [HttpGet]
+        public ActionResult InserirAlterarEvento()
+        {
+            return View("InserirAlterarEvento");
         }
 
         public ActionResult Convites(EventoModel model)

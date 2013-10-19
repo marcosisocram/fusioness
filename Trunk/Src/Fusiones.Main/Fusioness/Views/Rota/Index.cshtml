@@ -14,6 +14,7 @@
             <thead>
                 <th>Código da Rota</th>
                 <th>Descrição</th>
+                <th>Tipo da Rota</th>
                 <th>Ações</th>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                 <tr>
                     <td>@item.IdRota</td>
                     <td>@item.Descricao</td>
+                    <td>@item.TipoRota.Descricao</td>
                     <td><a href="/Rota/Detalhar/@item.IdRota" class="btn btn-primary">Detalhes</a></td>
                 </tr>
             }
