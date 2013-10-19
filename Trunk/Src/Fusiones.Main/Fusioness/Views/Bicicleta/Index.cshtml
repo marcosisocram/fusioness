@@ -60,7 +60,7 @@
       <div class="card">
             <h2 class="card-heading simple">Add bicicleta</h2>
             <div class="card-body">
-                @using (Html.BeginForm("InsertBicicleta", "Bicicleta", FormMethod.Post))
+                @using (Html.BeginForm("InserirAlterarBicicleta", "Bicicleta", FormMethod.Post))
                 {
                     @Html.LabelFor(m => m.Bicicleta.Modelo)
                     @Html.TextBoxFor(m => m.Bicicleta.Modelo)
