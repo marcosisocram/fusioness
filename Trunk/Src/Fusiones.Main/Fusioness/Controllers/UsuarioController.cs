@@ -2,6 +2,7 @@
 using Fusioness.Models.Usuarios;
 using Fusioness.Models.Seguranca;
 using System.Web;
+using System.Collections.Generic;
 
 namespace Fusioness.Controllers
 {
@@ -32,6 +33,7 @@ namespace Fusioness.Controllers
             }
             else
             {
+                model.CarregarParametrosView();
                 return View(model);
             }
         }
@@ -40,7 +42,10 @@ namespace Fusioness.Controllers
         [HttpGet]
         public ActionResult InserirAlterarUsuario()
         {
-            return View();
+            var model = new UsuarioModel();
+            model.CarregarParametrosView();
+
+            return View(model);
         }
 
                 

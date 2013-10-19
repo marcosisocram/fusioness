@@ -2,14 +2,15 @@
 using System.Linq;
 using Fusioness.FusionessWS;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace Fusioness.Models.Usuarios
 {
     public class UsuarioModel
     {
         public string Mensagem { get; set; }
-        private Usuario _Usuario;
-
+        private Usuario _Usuario;        
+        public IEnumerable<SelectListItem> Sexos { get; set; }
         public Usuario Usuario
         {
             get 
@@ -73,6 +74,15 @@ namespace Fusioness.Models.Usuarios
             }
 
             return retorno;
+        }
+
+        public void CarregarParametrosView()
+        {            
+            Sexos = new[]
+            {
+                new SelectListItem { Value = "M", Text = "Masculino" },
+                new SelectListItem { Value = "F", Text = "Feminino" },                
+            };
         }
     }
 }
