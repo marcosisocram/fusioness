@@ -2,6 +2,7 @@
 using Fusioness.Models.Usuarios;
 using Fusioness.Models.Seguranca;
 using System.Web;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Fusioness.Controllers
@@ -49,6 +50,14 @@ namespace Fusioness.Controllers
             model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             model.CarregarParametrosView();
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult VerPerfilUsuario(int IdUsuario)
+        {
+            var model = new UsuarioModel();
+            model.Usuario = Servico.ObterUsuariosIds(new int[] { IdUsuario }).FirstOrDefault();
+            return View("Perfil",model);
         }
 
     }

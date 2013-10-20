@@ -18,5 +18,15 @@ namespace Fusioness.Controllers
             //TODO: IMPLEMENTAR ROTINA
             return RedirectToAction("Index", model);
         }
+
+        [HttpGet]
+        public ActionResult ListarTodos()
+        {
+            var model = new ContatoModel();
+            model.ListaDeUsuarios = Servico.ListarUsuarios();
+            //model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+            //model.CarregarParametrosView();
+            return View("index",model);
+        }
     }
 }

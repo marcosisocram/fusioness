@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Fusioness.Entities
@@ -19,7 +20,8 @@ namespace Fusioness.Entities
         public string Login { get; set; }
         public string Senha { get; set; }
         public string Email { get; set; }
-        public int? Idade { get; set; }
+        //public int? Idade { get; set; }
+        public DateTime DataDeNascimento { get; set; }
         public string Sexo { get; set; }
         public string UrlImagem { get; set; }
         public virtual List<Bicicleta> Bicicletas { get; set; }

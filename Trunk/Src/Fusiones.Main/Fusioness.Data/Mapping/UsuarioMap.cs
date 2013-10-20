@@ -42,7 +42,8 @@ namespace Fusioness.Data.Mapping
             this.Property(t => t.Login).HasColumnName("Login");
             this.Property(t => t.Senha).HasColumnName("Senha");
             this.Property(t => t.Email).HasColumnName("Email");
-            this.Property(t => t.Idade).HasColumnName("Idade");
+            //this.Property(t => t.Idade).HasColumnName("Idade");
+            this.Property(t => t.DataDeNascimento).HasColumnName("DataDeNascimento");
             this.Property(t => t.Sexo).HasColumnName("Sexo");
             this.Property(t => t.UrlImagem).HasColumnName("UrlImagem");
         }

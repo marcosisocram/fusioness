@@ -70,7 +70,14 @@
                     <ul class="nav">
                         @Html.MenuItem("Home", "Index", "Home")
                         @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
-                        @Html.MenuItem("Contatos", "Index", "Contato")
+                        @*@Html.MenuItem("Contatos", "Index", "Contato")*@
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contatos</a>
+                            <ul class="dropdown-menu">
+                                @Html.MenuItem("Buscar Contatos", "ListarTodos", "Contato")
+                                @Html.MenuItem("Meus Contatos", "MeusContatos", "Contato")
+                            </ul>
+                        </li>
                         @Html.MenuItem("Rotas", "Index", "Rota")
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos</a>

@@ -36,8 +36,8 @@
                             @Html.ValidationMessage("Email", new { style = "margin-left:10px" })
                         </li>
                         <li>
-                            @Html.LabelFor(m => m.Usuario.Idade)
-                            @Html.TextBoxFor(m => m.Usuario.Idade)
+                            @Html.LabelFor(m => m.Usuario.DataDeNascimento)
+                            @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = Model.Usuario.DataDeNascimento.ToString("dd/MM/yyyy"), @class = "datepicker" })
                             @Html.ValidationMessage("Idade", new { style = "margin-left:10px" })
                         </li>
                         <li>
