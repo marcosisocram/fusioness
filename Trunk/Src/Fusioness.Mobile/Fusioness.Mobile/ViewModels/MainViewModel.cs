@@ -67,9 +67,24 @@ namespace Fusioness.Mobile.ViewModels
             FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
             servico.ListarRotasPorUsuarioAsync(Global.usuarioLogado);
             servico.ListarRotasPorUsuarioCompleted += servico_ListarRotasPorUsuarioCompleted;
-            servico.ListarEventosAsync();
-            servico.ListarEventosCompleted += servico_ListarEventosCompleted;
+            servico.ListarEventosPorUsuarioAsync(Global.usuarioLogado);
+            servico.ListarEventosPorUsuarioCompleted += servico_ListarEventosPorUsuarioCompleted;
             this.IsDataLoaded = true;
+        }
+
+        void servico_ListarEventosPorUsuarioCompleted(object sender, FusionessWS.ListarEventosPorUsuarioCompletedEventArgs e)
+        {
+            IList<FusionessWS.Evento> evetos = e.Result;
+
+            foreach (var item in evetos)
+            {
+                this.Eventos.Add(new ItemViewModel()
+                {
+                    EventoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
+                    EventoTitulo = item.Titulo,
+                    EventoData = item.Data.ToString("dd/MM/yyyy")
+                });
+            }
         }        
 
         void servico_ListarRotasPorUsuarioCompleted(object sender, FusionessWS.ListarRotasPorUsuarioCompletedEventArgs e)
@@ -85,21 +100,6 @@ namespace Fusioness.Mobile.ViewModels
                     RotaNome = item.Descricao.ToString()
                 });
             }            
-        }
-
-        void servico_ListarEventosCompleted(object sender, FusionessWS.ListarEventosCompletedEventArgs e)
-        {
-            IList<FusionessWS.Evento> evetos = e.Result;
-
-            foreach (var item in evetos)
-            {
-                this.Eventos.Add(new ItemViewModel()
-                {
-                    EventoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
-                    EventoTitulo = item.Titulo,
-                    EventoData = item.Data.ToString("dd/MM/yyyy")
-                });
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

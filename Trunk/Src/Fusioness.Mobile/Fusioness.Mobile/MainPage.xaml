@@ -49,7 +49,7 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,-6,0,12">
-                                <TextBlock Text="{Binding IdRota}" Visibility="Collapsed"/>
+                                <TextBlock Text="{Binding RotaId}" Visibility="Collapsed"/>
                                 <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
                             </StackPanel>
                         </DataTemplate>
@@ -157,7 +157,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
             <shell:ApplicationBarIconButton x:Name="btAdicionar" IconUri="/Assets/Buttons/add.png" Text="Novo" Click="btAdicionar_Click"/>
             <shell:ApplicationBarIconButton x:Name="btPesquisar" IconUri="/Assets/Buttons/search.png" Text="Pesquisar" Click="btPesquisar_Click"/>
 

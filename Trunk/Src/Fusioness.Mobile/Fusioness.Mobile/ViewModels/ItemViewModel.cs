@@ -12,6 +12,8 @@ namespace Fusioness.Mobile.ViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {
+        #region Rota
+
         private int _rotaId;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
@@ -28,7 +30,7 @@ namespace Fusioness.Mobile.ViewModels
                 if (value != _rotaId)
                 {
                     _rotaId = value;
-                    NotifyPropertyChanged("IdRota");
+                    NotifyPropertyChanged("RotaId");
                 }
             }
         }
@@ -52,7 +54,11 @@ namespace Fusioness.Mobile.ViewModels
                     NotifyPropertyChanged("RotaNome");
                 }
             }
-        }
+        } 
+
+        #endregion
+
+        #region Evento
 
         private string _eventoImagem;
         /// <summary>
@@ -115,7 +121,147 @@ namespace Fusioness.Mobile.ViewModels
                     NotifyPropertyChanged("EventoData");
                 }
             }
+        } 
+
+        #endregion
+
+        #region Tipo de Pista
+
+        private int _tipoPistaId;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public int TipoPistaId
+        {
+            get
+            {
+                return _tipoPistaId;
+            }
+            set
+            {
+                if (value != _tipoPistaId)
+                {
+                    _tipoPistaId = value;
+                    NotifyPropertyChanged("TipoPistaId");
+                }
+            }
         }
+
+        private string _tipoPistaDescricao;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string TipoPistaDescricao
+        {
+            get
+            {
+                return _tipoPistaDescricao;
+            }
+            set
+            {
+                if (value != _tipoPistaDescricao)
+                {
+                    _tipoPistaDescricao = value;
+                    NotifyPropertyChanged("TipoPistaDescricao");
+                }
+            }
+        } 
+
+        #endregion
+
+        #region Dificuldade
+        
+        private int _dificuldadeId;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public int DificuldadeId
+        {
+            get
+            {
+                return _dificuldadeId;
+            }
+            set
+            {
+                if (value != _dificuldadeId)
+                {
+                    _dificuldadeId = value;
+                    NotifyPropertyChanged("DificuldadeId");
+                }
+            }
+        }
+
+        private string _dificuldadeDescricao;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string DificuldadeDescricao
+        {
+            get
+            {
+                return _dificuldadeDescricao;
+            }
+            set
+            {
+                if (value != _dificuldadeDescricao)
+                {
+                    _dificuldadeDescricao = value;
+                    NotifyPropertyChanged("DificuldadeDescricao");
+                }
+            }
+        } 
+        
+        #endregion
+
+        #region Qualidade da Rota
+
+        private int _qualidadeId;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public int QualidadeId
+        {
+            get
+            {
+                return _qualidadeId;
+            }
+            set
+            {
+                if (value != _qualidadeId)
+                {
+                    _qualidadeId = value;
+                    NotifyPropertyChanged("QualidadeId");
+                }
+            }
+        }
+
+        private string _qualidadeDescricao;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string QualidadeDescricao
+        {
+            get
+            {
+                return _qualidadeDescricao;
+            }
+            set
+            {
+                if (value != _qualidadeDescricao)
+                {
+                    _qualidadeDescricao = value;
+                    NotifyPropertyChanged("QualidadeDescricao");
+                }
+            }
+        }
+
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

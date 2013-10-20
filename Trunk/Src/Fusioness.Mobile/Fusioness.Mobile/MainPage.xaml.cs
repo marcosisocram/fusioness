@@ -40,7 +40,7 @@ namespace Fusioness.Mobile
                     MessageBox.Show("Ative sua rede Wi-Fi ou conecte com a Rede Móvel para executar esta ação!", "Alerta", MessageBoxButton.OK);
                 else
                 {
-                    NavigationService.Navigate(new Uri("/Views/CriarRota.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new Uri("/Views/RotaMap.xaml", UriKind.Relative));
                 }
             }
             else if (PanoramaMain.SelectedItem == pnItemEvento)
@@ -56,7 +56,7 @@ namespace Fusioness.Mobile
         {
             var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
 
-            NavigationService.Navigate(new Uri("/Views/CriarRota.xaml?RotaId=" + res.RotaId.ToString(), UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/RotaMap.xaml?RotaId=" + res.RotaId.ToString(), UriKind.Relative));
 
         }
     }

@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
-    x:Class="Fusioness.Mobile.Views.CriarRota"
+    x:Class="Fusioness.Mobile.Views.RotaMap"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -24,13 +24,13 @@
 
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <maps:Map x:Name="Mapa" HorizontalAlignment="Left" Margin="10,10,0,-28" VerticalAlignment="Top" ZoomLevel="17"
-                      LandmarksEnabled="True" PedestrianFeaturesEnabled="True" ColorMode="Light" Width="436" Height="714"/>
+            <maps:Map x:Name="Mapa" HorizontalAlignment="Left" VerticalAlignment="Top" ZoomLevel="17"
+                      LandmarksEnabled="True" PedestrianFeaturesEnabled="True" ColorMode="Light" Width="456" Height="686"/>
         </Grid>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
             <shell:ApplicationBarIconButton x:Name="btStartStop" IconUri="/Assets/Buttons/play.png" Text="Iniciar" Click="btStartStop_Click"/>
             <shell:ApplicationBarIconButton x:Name="btSalvar" IconUri="/Assets/Buttons/save.png" Text="Salvar" IsEnabled="False" Click="btSalvar_Click"/>
             <shell:ApplicationBarIconButton x:Name="btLimpar" IconUri="/Assets/Buttons/delete.png" Text="Limpar" IsEnabled="False" Click="btLimpar_Click"/>
