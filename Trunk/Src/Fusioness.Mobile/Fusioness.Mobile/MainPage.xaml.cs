@@ -26,10 +26,7 @@ namespace Fusioness.Mobile
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+            App.ViewModel.LoadData();
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)
@@ -57,7 +54,11 @@ namespace Fusioness.Mobile
             var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
 
             NavigationService.Navigate(new Uri("/Views/RotaMap.xaml?RotaId=" + res.RotaId.ToString(), UriKind.Relative));
+        }
 
+        private void btAtualizar_Click(object sender, EventArgs e)
+        {
+            App.ViewModel.LoadData();
         }
     }
 }

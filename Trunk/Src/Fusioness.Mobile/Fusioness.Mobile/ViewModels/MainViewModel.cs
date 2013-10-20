@@ -11,8 +11,7 @@ namespace Fusioness.Mobile.ViewModels
     {
         public MainViewModel()
         {
-            this.Rotas = new ObservableCollection<ItemViewModel>();
-            this.Eventos = new ObservableCollection<ItemViewModel>();
+            
         }
 
         /// <summary>
@@ -64,6 +63,8 @@ namespace Fusioness.Mobile.ViewModels
         /// </summary>
         public void LoadData()
         {
+            this.Rotas = new ObservableCollection<ItemViewModel>();
+            this.Eventos = new ObservableCollection<ItemViewModel>();
             FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
             servico.ListarRotasPorUsuarioAsync(Global.usuarioLogado);
             servico.ListarRotasPorUsuarioCompleted += servico_ListarRotasPorUsuarioCompleted;

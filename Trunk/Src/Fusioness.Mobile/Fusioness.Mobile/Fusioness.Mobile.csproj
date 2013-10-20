@@ -150,11 +150,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Buttons\cancel.png" />
+    <Content Include="Assets\Buttons\refresh.png" />
     <Content Include="README_FIRST.txt" />
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarBicicletaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarComentarioEventoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarContatoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarEventoResponse.datasource">
@@ -166,6 +170,12 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ConvidarUsuariosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ExcluirContatoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.HelloWorldResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -173,6 +183,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirComentarioEventoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirContatoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirFotoUsuarioResponse.datasource">
@@ -193,7 +206,10 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarComentariosPorEventoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarContatosPorUsuarioResponse.datasource">
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarContatosDoUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarContatosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarConvitesEventosResponse.datasource">
@@ -229,6 +245,9 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarUsuariosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterBicicletaPorIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -242,6 +261,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterRotaPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterUsuariosIdsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.RemoverBicicletaResponse.datasource">

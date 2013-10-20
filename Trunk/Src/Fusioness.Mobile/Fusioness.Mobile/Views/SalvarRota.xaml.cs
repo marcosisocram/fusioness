@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using Fusioness.Mobile.Util;
 using System.Collections.ObjectModel;
 using Fusioness.Mobile.ViewModels;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace Fusioness.Mobile.Views
 {
@@ -21,6 +22,7 @@ namespace Fusioness.Mobile.Views
         public ObservableCollection<ItemViewModel> TipoPista { get; private set; }
         public ObservableCollection<ItemViewModel> Dificuldade { get; private set; }
         public ObservableCollection<ItemViewModel> Qualidade { get; private set; }
+        private FusionessWS.Rota rotaPai;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -46,10 +48,9 @@ namespace Fusioness.Mobile.Views
             InitializeComponent();
             this.TipoPista = new ObservableCollection<ItemViewModel>();
             this.Dificuldade = new ObservableCollection<ItemViewModel>();
-            this.Qualidade = new ObservableCollection<ItemViewModel>();
-
+            this.Qualidade = new ObservableCollection<ItemViewModel>();            
             try
-            {
+            {                
                 servico.ListarTiposPistaAsync();
                 servico.ListarTiposPistaCompleted += servico_ListarTiposPistaCompleted;
                 servico.ListarDificuldadesAsync();
@@ -61,6 +62,32 @@ namespace Fusioness.Mobile.Views
             {
                 MessageBox.Show("Serviço indisponível no momento!","Alerta!",MessageBoxButton.OK);
             }
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (acao == Global.Acao.Visualizar)
+            {
+                this.txtDescricao.IsEnabled = false;
+                rotaPai = new FusionessWS.Rota();
+                rotaPai.IdRota = RotaId;
+                servico.ObterRotaPorIdAsync(rotaPai);
+                servico.ObterRotaPorIdCompleted += servico_ObterRotaPorIdCompleted;
+            }
+        }
+
+        void servico_ObterRotaPorIdCompleted(object sender, FusionessWS.ObterRotaPorIdCompletedEventArgs e)
+        {
+            try
+            {
+                FusionessWS.Rota rota = e.Result;
+                this.txtDescricao.Text = rota.Descricao;
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Serviço indisponível");
+            }
+
         }       
 
         void servico_ListarTiposPistaCompleted(object sender, FusionessWS.ListarTiposPistaCompletedEventArgs e)
@@ -109,24 +136,37 @@ namespace Fusioness.Mobile.Views
 
        private void btSalvar_Click(object sender, EventArgs e)
        {
-           var tipoPista = (this.lpkTipoPista as ListPicker).SelectedItem as ItemViewModel;
-           var dificuldade = (this.lpkDificuldade as ListPicker).SelectedItem as ItemViewModel;
-           var qualidade = (this.lpkQualidade as ListPicker).SelectedItem as ItemViewModel;
-
-           FusionessWS.Rota rota = new FusionessWS.Rota();
-           rota.Descricao = this.txtDescricao.Text;
-           rota.IdUsuario = Global.usuarioLogado.IdUsuario;
-           rota.IdTipoPista = tipoPista.TipoPistaId;
-           rota.IdDificuldade = dificuldade.DificuldadeId;
-           rota.IdQualidadeRota = qualidade.QualidadeId;
-
-           if (acao == Global.Acao.Criar)
-               rota.IdTipoRota = 1;
+           if (!NetworkInterface.GetIsNetworkAvailable())
+               MessageBox.Show("Ative sua rede Wi-Fi ou conecte com a Rede Móvel para executar esta ação!");
            else
-               rota.IdTipoRota = 2;      
+           {
+               if (String.IsNullOrEmpty(this.txtDescricao.Text))
+               {
+                   MessageBox.Show("Informe o Nome da Rota!");
+                   this.txtDescricao.Focus();
+               }
+               else
+               {
+                   var tipoPista = (this.lpkTipoPista as ListPicker).SelectedItem as ItemViewModel;
+                   var dificuldade = (this.lpkDificuldade as ListPicker).SelectedItem as ItemViewModel;
+                   var qualidade = (this.lpkQualidade as ListPicker).SelectedItem as ItemViewModel;
 
-           servico.InserirRotaAsync(rota);
-           servico.InserirRotaCompleted += servico_InserirRotaCompleted;
+                   FusionessWS.Rota rota = new FusionessWS.Rota();
+                   rota.Descricao = this.txtDescricao.Text;
+                   rota.IdUsuario = Global.usuarioLogado.IdUsuario;
+                   rota.IdTipoPista = tipoPista.TipoPistaId;
+                   rota.IdDificuldade = dificuldade.DificuldadeId;
+                   rota.IdQualidadeRota = qualidade.QualidadeId;
+
+                   if (acao == Global.Acao.Criar)
+                       rota.IdTipoRota = 1;
+                   else
+                       rota.IdTipoRota = 2;
+
+                   servico.InserirRotaAsync(rota);
+                   servico.InserirRotaCompleted += servico_InserirRotaCompleted;
+               }
+           }
        }
 
        void servico_InserirRotaCompleted(object sender, FusionessWS.InserirRotaCompletedEventArgs e)
@@ -166,6 +206,7 @@ namespace Fusioness.Mobile.Views
                if (coordenadas != null)
                {
                    MessageBox.Show("Rota Salva com sucesso.");
+                   NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));                   
                }
                else
                {
@@ -177,5 +218,10 @@ namespace Fusioness.Mobile.Views
                MessageBox.Show("Erro ao Salvar Rota.");
            }
        }
+
+       private void btCancelar_Click(object sender, EventArgs e)
+       {
+           NavigationService.GoBack();
+       }  
     }
 }
