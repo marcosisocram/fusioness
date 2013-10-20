@@ -150,8 +150,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\bootplus-responsive.min.css" />
     <Content Include="Content\css\bootplus.min.css" />
+    <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\font-awesome-ie7.min.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Global.asax" />

@@ -11,68 +11,65 @@ namespace Fusioness.Controllers
         public ActionResult Index(EventoModel model)
         {
             model.ListaEventos = Servico.ListarEventos(new int[]{});
+            model.ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(UsuarioLogado);
             return View(model);
-        }
-
-
-        public ActionResult Detalhar(int Id = 0)
-        {
-            EventoModel model = new EventoModel();
-            model.ListaRotas = Servico.ListarRotasPorUsuario(this.UsuarioLogado);
-            model.Evento = new Evento() { IdEvento = Id };
-            model.Evento = Servico.ObterEventoPorId(model.Evento);
-
-            return View("InserirAlterarEvento", model);
         }
 
         [HttpPost]
         public ActionResult InserirAlterarEvento(EventoModel model)
         {
             model.Evento.IdUsuario = this.UsuarioLogado.IdUsuario;
+            model.ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(UsuarioLogado);
 
             if (model.Evento.IdEvento > 0)
             {
-                //model.Evento = Servico.Alterar
+                var eventoAlterado = Servico.AlterarEvento(model.Evento);
+                if (eventoAlterado != null && eventoAlterado.IdEvento > 0)
+                {
+                    ExibirModal("Evento alterado com sucesso.");
+                    return RedirectToAction("index");
+                }
+
+                ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
+                return InserirAlterarEvento(model.Evento.IdEvento);
             }
 
-            /*
-             if (model.Rota.IdRota > 0) model.Rota = Servico.AlterarRota(model.Rota);
-            else model.Rota = Servico.InserirRota(model.Rota);
-
-            if (model.Rota == null || model.Rota.IdRota <= 0) ExibirModal("Erro ao cadastrar rota.");
-            else ExibirModal("Rota cadastrada com sucesso!");*/
-
-            return RedirectToAction("index", model.Evento);
+            return RedirectToAction("index");
         }
 
         [HttpGet]
-        public ActionResult InserirAlterarEvento()
+        public ActionResult InserirAlterarEvento(int idEvento = 0)
         {
-            return View("InserirAlterarEvento");
+            var model = new EventoModel();
+            model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
+            model.Evento = Servico.ObterEventoPorId(new Evento { IdEvento = idEvento });
+            model.ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(UsuarioLogado);
+
+            return View("InserirAlterarEvento", model);
         }
 
         public ActionResult Convites(EventoModel model)
         {
-            var respostas = Servico.ListarRespostas();
+            model.RespostasPossiveis = Servico.ListarRespostas();
             model.ListaConviteEventos = Servico.ObterConvitesEventosDoUsuario(UsuarioLogado);
 
             foreach (var convite in model.ListaConviteEventos)
-                convite.Resposta = convite.IdResposta.HasValue ? respostas.First(r => r.IdResposta == convite.IdResposta) : respostas.First(r => r.IdResposta == 3);
+                convite.Resposta = convite.IdResposta.HasValue ? model.RespostasPossiveis.First(r => r.IdResposta == convite.IdResposta) : model.RespostasPossiveis.First(r => r.IdResposta == 3);
 
             if (model.ListaConviteEventos.Any())
                 model.ListaEventos = Servico.ListarEventos(model.ListaConviteEventos.Select(c => c.IdEvento).ToArray());
             return View(model);
         }
 
-        public ActionResult ResponderConviteEvento(int idEvento, bool aceito)
+        public ActionResult ResponderConviteEvento(int idEvento, int idResposta)
         {
-            Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento }, aceito);
+            Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento }, new Resposta{ IdResposta = idResposta});
             return RedirectToAction("Convites");
         }
 
-        public ActionResult ExcluirEvento(EventoModel model, int IdEvento)
+        public ActionResult ExcluirEvento(EventoModel model, int idEvento)
         {
-            Servico.RemoverEvento(new Evento() { IdEvento = IdEvento});
+            Servico.RemoverEvento(new Evento { IdEvento = idEvento });
             return RedirectToAction("index", model);
         }
 

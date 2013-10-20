@@ -1256,7 +1256,7 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ResponderConviteEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConviteEvento ResponderConviteEvento(ConviteEvento convite, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> resposta) {
+        public ConviteEvento ResponderConviteEvento(ConviteEvento convite, Resposta resposta) {
             object[] results = this.Invoke("ResponderConviteEvento", new object[] {
                         convite,
                         resposta});
@@ -1264,12 +1264,12 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public void ResponderConviteEventoAsync(ConviteEvento convite, System.Nullable<bool> resposta) {
+        public void ResponderConviteEventoAsync(ConviteEvento convite, Resposta resposta) {
             this.ResponderConviteEventoAsync(convite, resposta, null);
         }
         
         /// <remarks/>
-        public void ResponderConviteEventoAsync(ConviteEvento convite, System.Nullable<bool> resposta, object userState) {
+        public void ResponderConviteEventoAsync(ConviteEvento convite, Resposta resposta, object userState) {
             if ((this.ResponderConviteEventoOperationCompleted == null)) {
                 this.ResponderConviteEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnResponderConviteEventoOperationCompleted);
             }

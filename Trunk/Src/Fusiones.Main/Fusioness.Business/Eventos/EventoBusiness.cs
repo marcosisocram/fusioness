@@ -57,6 +57,8 @@ namespace Fusioness.Business.Eventos
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Evento> repo = new EventoRepository(uow);
+                    if (evento.UrlImagem.StartsWith("data:image/png;"))
+                        evento.UrlImagem = string.Empty;
                     evento = repo.Update(evento);
                     uow.Commit();
                 }
@@ -73,7 +75,10 @@ namespace Fusioness.Business.Eventos
             {
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
-                    IRepository<Evento> repo = new EventoRepository(uow);
+                    var repo = new EventoRepository(uow);
+                    var repoConvite = new ConviteEventoRepository(uow);
+                    var convites = repoConvite.GetWhere(c => c.IdEvento == evento.IdEvento);
+                    if(convites.Any()) repoConvite.Delete(convites);
                     repo.Delete(evento);
                     uow.Commit();
                 }
@@ -104,9 +109,7 @@ namespace Fusioness.Business.Eventos
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                IRepository<Evento> repo = new EventoRepository(uow);
-                var evento = repo.GetAll();
-                return evento.ToList();
+                return new EventoRepository(uow).GetWhere(e => e.IdUsuario == usuaio.IdUsuario).ToList();
             }
         }
 

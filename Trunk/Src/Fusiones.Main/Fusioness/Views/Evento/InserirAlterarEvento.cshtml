@@ -9,25 +9,54 @@
     <!-- BLOCK -->
     <div class="span12">
         <div class="card">
-            <h2 class="card-heading simple">Cadastre seu evento!</h2>
-            <div class="card-body">
-                @using (Html.BeginForm("InserirOuAlterarEvento", "Evento", FormMethod.Post))
+            <h2 class="card-heading simple">
+                @Html.ActionLink("Voltar", "Index", "Evento", new{ @class = "pull-right btn btn-primary"})
+                Detalhes do evento!
+            </h2>
+            <div class="card-body" style="overflow:hidden">
+                <div style="float:left">
+                    <ul class="thumbnails">
+                        <li  class="span9">
+                            <div class="thumbnail">
+                                <img data-src="holder.js/300x200" src="@Model.Evento.UrlImagem" alt="Imagem do Evento">
+                                <h3>@Model.Evento.Titulo</h3>
+                                <p>@Model.Evento.Descricao</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    @if (Model.SouDonoDoEvento(Model.Evento.IdEvento))
                 {
-                    @Html.LabelFor(m => m.Evento.UrlImagem)
-                    @Html.TextBoxFor(m => m.Evento.UrlImagem)
-                    <br />
-                    @Html.LabelFor(m => m.Evento.Titulo)
-                    @Html.TextBoxFor(m => m.Evento.Titulo)
-                    <br />
-                    @Html.LabelFor(m => m.Evento.Descricao)
-                    @Html.TextBoxFor(m => m.Evento.Descricao)
-                    <br />
-                    @Html.LabelFor(m => m.ListaRotas,"Rota:")
-                    @Html.DropDownListFor(m => m.Evento.IdRota, new SelectList(Model.ListaRotas, "IdRota", "Descricao"))
-                    <br />
-                    @Html.HiddenFor(m => m.Evento.IdEvento)
-                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                    using (Html.BeginForm("InserirAlterarEvento", "Evento", FormMethod.Post))
+                    {
+                        object displayMode = (Model.SouDonoDoEvento(Model.Evento.IdEvento)) ? (object)new { style = "width:95%" } : (object)new { disabled = "disabled", style = "width:95%" };
+                        <ul class="thumbnails">
+                            <li  class="span5">
+                                <div class="thumbnail">
+                                    @Html.LabelFor(m => m.Evento.UrlImagem)
+                                    @Html.TextBoxFor(m => m.Evento.UrlImagem, displayMode)
+                                    <br />
+                                    @Html.LabelFor(m => m.Evento.Titulo)
+                                    @Html.TextBoxFor(m => m.Evento.Titulo, displayMode)
+                                    <br />
+                                    @Html.LabelFor(m => m.Evento.Data)
+                                    @Html.TextBoxFor(m => m.Evento.Data, new { Value = Model.Evento.Data.ToString("dd/MM/yyyy"), @class = "datepicker"})
+                                    <br />
+                                    @Html.LabelFor(m => m.Evento.Descricao)
+                                    @Html.TextBoxFor(m => m.Evento.Descricao, displayMode)
+                                    <br />
+                                    @Html.LabelFor(m => m.ListaRotas, "Rota:")
+                                    @Html.DropDownListFor(m => m.Evento.IdRota, new SelectList(Model.ListaRotas, "IdRota", "Descricao"), displayMode)
+                                    <br />
+                                    @Html.HiddenFor(m => m.Evento.IdEvento)
+                                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                                </div>
+                            </li>
+                        </ul>
+                    }
                 }
+                </div>
             </div>
         </div>
     </div>

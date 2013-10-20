@@ -565,11 +565,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public ConviteEvento ResponderConviteEvento(ConviteEvento convite, bool? resposta)
+        public ConviteEvento ResponderConviteEvento(ConviteEvento convite, Resposta resposta)
         {
             try
             {
-                return Facade.Instance.ResponderAoConvite(convite, RespostasPrecarga(resposta));
+                return Facade.Instance.ResponderAoConvite(convite, resposta);
             }
             catch
             {
