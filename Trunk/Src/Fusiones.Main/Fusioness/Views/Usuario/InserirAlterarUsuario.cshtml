@@ -50,7 +50,8 @@
                     </ul>
                     <br />
                     @Html.HiddenFor(m => m.Usuario.IdUsuario)
-                    <input type="submit" value="Registrar" class="btn btn-primary" />
+                    @Html.HiddenFor(m => m.Usuario.UrlImagem)
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
                     <!-- <a class="btn" href="/Acesso">Voltar</a> -->                                     
                     
                 }

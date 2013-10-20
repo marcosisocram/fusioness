@@ -11,8 +11,9 @@ namespace Fusioness.Controllers
         [PermiteAnonimo]
         public ActionResult Index(UsuarioModel model)
         {
-            model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
-            return View("Perfil", model);
+            //model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+            //return View("InserirAlterarUsuario", model);
+            return RedirectToAction("InserirAlterarUsuario");
         }
 
         [PermiteAnonimo]
@@ -29,6 +30,8 @@ namespace Fusioness.Controllers
                 {
                     model.Usuario = Servico.InserirUsuario(model.Usuario);
                 }
+                // atualiza o usuario na session ou nao vai mostrar os dados corretos no reload
+                (new BaseController()).EfetuarLogon(model.Usuario,HttpContext);
                 return RedirectToAction("Index", model);
             }
             else
@@ -43,12 +46,10 @@ namespace Fusioness.Controllers
         public ActionResult InserirAlterarUsuario()
         {
             var model = new UsuarioModel();
+            model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             model.CarregarParametrosView();
-
             return View(model);
         }
 
-                
-        
     }
 }
