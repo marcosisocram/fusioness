@@ -38,8 +38,9 @@ namespace Fusioness.Controllers
         }
 
         [HttpGet]
-        public ActionResult InserirAlterarEvento(int idEvento = 0)
+        public ActionResult InserirAlterarEvento(int idEvento)
         {
+            if (idEvento == 0) return RedirectToAction("Index");
             var model = new EventoModel();
             model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
             model.Evento = Servico.ObterEventoPorId(new Evento { IdEvento = idEvento });
@@ -73,5 +74,11 @@ namespace Fusioness.Controllers
             return RedirectToAction("index", model);
         }
 
+
+
+        public ActionResult Convidar(int[] listaIdAmigo)
+        {
+            return null;
+        }
     }
 }

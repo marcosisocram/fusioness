@@ -132,7 +132,7 @@ namespace Fusioness.Business.Usuarios
             }
             
         }
-
+        /*
         #region Contato
         public Contato InserirContato(Contato contato)
         {
@@ -168,8 +168,16 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
-        #endregion
+        #endregion*/
+        public List<Usuario> ObterUsuariosIds(List<int> idsUsuario)
+        {
+            if (idsUsuario == null || !idsUsuario.Any()) return new List<Usuario>();
 
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                return new UsuarioRepository(uow).GetWhere(u => idsUsuario.Any(id => id == u.IdUsuario)).ToList();
+            }
+        }
         #endregion
     }
 }

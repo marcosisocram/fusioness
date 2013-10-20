@@ -167,20 +167,6 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<Usuario> ListarContatosPorUsuario(Usuario usuario)
-        {
-            try
-            {
-                return Facade.Instance.ListarContatosPorUsuario(usuario);
-            }
-            catch
-            {
-                return new List<Usuario>();
-            }
-        }
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string InserirFotoUsuario(Usuario usuario, string filename, byte[] bytes)
         {
             try
@@ -194,6 +180,19 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Usuario> ObterUsuariosIds(List<int> idsUsuario)
+        {
+            try
+            {
+                return Facade.Instance.ObterUsuariosIds(idsUsuario);
+            }
+            catch (Exception)
+            {
+                return new List<Usuario>();
+            }
+        }
         #endregion
 
         #region Rotas
@@ -590,6 +589,78 @@ namespace Fusioness.Services
             catch
             {
                 return new List<Resposta>();
+            }
+        }
+        #endregion
+
+        #region Contato
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Contato> ListarContatosDoUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarContatosDoUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Contato>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Contato> ListarContatos()
+        {
+            try
+            {
+                return Facade.Instance.ListarContatos();
+            }
+            catch
+            {
+                return new List<Contato>();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Contato InserirContato(Contato contato)
+        {
+            try
+            {
+                return Facade.Instance.InserirContato(contato);
+            }
+            catch
+            {
+                return new Contato();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Contato AlterarContato(Contato contato)
+        {
+            try
+            {
+                return Facade.Instance.AlterarContato(contato);
+            }
+            catch
+            {
+                return new Contato();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool ExcluirContato(Contato contato)
+        {
+            try
+            {
+                return Facade.Instance.ExcluirContato(contato);
+            }
+            catch
+            {
+                return false;
             }
         }
         #endregion
