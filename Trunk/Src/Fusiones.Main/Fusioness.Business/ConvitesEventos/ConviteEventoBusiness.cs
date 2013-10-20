@@ -64,7 +64,7 @@ namespace Fusioness.Business.ConvitesEventos
                     var conviteEventoRepo = new ConviteEventoRepository(uow);
                     var respostaRepo = new RespostaRepository(uow);
                     var respostaTemp = respostaRepo.GetByKey(resposta);
-                    var conviteTemp = conviteEventoRepo.GetWhere(c => c.IdEvento == convite.IdEvento);
+                    var conviteTemp = conviteEventoRepo.GetWhere(c => c.IdEvento == convite.IdEvento && c.IdContato == convite.IdContato);
 
                     if (respostaTemp == null) throw new Exception("Resposta inválida.");
                     if (conviteTemp == null) throw new Exception("Convite inexistente.");
@@ -81,6 +81,28 @@ namespace Fusioness.Business.ConvitesEventos
             {
                 //TODO: CREATE LOG
                 throw;
+            }
+        }
+
+        public List<ConviteEvento> ConvidarUsuarios(Usuario usuario, Evento evento, List<int> idsamigos)
+        {
+            if (idsamigos == null || !idsamigos.Any(id => id > 0) || usuario == null || usuario.IdUsuario <= 0) return new List<ConviteEvento>();
+
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                var repo = new ConviteEventoRepository(uow);
+                var novosConvites = idsamigos.Select(id => new ConviteEvento { IdUsuario = usuario.IdUsuario, IdContato = id, IdEvento = evento.IdEvento}).ToList();
+                var convitesExistentes = repo.GetWhere( c => c.IdEvento == evento.IdEvento && c.IdUsuario == usuario.IdUsuario && idsamigos.Any(idAmigo => idAmigo == c.IdContato)).ToList();
+                if (convitesExistentes.Any())
+                {
+                    //Elimina convites já feitos
+                    novosConvites = novosConvites.Where(cn => 
+                        !convitesExistentes.Any(ce => ce.IdEvento == cn.IdEvento && ce.IdUsuario == cn.IdUsuario && ce.IdContato == cn.IdContato)
+                    ).ToList();
+                }
+                var convites = repo.Insert(novosConvites).ToList();
+                uow.Commit();
+                return convites;
             }
         }
 

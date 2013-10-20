@@ -49,14 +49,27 @@ namespace Fusioness.Controllers
             try
             {
                 var usuario = ObterUsuarioLogado(context);
-                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir"];
-                return String.Format("{0}{1}", urlService, usuario.UrlImagem);
+                return String.Format("{0}{1}", ObterUrlBaseAvatar(), usuario.UrlImagem);
             }
             catch
             {
                 return string.Empty;
             }
             
+        }
+
+        public static string ObterUrlBaseAvatar()
+        {
+            try
+            {
+                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir"];
+                return urlService;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+
         }
 
         public void EfetuarLogon(Usuario usuario)

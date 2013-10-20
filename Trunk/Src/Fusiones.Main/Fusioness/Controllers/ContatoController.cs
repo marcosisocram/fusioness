@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Fusioness.Models.Contatos;
 
 namespace Fusioness.Controllers
@@ -7,7 +8,8 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(ContatoModel model)
         {
-            model.ListaDeUsuarios = Servico.ListarContatosPorUsuario(UsuarioLogado);
+            var idsContatos = Servico.ListarContatosDoUsuario(UsuarioLogado).Select(c => c.IdContato).ToList();
+            if (idsContatos.Any()) model.ListaDeUsuarios = Servico.ObterUsuariosIds(idsContatos.ToArray());
             return View(model);
         }
 
@@ -15,6 +17,16 @@ namespace Fusioness.Controllers
         {
             //TODO: IMPLEMENTAR ROTINA
             return RedirectToAction("Index", model);
+        }
+
+        [HttpGet]
+        public ActionResult ListarTodos()
+        {
+            var model = new ContatoModel();
+            model.ListaDeUsuarios = Servico.ListarUsuarios();
+            //model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+            //model.CarregarParametrosView();
+            return View("index",model);
         }
     }
 }

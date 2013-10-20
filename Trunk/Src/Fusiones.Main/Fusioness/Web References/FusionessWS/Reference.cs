@@ -48,9 +48,11 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback AlterarUsuarioOperationCompleted;
         
-        private System.Threading.SendOrPostCallback ListarContatosPorUsuarioOperationCompleted;
-        
         private System.Threading.SendOrPostCallback InserirFotoUsuarioOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ObterUsuariosIdsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarUsuariosOperationCompleted;
         
         private System.Threading.SendOrPostCallback InserirRotaOperationCompleted;
         
@@ -102,7 +104,19 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ResponderConviteEventoOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ConvidarUsuariosOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarRespostasOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarContatosDoUsuarioOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarContatosOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InserirContatoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AlterarContatoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ExcluirContatoOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -170,10 +184,13 @@ namespace Fusioness.FusionessWS {
         public event AlterarUsuarioCompletedEventHandler AlterarUsuarioCompleted;
         
         /// <remarks/>
-        public event ListarContatosPorUsuarioCompletedEventHandler ListarContatosPorUsuarioCompleted;
+        public event InserirFotoUsuarioCompletedEventHandler InserirFotoUsuarioCompleted;
         
         /// <remarks/>
-        public event InserirFotoUsuarioCompletedEventHandler InserirFotoUsuarioCompleted;
+        public event ObterUsuariosIdsCompletedEventHandler ObterUsuariosIdsCompleted;
+        
+        /// <remarks/>
+        public event ListarUsuariosCompletedEventHandler ListarUsuariosCompleted;
         
         /// <remarks/>
         public event InserirRotaCompletedEventHandler InserirRotaCompleted;
@@ -251,7 +268,25 @@ namespace Fusioness.FusionessWS {
         public event ResponderConviteEventoCompletedEventHandler ResponderConviteEventoCompleted;
         
         /// <remarks/>
+        public event ConvidarUsuariosCompletedEventHandler ConvidarUsuariosCompleted;
+        
+        /// <remarks/>
         public event ListarRespostasCompletedEventHandler ListarRespostasCompleted;
+        
+        /// <remarks/>
+        public event ListarContatosDoUsuarioCompletedEventHandler ListarContatosDoUsuarioCompleted;
+        
+        /// <remarks/>
+        public event ListarContatosCompletedEventHandler ListarContatosCompleted;
+        
+        /// <remarks/>
+        public event InserirContatoCompletedEventHandler InserirContatoCompleted;
+        
+        /// <remarks/>
+        public event AlterarContatoCompletedEventHandler AlterarContatoCompleted;
+        
+        /// <remarks/>
+        public event ExcluirContatoCompletedEventHandler ExcluirContatoCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -512,35 +547,6 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarContatosPorUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Usuario[] ListarContatosPorUsuario(Usuario usuario) {
-            object[] results = this.Invoke("ListarContatosPorUsuario", new object[] {
-                        usuario});
-            return ((Usuario[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ListarContatosPorUsuarioAsync(Usuario usuario) {
-            this.ListarContatosPorUsuarioAsync(usuario, null);
-        }
-        
-        /// <remarks/>
-        public void ListarContatosPorUsuarioAsync(Usuario usuario, object userState) {
-            if ((this.ListarContatosPorUsuarioOperationCompleted == null)) {
-                this.ListarContatosPorUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarContatosPorUsuarioOperationCompleted);
-            }
-            this.InvokeAsync("ListarContatosPorUsuario", new object[] {
-                        usuario}, this.ListarContatosPorUsuarioOperationCompleted, userState);
-        }
-        
-        private void OnListarContatosPorUsuarioOperationCompleted(object arg) {
-            if ((this.ListarContatosPorUsuarioCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ListarContatosPorUsuarioCompleted(this, new ListarContatosPorUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirFotoUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string InserirFotoUsuario(Usuario usuario, string filename, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] bytes) {
             object[] results = this.Invoke("InserirFotoUsuario", new object[] {
@@ -570,6 +576,62 @@ namespace Fusioness.FusionessWS {
             if ((this.InserirFotoUsuarioCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.InserirFotoUsuarioCompleted(this, new InserirFotoUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterUsuariosIds", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Usuario[] ObterUsuariosIds(int[] idsUsuario) {
+            object[] results = this.Invoke("ObterUsuariosIds", new object[] {
+                        idsUsuario});
+            return ((Usuario[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterUsuariosIdsAsync(int[] idsUsuario) {
+            this.ObterUsuariosIdsAsync(idsUsuario, null);
+        }
+        
+        /// <remarks/>
+        public void ObterUsuariosIdsAsync(int[] idsUsuario, object userState) {
+            if ((this.ObterUsuariosIdsOperationCompleted == null)) {
+                this.ObterUsuariosIdsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterUsuariosIdsOperationCompleted);
+            }
+            this.InvokeAsync("ObterUsuariosIds", new object[] {
+                        idsUsuario}, this.ObterUsuariosIdsOperationCompleted, userState);
+        }
+        
+        private void OnObterUsuariosIdsOperationCompleted(object arg) {
+            if ((this.ObterUsuariosIdsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterUsuariosIdsCompleted(this, new ObterUsuariosIdsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarUsuarios", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Usuario[] ListarUsuarios() {
+            object[] results = this.Invoke("ListarUsuarios", new object[0]);
+            return ((Usuario[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarUsuariosAsync() {
+            this.ListarUsuariosAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ListarUsuariosAsync(object userState) {
+            if ((this.ListarUsuariosOperationCompleted == null)) {
+                this.ListarUsuariosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarUsuariosOperationCompleted);
+            }
+            this.InvokeAsync("ListarUsuarios", new object[0], this.ListarUsuariosOperationCompleted, userState);
+        }
+        
+        private void OnListarUsuariosOperationCompleted(object arg) {
+            if ((this.ListarUsuariosCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarUsuariosCompleted(this, new ListarUsuariosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1256,7 +1318,7 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ResponderConviteEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConviteEvento ResponderConviteEvento(ConviteEvento convite, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> resposta) {
+        public ConviteEvento ResponderConviteEvento(ConviteEvento convite, Resposta resposta) {
             object[] results = this.Invoke("ResponderConviteEvento", new object[] {
                         convite,
                         resposta});
@@ -1264,12 +1326,12 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public void ResponderConviteEventoAsync(ConviteEvento convite, System.Nullable<bool> resposta) {
+        public void ResponderConviteEventoAsync(ConviteEvento convite, Resposta resposta) {
             this.ResponderConviteEventoAsync(convite, resposta, null);
         }
         
         /// <remarks/>
-        public void ResponderConviteEventoAsync(ConviteEvento convite, System.Nullable<bool> resposta, object userState) {
+        public void ResponderConviteEventoAsync(ConviteEvento convite, Resposta resposta, object userState) {
             if ((this.ResponderConviteEventoOperationCompleted == null)) {
                 this.ResponderConviteEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnResponderConviteEventoOperationCompleted);
             }
@@ -1282,6 +1344,39 @@ namespace Fusioness.FusionessWS {
             if ((this.ResponderConviteEventoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ResponderConviteEventoCompleted(this, new ResponderConviteEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ConvidarUsuarios", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ConviteEvento[] ConvidarUsuarios(Usuario usuario, Evento evento, int[] idsAmigos) {
+            object[] results = this.Invoke("ConvidarUsuarios", new object[] {
+                        usuario,
+                        evento,
+                        idsAmigos});
+            return ((ConviteEvento[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ConvidarUsuariosAsync(Usuario usuario, Evento evento, int[] idsAmigos) {
+            this.ConvidarUsuariosAsync(usuario, evento, idsAmigos, null);
+        }
+        
+        /// <remarks/>
+        public void ConvidarUsuariosAsync(Usuario usuario, Evento evento, int[] idsAmigos, object userState) {
+            if ((this.ConvidarUsuariosOperationCompleted == null)) {
+                this.ConvidarUsuariosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConvidarUsuariosOperationCompleted);
+            }
+            this.InvokeAsync("ConvidarUsuarios", new object[] {
+                        usuario,
+                        evento,
+                        idsAmigos}, this.ConvidarUsuariosOperationCompleted, userState);
+        }
+        
+        private void OnConvidarUsuariosOperationCompleted(object arg) {
+            if ((this.ConvidarUsuariosCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ConvidarUsuariosCompleted(this, new ConvidarUsuariosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1309,6 +1404,149 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarRespostasCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarRespostasCompleted(this, new ListarRespostasCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarContatosDoUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Contato[] ListarContatosDoUsuario(Usuario usuario) {
+            object[] results = this.Invoke("ListarContatosDoUsuario", new object[] {
+                        usuario});
+            return ((Contato[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarContatosDoUsuarioAsync(Usuario usuario) {
+            this.ListarContatosDoUsuarioAsync(usuario, null);
+        }
+        
+        /// <remarks/>
+        public void ListarContatosDoUsuarioAsync(Usuario usuario, object userState) {
+            if ((this.ListarContatosDoUsuarioOperationCompleted == null)) {
+                this.ListarContatosDoUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarContatosDoUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("ListarContatosDoUsuario", new object[] {
+                        usuario}, this.ListarContatosDoUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnListarContatosDoUsuarioOperationCompleted(object arg) {
+            if ((this.ListarContatosDoUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarContatosDoUsuarioCompleted(this, new ListarContatosDoUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarContatos", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Contato[] ListarContatos() {
+            object[] results = this.Invoke("ListarContatos", new object[0]);
+            return ((Contato[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarContatosAsync() {
+            this.ListarContatosAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ListarContatosAsync(object userState) {
+            if ((this.ListarContatosOperationCompleted == null)) {
+                this.ListarContatosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarContatosOperationCompleted);
+            }
+            this.InvokeAsync("ListarContatos", new object[0], this.ListarContatosOperationCompleted, userState);
+        }
+        
+        private void OnListarContatosOperationCompleted(object arg) {
+            if ((this.ListarContatosCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarContatosCompleted(this, new ListarContatosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirContato", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Contato InserirContato(Contato contato) {
+            object[] results = this.Invoke("InserirContato", new object[] {
+                        contato});
+            return ((Contato)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InserirContatoAsync(Contato contato) {
+            this.InserirContatoAsync(contato, null);
+        }
+        
+        /// <remarks/>
+        public void InserirContatoAsync(Contato contato, object userState) {
+            if ((this.InserirContatoOperationCompleted == null)) {
+                this.InserirContatoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInserirContatoOperationCompleted);
+            }
+            this.InvokeAsync("InserirContato", new object[] {
+                        contato}, this.InserirContatoOperationCompleted, userState);
+        }
+        
+        private void OnInserirContatoOperationCompleted(object arg) {
+            if ((this.InserirContatoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InserirContatoCompleted(this, new InserirContatoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AlterarContato", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Contato AlterarContato(Contato contato) {
+            object[] results = this.Invoke("AlterarContato", new object[] {
+                        contato});
+            return ((Contato)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AlterarContatoAsync(Contato contato) {
+            this.AlterarContatoAsync(contato, null);
+        }
+        
+        /// <remarks/>
+        public void AlterarContatoAsync(Contato contato, object userState) {
+            if ((this.AlterarContatoOperationCompleted == null)) {
+                this.AlterarContatoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAlterarContatoOperationCompleted);
+            }
+            this.InvokeAsync("AlterarContato", new object[] {
+                        contato}, this.AlterarContatoOperationCompleted, userState);
+        }
+        
+        private void OnAlterarContatoOperationCompleted(object arg) {
+            if ((this.AlterarContatoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AlterarContatoCompleted(this, new AlterarContatoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ExcluirContato", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool ExcluirContato(Contato contato) {
+            object[] results = this.Invoke("ExcluirContato", new object[] {
+                        contato});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ExcluirContatoAsync(Contato contato) {
+            this.ExcluirContatoAsync(contato, null);
+        }
+        
+        /// <remarks/>
+        public void ExcluirContatoAsync(Contato contato, object userState) {
+            if ((this.ExcluirContatoOperationCompleted == null)) {
+                this.ExcluirContatoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExcluirContatoOperationCompleted);
+            }
+            this.InvokeAsync("ExcluirContato", new object[] {
+                        contato}, this.ExcluirContatoOperationCompleted, userState);
+        }
+        
+        private void OnExcluirContatoOperationCompleted(object arg) {
+            if ((this.ExcluirContatoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ExcluirContatoCompleted(this, new ExcluirContatoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1418,7 +1656,7 @@ namespace Fusioness.FusionessWS {
         
         private string emailField;
         
-        private System.Nullable<int> idadeField;
+        private System.DateTime dataDeNascimentoField;
         
         private string sexoField;
         
@@ -1489,13 +1727,12 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> Idade {
+        public System.DateTime DataDeNascimento {
             get {
-                return this.idadeField;
+                return this.dataDeNascimentoField;
             }
             set {
-                this.idadeField = value;
+                this.dataDeNascimentoField = value;
             }
         }
         
@@ -2851,32 +3088,6 @@ namespace Fusioness.FusionessWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void ListarContatosPorUsuarioCompletedEventHandler(object sender, ListarContatosPorUsuarioCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ListarContatosPorUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ListarContatosPorUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Usuario[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Usuario[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void InserirFotoUsuarioCompletedEventHandler(object sender, InserirFotoUsuarioCompletedEventArgs e);
     
     /// <remarks/>
@@ -2897,6 +3108,58 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ObterUsuariosIdsCompletedEventHandler(object sender, ObterUsuariosIdsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterUsuariosIdsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterUsuariosIdsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Usuario[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Usuario[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarUsuariosCompletedEventHandler(object sender, ListarUsuariosCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarUsuariosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarUsuariosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Usuario[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Usuario[])(this.results[0]));
             }
         }
     }
@@ -3487,6 +3750,32 @@ namespace Fusioness.FusionessWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ConvidarUsuariosCompletedEventHandler(object sender, ConvidarUsuariosCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ConvidarUsuariosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ConvidarUsuariosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ConviteEvento[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ConviteEvento[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void ListarRespostasCompletedEventHandler(object sender, ListarRespostasCompletedEventArgs e);
     
     /// <remarks/>
@@ -3507,6 +3796,136 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Resposta[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarContatosDoUsuarioCompletedEventHandler(object sender, ListarContatosDoUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarContatosDoUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarContatosDoUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Contato[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Contato[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarContatosCompletedEventHandler(object sender, ListarContatosCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarContatosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarContatosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Contato[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Contato[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void InserirContatoCompletedEventHandler(object sender, InserirContatoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InserirContatoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InserirContatoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Contato Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Contato)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AlterarContatoCompletedEventHandler(object sender, AlterarContatoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AlterarContatoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AlterarContatoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Contato Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Contato)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ExcluirContatoCompletedEventHandler(object sender, ExcluirContatoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ExcluirContatoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ExcluirContatoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
             }
         }
     }

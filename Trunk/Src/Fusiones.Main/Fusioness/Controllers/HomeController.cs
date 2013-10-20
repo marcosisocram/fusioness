@@ -27,12 +27,15 @@ namespace Fusioness.Controllers
                     var ms = new MemoryStream();
                     image.InputStream.CopyTo(ms);
                     byte[] bytes = ms.ToArray();
-                    string fs = Servico.InserirFotoUsuario(BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext), image.FileName, bytes);
+                    var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+                    string fs = Servico.InserirFotoUsuario(usuario, image.FileName, bytes);
+                    usuario.UrlImagem = fs;
                 }
             }
             catch 
             {
             }
+
             return View("index");
         }
     }

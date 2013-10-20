@@ -13,8 +13,7 @@ namespace Fusioness.Business.Usuarios
         void RemoverUsuario(Usuario usuario);
         Usuario ObterUsuarioPorId(Usuario usuario);
         List<Usuario> ListarUsuarios();
-        Contato InserirContato(Contato contato);
-        List<Usuario> ListarContatosPorUsuario(Usuario usuario);
         string InserirFotoUsuario(Usuario usuario, byte[] bytes, string filename, string dirbase);
+        List<Usuario> ObterUsuariosIds(List<int> idsUsuario);
     }
 }

@@ -9,29 +9,28 @@
   <div class="span12">
     <div class="card">
       <h2 class="card-heading simple">Lista de Eventos</h2>
-      <div class="card-body">
-        <table class="table table-hover">
-            <thead>
-                <th></th>
-                <th>Título</th>
-                <th>Data</th>
-                <th></th>
-            </thead>
-            <tbody>
+      <div class="card-body" style="overflow:hidden">
             @foreach (var item in Model.ListaEventos)
             {
-                <tr>
-                    <td>@item.IdEvento</td>
-                    <td>@item.Titulo</td>
-                    <td>@item.Data</td>
-                  <td>
-                    @Html.ActionLink("Detalhes", "Details", "Evento", new{ id = item.IdEvento}, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Excluir", "Details", "Evento", new{ id = item.IdEvento}, new { @class = "btn btn-primary" })
-                  </td>
-                </tr>
+                <ul class="thumbnails" style="float:left;width:350px;height:450px;">
+                    <li style="width:100%;height:100%;">
+                        <div class="thumbnail" style="margin:5px;height:100%">
+                            <img src="@item.UrlImagem" alt="Imagem do Evento" width="auto" height="270">
+                            <h3>@item.Titulo</h3>
+                            <p>@(item.Descricao.Count() > 250 ? @item.Descricao.Substring(0, 250) + "..." : @item.Descricao)</p>
+                            <p>
+                                <div class="btn-group">
+                                @Html.ActionLink("Detalhes", "InserirAlterarEvento", "Evento", new{ idEvento = item.IdEvento}, new { @class = "btn btn-primary" })
+                                    @if (Model.SouDonoDoEvento(item.IdEvento))
+                                    {
+                                        @Html.ActionLink("Excluir", "ExcluirEvento", "Evento", new {idEvento = item.IdEvento}, new {@class = "btn btn-danger"})
+                                    }    
+                                </div>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
             }
-            </tbody>
-        </table>  
       </div>
     </div>
   </div>

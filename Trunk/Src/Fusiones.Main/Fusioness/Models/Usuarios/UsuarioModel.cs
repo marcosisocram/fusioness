@@ -2,14 +2,16 @@
 using System.Linq;
 using Fusioness.FusionessWS;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using System;
 
 namespace Fusioness.Models.Usuarios
 {
     public class UsuarioModel
     {
         public string Mensagem { get; set; }
-        private Usuario _Usuario;
-
+        private Usuario _Usuario;        
+        public IEnumerable<SelectListItem> Sexos { get; set; }
         public Usuario Usuario
         {
             get 
@@ -51,15 +53,29 @@ namespace Fusioness.Models.Usuarios
                 ModelState.AddModelError("Email", "E-mail inválido");
                 retorno = false;
             }
-            if (Usuario.Idade == null)
+            //if (Usuario.Idade == null)
+            //{
+            //    ModelState.AddModelError("Idade", "Preencha a idade");
+            //    retorno = false;
+            //}
+            //else if (Usuario.Idade <= 0 || Usuario.Idade > 100)
+            //{
+            //    ModelState.AddModelError("Idade", "Idade inválida");
+            //    retorno = false;
+            //}
+            if (Usuario.DataDeNascimento == null)
             {
-                ModelState.AddModelError("Idade", "Preencha a idade");
+                ModelState.AddModelError("Idade", "Preencha a data de nascimento");
                 retorno = false;
             }
-            else if (Usuario.Idade <= 0 || Usuario.Idade > 100)
+            else
             {
-                ModelState.AddModelError("Idade", "Idade inválida");
-                retorno = false;
+                var idade = DateTime.Now.Year - Usuario.DataDeNascimento.Year;
+                if (idade <= 18 || idade > 100)
+                {
+                    ModelState.AddModelError("Idade", "Idade inválida. Idade deve ser maior que 18 e menor que 100.");
+                    retorno = false;
+                }
             }
             if (string.IsNullOrWhiteSpace(Usuario.Sexo))
             {
@@ -73,6 +89,15 @@ namespace Fusioness.Models.Usuarios
             }
 
             return retorno;
+        }
+
+        public void CarregarParametrosView()
+        {            
+            Sexos = new[]
+            {
+                new SelectListItem { Value = "M", Text = "Masculino" },
+                new SelectListItem { Value = "F", Text = "Feminino" },                
+            };
         }
     }
 }

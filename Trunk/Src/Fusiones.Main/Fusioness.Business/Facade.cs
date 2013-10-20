@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fusioness.Business.Contatos;
 using Fusioness.Business.ConvitesEventos;
 using Fusioness.Business.Respostas;
 using Fusioness.Business.Usuarios;
@@ -12,7 +13,6 @@ using Fusioness.Business.TiposPista;
 using Fusioness.Business.Dificuldades;
 using Fusioness.Business.QualidadesRota;
 using Fusioness.Business.ComentariosEvento;
-using System.IO;
 using Fusioness.Business.Coordenadas;
 
 namespace Fusioness.Business
@@ -32,7 +32,7 @@ namespace Fusioness.Business
         private readonly ICoordenadaBusiness CoordenadaBus;
         private readonly IComentarioEventoBusiness ComentarioEventoBus;
         private readonly IRespostaBusiness RespostaBus;
-
+        private readonly IContatoBusiness ContatoBus;
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace Fusioness.Business
             DificuldadeBus = new DificuldadeBusiness();
             QualidadeRotaBus = new QualidadeRotaBusiness();
             CoordenadaBus = new CoordenadaBusiness();
-            
+            ContatoBus = new ContatoBusiness();
             ComentarioEventoBus = new ComentarioEventoBusiness();
             RespostaBus = new RespostaBusiness();
         }
@@ -93,17 +93,13 @@ namespace Fusioness.Business
         {
             return UsuarioBus.ListarUsuarios();
         }
-        public Contato InserirContato(Contato contato)
-        {
-            return UsuarioBus.InserirContato(contato);
-        }
-        public List<Usuario> ListarContatosPorUsuario(Usuario usuario)
-        {
-            return UsuarioBus.ListarContatosPorUsuario(usuario);
-        }
         public string InserirFotoUsuario(Usuario usuario, byte[] bytes, string filename, string dirbase)
         {
             return UsuarioBus.InserirFotoUsuario(usuario,bytes,filename,dirbase);
+        }
+        public List<Usuario> ObterUsuariosIds(List<int> idsUsuario)
+        {
+            return UsuarioBus.ObterUsuariosIds(idsUsuario);
         }
         #endregion
 
@@ -129,6 +125,10 @@ namespace Fusioness.Business
             return ConviteEventoBus.ResponderAoConvite(convite, resposta);
         }
 
+        public List<ConviteEvento> ConvidarUsuarios(Usuario usuario, Evento evento, List<int> idsAmigoss)
+        {
+            return ConviteEventoBus.ConvidarUsuarios(usuario, evento, idsAmigoss);
+        }
         #endregion
 
         #region Bicicleta
@@ -293,7 +293,32 @@ namespace Fusioness.Business
 
         #endregion
 
+        #region Contato
+        public Contato InserirContato(Contato contato)
+        {
+            return ContatoBus.InserirContato(contato);
+        }
+        public List<Contato> ListarContatosDoUsuario(Usuario usuario)
+        {
+            return ContatoBus.ListarContatosDoUsuario(usuario);
+        }
+
+        public List<Contato> ListarContatos()
+        {
+            return ContatoBus.ListarContatos();
+        }
+
+        public Contato AlterarContato(Contato contato)
+        {
+            return ContatoBus.AlterarContato(contato);
+        }
+
+        public bool ExcluirContato(Contato contato)
+        {
+            return ContatoBus.ExcluirContato(contato);
+        }
         #endregion
 
+        #endregion
     }
 }

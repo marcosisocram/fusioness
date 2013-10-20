@@ -16,25 +16,39 @@
                   <th></th>
                   <th>Título</th>
                   <th>Data</th>
+                  <th>Resposta</th>
                   <th></th>
               </thead>
               <tbody>
                 @foreach (var item in Model.ListaEventos)
                 {
+                    var convite = Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento);
                 <tr>
                     <td>@item.IdEvento</td>
                     <td>@item.Titulo</td>
-                    <td>@item.Data</td>
+                    <td>@item.Data.ToString("dd/MM/yyyy")</td>
                     <td>
-                        @if (!Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).IdResposta.HasValue)
+                        <p class="text-warning">@(Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).Resposta.Descricao)</p>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                        @foreach (var resposta in Model.RespostasPossiveis)
                         {
-                            @Html.ActionLink("Rejeitar", "ResponderConviteEvento", "Evento", new {idEvento = item.IdEvento, aceito = false}, new {@class = "btn btn-danger"})
-                            @Html.ActionLink("Aceitar", "ResponderConviteEvento", "Evento", new {idEvento = item.IdEvento, aceito = true}, new {@class = "btn btn-primary"})
+                            if (
+                                (!convite.IdResposta.HasValue && resposta.IdResposta != 3) /*se não tiver resposta, não imprimirá na tela o botão 'talvez'*/
+                                ||
+                                (convite.IdResposta.HasValue && resposta.IdResposta != convite.IdResposta.Value) /*não imprimirá na tela o botão que tenha a mesma resposta já dada*/
+                                )
+                            {
+                                @Html.ActionLink(
+                                    resposta.Descricao, "ResponderConviteEvento", "Evento"
+                                    , new {idEvento = item.IdEvento, idResposta = resposta.IdResposta}
+                                    , new {@class = resposta.IdResposta == 1 ? "btn btn-danger" : (resposta.IdResposta == 2 ? "btn btn-success" : "btn btn-warning"),onclick = "ExibirCarregando()"}
+                                    )
+                            }
+                            
                         }
-                        else
-                        {
-                            @(Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).Resposta.Descricao)
-                        }
+                        </div>
                     </td>
                 </tr>
                 }

@@ -9,28 +9,98 @@
     <!-- BLOCK -->
     <div class="span12">
         <div class="card">
-            <h2 class="card-heading simple">Cadastre seu evento!</h2>
-            <div class="card-body">
-                @using (Html.BeginForm("InserirOuAlterarEvento", "Evento", FormMethod.Post))
-                {
-                    @Html.LabelFor(m => m.Evento.UrlImagem)
-                    @Html.TextBoxFor(m => m.Evento.UrlImagem)
-                    <br />
-                    @Html.LabelFor(m => m.Evento.Titulo)
-                    @Html.TextBoxFor(m => m.Evento.Titulo)
-                    <br />
-                    @Html.LabelFor(m => m.Evento.Descricao)
-                    @Html.TextBoxFor(m => m.Evento.Descricao)
-                    <br />
-                    @Html.LabelFor(m => m.ListaRotas,"Rota:")
-                    @Html.DropDownListFor(m => m.Evento.IdRota, new SelectList(Model.ListaRotas, "IdRota", "Descricao"))
-                    <br />
-                    @Html.HiddenFor(m => m.Evento.IdEvento)
-                    <input type="submit" value="Salvar" class="btn btn-primary" />
-                }
+            <h2 class="card-heading simple">
+                @Html.ActionLink("Voltar", "Index", "Evento", new { @class = "pull-right btn btn-primary" })
+                Detalhes do evento!
+            </h2>
+            <div class="card-body" style="overflow: hidden">
+                <div style="float: left">
+                    <ul class="thumbnails">
+                        <li class="span9">
+                            <div class="thumbnail">
+                                <img data-src="holder.js/300x200" src="@Model.Evento.UrlImagem" alt="Imagem do Evento">
+                                <h3>@Model.Evento.Titulo</h3>
+                                <p>@Model.Evento.Descricao</p>
+                                @if (Model.ListaDeContatosDoUsuario.Any())
+                                {
+                                <p>
+                                    <a href="#divAmigos" class="btn btn-info" data-toggle="modal">Convidar Amigos</a>
+                                </p>
+                                }
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    @if (Model.SouDonoDoEvento(Model.Evento.IdEvento))
+                    {
+                        using (Html.BeginForm("InserirAlterarEvento", "Evento", FormMethod.Post))
+                        {
+                            object displayMode = (Model.SouDonoDoEvento(Model.Evento.IdEvento)) ? (object)new { style = "width:95%" } : (object)new { disabled = "disabled", style = "width:95%" };
+                        <ul class="thumbnails">
+                            <li class="span5">
+                                <div class="thumbnail">
+                                    @Html.LabelFor(m => m.Evento.UrlImagem)
+                                    @Html.TextBoxFor(m => m.Evento.UrlImagem, displayMode)
+                                    <br />
+                                    @Html.LabelFor(m => m.Evento.Titulo)
+                                    @Html.TextBoxFor(m => m.Evento.Titulo, displayMode)
+                                    <br />
+                                    @Html.LabelFor(m => m.Evento.Data)
+                                    @Html.TextBoxFor(m => m.Evento.Data, new { Value = Model.Evento.Data.ToString("dd/MM/yyyy"), @class = "datepicker" })
+                                    <br />
+                                    @Html.LabelFor(m => m.Evento.Descricao)
+                                    @Html.TextBoxFor(m => m.Evento.Descricao, displayMode)
+                                    <br />
+                                    @Html.LabelFor(m => m.ListaRotas, "Rota:")
+                                    @Html.DropDownListFor(m => m.Evento.IdRota, new SelectList(Model.ListaRotas, "IdRota", "Descricao"), displayMode)
+                                    <br />
+                                    @Html.HiddenFor(m => m.Evento.IdEvento)
+                                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                                </div>
+                            </li>
+                        </ul>
+                        }
+                    }
+                </div>
             </div>
         </div>
     </div>
     <!-- END BLOCK -->
+    @if (Model.ListaDeContatosDoUsuario.Any())
+    {
+        <div id="divAmigos" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Convide Seus Amigos!</h3>
+            </div>
+            @using (Html.BeginForm("Convidar", "Evento", FormMethod.Post))
+            {
+            <div class="modal-body">
+                    <table>
+                        <thead>
+                            <th></th>
+                            <th></th>
+                            <th>Nome</th>
+                        </thead>
+                        <tbody>
+                        @foreach (var amigo in Model.ListaDeContatosDoUsuario)
+                        {
+                            <tr>
+                                <td><input type="checkbox" name="idsAmigos" value="@amigo.IdUsuario" /></td>
+                                <td><img src="@amigo.UrlImagem" width="25" height="25" /></td>
+                                <td>@amigo.Nome</td>
+                            </tr>
+                        }
+                        <tbody>
+                    </table>
+            </div>
+                <div class="modal-footer">
+                    @Html.HiddenFor(m => m.Evento.IdEvento)
+                    <input type="submit" value="Convidar" class="btn btn-info pull-right"/>
+                </div>
+            }
+        </div>
+    }
 </div>
 <!-- END LINHA 2 -->

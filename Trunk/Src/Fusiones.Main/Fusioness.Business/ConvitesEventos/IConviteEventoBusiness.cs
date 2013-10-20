@@ -26,5 +26,7 @@ namespace Fusioness.Business.ConvitesEventos
         /// <param name="convite">Convite alvo.</param>
         /// <param name="resposta">Resposta dada.</param>
         ConviteEvento ResponderAoConvite(ConviteEvento convite, Resposta resposta);
+
+        List<ConviteEvento> ConvidarUsuarios(Usuario usuario, Evento evento, List<int> idsAmigos);
     }
 }

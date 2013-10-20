@@ -3,14 +3,14 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
-
 <!-- LINHA 1 -->
 <div class="row-fluid">
     <!-- BLOCK -->
     <div class="span12">
         <div class="card">
-            <h2 class="card-heading simple">Cabeçalho - Bloco tamanho 12</h2>
+            <h2 class="card-heading simple">Cadastre-se!</h2>
             <div class="card-body">
+                
                 @using (Html.BeginForm("InserirAlterarUsuario", "Usuario", FormMethod.Post))
                 {
                     <ul style="list-style:none;">
@@ -36,19 +36,24 @@
                             @Html.ValidationMessage("Email", new { style = "margin-left:10px" })
                         </li>
                         <li>
-                            @Html.LabelFor(m => m.Usuario.Idade)
-                            @Html.TextBoxFor(m => m.Usuario.Idade)
+                            @Html.LabelFor(m => m.Usuario.DataDeNascimento)
+                            @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = Model.Usuario.DataDeNascimento.ToString("dd/MM/yyyy"), @class = "datepicker" })
                             @Html.ValidationMessage("Idade", new { style = "margin-left:10px" })
                         </li>
                         <li>
+
                             @Html.LabelFor(m => m.Usuario.Sexo)
-                            @Html.TextBoxFor(m => m.Usuario.Sexo)
-                            @Html.ValidationMessage("Sexo", new { style = "margin-left:10px" })
+                            @Html.DropDownListFor(m => m.Usuario.Sexo, Model.Sexos, "Selecione o sexo")
+                            @Html.ValidationMessage("Sexo", new { style = "margin-left:10px" })                                                        
+                            
                         </li>
                     </ul>
                     <br />
                     @Html.HiddenFor(m => m.Usuario.IdUsuario)
-                    <input type="submit" value="Registrar" />
+                    @Html.HiddenFor(m => m.Usuario.UrlImagem)
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                    <!-- <a class="btn" href="/Acesso">Voltar</a> -->                                     
+                    
                 }
             </div>
         </div>

@@ -150,8 +150,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\bootplus-responsive.min.css" />
     <Content Include="Content\css\bootplus.min.css" />
+    <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\font-awesome-ie7.min.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Global.asax" />
@@ -178,7 +180,7 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\Evento\Index.cshtml" />
-    <Content Include="Views\Evento\Details.cshtml" />
+    <Content Include="Views\Evento\Detalhar.cshtml" />
     <Content Include="Views\Rota\InserirAlterarRota.cshtml" />
     <Content Include="Web References\FusionessWS\Dificuldade.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -193,6 +195,9 @@
     </Content>
     <Content Include="Views\Evento\Convites.cshtml" />
     <Content Include="Web References\FusionessWS\Coordenada.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\FusionessWS\Contato.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\FusionessWS\MainService.disco" />

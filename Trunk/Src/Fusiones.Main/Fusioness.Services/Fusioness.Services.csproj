@@ -14,7 +14,7 @@
     <RootNamespace>Fusioness.Services</RootNamespace>
     <AssemblyName>Fusioness.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -103,9 +103,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>42134</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://127.0.0.1/Fusioness.Services</IISUrl>
+          <IISUrl>http://localhost/Fusioness.Services</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://127.0.0.1/Fusioness.Services</IISAppRootUrl>
+          <IISAppRootUrl>http://localhost/Fusioness.Services</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -13,27 +13,34 @@ namespace Fusioness.Controllers
             var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             var bicicletas = Servico.ListarBicicletasPorUsuario(usuario);
             model.ListaBicicletasPorUsuario = bicicletas.ToList();
-            return View(model);
+            return View("index", model);
         }
-
-        public ActionResult InsertBicicleta(BicicletaModel model)
+        
+        public ActionResult InserirAlterarBicicleta(BicicletaModel model)
         {
+            var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+            var bicicletas = Servico.ListarBicicletasPorUsuario(usuario);
+            model.ListaBicicletasPorUsuario = bicicletas.ToList();
+            
             if (model.ValidarBicicleta(ModelState))
             {
-                var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+                
                 model.Bicicleta.IdUsuario = usuario.IdUsuario;
                 if (model.Bicicleta.IdBicicleta > 0)
                 {
-                    Servico.AlterarBicicleta(model.Bicicleta);
+                    model.Bicicleta = Servico.AlterarBicicleta(model.Bicicleta);
                 }
                 else
                 {
-                    Servico.InserirBicicleta(model.Bicicleta);
+                    model.Bicicleta = Servico.InserirBicicleta(model.Bicicleta);
                 }
-                model.Bicicleta = null;
+                // model.Bicicleta = null;                
+                return RedirectToAction("index", model);
             }
-            
-            return RedirectToAction("index", model);
+            else
+            {                
+                return View("index", model);
+            }
         }
 
         public ActionResult EditarBicicleta(BicicletaModel model, int IdBicicleta)

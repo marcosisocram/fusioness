@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using Fusioness.FusionessWS;
+using System.Web.Mvc;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Fusioness.Models.Rotas
 {
@@ -12,6 +15,18 @@ namespace Fusioness.Models.Rotas
         public IList<QualidadeRota> TiposDeQualidade{ get; set; }
         public IList<Rota> ListaRotas { get; set; }
 
+        public bool ValidarRota(ModelStateDictionary ModelState)
+        {
+            bool retorno = true;
+            if (string.IsNullOrWhiteSpace(Rota.Descricao))
+            {
+                ModelState.AddModelError("Descrição", "Preencha uma descrição.");
+                retorno = false;
+            }
+
+            return retorno;
+        }
+
         public void carregarParametrosView()
         {
             MainService Servico = new MainService();
@@ -20,6 +35,16 @@ namespace Fusioness.Models.Rotas
             TiposDePista = Servico.ListarTiposPista();
             TiposDeQualidade = Servico.ListarQualidadesRota();
             TiposDeRotas = Servico.ListarTiposRota();
+        }
+
+        public void carregarAtributos()
+        {
+            foreach (var rota in ListaRotas)
+            {
+                rota.TipoRota = (from tipoRota in TiposDeRotas
+                                 where tipoRota.IdTipoRota == rota.IdTipoRota
+                                 select tipoRota).First();
+            }
         }
     }
 }

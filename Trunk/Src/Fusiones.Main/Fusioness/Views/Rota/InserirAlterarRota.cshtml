@@ -13,20 +13,31 @@
             <div class="card-body">
                 @using (Html.BeginForm("InserirAlterarRota", "Rota", FormMethod.Post))
                 {
-                    @Html.LabelFor(m => m.Rota.Descricao,"Descrição:")
-                    @Html.TextBoxFor(m => m.Rota.Descricao)
-                    <br />
-                    @Html.LabelFor(m => m.TiposDeRotas,"Tipo da Rota:")
-                    @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
-                    <br />
-                    @Html.LabelFor(m => m.TiposDePista, "Tipo da Pista:")
-                    @Html.DropDownListFor(m => m.Rota.IdTipoPista, new SelectList(Model.TiposDePista, "IdTipoPista", "Descricao"))
-                    <br />
-                    @Html.LabelFor(m => m.TiposDeDificuldade, "Nível de Dificuldade:")
-                    @Html.DropDownListFor(m => m.Rota.IdDificuldade, new SelectList(Model.TiposDeDificuldade, "IdDificuldade", "Descricao"))
-                    <br />
-                    @Html.LabelFor(m => m.TiposDeQualidade, "Nível de Qualidade:")
-                    @Html.DropDownListFor(m => m.Rota.IdQualidadeRota, new SelectList(Model.TiposDeQualidade, "IdQualidadeRota", "Descricao"))
+                    
+                     <ul style="list-style:none;">
+                        <li>
+                            @Html.LabelFor(m => m.Rota.Descricao,"Descrição:")
+                            @Html.TextBoxFor(m => m.Rota.Descricao)
+                            @Html.ValidationMessage("Descrição", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.TiposDeRotas,"Tipo da Rota:")
+                            @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
+                            
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.TiposDePista, "Tipo da Pista:")
+                            @Html.DropDownListFor(m => m.Rota.IdTipoPista, new SelectList(Model.TiposDePista, "IdTipoPista", "Descricao"))
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.TiposDeDificuldade, "Nível de Dificuldade:")
+                            @Html.DropDownListFor(m => m.Rota.IdDificuldade, new SelectList(Model.TiposDeDificuldade, "IdDificuldade", "Descricao"))
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.TiposDeQualidade, "Nível de Qualidade:")
+                            @Html.DropDownListFor(m => m.Rota.IdQualidadeRota, new SelectList(Model.TiposDeQualidade, "IdQualidadeRota", "Descricao"))
+                        </li>
+                    </ul>
                     <br />
                     @Html.HiddenFor(m => m.Rota.IdRota)
                     <input type="submit" value="Salvar" class="btn btn-primary" />
