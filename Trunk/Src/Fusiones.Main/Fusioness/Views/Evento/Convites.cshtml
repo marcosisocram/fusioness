@@ -26,7 +26,7 @@
                 <tr>
                     <td>@item.IdEvento</td>
                     <td>@item.Titulo</td>
-                    <td>@item.Data</td>
+                    <td>@item.Data.ToString("dd/MM/yyyy")</td>
                     <td>
                         <p class="text-warning">@(Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).Resposta.Descricao)</p>
                     </td>

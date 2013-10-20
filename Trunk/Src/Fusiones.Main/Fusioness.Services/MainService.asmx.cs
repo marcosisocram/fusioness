@@ -575,6 +575,20 @@ namespace Fusioness.Services
                 return new ConviteEvento();
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ConviteEvento> ConvidarUsuarios(Usuario usuario, Evento evento, List<int> idsAmigos)
+        {
+            try
+            {
+                return Facade.Instance.ConvidarUsuarios(usuario, evento, idsAmigos);
+            }
+            catch (Exception)
+            {
+                return new List<ConviteEvento>();
+            }
+        }
         #endregion
 
         #region Respostas

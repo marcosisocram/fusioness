@@ -57,13 +57,21 @@ namespace Fusioness.Business.Contatos
         {
             if (contato == null || (contato.IdUsuario <= 0 || contato.IdContato <= 0)) return new Contato();
 
-            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            try
             {
-                IRepository<Contato> repo = new ContatoRepository(uow);
-                contato = repo.Insert(contato);
-                uow.Commit();
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Contato> repo = new ContatoRepository(uow);
+                    var contatos = new List<Contato> { contato, new Contato {IdContato = contato.IdUsuario, IdUsuario = contato.IdContato} }; // torna ambos contatos
+                    contatos = repo.Insert(contatos).ToList();
+                    uow.Commit();
+                    return contatos.First();
+                }
             }
-            return contato;
+            catch (Exception)
+            {
+                return new Contato();
+            }
         }
 
         public Contato AlterarContato(Contato contato)

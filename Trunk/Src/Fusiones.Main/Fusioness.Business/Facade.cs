@@ -125,6 +125,10 @@ namespace Fusioness.Business
             return ConviteEventoBus.ResponderAoConvite(convite, resposta);
         }
 
+        public List<ConviteEvento> ConvidarUsuarios(Usuario usuario, Evento evento, List<int> idsAmigoss)
+        {
+            return ConviteEventoBus.ConvidarUsuarios(usuario, evento, idsAmigoss);
+        }
         #endregion
 
         #region Bicicleta

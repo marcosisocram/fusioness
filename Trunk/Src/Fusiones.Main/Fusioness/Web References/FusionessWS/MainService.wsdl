@@ -751,6 +751,22 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ConvidarUsuarios">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+            <s:element minOccurs="0" maxOccurs="1" name="idsAmigos" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvidarUsuariosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConvidarUsuariosResult" type="tns:ArrayOfConviteEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ListarRespostas">
         <s:complexType />
       </s:element>
@@ -1050,6 +1066,12 @@
   <wsdl:message name="ResponderConviteEventoSoapOut">
     <wsdl:part name="parameters" element="tns:ResponderConviteEventoResponse" />
   </wsdl:message>
+  <wsdl:message name="ConvidarUsuariosSoapIn">
+    <wsdl:part name="parameters" element="tns:ConvidarUsuarios" />
+  </wsdl:message>
+  <wsdl:message name="ConvidarUsuariosSoapOut">
+    <wsdl:part name="parameters" element="tns:ConvidarUsuariosResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarRespostasSoapIn">
     <wsdl:part name="parameters" element="tns:ListarRespostas" />
   </wsdl:message>
@@ -1230,6 +1252,10 @@
     <wsdl:operation name="ResponderConviteEvento">
       <wsdl:input message="tns:ResponderConviteEventoSoapIn" />
       <wsdl:output message="tns:ResponderConviteEventoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvidarUsuarios">
+      <wsdl:input message="tns:ConvidarUsuariosSoapIn" />
+      <wsdl:output message="tns:ConvidarUsuariosSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarRespostas">
       <wsdl:input message="tns:ListarRespostasSoapIn" />
@@ -1575,6 +1601,15 @@
     </wsdl:operation>
     <wsdl:operation name="ResponderConviteEvento">
       <soap:operation soapAction="http://tempuri.org/ResponderConviteEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvidarUsuarios">
+      <soap:operation soapAction="http://tempuri.org/ConvidarUsuarios" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1956,6 +1991,15 @@
     </wsdl:operation>
     <wsdl:operation name="ResponderConviteEvento">
       <soap12:operation soapAction="http://tempuri.org/ResponderConviteEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvidarUsuarios">
+      <soap12:operation soapAction="http://tempuri.org/ConvidarUsuarios" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Fusioness.FusionessWS;
@@ -45,6 +47,8 @@ namespace Fusioness.Controllers
             model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
             model.Evento = Servico.ObterEventoPorId(new Evento { IdEvento = idEvento });
             model.ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(UsuarioLogado);
+            var idsContatos = Servico.ListarContatosDoUsuario(UsuarioLogado).ToList().Select(c => c.IdContato).ToList();
+            if (idsContatos.Any()) model.ListaDeContatosDoUsuario = Servico.ObterUsuariosIds(idsContatos.ToArray()).ToList();
 
             return View("InserirAlterarEvento", model);
         }
@@ -64,7 +68,7 @@ namespace Fusioness.Controllers
 
         public ActionResult ResponderConviteEvento(int idEvento, int idResposta)
         {
-            Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento }, new Resposta{ IdResposta = idResposta});
+            Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento, IdContato = UsuarioLogado.IdUsuario}, new Resposta{ IdResposta = idResposta});
             return RedirectToAction("Convites");
         }
 
@@ -74,11 +78,20 @@ namespace Fusioness.Controllers
             return RedirectToAction("index", model);
         }
 
-
-
-        public ActionResult Convidar(int[] listaIdAmigo)
+        public ActionResult Convidar(int[] idsAmigos, EventoModel model)
         {
-            return null;
+            if (idsAmigos != null && idsAmigos.Any())
+            {
+                var convites = Servico.ConvidarUsuarios(UsuarioLogado, model.Evento, idsAmigos);
+                if (convites == null)
+                {
+                    ExibirModal("Não foi possível efetuar parte dos convites.");
+                    return InserirAlterarEvento(model.Evento.IdEvento);
+                }
+            }
+
+            ExibirModal("Convites feitos.");
+            return RedirectToAction("Index");
         }
     }
 }

@@ -102,6 +102,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ResponderConviteEventoOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ConvidarUsuariosOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarRespostasOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarContatosDoUsuarioOperationCompleted;
@@ -259,6 +261,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ResponderConviteEventoCompletedEventHandler ResponderConviteEventoCompleted;
+        
+        /// <remarks/>
+        public event ConvidarUsuariosCompletedEventHandler ConvidarUsuariosCompleted;
         
         /// <remarks/>
         public event ListarRespostasCompletedEventHandler ListarRespostasCompleted;
@@ -1307,6 +1312,39 @@ namespace Fusioness.FusionessWS {
             if ((this.ResponderConviteEventoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ResponderConviteEventoCompleted(this, new ResponderConviteEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ConvidarUsuarios", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ConviteEvento[] ConvidarUsuarios(Usuario usuario, Evento evento, int[] idsAmigos) {
+            object[] results = this.Invoke("ConvidarUsuarios", new object[] {
+                        usuario,
+                        evento,
+                        idsAmigos});
+            return ((ConviteEvento[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ConvidarUsuariosAsync(Usuario usuario, Evento evento, int[] idsAmigos) {
+            this.ConvidarUsuariosAsync(usuario, evento, idsAmigos, null);
+        }
+        
+        /// <remarks/>
+        public void ConvidarUsuariosAsync(Usuario usuario, Evento evento, int[] idsAmigos, object userState) {
+            if ((this.ConvidarUsuariosOperationCompleted == null)) {
+                this.ConvidarUsuariosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConvidarUsuariosOperationCompleted);
+            }
+            this.InvokeAsync("ConvidarUsuarios", new object[] {
+                        usuario,
+                        evento,
+                        idsAmigos}, this.ConvidarUsuariosOperationCompleted, userState);
+        }
+        
+        private void OnConvidarUsuariosOperationCompleted(object arg) {
+            if ((this.ConvidarUsuariosCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ConvidarUsuariosCompleted(this, new ConvidarUsuariosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3649,6 +3687,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ConviteEvento)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ConvidarUsuariosCompletedEventHandler(object sender, ConvidarUsuariosCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ConvidarUsuariosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ConvidarUsuariosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ConviteEvento[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ConviteEvento[])(this.results[0]));
             }
         }
     }
