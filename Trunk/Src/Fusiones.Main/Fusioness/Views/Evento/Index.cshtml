@@ -19,13 +19,13 @@
                             <h3>@item.Titulo</h3>
                             <p>@(item.Descricao.Count() > 250 ? @item.Descricao.Substring(0, 250) + "..." : @item.Descricao)</p>
                             <p>
-                            @if (Model.SouDonoDoEvento(item.IdEvento))
-                            {
                                 <div class="btn-group">
-                                @Html.ActionLink("Editar", "InserirAlterarEvento", "Evento", new{ idEvento = item.IdEvento}, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("Excluir", "ExcluirEvento", "Evento", new {idEvento = item.IdEvento}, new {@class = "btn btn-danger"})
+                                @Html.ActionLink("Detalhes", "InserirAlterarEvento", "Evento", new{ idEvento = item.IdEvento}, new { @class = "btn btn-primary" })
+                                    @if (Model.SouDonoDoEvento(item.IdEvento))
+                                    {
+                                        @Html.ActionLink("Excluir", "ExcluirEvento", "Evento", new {idEvento = item.IdEvento}, new {@class = "btn btn-danger"})
+                                    }    
                                 </div>
-                            }    
                             </p>
                         </div>
                     </li>
