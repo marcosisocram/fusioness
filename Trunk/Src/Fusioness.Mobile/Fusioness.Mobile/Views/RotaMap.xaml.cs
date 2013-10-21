@@ -31,24 +31,29 @@ namespace Fusioness.Mobile.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
-            string site;
-
-            if (NavigationContext.QueryString.TryGetValue("RotaId", out site))
+            if (Global.fusCoordenadas.Count == 0)
             {
-                RotaId = Convert.ToInt32(site);
-                acao = Global.Acao.Visualizar;
-            }
-            else
-            {
-                acao = Global.Acao.Criar;
+                base.OnNavigatedTo(e);
+
+                string site;
+
+                if (NavigationContext.QueryString.TryGetValue("RotaId", out site))
+                {
+                    RotaId = Convert.ToInt32(site);
+                    acao = Global.Acao.Visualizar;
+                }
+                else
+                {
+                    acao = Global.Acao.Criar;
+                }
             }
         }
 
         public RotaMap()
         {
             InitializeComponent();
+
+            Global.fusCoordenadas = new List<FusionessWS.Coordenada>();
 
             watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
             {
@@ -60,15 +65,18 @@ namespace Fusioness.Mobile.Views
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (acao == Global.Acao.Visualizar)
+            if (Global.fusCoordenadas.Count == 0)
             {
-                Visualizar();
-                Mapa.ZoomLevel = 14;
-            }
-            else
-            {
-                adicionarLocalizacao();
-                Mapa.ZoomLevel = 17;
+                if (acao == Global.Acao.Visualizar)
+                {
+                    Visualizar();
+                    Mapa.ZoomLevel = 14;
+                }
+                else
+                {
+                    adicionarLocalizacao();
+                    Mapa.ZoomLevel = 17;
+                }
             }
         } 
 
@@ -152,8 +160,7 @@ namespace Fusioness.Mobile.Views
                 {
                     if (addLocalizacao)
                     {
-                        Mapa.Layers.Add(adicionar_MapLayer(geoCoordenada, "/Assets/locationGreen.png"));
-                        Global.fusCoordenadas = new List<FusionessWS.Coordenada>();
+                        Mapa.Layers.Add(adicionar_MapLayer(geoCoordenada, "/Assets/locationGreen.png"));                        
                         addLocalizacao = false;
                         watcher.Stop();
                     }
@@ -179,15 +186,13 @@ namespace Fusioness.Mobile.Views
                 {
                     if (Mapa.Layers.Count == 2)
                     {
-                        Global.fusCoordenadas = new List<FusionessWS.Coordenada>();
                         Mapa.Layers.Add(adicionar_MapLayer(geoCoordenada, "/Assets/locationGray.png"));
                     }
                     else
                     {
                         Mapa.Layers.RemoveAt(2);
                         Mapa.Layers.Add(adicionar_MapLayer(geoCoordenada, "/Assets/locationGray.png"));
-                    }
-                    Mapa.ZoomLevel = 17;
+                    }                    
                     Mapa.Center = new GeoCoordinate(geoCoordenada.Latitude, geoCoordenada.Longitude);
                 }
 

@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -45,11 +46,16 @@
             <!--Panorama item three-->
             <phone:PanoramaItem x:Name="pnItemRota" Header="Rotas" Height="533">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector x:Name="llsRota" Margin="0,-42,-22,2" ItemsSource="{Binding Rotas}" SelectionChanged="llsRota_SelectionChanged">
+                <phone:LongListSelector x:Name="llsRota" Margin="14,-20,0,2" ItemsSource="{Binding Rotas}" SelectionChanged="llsRota_SelectionChanged">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,-6,0,12" Height="61">                                
-                                <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                            <StackPanel Margin="0,-6,13,12" Height="auto" >
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu BorderThickness="0" BorderBrush="White">
+                                        <toolkit:MenuItem Header="Excluir" Click="Excluir_Click"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+                                <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" FontSize="30" />
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -95,11 +101,11 @@
             <!--Panorama item three-->
             <phone:PanoramaItem x:Name="pnItemRecentes" Header="Recentes">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector Margin="0,-42,-22,2" ItemsSource="{Binding Rotas}">
+                <phone:LongListSelector Margin="14,-20,0,2" ItemsSource="{Binding Rotas}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,-6,0,12">
-                                <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                            <StackPanel Margin="0,-6,13,12" Height="auto">
+                                <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" FontSize="30"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -109,11 +115,11 @@
             <!--Panorama item two-->
             <phone:PanoramaItem x:Name="pnItemFavoritos" Header="Favoritas">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector Margin="0,-42,-22,2" ItemsSource="{Binding Rotas}">
+                <phone:LongListSelector Margin="14,-20,0,2" ItemsSource="{Binding Rotas}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,-6,0,12">
-                                <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                            <StackPanel Margin="0,-6,13,12" Height="auto">
+                                <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" FontSize="30"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -158,7 +164,6 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
             <shell:ApplicationBarIconButton x:Name="btAdicionar" IconUri="/Assets/Buttons/add.png" Text="Novo" Click="btAdicionar_Click"/>
-            <shell:ApplicationBarIconButton x:Name="btAtualizar" IconUri="/Assets/Buttons/refresh.png" Text="Atualizar" Click="btAtualizar_Click" />
             <shell:ApplicationBarIconButton x:Name="btPesquisar" IconUri="/Assets/Buttons/search.png" Text="Pesquisar" Click="btPesquisar_Click"/>
 
             <!--

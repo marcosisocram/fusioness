@@ -56,9 +56,24 @@ namespace Fusioness.Mobile
             NavigationService.Navigate(new Uri("/Views/RotaMap.xaml?RotaId=" + res.RotaId.ToString(), UriKind.Relative));
         }
 
-        private void btAtualizar_Click(object sender, EventArgs e)
+        private void Excluir_Click(object sender, RoutedEventArgs e)
         {
-            App.ViewModel.LoadData();
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Deseja Excluir Esta Rota?", "Excluir Rota?", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    var Item = (sender as MenuItem).DataContext as ItemViewModel;                    
+                    App.ViewModel.RemoverRota(Item.RotaId);
+
+                    llsRota.ItemsSource.Remove(Item);
+                    MessageBox.Show("Rota Excluída com Sucesso!");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Erro ao Excluir Rota!");
+            }
         }
     }
 }
