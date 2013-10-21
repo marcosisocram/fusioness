@@ -9,7 +9,12 @@ namespace Fusioness.Mobile.Util
     static public class Global
     {
         public static FusionessWS.Usuario usuarioLogado;
-        public static List<FusionessWS.Coordenada> fusCoordenadas;
-        
+        public static IList<FusionessWS.Coordenada> fusCoordenadas;
+
+        public enum Acao
+        {
+            Criar = 0,
+            Visualizar = 1
+        }
     }
 }

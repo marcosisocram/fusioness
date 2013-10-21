@@ -26,10 +26,7 @@ namespace Fusioness.Mobile
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+            App.ViewModel.LoadData();
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)
@@ -40,7 +37,7 @@ namespace Fusioness.Mobile
                     MessageBox.Show("Ative sua rede Wi-Fi ou conecte com a Rede Móvel para executar esta ação!", "Alerta", MessageBoxButton.OK);
                 else
                 {
-                    NavigationService.Navigate(new Uri("/Views/CriarRota.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new Uri("/Views/RotaMap.xaml", UriKind.Relative));
                 }
             }
             else if (PanoramaMain.SelectedItem == pnItemEvento)
@@ -56,8 +53,27 @@ namespace Fusioness.Mobile
         {
             var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
 
-            NavigationService.Navigate(new Uri("/Views/CriarRota.xaml?RotaId=" + res.RotaId.ToString(), UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/RotaMap.xaml?RotaId=" + res.RotaId.ToString(), UriKind.Relative));
+        }
 
+        private void Excluir_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Deseja Excluir Esta Rota?", "Excluir Rota?", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    var Item = (sender as MenuItem).DataContext as ItemViewModel;                    
+                    App.ViewModel.RemoverRota(Item.RotaId);
+
+                    llsRota.ItemsSource.Remove(Item);
+                    MessageBox.Show("Rota Excluída com Sucesso!");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Erro ao Excluir Rota!");
+            }
         }
     }
 }

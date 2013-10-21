@@ -9,10 +9,11 @@ namespace Fusioness.Mobile.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
         public MainViewModel()
         {
-            this.Rotas = new ObservableCollection<ItemViewModel>();
-            this.Eventos = new ObservableCollection<ItemViewModel>();
+            
         }
 
         /// <summary>
@@ -64,12 +65,28 @@ namespace Fusioness.Mobile.ViewModels
         /// </summary>
         public void LoadData()
         {
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+            this.Rotas = new ObservableCollection<ItemViewModel>();
+            this.Eventos = new ObservableCollection<ItemViewModel>();            
             servico.ListarRotasPorUsuarioAsync(Global.usuarioLogado);
             servico.ListarRotasPorUsuarioCompleted += servico_ListarRotasPorUsuarioCompleted;
-            servico.ListarEventosAsync();
-            servico.ListarEventosCompleted += servico_ListarEventosCompleted;
+            servico.ListarEventosPorUsuarioAsync(Global.usuarioLogado);
+            servico.ListarEventosPorUsuarioCompleted += servico_ListarEventosPorUsuarioCompleted;
             this.IsDataLoaded = true;
+        }
+
+        void servico_ListarEventosPorUsuarioCompleted(object sender, FusionessWS.ListarEventosPorUsuarioCompletedEventArgs e)
+        {
+            IList<FusionessWS.Evento> evetos = e.Result;
+
+            foreach (var item in evetos)
+            {
+                this.Eventos.Add(new ItemViewModel()
+                {
+                    EventoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
+                    EventoTitulo = item.Titulo,
+                    EventoData = item.Data.ToString("dd/MM/yyyy")
+                });
+            }
         }        
 
         void servico_ListarRotasPorUsuarioCompleted(object sender, FusionessWS.ListarRotasPorUsuarioCompletedEventArgs e)
@@ -87,19 +104,11 @@ namespace Fusioness.Mobile.ViewModels
             }            
         }
 
-        void servico_ListarEventosCompleted(object sender, FusionessWS.ListarEventosCompletedEventArgs e)
+        public void RemoverRota(int idRota)
         {
-            IList<FusionessWS.Evento> evetos = e.Result;
-
-            foreach (var item in evetos)
-            {
-                this.Eventos.Add(new ItemViewModel()
-                {
-                    EventoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
-                    EventoTitulo = item.Titulo,
-                    EventoData = item.Data.ToString("dd/MM/yyyy")
-                });
-            }
+            FusionessWS.Rota rota = new FusionessWS.Rota();
+            rota.IdRota = idRota;
+            servico.RemoverRotaAsync(rota);            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
