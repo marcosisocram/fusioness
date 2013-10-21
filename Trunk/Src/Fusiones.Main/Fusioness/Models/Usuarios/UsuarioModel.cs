@@ -24,6 +24,15 @@ namespace Fusioness.Models.Usuarios
             }
             set { _Usuario = value; }
         }
+        public int IdadeUsuario
+        {
+            get
+            {
+                return DateTime.Now.Year - Usuario.DataDeNascimento.Year;
+            }
+        }
+        public bool IsMyself { get; set; }
+        public bool IsContato { get; set; }
 
         public bool ValidarUsuario(ModelStateDictionary ModelState)
         {

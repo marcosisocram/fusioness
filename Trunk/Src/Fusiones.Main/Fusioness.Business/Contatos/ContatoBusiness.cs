@@ -62,7 +62,7 @@ namespace Fusioness.Business.Contatos
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Contato> repo = new ContatoRepository(uow);
-                    var contatos = new List<Contato> { contato, new Contato {IdContato = contato.IdUsuario, IdUsuario = contato.IdContato} }; // torna ambos contatos
+                    var contatos = new List<Contato> {contato};
                     contatos = repo.Insert(contatos).ToList();
                     uow.Commit();
                     return contatos.First();

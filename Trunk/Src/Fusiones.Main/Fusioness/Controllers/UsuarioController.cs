@@ -57,6 +57,13 @@ namespace Fusioness.Controllers
         {
             var model = new UsuarioModel();
             model.Usuario = Servico.ObterUsuariosIds(new int[] { IdUsuario }).FirstOrDefault();
+            //eu posso visualizar meu proprio perfil
+            var usuarioLogado = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+            model.IsMyself = usuarioLogado.IdUsuario == IdUsuario;
+            //eu posso add/del um contato
+            var lstContatos = Servico.ListarContatosDoUsuario(usuarioLogado);
+            var contato = lstContatos.Where(c => c.IdUsuario == usuarioLogado.IdUsuario && c.IdContato == IdUsuario).FirstOrDefault();
+            model.IsContato = contato != null;
             return View("Perfil",model);
         }
 

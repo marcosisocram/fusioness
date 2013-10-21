@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Fusioness.FusionessWS;
 using Fusioness.Models.Contatos;
 
 namespace Fusioness.Controllers
@@ -13,10 +15,28 @@ namespace Fusioness.Controllers
             return View(model);
         }
 
-        public ActionResult AdicionarContato(ContatoModel model)
+        public ActionResult AdicionarRemoverContato(int IdContato, bool IsAdd)
         {
-            //TODO: IMPLEMENTAR ROTINA
-            return RedirectToAction("Index", model);
+            var usuarioLogado = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+            if (IsAdd)
+            {
+                var NovoContato = new Contato()
+                {
+                    IdUsuario = usuarioLogado.IdUsuario,
+                    IdContato = IdContato
+                };
+                NovoContato = Servico.InserirContato(NovoContato);
+            }
+            else
+            {
+                var lstContatos = Servico.ListarContatosDoUsuario(usuarioLogado);
+                var contato = lstContatos.Where(c => c.IdUsuario == usuarioLogado.IdUsuario && c.IdContato == IdContato).FirstOrDefault();
+                if (contato != null)
+                {
+                    Servico.ExcluirContato(contato);
+                }
+            }
+            return RedirectToAction("ListarTodos");
         }
 
         [HttpGet]
