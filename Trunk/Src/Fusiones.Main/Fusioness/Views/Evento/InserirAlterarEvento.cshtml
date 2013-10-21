@@ -20,6 +20,7 @@
                             <div class="thumbnail">
                                 <img data-src="holder.js/300x200" src="@Model.Evento.UrlImagem" alt="Imagem do Evento">
                                 <h3>@Model.Evento.Titulo</h3>
+                                <h4>Data do Evento: @Model.Evento.Data.ToString("dd/MM/yyyy")</h4>
                                 <p>@Model.Evento.Descricao</p>
                                 @if (Model.ListaDeContatosDoUsuario.Any())
                                 {
@@ -32,11 +33,11 @@
                     </ul>
                 </div>
                 <div>
-                    @if (Model.SouDonoDoEvento(Model.Evento.IdEvento))
+                    @if (Model.SouDonoDoEvento(Model.Evento.IdEvento) || Model.IsCadastroEvento)
                     {
                         using (Html.BeginForm("InserirAlterarEvento", "Evento", FormMethod.Post))
                         {
-                            object displayMode = (Model.SouDonoDoEvento(Model.Evento.IdEvento)) ? (object)new { style = "width:95%" } : (object)new { disabled = "disabled", style = "width:95%" };
+                            object displayMode = (Model.SouDonoDoEvento(Model.Evento.IdEvento)) || Model.IsCadastroEvento ? (object)new { style = "width:95%" } : (object)new { disabled = "disabled", style = "width:95%" };
                         <ul class="thumbnails">
                             <li class="span5">
                                 <div class="thumbnail">

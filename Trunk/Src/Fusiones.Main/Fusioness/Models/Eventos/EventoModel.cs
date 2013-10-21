@@ -59,5 +59,8 @@ namespace Fusioness.Models.Eventos
         {
             return ListaEventosQueSouDono.Any(e => e.IdEvento == idEvento);
         }
+
+        public bool IsCadastroEvento { get; set; }
+        
     }
 }

@@ -82,8 +82,9 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos</a>
                             <ul class="dropdown-menu">
+                                @Html.MenuItem("Crie seu Evento", "InserirAlterarEvento", "Evento")
                                 @Html.MenuItem("Lista de Eventos", "Index", "Evento")
-                                @Html.MenuItem("Lista de Convites", "Convites", "Evento")
+                                @Html.MenuItem("Lista de Convites", "VerConvitesEvento", "Evento")
                             </ul>
                         </li>
                         <li class="dropdown">

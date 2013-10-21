@@ -20,10 +20,11 @@
                             <p>@(item.Descricao.Count() > 250 ? @item.Descricao.Substring(0, 250) + "..." : @item.Descricao)</p>
                             <p>
                                 <div class="btn-group">
-                                @Html.ActionLink("Detalhes", "InserirAlterarEvento", "Evento", new{ idEvento = item.IdEvento}, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Detalhes", "Detalhar", "Evento", new{ idEvento = item.IdEvento}, new { @class = "btn btn-primary" })
                                     @if (Model.SouDonoDoEvento(item.IdEvento))
                                     {
-                                        @Html.ActionLink("Excluir", "ExcluirEvento", "Evento", new {idEvento = item.IdEvento}, new {@class = "btn btn-danger"})
+                                        <!--<a href="#divExclusao" class="btn btn-danger" data-toggle="modal">Excluir Evento</a>-->
+                                        <!--@Html.ActionLink("Excluir", "ExcluirEvento", "Evento", new {idEvento = item.IdEvento}, new {@class = "btn btn-danger"})-->
                                     }    
                                 </div>
                             </p>
@@ -35,6 +36,23 @@
     </div>
   </div>
   <!-- END BLOCK -->
+
+            <div id="divExclusao" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Tem certeza que deseja excluir este evento?</h3>
+            </div>
+            @using (Html.BeginForm("ExcluirEvento", "Evento", FormMethod.Post))
+            {
+                <div class="modal-footer">
+                    @Html.HiddenFor(m => m.Evento.IdEvento)
+                    <button type="button" class="btn btn-info pull-left" data-dismiss="modal" aria-hidden="true">NÂO</button>
+                    <input type="submit" value="SIM" class="btn btn-info pull-right"/>
+                </div>
+            }
+        </div>
+
+
 </div><!-- END LINHA 2 -->
 
 <!-- LINHA 2 -->

@@ -21,7 +21,6 @@ namespace Fusioness.Controllers
         public ActionResult InserirAlterarEvento(EventoModel model)
         {
             model.Evento.IdUsuario = this.UsuarioLogado.IdUsuario;
-            model.ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(UsuarioLogado);
 
             if (model.Evento.IdEvento > 0)
             {
@@ -29,20 +28,42 @@ namespace Fusioness.Controllers
                 if (eventoAlterado != null && eventoAlterado.IdEvento > 0)
                 {
                     ExibirModal("Evento alterado com sucesso.");
-                    return RedirectToAction("index");
+                    return View(model);
                 }
 
                 ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
-                return InserirAlterarEvento(model.Evento.IdEvento);
+                return View(model);
             }
+            else
+            {
+                var eventoCadastrado = Servico.InserirEvento(model.Evento);
 
-            return RedirectToAction("index");
+                if (eventoCadastrado != null && eventoCadastrado.IdEvento > 0)
+                {
+                    ExibirModal("Evento cadastrado com sucesso.");
+                    return RedirectToAction("Index");
+                }
+
+                ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpGet]
-        public ActionResult InserirAlterarEvento(int idEvento)
+        public ActionResult InserirAlterarEvento()
+        {
+            var model = new EventoModel();
+            model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
+            model.Evento = new Evento();
+            model.IsCadastroEvento = true;
+
+            return View("InserirAlterarEvento", model);
+        }
+
+        public ActionResult Detalhar(int idEvento = 0)
         {
             if (idEvento == 0) return RedirectToAction("Index");
+
             var model = new EventoModel();
             model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
             model.Evento = Servico.ObterEventoPorId(new Evento { IdEvento = idEvento });
@@ -53,7 +74,7 @@ namespace Fusioness.Controllers
             return View("InserirAlterarEvento", model);
         }
 
-        public ActionResult Convites(EventoModel model)
+        public ActionResult VerConvitesEvento(EventoModel model)
         {
             model.RespostasPossiveis = Servico.ListarRespostas();
             model.ListaConviteEventos = Servico.ObterConvitesEventosDoUsuario(UsuarioLogado);
@@ -63,7 +84,7 @@ namespace Fusioness.Controllers
 
             if (model.ListaConviteEventos.Any())
                 model.ListaEventos = Servico.ListarEventos(model.ListaConviteEventos.Select(c => c.IdEvento).ToArray());
-            return View(model);
+            return View("Convites", model);
         }
 
         public ActionResult ResponderConviteEvento(int idEvento, int idResposta)
@@ -72,9 +93,9 @@ namespace Fusioness.Controllers
             return RedirectToAction("Convites");
         }
 
-        public ActionResult ExcluirEvento(EventoModel model, int idEvento)
+        public ActionResult ExcluirEvento(EventoModel model)
         {
-            Servico.RemoverEvento(new Evento { IdEvento = idEvento });
+            Servico.RemoverEvento(model.Evento);
             return RedirectToAction("index", model);
         }
 
@@ -86,7 +107,7 @@ namespace Fusioness.Controllers
                 if (convites == null)
                 {
                     ExibirModal("Não foi possível efetuar parte dos convites.");
-                    return InserirAlterarEvento(model.Evento.IdEvento);
+                    return Detalhar(model.Evento.IdEvento);
                 }
             }
 

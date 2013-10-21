@@ -84,6 +84,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarQualidadesRotaOperationCompleted;
         
+        private System.Threading.SendOrPostCallback InserirEventoOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarEventosOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarEventosPorUsuarioOperationCompleted;
@@ -236,6 +238,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarQualidadesRotaCompletedEventHandler ListarQualidadesRotaCompleted;
+        
+        /// <remarks/>
+        public event InserirEventoCompletedEventHandler InserirEventoCompleted;
         
         /// <remarks/>
         public event ListarEventosCompletedEventHandler ListarEventosCompleted;
@@ -1055,6 +1060,35 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarQualidadesRotaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarQualidadesRotaCompleted(this, new ListarQualidadesRotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Evento InserirEvento(Evento evento) {
+            object[] results = this.Invoke("InserirEvento", new object[] {
+                        evento});
+            return ((Evento)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InserirEventoAsync(Evento evento) {
+            this.InserirEventoAsync(evento, null);
+        }
+        
+        /// <remarks/>
+        public void InserirEventoAsync(Evento evento, object userState) {
+            if ((this.InserirEventoOperationCompleted == null)) {
+                this.InserirEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInserirEventoOperationCompleted);
+            }
+            this.InvokeAsync("InserirEvento", new object[] {
+                        evento}, this.InserirEventoOperationCompleted, userState);
+        }
+        
+        private void OnInserirEventoOperationCompleted(object arg) {
+            if ((this.InserirEventoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InserirEventoCompleted(this, new InserirEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3506,6 +3540,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((QualidadeRota[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void InserirEventoCompletedEventHandler(object sender, InserirEventoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InserirEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InserirEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Evento Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Evento)(this.results[0]));
             }
         }
     }

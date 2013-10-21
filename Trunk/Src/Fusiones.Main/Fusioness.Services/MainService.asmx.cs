@@ -445,6 +445,21 @@ namespace Fusioness.Services
         #endregion
 
         #region Evento
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Evento InserirEvento(Evento evento)
+        {
+            try
+            {
+                return Facade.Instance.InserirEvento(evento);
+            }
+            catch
+            {
+                return new Evento();
+            }
+        }
+
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public List<Evento> ListarEventos(params int[] ids)
