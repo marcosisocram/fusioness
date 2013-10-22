@@ -44,6 +44,7 @@ namespace Fusioness.Models.Eventos
         public IList<ConviteEvento> ListaConviteEventos { get; set; }
         public IList<Resposta> RespostasPossiveis { get; set; }
         public IList<Usuario> ListaDeContatosDoUsuario { get; set; }
+        public IList<ComentarioEvento> ListaComentariosEvento{ get; set; }
 
         public EventoModel()
         {
@@ -53,6 +54,7 @@ namespace Fusioness.Models.Eventos
             ListaConviteEventos = new List<ConviteEvento>();
             RespostasPossiveis = new List<Resposta>();
             ListaDeContatosDoUsuario = new List<Usuario>();
+            ListaComentariosEvento = new List<ComentarioEvento>();
         }
 
         public bool SouDonoDoEvento(int idEvento)
