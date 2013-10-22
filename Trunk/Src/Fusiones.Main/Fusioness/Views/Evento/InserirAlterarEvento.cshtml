@@ -34,9 +34,6 @@
                                     <a href="#divComentarios" class="btn btn-info" data-toggle="modal">Ver Comentários</a>
                                 }
                                 </p>
-
-                                
-
                             </div>
                         </li>
                     </ul>
@@ -77,6 +74,42 @@
         </div>
     </div>
     <!-- END BLOCK -->
+    
+    @if (Model.ListaDeContatosDoUsuario.Any())
+    {
+        <div id="divAmigos" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Convide Seus Amigos!</h3>
+            </div>
+            @using (Html.BeginForm("Convidar", "Evento", FormMethod.Post))
+            {
+            <div class="modal-body">
+                    <table>
+                        <thead>
+                            <th></th>
+                            <th></th>
+                            <th>Nome</th>
+                        </thead>
+                        <tbody>
+                        @foreach (var amigo in Model.ListaDeContatosDoUsuario)
+                        {
+                            <tr>
+                                <td><input type="checkbox" name="idsAmigos" value="@amigo.IdUsuario" /></td>
+                                <td><img src="@amigo.UrlImagem" width="25" height="25" /></td>
+                                <td>@amigo.Nome</td>
+                            </tr>
+                        }
+                        <tbody>
+                    </table>
+            </div>
+                <div class="modal-footer">
+                    @Html.HiddenFor(m => m.Evento.IdEvento)
+                    <input type="submit" value="Convidar" class="btn btn-info pull-right"/>
+                </div>
+            }
+        </div>
+    }
     
     @if (Model.ListaComentariosEvento.Any())
     {

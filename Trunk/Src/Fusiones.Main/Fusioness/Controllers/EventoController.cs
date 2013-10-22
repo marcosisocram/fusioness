@@ -92,7 +92,7 @@ namespace Fusioness.Controllers
         public ActionResult ResponderConviteEvento(int idEvento, int idResposta)
         {
             Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento, IdContato = UsuarioLogado.IdUsuario}, new Resposta{ IdResposta = idResposta});
-            return RedirectToAction("Convites");
+            return RedirectToAction("VerConvitesEvento");
         }
 
         public ActionResult ExcluirEvento(EventoModel model)
