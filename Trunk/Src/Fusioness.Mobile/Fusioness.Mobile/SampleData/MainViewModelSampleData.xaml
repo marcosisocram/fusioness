@@ -22,4 +22,14 @@
         <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Torquent" EventoData="11/10/2013"/>
     </vm:MainViewModel.Eventos>
 
+    <vm:MainViewModel.Contatos>
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Marcus"/>
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Mateus"/>
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Dinarte"/>
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Bruno"/>
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Paulo"/>
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Tarcisio"/>
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Marcos Paulo"/>
+    </vm:MainViewModel.Contatos>
+    
 </vm:MainViewModel>

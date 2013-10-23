@@ -263,6 +263,74 @@ namespace Fusioness.Mobile.ViewModels
 
         #endregion
 
+        #region Contatos
+
+        private string _contatoImagem;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string ContatoImagem
+        {
+            get
+            {
+                return _contatoImagem;
+            }
+            set
+            {
+                if (value != _contatoImagem)
+                {
+                    _contatoImagem = value;
+                    NotifyPropertyChanged("ContatoImagem");
+                }
+            }
+        }
+
+        private int _contatoId;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public int ContatoId
+        {
+            get
+            {
+                return _contatoId;
+            }
+            set
+            {
+                if (value != _contatoId)
+                {
+                    _contatoId = value;
+                    NotifyPropertyChanged("ContatoId");
+                }
+            }
+        }
+
+
+        private string _contatoNome;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string ContatoNome
+        {
+            get
+            {
+                return _contatoNome;
+            }
+            set
+            {
+                if (value != _contatoNome)
+                {
+                    _contatoNome = value;
+                    NotifyPropertyChanged("ContatoNome");
+                }
+            }
+        }
+
+        #endregion
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

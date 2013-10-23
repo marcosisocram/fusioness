@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Fusioness.Mobile.Resources;
@@ -19,6 +20,7 @@ namespace Fusioness.Mobile.ViewModels
         /// </summary>
         public ObservableCollection<ItemViewModel> Rotas { get; private set; }
         public ObservableCollection<ItemViewModel> Eventos { get; private set; }
+        public ObservableCollection<ItemViewModel> Contatos { get; private set; }
 
         private string _sampleProperty = "Sample Runtime Property Value";
         /// <summary>
@@ -65,12 +67,46 @@ namespace Fusioness.Mobile.ViewModels
         {            
             this.Rotas = new ObservableCollection<ItemViewModel>();
             this.Eventos = new ObservableCollection<ItemViewModel>();
+            this.Contatos = new ObservableCollection<ItemViewModel>();
+
             FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
             servico.ListarRotasPorUsuarioAsync(Global.usuarioLogado);
             servico.ListarRotasPorUsuarioCompleted += servico_ListarRotasPorUsuarioCompleted;
             servico.ListarEventosPorUsuarioAsync(Global.usuarioLogado);
             servico.ListarEventosPorUsuarioCompleted += servico_ListarEventosPorUsuarioCompleted;
+            servico.ListarContatosDoUsuarioAsync(Global.usuarioLogado);
+            servico.ListarContatosDoUsuarioCompleted += servico_ListarContatosDoUsuarioCompleted;
             this.IsDataLoaded = true;
+        }
+
+        void servico_ListarContatosDoUsuarioCompleted(object sender, FusionessWS.ListarContatosDoUsuarioCompletedEventArgs e)
+        {
+            IList<FusionessWS.Contato> listContatos = e.Result;
+            var idsContatos = listContatos.Select(c => c.IdContato).ToList();
+
+            FusionessWS.ArrayOfInt listIds = new FusionessWS.ArrayOfInt();
+            foreach (var item in idsContatos)
+            {
+                listIds.Add(item);
+            }
+            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
+            servico.ObterUsuariosIdsAsync(listIds);
+            servico.ObterUsuariosIdsCompleted += servico_ObterUsuariosIdsCompleted;            
+        }
+
+        void servico_ObterUsuariosIdsCompleted(object sender, FusionessWS.ObterUsuariosIdsCompletedEventArgs e)
+        {
+            IList<FusionessWS.Usuario> listContatos = e.Result;
+            foreach (var item in listContatos)
+            {
+                this.Contatos.Add(new ItemViewModel()
+                {
+                    ContatoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
+                    ContatoId = item.IdUsuario,
+                    ContatoNome = item.Nome
+                });
+            }
         }
 
         void servico_ListarEventosPorUsuarioCompleted(object sender, FusionessWS.ListarEventosPorUsuarioCompletedEventArgs e)
