@@ -9,8 +9,6 @@ namespace Fusioness.Mobile.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-
         public MainViewModel()
         {
             
@@ -64,9 +62,10 @@ namespace Fusioness.Mobile.ViewModels
         /// Creates and adds a few ItemViewModel objects into the Items collection.
         /// </summary>
         public void LoadData()
-        {
+        {            
             this.Rotas = new ObservableCollection<ItemViewModel>();
-            this.Eventos = new ObservableCollection<ItemViewModel>();            
+            this.Eventos = new ObservableCollection<ItemViewModel>();
+            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
             servico.ListarRotasPorUsuarioAsync(Global.usuarioLogado);
             servico.ListarRotasPorUsuarioCompleted += servico_ListarRotasPorUsuarioCompleted;
             servico.ListarEventosPorUsuarioAsync(Global.usuarioLogado);
@@ -106,6 +105,7 @@ namespace Fusioness.Mobile.ViewModels
 
         public void RemoverRota(int idRota)
         {
+            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
             FusionessWS.Rota rota = new FusionessWS.Rota();
             rota.IdRota = idRota;
             servico.RemoverRotaAsync(rota);            

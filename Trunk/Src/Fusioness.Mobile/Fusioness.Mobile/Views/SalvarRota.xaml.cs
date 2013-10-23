@@ -17,8 +17,7 @@ namespace Fusioness.Mobile.Views
     public partial class SalvarRota : PhoneApplicationPage
     {
         int RotaId = -1;
-        Global.Acao acao = new Global.Acao();
-        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+        Global.Acao acao = new Global.Acao();        
         public ObservableCollection<ItemViewModel> TipoPista { get; private set; }
         public ObservableCollection<ItemViewModel> Dificuldade { get; private set; }
         public ObservableCollection<ItemViewModel> Qualidade { get; private set; }
@@ -50,7 +49,8 @@ namespace Fusioness.Mobile.Views
             this.Dificuldade = new ObservableCollection<ItemViewModel>();
             this.Qualidade = new ObservableCollection<ItemViewModel>();            
             try
-            {                
+            {
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                 servico.ListarTiposPistaAsync();
                 servico.ListarTiposPistaCompleted += servico_ListarTiposPistaCompleted;
                 servico.ListarDificuldadesAsync();
@@ -68,6 +68,7 @@ namespace Fusioness.Mobile.Views
         {
             if (acao == Global.Acao.Visualizar)
             {
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                 this.txtDescricao.IsEnabled = false;
                 rotaPai = new FusionessWS.Rota();
                 rotaPai.IdRota = RotaId;
@@ -163,6 +164,7 @@ namespace Fusioness.Mobile.Views
                    else
                        rota.IdTipoRota = 2;
 
+                   FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                    servico.InserirRotaAsync(rota);
                    servico.InserirRotaCompleted += servico_InserirRotaCompleted;
                }
@@ -183,6 +185,7 @@ namespace Fusioness.Mobile.Views
                        item.IdRota = rota.IdRota;
                        coordenadas.Add(item);
                    }
+                   FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                    servico.InserirListaCoordenadasAsync(coordenadas);
                    servico.InserirListaCoordenadasCompleted += servico_InserirListaCoordenadasCompleted;
                }

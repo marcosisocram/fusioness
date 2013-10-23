@@ -51,8 +51,8 @@
                         <DataTemplate>
                             <StackPanel Margin="0,-6,13,12" Height="auto" >
                                 <toolkit:ContextMenuService.ContextMenu>
-                                    <toolkit:ContextMenu BorderThickness="0" BorderBrush="White">
-                                        <toolkit:MenuItem Header="Excluir" Click="Excluir_Click"/>
+                                    <toolkit:ContextMenu Background="#FF272727" Foreground="{x:Null}">
+                                        <toolkit:MenuItem Header="Excluir" Click="Excluir_Click" Background="{x:Null}" Foreground="White"/>
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
                                 <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" FontSize="30" />
@@ -65,8 +65,8 @@
             <!--Panorama item one-->
             <phone:PanoramaItem x:Name="pnItemEvento" Header="Eventos">
                 <!--Double line list with image placeholder and text wrapping using a floating header that scrolls with the content-->
-                <phone:LongListSelector Margin="0,-38,-22,2" ItemsSource="{Binding Eventos}">
-                    <phone:LongListSelector.ListHeaderTemplate>
+                <phone:LongListSelector Margin="0,-38,0,2" ItemsSource="{Binding Eventos}" SelectionChanged="LongListSelector_SelectionChanged">
+                    <!--<phone:LongListSelector.ListHeaderTemplate>
                         <DataTemplate>
                             <Grid Margin="12,0,0,38">
                                 <Grid.RowDefinitions>
@@ -76,6 +76,7 @@
                             </Grid>
                         </DataTemplate>
                     </phone:LongListSelector.ListHeaderTemplate>
+                    -->
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
@@ -88,9 +89,9 @@
                                         </Image.Source>
                                     </Image>
                                 </Border>
-                                <StackPanel Width="311" Margin="8,-7,0,0">
-                                    <TextBlock Text="{Binding EventoTitulo}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
-                                    <TextBlock Text="{Binding EventoData}" TextWrapping="Wrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                <StackPanel Width="323" Margin="8,3,0,3">
+                                    <TextBlock Text="{Binding EventoTitulo}" TextWrapping="Wrap" Margin="10,0,10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" Height="45" />
+                                    <TextBlock Text="{Binding EventoData}" TextWrapping="Wrap" Margin="10,0,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>

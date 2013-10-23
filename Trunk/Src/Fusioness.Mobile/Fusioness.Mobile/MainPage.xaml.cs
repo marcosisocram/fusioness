@@ -26,6 +26,7 @@ namespace Fusioness.Mobile
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //this.llsRota.ItemsSource.Clear();
             App.ViewModel.LoadData();
         }
 
@@ -74,6 +75,11 @@ namespace Fusioness.Mobile
             {
                 MessageBox.Show("Erro ao Excluir Rota!");
             }
+        }
+
+        private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show("Pesquisar");
         }
     }
 }
