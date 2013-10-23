@@ -10,5 +10,6 @@ namespace Fusioness.Entities
         public virtual Evento Evento { get; set; }
         public virtual Usuario Usuario { get; set; }
         public string Descricao { get; set; }
+        public System.DateTime Data { get; set; }
     }
 }

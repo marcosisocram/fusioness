@@ -93,6 +93,7 @@ namespace Fusioness.Business.ComentariosEvento
                 return new ComentarioEventoRepository(uow).GetByKey(new ComentarioEvento { IdComentarioEvento = comentario.IdComentarioEvento});
             }
         }
+
         public List<ComentarioEvento> ListarComentariosPorEvento(Evento evento)
         {
             try
@@ -101,6 +102,23 @@ namespace Fusioness.Business.ComentariosEvento
                 {
                     IRepository<ComentarioEvento> repo = new ComentarioEventoRepository(uow);
                     var comentarios = repo.GetWhere(c => c.IdEvento == evento.IdEvento);
+                    return comentarios.ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<ComentarioEvento> ListarComentariosPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<ComentarioEvento> repo = new ComentarioEventoRepository(uow);
+                    var comentarios = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario);
                     return comentarios.ToList();
                 }
             }

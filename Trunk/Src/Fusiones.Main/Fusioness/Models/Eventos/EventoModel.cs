@@ -22,6 +22,7 @@ namespace Fusioness.Models.Eventos
         }
 
         public IList<Rota> ListaRotas { get; set; }
+        
         private IList<Evento> _listaEventos = new List<Evento>();
         public IList<Evento> ListaEventos
         {
@@ -45,6 +46,7 @@ namespace Fusioness.Models.Eventos
         public IList<Resposta> RespostasPossiveis { get; set; }
         public IList<Usuario> ListaDeContatosDoUsuario { get; set; }
         public IList<ComentarioEvento> ListaComentariosEvento{ get; set; }
+        public IList<ComentarioEvento> ListaComentariosQueSouDono{ get; set; }
 
         public EventoModel()
         {
@@ -55,11 +57,35 @@ namespace Fusioness.Models.Eventos
             RespostasPossiveis = new List<Resposta>();
             ListaDeContatosDoUsuario = new List<Usuario>();
             ListaComentariosEvento = new List<ComentarioEvento>();
+            ListaComentariosQueSouDono = new List<ComentarioEvento>();
+        }
+
+        public void carregarParametrosView(Usuario usuarioLogado, Evento eventoSelecionado)
+        {
+            MainService Servico = new MainService();
+
+            ListaEventos = Servico.ListarEventos(new int[] { });
+            ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(usuarioLogado);
+            ListaRotas = Servico.ListarRotasPorUsuario(usuarioLogado);
+
+            if (eventoSelecionado != null)
+            {
+                ListaComentariosEvento = Servico.ListarComentariosPorEvento(eventoSelecionado);
+                ListaComentariosQueSouDono = Servico.ListarComentariosPorUsuario(usuarioLogado);    
+            }
+
+            var idsContatos = Servico.ListarContatosDoUsuario(usuarioLogado).ToList().Select(c => c.IdContato).ToList();
+            if (idsContatos.Any()) ListaDeContatosDoUsuario = Servico.ObterUsuariosIds(idsContatos.ToArray()).ToList();
         }
 
         public bool SouDonoDoEvento(int idEvento)
         {
             return ListaEventosQueSouDono.Any(e => e.IdEvento == idEvento);
+        }
+
+        public bool SouDonoDoComentario(int idComentario)
+        {
+            return ListaComentariosQueSouDono.Any(c => c.IdComentarioEvento == idComentario);
         }
 
         public bool IsCadastroEvento { get; set; }

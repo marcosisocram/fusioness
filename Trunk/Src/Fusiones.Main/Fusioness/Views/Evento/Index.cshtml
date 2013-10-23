@@ -20,7 +20,7 @@
                             <p>@(item.Descricao.Count() > 250 ? @item.Descricao.Substring(0, 250) + "..." : @item.Descricao)</p>
                             <p>
                                 <div class="btn-group">
-                                @Html.ActionLink("Detalhes", "Detalhar", "Evento", new{ idEvento = item.IdEvento}, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Detalhes", "Detalhar", "Evento", new { idEvento = item.IdEvento}, new { @class = "btn btn-primary" })
                                     @if (Model.SouDonoDoEvento(item.IdEvento))
                                     {
                                         <!--<a href="#divExclusao" class="btn btn-danger" data-toggle="modal">Excluir Evento</a>-->

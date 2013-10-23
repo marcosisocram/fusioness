@@ -76,6 +76,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarComentariosPorEventoOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarComentariosPorUsuarioOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarTiposRotaOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarTiposPistaOperationCompleted;
@@ -226,6 +228,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarComentariosPorEventoCompletedEventHandler ListarComentariosPorEventoCompleted;
+        
+        /// <remarks/>
+        public event ListarComentariosPorUsuarioCompletedEventHandler ListarComentariosPorUsuarioCompleted;
         
         /// <remarks/>
         public event ListarTiposRotaCompletedEventHandler ListarTiposRotaCompleted;
@@ -952,6 +957,35 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarComentariosPorEventoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarComentariosPorEventoCompleted(this, new ListarComentariosPorEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarComentariosPorUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ComentarioEvento[] ListarComentariosPorUsuario(Usuario usuario) {
+            object[] results = this.Invoke("ListarComentariosPorUsuario", new object[] {
+                        usuario});
+            return ((ComentarioEvento[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarComentariosPorUsuarioAsync(Usuario usuario) {
+            this.ListarComentariosPorUsuarioAsync(usuario, null);
+        }
+        
+        /// <remarks/>
+        public void ListarComentariosPorUsuarioAsync(Usuario usuario, object userState) {
+            if ((this.ListarComentariosPorUsuarioOperationCompleted == null)) {
+                this.ListarComentariosPorUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarComentariosPorUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("ListarComentariosPorUsuario", new object[] {
+                        usuario}, this.ListarComentariosPorUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnListarComentariosPorUsuarioOperationCompleted(object arg) {
+            if ((this.ListarComentariosPorUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarComentariosPorUsuarioCompleted(this, new ListarComentariosPorUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2610,6 +2644,8 @@ namespace Fusioness.FusionessWS {
         
         private string descricaoField;
         
+        private System.DateTime dataField;
+        
         /// <remarks/>
         public int IdComentarioEvento {
             get {
@@ -2667,6 +2703,16 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.descricaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Data {
+            get {
+                return this.dataField;
+            }
+            set {
+                this.dataField = value;
             }
         }
     }
@@ -3427,6 +3473,32 @@ namespace Fusioness.FusionessWS {
         private object[] results;
         
         internal ListarComentariosPorEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ComentarioEvento[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ComentarioEvento[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarComentariosPorUsuarioCompletedEventHandler(object sender, ListarComentariosPorUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarComentariosPorUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarComentariosPorUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

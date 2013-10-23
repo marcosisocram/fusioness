@@ -128,6 +128,13 @@
                         {
                             <tr>
                                 <td>@comentario.Descricao</td>
+                                <td>
+                                    @if (Model.SouDonoDoComentario(comentario.IdComentarioEvento))
+                                {
+                                    <!--<a href="#divExclusao" class="btn btn-danger" data-toggle="modal">Excluir Evento</a>-->
+                                    @Html.ActionLink("Excluir", "ExcluirComentario", "Evento", new { idComentario = comentario.IdComentarioEvento}, new { @class = "btn btn-danger" })
+                                    }
+                                </td>
                             </tr>
                         }
                         <tbody>
