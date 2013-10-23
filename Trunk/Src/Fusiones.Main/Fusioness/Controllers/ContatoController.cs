@@ -44,9 +44,42 @@ namespace Fusioness.Controllers
         {
             var model = new ContatoModel();
             model.ListaDeUsuarios = Servico.ListarUsuarios();
-            //model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
-            //model.CarregarParametrosView();
             return View("index",model);
+        }
+
+        public ActionResult MeusContatos()
+        {
+            var model = new ContatoModel();
+            var usuario = BaseController.ObterUsuarioLogado(HttpContext);
+            var MeusContatos = Servico.ListarContatosDoUsuario(usuario);
+            var usuarios = Servico.ObterUsuariosIds(MeusContatos.Select(c => c.IdContato).ToArray());
+            model.ListaDeUsuarios = usuarios;
+            return View("index", model);
+        }
+
+        public ActionResult AceitarRejeitarConvite(bool IsAceitar, int IdUsuario)
+        {
+            var usuariologado = BaseController.ObterUsuarioLogado(HttpContext);
+            Contato contato;
+            if (IsAceitar)
+            {
+                contato = new Contato()
+                {
+                    IdUsuario = usuariologado.IdUsuario,
+                    IdContato = IdUsuario
+                };
+                contato = Servico.InserirContato(contato);
+            }
+            else
+            {
+                contato = new Contato()
+                {
+                    IdUsuario = IdUsuario,
+                    IdContato = usuariologado.IdUsuario
+                };
+                var ret = Servico.ExcluirContato(contato);
+            }
+            return RedirectToAction("MeusContatos");
         }
     }
 }

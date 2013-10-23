@@ -322,8 +322,13 @@ namespace Fusioness.Business
         {
             return ContatoBus.ExcluirContato(contato);
         }
+        public List<Contato> ListarConvitesDoUsuario(Usuario usuario)
+        {
+            return ContatoBus.ListarConvitesDoUsuario(usuario);
+        }
         #endregion
 
         #endregion
+
     }
 }

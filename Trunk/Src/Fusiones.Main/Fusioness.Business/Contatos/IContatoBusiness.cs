@@ -10,5 +10,6 @@ namespace Fusioness.Business.Contatos
         Contato InserirContato(Contato contato);
         Contato AlterarContato(Contato contato);
         bool ExcluirContato(Contato contato);
+        List<Contato> ListarConvitesDoUsuario(Usuario usuario);
     }
 }

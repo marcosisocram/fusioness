@@ -721,6 +721,20 @@ namespace Fusioness.Services
                 return false;
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Contato> ListarConvitesDoUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarConvitesDoUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Contato>();
+            }
+        }
         #endregion
     }
 }

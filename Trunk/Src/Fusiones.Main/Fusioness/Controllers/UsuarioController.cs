@@ -21,15 +21,21 @@ namespace Fusioness.Controllers
         [HttpPost]
         public ActionResult InserirAlterarUsuario(UsuarioModel model)
         {
+            bool IsAdd = model.Usuario.IdUsuario == 0;
+            var usuarios = Servico.ListarUsuarios();
+            var usuariologado = BaseController.ObterUsuarioLogado(HttpContext);
+            model.IsEmailOK = CheckEmail(usuarios, usuariologado,model.Usuario);
+            model.IsLoginOK = CheckLogin(usuarios, usuariologado,model.Usuario);
+
             if (model.ValidarUsuario(ModelState))
             {
-                if (model.Usuario.IdUsuario > 0)
+                if (IsAdd)
                 {
-                    model.Usuario = Servico.AlterarUsuario(model.Usuario);
+                    model.Usuario = Servico.InserirUsuario(model.Usuario);
                 }
                 else
                 {
-                    model.Usuario = Servico.InserirUsuario(model.Usuario);
+                    model.Usuario = Servico.AlterarUsuario(model.Usuario);
                 }
                 // atualiza o usuario na session ou nao vai mostrar os dados corretos no reload
                 (new BaseController()).EfetuarLogon(model.Usuario,HttpContext);
@@ -67,5 +73,26 @@ namespace Fusioness.Controllers
             return View("Perfil",model);
         }
 
+        private bool CheckEmail(FusionessWS.Usuario[] usuarios,FusionessWS.Usuario usuariologado, FusionessWS.Usuario usuariomodel)
+        {
+            // se o e-mail já existir e não for do mesmo usuário que está mudando o perfil ret false
+            bool ret = true;
+            if (usuarios.Select(c => c.Email).Contains(usuariomodel.Email))
+            {
+                ret = usuariologado != null && usuariomodel.Email == usuariologado.Email;
+            }
+            return ret;
+        }
+
+        private bool CheckLogin(FusionessWS.Usuario[] usuarios,FusionessWS.Usuario usuariologado, FusionessWS.Usuario usuariomodel)
+        {
+            // se o login já existir e não for do mesmo usuário que está mudando o perfil ret false
+            bool ret = true;
+            if (usuarios.Select(c => c.Login).Contains(usuariomodel.Login))
+            {
+                ret = usuariologado != null && usuariomodel.Login == usuariologado.Login;
+            }
+            return ret;
+        }
     }
 }
