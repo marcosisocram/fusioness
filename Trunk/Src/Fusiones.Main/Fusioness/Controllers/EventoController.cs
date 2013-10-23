@@ -65,9 +65,11 @@ namespace Fusioness.Controllers
             if (idEvento == 0) return RedirectToAction("Index");
 
             var model = new EventoModel();
-            model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
             model.Evento = Servico.ObterEventoPorId(new Evento { IdEvento = idEvento });
+            model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
             model.ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(UsuarioLogado);
+            model.ListaComentariosEvento = Servico.ListarComentariosPorEvento(new Evento { IdEvento = idEvento });
+
             var idsContatos = Servico.ListarContatosDoUsuario(UsuarioLogado).ToList().Select(c => c.IdContato).ToList();
             if (idsContatos.Any()) model.ListaDeContatosDoUsuario = Servico.ObterUsuariosIds(idsContatos.ToArray()).ToList();
 
@@ -90,7 +92,7 @@ namespace Fusioness.Controllers
         public ActionResult ResponderConviteEvento(int idEvento, int idResposta)
         {
             Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento, IdContato = UsuarioLogado.IdUsuario}, new Resposta{ IdResposta = idResposta});
-            return RedirectToAction("Convites");
+            return RedirectToAction("VerConvitesEvento");
         }
 
         public ActionResult ExcluirEvento(EventoModel model)

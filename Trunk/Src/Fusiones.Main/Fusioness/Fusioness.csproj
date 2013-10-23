@@ -180,7 +180,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\Evento\Index.cshtml" />
-    <Content Include="Views\Evento\Detalhar.cshtml" />
     <Content Include="Views\Rota\InserirAlterarRota.cshtml" />
     <Content Include="Web References\FusionessWS\Dificuldade.datasource">
       <DependentUpon>Reference.map</DependentUpon>

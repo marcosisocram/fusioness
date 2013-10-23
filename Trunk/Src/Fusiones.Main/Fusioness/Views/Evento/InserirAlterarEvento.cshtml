@@ -22,12 +22,18 @@
                                 <h3>@Model.Evento.Titulo</h3>
                                 <h4>Data do Evento: @Model.Evento.Data.ToString("dd/MM/yyyy")</h4>
                                 <p>@Model.Evento.Descricao</p>
-                                @if (Model.ListaDeContatosDoUsuario.Any())
-                                {
+                                
                                 <p>
+                                    @if (Model.ListaDeContatosDoUsuario.Any())
+                                {
                                     <a href="#divAmigos" class="btn btn-info" data-toggle="modal">Convidar Amigos</a>
-                                </p>
                                 }
+
+                                    @if (Model.ListaComentariosEvento.Any())
+                                {
+                                    <a href="#divComentarios" class="btn btn-info" data-toggle="modal">Ver Comentários</a>
+                                }
+                                </p>
                             </div>
                         </li>
                     </ul>
@@ -68,6 +74,7 @@
         </div>
     </div>
     <!-- END BLOCK -->
+    
     @if (Model.ListaDeContatosDoUsuario.Any())
     {
         <div id="divAmigos" class="modal hide fade">
@@ -101,6 +108,31 @@
                     <input type="submit" value="Convidar" class="btn btn-info pull-right"/>
                 </div>
             }
+        </div>
+    }
+    
+    @if (Model.ListaComentariosEvento.Any())
+    {
+        <div id="divComentarios" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Comentários do Evento:</h3>
+            </div>
+            <div class="modal-body">
+                    <table>
+                        <thead>
+                            <th>Descrição do comentário</th>
+                        </thead>
+                        <tbody>
+                        @foreach (var comentario in Model.ListaComentariosEvento)
+                        {
+                            <tr>
+                                <td>@comentario.Descricao</td>
+                            </tr>
+                        }
+                        <tbody>
+                    </table>
+            </div>
         </div>
     }
 </div>
