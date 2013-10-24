@@ -86,7 +86,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Senha" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
-              <s:element minOccurs="1" maxOccurs="1" name="DataDeNascimento" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Idade" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Sexo" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="UrlImagem" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Bicicletas" type="tns:ArrayOfBicicleta" />
@@ -271,7 +271,6 @@
               <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
               <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
-              <s:element minOccurs="1" maxOccurs="1" name="Data" type="s:dateTime" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -377,6 +376,25 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarContatosPorUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarContatosPorUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarContatosPorUsuarioResult" type="tns:ArrayOfUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUsuario">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Usuario" nillable="true" type="tns:Usuario" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="InserirFotoUsuario">
         <s:complexType>
           <s:sequence>
@@ -390,40 +408,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="InserirFotoUsuarioResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ObterUsuariosIds">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="idsUsuario" type="tns:ArrayOfInt" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="ArrayOfInt">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="ObterUsuariosIdsResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ObterUsuariosIdsResult" type="tns:ArrayOfUsuario" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="ArrayOfUsuario">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Usuario" nillable="true" type="tns:Usuario" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="ListarUsuarios">
-        <s:complexType />
-      </s:element>
-      <s:element name="ListarUsuariosResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListarUsuariosResult" type="tns:ArrayOfUsuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -569,20 +553,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ListarComentariosPorUsuario">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ListarComentariosPorUsuarioResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListarComentariosPorUsuarioResult" type="tns:ArrayOfComentarioEvento" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="ListarTiposRota">
         <s:complexType />
       </s:element>
@@ -643,20 +613,6 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="QualidadeRota" nillable="true" type="tns:QualidadeRota" />
         </s:sequence>
       </s:complexType>
-      <s:element name="InserirEvento">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="InserirEventoResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="InserirEventoResult" type="tns:Evento" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="ListarEventos">
         <s:complexType>
           <s:sequence>
@@ -664,6 +620,11 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ListarEventosResponse">
         <s:complexType>
           <s:sequence>
@@ -779,7 +740,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="convite" type="tns:ConviteEvento" />
-            <s:element minOccurs="0" maxOccurs="1" name="resposta" type="tns:Resposta" />
+            <s:element minOccurs="1" maxOccurs="1" name="resposta" nillable="true" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -787,22 +748,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ResponderConviteEventoResult" type="tns:ConviteEvento" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ConvidarUsuarios">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
-            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
-            <s:element minOccurs="0" maxOccurs="1" name="idsAmigos" type="tns:ArrayOfInt" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ConvidarUsuariosResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ConvidarUsuariosResult" type="tns:ArrayOfConviteEvento" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -821,86 +766,6 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Resposta" nillable="true" type="tns:Resposta" />
         </s:sequence>
       </s:complexType>
-      <s:element name="ListarContatosDoUsuario">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ListarContatosDoUsuarioResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListarContatosDoUsuarioResult" type="tns:ArrayOfContato" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ListarContatos">
-        <s:complexType />
-      </s:element>
-      <s:element name="ListarContatosResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListarContatosResult" type="tns:ArrayOfContato" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="InserirContato">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="contato" type="tns:Contato" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="InserirContatoResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="InserirContatoResult" type="tns:Contato" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="AlterarContato">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="contato" type="tns:Contato" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="AlterarContatoResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="AlterarContatoResult" type="tns:Contato" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ExcluirContato">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="contato" type="tns:Contato" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ExcluirContatoResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="ExcluirContatoResult" type="s:boolean" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ListarConvitesDoUsuario">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="ListarConvitesDoUsuarioResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListarConvitesDoUsuarioResult" type="tns:ArrayOfContato" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -957,23 +822,17 @@
   <wsdl:message name="AlterarUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:AlterarUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarContatosPorUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarContatosPorUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ListarContatosPorUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarContatosPorUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="InserirFotoUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:InserirFotoUsuario" />
   </wsdl:message>
   <wsdl:message name="InserirFotoUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:InserirFotoUsuarioResponse" />
-  </wsdl:message>
-  <wsdl:message name="ObterUsuariosIdsSoapIn">
-    <wsdl:part name="parameters" element="tns:ObterUsuariosIds" />
-  </wsdl:message>
-  <wsdl:message name="ObterUsuariosIdsSoapOut">
-    <wsdl:part name="parameters" element="tns:ObterUsuariosIdsResponse" />
-  </wsdl:message>
-  <wsdl:message name="ListarUsuariosSoapIn">
-    <wsdl:part name="parameters" element="tns:ListarUsuarios" />
-  </wsdl:message>
-  <wsdl:message name="ListarUsuariosSoapOut">
-    <wsdl:part name="parameters" element="tns:ListarUsuariosResponse" />
   </wsdl:message>
   <wsdl:message name="InserirRotaSoapIn">
     <wsdl:part name="parameters" element="tns:InserirRota" />
@@ -1041,12 +900,6 @@
   <wsdl:message name="ListarComentariosPorEventoSoapOut">
     <wsdl:part name="parameters" element="tns:ListarComentariosPorEventoResponse" />
   </wsdl:message>
-  <wsdl:message name="ListarComentariosPorUsuarioSoapIn">
-    <wsdl:part name="parameters" element="tns:ListarComentariosPorUsuario" />
-  </wsdl:message>
-  <wsdl:message name="ListarComentariosPorUsuarioSoapOut">
-    <wsdl:part name="parameters" element="tns:ListarComentariosPorUsuarioResponse" />
-  </wsdl:message>
   <wsdl:message name="ListarTiposRotaSoapIn">
     <wsdl:part name="parameters" element="tns:ListarTiposRota" />
   </wsdl:message>
@@ -1070,12 +923,6 @@
   </wsdl:message>
   <wsdl:message name="ListarQualidadesRotaSoapOut">
     <wsdl:part name="parameters" element="tns:ListarQualidadesRotaResponse" />
-  </wsdl:message>
-  <wsdl:message name="InserirEventoSoapIn">
-    <wsdl:part name="parameters" element="tns:InserirEvento" />
-  </wsdl:message>
-  <wsdl:message name="InserirEventoSoapOut">
-    <wsdl:part name="parameters" element="tns:InserirEventoResponse" />
   </wsdl:message>
   <wsdl:message name="ListarEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarEventos" />
@@ -1137,53 +984,11 @@
   <wsdl:message name="ResponderConviteEventoSoapOut">
     <wsdl:part name="parameters" element="tns:ResponderConviteEventoResponse" />
   </wsdl:message>
-  <wsdl:message name="ConvidarUsuariosSoapIn">
-    <wsdl:part name="parameters" element="tns:ConvidarUsuarios" />
-  </wsdl:message>
-  <wsdl:message name="ConvidarUsuariosSoapOut">
-    <wsdl:part name="parameters" element="tns:ConvidarUsuariosResponse" />
-  </wsdl:message>
   <wsdl:message name="ListarRespostasSoapIn">
     <wsdl:part name="parameters" element="tns:ListarRespostas" />
   </wsdl:message>
   <wsdl:message name="ListarRespostasSoapOut">
     <wsdl:part name="parameters" element="tns:ListarRespostasResponse" />
-  </wsdl:message>
-  <wsdl:message name="ListarContatosDoUsuarioSoapIn">
-    <wsdl:part name="parameters" element="tns:ListarContatosDoUsuario" />
-  </wsdl:message>
-  <wsdl:message name="ListarContatosDoUsuarioSoapOut">
-    <wsdl:part name="parameters" element="tns:ListarContatosDoUsuarioResponse" />
-  </wsdl:message>
-  <wsdl:message name="ListarContatosSoapIn">
-    <wsdl:part name="parameters" element="tns:ListarContatos" />
-  </wsdl:message>
-  <wsdl:message name="ListarContatosSoapOut">
-    <wsdl:part name="parameters" element="tns:ListarContatosResponse" />
-  </wsdl:message>
-  <wsdl:message name="InserirContatoSoapIn">
-    <wsdl:part name="parameters" element="tns:InserirContato" />
-  </wsdl:message>
-  <wsdl:message name="InserirContatoSoapOut">
-    <wsdl:part name="parameters" element="tns:InserirContatoResponse" />
-  </wsdl:message>
-  <wsdl:message name="AlterarContatoSoapIn">
-    <wsdl:part name="parameters" element="tns:AlterarContato" />
-  </wsdl:message>
-  <wsdl:message name="AlterarContatoSoapOut">
-    <wsdl:part name="parameters" element="tns:AlterarContatoResponse" />
-  </wsdl:message>
-  <wsdl:message name="ExcluirContatoSoapIn">
-    <wsdl:part name="parameters" element="tns:ExcluirContato" />
-  </wsdl:message>
-  <wsdl:message name="ExcluirContatoSoapOut">
-    <wsdl:part name="parameters" element="tns:ExcluirContatoResponse" />
-  </wsdl:message>
-  <wsdl:message name="ListarConvitesDoUsuarioSoapIn">
-    <wsdl:part name="parameters" element="tns:ListarConvitesDoUsuario" />
-  </wsdl:message>
-  <wsdl:message name="ListarConvitesDoUsuarioSoapOut">
-    <wsdl:part name="parameters" element="tns:ListarConvitesDoUsuarioResponse" />
   </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="HelloWorld">
@@ -1222,17 +1027,13 @@
       <wsdl:input message="tns:AlterarUsuarioSoapIn" />
       <wsdl:output message="tns:AlterarUsuarioSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarContatosPorUsuario">
+      <wsdl:input message="tns:ListarContatosPorUsuarioSoapIn" />
+      <wsdl:output message="tns:ListarContatosPorUsuarioSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="InserirFotoUsuario">
       <wsdl:input message="tns:InserirFotoUsuarioSoapIn" />
       <wsdl:output message="tns:InserirFotoUsuarioSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="ObterUsuariosIds">
-      <wsdl:input message="tns:ObterUsuariosIdsSoapIn" />
-      <wsdl:output message="tns:ObterUsuariosIdsSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="ListarUsuarios">
-      <wsdl:input message="tns:ListarUsuariosSoapIn" />
-      <wsdl:output message="tns:ListarUsuariosSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InserirRota">
       <wsdl:input message="tns:InserirRotaSoapIn" />
@@ -1278,10 +1079,6 @@
       <wsdl:input message="tns:ListarComentariosPorEventoSoapIn" />
       <wsdl:output message="tns:ListarComentariosPorEventoSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="ListarComentariosPorUsuario">
-      <wsdl:input message="tns:ListarComentariosPorUsuarioSoapIn" />
-      <wsdl:output message="tns:ListarComentariosPorUsuarioSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <wsdl:input message="tns:ListarTiposRotaSoapIn" />
       <wsdl:output message="tns:ListarTiposRotaSoapOut" />
@@ -1297,10 +1094,6 @@
     <wsdl:operation name="ListarQualidadesRota">
       <wsdl:input message="tns:ListarQualidadesRotaSoapIn" />
       <wsdl:output message="tns:ListarQualidadesRotaSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="InserirEvento">
-      <wsdl:input message="tns:InserirEventoSoapIn" />
-      <wsdl:output message="tns:InserirEventoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarEventos">
       <wsdl:input message="tns:ListarEventosSoapIn" />
@@ -1342,37 +1135,9 @@
       <wsdl:input message="tns:ResponderConviteEventoSoapIn" />
       <wsdl:output message="tns:ResponderConviteEventoSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="ConvidarUsuarios">
-      <wsdl:input message="tns:ConvidarUsuariosSoapIn" />
-      <wsdl:output message="tns:ConvidarUsuariosSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="ListarRespostas">
       <wsdl:input message="tns:ListarRespostasSoapIn" />
       <wsdl:output message="tns:ListarRespostasSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="ListarContatosDoUsuario">
-      <wsdl:input message="tns:ListarContatosDoUsuarioSoapIn" />
-      <wsdl:output message="tns:ListarContatosDoUsuarioSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="ListarContatos">
-      <wsdl:input message="tns:ListarContatosSoapIn" />
-      <wsdl:output message="tns:ListarContatosSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="InserirContato">
-      <wsdl:input message="tns:InserirContatoSoapIn" />
-      <wsdl:output message="tns:InserirContatoSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="AlterarContato">
-      <wsdl:input message="tns:AlterarContatoSoapIn" />
-      <wsdl:output message="tns:AlterarContatoSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="ExcluirContato">
-      <wsdl:input message="tns:ExcluirContatoSoapIn" />
-      <wsdl:output message="tns:ExcluirContatoSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="ListarConvitesDoUsuario">
-      <wsdl:input message="tns:ListarConvitesDoUsuarioSoapIn" />
-      <wsdl:output message="tns:ListarConvitesDoUsuarioSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
@@ -1458,26 +1223,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarContatosPorUsuario">
+      <soap:operation soapAction="http://tempuri.org/ListarContatosPorUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirFotoUsuario">
       <soap:operation soapAction="http://tempuri.org/InserirFotoUsuario" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ObterUsuariosIds">
-      <soap:operation soapAction="http://tempuri.org/ObterUsuariosIds" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarUsuarios">
-      <soap:operation soapAction="http://tempuri.org/ListarUsuarios" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1584,15 +1340,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ListarComentariosPorUsuario">
-      <soap:operation soapAction="http://tempuri.org/ListarComentariosPorUsuario" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <soap:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
       <wsdl:input>
@@ -1622,15 +1369,6 @@
     </wsdl:operation>
     <wsdl:operation name="ListarQualidadesRota">
       <soap:operation soapAction="http://tempuri.org/ListarQualidadesRota" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="InserirEvento">
-      <soap:operation soapAction="http://tempuri.org/InserirEvento" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1728,71 +1466,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ConvidarUsuarios">
-      <soap:operation soapAction="http://tempuri.org/ConvidarUsuarios" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ListarRespostas">
       <soap:operation soapAction="http://tempuri.org/ListarRespostas" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarContatosDoUsuario">
-      <soap:operation soapAction="http://tempuri.org/ListarContatosDoUsuario" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarContatos">
-      <soap:operation soapAction="http://tempuri.org/ListarContatos" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="InserirContato">
-      <soap:operation soapAction="http://tempuri.org/InserirContato" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="AlterarContato">
-      <soap:operation soapAction="http://tempuri.org/AlterarContato" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ExcluirContato">
-      <soap:operation soapAction="http://tempuri.org/ExcluirContato" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarConvitesDoUsuario">
-      <soap:operation soapAction="http://tempuri.org/ListarConvitesDoUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1884,26 +1559,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarContatosPorUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ListarContatosPorUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirFotoUsuario">
       <soap12:operation soapAction="http://tempuri.org/InserirFotoUsuario" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ObterUsuariosIds">
-      <soap12:operation soapAction="http://tempuri.org/ObterUsuariosIds" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarUsuarios">
-      <soap12:operation soapAction="http://tempuri.org/ListarUsuarios" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2010,15 +1676,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ListarComentariosPorUsuario">
-      <soap12:operation soapAction="http://tempuri.org/ListarComentariosPorUsuario" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ListarTiposRota">
       <soap12:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
       <wsdl:input>
@@ -2048,15 +1705,6 @@
     </wsdl:operation>
     <wsdl:operation name="ListarQualidadesRota">
       <soap12:operation soapAction="http://tempuri.org/ListarQualidadesRota" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="InserirEvento">
-      <soap12:operation soapAction="http://tempuri.org/InserirEvento" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2154,71 +1802,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ConvidarUsuarios">
-      <soap12:operation soapAction="http://tempuri.org/ConvidarUsuarios" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ListarRespostas">
       <soap12:operation soapAction="http://tempuri.org/ListarRespostas" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarContatosDoUsuario">
-      <soap12:operation soapAction="http://tempuri.org/ListarContatosDoUsuario" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarContatos">
-      <soap12:operation soapAction="http://tempuri.org/ListarContatos" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="InserirContato">
-      <soap12:operation soapAction="http://tempuri.org/InserirContato" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="AlterarContato">
-      <soap12:operation soapAction="http://tempuri.org/AlterarContato" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ExcluirContato">
-      <soap12:operation soapAction="http://tempuri.org/ExcluirContato" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarConvitesDoUsuario">
-      <soap12:operation soapAction="http://tempuri.org/ListarConvitesDoUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
