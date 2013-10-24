@@ -65,7 +65,7 @@
             <!--Panorama item one-->
             <phone:PanoramaItem x:Name="pnItemEvento" Header="Eventos">
                 <!--Double line list with image placeholder and text wrapping using a floating header that scrolls with the content-->
-                <phone:LongListSelector Margin="0,-38,0,2" ItemsSource="{Binding Eventos}" SelectionChanged="LongListSelector_SelectionChanged" VerticalAlignment="Bottom" Height="427">
+                <phone:LongListSelector x:Name="llsEvento" Margin="0,-38,0,2" ItemsSource="{Binding Eventos}" SelectionChanged="llsEvento_SelectionChanged" VerticalAlignment="Bottom" Height="427">
                     <!--<phone:LongListSelector.ListHeaderTemplate>
                         <DataTemplate>
                             <Grid Margin="12,0,0,38">
@@ -102,7 +102,7 @@
             <!--Panorama item three-->
             <phone:PanoramaItem x:Name="pnItemRecentes" Header="Realizadas">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector Margin="14,-20,0,2" ItemsSource="{Binding Rotas}">
+                <phone:LongListSelector x:Name="llsRotasRealizadas" Margin="14,-20,0,2" ItemsSource="{Binding Rotas}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,-6,13,12" Height="auto">
@@ -115,7 +115,7 @@
 
             <!--Panorama item two-->
             <phone:PanoramaItem x:Name="pnItemContatos" Header="Contatos">
-                <phone:LongListSelector Margin="-6,-38,0,2" ItemsSource="{Binding Contatos}" SelectionChanged="LongListSelector_SelectionChanged" VerticalAlignment="Bottom" Height="427">
+                <phone:LongListSelector x:Name="llsContatos" Margin="-6,-38,0,2" ItemsSource="{Binding Contatos}"  VerticalAlignment="Bottom" Height="427">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="12,2,-37,4" Height="75" Width="432">

@@ -8,12 +8,12 @@
       </basicHttpBinding>
     </bindings>
     <client>
-        <endpoint address="http://192.168.25.4/Fusioness.Services/MainService.asmx"
+        <!--<endpoint address="http://192.168.25.4/Fusioness.Services/MainService.asmx"
         binding="basicHttpBinding" bindingConfiguration="MainServiceSoap"
-        contract="FusionessWS.MainServiceSoap" name="MainServiceSoap" />
-      <!--<endpoint address="http://fusionessapi.apphb.com/MainService.asmx"
+        contract="FusionessWS.MainServiceSoap" name="MainServiceSoap" />-->
+        <endpoint address="http://fusionessapi.apphb.com/MainService.asmx"
                   binding="basicHttpBinding" bindingConfiguration="MainServiceSoap"
-                  contract="FusionessWS.MainServiceSoap" name="MainServiceSoap" />-->
+                  contract="FusionessWS.MainServiceSoap" name="MainServiceSoap" />
     </client>
   </system.serviceModel>
 </configuration>

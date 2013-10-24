@@ -112,6 +112,9 @@
     </Compile>
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\Evento.xaml.cs">
+      <DependentUpon>Evento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RotaMap.xaml.cs">
       <DependentUpon>RotaMap.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="Views\Evento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RotaMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Buttons\cancel.png" />
+    <Content Include="Assets\Buttons\edit.png" />
     <Content Include="Assets\Buttons\refresh.png" />
     <Content Include="README_FIRST.txt" />
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarBicicletaResponse.datasource">

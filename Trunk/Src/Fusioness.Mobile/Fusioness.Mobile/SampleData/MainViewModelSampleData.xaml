@@ -31,5 +31,5 @@
         <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Tarcisio"/>
         <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Marcos Paulo"/>
     </vm:MainViewModel.Contatos>
-    
+        
 </vm:MainViewModel>

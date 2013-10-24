@@ -119,7 +119,8 @@ namespace Fusioness.Mobile.ViewModels
                 {
                     EventoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
                     EventoTitulo = item.Titulo,
-                    EventoData = item.Data.ToString("dd/MM/yyyy")
+                    EventoData = item.Data.ToString("dd/MM/yyyy"),
+                    EventoId = item.IdEvento
                 });
             }
         }        

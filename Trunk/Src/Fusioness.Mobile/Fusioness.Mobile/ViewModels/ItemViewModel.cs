@@ -60,6 +60,27 @@ namespace Fusioness.Mobile.ViewModels
 
         #region Evento
 
+        private int _eventoId;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public int EventoId
+        {
+            get
+            {
+                return _eventoId;
+            }
+            set
+            {
+                if (value != _eventoId)
+                {
+                    _eventoId = value;
+                    NotifyPropertyChanged("EventoId");
+                }
+            }
+        }
+
         private string _eventoImagem;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
@@ -331,6 +352,50 @@ namespace Fusioness.Mobile.ViewModels
 
         #endregion
 
+        #region ComentarioEvento
+
+        private string _comentarioDescricao;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string ComentarioDescricao
+        {
+            get
+            {
+                return _comentarioDescricao;
+            }
+            set
+            {
+                if (value != _comentarioDescricao)
+                {
+                    _comentarioDescricao = value;
+                    NotifyPropertyChanged("ComentarioDescricao");
+                }
+            }
+        }
+
+        private int _comentarioId;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public int ComentarioId
+        {
+            get
+            {
+                return _comentarioId;
+            }
+            set
+            {
+                if (value != _comentarioId)
+                {
+                    _comentarioId = value;
+                    NotifyPropertyChanged("ComentarioId");
+                }
+            }
+        }
+        #endregion
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

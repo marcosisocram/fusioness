@@ -77,9 +77,10 @@ namespace Fusioness.Mobile
             }
         }
 
-        private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void llsEvento_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show("Pesquisar");
+            var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
+            NavigationService.Navigate(new Uri("/Views/Evento.xaml?EventoId=" + res.EventoId.ToString(), UriKind.Relative));
         }
     }
 }

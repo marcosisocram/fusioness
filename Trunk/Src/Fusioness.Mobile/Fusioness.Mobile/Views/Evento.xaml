@@ -1,0 +1,92 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Fusioness.Mobile.Views.Evento"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="136"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,6">
+            <TextBlock Text="Fusioness" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="Evento" Margin="9,0,0,0" FontSize="24" Height="32" />
+            <TextBlock x:Name="lbTituloEvento" Text="Evento" FontSize="36" HorizontalAlignment="Center" Height="40" />
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Left" Height="170" Margin="10,0,0,0" VerticalAlignment="Top" Width="460" Grid.Row="2" Grid.RowSpan="2">
+            <Border BorderBrush="#FFFFC700" BorderThickness="1" Height="150" Margin="10,10" Width="150" HorizontalAlignment="Left">
+                <Image HorizontalAlignment="Left" Margin="10,10,10,10">
+                    <Image.Source>
+                        <BitmapImage x:Name="imgEvento"
+        					UriSource="/Assets/ApplicationIcon.png" 
+        					CreateOptions="BackgroundCreation"/>
+                    </Image.Source>
+                </Image>
+            </Border>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="80" Margin="10,164,0,0" Grid.Row="3" VerticalAlignment="Top" Width="460">
+            <TextBlock HorizontalAlignment="Left" Height="29" TextWrapping="Wrap" Text="Participantes" Width="460" Margin="10,0"/>
+            <Border BorderBrush="#FFFFC700" BorderThickness="1" Height="40" Margin="15,5" Width="40" HorizontalAlignment="Left">
+                <Image HorizontalAlignment="Left" Height="39" VerticalAlignment="Top" Width="39" Margin="0,0,-1,-1" >
+                    <Image.Source>
+                        <BitmapImage 
+        					UriSource="/Assets/ApplicationIcon.png" 
+        					CreateOptions="BackgroundCreation"/>
+                    </Image.Source>
+                </Image>
+            </Border>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="311" Margin="10,249,0,0" Grid.Row="3" VerticalAlignment="Top" Width="460">
+            <TextBlock HorizontalAlignment="Left" Height="29" TextWrapping="Wrap" Text="Comentarios" Width="460" Margin="10,0"/>
+            <phone:LongListSelector x:Name="llsComentario" ItemsSource="{Binding Contatos}" VerticalAlignment="Bottom" Height="296">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="8,0,7,0" Height="Auto" Width="432">
+                            <!--Replace rectangle with image-->
+                            <Border BorderThickness="1" Margin="5,15" Width="50" BorderBrush="#FFFFC700" Height="50" VerticalAlignment="Top">
+                                <Image>
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding ContatoImagem}" 
+                                                         CreateOptions="BackgroundCreation"/>
+                                    </Image.Source>
+                                </Image>
+                            </Border>
+                            <StackPanel Width="365" Margin="5,5" Height="Auto">
+                                <TextBlock Text="{Binding ContatoNome}" TextWrapping="NoWrap" Height="30" Margin="5,3" FontSize="22" Foreground="#3C8BFF"/>
+                                <TextBlock Text="{Binding ComentarioDescricao}" TextWrapping="Wrap" Margin="5,0" Height="Auto" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
+        </StackPanel>
+
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
+            <shell:ApplicationBarIconButton x:Name="btComentar" IconUri="/Assets/Buttons/edit.png" Text="Comentar"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Rota do Evento"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
