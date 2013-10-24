@@ -101,13 +101,29 @@ namespace Fusioness.Business.ComentariosEvento
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<ComentarioEvento> repo = new ComentarioEventoRepository(uow);
-                    var comentarios = repo.GetWhere(c => c.IdEvento == evento.IdEvento);
+                    IQueryable<ComentarioEvento> comentarios = repo.GetWhere(c => c.IdEvento == evento.IdEvento);
+                    
+                    preencherUsuarioComentario(comentarios);
+
                     return comentarios.ToList();
                 }
             }
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        private void preencherUsuarioComentario(IQueryable<ComentarioEvento> listaComentarios)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                IRepository<Usuario> repo = new UsuarioRepository(uow);
+
+                foreach (var comentario in listaComentarios)
+                {
+                    comentario.Usuario = repo.GetByKey(new Usuario { IdUsuario = comentario.IdUsuario });
+                }
             }
         }
 

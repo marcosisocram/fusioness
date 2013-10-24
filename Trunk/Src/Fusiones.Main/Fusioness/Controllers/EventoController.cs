@@ -127,7 +127,19 @@ namespace Fusioness.Controllers
         #endregion
 
         #region Comentario
-        
+
+        public ActionResult InserirComentario(EventoModel model)
+        {
+            model.Comentario.Data = DateTime.Now;
+            model.Comentario.IdUsuario = UsuarioLogado.IdUsuario;
+
+            var comentario = Servico.InserirComentarioEvento(model.Comentario);
+
+            ExibirModal("Seu comentário foi salvo com sucesso.");
+
+            return RedirectToAction("Detalhar", new { idEvento = comentario.IdEvento });
+        }
+
         public ActionResult ExcluirComentario(int idComentario = 0)
         {
             ComentarioEvento comentario = Servico.ObterComentarioEventoPorId(new ComentarioEvento { IdComentarioEvento = idComentario });
