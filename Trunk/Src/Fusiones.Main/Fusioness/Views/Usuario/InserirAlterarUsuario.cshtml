@@ -8,7 +8,16 @@
     <!-- BLOCK -->
     <div class="span12">
         <div class="card">
-            <h2 class="card-heading simple">Cadastre-se!</h2>
+            <h2 class="card-heading simple">
+                @if (Model.Usuario.IdUsuario == 0)
+                {
+                    <span>Cadastre-se!</span>
+                }
+                else
+                {
+                    <span>Edite seu perfil</span>
+                }
+            </h2>
             <div class="card-body">
                 
                 @using (Html.BeginForm("InserirAlterarUsuario", "Usuario", FormMethod.Post))

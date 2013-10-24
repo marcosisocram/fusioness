@@ -17,12 +17,12 @@ namespace Fusioness.Models.Bicicletas
             bool retorno = true;
             if (string.IsNullOrWhiteSpace(Bicicleta.Modelo))
             {
-                ModelState.AddModelError("Modelo", "Preecha o modelo");
+                ModelState.AddModelError("Modelo", "Preencha o modelo");
                 retorno = false;
             }
             if (string.IsNullOrWhiteSpace(Bicicleta.Marca))
             {
-                ModelState.AddModelError("Marca", "Preecha a marca");
+                ModelState.AddModelError("Marca", "Preencha a marca");
                 retorno = false;
             }
             

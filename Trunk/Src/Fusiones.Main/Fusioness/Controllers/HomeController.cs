@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using Fusioness.Models.Home;
 using System.Linq;
+using System;
 
 namespace Fusioness.Controllers
 {
@@ -12,6 +13,7 @@ namespace Fusioness.Controllers
         {
             var usuario = BaseController.ObterUsuarioLogado(HttpContext);
             var convites = Servico.ListarConvitesDoUsuario(usuario);
+            model = new IndexModel();
             model.ContatosNaoConfirmados = Servico.ObterUsuariosIds(convites.Select(c => c.IdUsuario).ToArray()).ToList();
             return View(model);
         }
@@ -24,9 +26,18 @@ namespace Fusioness.Controllers
 
         public ActionResult EnviarImagem(HttpPostedFileBase image)
         {
+            string retorno = string.Empty;
             try
             {
-                if (image!=null && image.ContentLength > 0)
+                if (image == null || image.ContentLength <= 0)
+                {
+                    retorno = "Não foi selecionado nenhum arquivo.";
+                }
+                else if (!image.ContentType.ToLower().Contains("image"))
+                {
+                    retorno = "O arquivo selecionado não é uma imagem.";
+                }
+                else
                 {
                     var ms = new MemoryStream();
                     image.InputStream.CopyTo(ms);
@@ -36,11 +47,12 @@ namespace Fusioness.Controllers
                     usuario.UrlImagem = fs;
                 }
             }
-            catch 
+            catch(Exception e) 
             {
+                retorno = string.Format("Aconteceu um erro inesperado. Mensagem de erro: {0}.", e.Message);
             }
-
-            return View("index");
+            if (!string.IsNullOrEmpty(retorno)) { ExibirModal(retorno); }
+            return RedirectToAction("Index");
         }
     }
 }
