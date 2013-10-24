@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using Fusioness.Models.Home;
+using System.Linq;
 
 namespace Fusioness.Controllers
 {
@@ -9,6 +10,9 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(IndexModel model)
         {
+            var usuario = BaseController.ObterUsuarioLogado(HttpContext);
+            var convites = Servico.ListarConvitesDoUsuario(usuario);
+            model.ContatosNaoConfirmados = Servico.ObterUsuariosIds(convites.Select(c => c.IdUsuario).ToArray()).ToList();
             return View(model);
         }
 

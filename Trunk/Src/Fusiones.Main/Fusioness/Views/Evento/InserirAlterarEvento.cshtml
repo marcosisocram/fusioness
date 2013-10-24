@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Inserir Evento";
     Layout = "~/Views/Shared/LayoutBase.cshtml";
+    var urlTemp = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAEOCAYAAACkSI2SAAANmUlEQVR4Xu3cMW8USReG0TYIEAkhghARIhEixM8nIkKEEENsiQQSYFeDNFZvqXv69di+vuM9JJ++pTxVfar2cW97PGfn5+f/TP4QIECAQDuBM4FutycWRIAAgb8CAu0gECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGm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";
 }
 
 <!-- LINHA 1 -->
@@ -11,27 +12,23 @@
         <div class="card">
             <h2 class="card-heading simple">
                 @Html.ActionLink("Voltar", "Index", "Evento", new { @class = "pull-right btn btn-primary" })
-                Detalhes do evento!
+                Detalhes do evento:
             </h2>
             <div class="card-body" style="overflow: hidden">
                 <div style="float: left">
                     <ul class="thumbnails">
                         <li class="span9">
                             <div class="thumbnail">
-                                <img data-src="holder.js/300x200" src="@Model.Evento.UrlImagem" alt="Imagem do Evento">
+                                <img data-src="holder.js/300x200" src="@(string.IsNullOrEmpty(Model.Evento.UrlImagem) ? urlTemp : Model.Evento.UrlImagem)" alt="Imagem do Evento">
                                 <h3>@Model.Evento.Titulo</h3>
                                 <h4>Data do Evento: @Model.Evento.Data.ToString("dd/MM/yyyy")</h4>
+                                <h4>Tipo do Evento: @(Model.Evento.Publico ? "Público" : "Privado")</h4>
                                 <p>@Model.Evento.Descricao</p>
                                 
                                 <p>
                                     @if (Model.ListaDeContatosDoUsuario.Any())
                                 {
                                     <a href="#divAmigos" class="btn btn-info" data-toggle="modal">Convidar Amigos</a>
-                                }
-
-                                    @if (Model.ListaComentariosEvento.Any())
-                                {
-                                    <a href="#divComentarios" class="btn btn-info" data-toggle="modal">Ver Comentários</a>
                                 }
                                 </p>
                             </div>
@@ -70,6 +67,61 @@
                         }
                     }
                 </div>
+
+                <div style="float:none">
+                    @using (Html.BeginForm("InserirComentario", "Evento", FormMethod.Post))
+                    {
+                        <ul class="thumbnails">
+                            <li class="span5">
+                                <div class="thumbnail">
+                                    <h4>Que tal comentar?</h4>
+                                    @Html.TextAreaFor(m => m.Comentario.Descricao)
+                                    <br />
+                                    @Html.HiddenFor(m => m.Comentario.IdEvento)
+                                    <input type="submit" value="Comentar" class="btn btn-primary" />
+                                </div>
+                            </li>
+                        </ul>
+                        }
+                </div>
+
+
+                @if (Model.ListaComentariosEvento.Any())
+                {
+                    <div class="thumbnail">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Usuário que Comentou:</th>
+                                    <th>Data do Comentário:</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var comentario in Model.ListaComentariosEvento)
+                                {
+                                    <tr>
+                                        <td>@comentario.Usuario.Nome</td>
+                                        <td>@comentario.Data.ToString("dd/MM/yyyy - hh:mm")</td>
+                                        <td>@comentario.Descricao</td>
+                                        <td>
+                                            @if (Model.SouDonoDoComentario(comentario.IdComentarioEvento))
+                                            {
+                                                <!--<a href="#divExclusao" class="btn btn-danger" data-toggle="modal">Excluir Evento</a>-->
+                                                @Html.ActionLink("Excluir", "ExcluirComentario", "Evento", new { idComentario = comentario.IdComentarioEvento }, new { @class = "btn btn-danger" })
+                                    }
+                                        </td>
+                                    </tr>
+                        }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <ul class="thumbnails">
+                        <li class="span5"></li>
+                    </ul>
+                }
+
             </div>
         </div>
     </div>
@@ -108,31 +160,6 @@
                     <input type="submit" value="Convidar" class="btn btn-info pull-right"/>
                 </div>
             }
-        </div>
-    }
-    
-    @if (Model.ListaComentariosEvento.Any())
-    {
-        <div id="divComentarios" class="modal hide fade">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Comentários do Evento:</h3>
-            </div>
-            <div class="modal-body">
-                    <table>
-                        <thead>
-                            <th>Descrição do comentário</th>
-                        </thead>
-                        <tbody>
-                        @foreach (var comentario in Model.ListaComentariosEvento)
-                        {
-                            <tr>
-                                <td>@comentario.Descricao</td>
-                            </tr>
-                        }
-                        <tbody>
-                    </table>
-            </div>
         </div>
     }
 </div>

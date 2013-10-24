@@ -22,6 +22,7 @@ namespace Fusioness.Data.Mapping
             this.Property(t => t.IdEvento).HasColumnName("IdEvento");
             this.Property(t => t.IdUsuario).HasColumnName("IdUsuario");
             this.Property(t => t.Descricao).HasColumnName("Descricao");
+            this.Property(t => t.Data).HasColumnName("Data");
 
             // Relationships
             HasRequired(t => t.Evento)

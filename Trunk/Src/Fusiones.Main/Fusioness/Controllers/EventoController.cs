@@ -10,10 +10,10 @@ namespace Fusioness.Controllers
 {
     public class EventoController : BaseController
     {
+        #region Evento
         public ActionResult Index(EventoModel model)
         {
-            model.ListaEventos = Servico.ListarEventos(new int[]{});
-            model.ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(UsuarioLogado);
+            model.carregarParametrosView(UsuarioLogado, null);
             return View(model);
         }
 
@@ -53,8 +53,10 @@ namespace Fusioness.Controllers
         public ActionResult InserirAlterarEvento()
         {
             var model = new EventoModel();
-            model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
             model.Evento = new Evento();
+
+            model.carregarParametrosView(UsuarioLogado, null);
+
             model.IsCadastroEvento = true;
 
             return View("InserirAlterarEvento", model);
@@ -66,16 +68,24 @@ namespace Fusioness.Controllers
 
             var model = new EventoModel();
             model.Evento = Servico.ObterEventoPorId(new Evento { IdEvento = idEvento });
-            model.ListaRotas = Servico.ListarRotasPorUsuario(UsuarioLogado);
-            model.ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(UsuarioLogado);
-            model.ListaComentariosEvento = Servico.ListarComentariosPorEvento(new Evento { IdEvento = idEvento });
 
-            var idsContatos = Servico.ListarContatosDoUsuario(UsuarioLogado).ToList().Select(c => c.IdContato).ToList();
-            if (idsContatos.Any()) model.ListaDeContatosDoUsuario = Servico.ObterUsuariosIds(idsContatos.ToArray()).ToList();
+            model.carregarParametrosView(UsuarioLogado, model.Evento);
 
             return View("InserirAlterarEvento", model);
         }
 
+
+        public ActionResult ExcluirEvento(int idEvento = 0)
+        {
+            Servico.RemoverEvento(new Evento { IdEvento = idEvento });
+            ExibirModal("Evento excluído com sucesso.");
+
+            return RedirectToAction("index", new EventoModel());
+        }
+
+        #endregion
+
+        #region Convites
         public ActionResult VerConvitesEvento(EventoModel model)
         {
             model.RespostasPossiveis = Servico.ListarRespostas();
@@ -89,17 +99,7 @@ namespace Fusioness.Controllers
             return View("Convites", model);
         }
 
-        public ActionResult ResponderConviteEvento(int idEvento, int idResposta)
-        {
-            Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento, IdContato = UsuarioLogado.IdUsuario}, new Resposta{ IdResposta = idResposta});
-            return RedirectToAction("VerConvitesEvento");
-        }
 
-        public ActionResult ExcluirEvento(EventoModel model)
-        {
-            Servico.RemoverEvento(model.Evento);
-            return RedirectToAction("index", model);
-        }
 
         public ActionResult Convidar(int[] idsAmigos, EventoModel model)
         {
@@ -116,5 +116,40 @@ namespace Fusioness.Controllers
             ExibirModal("Convites feitos.");
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult ResponderConviteEvento(int idEvento, int idResposta)
+        {
+            Servico.ResponderConviteEvento(new ConviteEvento { IdEvento = idEvento, IdContato = UsuarioLogado.IdUsuario }, new Resposta { IdResposta = idResposta });
+            return RedirectToAction("VerConvitesEvento");
+        }
+
+        #endregion
+
+        #region Comentario
+
+        public ActionResult InserirComentario(EventoModel model)
+        {
+            model.Comentario.Data = DateTime.Now;
+            model.Comentario.IdUsuario = UsuarioLogado.IdUsuario;
+
+            var comentario = Servico.InserirComentarioEvento(model.Comentario);
+
+            ExibirModal("Seu comentário foi salvo com sucesso.");
+
+            return RedirectToAction("Detalhar", new { idEvento = comentario.IdEvento });
+        }
+
+        public ActionResult ExcluirComentario(int idComentario = 0)
+        {
+            ComentarioEvento comentario = Servico.ObterComentarioEventoPorId(new ComentarioEvento { IdComentarioEvento = idComentario });
+
+            Servico.RemoverComentarioEvento(comentario);
+            ExibirModal("Comentário excluído com sucesso.");
+
+            return RedirectToAction("Detalhar", new {idEvento = comentario.IdEvento});
+        }
+
+        #endregion
     }
 }

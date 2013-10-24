@@ -209,6 +209,11 @@ namespace Fusioness.Business
             return ComentarioEventoBus.ListarComentariosPorEvento(evento);
         }
 
+        public List<ComentarioEvento> ListarComentariosPorUsuario(Usuario usuario)
+        {
+            return ComentarioEventoBus.ListarComentariosPorUsuario(usuario);
+        }
+
         #endregion
 
         #region TipoRota
@@ -317,8 +322,13 @@ namespace Fusioness.Business
         {
             return ContatoBus.ExcluirContato(contato);
         }
+        public List<Contato> ListarConvitesDoUsuario(Usuario usuario)
+        {
+            return ContatoBus.ListarConvitesDoUsuario(usuario);
+        }
         #endregion
 
         #endregion
+
     }
 }

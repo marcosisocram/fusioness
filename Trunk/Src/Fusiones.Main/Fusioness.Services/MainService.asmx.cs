@@ -370,6 +370,20 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ComentarioEvento> ListarComentariosPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarComentariosPorUsuario(usuario);
+            }
+            catch
+            {
+                return new List<ComentarioEvento>();
+            }
+        }
+
         #endregion
 
         #region TipoRota
@@ -705,6 +719,20 @@ namespace Fusioness.Services
             catch
             {
                 return false;
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Contato> ListarConvitesDoUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarConvitesDoUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Contato>();
             }
         }
         #endregion

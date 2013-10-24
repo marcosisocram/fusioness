@@ -104,6 +104,18 @@ namespace Fusioness.Business.Contatos
             }
         }
 
+        public List<Contato> ListarConvitesDoUsuario(Usuario usuario)
+        {
+            /* Convites tem UsuarioId e ContatoId.
+             * Se existe um registro onde usuario.Id é ContatoId
+             * e não existe o registro onde usuario.Id é UsuarioId
+             * então o convite está aberto.
+            */
+            var allContatos = ListarContatos();
+            var meusContatos = ListarContatosDoUsuario(usuario).Select(c=>c.IdContato);
+            var convites = allContatos.Where(c => c.IdContato == usuario.IdUsuario && !meusContatos.Contains(c.IdUsuario));
+            return convites.ToList();
+        }
         #endregion
 
         #region Private

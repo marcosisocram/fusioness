@@ -33,6 +33,8 @@ namespace Fusioness.Models.Usuarios
         }
         public bool IsMyself { get; set; }
         public bool IsContato { get; set; }
+        public bool IsLoginOK { get; set; }
+        public bool IsEmailOK { get; set; }
 
         public bool ValidarUsuario(ModelStateDictionary ModelState)
         {
@@ -47,6 +49,11 @@ namespace Fusioness.Models.Usuarios
                 ModelState.AddModelError("Login", "Preencha o login");
                 retorno = false;
             }
+            else if (!IsLoginOK)
+            {
+                ModelState.AddModelError("Login", "Já existe um usuário com esse login");
+                retorno = false;
+            }
             if (string.IsNullOrWhiteSpace(Usuario.Senha))
             {
                 ModelState.AddModelError("Senha", "Preencha a senha");
@@ -57,21 +64,16 @@ namespace Fusioness.Models.Usuarios
                 ModelState.AddModelError("Email", "Preencha o e-mail");
                 retorno = false;
             }
+            else if (!IsEmailOK)
+            {
+                ModelState.AddModelError("Email", "Já existe um usuário com esse e-mail");
+                retorno = false;
+            }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(Usuario.Email, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
             {
                 ModelState.AddModelError("Email", "E-mail inválido");
                 retorno = false;
             }
-            //if (Usuario.Idade == null)
-            //{
-            //    ModelState.AddModelError("Idade", "Preencha a idade");
-            //    retorno = false;
-            //}
-            //else if (Usuario.Idade <= 0 || Usuario.Idade > 100)
-            //{
-            //    ModelState.AddModelError("Idade", "Idade inválida");
-            //    retorno = false;
-            //}
             if (Usuario.DataDeNascimento == null)
             {
                 ModelState.AddModelError("Idade", "Preencha a data de nascimento");

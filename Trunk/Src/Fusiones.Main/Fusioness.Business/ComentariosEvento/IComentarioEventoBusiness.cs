@@ -10,5 +10,6 @@ namespace Fusioness.Business.ComentariosEvento
         void RemoverComentarioEvento(ComentarioEvento comentario);
         ComentarioEvento ObterComentarioEventoPorId(ComentarioEvento comentario);
         List<ComentarioEvento> ListarComentariosPorEvento(Evento evento);
+        List<ComentarioEvento> ListarComentariosPorUsuario(Usuario usuario);
     }
 }

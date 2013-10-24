@@ -55,7 +55,7 @@
     </script>
     @RenderSection("head", false)
 </head>
-<body>
+<body style="background-image:url(http://fc07.deviantart.net/fs70/i/2013/118/c/1/bikes_by_takmaj-d63d6dn.jpg);background-attachment:fixed">
     <!-- Menu Superior -->
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
@@ -97,8 +97,10 @@
                                 @Html.MenuItem("Eventos", "Index", "Evento")
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, USUARIO</a>
+                        @if (Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext)!=null)
+                        {
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
                             <ul class="dropdown-menu">
                                 @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
                                 @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
@@ -108,23 +110,8 @@
                                 </li>
                             </ul>
                         </li>
+                        }
                     </ul>
-                    <!-- 
-              <ul class="pull-right nav">
-            <li class="dropdown">
-              @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>*@
-              <ul class="dropdown-menu">
-                @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
-                @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
-                <li class="divider"></li>
-                <li>
-                  @Html.ActionLink("Efetuar Logout", "Sair", "Acesso")
-                </li>
-              </ul>
-            </li>
-          </ul>-->
-
-
                 </div>
                 <!--/.nav-collapse -->
             </div>
