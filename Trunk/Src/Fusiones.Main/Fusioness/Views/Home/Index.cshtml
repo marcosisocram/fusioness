@@ -10,18 +10,14 @@
     }
 </script>
 
-<!-- FOTO -->
-<div class="span12" style="width:150px;height:150px;overflow:hidden;">
+<!-- COMENTANDO ENQUANTO NAO AJUSTA FOTO -->
+<!--<div class="span12" style="width:150px;height:150px;overflow:hidden;">
     <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();"/>
     <a href="/Usuario">Editar perfil</a>
-</div>
-<<<<<<< HEAD
+</div>-->
 
-@if(Model.ContatosNaoConfirmados.Count > 0) 
-=======
-<a href="/Usuario">Editar perfil</a>
 @if (Model.ContatosNaoConfirmados!=null && Model.ContatosNaoConfirmados.Count > 0) 
->>>>>>> a15d1f9b7f0a86e828f53a72e7cda285c35160ee
+
     {
         <div class="row-fluid">
             <div class="span12">
@@ -93,7 +89,6 @@
       <h2 class="card-heading simple">Últimas Rotas Cadastradas</h2>
       <div class="card-body">
         <p>AQUI VAI O MAPA COM AS ÚLTIMAS ROTAS.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo mollis cursus. Ut eu nulla at nibh pellentesque feugiat. Vestibulum ac euismod risus, ac molestie libero. Mauris mollis interdum nisi, non posuere dui auctor et. Ut pulvinar odio vel commodo sodales. Donec mi eros, elementum a ornare eu, placerat sit amet neque. Nunc suscipit dolor luctus lacus ornare, non consectetur enim condimentum. Curabitur iaculis magna eget sapien tincidunt, quis aliquet augue ornare. Vestibulum ullamcorper feugiat urna sed tincidunt. Nullam faucibus risus non luctus elementum. Cras tortor diam, molestie sit amet consectetur id, gravida ut ante. Morbi nec lorem suscipit, imperdiet enim at, condimentum risus. Quisque lacinia luctus nisi ut placerat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec a condimentum tellus. Nullam commodo molestie velit, sed hendrerit massa cursus molestie.</p>
         <p><a class="btn input-block-level" href="#">Link Botão</a></p>
       </div>
     </div>
