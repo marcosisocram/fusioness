@@ -39,7 +39,7 @@ namespace Fusioness.Controllers
                 }
                 // atualiza o usuario na session ou nao vai mostrar os dados corretos no reload
                 (new BaseController()).EfetuarLogon(model.Usuario,HttpContext);
-                return RedirectToAction("Index", model);
+                return IsAdd ? RedirectToAction("Index","Home") : RedirectToAction("Index", model);
             }
             else
             {

@@ -15,8 +15,13 @@
     <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();"/>
     <a href="/Usuario">Editar perfil</a>
 </div>
+<<<<<<< HEAD
 
 @if(Model.ContatosNaoConfirmados.Count > 0) 
+=======
+<a href="/Usuario">Editar perfil</a>
+@if (Model.ContatosNaoConfirmados!=null && Model.ContatosNaoConfirmados.Count > 0) 
+>>>>>>> a15d1f9b7f0a86e828f53a72e7cda285c35160ee
     {
         <div class="row-fluid">
             <div class="span12">

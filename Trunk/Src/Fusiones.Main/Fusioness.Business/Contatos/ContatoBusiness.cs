@@ -112,7 +112,7 @@ namespace Fusioness.Business.Contatos
              * então o convite está aberto.
             */
             var allContatos = ListarContatos();
-            var meusContatos = ListarContatosDoUsuario(usuario).Select(c=>c.IdUsuario);
+            var meusContatos = ListarContatosDoUsuario(usuario).Select(c=>c.IdContato);
             var convites = allContatos.Where(c => c.IdContato == usuario.IdUsuario && !meusContatos.Contains(c.IdUsuario));
             return convites.ToList();
         }
