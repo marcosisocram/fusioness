@@ -1645,6 +1645,11 @@ namespace Fusioness.Mobile.FusionessWS {
         
         Fusioness.Mobile.FusionessWS.ListarUsuariosResponse EndListarUsuarios(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarUsuariosPorNome", ReplyAction="*")]
+        System.IAsyncResult BeginListarUsuariosPorNome(Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse EndListarUsuariosPorNome(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/InserirRota", ReplyAction="*")]
         System.IAsyncResult BeginInserirRota(Fusioness.Mobile.FusionessWS.InserirRotaRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -2621,6 +2626,78 @@ namespace Fusioness.Mobile.FusionessWS {
         
         public ListarUsuariosResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Usuario> ListarUsuariosResult) {
             this.ListarUsuariosResult = ListarUsuariosResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarUsuariosPorNomeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarUsuariosPorNome", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeRequestBody Body;
+        
+        public ListarUsuariosPorNomeRequest() {
+        }
+        
+        public ListarUsuariosPorNomeRequest(Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarUsuariosPorNomeRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string nome;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int idUsuario;
+        
+        public ListarUsuariosPorNomeRequestBody() {
+        }
+        
+        public ListarUsuariosPorNomeRequestBody(string nome, int idUsuario) {
+            this.nome = nome;
+            this.idUsuario = idUsuario;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarUsuariosPorNomeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarUsuariosPorNomeResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponseBody Body;
+        
+        public ListarUsuariosPorNomeResponse() {
+        }
+        
+        public ListarUsuariosPorNomeResponse(Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarUsuariosPorNomeResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Usuario> ListarUsuariosPorNomeResult;
+        
+        public ListarUsuariosPorNomeResponseBody() {
+        }
+        
+        public ListarUsuariosPorNomeResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Usuario> ListarUsuariosPorNomeResult) {
+            this.ListarUsuariosPorNomeResult = ListarUsuariosPorNomeResult;
         }
     }
     
@@ -5154,6 +5231,25 @@ namespace Fusioness.Mobile.FusionessWS {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListarUsuariosPorNomeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListarUsuariosPorNomeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Usuario> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Usuario>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class InserirRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -5836,6 +5932,12 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onListarUsuariosCompletedDelegate;
         
+        private BeginOperationDelegate onBeginListarUsuariosPorNomeDelegate;
+        
+        private EndOperationDelegate onEndListarUsuariosPorNomeDelegate;
+        
+        private System.Threading.SendOrPostCallback onListarUsuariosPorNomeCompletedDelegate;
+        
         private BeginOperationDelegate onBeginInserirRotaDelegate;
         
         private EndOperationDelegate onEndInserirRotaDelegate;
@@ -6122,6 +6224,8 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<ObterUsuariosIdsCompletedEventArgs> ObterUsuariosIdsCompleted;
         
         public event System.EventHandler<ListarUsuariosCompletedEventArgs> ListarUsuariosCompleted;
+        
+        public event System.EventHandler<ListarUsuariosPorNomeCompletedEventArgs> ListarUsuariosPorNomeCompleted;
         
         public event System.EventHandler<InserirRotaCompletedEventArgs> InserirRotaCompleted;
         
@@ -6913,6 +7017,69 @@ namespace Fusioness.Mobile.FusionessWS {
                 this.onListarUsuariosCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarUsuariosCompleted);
             }
             base.InvokeAsync(this.onBeginListarUsuariosDelegate, null, this.onEndListarUsuariosDelegate, this.onListarUsuariosCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarUsuariosPorNome(Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListarUsuariosPorNome(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginListarUsuariosPorNome(string nome, int idUsuario, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeRequest inValue = new Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeRequestBody();
+            inValue.Body.nome = nome;
+            inValue.Body.idUsuario = idUsuario;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarUsuariosPorNome(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarUsuariosPorNome(System.IAsyncResult result) {
+            return base.Channel.EndListarUsuariosPorNome(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Usuario> EndListarUsuariosPorNome(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarUsuariosPorNome(result);
+            return retVal.Body.ListarUsuariosPorNomeResult;
+        }
+        
+        private System.IAsyncResult OnBeginListarUsuariosPorNome(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string nome = ((string)(inValues[0]));
+            int idUsuario = ((int)(inValues[1]));
+            return this.BeginListarUsuariosPorNome(nome, idUsuario, callback, asyncState);
+        }
+        
+        private object[] OnEndListarUsuariosPorNome(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Usuario> retVal = this.EndListarUsuariosPorNome(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListarUsuariosPorNomeCompleted(object state) {
+            if ((this.ListarUsuariosPorNomeCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListarUsuariosPorNomeCompleted(this, new ListarUsuariosPorNomeCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListarUsuariosPorNomeAsync(string nome, int idUsuario) {
+            this.ListarUsuariosPorNomeAsync(nome, idUsuario, null);
+        }
+        
+        public void ListarUsuariosPorNomeAsync(string nome, int idUsuario, object userState) {
+            if ((this.onBeginListarUsuariosPorNomeDelegate == null)) {
+                this.onBeginListarUsuariosPorNomeDelegate = new BeginOperationDelegate(this.OnBeginListarUsuariosPorNome);
+            }
+            if ((this.onEndListarUsuariosPorNomeDelegate == null)) {
+                this.onEndListarUsuariosPorNomeDelegate = new EndOperationDelegate(this.OnEndListarUsuariosPorNome);
+            }
+            if ((this.onListarUsuariosPorNomeCompletedDelegate == null)) {
+                this.onListarUsuariosPorNomeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarUsuariosPorNomeCompleted);
+            }
+            base.InvokeAsync(this.onBeginListarUsuariosPorNomeDelegate, new object[] {
+                        nome,
+                        idUsuario}, this.onEndListarUsuariosPorNomeDelegate, this.onListarUsuariosPorNomeCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -9223,6 +9390,19 @@ namespace Fusioness.Mobile.FusionessWS {
             public Fusioness.Mobile.FusionessWS.ListarUsuariosResponse EndListarUsuarios(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Fusioness.Mobile.FusionessWS.ListarUsuariosResponse _result = ((Fusioness.Mobile.FusionessWS.ListarUsuariosResponse)(base.EndInvoke("ListarUsuarios", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListarUsuariosPorNome(Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ListarUsuariosPorNome", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse EndListarUsuariosPorNome(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse _result = ((Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse)(base.EndInvoke("ListarUsuariosPorNome", _args, result)));
                 return _result;
             }
             

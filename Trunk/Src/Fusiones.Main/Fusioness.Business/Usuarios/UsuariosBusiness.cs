@@ -179,13 +179,13 @@ namespace Fusioness.Business.Usuarios
             }
         }
 
-        public List<Usuario> ListarUsuariosPorNome(string nome)
+        public List<Usuario> ListarUsuariosPorNome(string nome, int idUsuario)
         {
-            if (!String.IsNullOrEmpty(nome)) return new List<Usuario>();
+            if (String.IsNullOrEmpty(nome)) return new List<Usuario>();
 
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                return new UsuarioRepository(uow).GetWhere(u => u.Nome.Contains(nome)).ToList();
+                return new UsuarioRepository(uow).GetWhere(u => u.Nome.Contains(nome) && u.IdUsuario != idUsuario).ToList();
             }
         }
         

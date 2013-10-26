@@ -47,7 +47,10 @@ namespace Fusioness.Mobile
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Pesquisar");
+            if (PanoramaMain.SelectedItem == pnItemContatos)
+            {
+                NavigationService.Navigate(new Uri("/Views/BuscarContatos.xaml", UriKind.Relative));
+            }
         }
 
         private void llsRota_SelectionChanged(object sender, SelectionChangedEventArgs e)

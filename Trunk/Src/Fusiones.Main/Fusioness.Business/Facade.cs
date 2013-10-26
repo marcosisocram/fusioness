@@ -101,9 +101,9 @@ namespace Fusioness.Business
         {
             return UsuarioBus.ObterUsuariosIds(idsUsuario);
         }
-        public List<Usuario> ListarUsuariosPorNome(string nome)
+        public List<Usuario> ListarUsuariosPorNome(string nome, int idUsuario)
         {
-            return UsuarioBus.ListarUsuariosPorNome(nome);
+            return UsuarioBus.ListarUsuariosPorNome(nome, idUsuario);
         }        
         #endregion
 

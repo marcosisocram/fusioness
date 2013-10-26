@@ -210,11 +210,11 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<Usuario> ListarUsuariosPorNome(string nome)
+        public List<Usuario> ListarUsuariosPorNome(string nome, int idUsuario)
         {
             try
             {
-                return Facade.Instance.ListarUsuariosPorNome(nome);
+                return Facade.Instance.ListarUsuariosPorNome(nome, idUsuario);
             }
             catch (Exception)
             {

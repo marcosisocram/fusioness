@@ -112,6 +112,9 @@
     </Compile>
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\BuscarContatos.xaml.cs">
+      <DependentUpon>BuscarContatos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Comentario.xaml.cs">
       <DependentUpon>Comentario.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="Views\BuscarContatos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Comentario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -275,6 +282,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarUsuariosResponse.datasource">
