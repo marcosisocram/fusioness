@@ -92,5 +92,10 @@ namespace Fusioness.Mobile.Views
         {
             LoadData();
         }
+
+        private void btComentar_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/Comentario.xaml?EventoId=" + EventoId.ToString(), UriKind.Relative));
+        }
     }
 }

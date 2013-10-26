@@ -112,6 +112,12 @@
     </Compile>
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\Comentario.xaml.cs">
+      <DependentUpon>Comentario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConvidarParaEvento.xaml.cs">
+      <DependentUpon>ConvidarParaEvento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Evento.xaml.cs">
       <DependentUpon>Evento.xaml</DependentUpon>
     </Compile>
@@ -138,6 +144,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="Views\Comentario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConvidarParaEvento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Evento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Buttons\cancel.png" />
+    <Content Include="Assets\Buttons\coment.png" />
     <Content Include="Assets\Buttons\edit.png" />
     <Content Include="Assets\Buttons\refresh.png" />
     <Content Include="README_FIRST.txt" />
@@ -196,6 +211,9 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirContatoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirEventoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.InserirFotoUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -214,10 +232,16 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarComentariosPorEventoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarComentariosPorUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarContatosDoUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarContatosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarConvitesDoUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarConvitesEventosResponse.datasource">

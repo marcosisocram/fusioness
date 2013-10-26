@@ -82,5 +82,11 @@ namespace Fusioness.Mobile
             var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
             NavigationService.Navigate(new Uri("/Views/Evento.xaml?EventoId=" + res.EventoId.ToString(), UriKind.Relative));
         }
+
+        private void Convidar_Click(object sender, RoutedEventArgs e)
+        {
+            var Item = (sender as MenuItem).DataContext as ItemViewModel;
+            NavigationService.Navigate(new Uri("/Views/ConvidarParaEvento.xaml?EventoId=" + Item.EventoId.ToString(), UriKind.Relative));
+        }
     }
 }

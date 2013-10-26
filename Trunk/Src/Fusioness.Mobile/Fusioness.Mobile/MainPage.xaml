@@ -81,6 +81,11 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="12,2,-37,4" Height="101" Width="432">
                                 <!--Replace rectangle with image-->
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu Background="#FF272727" Foreground="{x:Null}">
+                                        <toolkit:MenuItem Header="Convidar" Click="Convidar_Click" Background="{x:Null}" Foreground="White"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
                                 <Border BorderThickness="1" Width="90" BorderBrush="#FFFFC700" Height="90">
                                     <Image>
                                         <Image.Source>
