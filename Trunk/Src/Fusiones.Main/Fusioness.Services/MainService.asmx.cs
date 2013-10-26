@@ -208,6 +208,19 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Usuario> ListarUsuariosPorNome(string nome)
+        {
+            try
+            {
+                return Facade.Instance.ListarUsuariosPorNome(nome);
+            }
+            catch (Exception)
+            {
+                return new List<Usuario>();
+            }
+        }
         #endregion
 
         #region Rotas

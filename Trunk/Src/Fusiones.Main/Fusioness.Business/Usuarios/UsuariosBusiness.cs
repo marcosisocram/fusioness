@@ -178,6 +178,17 @@ namespace Fusioness.Business.Usuarios
                 return new UsuarioRepository(uow).GetWhere(u => idsUsuario.Any(id => id == u.IdUsuario)).ToList();
             }
         }
+
+        public List<Usuario> ListarUsuariosPorNome(string nome)
+        {
+            if (!String.IsNullOrEmpty(nome)) return new List<Usuario>();
+
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                return new UsuarioRepository(uow).GetWhere(u => u.Nome.Contains(nome)).ToList();
+            }
+        }
+        
         #endregion
     }
 }

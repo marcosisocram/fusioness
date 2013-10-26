@@ -101,6 +101,10 @@ namespace Fusioness.Business
         {
             return UsuarioBus.ObterUsuariosIds(idsUsuario);
         }
+        public List<Usuario> ListarUsuariosPorNome(string nome)
+        {
+            return UsuarioBus.ListarUsuariosPorNome(nome);
+        }        
         #endregion
 
         #region ConviteEvento
