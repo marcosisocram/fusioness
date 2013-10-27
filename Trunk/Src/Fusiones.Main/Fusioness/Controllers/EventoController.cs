@@ -103,18 +103,14 @@ namespace Fusioness.Controllers
 
         public ActionResult Convidar(int[] idsAmigos, EventoModel model)
         {
-            if (idsAmigos != null && idsAmigos.Any())
+            if (idsAmigos != null && idsAmigos.Any() && model.Evento != null && model.Evento.IdEvento > 0)
             {
                 var convites = Servico.ConvidarUsuarios(UsuarioLogado, model.Evento, idsAmigos);
-                if (convites == null)
-                {
-                    ExibirModal("Não foi possível efetuar parte dos convites.");
-                    return Detalhar(model.Evento.IdEvento);
-                }
+                if (convites == null) return Json(false);
             }
+            else return Json(false);
 
-            ExibirModal("Convites feitos.");
-            return RedirectToAction("Index");
+            return Json(true);
         }
 
 
