@@ -52,7 +52,7 @@
                                 <p>@Model.Evento.Descricao</p>
                                 
                                 <p>
-                                    @if (Model.ListaDeContatosDoUsuario.Any())
+                                    @if (Model.ListaDeContatosDoUsuario.Any() && @Model.Evento.IdEvento > 0)
                                 {
                                     <a href="#divAmigos" class="btn btn-info" data-toggle="modal">Convidar Amigos</a>
                                 }
