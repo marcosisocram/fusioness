@@ -427,6 +427,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarUsuariosPorNome">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nome" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarUsuariosPorNomeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarUsuariosPorNomeResult" type="tns:ArrayOfUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="InserirRota">
         <s:complexType>
           <s:sequence>
@@ -975,6 +990,12 @@
   <wsdl:message name="ListarUsuariosSoapOut">
     <wsdl:part name="parameters" element="tns:ListarUsuariosResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarUsuariosPorNomeSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarUsuariosPorNome" />
+  </wsdl:message>
+  <wsdl:message name="ListarUsuariosPorNomeSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarUsuariosPorNomeResponse" />
+  </wsdl:message>
   <wsdl:message name="InserirRotaSoapIn">
     <wsdl:part name="parameters" element="tns:InserirRota" />
   </wsdl:message>
@@ -1234,6 +1255,10 @@
       <wsdl:input message="tns:ListarUsuariosSoapIn" />
       <wsdl:output message="tns:ListarUsuariosSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosPorNome">
+      <wsdl:input message="tns:ListarUsuariosPorNomeSoapIn" />
+      <wsdl:output message="tns:ListarUsuariosPorNomeSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="InserirRota">
       <wsdl:input message="tns:InserirRotaSoapIn" />
       <wsdl:output message="tns:InserirRotaSoapOut" />
@@ -1478,6 +1503,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarUsuarios">
       <soap:operation soapAction="http://tempuri.org/ListarUsuarios" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosPorNome">
+      <soap:operation soapAction="http://tempuri.org/ListarUsuariosPorNome" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1904,6 +1938,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarUsuarios">
       <soap12:operation soapAction="http://tempuri.org/ListarUsuarios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosPorNome">
+      <soap12:operation soapAction="http://tempuri.org/ListarUsuariosPorNome" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -92,7 +92,7 @@ namespace Fusioness.Controllers
             model.ListaConviteEventos = Servico.ObterConvitesEventosDoUsuario(UsuarioLogado);
 
             foreach (var convite in model.ListaConviteEventos)
-                convite.Resposta = convite.IdResposta.HasValue ? model.RespostasPossiveis.First(r => r.IdResposta == convite.IdResposta) : model.RespostasPossiveis.First(r => r.IdResposta == 3);
+                convite.Resposta = convite.IdResposta.HasValue ? model.RespostasPossiveis.First(r => r.IdResposta == convite.IdResposta) : new Resposta{Descricao = "Sem resposta"};
 
             if (model.ListaConviteEventos.Any())
                 model.ListaEventos = Servico.ListarEventos(model.ListaConviteEventos.Select(c => c.IdEvento).ToArray());
