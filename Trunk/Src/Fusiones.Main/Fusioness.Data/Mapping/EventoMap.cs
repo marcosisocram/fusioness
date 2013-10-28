@@ -18,7 +18,6 @@ namespace Fusioness.Data.Mapping
 
             this.Property(t => t.Descricao)
                 .IsRequired();
-
             this.Property(t => t.UrlImagem)
                 .HasMaxLength(2000);
 

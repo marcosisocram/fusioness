@@ -112,6 +112,7 @@ namespace Fusioness.Business.Coordenadas
                 return new CoordenadaRepository(uow).GetByKey(new Coordenada { IdCoordenada = coordenada.IdCoordenada });
             }
         }
+
         public List<Coordenada> ListarCoordenadas()
         {
             try
