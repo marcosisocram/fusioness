@@ -54,6 +54,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarUsuariosOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarUsuariosPorNomeOperationCompleted;
+        
         private System.Threading.SendOrPostCallback InserirRotaOperationCompleted;
         
         private System.Threading.SendOrPostCallback AlterarRotaOperationCompleted;
@@ -197,6 +199,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarUsuariosCompletedEventHandler ListarUsuariosCompleted;
+        
+        /// <remarks/>
+        public event ListarUsuariosPorNomeCompletedEventHandler ListarUsuariosPorNomeCompleted;
         
         /// <remarks/>
         public event InserirRotaCompletedEventHandler InserirRotaCompleted;
@@ -647,6 +652,37 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarUsuariosCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarUsuariosCompleted(this, new ListarUsuariosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarUsuariosPorNome", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Usuario[] ListarUsuariosPorNome(string nome, int idUsuario) {
+            object[] results = this.Invoke("ListarUsuariosPorNome", new object[] {
+                        nome,
+                        idUsuario});
+            return ((Usuario[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarUsuariosPorNomeAsync(string nome, int idUsuario) {
+            this.ListarUsuariosPorNomeAsync(nome, idUsuario, null);
+        }
+        
+        /// <remarks/>
+        public void ListarUsuariosPorNomeAsync(string nome, int idUsuario, object userState) {
+            if ((this.ListarUsuariosPorNomeOperationCompleted == null)) {
+                this.ListarUsuariosPorNomeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarUsuariosPorNomeOperationCompleted);
+            }
+            this.InvokeAsync("ListarUsuariosPorNome", new object[] {
+                        nome,
+                        idUsuario}, this.ListarUsuariosPorNomeOperationCompleted, userState);
+        }
+        
+        private void OnListarUsuariosPorNomeOperationCompleted(object arg) {
+            if ((this.ListarUsuariosPorNomeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarUsuariosPorNomeCompleted(this, new ListarUsuariosPorNomeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3265,6 +3301,32 @@ namespace Fusioness.FusionessWS {
         private object[] results;
         
         internal ListarUsuariosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Usuario[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Usuario[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarUsuariosPorNomeCompletedEventHandler(object sender, ListarUsuariosPorNomeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarUsuariosPorNomeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarUsuariosPorNomeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

@@ -62,6 +62,9 @@
     function ExibirCarregando() {
         $('#modalLoading').modal('show');
     }
+    function EsconderCarregando() {
+        $('#modalLoading').modal('hide');
+    }
 
     function atualizaBG() {
         var images = new Array(
@@ -116,23 +119,12 @@
                                     @Html.MenuItem("Lista de Convites", "VerConvitesEvento", "Evento")
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                                <ul class="dropdown-menu">
-                                    @Html.MenuItem("Home", "Index", "Home")
-                                    @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
-                                    @Html.MenuItem("Contatos", "Index", "Contato")
-                                    @Html.MenuItem("Rotas", "Index", "Rota")
-                                    @Html.MenuItem("Eventos", "Index", "Evento")
-                                </ul>
-                            </li>
-                            @if (Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
+                            @if (BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
                             {
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
                                     <ul class="dropdown-menu">
-                                        @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
-                                        @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
+                                        @Html.MenuItem("Perfil", "InserirAlterarUsuario", "Usuario")
                                         <li class="divider"></li>
                                         <li>
                                             @Html.ActionLink("Efetuar Logout", "Sair", "Acesso")

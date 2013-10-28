@@ -92,7 +92,7 @@ namespace Fusioness.Controllers
             model.ListaConviteEventos = Servico.ObterConvitesEventosDoUsuario(UsuarioLogado);
 
             foreach (var convite in model.ListaConviteEventos)
-                convite.Resposta = convite.IdResposta.HasValue ? model.RespostasPossiveis.First(r => r.IdResposta == convite.IdResposta) : model.RespostasPossiveis.First(r => r.IdResposta == 3);
+                convite.Resposta = convite.IdResposta.HasValue ? model.RespostasPossiveis.First(r => r.IdResposta == convite.IdResposta) : new Resposta{Descricao = "Sem resposta"};
 
             if (model.ListaConviteEventos.Any())
                 model.ListaEventos = Servico.ListarEventos(model.ListaConviteEventos.Select(c => c.IdEvento).ToArray());
@@ -103,18 +103,14 @@ namespace Fusioness.Controllers
 
         public ActionResult Convidar(int[] idsAmigos, EventoModel model)
         {
-            if (idsAmigos != null && idsAmigos.Any())
+            if (idsAmigos != null && idsAmigos.Any() && model.Evento != null && model.Evento.IdEvento > 0)
             {
                 var convites = Servico.ConvidarUsuarios(UsuarioLogado, model.Evento, idsAmigos);
-                if (convites == null)
-                {
-                    ExibirModal("Não foi possível efetuar parte dos convites.");
-                    return Detalhar(model.Evento.IdEvento);
-                }
+                if (convites == null) return Json(false);
             }
+            else return Json(false);
 
-            ExibirModal("Convites feitos.");
-            return RedirectToAction("Index");
+            return Json(true);
         }
 
 
