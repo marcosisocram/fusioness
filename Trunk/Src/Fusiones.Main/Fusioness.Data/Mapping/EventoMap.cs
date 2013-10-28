@@ -20,6 +20,8 @@ namespace Fusioness.Data.Mapping
                 .IsRequired();
             this.Property(t => t.UrlImagem)
                 .HasMaxLength(2000);
+				
+			this.Ignore(t => t.Distancia);
 
             // Table & Column Mappings
             this.ToTable("Evento");
