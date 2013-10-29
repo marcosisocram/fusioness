@@ -50,6 +50,8 @@
     <Compile Include="ConvitesEventos\IConviteEventoBusiness.cs" />
     <Compile Include="Coordenada\CoordenadaBusiness.cs" />
     <Compile Include="Coordenada\ICoordenadaBusiness.cs" />
+    <Compile Include="EventosUsuarios\EventoUsuarioBusiness.cs" />
+    <Compile Include="EventosUsuarios\IEventoUsuarioBusiness.cs" />
     <Compile Include="QualidadeRota\IQualidadeRotaBusiness.cs" />
     <Compile Include="QualidadeRota\QualidadeRotaBusiness.cs" />
     <Compile Include="Dificuldades\IDificuldadeBusiness.cs" />

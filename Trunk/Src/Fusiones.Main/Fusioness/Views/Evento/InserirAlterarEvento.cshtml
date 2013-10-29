@@ -55,6 +55,7 @@
                                     @if (Model.ListaDeContatosDoUsuario.Any() && @Model.Evento.IdEvento > 0)
                                 {
                                     <a href="#divAmigos" class="btn btn-info" data-toggle="modal">Convidar Amigos</a>
+                                    <a id="btAssociar" href="/Evento/Participe/@Model.Evento.IdEvento" class="btn btn-success pull-right">Participar</a>
                                 }
                                 </p>
                             </div>
@@ -184,7 +185,6 @@
                 <div class="modal-footer">
                     @Html.HiddenFor(m => m.Evento.IdEvento)
                     <input id="btConvidarAmigos" type="button" value="Convidar" class="btn btn-info pull-right"/>
-                    <input id="btAssociar" type="button" value="Participar" class="btn btn-success pull-right"/>
                 </div>
             }
         </div>

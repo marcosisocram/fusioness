@@ -73,6 +73,7 @@
     <Compile Include="Repositories\ContatoRepository.cs" />
     <Compile Include="Repositories\CoordenadaRepository.cs" />
     <Compile Include="Repositories\ComentarioEventoRepository.cs" />
+    <Compile Include="Repositories\EventoUsuarioRepository.cs" />
     <Compile Include="Repositories\QualidadeRepository.cs" />
     <Compile Include="Repositories\DificuldadeRepository.cs" />
     <Compile Include="Repositories\TipoPistaRepository.cs" />

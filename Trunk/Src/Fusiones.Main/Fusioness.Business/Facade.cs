@@ -14,6 +14,7 @@ using Fusioness.Business.Dificuldades;
 using Fusioness.Business.QualidadesRota;
 using Fusioness.Business.ComentariosEvento;
 using Fusioness.Business.Coordenadas;
+using Fusioness.Business.EventosUsuarios;
 
 namespace Fusioness.Business
 {
@@ -33,6 +34,7 @@ namespace Fusioness.Business
         private readonly IComentarioEventoBusiness ComentarioEventoBus;
         private readonly IRespostaBusiness RespostaBus;
         private readonly IContatoBusiness ContatoBus;
+        private readonly IEventoUsuarioBusiness EventoUsuarioBus;
 
         #endregion
 
@@ -60,6 +62,7 @@ namespace Fusioness.Business
             ContatoBus = new ContatoBusiness();
             ComentarioEventoBus = new ComentarioEventoBusiness();
             RespostaBus = new RespostaBusiness();
+            EventoUsuarioBus = new EventoUsuarioBusiness();
         }
 
         #endregion
@@ -334,6 +337,13 @@ namespace Fusioness.Business
         public List<Contato> ListarConvitesDoUsuario(Usuario usuario)
         {
             return ContatoBus.ListarConvitesDoUsuario(usuario);
+        }
+        #endregion
+
+        #region EventoUsuario
+        public EventoUsuario InserirEventoUsuario(EventoUsuario eventoUsuario)
+        {
+            return EventoUsuarioBus.InserirEventoUsuario(eventoUsuario);
         }
         #endregion
 

@@ -154,6 +154,12 @@ namespace Fusioness.Controllers
             return RedirectToAction("Detalhar", new {idEvento = comentario.IdEvento});
         }
 
+        public ActionResult Participe(int id)
+        {
+            Servico.InserirEventoUsuario(new EventoUsuario() { IdEvento = id, IdUsuario = UsuarioLogado.IdUsuario });
+            return RedirectToAction("Index", "Home");
+        }
+
         #endregion
     }
 }

@@ -208,6 +208,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\Usuario\Registrar.cshtml" />
+    <Content Include="Web References\FusionessWS\EventoUsuario.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

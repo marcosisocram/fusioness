@@ -129,10 +129,10 @@
               <s:element minOccurs="1" maxOccurs="1" name="Publico" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="ConviteEventos" type="tns:ArrayOfConviteEvento" />
               <s:element minOccurs="0" maxOccurs="1" name="Rota" type="tns:Rota" />
-              <s:element minOccurs="1" maxOccurs="1" name="Distancia" type="s:double" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
               <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
               <s:element minOccurs="0" maxOccurs="1" name="ComentariosEvento" type="tns:ArrayOfComentarioEvento" />
+              <s:element minOccurs="1" maxOccurs="1" name="Distancia" type="s:double" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -932,6 +932,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="InserirEventoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventoUsuario" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirEventoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InserirEventoUsuarioResult" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -1228,6 +1242,12 @@
   <wsdl:message name="ListarConvitesDoUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarConvitesDoUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="InserirEventoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:InserirEventoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="InserirEventoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:InserirEventoUsuarioResponse" />
+  </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -1424,6 +1444,10 @@
     <wsdl:operation name="ListarConvitesDoUsuario">
       <wsdl:input message="tns:ListarConvitesDoUsuarioSoapIn" />
       <wsdl:output message="tns:ListarConvitesDoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InserirEventoUsuario">
+      <wsdl:input message="tns:InserirEventoUsuarioSoapIn" />
+      <wsdl:output message="tns:InserirEventoUsuarioSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
@@ -1869,6 +1893,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InserirEventoUsuario">
+      <soap:operation soapAction="http://tempuri.org/InserirEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -2306,6 +2339,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesDoUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarConvitesDoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserirEventoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/InserirEventoUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

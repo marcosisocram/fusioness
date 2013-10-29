@@ -764,5 +764,21 @@ namespace Fusioness.Services
             }
         }
         #endregion
+
+        #region EventoUsuario
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public EventoUsuario InserirEventoUsuario(EventoUsuario eventoUsuario)
+        {
+            try
+            {
+                return Facade.Instance.InserirEventoUsuario(eventoUsuario);
+            }
+            catch (Exception)
+            {
+                return new EventoUsuario();
+            }
+        }
+        #endregion
     }
 }

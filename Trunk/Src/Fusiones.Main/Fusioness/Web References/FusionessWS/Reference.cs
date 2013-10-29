@@ -128,6 +128,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarConvitesDoUsuarioOperationCompleted;
         
+        private System.Threading.SendOrPostCallback InserirEventoUsuarioOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -312,6 +314,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarConvitesDoUsuarioCompletedEventHandler ListarConvitesDoUsuarioCompleted;
+        
+        /// <remarks/>
+        public event InserirEventoUsuarioCompletedEventHandler InserirEventoUsuarioCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -1725,6 +1730,35 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirEventoUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public EventoUsuario InserirEventoUsuario(EventoUsuario eventoUsuario) {
+            object[] results = this.Invoke("InserirEventoUsuario", new object[] {
+                        eventoUsuario});
+            return ((EventoUsuario)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InserirEventoUsuarioAsync(EventoUsuario eventoUsuario) {
+            this.InserirEventoUsuarioAsync(eventoUsuario, null);
+        }
+        
+        /// <remarks/>
+        public void InserirEventoUsuarioAsync(EventoUsuario eventoUsuario, object userState) {
+            if ((this.InserirEventoUsuarioOperationCompleted == null)) {
+                this.InserirEventoUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInserirEventoUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("InserirEventoUsuario", new object[] {
+                        eventoUsuario}, this.InserirEventoUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnInserirEventoUsuarioOperationCompleted(object arg) {
+            if ((this.InserirEventoUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InserirEventoUsuarioCompleted(this, new InserirEventoUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -2192,13 +2226,13 @@ namespace Fusioness.FusionessWS {
         
         private Rota rotaField;
         
-        private double distanciaField;
-        
         private Usuario usuarioField;
         
         private EventoUsuario[] eventoUsuariosField;
         
         private ComentarioEvento[] comentariosEventoField;
+        
+        private double distanciaField;
         
         /// <remarks/>
         public int IdEvento {
@@ -2301,16 +2335,6 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public double Distancia {
-            get {
-                return this.distanciaField;
-            }
-            set {
-                this.distanciaField = value;
-            }
-        }
-        
-        /// <remarks/>
         public Usuario Usuario {
             get {
                 return this.usuarioField;
@@ -2337,6 +2361,16 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.comentariosEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Distancia {
+            get {
+                return this.distanciaField;
+            }
+            set {
+                this.distanciaField = value;
             }
         }
     }
@@ -4254,6 +4288,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Contato[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void InserirEventoUsuarioCompletedEventHandler(object sender, InserirEventoUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InserirEventoUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InserirEventoUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public EventoUsuario Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((EventoUsuario)(this.results[0]));
             }
         }
     }
