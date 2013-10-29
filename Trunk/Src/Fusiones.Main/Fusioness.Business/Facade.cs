@@ -279,6 +279,11 @@ namespace Fusioness.Business
             return EventoBus.ListarEventosPorUsuario(usuario);
         }
 
+        public List<Evento> ListarEventosComDistancia(double latitudeAtual, double longitudeAtual)
+        {
+            return EventoBus.ListarEventosComDistancia(latitudeAtual, longitudeAtual);
+        }
+
         #endregion
 
         #region Coordenadas

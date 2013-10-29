@@ -36,8 +36,23 @@
     }
 
         $(document).ready(function () {
-            //configuração do modal
             var mensagem = '@mensagem';
+            
+            //Geolocation do browser
+            navigator.geolocation.getCurrentPosition(showPosition, positionError);
+
+            function showPosition(position) {
+                var coordinates = position.coords;
+                var link = '/Evento/Explore?latitude=' + coordinates.latitude + '&longitude=' + coordinates.longitude;
+                $('#explore').attr('href', link);
+            }
+
+            function positionError(position) {
+                $('#explore').attr('href', '#');
+                $('#explore').attr('title', 'Para utilizar todos os recursos do sistema, favor habilitar a geolocalização');
+                $('#explore').text('Explore (Habilitar Geolocalização)');
+            }
+        //configuração do modal
         if (mensagem.trim() !== '') { $(window).load(function () { $('#divModalGlobal').modal('show'); }); }
 
         //configuração do loading...
@@ -62,9 +77,6 @@
 
     function ExibirCarregando() {
         $('#modalLoading').modal('show');
-    }
-    function EsconderCarregando() {
-        $('#modalLoading').modal('hide');
     }
 
     function atualizaBG() {
@@ -118,14 +130,25 @@
                                     @Html.MenuItem("Crie seu Evento", "InserirAlterarEvento", "Evento")
                                     @Html.MenuItem("Lista de Eventos", "Index", "Evento")
                                     @Html.MenuItem("Lista de Convites", "VerConvitesEvento", "Evento")
+                                    <li><a id="explore" href="#">Eventos</a></li>
                                 </ul>
                             </li>
-                            @if (BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+                                <ul class="dropdown-menu">
+                                    @Html.MenuItem("Home", "Index", "Home")
+                                    @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
+                                    @Html.MenuItem("Contatos", "Index", "Contato")
+                                    @Html.MenuItem("Rotas", "Index", "Rota")
+                                </ul>
+                            </li>
+                            @if (Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
                             {
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
                                     <ul class="dropdown-menu">
-                                        @Html.MenuItem("Perfil", "InserirAlterarUsuario", "Usuario")
+                                        @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
+                                        @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
                                         <li class="divider"></li>
                                         <li>
                                             @Html.ActionLink("Efetuar Logout", "Sair", "Acesso")

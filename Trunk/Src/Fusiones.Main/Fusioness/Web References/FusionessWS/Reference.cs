@@ -100,6 +100,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ObterEventoPorIdOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarEventosComDistanciaOperationCompleted;
+        
         private System.Threading.SendOrPostCallback InserirListaCoordenadasOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarCoordenadasPorRotaOperationCompleted;
@@ -268,6 +270,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ObterEventoPorIdCompletedEventHandler ObterEventoPorIdCompleted;
+        
+        /// <remarks/>
+        public event ListarEventosComDistanciaCompletedEventHandler ListarEventosComDistanciaCompleted;
         
         /// <remarks/>
         public event InserirListaCoordenadasCompletedEventHandler InserirListaCoordenadasCompleted;
@@ -1312,6 +1317,37 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarEventosComDistancia", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Evento[] ListarEventosComDistancia(double latitudeAtual, double longitudeAtual) {
+            object[] results = this.Invoke("ListarEventosComDistancia", new object[] {
+                        latitudeAtual,
+                        longitudeAtual});
+            return ((Evento[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarEventosComDistanciaAsync(double latitudeAtual, double longitudeAtual) {
+            this.ListarEventosComDistanciaAsync(latitudeAtual, longitudeAtual, null);
+        }
+        
+        /// <remarks/>
+        public void ListarEventosComDistanciaAsync(double latitudeAtual, double longitudeAtual, object userState) {
+            if ((this.ListarEventosComDistanciaOperationCompleted == null)) {
+                this.ListarEventosComDistanciaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarEventosComDistanciaOperationCompleted);
+            }
+            this.InvokeAsync("ListarEventosComDistancia", new object[] {
+                        latitudeAtual,
+                        longitudeAtual}, this.ListarEventosComDistanciaOperationCompleted, userState);
+        }
+        
+        private void OnListarEventosComDistanciaOperationCompleted(object arg) {
+            if ((this.ListarEventosComDistanciaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarEventosComDistanciaCompleted(this, new ListarEventosComDistanciaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirListaCoordenadas", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public Coordenada[] InserirListaCoordenadas(Coordenada[] listaCoordenadas) {
             object[] results = this.Invoke("InserirListaCoordenadas", new object[] {
@@ -2156,6 +2192,8 @@ namespace Fusioness.FusionessWS {
         
         private Rota rotaField;
         
+        private double distanciaField;
+        
         private Usuario usuarioField;
         
         private EventoUsuario[] eventoUsuariosField;
@@ -2259,6 +2297,16 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.rotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Distancia {
+            get {
+                return this.distanciaField;
+            }
+            set {
+                this.distanciaField = value;
             }
         }
         
@@ -3842,6 +3890,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Evento)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarEventosComDistanciaCompletedEventHandler(object sender, ListarEventosComDistanciaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarEventosComDistanciaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarEventosComDistanciaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Evento[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Evento[])(this.results[0]));
             }
         }
     }

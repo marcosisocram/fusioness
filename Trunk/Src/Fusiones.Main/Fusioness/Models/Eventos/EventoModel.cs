@@ -29,7 +29,12 @@ namespace Fusioness.Models.Eventos
         public IList<ComentarioEvento> ListaComentariosQueSouDono { get; set; }
 
         #endregion
-        
+
+        #region Outros
+        private double latitudeAtual;
+        private double longitudeAtual;
+        #endregion
+
 
         public EventoModel()
         {
@@ -49,18 +54,35 @@ namespace Fusioness.Models.Eventos
             MainService Servico = new MainService();
 
             ListaEventos = Servico.ListarEventos(new int[] { });
-            ListaEventosQueSouDono = Servico.ListarEventosPorUsuario(usuarioLogado);
-            ListaRotas = Servico.ListarRotasPorUsuario(usuarioLogado);
+
+            CarregarParametrosComunsView(Servico, usuarioLogado, eventoSelecionado);
+            
+        }
+
+        public void carregarParametrosViewExplore(Usuario usuarioLogado, Evento eventoSelecionado, double latitudeAtual, double longitudeAtual)
+        {
+            MainService Servico = new MainService();
+
+            ListaEventos = Servico.ListarEventosComDistancia(latitudeAtual, longitudeAtual);
+
+            CarregarParametrosComunsView(Servico, usuarioLogado, eventoSelecionado);
+
+        }
+
+        private void CarregarParametrosComunsView(MainService servico, Usuario usuarioLogado, Evento eventoSelecionado)
+        {
+            ListaEventosQueSouDono = servico.ListarEventosPorUsuario(usuarioLogado);
+            ListaRotas = servico.ListarRotasPorUsuario(usuarioLogado);
 
             if (eventoSelecionado != null)
             {
-                ListaComentariosEvento = Servico.ListarComentariosPorEvento(eventoSelecionado);
-                ListaComentariosQueSouDono = Servico.ListarComentariosPorUsuario(usuarioLogado);
+                ListaComentariosEvento = servico.ListarComentariosPorEvento(eventoSelecionado);
+                ListaComentariosQueSouDono = servico.ListarComentariosPorUsuario(usuarioLogado);
                 Comentario.IdEvento = eventoSelecionado.IdEvento;
             }
 
-            var idsContatos = Servico.ListarContatosDoUsuario(usuarioLogado).ToList().Select(c => c.IdContato).ToList();
-            if (idsContatos.Any()) ListaDeContatosDoUsuario = Servico.ObterUsuariosIds(idsContatos.ToArray()).ToList();
+            var idsContatos = servico.ListarContatosDoUsuario(usuarioLogado).ToList().Select(c => c.IdContato).ToList();
+            if (idsContatos.Any()) ListaDeContatosDoUsuario = servico.ObterUsuariosIds(idsContatos.ToArray()).ToList();
         }
 
         public bool SouDonoDoEvento(int idEvento)
