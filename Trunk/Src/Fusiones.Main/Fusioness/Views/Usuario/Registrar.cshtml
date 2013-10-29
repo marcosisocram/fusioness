@@ -1,33 +1,64 @@
 ﻿@model Fusioness.Models.Usuarios.UsuarioModel
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/LayoutBase.cshtml";
+@{ 
+    ViewBag.Title = "Cadastre-se";
+    Layout = "~/Views/Shared/_LayoutBaseAcesso.cshtml";
 }
-<script type="text/javascript">
-    function ExibirModalMudarImagem() {
-        $("#modalEditarImagem").modal('show');
+@section head
+{
+  <style type="text/css">
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #E5E5E5;
     }
-</script>
+
+    .form-signin {
+      border: 1px solid #D8D8D8;
+      border-bottom-width: 2px;
+      border-top-width: 0;
+      background-color: #FFF;
+      max-width: 350px;
+      padding: 19px 29px 29px;
+      margin: 0 auto 20px;
+      background-color: #fff;
+      border: 1px solid #F5F5F5;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+    }
+
+      .form-signin .form-signin-heading {
+        font-size: 24px;
+        font-weight: 300;
+      }
+
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+  </style>
+}
 <!-- LINHA 1 -->
 <div class="row-fluid">
     <!-- BLOCK -->
     <div class="span12">
         <div class="card">
             <h2 class="card-heading simple">
-                @if (Model.Usuario.IdUsuario == 0)
-                {
-                    <span>Cadastre-se!</span>
-                }
-                else
-                {
-                    <span>Edite seu perfil</span>
-                }
+                <span>Registre-se!</span>
             </h2>
             <div class="card-body">
 
                 
                 
-                @using (Html.BeginForm("InserirAlterarUsuario", "Usuario", FormMethod.Post))
+                @using (Html.BeginForm("Registrar", "Usuario", FormMethod.Post))
                 {
                     <ul style="list-style:none;">
                         <li>
@@ -54,12 +85,8 @@
                         <li>
                             <label for="Usuario_DataDeNascimento">Data De Nascimento</label>
                             @*Html.LabelFor(m => m.Usuario.DataDeNascimento)*@
-                            @if (Model.Usuario.IdUsuario > 0) 
-                            {
-                                @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = Model.Usuario.DataDeNascimento.ToString("dd/MM/yyyy"), @class = "datepicker", @disabled = ""})
-                            } else {
-                                @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = "", @class = "datepicker"})
-                            }
+                            
+                            @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = "", @class = "datepicker"})
                             @Html.ValidationMessage("Idade", new { style = "margin-left:10px" })
                         </li>
                         <li>
@@ -73,8 +100,10 @@
                     <br />
                     @Html.HiddenFor(m => m.Usuario.IdUsuario)
                     @Html.HiddenFor(m => m.Usuario.UrlImagem)
-                    <input type="submit" value="Salvar" class="btn btn-primary" />
-                    <!-- <a class="btn" href="/Acesso">Voltar</a> -->                                                        
+                   <div class="form-actions">
+                      <button type="submit" class="btn btn-primary">Registrar</button>
+                      <a class="btn " href="/Acesso">Voltar</a>
+                    </div>                    
                 }
                 
             </div>
@@ -85,33 +114,3 @@
     <!-- END BLOCK -->
 </div>
 <!-- END LINHA 2 -->
-<!-- FOTO -->
-<!-- @*Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)*@ -->
-<!--  
-    @if (Model.Usuario.IdUsuario > 0)
-                {
-                   
-                    <div class="span12 pull-left" style="width:150px; height:150px; overflow:hidden;">
-                        
-                        <img src="http://lorempixel.com/100/100/people/1/" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();"/>
-                    </div>
-                }
-    <div id="modalEditarImagem" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-    @using (Html.BeginForm("EnviarImagem", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Selecione a imagem</h3>
-    </div>
-    <div class="modal-body">
-        <p>
-            <input type="file" id="image" name="image" />
-        </p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary" type="submit">Save changes</button>
-    </div>
-    }
-</div>
--->

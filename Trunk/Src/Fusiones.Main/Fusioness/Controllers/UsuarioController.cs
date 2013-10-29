@@ -38,7 +38,15 @@ namespace Fusioness.Controllers
                     model.Usuario = Servico.AlterarUsuario(model.Usuario);
                 }
                 // atualiza o usuario na session ou nao vai mostrar os dados corretos no reload
-                (new BaseController()).EfetuarLogon(model.Usuario,HttpContext);
+                try
+                {
+                    (new BaseController()).EfetuarLogon(model.Usuario, HttpContext);
+                }
+                catch (System.Exception ex)
+                {
+                    ExibirModal(ex.Message);
+                }
+                
                 return IsAdd ? RedirectToAction("Index","Home") : RedirectToAction("Index", model);
             }
             else
@@ -56,6 +64,23 @@ namespace Fusioness.Controllers
             model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             model.CarregarParametrosView();
             return View(model);
+        }
+
+        [PermiteAnonimo]
+        [HttpGet]
+        public ActionResult Registrar()
+        {
+            var model = new UsuarioModel();
+            model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+            model.CarregarParametrosView();
+            return View(model);
+        }
+
+        [PermiteAnonimo]
+        [HttpPost]
+        public ActionResult Registrar(UsuarioModel model)
+        {
+            return InserirAlterarUsuario(model);
         }
 
         [HttpGet]

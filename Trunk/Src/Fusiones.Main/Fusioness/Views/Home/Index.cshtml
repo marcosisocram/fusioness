@@ -10,8 +10,9 @@
 </script>
 
 <!-- FOTO -->
-<div class="span12" style="width:150px;height:150px;overflow:hidden;">
-    <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();"/>
+<div class="span12" style="width:150px; height:150px; overflow:hidden;">
+    <!-- @Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext) -->
+    <img src="" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();"/>
 </div>
 <a href="/Usuario">Editar perfil</a>
 @if (Model.ContatosNaoConfirmados!=null && Model.ContatosNaoConfirmados.Count > 0) 
@@ -19,17 +20,18 @@
         <div class="row-fluid">
             <div class="span12">
             <div class="card">
-                <h2 class="card-heading simple">Você possui convites de amizade!</h2>
+                <h2 class="card-heading simple">
+                    Você possui <span class="badge badge-success">@Model.ContatosNaoConfirmados.Count</span> convite(s) de amizade!</h2>
                 <div class="card-body">
                     <table style="margin-bottom:10px;">
                         @foreach (var usuario in Model.ContatosNaoConfirmados)
 	                    {
 		                    <tr>
-                                <td>
+                               <!-- <td>
                                     @usuario.Nome
-                                </td>
+                                </td> -->
                                 <td>
-                                    @Html.ActionLink("Ver Perfil", "VerPerfilUsuario", "Usuario", new { IdUsuario=usuario.IdUsuario }, new { @class = "btn btn-info" })
+                                    @Html.ActionLink("Ver Perfil de " + @usuario.Nome, "VerPerfilUsuario", "Usuario", new { IdUsuario=usuario.IdUsuario }, new { @class = "btn btn-info" })
                                 </td>
                                 <td>
                                     @Html.ActionLink("Aceitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario=usuario.IdUsuario, IsAceitar=true }, new { @class = "btn btn-primary" })
@@ -64,16 +66,15 @@
 <div class="row-fluid">
   
   <!-- BLOCK -->
-  <div class="span4">
+  <div class="span5">
     <div class="card">
       <h2 class="card-heading simple">Buscar Eventos</h2>
       <div class="card-body">
-        @using (Html.BeginForm("DoSomething", "Home", FormMethod.Post))
+        @using (Html.BeginForm("DoSomething", "Home", FormMethod.Post, new { @class = "form-search" }))
         {
-          @Html.LabelFor(m => m.User.Nome)
-          @Html.TextBoxFor(m => m.User.Nome)
-          <br />
-          <input type="submit" class="btn" value="Enviar" />
+          @*Html.LabelFor(m => m.User.Nome)*@
+          @Html.TextBoxFor(m => m.User.Nome, new { @placeholder = "Nome", @class = "input-medium search-query" })                 
+          <input type="submit" class="btn btn-primary" value="Pesquisar" />
         }
       </div>
     </div>
@@ -81,7 +82,7 @@
   <!-- END BLOCK -->
   
   <!-- BLOCK -->
-  <div class="span8">
+  <div class="span7">
     <div class="card">
       <h2 class="card-heading simple">Últimas Rotas Cadastradas</h2>
       <div class="card-body">
