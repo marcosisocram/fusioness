@@ -31,6 +31,7 @@ namespace Fusioness.Controllers
             {
                 if (IsAdd)
                 {
+                    model.Usuario.UrlImagem = "avatar.png";
                     model.Usuario = Servico.InserirUsuario(model.Usuario);
                 }
                 else

@@ -43,7 +43,7 @@ namespace Fusioness.Controllers
         public ActionResult ListarTodos()
         {
             var model = new ContatoModel();
-            model.ListaDeUsuarios = Servico.ListarUsuarios();
+            model.ListaDeUsuarios = Servico.ListarUsuarios().OrderBy(x=>x.Nome).ToArray();
             return View("index",model);
         }
 
@@ -52,7 +52,7 @@ namespace Fusioness.Controllers
             var model = new ContatoModel();
             var usuario = BaseController.ObterUsuarioLogado(HttpContext);
             var MeusContatos = Servico.ListarContatosDoUsuario(usuario);
-            var usuarios = Servico.ObterUsuariosIds(MeusContatos.Select(c => c.IdContato).ToArray());
+            var usuarios = Servico.ObterUsuariosIds(MeusContatos.Select(c => c.IdContato).ToArray()).OrderBy(x => x.Nome).ToArray();
             model.ListaDeUsuarios = usuarios;
             return View("index", model);
         }
