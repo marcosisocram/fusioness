@@ -7,6 +7,7 @@ using Fusioness.Data.Contracts;
 using Fusioness.Data.Repositories;
 using Fusioness.Entities;
 using Fusioness.Business.Coordenadas;
+using Fusioness.Business.Rotas;
 
 namespace Fusioness.Business.Eventos
 {
@@ -117,15 +118,18 @@ namespace Fusioness.Business.Eventos
         public List<Evento> ListarEventosComDistancia(double latitudeAtual, double longitudeAtual)
         {
             CoordenadaBusiness coordenadaBusiness = new CoordenadaBusiness();
-            Dictionary<Evento, Coordenada> listaCoordenadas = new Dictionary<Evento, Coordenada>();
-            IEnumerable<Evento> listaEventosPublicos = ListarEventos().Where(e => e.Publico = false);
+            RotaBusiness rotaBusiness = new RotaBusiness();
+            IEnumerable<Evento> listaEventosPublicos = ListarEventos().Where(e => e.Publico = true);
             foreach (var item in listaEventosPublicos)
             {
-                Coordenada pontoDePartida = coordenadaBusiness.ListarCoordenadasPorRota(item.Rota).First();
+                Rota rota = rotaBusiness.ObterRotaPorId(new Rota(){IdRota = item.IdRota});
+                Coordenada pontoDePartida = coordenadaBusiness.ListarCoordenadasPorRota(rota).First();
                 item.Distancia = CalculateCoordinateDistance(latitudeAtual, longitudeAtual, pontoDePartida.Latitude, pontoDePartida.Longitude);
-                listaCoordenadas.Add(item, pontoDePartida);
             }
-
+            listaEventosPublicos = from e in listaEventosPublicos
+                                   orderby e.Distancia
+                                   select e;
+                                    
             return listaEventosPublicos.ToList();
         }
 

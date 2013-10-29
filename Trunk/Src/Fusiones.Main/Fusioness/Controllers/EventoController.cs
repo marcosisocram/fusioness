@@ -22,7 +22,7 @@ namespace Fusioness.Controllers
             double latitude = Double.Parse(Request.QueryString["latitude"]);
             double longitude = Double.Parse(Request.QueryString["longitude"]);
             model.carregarParametrosViewExplore(UsuarioLogado, null, latitude, longitude);
-            return View(model);
+            return View("Index",model);
         }
 
         [HttpPost]
