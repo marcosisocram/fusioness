@@ -7,6 +7,9 @@
     function ExibirModalMudarImagem() {
         $("#modalEditarImagem").modal('show');
     }
+    function ExibirModalConvidarProEmail() {
+        $("#modalConvidarPorEmail").modal('show');
+    }
 </script>
 
 <!-- FOTO -->
@@ -56,6 +59,7 @@
       <div class="card-body">
         <p>Conecte-se agora mesmo a milhares de outros apaixonados por ciclismo. Interaja, proponha rotas e crie eventos.</p>
         <p><a class="btn" href="#">Clique e encontre amigos!</a></p>
+          <p><a class="btn" onclick="ExibirModalConvidarProEmail()" href="#">Clique e convide amigos por e-mail!</a></p>
       </div>
     </div>
   </div>
@@ -110,5 +114,24 @@
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
         <button class="btn btn-primary" type="submit">Save changes</button>
     </div>
+    }
+</div>
+
+<div id="modalConvidarPorEmail" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    @using (Html.BeginForm("ConvidarPorEmail", "Home", FormMethod.Post))
+    {
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Digite os emails separados por virgula</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                <input type="text" id="email" name="email" />
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary" type="submit">Enviar email</button>
+        </div>
     }
 </div>

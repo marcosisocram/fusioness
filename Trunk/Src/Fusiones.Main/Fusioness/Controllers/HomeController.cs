@@ -24,6 +24,31 @@ namespace Fusioness.Controllers
             return RedirectToAction("index");
         }
 
+
+        public ActionResult ConvidarPorEmail(string email)
+        {
+            string retorno = string.Empty;
+            try
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(email, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
+                {
+                    string srt = HttpContext.Request.Url.PathAndQuery;
+                    string url = HttpContext.Request.Url.AbsoluteUri.Replace(srt, "/");
+                    Servico.ConvidarPorEmail(email, url);
+                }
+                else 
+                {
+                    ExibirModal("Formato de email invalido!");
+                }
+            }
+            catch(Exception e) 
+            {
+                retorno = string.Format("Aconteceu um erro inesperado. Mensagem de erro: {0}.", e.Message);
+            }
+            return RedirectToAction("Index");
+        }
+        
+
         public ActionResult EnviarImagem(HttpPostedFileBase image)
         {
             string retorno = string.Empty;

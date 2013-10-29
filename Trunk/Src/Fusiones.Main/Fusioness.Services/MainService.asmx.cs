@@ -9,6 +9,8 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using Fusioness.Business;
 using Fusioness.Entities;
+using System.Net.Mail;
+using System.Net;
 
 namespace Fusioness.Services
 {
@@ -793,6 +795,36 @@ namespace Fusioness.Services
             {
                 return new EventoUsuario();
             }
+        }
+        #endregion
+
+        #region Outros
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ConvidarPorEmail(string mail, string url)
+        {
+            var fromAddress = new MailAddress("fusionessapp@gmail.com", "Convite Fusioness");
+            var toAddress = new MailAddress(mail, mail);
+            const string fromPassword = "Unibratec";
+            const string subject = "Venha fazer parte do Fusioness!";
+            string body = "Click no link para criar o seu perfil \n" + url;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            };
+
+            smtp.Send(message);
         }
         #endregion
     }
