@@ -35,6 +35,8 @@ namespace Fusioness.Controllers
                 var eventoAlterado = Servico.AlterarEvento(model.Evento);
                 if (eventoAlterado != null && eventoAlterado.IdEvento > 0)
                 {
+                    model.Evento = eventoAlterado;
+                    model.carregarParametrosView(this.UsuarioLogado, model.Evento);
                     ExibirModal("Evento alterado com sucesso.");
                     return View(model);
                 }
@@ -66,6 +68,7 @@ namespace Fusioness.Controllers
             model.carregarParametrosView(UsuarioLogado, null);
 
             model.IsCadastroEvento = true;
+            model.Evento.Data = DateTime.Now;
 
             return View("InserirAlterarEvento", model);
         }

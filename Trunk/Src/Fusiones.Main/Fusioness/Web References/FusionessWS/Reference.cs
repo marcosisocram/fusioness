@@ -2192,13 +2192,13 @@ namespace Fusioness.FusionessWS {
         
         private Rota rotaField;
         
-        private double distanciaField;
-        
         private Usuario usuarioField;
         
         private EventoUsuario[] eventoUsuariosField;
         
         private ComentarioEvento[] comentariosEventoField;
+        
+        private double distanciaField;
         
         /// <remarks/>
         public int IdEvento {
@@ -2301,16 +2301,6 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
-        public double Distancia {
-            get {
-                return this.distanciaField;
-            }
-            set {
-                this.distanciaField = value;
-            }
-        }
-        
-        /// <remarks/>
         public Usuario Usuario {
             get {
                 return this.usuarioField;
@@ -2337,6 +2327,16 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.comentariosEventoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Distancia {
+            get {
+                return this.distanciaField;
+            }
+            set {
+                this.distanciaField = value;
             }
         }
     }
