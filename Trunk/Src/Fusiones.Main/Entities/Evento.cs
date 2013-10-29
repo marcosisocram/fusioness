@@ -23,5 +23,6 @@ namespace Fusioness.Entities
         public virtual Usuario Usuario { get; set; }
         public virtual List<EventoUsuario> EventoUsuarios { get; set; }
         public virtual List<ComentarioEvento> ComentariosEvento { get; set; }
+        public virtual double Distancia { get; set; }
     }
 }

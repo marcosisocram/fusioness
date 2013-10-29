@@ -556,6 +556,21 @@ namespace Fusioness.Services
                 return new Evento();
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Evento> ListarEventosComDistancia(double latitudeAtual, double longitudeAtual)
+        {
+            try
+            {
+                return Facade.Instance.ListarEventosComDistancia(latitudeAtual, longitudeAtual);
+            }
+            catch
+            {
+                return new List<Evento>();
+            }
+        }
+
         #endregion
 
         #region Coordenadas

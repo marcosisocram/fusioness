@@ -8,7 +8,7 @@
     <link href="@Url.Content("~/Content/css/bootplus.min.css")" rel="stylesheet" media="screen">
     <link href="@Url.Content("~/Content/css/bootplus-responsive.min.css")" rel="stylesheet" media="screen">
     <link href="@Url.Content("~/Content/css/datepicker.css")" rel="stylesheet" media="screen">
-
+    <link href="@Url.Content("~/Content/css/font-awesome-ie7.min.css")" rel="stylesheet" media="screen">
     <script src="@Url.Content("~/Content/js/jquery.js")"></script>
     <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/Content/js/bootstrap-datepicker.js")"></script>
@@ -26,6 +26,7 @@
         }
         #divBg *{height: 100%;width: 100%;}
         #divGeneralContainer{position: relative;}
+        footer { color: white; }
     </style>
     <script type="text/javascript">
     @{
@@ -35,8 +36,23 @@
     }
 
         $(document).ready(function () {
-            //configuração do modal
             var mensagem = '@mensagem';
+            
+            //Geolocation do browser
+            navigator.geolocation.getCurrentPosition(showPosition, positionError);
+
+            function showPosition(position) {
+                var coordinates = position.coords;
+                var link = '/Evento/Explore?latitude=' + coordinates.latitude + '&longitude=' + coordinates.longitude;
+                $('#explore').attr('href', link);
+            }
+
+            function positionError(position) {
+                $('#explore').attr('href', '#');
+                $('#explore').attr('title', 'Para utilizar todos os recursos do sistema, favor habilitar a geolocalização');
+                $('#explore').text('Explore (Habilitar Geolocalização)');
+            }
+        //configuração do modal
         if (mensagem.trim() !== '') { $(window).load(function () { $('#divModalGlobal').modal('show'); }); }
 
         //configuração do loading...
@@ -114,6 +130,7 @@
                                     @Html.MenuItem("Crie seu Evento", "InserirAlterarEvento", "Evento")
                                     @Html.MenuItem("Lista de Eventos", "Index", "Evento")
                                     @Html.MenuItem("Lista de Convites", "VerConvitesEvento", "Evento")
+                                    <li><a id="explore" href="#">Explore</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -123,7 +140,6 @@
                                     @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
                                     @Html.MenuItem("Contatos", "Index", "Contato")
                                     @Html.MenuItem("Rotas", "Index", "Rota")
-                                    @Html.MenuItem("Eventos", "Index", "Evento")
                                 </ul>
                             </li>
                             @if (Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)

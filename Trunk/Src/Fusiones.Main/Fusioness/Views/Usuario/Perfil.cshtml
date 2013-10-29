@@ -36,17 +36,17 @@
                                 <td colspan="2">
                                     @if (Model.IsMyself)
                                     {
-                                        <label>você é visto assim! -=)</label>
+                                        <label>você é visto assim! :)</label>
                                     }
                                     else
                                     {
                                         if (Model.IsContato)
                                         {
-                                        @Html.ActionLink("Del", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=false}, new { @class = "btn btn-danger" })
+                                            @Html.ActionLink("Del", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=false}, new { @class = "btn btn-danger" })
                                         }
                                         else
                                         {
-                                        @Html.ActionLink("Add", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=true}, new { @class = "btn btn-primary" })
+                                            @Html.ActionLink("Add", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=true}, new { @class = "btn btn-primary" })
                                         }
                                     }
                                 </td>
