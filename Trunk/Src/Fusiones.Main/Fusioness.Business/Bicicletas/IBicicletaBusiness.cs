@@ -10,5 +10,6 @@ namespace Fusioness.Business.Bicicletas
         void RemoverBicicleta(Bicicleta bicicleta);
         Bicicleta ObterBicicletaPorId(Bicicleta bicicleta);
         List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario);
+        string InserirFotoBicicleta(Bicicleta bicicleta, byte[] bytes, string filename, string dirBase);
     }
 }

@@ -159,6 +159,10 @@ namespace Fusioness.Business
         {
             return BicicletaBus.ListarBicicletasPorUsuario(usuario);
         }
+        public string InserirBicicleta(Bicicleta bicicleta, byte[] bytes, string filename, string dirBase)
+        {
+            return BicicletaBus.InserirFotoBicicleta(bicicleta, bytes, filename, dirBase);
+        }
         #endregion
 
         #region Rota
@@ -348,6 +352,5 @@ namespace Fusioness.Business
         #endregion
 
         #endregion
-
     }
 }

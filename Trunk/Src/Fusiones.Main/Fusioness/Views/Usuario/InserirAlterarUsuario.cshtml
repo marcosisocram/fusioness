@@ -56,7 +56,7 @@
                             @*Html.LabelFor(m => m.Usuario.DataDeNascimento)*@
                             @if (Model.Usuario.IdUsuario > 0) 
                             {
-                                @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = Model.Usuario.DataDeNascimento.ToString("dd/MM/yyyy"), @class = "datepicker", @disabled = ""})
+                                @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = Model.Usuario.DataDeNascimento.ToString("dd/MM/yyyy"), @class = "datepicker"})
                             } else {
                                 @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = "", @class = "datepicker"})
                             }

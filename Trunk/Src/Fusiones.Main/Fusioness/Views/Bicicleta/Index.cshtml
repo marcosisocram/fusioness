@@ -3,7 +3,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
-
+<script type="text/javascript">
+    function ExibirModalMudarImagem(id) {
+        $('#idbicicleta').val(id);
+        $("#modalEditarImagem").modal('show');
+    }
+</script>
 @*<!-- LINHA 1 -->
 <div class="row-fluid">
   <!-- BLOCK -->
@@ -37,6 +42,7 @@
       <div class="card-body">
         <table class="table table-hover">
             <thead>
+                <th>Foto</th>
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Ações</th>
@@ -45,11 +51,13 @@
             @foreach (var bicicleta in Model.ListaBicicletasPorUsuario)
             {
                 <tr>
+                    <td><img src="@String.Format("{0}{1}",System.Configuration.ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir"],bicicleta.UrlImagem)" style="width:200px;height:200px;"/></td>
                     <td>@bicicleta.Marca</td>
                     <td>@bicicleta.Modelo</td>
                     <td>
                         @Html.ActionLink("Editar", "EditarBicicleta", "Bicicleta", new { IdBicicleta=bicicleta.IdBicicleta }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Excluir", "ExcluirBicicleta", "Bicicleta", new { IdBicicleta=bicicleta.IdBicicleta}, new { @class = "btn btn-primary" })
+                        <input type="button" value="Mudar foto" class="btn btn-primary" onclick="ExibirModalMudarImagem('@bicicleta.IdBicicleta');" />
                     </td>
                 </tr>
             }
@@ -86,3 +94,22 @@
 <div class="row-fluid"><//div>
   
   <!-- BLOCK -->
+<div id="modalEditarImagem" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    @using (Html.BeginForm("EnviarImagem", "Bicicleta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Selecione a imagem</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <input type="file" id="image" name="image" />
+            <input type="number" id="idbicicleta" name="idbicicleta" style="display:none;" />
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" type="submit">Save changes</button>
+    </div>
+    }
+</div>

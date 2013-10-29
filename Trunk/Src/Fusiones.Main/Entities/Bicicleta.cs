@@ -6,6 +6,7 @@ namespace Fusioness.Entities
         public int IdUsuario { get; set; }
         public string Modelo { get; set; }
         public string Marca { get; set; }
+        public string UrlImagem { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

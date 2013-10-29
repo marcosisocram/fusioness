@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Fusioness.Business.Util;
 using Fusioness.Data;
@@ -106,6 +107,31 @@ namespace Fusioness.Business.Bicicletas
             {
                 throw;
             }
+        }
+        public string InserirFotoBicicleta(Bicicleta bicicleta, byte[] bytes, string filename, string dirbase)
+        {
+            try
+            {
+                string retorno = string.Empty;
+                var directory = Path.Combine(dirbase, "images");
+                var fname = String.Format("{0}/{1}{2}", directory, Path.GetFileNameWithoutExtension(Path.GetTempFileName()), Path.GetExtension(filename));
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                var fs = File.OpenWrite(fname);
+                fs.Write(bytes, 0, bytes.Count());
+                fs.Close();
+                retorno = Path.GetFileName(fname);
+                bicicleta.UrlImagem = retorno;
+                bicicleta = AlterarBicicleta(bicicleta);
+                return retorno;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+
         }
         #endregion
     }

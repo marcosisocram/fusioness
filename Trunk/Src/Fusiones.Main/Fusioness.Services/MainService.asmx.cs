@@ -118,6 +118,21 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string InserirFotoBicicleta(Bicicleta bicicleta, string filename, byte[] bytes)
+        {
+            try
+            {
+                string dirBase = Server.MapPath("~");
+                return Facade.Instance.InserirBicicleta(bicicleta, bytes, filename, dirBase);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
         #endregion
 
         #region Usuario

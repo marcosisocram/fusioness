@@ -7,6 +7,25 @@
     function VerPerfilUsuario(idusuario) {
         window.location = '/Usuario/VerPerfilUsuario?IdUsuario=' + idusuario;
     }
+    function FiltrarPorNome() {
+        var key = $('#txtBusca').val();
+        $('.thumbnails').each(function () {
+            if(key==null || key.trim()=='')
+            {
+                $(this).css('display', 'inherit');
+            }
+            else
+            {
+                var lbl = $(this).find('#lblNomeDoUsuario').first();
+                if ($(lbl).text().toLowerCase().indexOf(key.toLowerCase()) >= 0) {
+                    $(this).css('display', 'inherit');
+                }
+                else {
+                    $(this).css('display', 'none');
+                }
+            }
+        });
+    }
 </script>
 @*<div class="row">
     @foreach (var usuario in Model.ListaDeUsuarios)
@@ -25,6 +44,10 @@
   <div class="span12">
     <div class="card">
       <h2 class="card-heading simple">Lista de Usuários</h2>
+      <div class="searchbox" style="padding:5px;">
+          <input id="txtBusca" type="text" name="busca" placeholder="filtre por nome" onchange="FiltrarPorNome();">
+          <img src="/Content/images/search_lens.png" style="width:16px;" onclick="FiltrarPorNome();"/>
+      </div>
       <div class="card-body" style="overflow:hidden">
             @foreach (var usuario in Model.ListaDeUsuarios)
             {
@@ -32,7 +55,7 @@
                     <li style="width:100%;height:100%;">
                         <div class="thumbnail" style="margin: 5px; height: 100%; cursor: pointer" onclick="VerPerfilUsuario(@usuario.IdUsuario);" title="Ver perfil de @usuario.Nome">
                             <div class="span12">
-                                <label style="font-weight: bold;">@usuario.Nome</label>
+                                <label id="lblNomeDoUsuario" style="font-weight: bold;">@usuario.Nome</label>
                                 <img src="@String.Format("{0}{1}", Fusioness.Controllers.BaseController.ObterUrlBaseAvatar(), usuario.UrlImagem)" alt="[usuario não possui foto]"/>
                             </div>
                         </div>

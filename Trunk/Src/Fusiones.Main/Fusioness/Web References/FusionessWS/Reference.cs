@@ -42,6 +42,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarBicicletasPorUsuarioOperationCompleted;
         
+        private System.Threading.SendOrPostCallback InserirFotoBicicletaOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ValidarLogonUsuarioOperationCompleted;
         
         private System.Threading.SendOrPostCallback InserirUsuarioOperationCompleted;
@@ -185,6 +187,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarBicicletasPorUsuarioCompletedEventHandler ListarBicicletasPorUsuarioCompleted;
+        
+        /// <remarks/>
+        public event InserirFotoBicicletaCompletedEventHandler InserirFotoBicicletaCompleted;
         
         /// <remarks/>
         public event ValidarLogonUsuarioCompletedEventHandler ValidarLogonUsuarioCompleted;
@@ -486,6 +491,39 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarBicicletasPorUsuarioCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarBicicletasPorUsuarioCompleted(this, new ListarBicicletasPorUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InserirFotoBicicleta", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string InserirFotoBicicleta(Bicicleta bicicleta, string filename, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] bytes) {
+            object[] results = this.Invoke("InserirFotoBicicleta", new object[] {
+                        bicicleta,
+                        filename,
+                        bytes});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InserirFotoBicicletaAsync(Bicicleta bicicleta, string filename, byte[] bytes) {
+            this.InserirFotoBicicletaAsync(bicicleta, filename, bytes, null);
+        }
+        
+        /// <remarks/>
+        public void InserirFotoBicicletaAsync(Bicicleta bicicleta, string filename, byte[] bytes, object userState) {
+            if ((this.InserirFotoBicicletaOperationCompleted == null)) {
+                this.InserirFotoBicicletaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInserirFotoBicicletaOperationCompleted);
+            }
+            this.InvokeAsync("InserirFotoBicicleta", new object[] {
+                        bicicleta,
+                        filename,
+                        bytes}, this.InserirFotoBicicletaOperationCompleted, userState);
+        }
+        
+        private void OnInserirFotoBicicletaOperationCompleted(object arg) {
+            if ((this.InserirFotoBicicletaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InserirFotoBicicletaCompleted(this, new InserirFotoBicicletaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1793,6 +1831,8 @@ namespace Fusioness.FusionessWS {
         
         private string marcaField;
         
+        private string urlImagemField;
+        
         private Usuario usuarioField;
         
         /// <remarks/>
@@ -1832,6 +1872,16 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.marcaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UrlImagem {
+            get {
+                return this.urlImagemField;
+            }
+            set {
+                this.urlImagemField = value;
             }
         }
         
@@ -3236,6 +3286,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Bicicleta[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void InserirFotoBicicletaCompletedEventHandler(object sender, InserirFotoBicicletaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InserirFotoBicicletaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InserirFotoBicicletaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }
