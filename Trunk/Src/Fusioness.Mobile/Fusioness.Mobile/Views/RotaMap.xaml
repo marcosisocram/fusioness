@@ -34,6 +34,11 @@
             <shell:ApplicationBarIconButton x:Name="btStartStop" IconUri="/Assets/Buttons/play.png" Text="Iniciar" Click="btStartStop_Click"/>
             <shell:ApplicationBarIconButton x:Name="btSalvar" IconUri="/Assets/Buttons/save.png" Text="Salvar" IsEnabled="False" Click="btSalvar_Click"/>
             <shell:ApplicationBarIconButton x:Name="btLimpar" IconUri="/Assets/Buttons/delete.png" Text="Limpar" IsEnabled="False" Click="btLimpar_Click"/>
+
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="menuPontos" Text="adicionar ponto" Click="menuPontos_Click"/>
+            </shell:ApplicationBar.MenuItems>
+            
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

@@ -18,7 +18,7 @@ using Microsoft.Phone.Maps.Services;
 using System.Text;
 using Fusioness.Mobile.Util;
 using System.Collections.ObjectModel;
-using Fusioness.Mobile.Util;
+
 namespace Fusioness.Mobile.Views
 {
     public partial class RotaMap : PhoneApplicationPage
@@ -198,6 +198,7 @@ namespace Fusioness.Mobile.Views
 
                 //Dados para Salvar                    
                 coordenada.Data = DateTime.Now;
+                coordenada.IdTipoCoordenada = 1;
                 coordenada.Latitude = geoCoordenada.Latitude;
                 coordenada.Longitude = geoCoordenada.Longitude;
 
@@ -296,6 +297,11 @@ namespace Fusioness.Mobile.Views
         private void btSalvar_Click(object sender, EventArgs e)
         {            
             NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + RotaId.ToString(), UriKind.Relative));
+        }
+
+        private void menuPontos_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/SalvarPontoReferencia.xaml", UriKind.Relative));
         }     
     }
 

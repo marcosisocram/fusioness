@@ -77,6 +77,9 @@
                                     @Html.LabelFor(m => m.Evento.Titulo)
                                     @Html.TextBoxFor(m => m.Evento.Titulo, displayMode)
                                     <br />
+                                    @Html.RadioButtonFor(m => m.Evento.Publico, "false", new { id = "privado"}) Privado
+                                    @Html.RadioButtonFor(m => m.Evento.Publico, "true", new { id = "publico" }) Público
+                                    <br />
                                     @Html.LabelFor(m => m.Evento.Data)
                                     @Html.TextBoxFor(m => m.Evento.Data, new { Value = Model.Evento.Data.ToString("dd/MM/yyyy"), @class = "datepicker" })
                                     <br />
@@ -95,22 +98,25 @@
                     }
                 </div>
 
-                <div style="float:none">
-                    @using (Html.BeginForm("InserirComentario", "Evento", FormMethod.Post))
-                    {
-                        <ul class="thumbnails">
-                            <li class="span5">
-                                <div class="thumbnail">
-                                    <h4>Que tal comentar?</h4>
-                                    @Html.TextAreaFor(m => m.Comentario.Descricao)
-                                    <br />
-                                    @Html.HiddenFor(m => m.Comentario.IdEvento)
-                                    <input type="submit" value="Comentar" class="btn btn-primary" />
-                                </div>
-                            </li>
-                        </ul>
+                @if (!Model.IsCadastroEvento)
+                {
+                    <div style="float: none">
+                        @using (Html.BeginForm("InserirComentario", "Evento", FormMethod.Post))
+                        {
+                            <ul class="thumbnails">
+                                <li class="span5">
+                                    <div class="thumbnail">
+                                        <h4>Que tal comentar?</h4>
+                                        @Html.TextAreaFor(m => m.Comentario.Descricao)
+                                        <br />
+                                        @Html.HiddenFor(m => m.Comentario.IdEvento)
+                                        <input type="submit" value="Comentar" class="btn btn-primary" />
+                                    </div>
+                                </li>
+                            </ul>
                         }
-                </div>
+                    </div>
+                }
 
 
                 @if (Model.ListaComentariosEvento.Any())
