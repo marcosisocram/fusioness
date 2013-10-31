@@ -37,40 +37,52 @@ namespace Fusioness.Mobile.Views
 
         private void llsContatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
-
-            MessageBoxResult result = MessageBox.Show("Deseja Convidar " + res.ContatoNome + "?", "Convidar?", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
+            try
             {
-                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-                FusionessWS.Evento evento = new FusionessWS.Evento() { IdEvento = EventoId};
-                FusionessWS.ArrayOfInt idsContatos = new FusionessWS.ArrayOfInt();
-                idsContatos.Add(res.ContatoId);
+                var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
 
-                servico.ConvidarUsuariosAsync(Global.usuarioLogado, evento, idsContatos);
-                servico.ConvidarUsuariosCompleted += servico_ConvidarUsuariosCompleted;
+                MessageBoxResult result = MessageBox.Show("Deseja Convidar " + res.ContatoNome + "?", "Convidar?", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                    FusionessWS.Evento evento = new FusionessWS.Evento() { IdEvento = EventoId };
+                    FusionessWS.ArrayOfInt idsContatos = new FusionessWS.ArrayOfInt();
+                    idsContatos.Add(res.ContatoId);
+
+                    servico.ConvidarUsuariosAsync(Global.usuarioLogado, evento, idsContatos);
+                    servico.ConvidarUsuariosCompleted += servico_ConvidarUsuariosCompleted;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(),"Erro",MessageBoxButton.OK);
             }
         }
 
         void servico_ConvidarUsuariosCompleted(object sender, FusionessWS.ConvidarUsuariosCompletedEventArgs e)
         {
-            if (e.Result != null)
+            try
             {
-                MessageBox.Show("Convite enviado com sucesso.");
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative)); 
+                if (e.Result != null)
+                {
+                    MessageBox.Show("Convite enviado com sucesso.");
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Erro", MessageBoxButton.OK);
             }
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-
             this.Contatos = new ObservableCollection<ItemViewModel>();
 
             FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
 
             servico.ListarContatosDoUsuarioAsync(Global.usuarioLogado);
             servico.ListarContatosDoUsuarioCompleted += servico_ListarContatosDoUsuarioCompleted;
-
         }
 
         void servico_ListarContatosDoUsuarioCompleted(object sender, FusionessWS.ListarContatosDoUsuarioCompletedEventArgs e)

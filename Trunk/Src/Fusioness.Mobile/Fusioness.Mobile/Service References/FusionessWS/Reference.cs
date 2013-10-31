@@ -550,6 +550,8 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.ComentarioEvento> ComentariosEventoField;
         
+        private double DistanciaField;
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int IdEvento {
             get {
@@ -715,6 +717,19 @@ namespace Fusioness.Mobile.FusionessWS {
                 if ((object.ReferenceEquals(this.ComentariosEventoField, value) != true)) {
                     this.ComentariosEventoField = value;
                     this.RaisePropertyChanged("ComentariosEvento");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
+        public double Distancia {
+            get {
+                return this.DistanciaField;
+            }
+            set {
+                if ((this.DistanciaField.Equals(value) != true)) {
+                    this.DistanciaField = value;
+                    this.RaisePropertyChanged("Distancia");
                 }
             }
         }
@@ -1759,6 +1774,11 @@ namespace Fusioness.Mobile.FusionessWS {
         System.IAsyncResult BeginObterEventoPorId(Fusioness.Mobile.FusionessWS.ObterEventoPorIdRequest request, System.AsyncCallback callback, object asyncState);
         
         Fusioness.Mobile.FusionessWS.ObterEventoPorIdResponse EndObterEventoPorId(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarEventosComDistancia", ReplyAction="*")]
+        System.IAsyncResult BeginListarEventosComDistancia(Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponse EndListarEventosComDistancia(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/InserirListaCoordenadas", ReplyAction="*")]
         System.IAsyncResult BeginInserirListaCoordenadas(Fusioness.Mobile.FusionessWS.InserirListaCoordenadasRequest request, System.AsyncCallback callback, object asyncState);
@@ -4145,6 +4165,78 @@ namespace Fusioness.Mobile.FusionessWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarEventosComDistanciaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarEventosComDistancia", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaRequestBody Body;
+        
+        public ListarEventosComDistanciaRequest() {
+        }
+        
+        public ListarEventosComDistanciaRequest(Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarEventosComDistanciaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public double latitudeAtual;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public double longitudeAtual;
+        
+        public ListarEventosComDistanciaRequestBody() {
+        }
+        
+        public ListarEventosComDistanciaRequestBody(double latitudeAtual, double longitudeAtual) {
+            this.latitudeAtual = latitudeAtual;
+            this.longitudeAtual = longitudeAtual;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarEventosComDistanciaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarEventosComDistanciaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponseBody Body;
+        
+        public ListarEventosComDistanciaResponse() {
+        }
+        
+        public ListarEventosComDistanciaResponse(Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarEventosComDistanciaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> ListarEventosComDistanciaResult;
+        
+        public ListarEventosComDistanciaResponseBody() {
+        }
+        
+        public ListarEventosComDistanciaResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> ListarEventosComDistanciaResult) {
+            this.ListarEventosComDistanciaResult = ListarEventosComDistanciaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class InserirListaCoordenadasRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="InserirListaCoordenadas", Namespace="http://tempuri.org/", Order=0)]
@@ -5611,6 +5703,25 @@ namespace Fusioness.Mobile.FusionessWS {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListarEventosComDistanciaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListarEventosComDistanciaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class InserirListaCoordenadasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -6070,6 +6181,12 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onObterEventoPorIdCompletedDelegate;
         
+        private BeginOperationDelegate onBeginListarEventosComDistanciaDelegate;
+        
+        private EndOperationDelegate onEndListarEventosComDistanciaDelegate;
+        
+        private System.Threading.SendOrPostCallback onListarEventosComDistanciaCompletedDelegate;
+        
         private BeginOperationDelegate onBeginInserirListaCoordenadasDelegate;
         
         private EndOperationDelegate onEndInserirListaCoordenadasDelegate;
@@ -6270,6 +6387,8 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> RemoverEventoCompleted;
         
         public event System.EventHandler<ObterEventoPorIdCompletedEventArgs> ObterEventoPorIdCompleted;
+        
+        public event System.EventHandler<ListarEventosComDistanciaCompletedEventArgs> ListarEventosComDistanciaCompleted;
         
         public event System.EventHandler<InserirListaCoordenadasCompletedEventArgs> InserirListaCoordenadasCompleted;
         
@@ -8382,6 +8501,69 @@ namespace Fusioness.Mobile.FusionessWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarEventosComDistancia(Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListarEventosComDistancia(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginListarEventosComDistancia(double latitudeAtual, double longitudeAtual, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaRequest inValue = new Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaRequestBody();
+            inValue.Body.latitudeAtual = latitudeAtual;
+            inValue.Body.longitudeAtual = longitudeAtual;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarEventosComDistancia(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarEventosComDistancia(System.IAsyncResult result) {
+            return base.Channel.EndListarEventosComDistancia(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> EndListarEventosComDistancia(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarEventosComDistancia(result);
+            return retVal.Body.ListarEventosComDistanciaResult;
+        }
+        
+        private System.IAsyncResult OnBeginListarEventosComDistancia(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            double latitudeAtual = ((double)(inValues[0]));
+            double longitudeAtual = ((double)(inValues[1]));
+            return this.BeginListarEventosComDistancia(latitudeAtual, longitudeAtual, callback, asyncState);
+        }
+        
+        private object[] OnEndListarEventosComDistancia(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> retVal = this.EndListarEventosComDistancia(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListarEventosComDistanciaCompleted(object state) {
+            if ((this.ListarEventosComDistanciaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListarEventosComDistanciaCompleted(this, new ListarEventosComDistanciaCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListarEventosComDistanciaAsync(double latitudeAtual, double longitudeAtual) {
+            this.ListarEventosComDistanciaAsync(latitudeAtual, longitudeAtual, null);
+        }
+        
+        public void ListarEventosComDistanciaAsync(double latitudeAtual, double longitudeAtual, object userState) {
+            if ((this.onBeginListarEventosComDistanciaDelegate == null)) {
+                this.onBeginListarEventosComDistanciaDelegate = new BeginOperationDelegate(this.OnBeginListarEventosComDistancia);
+            }
+            if ((this.onEndListarEventosComDistanciaDelegate == null)) {
+                this.onEndListarEventosComDistanciaDelegate = new EndOperationDelegate(this.OnEndListarEventosComDistancia);
+            }
+            if ((this.onListarEventosComDistanciaCompletedDelegate == null)) {
+                this.onListarEventosComDistanciaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarEventosComDistanciaCompleted);
+            }
+            base.InvokeAsync(this.onBeginListarEventosComDistanciaDelegate, new object[] {
+                        latitudeAtual,
+                        longitudeAtual}, this.onEndListarEventosComDistanciaDelegate, this.onListarEventosComDistanciaCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginInserirListaCoordenadas(Fusioness.Mobile.FusionessWS.InserirListaCoordenadasRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginInserirListaCoordenadas(request, callback, asyncState);
         }
@@ -9689,6 +9871,19 @@ namespace Fusioness.Mobile.FusionessWS {
             public Fusioness.Mobile.FusionessWS.ObterEventoPorIdResponse EndObterEventoPorId(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Fusioness.Mobile.FusionessWS.ObterEventoPorIdResponse _result = ((Fusioness.Mobile.FusionessWS.ObterEventoPorIdResponse)(base.EndInvoke("ObterEventoPorId", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListarEventosComDistancia(Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ListarEventosComDistancia", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponse EndListarEventosComDistancia(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponse _result = ((Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponse)(base.EndInvoke("ListarEventosComDistancia", _args, result)));
                 return _result;
             }
             

@@ -255,13 +255,15 @@ namespace Fusioness.Mobile.Views
             ApplicationBarIconButton btStartStop = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
             ApplicationBarIconButton btSalvar = (ApplicationBarIconButton)ApplicationBar.Buttons[1];
             ApplicationBarIconButton btLimpar = (ApplicationBarIconButton)ApplicationBar.Buttons[2];
-            
+            ApplicationBarMenuItem menuPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
+
             if (btStartStop.IconUri.OriginalString == "/Assets/Buttons/play.png")
             {
                 btStartStop.IconUri = new Uri("/Assets/Buttons/pause.png", UriKind.Relative);
                 btStartStop.Text = "Parar";
                 btSalvar.IsEnabled = false;
                 btLimpar.IsEnabled = false;
+                menuPontos.IsEnabled = false;
                 watcher.Start();
             }
             else
@@ -270,6 +272,7 @@ namespace Fusioness.Mobile.Views
                 btStartStop.Text = "Iniciar";
                 btSalvar.IsEnabled = true;
                 btLimpar.IsEnabled = true;
+                menuPontos.IsEnabled = true;
                 watcher.Stop();
             }
         }

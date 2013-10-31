@@ -187,7 +187,6 @@
     <Content Include="Assets\Buttons\cancel.png" />
     <Content Include="Assets\Buttons\coment.png" />
     <Content Include="Assets\Buttons\edit.png" />
-    <Content Include="Assets\Buttons\map.png" />
     <Content Include="Assets\Buttons\refresh.png" />
     <Content Include="README_FIRST.txt" />
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarBicicletaResponse.datasource">
@@ -266,6 +265,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarDificuldadesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarEventosComDistanciaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarEventosPorUsuarioResponse.datasource">

@@ -58,28 +58,42 @@ namespace Fusioness.Mobile.Views
 
         private void llsContatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
-
-            MessageBoxResult result = MessageBox.Show("Deseja Adicionar " + res.ContatoNome + " aos Contatos?", "Adicionar?", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
+            try
             {
-                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-                FusionessWS.Contato contato = new FusionessWS.Contato();
+                var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
 
-                contato.IdUsuario = Global.usuarioLogado.IdUsuario;
-                contato.IdContato = res.ContatoId;
+                MessageBoxResult result = MessageBox.Show("Deseja Adicionar " + res.ContatoNome + " aos Contatos?", "Adicionar?", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                    FusionessWS.Contato contato = new FusionessWS.Contato();
 
-                servico.InserirContatoAsync(contato);
-                servico.InserirContatoCompleted += servico_InserirContatoCompleted;
+                    contato.IdUsuario = Global.usuarioLogado.IdUsuario;
+                    contato.IdContato = res.ContatoId;
+
+                    servico.InserirContatoAsync(contato);
+                    servico.InserirContatoCompleted += servico_InserirContatoCompleted;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(),"Erro",MessageBoxButton.OK);
             }
         }
 
         void servico_InserirContatoCompleted(object sender, FusionessWS.InserirContatoCompletedEventArgs e)
         {
-            if (e.Result != null)
+            try
             {
-                MessageBox.Show("Contato adicionado com sucesso.");
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative)); 
+                if (e.Result != null)
+                {
+                    MessageBox.Show("Contato adicionado com sucesso.");
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Erro", MessageBoxButton.OK);
             }
         }
     }

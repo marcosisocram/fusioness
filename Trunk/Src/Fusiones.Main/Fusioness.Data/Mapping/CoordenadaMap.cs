@@ -11,7 +11,15 @@ namespace Fusioness.Data.Mapping
             // Primary Key
             this.HasKey(t => t.IdCoordenada);
 
+
             // Properties
+            this.Property(t => t.NomePonto)
+                .HasMaxLength(50);
+            this.Property(t => t.DescricaoPonto)
+                .HasMaxLength(200);
+            this.Property(t => t.UrlImagemPonto)
+                .HasMaxLength(2455);
+
             // Table & Column Mappings
             this.ToTable("Coordenada");
             this.Property(t => t.IdCoordenada).HasColumnName("IdCoordenada");
@@ -20,6 +28,9 @@ namespace Fusioness.Data.Mapping
             this.Property(t => t.Latitude).HasColumnName("Latitude");
             this.Property(t => t.Longitude).HasColumnName("Longitude");
             this.Property(t => t.Data).HasColumnName("Data");
+            this.Property(t => t.NomePonto).HasColumnName("NomePonto");
+            this.Property(t => t.DescricaoPonto).HasColumnName("DescricaoPonto");
+            this.Property(t => t.UrlImagemPonto).HasColumnName("UrlImagemPonto");
 
             // Relationships
             this.HasRequired(t => t.Rota)

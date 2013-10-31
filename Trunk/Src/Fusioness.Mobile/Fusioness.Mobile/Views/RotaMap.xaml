@@ -36,7 +36,7 @@
             <shell:ApplicationBarIconButton x:Name="btLimpar" IconUri="/Assets/Buttons/delete.png" Text="Limpar" IsEnabled="False" Click="btLimpar_Click"/>
 
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="menuPontos" Text="adicionar ponto" Click="menuPontos_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="menuPontos" Text="adicionar ponto" IsEnabled="False" Click="menuPontos_Click"/>
             </shell:ApplicationBar.MenuItems>
             
         </shell:ApplicationBar>
