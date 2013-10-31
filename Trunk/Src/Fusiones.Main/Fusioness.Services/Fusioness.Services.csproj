@@ -60,6 +60,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\avatar.png" />
+    <Content Include="images\bike.jpg" />
+    <Content Include="images\tmp4984.jpg" />
     <Content Include="MainService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -89,6 +92,7 @@
       <Name>Fusioness.Business</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
