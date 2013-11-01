@@ -343,6 +343,9 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.RemoverComentarioEventoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.RemoverEventoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

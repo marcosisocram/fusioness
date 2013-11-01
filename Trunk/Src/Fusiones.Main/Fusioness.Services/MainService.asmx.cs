@@ -634,6 +634,19 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverCoordenada(Coordenada coordenada)
+        {
+            try
+            {
+                Facade.Instance.RemoverCoordenada(coordenada);
+            }
+            catch
+            {
+                //log
+            }
+        }
         #endregion
 
         #region ConviteEvento

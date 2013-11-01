@@ -320,7 +320,7 @@ namespace Fusioness.Mobile.Views
 
         private void menuListarPontos_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/ListarPontoReferencia.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/ListarPontoReferencia.xaml?RotaId=" + RotaId.ToString(), UriKind.Relative));
         }   
     }
 

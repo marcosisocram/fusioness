@@ -309,6 +309,11 @@ namespace Fusioness.Business
         {
             return CoordenadaBus.ListarPontosReferenciaPorRota(rota);
         }
+
+        public void RemoverCoordenada(Coordenada coordenada)
+        {
+            CoordenadaBus.RemoverCoordenada(coordenada);
+        }
         
         #region Respostas
         public List<Resposta> ListarRespostas()

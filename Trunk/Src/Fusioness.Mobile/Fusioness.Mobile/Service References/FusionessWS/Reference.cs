@@ -1860,6 +1860,11 @@ namespace Fusioness.Mobile.FusionessWS {
         
         Fusioness.Mobile.FusionessWS.ListarPontosReferenciaPorRotaResponse EndListarPontosReferenciaPorRota(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/RemoverCoordenada", ReplyAction="*")]
+        System.IAsyncResult BeginRemoverCoordenada(Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse EndRemoverCoordenada(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarConvitesEventos", ReplyAction="*")]
         System.IAsyncResult BeginListarConvitesEventos(Fusioness.Mobile.FusionessWS.ListarConvitesEventosRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -4597,6 +4602,67 @@ namespace Fusioness.Mobile.FusionessWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RemoverCoordenadaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RemoverCoordenada", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequestBody Body;
+        
+        public RemoverCoordenadaRequest() {
+        }
+        
+        public RemoverCoordenadaRequest(Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class RemoverCoordenadaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Coordenada coordenada;
+        
+        public RemoverCoordenadaRequestBody() {
+        }
+        
+        public RemoverCoordenadaRequestBody(Fusioness.Mobile.FusionessWS.Coordenada coordenada) {
+            this.coordenada = coordenada;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RemoverCoordenadaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RemoverCoordenadaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponseBody Body;
+        
+        public RemoverCoordenadaResponse() {
+        }
+        
+        public RemoverCoordenadaResponse(Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class RemoverCoordenadaResponseBody {
+        
+        public RemoverCoordenadaResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ListarConvitesEventosRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarConvitesEventos", Namespace="http://tempuri.org/", Order=0)]
@@ -6625,6 +6691,12 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onListarPontosReferenciaPorRotaCompletedDelegate;
         
+        private BeginOperationDelegate onBeginRemoverCoordenadaDelegate;
+        
+        private EndOperationDelegate onEndRemoverCoordenadaDelegate;
+        
+        private System.Threading.SendOrPostCallback onRemoverCoordenadaCompletedDelegate;
+        
         private BeginOperationDelegate onBeginListarConvitesEventosDelegate;
         
         private EndOperationDelegate onEndListarConvitesEventosDelegate;
@@ -6835,6 +6907,8 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<ListarCoordenadasPorRotaCompletedEventArgs> ListarCoordenadasPorRotaCompleted;
         
         public event System.EventHandler<ListarPontosReferenciaPorRotaCompletedEventArgs> ListarPontosReferenciaPorRotaCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> RemoverCoordenadaCompleted;
         
         public event System.EventHandler<ListarConvitesEventosCompletedEventArgs> ListarConvitesEventosCompleted;
         
@@ -9256,6 +9330,64 @@ namespace Fusioness.Mobile.FusionessWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginRemoverCoordenada(Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRemoverCoordenada(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginRemoverCoordenada(Fusioness.Mobile.FusionessWS.Coordenada coordenada, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequest inValue = new Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequestBody();
+            inValue.Body.coordenada = coordenada;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginRemoverCoordenada(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndRemoverCoordenada(System.IAsyncResult result) {
+            return base.Channel.EndRemoverCoordenada(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private void EndRemoverCoordenada(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndRemoverCoordenada(result);
+        }
+        
+        private System.IAsyncResult OnBeginRemoverCoordenada(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.Coordenada coordenada = ((Fusioness.Mobile.FusionessWS.Coordenada)(inValues[0]));
+            return this.BeginRemoverCoordenada(coordenada, callback, asyncState);
+        }
+        
+        private object[] OnEndRemoverCoordenada(System.IAsyncResult result) {
+            this.EndRemoverCoordenada(result);
+            return null;
+        }
+        
+        private void OnRemoverCoordenadaCompleted(object state) {
+            if ((this.RemoverCoordenadaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.RemoverCoordenadaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void RemoverCoordenadaAsync(Fusioness.Mobile.FusionessWS.Coordenada coordenada) {
+            this.RemoverCoordenadaAsync(coordenada, null);
+        }
+        
+        public void RemoverCoordenadaAsync(Fusioness.Mobile.FusionessWS.Coordenada coordenada, object userState) {
+            if ((this.onBeginRemoverCoordenadaDelegate == null)) {
+                this.onBeginRemoverCoordenadaDelegate = new BeginOperationDelegate(this.OnBeginRemoverCoordenada);
+            }
+            if ((this.onEndRemoverCoordenadaDelegate == null)) {
+                this.onEndRemoverCoordenadaDelegate = new EndOperationDelegate(this.OnEndRemoverCoordenada);
+            }
+            if ((this.onRemoverCoordenadaCompletedDelegate == null)) {
+                this.onRemoverCoordenadaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRemoverCoordenadaCompleted);
+            }
+            base.InvokeAsync(this.onBeginRemoverCoordenadaDelegate, new object[] {
+                        coordenada}, this.onEndRemoverCoordenadaDelegate, this.onRemoverCoordenadaCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarConvitesEventos(Fusioness.Mobile.FusionessWS.ListarConvitesEventosRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginListarConvitesEventos(request, callback, asyncState);
         }
@@ -10629,6 +10761,19 @@ namespace Fusioness.Mobile.FusionessWS {
             public Fusioness.Mobile.FusionessWS.ListarPontosReferenciaPorRotaResponse EndListarPontosReferenciaPorRota(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Fusioness.Mobile.FusionessWS.ListarPontosReferenciaPorRotaResponse _result = ((Fusioness.Mobile.FusionessWS.ListarPontosReferenciaPorRotaResponse)(base.EndInvoke("ListarPontosReferenciaPorRota", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginRemoverCoordenada(Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("RemoverCoordenada", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse EndRemoverCoordenada(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse _result = ((Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse)(base.EndInvoke("RemoverCoordenada", _args, result)));
                 return _result;
             }
             

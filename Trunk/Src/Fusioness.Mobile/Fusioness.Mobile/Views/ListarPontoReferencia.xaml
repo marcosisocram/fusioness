@@ -6,13 +6,14 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -33,6 +34,11 @@
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="0,5" Height="105" Width="432">
+                            <toolkit:ContextMenuService.ContextMenu>
+                                <toolkit:ContextMenu Background="#FF272727" Foreground="{x:Null}">
+                                    <toolkit:MenuItem Header="Excluir" Click="Excluir_Click" Background="{x:Null}" Foreground="White"/>
+                                </toolkit:ContextMenu>
+                            </toolkit:ContextMenuService.ContextMenu>
                             <!--Replace rectangle with image-->
                             <Border BorderThickness="1" Width="100" BorderBrush="#FFFFC700" Height="100">
                                 <Image>
