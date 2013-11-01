@@ -38,6 +38,7 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem x:Name="menuPontos" Text="adicionar ponto" IsEnabled="False" Click="menuPontos_Click"/>
                 <shell:ApplicationBarMenuItem x:Name="menuListarPontos" Text="listar pontos de referência" IsEnabled="False" Click="menuListarPontos_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="menuExibirPontos" Text="Exibir pontos de referência" IsEnabled="False" Click="menuExibirPontos_Click"/>
             </shell:ApplicationBar.MenuItems>
             
         </shell:ApplicationBar>

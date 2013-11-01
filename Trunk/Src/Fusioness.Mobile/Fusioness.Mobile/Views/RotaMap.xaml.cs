@@ -29,6 +29,7 @@ namespace Fusioness.Mobile.Views
         bool addLocalizacao = false;
         Global.Acao acao = new Global.Acao();
         bool pontoReferencia = false;
+        int qtdMapLayer = 0;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -59,7 +60,9 @@ namespace Fusioness.Mobile.Views
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            ApplicationBarIconButton btStartStop = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
             ApplicationBarMenuItem menuListarPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[1];
+            ApplicationBarMenuItem menuExibirPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[2];
 
             watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
             {
@@ -68,13 +71,14 @@ namespace Fusioness.Mobile.Views
             watcher.PositionChanged += this.watcher_PositionChanged;
             watcher.StatusChanged += this.watcher_StatusChanged;
 
-            if (Global.fusCoordenadas.Count == 0)
+            if (Global.fusCoordenadas.Count == 0 && !pontoReferencia)
             {
                 if (acao == Global.Acao.Visualizar)
                 {
                     Visualizar();
                     Mapa.ZoomLevel = 14;
                     menuListarPontos.IsEnabled = true;
+                    menuExibirPontos.IsEnabled = true;
                 }
                 else
                 {
@@ -82,11 +86,12 @@ namespace Fusioness.Mobile.Views
                     Mapa.ZoomLevel = 17;
                 }
             }
-            else if (pontoReferencia)
+            else if (pontoReferencia && btStartStop.IconUri.OriginalString == "/Assets/Buttons/pause.png")
             {
                 watcher.Start();
                 pontoReferencia = false;
                 menuListarPontos.IsEnabled = true;
+                menuExibirPontos.IsEnabled = true;
             }
         }
 
@@ -266,14 +271,17 @@ namespace Fusioness.Mobile.Views
             ApplicationBarIconButton btSalvar = (ApplicationBarIconButton)ApplicationBar.Buttons[1];
             ApplicationBarIconButton btLimpar = (ApplicationBarIconButton)ApplicationBar.Buttons[2];
             ApplicationBarMenuItem menuPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
-
+            
             if (btStartStop.IconUri.OriginalString == "/Assets/Buttons/play.png")
             {
                 btStartStop.IconUri = new Uri("/Assets/Buttons/pause.png", UriKind.Relative);
                 btStartStop.Text = "Parar";
                 btSalvar.IsEnabled = false;
                 btLimpar.IsEnabled = false;
-                menuPontos.IsEnabled = true;
+                if (acao == Global.Acao.Criar)
+                {
+                    menuPontos.IsEnabled = true;
+                }
                 watcher.Start();
             }
             else
@@ -320,8 +328,65 @@ namespace Fusioness.Mobile.Views
 
         private void menuListarPontos_Click(object sender, EventArgs e)
         {
+            pontoReferencia = true;
+            watcher.Stop();
             NavigationService.Navigate(new Uri("/Views/ListarPontoReferencia.xaml?RotaId=" + RotaId.ToString(), UriKind.Relative));
-        }   
+        }
+
+        private void menuExibirPontos_Click(object sender, EventArgs e)
+        {
+            ApplicationBarMenuItem menuExibirPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[2];
+
+            if (menuExibirPontos.Text == "Exibir pontos de referência")
+            {
+                if (RotaId != -1)
+                {
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
+                    FusionessWS.Rota rota = new FusionessWS.Rota() { IdRota = RotaId };
+                    servico.ListarPontosReferenciaPorRotaAsync(rota);
+                    servico.ListarPontosReferenciaPorRotaCompleted += servico_ListarPontosReferenciaPorRotaCompleted;
+                    menuExibirPontos.Text = "Ocultar pontos de referência";
+                }
+                else
+                {
+                    exibirPontos();
+                }
+            }
+            else
+            {
+                menuExibirPontos.Text = "Exibir pontos de referência";
+                for (int i = qtdMapLayer; i > 0; i--)
+                {
+                    Mapa.Layers.RemoveAt(Mapa.Layers.Count - 1);
+                }
+                qtdMapLayer = 0;
+            }
+        }
+
+        void servico_ListarPontosReferenciaPorRotaCompleted(object sender, FusionessWS.ListarPontosReferenciaPorRotaCompletedEventArgs e)
+        {
+            IList<FusionessWS.Coordenada> listCoordenadas = e.Result;
+
+            foreach (var item in listCoordenadas)
+            {
+                Mapa.Layers.Add(adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png"));
+                qtdMapLayer++;
+            }
+        }
+
+        private void exibirPontos()
+        {
+            foreach (var item in Global.fusCoordenadas)
+            {
+                if (item.IdTipoCoordenada == 2)
+                {
+                    Mapa.Layers.Add(adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png"));
+                    qtdMapLayer++;
+                }
+            }           
+        }
+        
     }
 
 }

@@ -40,7 +40,7 @@ namespace Fusioness.Mobile.Views
             {
                 FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
 
-                FusionessWS.Rota rota = new FusionessWS.Rota() { IdRota = 81 };
+                FusionessWS.Rota rota = new FusionessWS.Rota() { IdRota = RotaId };
                 servico.ListarPontosReferenciaPorRotaAsync(rota);
                 servico.ListarPontosReferenciaPorRotaCompleted += servico_ListarPontosReferenciaPorRotaCompleted;
             }
@@ -73,18 +73,19 @@ namespace Fusioness.Mobile.Views
 
         private void exibirPontos()
         {
-            foreach (var item in Global.fusCoordenadas)
+            for (int i = 0; i < Global.fusCoordenadas.Count; i++)
             {
-                if (item.IdTipoCoordenada == 2)
+                if (Global.fusCoordenadas[i].IdTipoCoordenada == 2)
                 {
                     this.Pontos.Add(new ItemViewModel()
                     {
                         PontoUrlImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
-                        CoordenadaId = item.IdCoordenada,
-                        PontoNome = item.NomePonto
+                        CoordenadaId = i,
+                        PontoNome = Global.fusCoordenadas[i].NomePonto
                     });
                 }
             }
+            
             llsPontosRef.ItemsSource = Pontos;
         }
 
@@ -95,16 +96,24 @@ namespace Fusioness.Mobile.Views
 
         private void Excluir_Click(object sender, RoutedEventArgs e)
         {
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-
             MessageBoxResult result = MessageBox.Show("Deseja Excluir Este Ponto?", "Alerta!", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
                 Item = (sender as MenuItem).DataContext as ItemViewModel;
 
-                FusionessWS.Coordenada coordenada = new FusionessWS.Coordenada() { IdCoordenada = Item.CoordenadaId };
-                servico.RemoverCoordenadaAsync(coordenada);
-                servico.RemoverCoordenadaCompleted += servico_RemoverCoordenadaCompleted;                
+                if (RotaId != -1)
+                {
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
+                    FusionessWS.Coordenada coordenada = new FusionessWS.Coordenada() { IdCoordenada = Item.CoordenadaId };
+                    servico.RemoverCoordenadaAsync(coordenada);
+                    servico.RemoverCoordenadaCompleted += servico_RemoverCoordenadaCompleted;
+                }
+                else
+                {
+                    Global.fusCoordenadas.RemoveAt(Item.CoordenadaId);
+                    llsPontosRef.ItemsSource.Remove(Item);
+                }
             }
         }
 

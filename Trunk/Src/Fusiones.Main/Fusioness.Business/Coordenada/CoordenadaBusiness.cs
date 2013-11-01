@@ -136,7 +136,7 @@ namespace Fusioness.Business.Coordenadas
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Coordenada> repo = new CoordenadaRepository(uow);
-                    return repo.GetWhere(c => c.IdRota == rota.IdRota).ToList();
+                    return repo.GetWhere(c => c.IdRota == rota.IdRota && c.IdTipoCoordenada == 1).ToList();
                 }
             }
             catch (Exception)
