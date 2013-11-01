@@ -41,9 +41,9 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
             <TextBlock HorizontalAlignment="Left" Margin="10,262,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top" Width="436"/>
-            <TextBox HorizontalAlignment="Left" Height="70" Margin="0,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
+            <TextBox x:Name="txtNomePonto" HorizontalAlignment="Left" Height="70" Margin="0,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
             <TextBlock HorizontalAlignment="Left" Height="30" Margin="10,364,0,0" TextWrapping="Wrap" Text="Descrição" VerticalAlignment="Top" Width="436"/>
-            <TextBox HorizontalAlignment="Left" Height="142" Margin="0,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
+            <TextBox x:Name="txtDescricao" HorizontalAlignment="Left" Height="142" Margin="0,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
 
         </Grid>
     </Grid>
@@ -51,7 +51,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
-            <shell:ApplicationBarIconButton x:Name="btSalvar" IconUri="/Assets/Buttons/save.png" Text="Salvar"/>
+            <shell:ApplicationBarIconButton x:Name="btSalvar" IconUri="/Assets/Buttons/save.png" Text="Salvar" Click="btSalvar_Click"/>
             <shell:ApplicationBarIconButton x:Name="btCancelar" IconUri="/Assets/Buttons/cancel.png" Text="Cancelar" Click="btCancelar_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

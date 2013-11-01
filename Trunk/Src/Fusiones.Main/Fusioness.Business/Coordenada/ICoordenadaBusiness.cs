@@ -12,5 +12,6 @@ namespace Fusioness.Business.Coordenadas
         Coordenada ObterCoordenadaPorId(Coordenada coordenada);
         List<Coordenada> ListarCoordenadas();
         List<Coordenada> ListarCoordenadasPorRota(Rota rota);
+        List<Coordenada> ListarPontosReferenciaPorRota(Rota rota);
     }
 }

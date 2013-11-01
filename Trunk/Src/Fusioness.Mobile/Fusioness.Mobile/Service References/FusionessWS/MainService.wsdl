@@ -27,6 +27,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Modelo" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Marca" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrlImagem" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
             </s:sequence>
           </s:extension>
@@ -174,6 +175,9 @@
               <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
               <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
               <s:element minOccurs="1" maxOccurs="1" name="Data" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="NomePonto" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DescricaoPonto" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrlImagemPonto" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Rota" type="tns:Rota" />
               <s:element minOccurs="0" maxOccurs="1" name="TipoCoordenada" type="tns:TipoCoordenada" />
             </s:sequence>
@@ -333,6 +337,22 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ListarBicicletasPorUsuarioResult" type="tns:ArrayOfBicicleta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirFotoBicicleta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bicicleta" type="tns:Bicicleta" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bytes" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirFotoBicicletaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InserirFotoBicicletaResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -782,6 +802,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarPontosReferenciaPorRota">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPontosReferenciaPorRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarPontosReferenciaPorRotaResult" type="tns:ArrayOfCoordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ListarConvitesEventos">
         <s:complexType />
       </s:element>
@@ -932,6 +966,31 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="InserirEventoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventoUsuario" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirEventoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InserirEventoUsuarioResult" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvidarPorEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvidarPorEmailResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -969,6 +1028,12 @@
   </wsdl:message>
   <wsdl:message name="ListarBicicletasPorUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarBicicletasPorUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="InserirFotoBicicletaSoapIn">
+    <wsdl:part name="parameters" element="tns:InserirFotoBicicleta" />
+  </wsdl:message>
+  <wsdl:message name="InserirFotoBicicletaSoapOut">
+    <wsdl:part name="parameters" element="tns:InserirFotoBicicletaResponse" />
   </wsdl:message>
   <wsdl:message name="ValidarLogonUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:ValidarLogonUsuario" />
@@ -1162,6 +1227,12 @@
   <wsdl:message name="ListarCoordenadasPorRotaSoapOut">
     <wsdl:part name="parameters" element="tns:ListarCoordenadasPorRotaResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarPontosReferenciaPorRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarPontosReferenciaPorRota" />
+  </wsdl:message>
+  <wsdl:message name="ListarPontosReferenciaPorRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarPontosReferenciaPorRotaResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarConvitesEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarConvitesEventos" />
   </wsdl:message>
@@ -1228,6 +1299,18 @@
   <wsdl:message name="ListarConvitesDoUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarConvitesDoUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="InserirEventoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:InserirEventoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="InserirEventoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:InserirEventoUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConvidarPorEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:ConvidarPorEmail" />
+  </wsdl:message>
+  <wsdl:message name="ConvidarPorEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:ConvidarPorEmailResponse" />
+  </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -1252,6 +1335,10 @@
     <wsdl:operation name="ListarBicicletasPorUsuario">
       <wsdl:input message="tns:ListarBicicletasPorUsuarioSoapIn" />
       <wsdl:output message="tns:ListarBicicletasPorUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InserirFotoBicicleta">
+      <wsdl:input message="tns:InserirFotoBicicletaSoapIn" />
+      <wsdl:output message="tns:InserirFotoBicicletaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ValidarLogonUsuario">
       <wsdl:input message="tns:ValidarLogonUsuarioSoapIn" />
@@ -1381,6 +1468,10 @@
       <wsdl:input message="tns:ListarCoordenadasPorRotaSoapIn" />
       <wsdl:output message="tns:ListarCoordenadasPorRotaSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarPontosReferenciaPorRota">
+      <wsdl:input message="tns:ListarPontosReferenciaPorRotaSoapIn" />
+      <wsdl:output message="tns:ListarPontosReferenciaPorRotaSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ListarConvitesEventos">
       <wsdl:input message="tns:ListarConvitesEventosSoapIn" />
       <wsdl:output message="tns:ListarConvitesEventosSoapOut" />
@@ -1424,6 +1515,14 @@
     <wsdl:operation name="ListarConvitesDoUsuario">
       <wsdl:input message="tns:ListarConvitesDoUsuarioSoapIn" />
       <wsdl:output message="tns:ListarConvitesDoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InserirEventoUsuario">
+      <wsdl:input message="tns:InserirEventoUsuarioSoapIn" />
+      <wsdl:output message="tns:InserirEventoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvidarPorEmail">
+      <wsdl:input message="tns:ConvidarPorEmailSoapIn" />
+      <wsdl:output message="tns:ConvidarPorEmailSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
@@ -1475,6 +1574,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarBicicletasPorUsuario">
       <soap:operation soapAction="http://tempuri.org/ListarBicicletasPorUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserirFotoBicicleta">
+      <soap:operation soapAction="http://tempuri.org/InserirFotoBicicleta" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1770,6 +1878,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarPontosReferenciaPorRota">
+      <soap:operation soapAction="http://tempuri.org/ListarPontosReferenciaPorRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarConvitesEventos">
       <soap:operation soapAction="http://tempuri.org/ListarConvitesEventos" style="document" />
       <wsdl:input>
@@ -1869,6 +1986,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InserirEventoUsuario">
+      <soap:operation soapAction="http://tempuri.org/InserirEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvidarPorEmail">
+      <soap:operation soapAction="http://tempuri.org/ConvidarPorEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1919,6 +2054,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarBicicletasPorUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarBicicletasPorUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserirFotoBicicleta">
+      <soap12:operation soapAction="http://tempuri.org/InserirFotoBicicleta" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2214,6 +2358,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarPontosReferenciaPorRota">
+      <soap12:operation soapAction="http://tempuri.org/ListarPontosReferenciaPorRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarConvitesEventos">
       <soap12:operation soapAction="http://tempuri.org/ListarConvitesEventos" style="document" />
       <wsdl:input>
@@ -2306,6 +2459,24 @@
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesDoUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarConvitesDoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserirEventoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/InserirEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvidarPorEmail">
+      <soap12:operation soapAction="http://tempuri.org/ConvidarPorEmail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

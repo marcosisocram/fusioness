@@ -620,6 +620,20 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Coordenada> ListarPontosReferenciaPorRota(Rota rota)
+        {
+            try
+            {
+                return Facade.Instance.ListarPontosReferenciaPorRota(rota);
+            }
+            catch
+            {
+                return new List<Coordenada>();
+            }
+        }
+
         #endregion
 
         #region ConviteEvento

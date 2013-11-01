@@ -27,7 +27,8 @@ namespace Fusioness.Mobile.Views
         GeoCoordinateWatcher watcher;
         int RotaId = -1;
         bool addLocalizacao = false;
-        Global.Acao acao = new Global.Acao();        
+        Global.Acao acao = new Global.Acao();
+        bool pontoReferencia = false;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -54,23 +55,26 @@ namespace Fusioness.Mobile.Views
             InitializeComponent();
 
             Global.fusCoordenadas = new List<FusionessWS.Coordenada>();
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            ApplicationBarMenuItem menuListarPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[1];
 
             watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
             {
                 MovementThreshold = 20
             };
             watcher.PositionChanged += this.watcher_PositionChanged;
-            watcher.StatusChanged += this.watcher_StatusChanged;              
-        }
+            watcher.StatusChanged += this.watcher_StatusChanged;
 
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
             if (Global.fusCoordenadas.Count == 0)
             {
                 if (acao == Global.Acao.Visualizar)
                 {
                     Visualizar();
                     Mapa.ZoomLevel = 14;
+                    menuListarPontos.IsEnabled = true;
                 }
                 else
                 {
@@ -78,7 +82,13 @@ namespace Fusioness.Mobile.Views
                     Mapa.ZoomLevel = 17;
                 }
             }
-        } 
+            else if (pontoReferencia)
+            {
+                watcher.Start();
+                pontoReferencia = false;
+                menuListarPontos.IsEnabled = true;
+            }
+        }
 
         private void adicionarLocalizacao()
         {            
@@ -263,7 +273,7 @@ namespace Fusioness.Mobile.Views
                 btStartStop.Text = "Parar";
                 btSalvar.IsEnabled = false;
                 btLimpar.IsEnabled = false;
-                menuPontos.IsEnabled = false;
+                menuPontos.IsEnabled = true;
                 watcher.Start();
             }
             else
@@ -272,7 +282,6 @@ namespace Fusioness.Mobile.Views
                 btStartStop.Text = "Iniciar";
                 btSalvar.IsEnabled = true;
                 btLimpar.IsEnabled = true;
-                menuPontos.IsEnabled = true;
                 watcher.Stop();
             }
         }
@@ -304,8 +313,15 @@ namespace Fusioness.Mobile.Views
 
         private void menuPontos_Click(object sender, EventArgs e)
         {
+            pontoReferencia = true;
+            watcher.Stop();
             NavigationService.Navigate(new Uri("/Views/SalvarPontoReferencia.xaml", UriKind.Relative));
-        }     
+        }
+
+        private void menuListarPontos_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/ListarPontoReferencia.xaml", UriKind.Relative));
+        }   
     }
 
 }

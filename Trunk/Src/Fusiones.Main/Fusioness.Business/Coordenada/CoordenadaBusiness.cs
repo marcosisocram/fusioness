@@ -144,6 +144,23 @@ namespace Fusioness.Business.Coordenadas
                 throw;
             }
         }
+
+        public List<Coordenada> ListarPontosReferenciaPorRota(Rota rota)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Coordenada> repo = new CoordenadaRepository(uow);
+                    return repo.GetWhere(c => c.IdRota == rota.IdRota && c.IdTipoCoordenada == 2).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
         #endregion
     }
 }

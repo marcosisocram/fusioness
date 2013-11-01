@@ -305,6 +305,11 @@ namespace Fusioness.Business
             return CoordenadaBus.ListarCoordenadasPorRota(rota);
         }
 
+        public List<Coordenada> ListarPontosReferenciaPorRota(Rota rota)
+        {
+            return CoordenadaBus.ListarPontosReferenciaPorRota(rota);
+        }
+        
         #region Respostas
         public List<Resposta> ListarRespostas()
         {

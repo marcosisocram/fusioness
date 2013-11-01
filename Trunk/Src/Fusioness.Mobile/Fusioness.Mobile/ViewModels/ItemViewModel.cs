@@ -397,6 +397,73 @@ namespace Fusioness.Mobile.ViewModels
         }
         #endregion
 
+        #region Ponto de Referencia
+
+        private string _pontoUrlImagem;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string PontoUrlImagem
+        {
+            get
+            {
+                return _pontoUrlImagem;
+            }
+            set
+            {
+                if (value != _pontoUrlImagem)
+                {
+                    _pontoUrlImagem = value;
+                    NotifyPropertyChanged("PontoUrlImagem");
+                }
+            }
+        }
+        
+        private string _pontoNome;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string PontoNome
+        {
+            get
+            {
+                return _pontoNome;
+            }
+            set
+            {
+                if (value != _pontoNome)
+                {
+                    _pontoNome = value;
+                    NotifyPropertyChanged("PontoNome");
+                }
+            }
+        }
+
+        private int _coordenadaId;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public int CoordenadaId
+        {
+            get
+            {
+                return _coordenadaId;
+            }
+            set
+            {
+                if (value != _coordenadaId)
+                {
+                    _coordenadaId = value;
+                    NotifyPropertyChanged("CoordenadaId");
+                }
+            }
+        }
+
+        #endregion
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {
