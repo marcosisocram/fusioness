@@ -142,16 +142,17 @@
                                     @Html.MenuItem("Rotas", "Index", "Rota")
                                 </ul>
                             </li>
-                            @if (Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
+                            @if (BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
                             {
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
                                     <ul class="dropdown-menu">
-                                        @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
-                                        @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
+
+                                        <li><a href="/Usuario/VerPerfilUsuario?IdUsuario=@BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).IdUsuario" > Perfil </a></li>                                        
+                                        @Html.MenuItem("Editar Perfil", "InserirAlterarUsuario", "Usuario")
                                         <li class="divider"></li>
                                         <li>
-                                            @Html.ActionLink("Efetuar Logout", "Sair", "Acesso")
+                                            @Html.MenuItem("Efetuar Logout", "Sair", "Acesso")
                                         </li>
                                     </ul>
                                 </li>
