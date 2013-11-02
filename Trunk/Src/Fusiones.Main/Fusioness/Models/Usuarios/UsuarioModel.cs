@@ -31,6 +31,18 @@ namespace Fusioness.Models.Usuarios
                 return DateTime.Now.Year - Usuario.DataDeNascimento.Year;
             }
         }
+
+        public string SexoUsuario
+        {
+            get 
+            {
+                if (Usuario.Sexo.Equals("M"))
+                {
+                    return "Masculino";
+                }
+                return "Feminino";
+            }
+        }
         public bool IsMyself { get; set; }
         public bool IsContato { get; set; }
         public bool IsLoginOK { get; set; }

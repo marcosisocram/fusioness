@@ -37,7 +37,7 @@
 
         $(document).ready(function () {
             var mensagem = '@mensagem';
-            
+
             //Geolocation do browser
             navigator.geolocation.getCurrentPosition(showPosition, positionError);
 
@@ -78,6 +78,10 @@
     function ExibirCarregando() {
         $('#modalLoading').modal('show');
     }
+    
+    function EsconderCarregando() {
+        $('#modalLoading').modal('hide');
+    }
 
     function atualizaBG() {
         var images = new Array(
@@ -110,7 +114,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="brand" href="#">Fusioness</a>
+                    <a class="brand" href="@(Url.Action("Index", "Home"))">Fusioness</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             @Html.MenuItem("Home", "Index", "Home")
@@ -119,6 +123,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contatos</a>
                                 <ul class="dropdown-menu">
+                                    @Html.MenuItem("Meus Contatos", "Index", "Contato")
                                     @Html.MenuItem("Buscar Contatos", "ListarTodos", "Contato")
                                     @Html.MenuItem("Meus Contatos", "MeusContatos", "Contato")
                                 </ul>
@@ -133,30 +138,26 @@
                                     <li><a id="explore" href="#">Explore</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                                <ul class="dropdown-menu">
-                                    @Html.MenuItem("Home", "Index", "Home")
-                                    @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
-                                    @Html.MenuItem("Contatos", "Index", "Contato")
-                                    @Html.MenuItem("Rotas", "Index", "Rota")
-                                </ul>
-                            </li>
-                            @if (Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
+                        </ul>
+                        <div class="pull-right nav-collapse collapse">
+                            <ul class="nav">
+                                @if (BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
                             {
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
                                     <ul class="dropdown-menu">
-                                        @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
-                                        @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
+
+                                        <li><a href="/Usuario/VerPerfilUsuario?IdUsuario=@BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).IdUsuario" > Perfil </a></li>                                        
+                                        @Html.MenuItem("Editar Perfil", "InserirAlterarUsuario", "Usuario")
                                         <li class="divider"></li>
                                         <li>
-                                            @Html.ActionLink("Efetuar Logout", "Sair", "Acesso")
+                                            @Html.MenuItem("Efetuar Logout", "Sair", "Acesso")
                                         </li>
                                     </ul>
                                 </li>
                             }
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
                     <!--/.nav-collapse -->
                 </div>

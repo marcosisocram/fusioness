@@ -3,7 +3,14 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
+<style>
+    .btn-friend {
+        width: 149px;
+    }
+</style>
+<script>
 
+</script>
 <div class="row-fluid">
     @using (Html.BeginForm("Perfil", "Usuario", FormMethod.Post))
     {
@@ -16,7 +23,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <img src="@String.Format("{0}{1}", Fusioness.Controllers.BaseController.ObterUrlBaseAvatar(), Model.Usuario.UrlImagem)" alt="[usuario não possui foto]" title="Ver perfil de @Model.Usuario.Nome" style="height:150px;width:150px;"/>
+                                    <img src="@String.Format("{0}{1}", Fusioness.Controllers.BaseController.ObterUrlBaseAvatar(), Model.Usuario.UrlImagem)" alt="[usuario não possui foto]" title="Ver perfil de @Model.Usuario.Nome" style="height: 150px;width: 167px;"/>
                                 </td>
                                 <td>
                                     <ul style="list-style: none;">
@@ -27,7 +34,7 @@
                                             <label><b>Idade:</b> @Model.IdadeUsuario</label>
                                         </li>
                                         <li>
-                                            <label><b>Sexo:</b> @Model.Usuario.Sexo</label>
+                                            <label><b>Sexo:</b> @Model.SexoUsuario</label>
                                         </li>
                                     </ul>
                                 </td>
@@ -36,17 +43,18 @@
                                 <td colspan="2">
                                     @if (Model.IsMyself)
                                     {
-                                        <label>você é visto assim! :)</label>
+                                        <!-- <span>Você é visto assim! :)</span>-->
+                                        @Html.ActionLink("Editar Perfil", "InserirAlterarUsuario", "Usuario", new { @class = "btn btn-primary btn-friend" })
                                     }
                                     else
                                     {
                                         if (Model.IsContato)
-                                        {
-                                            @Html.ActionLink("Del", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=false}, new { @class = "btn btn-danger" })
+                                        {                                            
+                                            @Html.ActionLink("Desfazer amizade", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=false}, new { @class = "btn btn-danger btn-friend" })
                                         }
                                         else
                                         {
-                                            @Html.ActionLink("Add", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=true}, new { @class = "btn btn-primary" })
+                                            @Html.ActionLink("Adicionar como amigo", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=true}, new { @class = "btn btn-primary btn-friend" })
                                         }
                                     }
                                 </td>
@@ -56,3 +64,5 @@
                 </div>
             </div>
     }
+
+</div>

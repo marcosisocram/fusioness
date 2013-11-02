@@ -802,6 +802,30 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarPontosReferenciaPorRota">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPontosReferenciaPorRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarPontosReferenciaPorRotaResult" type="tns:ArrayOfCoordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverCoordenada">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="coordenada" type="tns:Coordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverCoordenadaResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="ListarConvitesEventos">
         <s:complexType />
       </s:element>
@@ -1213,6 +1237,18 @@
   <wsdl:message name="ListarCoordenadasPorRotaSoapOut">
     <wsdl:part name="parameters" element="tns:ListarCoordenadasPorRotaResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarPontosReferenciaPorRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarPontosReferenciaPorRota" />
+  </wsdl:message>
+  <wsdl:message name="ListarPontosReferenciaPorRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarPontosReferenciaPorRotaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoverCoordenadaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverCoordenada" />
+  </wsdl:message>
+  <wsdl:message name="RemoverCoordenadaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverCoordenadaResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarConvitesEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarConvitesEventos" />
   </wsdl:message>
@@ -1447,6 +1483,14 @@
     <wsdl:operation name="ListarCoordenadasPorRota">
       <wsdl:input message="tns:ListarCoordenadasPorRotaSoapIn" />
       <wsdl:output message="tns:ListarCoordenadasPorRotaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarPontosReferenciaPorRota">
+      <wsdl:input message="tns:ListarPontosReferenciaPorRotaSoapIn" />
+      <wsdl:output message="tns:ListarPontosReferenciaPorRotaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverCoordenada">
+      <wsdl:input message="tns:RemoverCoordenadaSoapIn" />
+      <wsdl:output message="tns:RemoverCoordenadaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesEventos">
       <wsdl:input message="tns:ListarConvitesEventosSoapIn" />
@@ -1847,6 +1891,24 @@
     </wsdl:operation>
     <wsdl:operation name="ListarCoordenadasPorRota">
       <soap:operation soapAction="http://tempuri.org/ListarCoordenadasPorRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPontosReferenciaPorRota">
+      <soap:operation soapAction="http://tempuri.org/ListarPontosReferenciaPorRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverCoordenada">
+      <soap:operation soapAction="http://tempuri.org/RemoverCoordenada" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2318,6 +2380,24 @@
     </wsdl:operation>
     <wsdl:operation name="ListarCoordenadasPorRota">
       <soap12:operation soapAction="http://tempuri.org/ListarCoordenadasPorRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPontosReferenciaPorRota">
+      <soap12:operation soapAction="http://tempuri.org/ListarPontosReferenciaPorRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverCoordenada">
+      <soap12:operation soapAction="http://tempuri.org/RemoverCoordenada" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
