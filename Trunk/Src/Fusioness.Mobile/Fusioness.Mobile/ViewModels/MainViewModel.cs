@@ -5,6 +5,8 @@ using System.ComponentModel;
 using Fusioness.Mobile.Resources;
 using System.Collections.Generic;
 using Fusioness.Mobile.Util;
+using System.Configuration;
+using System.Windows.Controls;
 
 namespace Fusioness.Mobile.ViewModels
 {
@@ -98,11 +100,12 @@ namespace Fusioness.Mobile.ViewModels
         void servico_ObterUsuariosIdsCompleted(object sender, FusionessWS.ObterUsuariosIdsCompletedEventArgs e)
         {
             IList<FusionessWS.Usuario> listContatos = e.Result;
+
             foreach (var item in listContatos)
             {
                 this.Contatos.Add(new ItemViewModel()
                 {
-                    ContatoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
+                    ContatoImagem = "http://fusionessapi.apphb.com/images/" + ((String.IsNullOrEmpty(item.UrlImagem)) ? "avatar.png" : item.UrlImagem),   
                     ContatoId = item.IdUsuario,
                     ContatoNome = item.Nome
                 });
@@ -112,12 +115,12 @@ namespace Fusioness.Mobile.ViewModels
         void servico_ListarEventosPorUsuarioCompleted(object sender, FusionessWS.ListarEventosPorUsuarioCompletedEventArgs e)
         {
             IList<FusionessWS.Evento> evetos = e.Result;
-
+            
             foreach (var item in evetos)
             {
                 this.Eventos.Add(new ItemViewModel()
                 {
-                    EventoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
+                    EventoImagem = "http://fusionessapi.apphb.com/images/" + ((String.IsNullOrEmpty(item.UrlImagem)) ? "eventoAvatar.png" : item.UrlImagem),   
                     EventoTitulo = item.Titulo,
                     EventoData = item.Data.ToString("dd/MM/yyyy"),
                     EventoId = item.IdEvento

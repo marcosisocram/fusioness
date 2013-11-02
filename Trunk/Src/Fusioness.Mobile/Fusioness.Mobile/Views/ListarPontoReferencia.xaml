@@ -14,7 +14,8 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
     shell:SystemTray.IsVisible="True" 
-    shell:SystemTray.BackgroundColor="#FF173779"
+    shell:SystemTray.ForegroundColor="#3C8BFF"
+    shell:SystemTray.BackgroundColor="#FF212021"
     Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->

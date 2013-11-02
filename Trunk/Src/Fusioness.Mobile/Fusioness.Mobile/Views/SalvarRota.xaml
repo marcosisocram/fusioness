@@ -13,7 +13,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" 
-    shell:SystemTray.BackgroundColor="#FF173779"
+    shell:SystemTray.ForegroundColor="#3C8BFF"
+    shell:SystemTray.BackgroundColor="#FF212021"
     Loaded="PhoneApplicationPage_Loaded">
 
     <phone:PhoneApplicationPage.Resources>
