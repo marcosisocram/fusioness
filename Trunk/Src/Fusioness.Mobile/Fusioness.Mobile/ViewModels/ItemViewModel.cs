@@ -441,6 +441,27 @@ namespace Fusioness.Mobile.ViewModels
             }
         }
 
+        private string _pontoDescricao;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string PontoDescricao
+        {
+            get
+            {
+                return _pontoDescricao;
+            }
+            set
+            {
+                if (value != _pontoDescricao)
+                {
+                    _pontoDescricao = value;
+                    NotifyPropertyChanged("PontoDescricao");
+                }
+            }
+        }
+
         private int _coordenadaId;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.

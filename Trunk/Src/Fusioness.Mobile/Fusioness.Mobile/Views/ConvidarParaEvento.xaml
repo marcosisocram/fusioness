@@ -12,10 +12,12 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.IsVisible="True" 
+    shell:SystemTray.BackgroundColor="#FF173779" 
+    Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#FF212021">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -33,7 +35,7 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="0,5" Height="75" Width="432">
                             <!--Replace rectangle with image-->
-                            <Border BorderThickness="1" Width="70" BorderBrush="#FFFFC700" Height="70">
+                            <Border BorderThickness="1" Width="70" BorderBrush="#FF173779" Height="70">
                                 <Image>
                                     <Image.Source>
                                         <BitmapImage UriSource="{Binding ContatoImagem}" 

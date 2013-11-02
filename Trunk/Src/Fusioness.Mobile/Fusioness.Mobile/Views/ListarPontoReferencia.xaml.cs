@@ -64,7 +64,8 @@ namespace Fusioness.Mobile.Views
                 {
                     PontoUrlImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
                     CoordenadaId = item.IdCoordenada,
-                    PontoNome = item.NomePonto
+                    PontoNome = item.NomePonto,
+                    PontoDescricao = item.DescricaoPonto
                 });
             }
 
@@ -81,7 +82,8 @@ namespace Fusioness.Mobile.Views
                     {
                         PontoUrlImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
                         CoordenadaId = i,
-                        PontoNome = Global.fusCoordenadas[i].NomePonto
+                        PontoNome = Global.fusCoordenadas[i].NomePonto,
+                        PontoDescricao = Global.fusCoordenadas[i].DescricaoPonto
                     });
                 }
             }

@@ -13,10 +13,12 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.IsVisible="True" 
+    shell:SystemTray.BackgroundColor="#FF173779"
+    Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#FF212021">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -40,7 +42,7 @@
                                 </toolkit:ContextMenu>
                             </toolkit:ContextMenuService.ContextMenu>
                             <!--Replace rectangle with image-->
-                            <Border BorderThickness="1" Width="100" BorderBrush="#FFFFC700" Height="100">
+                            <Border BorderThickness="1" Width="100" BorderBrush="#FF173779" Height="100">
                                 <Image>
                                     <Image.Source>
                                         <BitmapImage UriSource="{Binding PontoUrlImagem}" 
@@ -49,7 +51,8 @@
                                 </Image>
                             </Border>
                             <StackPanel Width="323">
-                                <TextBlock Text="{Binding PontoNome}" TextWrapping="Wrap" Height="40" FontSize="30" Margin="10,30,10,10" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding PontoNome}" TextWrapping="Wrap" FontSize="30" Margin="10,5,10,0" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding PontoDescricao}" TextWrapping="Wrap" FontSize="20" Margin="10,0,10,0" VerticalAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
@@ -59,7 +62,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default" BackgroundColor="#FF173779">
             <shell:ApplicationBarIconButton x:Name="btCancelar" IconUri="/Assets/Buttons/cancel.png" Text="Cancelar" Click="btCancelar_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

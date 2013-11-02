@@ -24,12 +24,13 @@ namespace Fusioness.Mobile.Views
     public partial class RotaMap : PhoneApplicationPage
     {
         GeoCoordinate lastGeoCoordenada;
-        GeoCoordinateWatcher watcher;
+        GeoCoordinateWatcher watcher;        
+        Global.Acao acao = new Global.Acao();
+        MapLayer lastMapLayer = null;
         int RotaId = -1;
         bool addLocalizacao = false;
-        Global.Acao acao = new Global.Acao();
         bool pontoReferencia = false;
-        int qtdMapLayer = 0;
+        List<MapLayer> mapLayerPontosRef = new List<MapLayer>();
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -107,7 +108,6 @@ namespace Fusioness.Mobile.Views
 
         private void Visualizar()
         {
-            //watcher.Start();
             FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
             FusionessWS.Rota rota = new FusionessWS.Rota();
             rota.IdRota = RotaId;
@@ -190,23 +190,29 @@ namespace Fusioness.Mobile.Views
 
                         if (Mapa.Layers.Count > 1)
                         {
-                            Mapa.Layers.RemoveAt(Mapa.Layers.Count - 1);
+                            Mapa.Layers.Remove(lastMapLayer);
                         }
 
-                        Mapa.Layers.Add(adicionar_MapLayer(geoCoordenada, "/Assets/locationGray.png"));
+                        var mapLayer = adicionar_MapLayer(geoCoordenada, "/Assets/locationGray.png");
+                        Mapa.Layers.Add(mapLayer);
+                        lastMapLayer = mapLayer;
                     }
                     lastGeoCoordenada = geoCoordenada;
                 }
                 else
                 {
-                    if (Mapa.Layers.Count == 2)
+                    if (lastMapLayer == null)
                     {
-                        Mapa.Layers.Add(adicionar_MapLayer(geoCoordenada, "/Assets/locationGray.png"));
+                        var mapLayer = adicionar_MapLayer(geoCoordenada, "/Assets/locationGray.png");
+                        Mapa.Layers.Add(mapLayer);
+                        lastMapLayer = mapLayer;
                     }
                     else
                     {
-                        Mapa.Layers.RemoveAt(2);
-                        Mapa.Layers.Add(adicionar_MapLayer(geoCoordenada, "/Assets/locationGray.png"));
+                        Mapa.Layers.Remove(lastMapLayer);
+                        var mapLayer = adicionar_MapLayer(geoCoordenada, "/Assets/locationGray.png");
+                        Mapa.Layers.Add(mapLayer);
+                        lastMapLayer = mapLayer;
                     }                    
                     Mapa.Center = new GeoCoordinate(geoCoordenada.Latitude, geoCoordenada.Longitude);
                 }
@@ -241,7 +247,7 @@ namespace Fusioness.Mobile.Views
 
             mapOverlay.Content = image;
             mapLayer.Add(mapOverlay);
-
+            
             return mapLayer;                    
         }
 
@@ -339,6 +345,8 @@ namespace Fusioness.Mobile.Views
 
             if (menuExibirPontos.Text == "Exibir pontos de referência")
             {
+                menuExibirPontos.Text = "Ocultar pontos de referência";
+
                 if (RotaId != -1)
                 {
                     FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
@@ -346,7 +354,6 @@ namespace Fusioness.Mobile.Views
                     FusionessWS.Rota rota = new FusionessWS.Rota() { IdRota = RotaId };
                     servico.ListarPontosReferenciaPorRotaAsync(rota);
                     servico.ListarPontosReferenciaPorRotaCompleted += servico_ListarPontosReferenciaPorRotaCompleted;
-                    menuExibirPontos.Text = "Ocultar pontos de referência";
                 }
                 else
                 {
@@ -356,11 +363,12 @@ namespace Fusioness.Mobile.Views
             else
             {
                 menuExibirPontos.Text = "Exibir pontos de referência";
-                for (int i = qtdMapLayer; i > 0; i--)
+
+                foreach (var item in mapLayerPontosRef)
                 {
-                    Mapa.Layers.RemoveAt(Mapa.Layers.Count - 1);
+                    Mapa.Layers.Remove(item);
                 }
-                qtdMapLayer = 0;
+                mapLayerPontosRef.Clear();
             }
         }
 
@@ -370,8 +378,9 @@ namespace Fusioness.Mobile.Views
 
             foreach (var item in listCoordenadas)
             {
-                Mapa.Layers.Add(adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png"));
-                qtdMapLayer++;
+                var mapLayer = adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png");
+                Mapa.Layers.Add(mapLayer);
+                mapLayerPontosRef.Add(mapLayer);
             }
         }
 
@@ -381,8 +390,9 @@ namespace Fusioness.Mobile.Views
             {
                 if (item.IdTipoCoordenada == 2)
                 {
-                    Mapa.Layers.Add(adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png"));
-                    qtdMapLayer++;
+                    var mapLayer = adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png");
+                    Mapa.Layers.Add(mapLayer);
+                    mapLayerPontosRef.Add(mapLayer);
                 }
             }           
         }

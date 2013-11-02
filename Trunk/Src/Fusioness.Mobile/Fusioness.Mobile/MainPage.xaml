@@ -13,7 +13,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="true">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -44,9 +44,9 @@
             </phone:Panorama.Background>
 
             <!--Panorama item three-->
-            <phone:PanoramaItem x:Name="pnItemRota" Header="Rotas" Height="533">
+            <phone:PanoramaItem x:Name="pnItemRota" Header="Rotas" Height="497" VerticalAlignment="Top">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector x:Name="llsRota" Margin="14,-20,0,2" ItemsSource="{Binding Rotas}" SelectionChanged="llsRota_SelectionChanged">
+                <phone:LongListSelector x:Name="llsRota" VerticalAlignment="Top" Height="412" Margin="14,-38,0,-1" ItemsSource="{Binding Rotas}" SelectionChanged="llsRota_SelectionChanged">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,-6,13,12" Height="auto" >
@@ -63,9 +63,9 @@
             </phone:PanoramaItem>
 
             <!--Panorama item one-->
-            <phone:PanoramaItem x:Name="pnItemEvento" Header="Eventos">
+            <phone:PanoramaItem x:Name="pnItemEvento" Header="Eventos" Height="497" VerticalAlignment="Top">
                 <!--Double line list with image placeholder and text wrapping using a floating header that scrolls with the content-->
-                <phone:LongListSelector x:Name="llsEvento" Margin="0,-38,0,2" ItemsSource="{Binding Eventos}" SelectionChanged="llsEvento_SelectionChanged" VerticalAlignment="Bottom" Height="427">
+                <phone:LongListSelector x:Name="llsEvento" VerticalAlignment="Top" Height="412" Margin="3,-38,0,-1" ItemsSource="{Binding Eventos}" SelectionChanged="llsEvento_SelectionChanged">
                     <!--<phone:LongListSelector.ListHeaderTemplate>
                         <DataTemplate>
                             <Grid Margin="12,0,0,38">
@@ -105,9 +105,9 @@
             </phone:PanoramaItem>
 
             <!--Panorama item three-->
-            <phone:PanoramaItem x:Name="pnItemRecentes" Header="Realizadas">
+            <phone:PanoramaItem x:Name="pnItemRecentes" Header="Realizadas" Height="497" VerticalAlignment="Top">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector x:Name="llsRotasRealizadas" Margin="14,-20,0,2" ItemsSource="{Binding Rotas}">
+                <phone:LongListSelector x:Name="llsRotasRealizadas" VerticalAlignment="Top" Height="412" Margin="14,-38,0,-1" ItemsSource="{Binding Rotas}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,-6,13,12" Height="auto">
@@ -119,8 +119,8 @@
             </phone:PanoramaItem>
 
             <!--Panorama item two-->
-            <phone:PanoramaItem x:Name="pnItemContatos" Header="Contatos">
-                <phone:LongListSelector x:Name="llsContatos" Margin="-6,-38,0,2" ItemsSource="{Binding Contatos}"  VerticalAlignment="Bottom" Height="427">
+            <phone:PanoramaItem x:Name="pnItemContatos" Header="Contatos" Height="497" VerticalAlignment="Top">
+                <phone:LongListSelector x:Name="llsContatos" VerticalAlignment="Top" Height="412" Margin="3,-38,0,-1" ItemsSource="{Binding Contatos}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="12,2,-37,4" Height="75" Width="432">

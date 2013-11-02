@@ -12,10 +12,12 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.IsVisible="True" 
+    shell:SystemTray.BackgroundColor="#FF173779" 
+    Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#FF212021">
         <Grid.RowDefinitions>
             <RowDefinition Height="106"/>
             <RowDefinition Height="0"/>
@@ -30,7 +32,7 @@
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Left" Height="170" Margin="10,0,0,0" VerticalAlignment="Top" Width="460" Grid.Row="2" Grid.RowSpan="2">
-            <Border BorderBrush="#FF575756" BorderThickness="1" Height="150" Margin="10,10" Width="150" HorizontalAlignment="Left">
+            <Border BorderBrush="#3C8BFF" BorderThickness="1" Height="150" Margin="10,10" Width="150" HorizontalAlignment="Left">
                 <Image HorizontalAlignment="Left" Margin="10,10,10,10">
                     <Image.Source>
                         <BitmapImage x:Name="imgEvento"
@@ -42,7 +44,7 @@
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Height="80" Margin="10,175,0,0" Grid.Row="3" VerticalAlignment="Top" Width="460">
             <TextBlock HorizontalAlignment="Left" Height="29" TextWrapping="Wrap" Text="Participantes" Width="460" Margin="10,0"/>
-            <Border BorderBrush="#FF575756" BorderThickness="1" Height="40" Margin="15,10" Width="40" HorizontalAlignment="Left">
+            <Border BorderBrush="#3C8BFF" BorderThickness="1" Height="40" Margin="15,10" Width="40" HorizontalAlignment="Left">
                 <Image HorizontalAlignment="Left" Height="39" VerticalAlignment="Top" Width="39" Margin="0,0,-1,-1" >
                     <Image.Source>
                         <BitmapImage 
@@ -59,7 +61,7 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="8,5,7,0" Height="Auto" Width="432">
                             <!--Replace rectangle with image-->
-                            <Border BorderThickness="1" Margin="0,12" Width="50" BorderBrush="#FF575756" Height="50" VerticalAlignment="Top">
+                            <Border BorderThickness="1" Margin="0,12" Width="50" BorderBrush="#3C8BFF" Height="50" VerticalAlignment="Top">
                                 <Image>
                                     <Image.Source>
                                         <BitmapImage UriSource="{Binding ContatoImagem}" 
@@ -80,7 +82,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default" BackgroundColor="#FF173779">
             <shell:ApplicationBarIconButton x:Name="btComentar" IconUri="/Assets/Buttons/coment.png" Text="Comentar" Click="btComentar_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Rota do Evento"/>
