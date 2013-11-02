@@ -120,7 +120,7 @@ namespace Fusioness.Mobile.ViewModels
             {
                 this.Eventos.Add(new ItemViewModel()
                 {
-                    EventoImagem = "http://fusionessapi.apphb.com/images/" + ((String.IsNullOrEmpty(item.UrlImagem)) ? "eventoAvatar.png" : item.UrlImagem),   
+                    EventoImagem = ((String.IsNullOrEmpty(item.UrlImagem)) ? "/Assets/ApplicationIcon.png" : "http://fusionessapi.apphb.com/images/" + item.UrlImagem),   
                     EventoTitulo = item.Titulo,
                     EventoData = item.Data.ToString("dd/MM/yyyy"),
                     EventoId = item.IdEvento
@@ -149,6 +149,15 @@ namespace Fusioness.Mobile.ViewModels
             FusionessWS.Rota rota = new FusionessWS.Rota();
             rota.IdRota = idRota;
             servico.RemoverRotaAsync(rota);            
+        }
+
+        public void RemoverContato(int idContato)
+        {
+            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+            FusionessWS.Contato contato = new FusionessWS.Contato();
+            contato.IdContato = idContato;
+            contato.IdUsuario = Global.usuarioLogado.IdUsuario;
+            servico.ExcluirContatoAsync(contato);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

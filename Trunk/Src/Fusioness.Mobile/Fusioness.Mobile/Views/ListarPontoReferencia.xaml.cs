@@ -62,7 +62,7 @@ namespace Fusioness.Mobile.Views
             {
                 this.Pontos.Add(new ItemViewModel()
                 {
-                    PontoUrlImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
+                    PontoUrlImagem = ((String.IsNullOrEmpty(item.UrlImagemPonto)) ? "/Assets/ApplicationIcon.png" : "http://fusionessapi.apphb.com/images/" + item.UrlImagemPonto),  
                     CoordenadaId = item.IdCoordenada,
                     PontoNome = item.NomePonto,
                     PontoDescricao = item.DescricaoPonto
@@ -80,7 +80,7 @@ namespace Fusioness.Mobile.Views
                 {
                     this.Pontos.Add(new ItemViewModel()
                     {
-                        PontoUrlImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",//item.UrlImagem,   
+                        PontoUrlImagem = ((String.IsNullOrEmpty(Global.fusCoordenadas[i].UrlImagemPonto)) ? "/Assets/ApplicationIcon.png" : "http://fusionessapi.apphb.com/images/" + Global.fusCoordenadas[i].UrlImagemPonto),   
                         CoordenadaId = i,
                         PontoNome = Global.fusCoordenadas[i].NomePonto,
                         PontoDescricao = Global.fusCoordenadas[i].DescricaoPonto

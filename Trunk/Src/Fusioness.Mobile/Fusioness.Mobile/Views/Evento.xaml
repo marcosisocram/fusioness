@@ -37,7 +37,7 @@
                 <Image HorizontalAlignment="Left" Margin="10,10,10,10">
                     <Image.Source>
                         <BitmapImage x:Name="imgEvento"
-        					UriSource="/Assets/ApplicationIcon.png" 
+        					UriSource="{Binding EventoImagem}" 
         					CreateOptions="BackgroundCreation"/>
                     </Image.Source>
                 </Image>

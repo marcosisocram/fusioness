@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
 using Fusioness.Mobile.ViewModels;
 using Fusioness.Mobile.Util;
+using System.IO;
 
 namespace Fusioness.Mobile.Views
 {
@@ -57,10 +58,18 @@ namespace Fusioness.Mobile.Views
             evento = e.Result;
             if (evento != null)
             {
-                
-                    //this.imgEvento.UriSource = new Uri("http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg", UriKind.Relative);//evento.UrlImagem,   
-                    this.lbTituloEvento.Text = evento.Titulo;
-                    //EventoData = evento.Data.ToString("dd/MM/yyyy");
+                string file = ((String.IsNullOrEmpty(evento.UrlImagem)) ? "Assets/ApplicationIcon.png" : "http://fusionessapi.apphb.com/images/" + evento.UrlImagem);
+                Stream output = new FileStream(file, FileMode.Open);
+                byte[] buffer = new byte[32 * 1024];
+                int read;
+                while ((read = output.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    output.Write(buffer, 0, read);
+                }
+
+                this.imgEvento.SetSource(output);
+                this.lbTituloEvento.Text = evento.Titulo;
+                //EventoData = evento.Data.ToString("dd/MM/yyyy");
 
                 FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                 servico.ListarComentariosPorEventoAsync(evento);
@@ -80,7 +89,7 @@ namespace Fusioness.Mobile.Views
                         ComentarioId = item.IdComentarioEvento,
                         ComentarioDescricao = item.Descricao,
                         ContatoId = item.IdUsuario,
-                        ContatoImagem = "http://31.media.tumblr.com/tumblr_m3evdtpgE61r2y7tvo1_1280.jpg",
+                        ContatoImagem = "http://fusionessapi.apphb.com/images/" + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? "avatar.png" : item.Usuario.UrlImagem),
                         ContatoNome = item.Usuario.Nome
                     });
                 }

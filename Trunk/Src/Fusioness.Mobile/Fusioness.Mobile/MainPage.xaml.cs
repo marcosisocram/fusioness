@@ -80,6 +80,26 @@ namespace Fusioness.Mobile
             }
         }
 
+        private void Excluir_Contato_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var Item = (sender as MenuItem).DataContext as ItemViewModel;
+                MessageBoxResult result = MessageBox.Show("Deseja Remover " + Item.ContatoNome + "dos seus Contatos?", "Atenção?", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {                    
+                    App.ViewModel.RemoverContato(Item.ContatoId);
+
+                    llsContatos.ItemsSource.Remove(Item);
+                    MessageBox.Show("Contato Removido com Sucesso!");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Erro ao Excluir Rota!");
+            }
+        }
+
         private void llsEvento_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
