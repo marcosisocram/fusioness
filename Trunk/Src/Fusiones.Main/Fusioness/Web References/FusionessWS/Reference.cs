@@ -108,6 +108,10 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarCoordenadasPorRotaOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarPontosReferenciaPorRotaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RemoverCoordenadaOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarConvitesEventosOperationCompleted;
         
         private System.Threading.SendOrPostCallback ObterConvitesEventosDoUsuarioOperationCompleted;
@@ -288,6 +292,12 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarCoordenadasPorRotaCompletedEventHandler ListarCoordenadasPorRotaCompleted;
+        
+        /// <remarks/>
+        public event ListarPontosReferenciaPorRotaCompletedEventHandler ListarPontosReferenciaPorRotaCompleted;
+        
+        /// <remarks/>
+        public event RemoverCoordenadaCompletedEventHandler RemoverCoordenadaCompleted;
         
         /// <remarks/>
         public event ListarConvitesEventosCompletedEventHandler ListarConvitesEventosCompleted;
@@ -1450,6 +1460,63 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarCoordenadasPorRotaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarCoordenadasPorRotaCompleted(this, new ListarCoordenadasPorRotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarPontosReferenciaPorRota", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Coordenada[] ListarPontosReferenciaPorRota(Rota rota) {
+            object[] results = this.Invoke("ListarPontosReferenciaPorRota", new object[] {
+                        rota});
+            return ((Coordenada[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarPontosReferenciaPorRotaAsync(Rota rota) {
+            this.ListarPontosReferenciaPorRotaAsync(rota, null);
+        }
+        
+        /// <remarks/>
+        public void ListarPontosReferenciaPorRotaAsync(Rota rota, object userState) {
+            if ((this.ListarPontosReferenciaPorRotaOperationCompleted == null)) {
+                this.ListarPontosReferenciaPorRotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarPontosReferenciaPorRotaOperationCompleted);
+            }
+            this.InvokeAsync("ListarPontosReferenciaPorRota", new object[] {
+                        rota}, this.ListarPontosReferenciaPorRotaOperationCompleted, userState);
+        }
+        
+        private void OnListarPontosReferenciaPorRotaOperationCompleted(object arg) {
+            if ((this.ListarPontosReferenciaPorRotaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarPontosReferenciaPorRotaCompleted(this, new ListarPontosReferenciaPorRotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/RemoverCoordenada", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RemoverCoordenada(Coordenada coordenada) {
+            this.Invoke("RemoverCoordenada", new object[] {
+                        coordenada});
+        }
+        
+        /// <remarks/>
+        public void RemoverCoordenadaAsync(Coordenada coordenada) {
+            this.RemoverCoordenadaAsync(coordenada, null);
+        }
+        
+        /// <remarks/>
+        public void RemoverCoordenadaAsync(Coordenada coordenada, object userState) {
+            if ((this.RemoverCoordenadaOperationCompleted == null)) {
+                this.RemoverCoordenadaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoverCoordenadaOperationCompleted);
+            }
+            this.InvokeAsync("RemoverCoordenada", new object[] {
+                        coordenada}, this.RemoverCoordenadaOperationCompleted, userState);
+        }
+        
+        private void OnRemoverCoordenadaOperationCompleted(object arg) {
+            if ((this.RemoverCoordenadaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoverCoordenadaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -4152,6 +4219,36 @@ namespace Fusioness.FusionessWS {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarPontosReferenciaPorRotaCompletedEventHandler(object sender, ListarPontosReferenciaPorRotaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarPontosReferenciaPorRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarPontosReferenciaPorRotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Coordenada[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Coordenada[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void RemoverCoordenadaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
