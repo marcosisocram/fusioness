@@ -9,5 +9,6 @@ namespace Fusioness.Entities
         public virtual Contato Contato { get; set; }
         public virtual Evento Evento { get; set; }
         public virtual Resposta Resposta { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

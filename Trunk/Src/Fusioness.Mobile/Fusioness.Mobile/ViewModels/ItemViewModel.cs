@@ -123,6 +123,27 @@ namespace Fusioness.Mobile.ViewModels
             }
         }
 
+        private string _eventoDescricao;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string EventoDescricao
+        {
+            get
+            {
+                return _eventoDescricao;
+            }
+            set
+            {
+                if (value != _eventoDescricao)
+                {
+                    _eventoDescricao = value;
+                    NotifyPropertyChanged("EventoDescricao");
+                }
+            }
+        }
+
         private string _eventoData;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.

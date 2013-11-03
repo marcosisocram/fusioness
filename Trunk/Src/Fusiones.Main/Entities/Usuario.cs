@@ -13,6 +13,7 @@ namespace Fusioness.Entities
             Eventos = new List<Evento>();
             EventoUsuarios = new List<EventoUsuario>();
             Rotas = new List<Rota>();
+            ConviteEventos = new List<ConviteEvento>();
         }
 
         public int IdUsuario { get; set; }
@@ -31,5 +32,6 @@ namespace Fusioness.Entities
         public virtual List<EventoUsuario> EventoUsuarios { get; set; }
         public virtual List<Rota> Rotas { get; set; }
         public virtual List<ComentarioEvento> ComentariosEventos { get; set; }
+        public virtual List<ConviteEvento> ConviteEventos { get; set; }
     }
 }

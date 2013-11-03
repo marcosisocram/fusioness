@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Net.NetworkInformation;
 using Fusioness.Mobile.ViewModels;
+using Fusioness.Mobile.Util;
 
 namespace Fusioness.Mobile
 {
@@ -28,6 +29,24 @@ namespace Fusioness.Mobile
         {
             //this.llsRota.ItemsSource.Clear();
             App.ViewModel.LoadData();
+
+            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
+            servico.ObterConvitesEventosDoUsuarioAsync(Global.usuarioLogado);
+            servico.ObterConvitesEventosDoUsuarioCompleted += servico_ObterConvitesEventosDoUsuarioCompleted;
+        }
+
+        void servico_ObterConvitesEventosDoUsuarioCompleted(object sender, FusionessWS.ObterConvitesEventosDoUsuarioCompletedEventArgs e)
+        {
+            IList<FusionessWS.ConviteEvento> convites = e.Result;
+            if (convites.Count > 0)
+            {
+                this.imgConvites.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                this.imgConvites.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)
@@ -110,6 +129,11 @@ namespace Fusioness.Mobile
         {
             var Item = (sender as MenuItem).DataContext as ItemViewModel;
             NavigationService.Navigate(new Uri("/Views/ConvidarParaEvento.xaml?EventoId=" + Item.EventoId.ToString(), UriKind.Relative));
+        }
+
+        private void imgConvites_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/ConvitesRecebidos.xaml", UriKind.Relative));
         }
     }
 }

@@ -1,0 +1,91 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Fusioness.Mobile.Views.ConvitesRecebidos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.ForegroundColor="#3C8BFF"
+    shell:SystemTray.BackgroundColor="#FF212021" Loaded="PhoneApplicationPage_Loaded">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#FF212021">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="47"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="10,10,10,10">
+            <TextBlock Text="FUSIONESS" Style="{StaticResource PhoneTextNormalStyle}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Left" Height="39" Margin="10,0,0,0" TextWrapping="Wrap" Text="Convites" VerticalAlignment="Top" Width="436" TextAlignment="Center" FontSize="30" Grid.RowSpan="2"/>
+
+            <StackPanel HorizontalAlignment="Left" Height="595" Margin="0,44,0,0" Grid.Row="1" VerticalAlignment="Top" Width="456">
+                <phone:LongListSelector x:Name="llsConvites" ItemsSource="{Binding Contatos}" VerticalAlignment="Bottom" Height="596">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Margin="4,10,-12,0">
+                                <StackPanel Orientation="Horizontal" Margin="5,5,0,5" Height="Auto">
+                                    <!--Replace rectangle with image-->
+                                    <Border BorderThickness="1" Margin="0,0" Width="50" BorderBrush="#3C8BFF" Height="50" VerticalAlignment="Top">
+                                        <Image Stretch="Fill">
+                                            <Image.Source>
+                                                <BitmapImage UriSource="{Binding ContatoImagem}" 
+                                                             CreateOptions="BackgroundCreation"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </Border>
+                                    <StackPanel Width="365" Margin="10,5" Height="30" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding ContatoNome}" TextWrapping="NoWrap" Margin="5,0" FontSize="22" Foreground="#3C8BFF"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="Auto">
+                                    <!--Replace rectangle with image-->
+                                    <StackPanel Width="348" Height="Auto">
+                                        <TextBlock Text="{Binding EventoTitulo}" TextWrapping="NoWrap" Height="30" Margin="0,0" FontSize="22"/>
+                                        <TextBlock Text="{Binding EventoDescricao}" TextWrapping="Wrap" Margin="5,5" Height="Auto" Foreground="#FFB9B9B9" />
+                                    </StackPanel>
+                                    <Border BorderThickness="1" Margin="10,0" Width="80" BorderBrush="#3C8BFF" Height="80">
+                                        <Image Stretch="Fill">
+                                            <Image.Source>
+                                                <BitmapImage UriSource="{Binding EventoImagem}" 
+                                                             CreateOptions="BackgroundCreation"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="47" Margin="0,0,15,0">
+                                    <Button x:Name="btnAceitar" Content="Aceitar" HorizontalAlignment="Right" Margin="-5,-5,-5,-5" Width="108" Background="#FF173779" BorderThickness="1" FontSize="16" Click="btnAceitar_Click"/>
+                                    <Button x:Name="btnRecusar" Content="Recusar" HorizontalAlignment="Right" Margin="-10,-5,0,-5" Width="108" Background="#FF173779" BorderThickness="1" FontSize="16" Click="btnRecusar_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default" BackgroundColor="#FF173779">
+            <shell:ApplicationBarIconButton x:Name="btCancelar" IconUri="/Assets/Buttons/cancel.png" Text="Cancelar" Click="btCancelar_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

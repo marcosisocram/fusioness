@@ -78,6 +78,7 @@ namespace Fusioness.Mobile.ViewModels
             servico.ListarEventosPorUsuarioCompleted += servico_ListarEventosPorUsuarioCompleted;
             servico.ListarContatosDoUsuarioAsync(Global.usuarioLogado);
             servico.ListarContatosDoUsuarioCompleted += servico_ListarContatosDoUsuarioCompleted;
+            
             this.IsDataLoaded = true;
         }
 

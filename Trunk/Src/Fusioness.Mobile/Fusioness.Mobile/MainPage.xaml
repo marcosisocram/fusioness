@@ -89,7 +89,7 @@
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
                                 <Border BorderThickness="1" Width="90" BorderBrush="#FFFFC700" Height="90">
-                                    <Image>
+                                    <Image Stretch="Fill">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding EventoImagem}" 
                                                          CreateOptions="BackgroundCreation"/>
@@ -133,7 +133,7 @@
                                 </toolkit:ContextMenuService.ContextMenu>
                                 <!--Replace rectangle with image-->
                                 <Border BorderThickness="1" Width="70" BorderBrush="#FFFFC700" Height="70">
-                                    <Image>
+                                    <Image Stretch="Fill">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding ContatoImagem}" 
                                                          CreateOptions="BackgroundCreation"/>
@@ -172,7 +172,8 @@
             </phone:PanoramaItem>
             -->
         </phone:Panorama>
-        <StackPanel HorizontalAlignment="Left" Height="100" Margin="-148,82,0,0" VerticalAlignment="Top" Width="100"/>
+
+        <Image x:Name="imgConvites" HorizontalAlignment="Left" Height="78" Margin="392,0,0,0" VerticalAlignment="Top" Width="78" Source="/Assets/Buttons/people.png" Visibility="Collapsed" MouseEnter="imgConvites_MouseEnter" />
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to

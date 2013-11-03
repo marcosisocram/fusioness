@@ -61,6 +61,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Contato" type="tns:Contato" />
               <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
               <s:element minOccurs="0" maxOccurs="1" name="Resposta" type="tns:Resposta" />
+              <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -97,6 +98,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="EventoUsuarios" type="tns:ArrayOfEventoUsuario" />
               <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
               <s:element minOccurs="0" maxOccurs="1" name="ComentariosEventos" type="tns:ArrayOfComentarioEvento" />
+              <s:element minOccurs="0" maxOccurs="1" name="ConviteEventos" type="tns:ArrayOfConviteEvento" />
             </s:sequence>
           </s:extension>
         </s:complexContent>

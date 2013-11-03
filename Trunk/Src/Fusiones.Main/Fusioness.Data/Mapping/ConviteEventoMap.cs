@@ -39,6 +39,9 @@ namespace Fusioness.Data.Mapping
             this.HasOptional(t => t.Resposta)
                 .WithMany(t => t.ConviteEventos)
                 .HasForeignKey(d => d.IdResposta);
+            this.HasRequired(t => t.Usuario)
+                .WithMany(t => t.ConviteEventos)
+                .HasForeignKey(d => d.IdUsuario);
 
         }
     }

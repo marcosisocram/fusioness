@@ -23,13 +23,14 @@
     </vm:MainViewModel.Eventos>
 
     <vm:MainViewModel.Contatos>
-        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Marcus"/>
-        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Mateus"/>
-        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Dinarte"/>
-        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Bruno"/>
-        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Paulo"/>
-        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Tarcisio"/>
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Marcus"        EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Evento 1" EventoDescricao="Descrição do Evento Descrição do Evento Descrição do Evento"  EventoData="11/10/2013"  />
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Mateus"        EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Evento 2" EventoDescricao="Descrição do Evento Descrição do Evento Descrição do Evento" EventoData="11/10/2013"  />
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Dinarte"       EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Evento 3" EventoData="11/10/2013"  />
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Bruno"         EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Nascetur" EventoData="11/10/2013"  />
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Paulo"         EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Sagittis" EventoData="11/10/2013"  />
+        <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Tarcisio"      EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Torquent" EventoData="11/10/2013"  />
         <vm:ItemViewModel ContatoImagem="/Assets/ApplicationIcon.png" ContatoNome="Marcos Paulo"/>
+        
     </vm:MainViewModel.Contatos>
         
 </vm:MainViewModel>

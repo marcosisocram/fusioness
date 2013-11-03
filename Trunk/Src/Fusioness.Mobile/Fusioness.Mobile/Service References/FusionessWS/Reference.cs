@@ -115,6 +115,8 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private Fusioness.Mobile.FusionessWS.Resposta RespostaField;
         
+        private Fusioness.Mobile.FusionessWS.Usuario UsuarioField;
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int IdUsuario {
             get {
@@ -202,6 +204,19 @@ namespace Fusioness.Mobile.FusionessWS {
                 if ((object.ReferenceEquals(this.RespostaField, value) != true)) {
                     this.RespostaField = value;
                     this.RaisePropertyChanged("Resposta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public Fusioness.Mobile.FusionessWS.Usuario Usuario {
+            get {
+                return this.UsuarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsuarioField, value) != true)) {
+                    this.UsuarioField = value;
+                    this.RaisePropertyChanged("Usuario");
                 }
             }
         }
@@ -322,6 +337,8 @@ namespace Fusioness.Mobile.FusionessWS {
         private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> RotasField;
         
         private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.ComentarioEvento> ComentariosEventosField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.ConviteEvento> ConviteEventosField;
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int IdUsuario {
@@ -514,6 +531,19 @@ namespace Fusioness.Mobile.FusionessWS {
                 if ((object.ReferenceEquals(this.ComentariosEventosField, value) != true)) {
                     this.ComentariosEventosField = value;
                     this.RaisePropertyChanged("ComentariosEventos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.ConviteEvento> ConviteEventos {
+            get {
+                return this.ConviteEventosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ConviteEventosField, value) != true)) {
+                    this.ConviteEventosField = value;
+                    this.RaisePropertyChanged("ConviteEventos");
                 }
             }
         }

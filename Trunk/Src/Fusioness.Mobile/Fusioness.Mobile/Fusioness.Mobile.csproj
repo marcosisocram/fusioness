@@ -121,6 +121,9 @@
     <Compile Include="Views\ConvidarParaEvento.xaml.cs">
       <DependentUpon>ConvidarParaEvento.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ConvitesRecebidos.xaml.cs">
+      <DependentUpon>ConvitesRecebidos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Evento.xaml.cs">
       <DependentUpon>Evento.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ConvitesRecebidos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Evento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +201,7 @@
     <Content Include="Assets\Buttons\cancel.png" />
     <Content Include="Assets\Buttons\coment.png" />
     <Content Include="Assets\Buttons\edit.png" />
+    <Content Include="Assets\Buttons\people.png" />
     <Content Include="Assets\Buttons\refresh.png" />
     <Content Include="Assets\pontoref.png" />
     <Content Include="README_FIRST.txt" />

@@ -23,15 +23,21 @@ namespace Fusioness.Mobile.Views
 {
     public partial class RotaMap : PhoneApplicationPage
     {
+        #region Propriedades
+
         GeoCoordinate lastGeoCoordenada;
-        GeoCoordinateWatcher watcher;        
+        GeoCoordinateWatcher watcher;
         Global.Acao acao = new Global.Acao();
         MapLayer lastMapLayer = null;
         int RotaId = -1;
         bool addLocalizacao = false;
         bool pontoReferencia = false;
-        List<MapLayer> mapLayerPontosRef = new List<MapLayer>();
+        List<MapLayer> mapLayerPontosRef = new List<MapLayer>(); 
+        
+        #endregion
 
+        #region Inicialize
+        
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (Global.fusCoordenadas.Count == 0)
@@ -60,7 +66,7 @@ namespace Fusioness.Mobile.Views
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {            
+        {
             ApplicationBarIconButton btStartStop = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
             ApplicationBarMenuItem menuListarPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[1];
             ApplicationBarMenuItem menuExibirPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[2];
@@ -94,36 +100,24 @@ namespace Fusioness.Mobile.Views
                 menuListarPontos.IsEnabled = true;
                 menuExibirPontos.IsEnabled = true;
             }
-            
-            
+
+
         }
 
-        void servico_ObterRotaPorIdCompleted(object sender, FusionessWS.ObterRotaPorIdCompletedEventArgs e)
-        {
-            FusionessWS.Rota rota = e.Result;
-            if (rota != null)
-            {
-                if (rota.IdRotaOrigem != null)
-                {
-                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRotaOrigem.ToString(), UriKind.Relative));
-                }
-                else
-                {
-                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRota.ToString(), UriKind.Relative));
-                }
-            }
-        }
-
-        private void adicionarLocalizacao()
-        {            
-            watcher.Start();
-            addLocalizacao = true;
-        }
-        
         private void MapPage_Loaded(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
-        }        
+        } 
+
+        #endregion
+
+        #region Metodos Comuns
+
+        private void adicionarLocalizacao()
+        {
+            watcher.Start();
+            addLocalizacao = true;
+        }
 
         private void Visualizar()
         {
@@ -134,53 +128,42 @@ namespace Fusioness.Mobile.Views
             servico.ListarCoordenadasPorRotaCompleted += servico_ListarCoordenadasPorRotaCompleted;
         }
 
-        void servico_ListarCoordenadasPorRotaCompleted(object sender, FusionessWS.ListarCoordenadasPorRotaCompletedEventArgs e)
+        private void exibirPontos()
         {
-            try
+            foreach (var item in Global.fusCoordenadas)
             {
-                ObservableCollection<FusionessWS.Coordenada> listCoordenadas = e.Result;
-                if (listCoordenadas != null)
+                if (item.IdTipoCoordenada == 2)
                 {
-                    for (int i = 0; i < listCoordenadas.Count; i++)
-                    {
-                        GeoCoordinate geoCoordinate = new GeoCoordinate();
-                        geoCoordinate.Latitude = listCoordenadas[i].Latitude;
-                        geoCoordinate.Longitude = listCoordenadas[i].Longitude;
-
-                        if (i == 0)
-                        {
-                            Mapa.Layers.Add(adicionar_MapLayer(geoCoordinate, "/Assets/locationGreen.png"));
-                            lastGeoCoordenada = geoCoordinate;
-                        }
-                        else
-                        {
-                            MapPolyline polyline = new MapPolyline();
-                            polyline.Path.Add(lastGeoCoordenada);
-                            polyline.Path.Add(geoCoordinate);
-                            polyline.StrokeThickness = 7;
-                            polyline.StrokeColor = Colors.Green;
-                            Mapa.MapElements.Add(polyline);
-
-                            lastGeoCoordenada = geoCoordinate;
-                        }
-
-                        if (i == listCoordenadas.Count - 1)
-                        {
-                            Mapa.Layers.Add(adicionar_MapLayer(geoCoordinate, "/Assets/locationPink.png"));
-                            Mapa.Center = new GeoCoordinate(geoCoordinate.Latitude, geoCoordinate.Longitude);
-                        }
-                    }
+                    var mapLayer = adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png");
+                    Mapa.Layers.Add(mapLayer);
+                    mapLayerPontosRef.Add(mapLayer);
                 }
-                else
-                {
-                    MessageBox.Show("Error ao visualizar rota!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), "Erro", MessageBoxButton.OK);
             }
         }
+
+        private MapLayer adicionar_MapLayer(GeoCoordinate coordenadas, string uriImage)
+        {
+            MapLayer mapLayer = new MapLayer();
+            MapOverlay mapOverlay = new MapOverlay();
+            mapOverlay.GeoCoordinate = new GeoCoordinate(coordenadas.Latitude, coordenadas.Longitude);
+            mapOverlay.PositionOrigin = new Point(0.5, 0.5);
+
+            Image image = new Image();
+            image.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(uriImage, UriKind.Relative));
+            //image.Opacity = 0.8;
+            image.Stretch = System.Windows.Media.Stretch.Fill;
+            image.Width = 40;
+            image.Height = 40;
+
+            mapOverlay.Content = image;
+            mapLayer.Add(mapOverlay);
+
+            return mapLayer;
+        } 
+        
+        #endregion
+
+        #region Geolocation
 
         private void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
@@ -250,26 +233,6 @@ namespace Fusioness.Mobile.Views
             }
         }
 
-        private MapLayer adicionar_MapLayer(GeoCoordinate coordenadas, string uriImage)
-        {
-            MapLayer mapLayer = new MapLayer();
-            MapOverlay mapOverlay = new MapOverlay();
-            mapOverlay.GeoCoordinate = new GeoCoordinate(coordenadas.Latitude, coordenadas.Longitude);
-            mapOverlay.PositionOrigin = new Point(0.5, 0.5);            
-            
-            Image image = new Image();                        
-            image.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(uriImage, UriKind.Relative));
-            //image.Opacity = 0.8;
-            image.Stretch = System.Windows.Media.Stretch.Fill;
-            image.Width = 40;
-            image.Height = 40;
-
-            mapOverlay.Content = image;
-            mapLayer.Add(mapOverlay);
-            
-            return mapLayer;                    
-        }
-
         private void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
             try
@@ -290,13 +253,17 @@ namespace Fusioness.Mobile.Views
             }
         }
 
+        #endregion
+
+        #region Evento da Tela
+
         private void btStartStop_Click(object sender, EventArgs e)
         {
             ApplicationBarIconButton btStartStop = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
             ApplicationBarIconButton btSalvar = (ApplicationBarIconButton)ApplicationBar.Buttons[1];
             ApplicationBarIconButton btLimpar = (ApplicationBarIconButton)ApplicationBar.Buttons[2];
             ApplicationBarMenuItem menuPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
-            
+
             if (btStartStop.IconUri.OriginalString == "/Assets/Buttons/play.png")
             {
                 btStartStop.IconUri = new Uri("/Assets/Buttons/pause.png", UriKind.Relative);
@@ -336,7 +303,7 @@ namespace Fusioness.Mobile.Views
             {
                 Mapa.Layers.RemoveAt(2);
             }
-                       
+
         }
 
         private void btSalvar_Click(object sender, EventArgs e)
@@ -400,8 +367,12 @@ namespace Fusioness.Mobile.Views
                 }
                 mapLayerPontosRef.Clear();
             }
-        }
+        } 
 
+        #endregion
+
+        #region Serviços
+        
         void servico_ListarPontosReferenciaPorRotaCompleted(object sender, FusionessWS.ListarPontosReferenciaPorRotaCompletedEventArgs e)
         {
             IList<FusionessWS.Coordenada> listCoordenadas = e.Result;
@@ -414,19 +385,72 @@ namespace Fusioness.Mobile.Views
             }
         }
 
-        private void exibirPontos()
+        void servico_ListarCoordenadasPorRotaCompleted(object sender, FusionessWS.ListarCoordenadasPorRotaCompletedEventArgs e)
         {
-            foreach (var item in Global.fusCoordenadas)
+            try
             {
-                if (item.IdTipoCoordenada == 2)
+                ObservableCollection<FusionessWS.Coordenada> listCoordenadas = e.Result;
+                if (listCoordenadas != null)
                 {
-                    var mapLayer = adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png");
-                    Mapa.Layers.Add(mapLayer);
-                    mapLayerPontosRef.Add(mapLayer);
+                    for (int i = 0; i < listCoordenadas.Count; i++)
+                    {
+                        GeoCoordinate geoCoordinate = new GeoCoordinate();
+                        geoCoordinate.Latitude = listCoordenadas[i].Latitude;
+                        geoCoordinate.Longitude = listCoordenadas[i].Longitude;
+
+                        if (i == 0)
+                        {
+                            Mapa.Layers.Add(adicionar_MapLayer(geoCoordinate, "/Assets/locationGreen.png"));
+                            lastGeoCoordenada = geoCoordinate;
+                        }
+                        else
+                        {
+                            MapPolyline polyline = new MapPolyline();
+                            polyline.Path.Add(lastGeoCoordenada);
+                            polyline.Path.Add(geoCoordinate);
+                            polyline.StrokeThickness = 7;
+                            polyline.StrokeColor = Colors.Green;
+                            Mapa.MapElements.Add(polyline);
+
+                            lastGeoCoordenada = geoCoordinate;
+                        }
+
+                        if (i == listCoordenadas.Count - 1)
+                        {
+                            Mapa.Layers.Add(adicionar_MapLayer(geoCoordinate, "/Assets/locationPink.png"));
+                            Mapa.Center = new GeoCoordinate(geoCoordinate.Latitude, geoCoordinate.Longitude);
+                        }
+                    }
                 }
-            }           
+                else
+                {
+                    MessageBox.Show("Error ao visualizar rota!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Erro", MessageBoxButton.OK);
+            }
+        }
+
+        void servico_ObterRotaPorIdCompleted(object sender, FusionessWS.ObterRotaPorIdCompletedEventArgs e)
+        {
+            FusionessWS.Rota rota = e.Result;
+            if (rota != null)
+            {
+                if (rota.IdRotaOrigem != null)
+                {
+                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRotaOrigem.ToString(), UriKind.Relative));
+                }
+                else
+                {
+                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRota.ToString(), UriKind.Relative));
+                }
+            }
         }
         
+        #endregion
+  
     }
 
 }

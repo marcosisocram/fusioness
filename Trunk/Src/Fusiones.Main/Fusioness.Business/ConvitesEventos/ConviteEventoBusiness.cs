@@ -41,7 +41,38 @@ namespace Fusioness.Business.ConvitesEventos
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                return new ConviteEventoRepository(uow).GetWhere(c => c.IdContato == convidado.IdUsuario).ToList();
+                IRepository<ConviteEvento> repo = new ConviteEventoRepository(uow);
+                IQueryable<ConviteEvento> convites = repo.GetWhere(c => c.IdContato == convidado.IdUsuario && c.IdResposta == null);
+
+                preencherUsuarioConvite(convites);
+                preencherEventoConvite(convites);
+                return convites.ToList();
+            }
+        }
+
+        private void preencherUsuarioConvite(IQueryable<ConviteEvento> listaConvites)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                IRepository<Usuario> repo = new UsuarioRepository(uow);
+
+                foreach (var convites in listaConvites)
+                {
+                    convites.Usuario = repo.GetByKey(new Usuario { IdUsuario = convites.IdUsuario });
+                }
+            }
+        }
+
+        private void preencherEventoConvite(IQueryable<ConviteEvento> listaConvites)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                IRepository<Evento> repo = new EventoRepository(uow);
+
+                foreach (var convites in listaConvites)
+                {
+                    convites.Evento = repo.GetByKey(new Evento { IdEvento = convites.IdEvento });
+                }
             }
         }
 
