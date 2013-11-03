@@ -752,6 +752,8 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Nullable<int> IdQualidadeRotaField;
         
+        private System.Nullable<int> IdRotaOrigemField;
+        
         private string DescricaoField;
         
         private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Coordenada> CoordenadasField;
@@ -846,7 +848,20 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public System.Nullable<int> IdRotaOrigem {
+            get {
+                return this.IdRotaOrigemField;
+            }
+            set {
+                if ((this.IdRotaOrigemField.Equals(value) != true)) {
+                    this.IdRotaOrigemField = value;
+                    this.RaisePropertyChanged("IdRotaOrigem");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public string Descricao {
             get {
                 return this.DescricaoField;
@@ -859,7 +874,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
         public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Coordenada> Coordenadas {
             get {
                 return this.CoordenadasField;
@@ -872,7 +887,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
         public Fusioness.Mobile.FusionessWS.Dificuldade Dificuldade {
             get {
                 return this.DificuldadeField;
@@ -885,7 +900,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
         public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> Eventos {
             get {
                 return this.EventosField;
@@ -898,7 +913,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
         public Fusioness.Mobile.FusionessWS.QualidadeRota QualidadeRota {
             get {
                 return this.QualidadeRotaField;
@@ -911,7 +926,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
         public Fusioness.Mobile.FusionessWS.TipoPista TipoPista {
             get {
                 return this.TipoPistaField;
@@ -924,7 +939,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
         public Fusioness.Mobile.FusionessWS.TipoRota TipoRota {
             get {
                 return this.TipoRotaField;
@@ -937,7 +952,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
         public Fusioness.Mobile.FusionessWS.Usuario Usuario {
             get {
                 return this.UsuarioField;
@@ -1864,6 +1879,11 @@ namespace Fusioness.Mobile.FusionessWS {
         System.IAsyncResult BeginRemoverCoordenada(Fusioness.Mobile.FusionessWS.RemoverCoordenadaRequest request, System.AsyncCallback callback, object asyncState);
         
         Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse EndRemoverCoordenada(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConsultarDuracaoRota", ReplyAction="*")]
+        System.IAsyncResult BeginConsultarDuracaoRota(int idRota, System.AsyncCallback callback, object asyncState);
+        
+        double EndConsultarDuracaoRota(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarConvitesEventos", ReplyAction="*")]
         System.IAsyncResult BeginListarConvitesEventos(Fusioness.Mobile.FusionessWS.ListarConvitesEventosRequest request, System.AsyncCallback callback, object asyncState);
@@ -6221,6 +6241,25 @@ namespace Fusioness.Mobile.FusionessWS {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ConsultarDuracaoRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ConsultarDuracaoRotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public double Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((double)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ListarConvitesEventosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -6697,6 +6736,12 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onRemoverCoordenadaCompletedDelegate;
         
+        private BeginOperationDelegate onBeginConsultarDuracaoRotaDelegate;
+        
+        private EndOperationDelegate onEndConsultarDuracaoRotaDelegate;
+        
+        private System.Threading.SendOrPostCallback onConsultarDuracaoRotaCompletedDelegate;
+        
         private BeginOperationDelegate onBeginListarConvitesEventosDelegate;
         
         private EndOperationDelegate onEndListarConvitesEventosDelegate;
@@ -6909,6 +6954,8 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<ListarPontosReferenciaPorRotaCompletedEventArgs> ListarPontosReferenciaPorRotaCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> RemoverCoordenadaCompleted;
+        
+        public event System.EventHandler<ConsultarDuracaoRotaCompletedEventArgs> ConsultarDuracaoRotaCompleted;
         
         public event System.EventHandler<ListarConvitesEventosCompletedEventArgs> ListarConvitesEventosCompleted;
         
@@ -9388,6 +9435,52 @@ namespace Fusioness.Mobile.FusionessWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginConsultarDuracaoRota(int idRota, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginConsultarDuracaoRota(idRota, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        double Fusioness.Mobile.FusionessWS.MainServiceSoap.EndConsultarDuracaoRota(System.IAsyncResult result) {
+            return base.Channel.EndConsultarDuracaoRota(result);
+        }
+        
+        private System.IAsyncResult OnBeginConsultarDuracaoRota(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int idRota = ((int)(inValues[0]));
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginConsultarDuracaoRota(idRota, callback, asyncState);
+        }
+        
+        private object[] OnEndConsultarDuracaoRota(System.IAsyncResult result) {
+            double retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndConsultarDuracaoRota(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnConsultarDuracaoRotaCompleted(object state) {
+            if ((this.ConsultarDuracaoRotaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ConsultarDuracaoRotaCompleted(this, new ConsultarDuracaoRotaCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ConsultarDuracaoRotaAsync(int idRota) {
+            this.ConsultarDuracaoRotaAsync(idRota, null);
+        }
+        
+        public void ConsultarDuracaoRotaAsync(int idRota, object userState) {
+            if ((this.onBeginConsultarDuracaoRotaDelegate == null)) {
+                this.onBeginConsultarDuracaoRotaDelegate = new BeginOperationDelegate(this.OnBeginConsultarDuracaoRota);
+            }
+            if ((this.onEndConsultarDuracaoRotaDelegate == null)) {
+                this.onEndConsultarDuracaoRotaDelegate = new EndOperationDelegate(this.OnEndConsultarDuracaoRota);
+            }
+            if ((this.onConsultarDuracaoRotaCompletedDelegate == null)) {
+                this.onConsultarDuracaoRotaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnConsultarDuracaoRotaCompleted);
+            }
+            base.InvokeAsync(this.onBeginConsultarDuracaoRotaDelegate, new object[] {
+                        idRota}, this.onEndConsultarDuracaoRotaDelegate, this.onConsultarDuracaoRotaCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarConvitesEventos(Fusioness.Mobile.FusionessWS.ListarConvitesEventosRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginListarConvitesEventos(request, callback, asyncState);
         }
@@ -10774,6 +10867,19 @@ namespace Fusioness.Mobile.FusionessWS {
             public Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse EndRemoverCoordenada(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse _result = ((Fusioness.Mobile.FusionessWS.RemoverCoordenadaResponse)(base.EndInvoke("RemoverCoordenada", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginConsultarDuracaoRota(int idRota, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = idRota;
+                System.IAsyncResult _result = base.BeginInvoke("ConsultarDuracaoRota", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public double EndConsultarDuracaoRota(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                double _result = ((double)(base.EndInvoke("ConsultarDuracaoRota", _args, result)));
                 return _result;
             }
             

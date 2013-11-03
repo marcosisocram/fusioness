@@ -60,7 +60,7 @@ namespace Fusioness.Mobile.Views
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
+        {            
             ApplicationBarIconButton btStartStop = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
             ApplicationBarMenuItem menuListarPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[1];
             ApplicationBarMenuItem menuExibirPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[2];
@@ -94,6 +94,24 @@ namespace Fusioness.Mobile.Views
                 menuListarPontos.IsEnabled = true;
                 menuExibirPontos.IsEnabled = true;
             }
+            
+            
+        }
+
+        void servico_ObterRotaPorIdCompleted(object sender, FusionessWS.ObterRotaPorIdCompletedEventArgs e)
+        {
+            FusionessWS.Rota rota = e.Result;
+            if (rota != null)
+            {
+                if (rota.IdRotaOrigem != null)
+                {
+                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRotaOrigem.ToString(), UriKind.Relative));
+                }
+                else
+                {
+                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRota.ToString(), UriKind.Relative));
+                }
+            }
         }
 
         private void adicionarLocalizacao()
@@ -101,6 +119,7 @@ namespace Fusioness.Mobile.Views
             watcher.Start();
             addLocalizacao = true;
         }
+        
         private void MapPage_Loaded(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
@@ -321,8 +340,19 @@ namespace Fusioness.Mobile.Views
         }
 
         private void btSalvar_Click(object sender, EventArgs e)
-        {            
-            NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + RotaId.ToString(), UriKind.Relative));
+        {
+            if (acao == Global.Acao.Visualizar)
+            {
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                FusionessWS.Rota rota = new FusionessWS.Rota();
+                rota.IdRota = RotaId;
+                servico.ObterRotaPorIdAsync(rota);
+                servico.ObterRotaPorIdCompleted += servico_ObterRotaPorIdCompleted;
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + RotaId.ToString(), UriKind.Relative));
+            }
         }
 
         private void menuPontos_Click(object sender, EventArgs e)

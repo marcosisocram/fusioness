@@ -647,6 +647,21 @@ namespace Fusioness.Services
                 //log
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public double ConsultarDuracaoRota(int idRota)
+        {
+            try
+            {
+                return Facade.Instance.ConsultarDuracaoRota(idRota);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         #endregion
 
         #region ConviteEvento

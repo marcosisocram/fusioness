@@ -15,6 +15,7 @@ namespace Fusioness.Data.Mapping
             // Table & Column Mappings
             this.ToTable("Rota");
             this.Property(t => t.IdRota).HasColumnName("IdRota");
+            this.Property(t => t.IdRotaOrigem).HasColumnName("IdRotaOrigem");            
             this.Property(t => t.IdUsuario).HasColumnName("IdUsuario");
             this.Property(t => t.IdTipoPista).HasColumnName("IdTipoPista");
             this.Property(t => t.IdTipoRota).HasColumnName("IdTipoRota");

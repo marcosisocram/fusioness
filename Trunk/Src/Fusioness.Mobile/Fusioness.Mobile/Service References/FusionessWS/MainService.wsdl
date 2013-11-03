@@ -148,6 +148,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="IdTipoRota" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdDificuldade" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdQualidadeRota" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdRotaOrigem" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Coordenadas" type="tns:ArrayOfCoordenada" />
               <s:element minOccurs="0" maxOccurs="1" name="Dificuldade" type="tns:Dificuldade" />
@@ -826,6 +827,20 @@
       <s:element name="RemoverCoordenadaResponse">
         <s:complexType />
       </s:element>
+      <s:element name="ConsultarDuracaoRota">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idRota" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarDuracaoRotaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ConsultarDuracaoRotaResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ListarConvitesEventos">
         <s:complexType />
       </s:element>
@@ -1249,6 +1264,12 @@
   <wsdl:message name="RemoverCoordenadaSoapOut">
     <wsdl:part name="parameters" element="tns:RemoverCoordenadaResponse" />
   </wsdl:message>
+  <wsdl:message name="ConsultarDuracaoRotaSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarDuracaoRota" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarDuracaoRotaSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarDuracaoRotaResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarConvitesEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarConvitesEventos" />
   </wsdl:message>
@@ -1491,6 +1512,10 @@
     <wsdl:operation name="RemoverCoordenada">
       <wsdl:input message="tns:RemoverCoordenadaSoapIn" />
       <wsdl:output message="tns:RemoverCoordenadaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarDuracaoRota">
+      <wsdl:input message="tns:ConsultarDuracaoRotaSoapIn" />
+      <wsdl:output message="tns:ConsultarDuracaoRotaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesEventos">
       <wsdl:input message="tns:ListarConvitesEventosSoapIn" />
@@ -1909,6 +1934,15 @@
     </wsdl:operation>
     <wsdl:operation name="RemoverCoordenada">
       <soap:operation soapAction="http://tempuri.org/RemoverCoordenada" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarDuracaoRota">
+      <soap:operation soapAction="http://tempuri.org/ConsultarDuracaoRota" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2398,6 +2432,15 @@
     </wsdl:operation>
     <wsdl:operation name="RemoverCoordenada">
       <soap12:operation soapAction="http://tempuri.org/RemoverCoordenada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarDuracaoRota">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarDuracaoRota" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

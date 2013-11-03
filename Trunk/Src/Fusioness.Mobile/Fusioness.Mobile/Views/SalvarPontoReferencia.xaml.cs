@@ -54,7 +54,7 @@ namespace Fusioness.Mobile.Views
             coordenada.IdTipoCoordenada = 2;
             coordenada.Latitude = geoCoordenada.Latitude;
             coordenada.Longitude = geoCoordenada.Longitude;
-            //coordenada.UrlImagemPonto = "avatar.png";
+            //coordenada.UrlImagemPonto = Global.imgUsuarioDefault;
             coordenada.NomePonto = this.txtNomePonto.Text.ToString();
             coordenada.DescricaoPonto = this.txtDescricao.Text.ToString();
 

@@ -64,6 +64,12 @@ namespace Fusioness.Mobile.Views
             }
         }
 
+        void servico_ConsultarDuracaoRotaCompleted(object sender, FusionessWS.ConsultarDuracaoRotaCompletedEventArgs e)
+        {
+            double duracaoMedia = e.Result;
+            this.lblDuracaoMedia.Text = "Duração Média: " + duracaoMedia.ToString("#0:00h");
+        }
+
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (acao == Global.Acao.Visualizar)
@@ -74,6 +80,8 @@ namespace Fusioness.Mobile.Views
                 rotaPai.IdRota = RotaId;
                 servico.ObterRotaPorIdAsync(rotaPai);
                 servico.ObterRotaPorIdCompleted += servico_ObterRotaPorIdCompleted;
+                servico.ConsultarDuracaoRotaAsync(RotaId);
+                servico.ConsultarDuracaoRotaCompleted += servico_ConsultarDuracaoRotaCompleted;
             }
         }
 

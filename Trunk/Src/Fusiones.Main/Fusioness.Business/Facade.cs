@@ -314,14 +314,19 @@ namespace Fusioness.Business
         {
             CoordenadaBus.RemoverCoordenada(coordenada);
         }
+
+        public double ConsultarDuracaoRota(int idRota)
+        {
+            return CoordenadaBus.ConsultarDuracaoRota(idRota);
+        }
         
+        #endregion
+
         #region Respostas
         public List<Resposta> ListarRespostas()
         {
             return RespostaBus.ListarRespostas();
         }
-        #endregion
-
         #endregion
 
         #region Contato

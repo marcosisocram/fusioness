@@ -13,5 +13,6 @@ namespace Fusioness.Business.Coordenadas
         List<Coordenada> ListarCoordenadas();
         List<Coordenada> ListarCoordenadasPorRota(Rota rota);
         List<Coordenada> ListarPontosReferenciaPorRota(Rota rota);
+        double ConsultarDuracaoRota(int idRota);
     }
 }

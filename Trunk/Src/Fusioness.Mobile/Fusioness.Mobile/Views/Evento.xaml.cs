@@ -19,6 +19,7 @@ namespace Fusioness.Mobile.Views
         public ObservableCollection<ItemViewModel> Comentarios { get; private set; }
         int EventoId = -1;
         FusionessWS.Evento evento = new FusionessWS.Evento();
+        Stream output;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -55,25 +56,41 @@ namespace Fusioness.Mobile.Views
 
         void servico_ObterEventoPorIdCompleted(object sender, FusionessWS.ObterEventoPorIdCompletedEventArgs e)
         {
-            evento = e.Result;
-            if (evento != null)
+            try
             {
-                string file = ((String.IsNullOrEmpty(evento.UrlImagem)) ? "Assets/ApplicationIcon.png" : "http://fusionessapi.apphb.com/images/" + evento.UrlImagem);
-                Stream output = new FileStream(file, FileMode.Open);
-                byte[] buffer = new byte[32 * 1024];
-                int read;
-                while ((read = output.Read(buffer, 0, buffer.Length)) > 0)
+                evento = e.Result;
+                if (evento != null)
                 {
-                    output.Write(buffer, 0, read);
+                    try
+                    {
+                        string file = ((String.IsNullOrEmpty(evento.UrlImagem)) ? Global.imgEventoDefault : Global.linkImagem + evento.UrlImagem);
+                        output = new FileStream(file, FileMode.Open);
+                        byte[] buffer = new byte[32 * 1024];
+                        int read;
+                        while ((read = output.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            output.Write(buffer, 0, read);
+                        }
+
+                        this.imgEvento.SetSource(output);
+                        output.Dispose();
+                    }
+                    catch (ArgumentException)
+                    {
+                        //Não encontrou a imagem
+                    }
+                    this.lbTituloEvento.Text = evento.Titulo;
+                    //EventoData = evento.Data.ToString("dd/MM/yyyy");
+
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                    servico.ListarComentariosPorEventoAsync(evento);
+                    servico.ListarComentariosPorEventoCompleted += servico_ListarComentariosPorEventoCompleted;                    
                 }
-
-                this.imgEvento.SetSource(output);
-                this.lbTituloEvento.Text = evento.Titulo;
-                //EventoData = evento.Data.ToString("dd/MM/yyyy");
-
-                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-                servico.ListarComentariosPorEventoAsync(evento);
-                servico.ListarComentariosPorEventoCompleted += servico_ListarComentariosPorEventoCompleted;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Erro ao carregar evento!");
+                NavigationService.GoBack();
             }
         }
 
@@ -89,7 +106,7 @@ namespace Fusioness.Mobile.Views
                         ComentarioId = item.IdComentarioEvento,
                         ComentarioDescricao = item.Descricao,
                         ContatoId = item.IdUsuario,
-                        ContatoImagem = "http://fusionessapi.apphb.com/images/" + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? "avatar.png" : item.Usuario.UrlImagem),
+                        ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? Global.imgUsuarioDefault : item.Usuario.UrlImagem),
                         ContatoNome = item.Usuario.Nome
                     });
                 }

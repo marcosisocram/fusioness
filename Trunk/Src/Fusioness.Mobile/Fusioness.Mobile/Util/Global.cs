@@ -11,7 +11,9 @@ namespace Fusioness.Mobile.Util
     {
         public static FusionessWS.Usuario usuarioLogado;
         public static IList<FusionessWS.Coordenada> fusCoordenadas;
-
+        public static string linkImagem = "http://fusionessapi.apphb.com/images/";
+        public static string imgUsuarioDefault = "avatar.png";
+        public static string imgEventoDefault = "Assets/ApplicationIcon.png";
         public enum Acao
         {
             Criar = 0,

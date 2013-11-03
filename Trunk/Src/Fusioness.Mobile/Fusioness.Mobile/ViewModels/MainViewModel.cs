@@ -105,7 +105,7 @@ namespace Fusioness.Mobile.ViewModels
             {
                 this.Contatos.Add(new ItemViewModel()
                 {
-                    ContatoImagem = "http://fusionessapi.apphb.com/images/" + ((String.IsNullOrEmpty(item.UrlImagem)) ? "avatar.png" : item.UrlImagem),   
+                    ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.UrlImagem)) ? Global.imgUsuarioDefault : item.UrlImagem),   
                     ContatoId = item.IdUsuario,
                     ContatoNome = item.Nome
                 });
@@ -120,7 +120,7 @@ namespace Fusioness.Mobile.ViewModels
             {
                 this.Eventos.Add(new ItemViewModel()
                 {
-                    EventoImagem = ((String.IsNullOrEmpty(item.UrlImagem)) ? "/Assets/ApplicationIcon.png" : "http://fusionessapi.apphb.com/images/" + item.UrlImagem),   
+                    EventoImagem = ((String.IsNullOrEmpty(item.UrlImagem)) ? Global.imgEventoDefault : Global.linkImagem + item.UrlImagem),   
                     EventoTitulo = item.Titulo,
                     EventoData = item.Data.ToString("dd/MM/yyyy"),
                     EventoId = item.IdEvento

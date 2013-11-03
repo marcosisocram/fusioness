@@ -160,7 +160,46 @@ namespace Fusioness.Business.Coordenadas
                 throw;
             }
         }
-        
+
+        public double ConsultarDuracaoRota(int idRota)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Coordenada> repo = new CoordenadaRepository(uow);
+                    IRepository<Rota> reporota = new RotaRepository(uow);
+
+                    var listRota = reporota.GetWhere(c => c.IdRota == idRota || c.IdRotaOrigem == idRota).ToList();
+                    int somaMinutos = 0;
+
+                    foreach (var item in listRota)
+	                {
+		                var listCoordenada = repo.GetWhere(c => c.IdRota == item.IdRota).ToList();
+                        
+                        DateTime minData = Convert.ToDateTime(listCoordenada.Min(u => u.Data));
+                        DateTime maxData = Convert.ToDateTime(listCoordenada.Max(u => u.Data));
+
+                        somaMinutos += (maxData - minData).Minutes;
+                    }
+
+                    if (listRota.Count > 0)
+                    {
+                        double totalMinutos = somaMinutos / listRota.Count;
+                        if (totalMinutos >= 60)
+                            return (totalMinutos) / 60.0;
+                        else
+                            return totalMinutos;
+                    }
+                    else
+                        return somaMinutos;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
     }
 }

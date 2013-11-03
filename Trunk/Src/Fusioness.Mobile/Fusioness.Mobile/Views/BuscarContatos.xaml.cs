@@ -46,7 +46,7 @@ namespace Fusioness.Mobile.Views
                 {
                     this.Contatos.Add(new ItemViewModel()
                     {
-                        ContatoImagem = "http://fusionessapi.apphb.com/images/" + ((String.IsNullOrEmpty(item.UrlImagem)) ? "avatar.png" : item.UrlImagem),   
+                        ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.UrlImagem)) ? Global.imgUsuarioDefault : item.UrlImagem),   
                         ContatoId = item.IdUsuario,
                         ContatoNome = item.Nome
                     });
