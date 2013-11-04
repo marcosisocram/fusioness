@@ -12,15 +12,17 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(BicicletaModel model)
         {
-            //if (!string.IsNullOrWhiteSpace(model.Mensagem)) ExibirModal(model.Mensagem);
+            
             var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             var bicicletas = Servico.ListarBicicletasPorUsuario(usuario).OrderBy(b=>b.Marca).ThenBy(b=>b.Modelo).ToArray();
             model.ListaBicicletasPorUsuario = bicicletas.ToList();
             return View("index", model);
         }
+
         
         public ActionResult InserirAlterarBicicleta(BicicletaModel model)
         {
+
             var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             var bicicletas = Servico.ListarBicicletasPorUsuario(usuario);
             model.ListaBicicletasPorUsuario = bicicletas.ToList();
@@ -37,22 +39,43 @@ namespace Fusioness.Controllers
                 {
                     model.Bicicleta = Servico.InserirBicicleta(model.Bicicleta);
                 }
-                // model.Bicicleta = null;                
-                return RedirectToAction("index", model);
+                // model.Bicicleta = null;
+                return RedirectToAction("Index", model);
             }
             else
-            {                
-                return View("index", model);
+            {
+                return View("InserirAlterarBicicleta", model);
             }
         }
 
-        public ActionResult EditarBicicleta(BicicletaModel model, int IdBicicleta)
+        public ActionResult InserirBicicleta()
+        {
+            var model = new BicicletaModel();
+            model.Bicicleta = new Bicicleta();
+
+            return View("InserirAlterarBicicleta", model);
+        }
+        
+
+        /*
+         public ActionResult EditarBicicleta(BicicletaModel model, int IdBicicleta)
         {
             model.Bicicleta = Servico.ObterBicicletaPorId(new Bicicleta() {IdBicicleta=IdBicicleta });
             var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             var bicicletas = Servico.ListarBicicletasPorUsuario(usuario);
             model.ListaBicicletasPorUsuario = bicicletas.ToList();
-            return View("index", model);
+            return View("InserirAlterarBicicleta", model);
+        }
+         */
+
+        public ActionResult EditarBicicleta(int IdBicicleta)
+        {
+            if (IdBicicleta == 0) return RedirectToAction("Index");
+
+            var model = new BicicletaModel();
+            model.Bicicleta = Servico.ObterBicicletaPorId(new Bicicleta() { IdBicicleta = IdBicicleta });
+            
+            return View("InserirAlterarBicicleta", model);
         }
 
         public ActionResult ExcluirBicicleta(BicicletaModel model, int IdBicicleta)

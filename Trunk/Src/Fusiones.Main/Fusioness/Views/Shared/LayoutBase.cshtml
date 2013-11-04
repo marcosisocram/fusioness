@@ -118,7 +118,13 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             @Html.MenuItem("Home", "Index", "Home")
-                            @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bicicleta</a>
+                                <ul class="dropdown-menu">
+                                    @Html.MenuItem("Nova Bicicleta", "InserirBicicleta", "Bicicleta")
+                                    @Html.MenuItem("Minhas Bicicletas", "Index", "Bicicleta")
+                                </ul>
+                            </li>
                             @*@Html.MenuItem("Contatos", "Index", "Contato")*@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contatos</a>
