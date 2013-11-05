@@ -47,6 +47,10 @@
                             @Html.ValidationMessage("Senha", new { style = "margin-left:10px" })
                         </li>
                         <li>
+                            @Html.LabelFor(m => m.NovaSenha)
+                            @Html.PasswordFor(m => m.NovaSenha) 
+                        </li>
+                        <li>
                             @Html.LabelFor(m => m.Usuario.Email)
                             @Html.TextBoxFor(m => m.Usuario.Email) 
                             @Html.ValidationMessage("Email", new { style = "margin-left:10px" })

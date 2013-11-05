@@ -23,6 +23,15 @@ namespace Fusioness.Controllers
             return View("Index", model);
         }
 
+        [HttpGet]
+        public ActionResult BuscarEventos(string palavra)
+        {
+            var model = new EventoModel();
+            model.carregarParametrosView(UsuarioLogado, null);
+            model.ListaEventos = model.ListaEventos.Where(c => c.Titulo.ToLower().Contains(palavra.ToLower()) || c.Descricao.ToLower().Contains(palavra.ToLower())).ToList();
+            return View("Index", model);
+        }
+
         public ActionResult Explore(EventoModel model)
         {
             double latitude = Double.Parse(Request.QueryString["latitude"]);
@@ -90,7 +99,6 @@ namespace Fusioness.Controllers
 
             return View("InserirAlterarEvento", model);
         }
-
 
         public ActionResult ExcluirEvento(int idEvento = 0)
         {

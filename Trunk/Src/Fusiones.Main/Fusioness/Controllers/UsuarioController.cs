@@ -26,6 +26,7 @@ namespace Fusioness.Controllers
             var usuariologado = BaseController.ObterUsuarioLogado(HttpContext);
             model.IsEmailOK = CheckEmail(usuarios, usuariologado,model.Usuario);
             model.IsLoginOK = CheckLogin(usuarios, usuariologado,model.Usuario);
+            model.IsSenhaOK = CheckSenha(usuariologado, model.Usuario);
 
             if (model.ValidarUsuario(ModelState))
             {
@@ -36,6 +37,10 @@ namespace Fusioness.Controllers
                 }
                 else
                 {
+                    if (!string.IsNullOrWhiteSpace(model.NovaSenha))
+                    {
+                        model.Usuario.Senha = model.NovaSenha;
+                    }
                     model.Usuario = Servico.AlterarUsuario(model.Usuario);
                 }
                 // atualiza o usuario na session ou nao vai mostrar os dados corretos no reload
@@ -119,6 +124,11 @@ namespace Fusioness.Controllers
                 ret = usuariologado != null && usuariomodel.Login == usuariologado.Login;
             }
             return ret;
+        }
+
+        private bool CheckSenha(FusionessWS.Usuario usuariologado, FusionessWS.Usuario usuario)
+        {
+            return usuariologado.Senha == usuario.Senha;
         }
     }
 }

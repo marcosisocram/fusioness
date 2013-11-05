@@ -10,6 +10,10 @@
     function ExibirModalConvidarProEmail() {
         $("#modalConvidarPorEmail").modal('show');
     }
+    function BuscarEvento() {
+        var url = '/Evento/BuscarEventos/?palavra=' + $('#txtBuscaEventos').val();
+        window.location = url;
+    }
 </script>
 
 <!-- FOTO -->
@@ -58,7 +62,7 @@
       <h2 class="card-heading simple">Bem vindo à maior rede social de ciclistas que você já viu...</h2>
       <div class="card-body">
         <p>Conecte-se agora mesmo a milhares de outros apaixonados por ciclismo. Interaja, proponha rotas e crie eventos.</p>
-        <p><a class="btn" href="#">Clique e encontre amigos!</a></p>
+        <p><a class="btn" href="/Contato/ListarTodos">Clique e encontre amigos!</a></p>
           <p><a class="btn" onclick="ExibirModalConvidarProEmail()" href="#">Clique e convide amigos por e-mail!</a></p>
       </div>
     </div>
@@ -73,13 +77,15 @@
   <div class="span5">
     <div class="card">
       <h2 class="card-heading simple">Buscar Eventos</h2>
-      <div class="card-body">
-        @using (Html.BeginForm("DoSomething", "Home", FormMethod.Post, new { @class = "form-search" }))
+      <div class="card-body" style="margin-bottom: 20px;">
+        @*@using (Html.BeginForm("DoSomething", "Home", FormMethod.Post, new { @class = "form-search" }))
         {
-          @*Html.LabelFor(m => m.User.Nome)*@
+          Html.LabelFor(m => m.User.Nome)
           @Html.TextBoxFor(m => m.User.Nome, new { @placeholder = "Nome", @class = "input-medium search-query" })                 
-          <input type="submit" class="btn btn-primary" value="Pesquisar" />
-        }
+          <input type="submit" class="btn btn-primary" value="Pesquisar" onclick="GoToEvento(); return false;"/>
+        }*@
+          <input id="txtBuscaEventos" type="text" class="input-medium search-query" name="busca" placeholder="Busque eventos">
+          <input type="submit" class="btn btn-primary" value="Pesquisar" onclick="BuscarEvento();"/>   
       </div>
     </div>
   </div>

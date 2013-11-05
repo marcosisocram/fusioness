@@ -47,6 +47,8 @@ namespace Fusioness.Models.Usuarios
         public bool IsContato { get; set; }
         public bool IsLoginOK { get; set; }
         public bool IsEmailOK { get; set; }
+        public bool IsSenhaOK { get; set; }
+        public string NovaSenha { get; set; }
 
         public bool ValidarUsuario(ModelStateDictionary ModelState)
         {
@@ -69,6 +71,11 @@ namespace Fusioness.Models.Usuarios
             if (string.IsNullOrWhiteSpace(Usuario.Senha))
             {
                 ModelState.AddModelError("Senha", "Preencha a senha");
+                retorno = false;
+            }
+            else if (!IsSenhaOK)
+            {
+                ModelState.AddModelError("Senha", "A senha digitada não confere com a senha em nosso sistema");
                 retorno = false;
             }
             if (string.IsNullOrWhiteSpace(Usuario.Email))

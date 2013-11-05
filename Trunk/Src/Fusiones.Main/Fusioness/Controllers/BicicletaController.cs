@@ -37,6 +37,7 @@ namespace Fusioness.Controllers
                 }
                 else
                 {
+                    model.Bicicleta.UrlImagem = "bike.jpg";
                     model.Bicicleta = Servico.InserirBicicleta(model.Bicicleta);
                 }
                 // model.Bicicleta = null;
