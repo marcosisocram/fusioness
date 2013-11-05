@@ -23,7 +23,7 @@ namespace Fusioness.Mobile.Views
             InitializeComponent();
         }
 
-        private void btCancelar_Click(object sender, EventArgs e)
+        private void btVoltar_Click(object sender, EventArgs e)
         {
             NavigationService.GoBack();
         }

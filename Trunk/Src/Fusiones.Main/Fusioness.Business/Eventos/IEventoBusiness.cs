@@ -16,5 +16,6 @@ namespace Fusioness.Business.Eventos
         List<Evento> ListarEventos(params int[] ids);
         List<Evento> ListarEventosPorUsuario(Usuario usuario);
         List<Evento> ListarEventosComDistancia(double latitudeAtual, double longitudeAtual);
+        List<Evento> ListarEventosProximos(double latitudeMin, double latitudeMax, double longitudeMin, double longitudeMax);
     }
 }

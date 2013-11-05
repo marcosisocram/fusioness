@@ -14,8 +14,8 @@
     </vm:MainViewModel.Rotas>
 
     <vm:MainViewModel.Eventos>
-        <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Maecenas" EventoData="11/10/2013"/>
-        <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Dictumst" EventoData="11/10/2013"/>
+        <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Arrumadinho de Santo Amaro novo" EventoData="11/10/2013" EventoDescricao="Descrição do Evento Descrição do Evento Descrição do Evento" />
+        <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Dictumst" EventoData="11/10/2013" EventoDescricao="Descrição do Evento Descrição do Evento Descrição do Evento" />
         <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Habitant" EventoData="11/10/2013"/>
         <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Nascetur" EventoData="11/10/2013"/>
         <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Sagittis" EventoData="11/10/2013"/>

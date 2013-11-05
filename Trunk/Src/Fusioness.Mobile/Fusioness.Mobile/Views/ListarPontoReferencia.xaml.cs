@@ -91,7 +91,7 @@ namespace Fusioness.Mobile.Views
             llsPontosRef.ItemsSource = Pontos;
         }
 
-        private void btCancelar_Click(object sender, EventArgs e)
+        private void btVoltar_Click(object sender, EventArgs e)
         {
             NavigationService.GoBack();
         }

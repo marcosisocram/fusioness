@@ -14,7 +14,8 @@
     d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
     shell:SystemTray.IsVisible="True"
     shell:SystemTray.ForegroundColor="#3C8BFF"
-    shell:SystemTray.BackgroundColor="#FF212021" Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.BackgroundColor="#FF212021" 
+    Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="#FF212021">
@@ -61,7 +62,7 @@
                                         <TextBlock Text="{Binding EventoTitulo}" TextWrapping="NoWrap" Height="30" Margin="0,0" FontSize="22"/>
                                         <TextBlock Text="{Binding EventoDescricao}" TextWrapping="Wrap" Margin="5,5" Height="Auto" Foreground="#FFB9B9B9" />
                                     </StackPanel>
-                                    <Border BorderThickness="1" Margin="10,0" Width="80" BorderBrush="#3C8BFF" Height="80">
+                                    <Border BorderThickness="1" Margin="10,10" Width="80" BorderBrush="#3C8BFF" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right">
                                         <Image Stretch="Fill">
                                             <Image.Source>
                                                 <BitmapImage UriSource="{Binding EventoImagem}" 
@@ -71,8 +72,8 @@
                                     </Border>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="47" Margin="0,0,15,0">
-                                    <Button x:Name="btnAceitar" Content="Aceitar" HorizontalAlignment="Right" Margin="-5,-5,-5,-5" Width="108" Background="#FF173779" BorderThickness="1" FontSize="16" Click="btnAceitar_Click"/>
-                                    <Button x:Name="btnRecusar" Content="Recusar" HorizontalAlignment="Right" Margin="-10,-5,0,-5" Width="108" Background="#FF173779" BorderThickness="1" FontSize="16" Click="btnRecusar_Click"/>
+                                    <Button x:Name="btnAceitar" Content="Aceitar" HorizontalAlignment="Right" Margin="-5,-5,-5,-5" Width="108" Background="#FF173779" BorderThickness="1" FontSize="16" Click="btnAceitar_Click" BorderBrush="#3C8BFF"/>
+                                    <Button x:Name="btnRecusar" Content="Recusar" HorizontalAlignment="Right" Margin="-10,-5,0,-5" Width="108" Background="#FF173779" BorderThickness="1" FontSize="16" Click="btnRecusar_Click" BorderBrush="#3C8BFF"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
@@ -84,7 +85,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default" BackgroundColor="#FF173779">
-            <shell:ApplicationBarIconButton x:Name="btCancelar" IconUri="/Assets/Buttons/cancel.png" Text="Cancelar" Click="btCancelar_Click" />
+            <shell:ApplicationBarIconButton x:Name="btVoltar" IconUri="/Assets/Buttons/back.png" Text="Voltar" Click="btVoltar_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

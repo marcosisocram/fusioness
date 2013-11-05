@@ -70,6 +70,10 @@ namespace Fusioness.Mobile
             {
                 NavigationService.Navigate(new Uri("/Views/BuscarContatos.xaml", UriKind.Relative));
             }
+            else if (PanoramaMain.SelectedItem == pnItemEvento)
+            {
+                NavigationService.Navigate(new Uri("/Views/BuscarEventos.xaml", UriKind.Relative));
+            }
         }
 
         private void llsRota_SelectionChanged(object sender, SelectionChangedEventArgs e)

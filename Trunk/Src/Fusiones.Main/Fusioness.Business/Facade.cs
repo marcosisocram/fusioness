@@ -291,6 +291,11 @@ namespace Fusioness.Business
             return EventoBus.ListarEventosComDistancia(latitudeAtual, longitudeAtual);
         }
 
+        public List<Evento> ListarEventosProximos(double latitudeMin, double latitudeMax, double longitudeMin, double longitudeMax)
+        {
+            return EventoBus.ListarEventosProximos(latitudeMin, latitudeMax, longitudeMin, longitudeMax);
+        }
+        
         #endregion
 
         #region Coordenadas

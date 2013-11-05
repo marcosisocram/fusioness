@@ -14,6 +14,8 @@ namespace Fusioness.Mobile.Util
         public static string linkImagem = "http://fusionessapi.apphb.com/images/";
         public static string imgUsuarioDefault = "avatar.png";
         public static string imgEventoDefault = "Assets/ApplicationIcon.png";
+        public const double coordenadaRange = 0.9;
+
         public enum Acao
         {
             Criar = 0,

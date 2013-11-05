@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="Fusioness.Mobile.Views.ListarPontoReferencia"
+    x:Class="Fusioness.Mobile.Views.BuscarEventos"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -13,47 +13,57 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
-    shell:SystemTray.IsVisible="True" 
+    shell:SystemTray.IsVisible="True"
     shell:SystemTray.ForegroundColor="#3C8BFF"
-    shell:SystemTray.BackgroundColor="#FF212021"
-    Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.BackgroundColor="#FF212021" Loaded="PhoneApplicationPage_Loaded" >
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="#FF212021">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0" Margin="10,10,10,10">
             <TextBlock Text="FUSIONESS" Style="{StaticResource PhoneTextNormalStyle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,10" Grid.RowSpan="2">
-            <phone:LongListSelector x:Name="llsPontosRef" ItemsSource="{Binding Pontos}" VerticalAlignment="Bottom" Height="604">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" HorizontalAlignment="Left" Height="39" Margin="10,0,0,0" TextWrapping="Wrap" Text="Eventos Próximos" VerticalAlignment="Top" Width="436" TextAlignment="Center" FontSize="30"/>
+
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="Pesquisar" VerticalAlignment="Top" Width="436"/>
+            <TextBox Grid.Row="2" x:Name="txtPesquisar" InputScope="Search" HorizontalAlignment="Left" Height="67" TextWrapping="Wrap" VerticalAlignment="Top" Width="466" Margin="-5,0,0,0" KeyDown="txtPesquisar_KeyDown"/>
+
+            <phone:LongListSelector Grid.Row="3" x:Name="llsEvento" VerticalAlignment="Top" Height="503" Margin="0,0,0,0" ItemsSource="{Binding Eventos}">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="0,5" Height="105" Width="432">
-                            <toolkit:ContextMenuService.ContextMenu>
-                                <toolkit:ContextMenu Background="#FF272727" Foreground="{x:Null}">
-                                    <toolkit:MenuItem Header="Excluir" Click="Excluir_Click" Background="{x:Null}" Foreground="White"/>
-                                </toolkit:ContextMenu>
-                            </toolkit:ContextMenuService.ContextMenu>
+                        <StackPanel Orientation="Vertical" Margin="6,10,-5,0">
                             <!--Replace rectangle with image-->
-                            <Border BorderThickness="1" Width="100" BorderBrush="#FF173779" Height="100">
+                            <StackPanel Orientation="Horizontal">
+                            <Border Margin="0,5" BorderThickness="1" Width="90" BorderBrush="#FF173779" Height="90" VerticalAlignment="Top">
                                 <Image Stretch="Fill">
                                     <Image.Source>
-                                        <BitmapImage UriSource="{Binding PontoUrlImagem}" 
+                                        <BitmapImage UriSource="{Binding EventoImagem}" 
                                                          CreateOptions="BackgroundCreation"/>
                                     </Image.Source>
                                 </Image>
                             </Border>
-                            <StackPanel Width="323">
-                                <TextBlock Text="{Binding PontoNome}" TextWrapping="Wrap" FontSize="30" Margin="10,5,10,0" VerticalAlignment="Center" />
-                                <TextBlock Text="{Binding PontoDescricao}" TextWrapping="Wrap" FontSize="20" Margin="10,0,10,0" VerticalAlignment="Center" />
+                            <StackPanel Width="351">
+                                <TextBlock Text="{Binding EventoTitulo}" TextWrapping="Wrap" Margin="5,0,0,0" FontSize="26" VerticalAlignment="Top" MaxHeight="72"/>
+                                <TextBlock Text="{Binding EventoData}" TextWrapping="Wrap" Margin="5,0,10,0" Foreground="#FFB9B9B9" VerticalAlignment="Bottom"/>                                
+                            </StackPanel>
+                            </StackPanel>
+                            <StackPanel>
+                            <TextBlock Text="{Binding EventoDescricao}" TextWrapping="Wrap" Margin="5,5" Height="Auto" Foreground="#FFB9B9B9" />
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
@@ -67,5 +77,4 @@
             <shell:ApplicationBarIconButton x:Name="btVoltar" IconUri="/Assets/Buttons/back.png" Text="Voltar" Click="btVoltar_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-
 </phone:PhoneApplicationPage>

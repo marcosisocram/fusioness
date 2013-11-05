@@ -81,14 +81,14 @@
                     -->
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="12,2,-37,4" Height="101" Width="432">
+                            <StackPanel Orientation="Horizontal" Margin="6,10,-5,0">
                                 <!--Replace rectangle with image-->
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu Background="#FF272727" Foreground="{x:Null}">
                                         <toolkit:MenuItem Header="Convidar" Click="Convidar_Click" Background="{x:Null}" Foreground="White"/>
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
-                                <Border BorderThickness="1" Width="90" BorderBrush="#FFFFC700" Height="90">
+                                <Border Margin="0,6" BorderThickness="1" Width="90" BorderBrush="#3C8BFF" Height="90" VerticalAlignment="Top">
                                     <Image Stretch="Fill">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding EventoImagem}" 
@@ -96,9 +96,9 @@
                                         </Image.Source>
                                     </Image>
                                 </Border>
-                                <StackPanel Width="323" Margin="8,3,0,3">
-                                    <TextBlock Text="{Binding EventoTitulo}" TextWrapping="Wrap" Margin="10,0,10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" Height="45" />
-                                    <TextBlock Text="{Binding EventoData}" TextWrapping="Wrap" Margin="10,0,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                <StackPanel Width="312" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding EventoTitulo}" TextWrapping="Wrap" Margin="5,0,0,0" FontSize="26" Height="36"/>
+                                    <TextBlock Text="{Binding EventoData}" TextWrapping="Wrap" Margin="5,0,10,0" Foreground="#FFB9B9B9"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
@@ -132,7 +132,7 @@
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
                                 <!--Replace rectangle with image-->
-                                <Border BorderThickness="1" Width="70" BorderBrush="#FFFFC700" Height="70">
+                                <Border BorderThickness="1" Width="70" BorderBrush="#3C8BFF" Height="70">
                                     <Image Stretch="Fill">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding ContatoImagem}" 

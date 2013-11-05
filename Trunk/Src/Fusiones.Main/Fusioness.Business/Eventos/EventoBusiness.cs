@@ -52,6 +52,7 @@ namespace Fusioness.Business.Eventos
                 return default(Evento);
             }
         }
+        
         public Evento AlterarEvento(Evento evento)
         {
             try
@@ -71,6 +72,7 @@ namespace Fusioness.Business.Eventos
                 return default(Evento);
             }
         }
+        
         public void RemoverEvento(Evento evento)
         {
             try
@@ -98,6 +100,7 @@ namespace Fusioness.Business.Eventos
                 return new EventoRepository(ouw).GetByKey(new Evento { IdEvento = evento.IdEvento });
             }
         }
+
         public List<Evento> ListarEventos(params int[] ids)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
@@ -147,6 +150,43 @@ namespace Fusioness.Business.Eventos
             return Math.Round(d, 2);
         }
 
+        public List<Evento> ListarEventosProximos(double latitudeMin, double latitudeMax, double longitudeMin, double longitudeMax)
+        {
+            CoordenadaBusiness coordenadaBusiness = new CoordenadaBusiness();
+            RotaBusiness rotaBusiness = new RotaBusiness();
+
+            List<Evento> listaEventosPublicos = new List<Evento>();
+            List<Rota> listaRotas = new List<Rota>();
+
+            List<Coordenada> listCoo = coordenadaBusiness.ListarCoordenadasProximas(latitudeMin, latitudeMax, longitudeMin, longitudeMax);
+
+            var idRota = listCoo.Select(m => m.IdRota).Distinct();
+
+            foreach (var item in idRota)
+            {
+                Rota rota = rotaBusiness.ObterRotaPorId(new Rota() { IdRota = item});
+                if (rota != null && rota.IdRotaOrigem == null)
+                {
+                    listaRotas.Add(rota);
+                }
+            }
+
+            foreach (var item in listaRotas)
+            {
+                IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString);
+                List<Evento> evento = new EventoRepository(ouw).GetWhere(c => c.IdRota == item.IdRota).ToList();
+                
+                foreach (var itemEvento in evento)
+                {
+                    if (itemEvento != null && itemEvento.Publico)
+                    {
+                        listaEventosPublicos.Add(itemEvento);
+                    }   
+                }                
+            }
+
+            return listaEventosPublicos.ToList();
+        }
 
         #endregion
     }

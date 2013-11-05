@@ -588,6 +588,20 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Evento> ListarEventosProximos(double latitudeMin, double latitudeMax, double longitudeMin, double longitudeMax)
+        {
+            try
+            {
+                return Facade.Instance.ListarEventosProximos(latitudeMin, latitudeMax, longitudeMin, longitudeMax);
+            }
+            catch
+            {
+                return new List<Evento>();
+            }
+        }
+
         #endregion
 
         #region Coordenadas

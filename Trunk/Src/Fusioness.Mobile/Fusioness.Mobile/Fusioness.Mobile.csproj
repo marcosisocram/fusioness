@@ -115,6 +115,9 @@
     <Compile Include="Views\BuscarContatos.xaml.cs">
       <DependentUpon>BuscarContatos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BuscarEventos.xaml.cs">
+      <DependentUpon>BuscarEventos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Comentario.xaml.cs">
       <DependentUpon>Comentario.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BuscarEventos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Comentario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +205,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Buttons\back.png" />
     <Content Include="Assets\Buttons\cancel.png" />
     <Content Include="Assets\Buttons\coment.png" />
     <Content Include="Assets\Buttons\edit.png" />
@@ -296,6 +304,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarEventosPorUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarEventosProximosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarEventosResponse.datasource">

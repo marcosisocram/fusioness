@@ -161,6 +161,23 @@ namespace Fusioness.Business.Coordenadas
             }
         }
 
+        public List<Coordenada> ListarCoordenadasProximas(double latitudeMin, double latitudeMax, double longitudeMin, double longitudeMax)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<Coordenada> repo = new CoordenadaRepository(uow);
+                    return repo.GetWhere(c => c.Latitude >= latitudeMin && c.Latitude <= latitudeMax
+                        && c.Longitude >= longitudeMin && c.Longitude <= longitudeMax).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public double ConsultarDuracaoRota(int idRota)
         {
             try

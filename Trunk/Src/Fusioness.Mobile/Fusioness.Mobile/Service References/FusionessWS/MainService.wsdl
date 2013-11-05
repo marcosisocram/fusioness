@@ -777,6 +777,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarEventosProximos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="latitudeMin" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="latitudeMax" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="longitudeMin" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="longitudeMax" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarEventosProximosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarEventosProximosResult" type="tns:ArrayOfEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="InserirListaCoordenadas">
         <s:complexType>
           <s:sequence>
@@ -1242,6 +1259,12 @@
   <wsdl:message name="ListarEventosComDistanciaSoapOut">
     <wsdl:part name="parameters" element="tns:ListarEventosComDistanciaResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarEventosProximosSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarEventosProximos" />
+  </wsdl:message>
+  <wsdl:message name="ListarEventosProximosSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarEventosProximosResponse" />
+  </wsdl:message>
   <wsdl:message name="InserirListaCoordenadasSoapIn">
     <wsdl:part name="parameters" element="tns:InserirListaCoordenadas" />
   </wsdl:message>
@@ -1498,6 +1521,10 @@
     <wsdl:operation name="ListarEventosComDistancia">
       <wsdl:input message="tns:ListarEventosComDistanciaSoapIn" />
       <wsdl:output message="tns:ListarEventosComDistanciaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosProximos">
+      <wsdl:input message="tns:ListarEventosProximosSoapIn" />
+      <wsdl:output message="tns:ListarEventosProximosSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InserirListaCoordenadas">
       <wsdl:input message="tns:InserirListaCoordenadasSoapIn" />
@@ -1900,6 +1927,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarEventosComDistancia">
       <soap:operation soapAction="http://tempuri.org/ListarEventosComDistancia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosProximos">
+      <soap:operation soapAction="http://tempuri.org/ListarEventosProximos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2398,6 +2434,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarEventosComDistancia">
       <soap12:operation soapAction="http://tempuri.org/ListarEventosComDistancia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosProximos">
+      <soap12:operation soapAction="http://tempuri.org/ListarEventosProximos" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
