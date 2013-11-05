@@ -13,7 +13,7 @@ namespace Fusioness.Business.EventosUsuarios
         EventoUsuario AlterarEventoUsuario(EventoUsuario eventoUsuario);
         void RemoverEventoUsuario(EventoUsuario eventoUsuario);
         List<EventoUsuario> ListarUsuariosEvento(Evento evento);
-        List<EventoUsuario> ListarEventosUsuario(Usuario usuario);
+        List<EventoUsuario> ListarEventoUsuario(Usuario usuario);
         EventoUsuario ObterEventoUsuario(Evento evento, Usuario usuario);
     }
 }

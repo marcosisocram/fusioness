@@ -17,6 +17,12 @@ namespace Fusioness.Controllers
             return View(model);
         }
 
+        public ActionResult ListarMeusEventos(EventoModel model)
+        {
+            model.carregarParametrosViewMeusEventos(UsuarioLogado, null);
+            return View("Index", model);
+        }
+
         public ActionResult Explore(EventoModel model)
         {
             double latitude = Double.Parse(Request.QueryString["latitude"]);
@@ -142,8 +148,15 @@ namespace Fusioness.Controllers
 
             var comentario = Servico.InserirComentarioEvento(model.Comentario);
 
-            ExibirModal("Seu comentário foi salvo com sucesso.");
-
+            if (comentario.IdComentarioEvento > 0)
+            {
+                ExibirModal("Seu comentário foi salvo com sucesso.");
+            }
+            else
+            {
+                ExibirModal("Ocorreu algum erro ao inserir seu comentário, tente novamente...");
+            }
+            
             return RedirectToAction("Detalhar", new { idEvento = comentario.IdEvento });
         }
 
@@ -157,10 +170,14 @@ namespace Fusioness.Controllers
             return RedirectToAction("Detalhar", new {idEvento = comentario.IdEvento});
         }
 
-        public ActionResult Participe(int id)
+        public ActionResult Participe(int idEvento = 0)
         {
-            Servico.InserirEventoUsuario(new EventoUsuario() { IdEvento = id, IdUsuario = UsuarioLogado.IdUsuario });
-            return RedirectToAction("Index", "Home");
+            EventoUsuario eventoUsuario = new EventoUsuario() { IdEvento = idEvento, IdUsuario = UsuarioLogado.IdUsuario };
+            Servico.InserirEventoUsuario(eventoUsuario);
+            
+            ExibirModal("Sua participação no evento foi confirmada... Anote na sua agenda :)");
+
+            return RedirectToAction("Detalhar", new { idEvento = eventoUsuario.IdEvento });
         }
 
         #endregion

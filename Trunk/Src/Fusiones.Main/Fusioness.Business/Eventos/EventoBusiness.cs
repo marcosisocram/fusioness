@@ -106,15 +106,15 @@ namespace Fusioness.Business.Eventos
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 if (ids.Any()) return new EventoRepository(uow).GetWhere(e => ids.Any(id => id == e.IdEvento)).ToList();
-                return new EventoRepository(uow).GetAll().ToList();
+                return new EventoRepository(uow).GetWhere(e => e.Publico == true).ToList();
             }
         }
 
-        public List<Evento> ListarEventosPorUsuario(Usuario usuaio)
+        public List<Evento> ListarEventosPorUsuario(Usuario usuario)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                return new EventoRepository(uow).GetWhere(e => e.IdUsuario == usuaio.IdUsuario).ToList();
+                return new EventoRepository(uow).GetWhere(e => e.IdUsuario == usuario.IdUsuario).ToList();
             }
         }
 

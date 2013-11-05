@@ -852,6 +852,20 @@ namespace Fusioness.Services
                 return new EventoUsuario();
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<EventoUsuario> ListarEventoUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarEventoUsuario(usuario);
+            }
+            catch (Exception)
+            {
+                return new List<EventoUsuario>();
+            }
+        }
         #endregion
 
         #region Outros
