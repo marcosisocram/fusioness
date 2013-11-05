@@ -103,7 +103,7 @@ namespace Fusioness.Business.EventosUsuarios
             }
         }
 
-        public List<EventoUsuario> ListarEventosUsuario(Usuario usuario)
+        public List<EventoUsuario> ListarEventoUsuario(Usuario usuario)
         {
             try
             {

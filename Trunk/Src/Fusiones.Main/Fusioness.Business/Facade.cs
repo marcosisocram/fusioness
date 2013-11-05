@@ -364,6 +364,12 @@ namespace Fusioness.Business
         {
             return EventoUsuarioBus.InserirEventoUsuario(eventoUsuario);
         }
+
+        public List<EventoUsuario> ListarEventoUsuario(Usuario usuario)
+        {
+            return EventoUsuarioBus.ListarEventoUsuario(usuario);
+        }
+
         #endregion
 
         #endregion

@@ -6,14 +6,24 @@ namespace Fusioness.Models.Eventos
 {
     public class EventoModel
     {
-        public Evento Evento { get; set; }
-
         #region Evento
 
+        public Evento Evento { get; set; }
         public IList<Rota> ListaRotas { get; set; }
         public IList<Evento> ListaEventos { get; set; }
         public IList<Evento> ListaEventosQueSouDono { get; set; }
+        public IList<EventoUsuario> ListaEventosQueParticipo { get; set; }
+        
+        private bool _IsCadastroEvento;
+        public bool IsCadastroEvento
+        {
+            get
+            {
+                return this.Evento != null ? this.Evento.IdEvento == 0 : false;
+            }
 
+            set { _IsCadastroEvento = value; }
+        }
         #endregion
        
         #region Convite e Contatos
@@ -41,9 +51,12 @@ namespace Fusioness.Models.Eventos
             ListaRotas = new List<Rota>();
             ListaEventos = new List<Evento>();
             ListaEventosQueSouDono = new List<Evento>();
+            ListaEventosQueParticipo = new List<EventoUsuario>();
+            
             ListaConviteEventos = new List<ConviteEvento>();
             RespostasPossiveis = new List<Resposta>();
             ListaDeContatosDoUsuario = new List<Usuario>();
+            
             ListaComentariosEvento = new List<ComentarioEvento>();
             ListaComentariosQueSouDono = new List<ComentarioEvento>();
             Comentario = new ComentarioEvento();
@@ -52,37 +65,39 @@ namespace Fusioness.Models.Eventos
         public void carregarParametrosView(Usuario usuarioLogado, Evento eventoSelecionado)
         {
             MainService Servico = new MainService();
-
-            ListaEventos = Servico.ListarEventos(new int[] { });
-
+            ListaEventos = Servico.ListarEventos(new int[] { }).Where(e => e.IdUsuario != usuarioLogado.IdUsuario).ToList();
             CarregarParametrosComunsView(Servico, usuarioLogado, eventoSelecionado);
-            
         }
 
-        public void carregarParametrosViewExplore(Usuario usuarioLogado, Evento eventoSelecionado, double latitudeAtual, double longitudeAtual)
+        public void carregarParametrosViewMeusEventos(Usuario usuarioLogado, Evento eventoSelecionado)
         {
             MainService Servico = new MainService();
-
-            ListaEventos = Servico.ListarEventosComDistancia(latitudeAtual, longitudeAtual);
-
+            ListaEventos = Servico.ListarEventosPorUsuario(usuarioLogado);
             CarregarParametrosComunsView(Servico, usuarioLogado, eventoSelecionado);
-
         }
 
         private void CarregarParametrosComunsView(MainService servico, Usuario usuarioLogado, Evento eventoSelecionado)
         {
-            ListaEventosQueSouDono = servico.ListarEventosPorUsuario(usuarioLogado);
             ListaRotas = servico.ListarRotasPorUsuario(usuarioLogado);
+            ListaEventosQueSouDono = servico.ListarEventosPorUsuario(usuarioLogado);
 
             if (eventoSelecionado != null)
             {
                 ListaComentariosEvento = servico.ListarComentariosPorEvento(eventoSelecionado);
+                ListaEventosQueParticipo = servico.ListarEventoUsuario(usuarioLogado);
                 ListaComentariosQueSouDono = servico.ListarComentariosPorUsuario(usuarioLogado);
                 Comentario.IdEvento = eventoSelecionado.IdEvento;
             }
 
             var idsContatos = servico.ListarContatosDoUsuario(usuarioLogado).ToList().Select(c => c.IdContato).ToList();
             if (idsContatos.Any()) ListaDeContatosDoUsuario = servico.ObterUsuariosIds(idsContatos.ToArray()).ToList();
+        }
+
+        public void carregarParametrosViewExplore(Usuario usuarioLogado, Evento eventoSelecionado, double latitudeAtual, double longitudeAtual)
+        {
+            MainService Servico = new MainService();
+            ListaEventos = Servico.ListarEventosComDistancia(latitudeAtual, longitudeAtual);
+            CarregarParametrosComunsView(Servico, usuarioLogado, eventoSelecionado);
         }
 
         public bool SouDonoDoEvento(int idEvento)
@@ -95,7 +110,9 @@ namespace Fusioness.Models.Eventos
             return ListaComentariosQueSouDono.Any(c => c.IdComentarioEvento == idComentario);
         }
 
-        public bool IsCadastroEvento { get; set; }
-
+        public bool SouParticipanteDoEvento(int idEvento)
+        {
+            return ListaEventosQueParticipo.Any(eu => eu.IdEvento == idEvento);
+        }
     }
 }
