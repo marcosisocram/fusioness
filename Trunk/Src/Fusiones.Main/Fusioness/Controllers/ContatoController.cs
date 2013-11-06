@@ -26,6 +26,7 @@ namespace Fusioness.Controllers
                     IdContato = IdContato
                 };
                 NovoContato = Servico.InserirContato(NovoContato);
+                ExibirModal("O convite foi enviado com sucesso.");
             }
             else
             {

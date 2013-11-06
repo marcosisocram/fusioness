@@ -49,7 +49,11 @@ namespace Fusioness.Business.Contatos
 
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
-                return new ContatoRepository(uow).GetWhere(c => c.IdUsuario == usuario.IdUsuario).ToList();
+                var repo = new ContatoRepository(uow);
+                var meusContatos = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario).ToList();
+                var meusContatosAceitos = repo.GetWhere(c => c.IdContato == usuario.IdUsuario).ToList();
+
+                return meusContatos.Where(meu => meusContatosAceitos.Any(dele => meu.IdContato == dele.IdUsuario)).ToList();
             }
         }
 
@@ -93,7 +97,12 @@ namespace Fusioness.Business.Contatos
                 using (var uow = new EFUnityOfWork(_ConnectionString))
                 {
                     var repo = new ContatoRepository(uow);
-                    repo.Delete(contato);
+                    var aDeletar = repo.GetWhere(c => 
+                        (c.IdUsuario == contato.IdUsuario && c.IdContato == contato.IdContato)
+                        ||
+                        (c.IdContato == contato.IdUsuario && c.IdUsuario == contato.IdContato)
+                    );
+                    if (aDeletar != null && aDeletar.Any()) repo.Delete(aDeletar);
                     uow.Commit();
                     return true;
                 }
