@@ -108,7 +108,8 @@ namespace Fusioness.Business.Bicicletas
                 throw;
             }
         }
-        public string InserirFotoBicicleta(Bicicleta bicicleta, byte[] bytes, string filename, string dirbase)
+
+        public Bicicleta InserirFotoBicicleta(Bicicleta bicicleta, byte[] bytes, string filename, string dirbase)
         {
             try
             {
@@ -123,13 +124,15 @@ namespace Fusioness.Business.Bicicletas
                 fs.Write(bytes, 0, bytes.Count());
                 fs.Close();
                 retorno = Path.GetFileName(fname);
+                
                 bicicleta.UrlImagem = retorno;
                 bicicleta = AlterarBicicleta(bicicleta);
-                return retorno;
+                
+                return bicicleta;
             }
             catch (Exception)
             {
-                return string.Empty;
+                throw;
             }
 
         }

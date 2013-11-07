@@ -109,6 +109,7 @@ namespace Fusioness.Controllers
             TempData["MODAL_CONTENT"] = conteudo;
             TempData["MODAL_WIDTH"] = width;
         }
+
         #endregion
 
         #region Privados

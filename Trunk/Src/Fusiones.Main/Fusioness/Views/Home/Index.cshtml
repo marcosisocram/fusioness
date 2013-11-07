@@ -22,26 +22,26 @@
     <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();"/>
 </div>
 <a href="/Usuario">Editar perfil</a>
-@if (Model.ContatosNaoConfirmados!=null && Model.ContatosNaoConfirmados.Count > 0) 
+@if (Model.ConvitesNaoConfirmados != null && Model.ConvitesNaoConfirmados.Count > 0) 
     {
         <div class="row-fluid">
             <div class="span12">
             <div class="card">
                 <h2 class="card-heading simple">
-                    Você possui <span class="badge badge-success">@Model.ContatosNaoConfirmados.Count</span> convite(s) de amizade!</h2>
+                    Você possui <span class="badge badge-success">@Model.ConvitesNaoConfirmados.Count</span> convite(s) de amizade!</h2>
                 <div class="card-body">
                     <table style="margin-bottom:10px;">
-                        @foreach (var usuario in Model.ContatosNaoConfirmados)
+                        @foreach (var usuario in Model.ConvitesNaoConfirmados)
 	                    {
 		                    <tr>
                                <!-- <td>
                                     @usuario.Nome
                                 </td> -->
                                 <td>
-                                    @Html.ActionLink("Ver Perfil de " + @usuario.Nome, "VerPerfilUsuario", "Usuario", new { IdUsuario=usuario.IdUsuario }, new { @class = "btn btn-info" })
+                                    @Html.ActionLink("Quem te convida: " + @usuario.Nome, "VerPerfilUsuario", "Usuario", new { IdUsuario=usuario.IdUsuario }, new { @class = "btn btn-info" })
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Aceitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario=usuario.IdUsuario, IsAceitar=true }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("Aceitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario=usuario.IdUsuario, IsAceitar=true }, new { @class = "btn btn-success" })
                                 </td>
                                 <td>
                                     @Html.ActionLink("Rejeitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario=usuario.IdUsuario, IsAceitar=false }, new { @class = "btn btn-danger" })
@@ -62,7 +62,7 @@
       <h2 class="card-heading simple">Bem vindo à maior rede social de ciclistas que você já viu...</h2>
       <div class="card-body">
         <p>Conecte-se agora mesmo a milhares de outros apaixonados por ciclismo. Interaja, proponha rotas e crie eventos.</p>
-        <p><a class="btn" href="/Contato/ListarTodos">Clique e encontre amigos!</a></p>
+        <p><a class="btn" href="/Contato">Clique e encontre amigos!</a></p>
           <p><a class="btn" onclick="ExibirModalConvidarProEmail()" href="#">Clique e convide amigos por e-mail!</a></p>
       </div>
     </div>

@@ -57,9 +57,9 @@ namespace Fusioness.Services
             {
                 return Facade.Instance.InserirBicicleta(bicicleta);
             }
-            catch
+            catch (Exception e)
             {
-                return default(Bicicleta);
+                return (Bicicleta)TratarRetorno(bicicleta, e);
             }
         }
 
@@ -72,23 +72,24 @@ namespace Fusioness.Services
             {
                 return Facade.Instance.AlterarBicicleta(bicicleta);
             }
-            catch
+            catch (Exception e)
             {
-                return default(Bicicleta);
+                return (Bicicleta)TratarRetorno(bicicleta, e);
             }
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void RemoverBicicleta(Bicicleta bicicleta)
+        public Bicicleta RemoverBicicleta(Bicicleta bicicleta)
         {
             try
             {
                 Facade.Instance.RemoverBicicleta(bicicleta);
+                return new Bicicleta();
             }
-            catch
+            catch (Exception e)
             {
-                //TODO: LogFile();
+                return (Bicicleta)TratarRetorno(bicicleta, e);
             }
         }
 
@@ -100,9 +101,9 @@ namespace Fusioness.Services
             {
                 return Facade.Instance.ObterBicicletaPorId(bicicleta);
             }
-            catch
+            catch (Exception e)
             {
-                return default(Bicicleta);
+                return (Bicicleta)TratarRetorno(bicicleta, e);
             }
         }
 
@@ -122,16 +123,16 @@ namespace Fusioness.Services
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string InserirFotoBicicleta(Bicicleta bicicleta, string filename, byte[] bytes)
+        public Bicicleta InserirFotoBicicleta(Bicicleta bicicleta, string filename, byte[] bytes)
         {
             try
             {
                 string dirBase = Server.MapPath("~");
-                return Facade.Instance.InserirBicicleta(bicicleta, bytes, filename, dirBase);
+                return Facade.Instance.InserirFotoBicicleta(bicicleta, bytes, filename, dirBase);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return string.Empty;
+                return (Bicicleta)TratarRetorno(bicicleta, e);
             }
         }
 
@@ -896,6 +897,17 @@ namespace Fusioness.Services
 
             smtp.Send(message);
         }
+        #endregion
+
+        #region Util
+
+        private EntityBase TratarRetorno(EntityBase objeto, Exception e)
+        {
+            objeto.StatusRetorno = 1;
+            objeto.DescricaoRetorno = e.Message;
+            return objeto;
+        }
+
         #endregion
     }
 }

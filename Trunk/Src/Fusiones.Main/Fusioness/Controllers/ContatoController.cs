@@ -10,42 +10,46 @@ namespace Fusioness.Controllers
     {
         public ActionResult Index(ContatoModel model)
         {
-            var idsContatos = Servico.ListarContatosDoUsuario(UsuarioLogado).Select(c => c.IdContato).ToList();
-            if (idsContatos.Any()) model.ListaDeUsuarios = Servico.ObterUsuariosIds(idsContatos.ToArray());
+            model = new ContatoModel();
+            model.ListaDeUsuarios = Servico.ListarUsuarios().OrderBy(x => x.Nome).ToArray();
             return View(model);
         }
 
         public ActionResult AdicionarRemoverContato(int IdContato, bool IsAdd)
         {
-            var usuarioLogado = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
             if (IsAdd)
             {
                 var NovoContato = new Contato()
                 {
-                    IdUsuario = usuarioLogado.IdUsuario,
+                    IdUsuario = this.UsuarioLogado.IdUsuario,
                     IdContato = IdContato
                 };
                 NovoContato = Servico.InserirContato(NovoContato);
-                ExibirModal("O convite foi enviado com sucesso.");
+
+                if (NovoContato.StatusRetorno == 0)
+                {
+                    ExibirModal("O convite foi enviado com sucesso. Aguarde que o amigo o aceite =)");
+                }
+                else
+                {
+                    ExibirModal("Ocorreu algum erro ao adicionar a amizade, tente novamente.");
+                }
             }
             else
             {
-                var lstContatos = Servico.ListarContatosDoUsuario(usuarioLogado);
-                var contato = lstContatos.Where(c => c.IdUsuario == usuarioLogado.IdUsuario && c.IdContato == IdContato).FirstOrDefault();
-                if (contato != null)
+                if (IdContato > 0)
                 {
-                    Servico.ExcluirContato(contato);
+                    var lstContatos = Servico.ListarContatosDoUsuario(this.UsuarioLogado);
+                    var contato = lstContatos.Where(c => c.IdUsuario == this.UsuarioLogado.IdUsuario && c.IdContato == IdContato).FirstOrDefault();
+                    if (contato != null)
+                    {
+                        Servico.ExcluirContato(contato);
+                        ExibirModal("A amizade foi desfeita, mas ainda dá tempo de voltar atrás... Adiciona de novo!");
+                    }
                 }
             }
-            return RedirectToAction("ListarTodos");
-        }
 
-        [HttpGet]
-        public ActionResult ListarTodos()
-        {
-            var model = new ContatoModel();
-            model.ListaDeUsuarios = Servico.ListarUsuarios().OrderBy(x=>x.Nome).ToArray();
-            return View("index",model);
+            return RedirectToAction("VerPerfilUsuario", "Usuario", new { IdUsuario = IdContato });
         }
 
         public ActionResult MeusContatos()
@@ -70,6 +74,15 @@ namespace Fusioness.Controllers
                     IdContato = IdUsuario
                 };
                 contato = Servico.InserirContato(contato);
+
+                if (contato.StatusRetorno == 0)
+                {
+                    ExibirModal("O contato foi aceito com sucesso... Sejam felizes!");
+                }
+                else
+                {
+                    ExibirModal("Ocorreu algum erro ao concretizar a amizade, tente novamente.");
+                }
             }
             else
             {
@@ -79,6 +92,7 @@ namespace Fusioness.Controllers
                     IdContato = usuariologado.IdUsuario
                 };
                 var ret = Servico.ExcluirContato(contato);
+                ExibirModal("Convite rejeitado! O seu amigo vai ficar triste... :/");
             }
             return RedirectToAction("MeusContatos");
         }

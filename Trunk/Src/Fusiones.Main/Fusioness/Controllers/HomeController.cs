@@ -14,13 +14,12 @@ namespace Fusioness.Controllers
             var usuario = BaseController.ObterUsuarioLogado(HttpContext);
             var convites = Servico.ListarConvitesDoUsuario(usuario);
             model = new IndexModel();
-            model.ContatosNaoConfirmados = Servico.ObterUsuariosIds(convites.Select(c => c.IdUsuario).ToArray()).ToList();
+            model.ConvitesNaoConfirmados = Servico.ObterUsuariosIds(convites.Select(c => c.IdUsuario).ToArray()).ToList();
             return View(model);
         }
 
         public ActionResult DoSomething(IndexModel model)
         {
-            //Servico.DoSomething()
             return RedirectToAction("index");
         }
 

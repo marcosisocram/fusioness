@@ -41,20 +41,28 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    @if (Model.IsMyself)
+                                    @if (Model.IsMySelf(Model.Usuario.IdUsuario))
                                     {
                                         <!-- <span>Você é visto assim! :)</span>-->
                                         @Html.ActionLink("Editar Perfil", "InserirAlterarUsuario", "Usuario", new { @class = "btn btn-primary btn-friend" })
                                     }
                                     else
                                     {
-                                        if (Model.IsContato)
+                                        if (Model.IsContato(Model.Usuario.IdUsuario))
                                         {                                            
                                             @Html.ActionLink("Desfazer amizade", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=false}, new { @class = "btn btn-danger btn-friend" })
                                         }
                                         else
                                         {
-                                            @Html.ActionLink("Adicionar como amigo", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=true}, new { @class = "btn btn-primary btn-friend" })
+                                            if (Model.IsConvitePendente(Model.Usuario.IdUsuario))
+                                            { 
+                                                @Html.ActionLink("Aceitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario= Model.Usuario.IdUsuario, IsAceitar=true }, new { @class = "btn btn-success"})
+                                                @Html.ActionLink("Rejeitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario= Model.Usuario.IdUsuario, IsAceitar=false }, new { @class = "btn btn-danger" })
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("Adicionar como amigo", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=true}, new { @class = "btn btn-primary btn-friend" })
+                                            }
                                         }
                                     }
                                 </td>

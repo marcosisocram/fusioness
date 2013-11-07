@@ -153,13 +153,15 @@ namespace Fusioness.Business
         }
         public Bicicleta ObterBicicletaPorId(Bicicleta bicicleta)
         {
-            return BicicletaBus.ObterBicicletaPorId(bicicleta);
+            Bicicleta b = BicicletaBus.ObterBicicletaPorId(bicicleta);
+            return b;
         }
         public List<Bicicleta> ListarBicicletasPorUsuario(Usuario usuario)
         {
             return BicicletaBus.ListarBicicletasPorUsuario(usuario);
         }
-        public string InserirBicicleta(Bicicleta bicicleta, byte[] bytes, string filename, string dirBase)
+
+        public Bicicleta InserirFotoBicicleta(Bicicleta bicicleta, byte[] bytes, string filename, string dirBase)
         {
             return BicicletaBus.InserirFotoBicicleta(bicicleta, bytes, filename, dirBase);
         }

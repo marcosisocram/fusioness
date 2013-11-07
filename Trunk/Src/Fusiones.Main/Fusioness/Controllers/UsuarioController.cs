@@ -4,6 +4,8 @@ using Fusioness.Models.Seguranca;
 using System.Web;
 using System.Linq;
 using System.Collections.Generic;
+using Fusioness.FusionessWS;
+
 
 namespace Fusioness.Controllers
 {
@@ -12,8 +14,6 @@ namespace Fusioness.Controllers
         [PermiteAnonimo]
         public ActionResult Index(UsuarioModel model)
         {
-            //model.Usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
-            //return View("InserirAlterarUsuario", model);
             return RedirectToAction("InserirAlterarUsuario");
         }
 
@@ -95,16 +95,12 @@ namespace Fusioness.Controllers
             var model = new UsuarioModel();
             model.Usuario = Servico.ObterUsuariosIds(new int[] { IdUsuario }).FirstOrDefault();
             //eu posso visualizar meu proprio perfil
-            var usuarioLogado = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
-            model.IsMyself = usuarioLogado.IdUsuario == IdUsuario;
-            //eu posso add/del um contato
-            var lstContatos = Servico.ListarContatosDoUsuario(usuarioLogado);
-            var contato = lstContatos.Where(c => c.IdUsuario == usuarioLogado.IdUsuario && c.IdContato == IdUsuario).FirstOrDefault();
-            model.IsContato = contato != null;
+            model.UsuarioLogado = this.UsuarioLogado;
+                                    
             return View("Perfil",model);
         }
 
-        private bool CheckEmail(FusionessWS.Usuario[] usuarios,FusionessWS.Usuario usuariologado, FusionessWS.Usuario usuariomodel)
+        private bool CheckEmail(Usuario[] usuarios,Usuario usuariologado, Usuario usuariomodel)
         {
             // se o e-mail já existir e não for do mesmo usuário que está mudando o perfil ret false
             bool ret = true;
@@ -115,7 +111,7 @@ namespace Fusioness.Controllers
             return ret;
         }
 
-        private bool CheckLogin(FusionessWS.Usuario[] usuarios,FusionessWS.Usuario usuariologado, FusionessWS.Usuario usuariomodel)
+        private bool CheckLogin(Usuario[] usuarios,Usuario usuariologado, Usuario usuariomodel)
         {
             // se o login já existir e não for do mesmo usuário que está mudando o perfil ret false
             bool ret = true;
@@ -126,7 +122,7 @@ namespace Fusioness.Controllers
             return ret;
         }
 
-        private bool CheckSenha(FusionessWS.Usuario usuariologado, FusionessWS.Usuario usuario)
+        private bool CheckSenha(Usuario usuariologado, Usuario usuario)
         {
             return usuariologado.Senha == usuario.Senha;
         }

@@ -12,6 +12,9 @@ namespace Fusioness.Models.Usuarios
         public string Mensagem { get; set; }
         private Usuario _Usuario;        
         public IEnumerable<SelectListItem> Sexos { get; set; }
+
+        public Usuario UsuarioLogado { get; set; }
+
         public Usuario Usuario
         {
             get 
@@ -24,6 +27,7 @@ namespace Fusioness.Models.Usuarios
             }
             set { _Usuario = value; }
         }
+
         public int IdadeUsuario
         {
             get
@@ -43,8 +47,6 @@ namespace Fusioness.Models.Usuarios
                 return "Feminino";
             }
         }
-        public bool IsMyself { get; set; }
-        public bool IsContato { get; set; }
         public bool IsLoginOK { get; set; }
         public bool IsEmailOK { get; set; }
         public bool IsSenhaOK { get; set; }
@@ -128,6 +130,24 @@ namespace Fusioness.Models.Usuarios
                 new SelectListItem { Value = "M", Text = "Masculino" },
                 new SelectListItem { Value = "F", Text = "Feminino" },                
             };
+        }
+
+        public bool IsContato(int IdUsuarioDetalhar)
+        {
+            MainService Servico = new MainService();
+            return Servico.ListarContatosDoUsuario(this.UsuarioLogado).Any(c => c.IdUsuario == this.UsuarioLogado.IdUsuario && c.IdContato == IdUsuarioDetalhar);
+        }
+
+        public bool IsMySelf(int IdUsuarioDetalhar)
+        {
+            return this.UsuarioLogado.IdUsuario == IdUsuarioDetalhar;
+        }
+
+        public bool IsConvitePendente(int IdUsuarioDetalhar)
+        {
+            MainService Servico = new MainService();
+            var convites = Servico.ListarConvitesDoUsuario(this.UsuarioLogado);
+            return convites.Any(c => c.IdUsuario == IdUsuarioDetalhar);
         }
     }
 }

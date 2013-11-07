@@ -50,13 +50,14 @@ namespace Fusioness.Controllers
                 var eventoAlterado = Servico.AlterarEvento(model.Evento);
                 if (eventoAlterado != null && eventoAlterado.IdEvento > 0)
                 {
+                    ExibirModal("Evento alterado com sucesso.");
                     model.Evento = eventoAlterado;
                     model.carregarParametrosView(this.UsuarioLogado, model.Evento);
-                    ExibirModal("Evento alterado com sucesso.");
                     return View(model);
                 }
 
                 ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
+                model.carregarParametrosView(this.UsuarioLogado, model.Evento);
                 return View(model);
             }
             else
