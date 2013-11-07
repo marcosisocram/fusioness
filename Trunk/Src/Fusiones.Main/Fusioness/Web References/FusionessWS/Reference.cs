@@ -148,7 +148,11 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public MainService() {
-            this.Url = global::Fusioness.Properties.Settings.Default.Fusioness_FusionessWS_MainService;
+            #if DEGUG
+            this.Url = global::Fusioness.Properties.Settings.Default.Fusioness_FusionessWS_MainService_Debug;
+            #else
+            this.Url = global::Fusioness.Properties.Settings.Default.Fusioness_FusionessWS_MainService_Release;
+            #endif
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
