@@ -5,11 +5,15 @@ using Fusioness.Models.Seguranca;
 
 namespace Fusioness.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class AcessoController : BaseController
     {
         [PermiteAnonimo]
         public ActionResult Index()
         {
+            var usuarioLogado = BaseController.ObterUsuarioLogado(HttpContext);
+            if(usuarioLogado!=null)
+                return RedirectToAction("Index", "Home");
             return View();
         }
 
