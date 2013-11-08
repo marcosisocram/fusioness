@@ -7,6 +7,8 @@ using System.Collections.Generic;
     {
         public int IdUsuario { get; set; }
         public int IdEvento { get; set; }
+        public DateTime? DataInicial { get; set; }
+        public DateTime? DataFinal { get; set; }
         public virtual Evento Evento { get; set; }
         public virtual Usuario Usuario { get; set; }
     }

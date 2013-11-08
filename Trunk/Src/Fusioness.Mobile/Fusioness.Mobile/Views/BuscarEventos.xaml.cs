@@ -91,21 +91,28 @@ namespace Fusioness.Mobile.Views
 
         void servico_ListarEventosProximosCompleted(object sender, FusionessWS.ListarEventosProximosCompletedEventArgs e)
         {
-            IList<FusionessWS.Evento> listEvetos = e.Result;
-
-            foreach (var item in listEvetos)
+            try
             {
-                this.Eventos.Add(new ItemViewModel()
-                {
-                    EventoImagem = ((String.IsNullOrEmpty(item.UrlImagem)) ? Global.imgEventoDefault : Global.linkImagem + item.UrlImagem),
-                    EventoTitulo = item.Titulo,
-                    EventoData = item.Data.ToString("dd/MM/yyyy"),
-                    EventoId = item.IdEvento,
-                    EventoDescricao = item.Descricao
-                });
-            }
+                IList<FusionessWS.Evento> listEvetos = e.Result;
 
-            llsEvento.ItemsSource = Eventos;
+                foreach (var item in listEvetos)
+                {
+                    this.Eventos.Add(new ItemViewModel()
+                    {
+                        EventoImagem = ((String.IsNullOrEmpty(item.UrlImagem)) ? Global.imgEventoDefault : Global.linkImagem + item.UrlImagem),
+                        EventoTitulo = item.Titulo,
+                        EventoData = item.Data.ToString("dd/MM/yyyy"),
+                        EventoId = item.IdEvento,
+                        EventoDescricao = item.Descricao
+                    });
+                }
+
+                llsEvento.ItemsSource = Eventos;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+            }
         }
 
         private void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
@@ -113,6 +120,49 @@ namespace Fusioness.Mobile.Views
             if (e.Key == Key.Enter)
             {
                 
+            }
+        }
+
+        private void llsEvento_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var Item = (sender as LongListSelector).SelectedItem as ItemViewModel;
+                MessageBoxResult result = MessageBox.Show("Deseja Participar do Evento\n" + Item.EventoTitulo + "?", "Associar?", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {                    
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
+                    FusionessWS.EventoUsuario eventoUsuario = new FusionessWS.EventoUsuario();
+                    eventoUsuario.IdEvento = Item.EventoId;
+                    eventoUsuario.IdUsuario = Global.usuarioLogado.IdUsuario;
+
+                    servico.InserirEventoUsuarioAsync(eventoUsuario);
+                    servico.InserirEventoUsuarioCompleted += servico_InserirEventoUsuarioCompleted;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+            }
+        }
+
+        void servico_InserirEventoUsuarioCompleted(object sender, FusionessWS.InserirEventoUsuarioCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result != null)
+                {
+                    MessageBox.Show("Evento Associado com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
             }
         }
     }

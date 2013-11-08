@@ -18,6 +18,7 @@ namespace Fusioness.Mobile.Views
     {
         public ObservableCollection<ItemViewModel> Comentarios { get; private set; }
         int EventoId = -1;
+        int RotaId = -1;
         FusionessWS.Evento evento = new FusionessWS.Evento();
         Stream output;
 
@@ -79,6 +80,7 @@ namespace Fusioness.Mobile.Views
                     {
                         //Não encontrou a imagem
                     }
+                    RotaId = evento.IdRota;
                     this.lbTituloEvento.Text = evento.Titulo;
                     //EventoData = evento.Data.ToString("dd/MM/yyyy");
 
@@ -122,6 +124,16 @@ namespace Fusioness.Mobile.Views
         private void btComentar_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/Comentario.xaml?EventoId=" + EventoId.ToString(), UriKind.Relative));
+        }
+
+        private void menuIniciar_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/RotaMap.xaml?RotaId=" + RotaId.ToString() +  "&EventoId=" + EventoId.ToString(), UriKind.Relative));
+        }
+
+        private void menuVisualizarRota_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

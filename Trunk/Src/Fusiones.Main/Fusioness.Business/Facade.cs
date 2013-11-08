@@ -371,7 +371,10 @@ namespace Fusioness.Business
         {
             return EventoUsuarioBus.InserirEventoUsuario(eventoUsuario);
         }
-
+        public EventoUsuario AlterarEventoUsuario(EventoUsuario eventoUsuario)
+        {
+            return EventoUsuarioBus.AlterarEventoUsuario(eventoUsuario);
+        }
         public List<EventoUsuario> ListarEventoUsuario(Usuario usuario)
         {
             return EventoUsuarioBus.ListarEventoUsuario(usuario);

@@ -30,8 +30,11 @@ namespace Fusioness.Mobile.Views
         Global.Acao acao = new Global.Acao();
         MapLayer lastMapLayer = null;
         int RotaId = -1;
+        int EventoId = -1;
         bool addLocalizacao = false;
         bool pontoReferencia = false;
+        bool iniciarEvento = true;
+        DateTime? dataInicial = null;
         List<MapLayer> mapLayerPontosRef = new List<MapLayer>(); 
         
         #endregion
@@ -54,6 +57,10 @@ namespace Fusioness.Mobile.Views
                 else
                 {
                     acao = Global.Acao.Criar;
+                }
+                if (NavigationContext.QueryString.TryGetValue("EventoId", out site))
+                {
+                    EventoId = Convert.ToInt32(site);
                 }
             }
         }
@@ -259,30 +266,68 @@ namespace Fusioness.Mobile.Views
 
         private void btStartStop_Click(object sender, EventArgs e)
         {
-            ApplicationBarIconButton btStartStop = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
-            ApplicationBarIconButton btSalvar = (ApplicationBarIconButton)ApplicationBar.Buttons[1];
-            ApplicationBarIconButton btLimpar = (ApplicationBarIconButton)ApplicationBar.Buttons[2];
-            ApplicationBarMenuItem menuPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
+            try
+            {
+                ApplicationBarIconButton btStartStop = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
+                ApplicationBarIconButton btSalvar = (ApplicationBarIconButton)ApplicationBar.Buttons[1];
+                ApplicationBarIconButton btLimpar = (ApplicationBarIconButton)ApplicationBar.Buttons[2];
+                ApplicationBarMenuItem menuPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
 
-            if (btStartStop.IconUri.OriginalString == "/Assets/Buttons/play.png")
-            {
-                btStartStop.IconUri = new Uri("/Assets/Buttons/pause.png", UriKind.Relative);
-                btStartStop.Text = "Parar";
-                btSalvar.IsEnabled = false;
-                btLimpar.IsEnabled = false;
-                if (acao == Global.Acao.Criar)
+                if (btStartStop.IconUri.OriginalString == "/Assets/Buttons/play.png")
                 {
-                    menuPontos.IsEnabled = true;
+                    btStartStop.IconUri = new Uri("/Assets/Buttons/pause.png", UriKind.Relative);
+                    btStartStop.Text = "Parar";
+                    btSalvar.IsEnabled = false;
+                    btLimpar.IsEnabled = false;
+                    if (acao == Global.Acao.Criar)
+                    {
+                        menuPontos.IsEnabled = true;
+                    }
+                    watcher.Start();
+
+                    if (EventoId != -1 && iniciarEvento)
+                    {
+                        iniciarEvento = false;
+                        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                        dataInicial = DateTime.Now;
+                        FusionessWS.EventoUsuario eventoUsuario = new FusionessWS.EventoUsuario()
+                        {
+                            IdEvento = EventoId,
+                            IdUsuario = Global.usuarioLogado.IdUsuario,
+                            DataInicial = dataInicial
+                        };
+
+                        servico.AlterarEventoUsuarioAsync(eventoUsuario);
+                        servico.AlterarEventoUsuarioCompleted += servico_AlterarEventoUsuarioCompleted;
+                    }
                 }
-                watcher.Start();
+                else
+                {
+                    btStartStop.IconUri = new Uri("/Assets/Buttons/play.png", UriKind.Relative);
+                    btStartStop.Text = "Iniciar";
+                    btSalvar.IsEnabled = true;
+                    btLimpar.IsEnabled = true;
+                    watcher.Stop();
+                }
             }
-            else
+            catch (Exception)
             {
-                btStartStop.IconUri = new Uri("/Assets/Buttons/play.png", UriKind.Relative);
-                btStartStop.Text = "Iniciar";
-                btSalvar.IsEnabled = true;
-                btLimpar.IsEnabled = true;
-                watcher.Stop();
+                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+            }
+        }
+
+        void servico_AlterarEventoUsuarioCompleted(object sender, FusionessWS.AlterarEventoUsuarioCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result == null)
+                {
+                    //
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
             }
         }
 
@@ -308,17 +353,38 @@ namespace Fusioness.Mobile.Views
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            if (acao == Global.Acao.Visualizar)
+            try
             {
                 FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-                FusionessWS.Rota rota = new FusionessWS.Rota();
-                rota.IdRota = RotaId;
-                servico.ObterRotaPorIdAsync(rota);
-                servico.ObterRotaPorIdCompleted += servico_ObterRotaPorIdCompleted;
+
+                if (EventoId != -1)
+                {
+                    FusionessWS.EventoUsuario eventoUsuario = new FusionessWS.EventoUsuario()
+                    {
+                        IdEvento = EventoId,
+                        IdUsuario = Global.usuarioLogado.IdUsuario,
+                        DataInicial = dataInicial,
+                        DataFinal = DateTime.Now
+                    };
+
+                    servico.AlterarEventoUsuarioAsync(eventoUsuario);
+                    servico.AlterarEventoUsuarioCompleted += servico_AlterarEventoUsuarioCompleted;
+                }
+                if (acao == Global.Acao.Visualizar)
+                {
+                    FusionessWS.Rota rota = new FusionessWS.Rota();
+                    rota.IdRota = RotaId;
+                    servico.ObterRotaPorIdAsync(rota);
+                    servico.ObterRotaPorIdCompleted += servico_ObterRotaPorIdCompleted;
+                }
+                else
+                {
+                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + RotaId.ToString(), UriKind.Relative));
+                }
             }
-            else
+            catch (Exception)
             {
-                NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + RotaId.ToString(), UriKind.Relative));
+                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
             }
         }
 

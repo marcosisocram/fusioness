@@ -23,6 +23,8 @@ namespace Fusioness.Data.Mapping
             ToTable("EventoUsuario");
             Property(t => t.IdUsuario).HasColumnName("IdUsuario");
             Property(t => t.IdEvento).HasColumnName("IdEvento");
+            Property(t => t.DataInicial).HasColumnName("DataInicial");
+            Property(t => t.DataFinal).HasColumnName("DataFinal");
 
             // Relationships
             HasRequired(t => t.Evento)

@@ -43,7 +43,7 @@
             <TextBlock Grid.Row="1" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="Pesquisar" VerticalAlignment="Top" Width="436"/>
             <TextBox Grid.Row="2" x:Name="txtPesquisar" InputScope="Search" HorizontalAlignment="Left" Height="67" TextWrapping="Wrap" VerticalAlignment="Top" Width="466" Margin="-5,0,0,0" KeyDown="txtPesquisar_KeyDown"/>
 
-            <phone:LongListSelector Grid.Row="3" x:Name="llsEvento" VerticalAlignment="Top" Height="503" Margin="0,0,0,0" ItemsSource="{Binding Eventos}">
+            <phone:LongListSelector Grid.Row="3" x:Name="llsEvento" VerticalAlignment="Top" Height="503" Margin="0,0,0,0" ItemsSource="{Binding Eventos}" SelectionChanged="llsEvento_SelectionChanged">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="6,10,-5,0">

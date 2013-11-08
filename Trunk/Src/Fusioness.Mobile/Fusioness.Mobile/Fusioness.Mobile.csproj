@@ -225,6 +225,9 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarEventoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarEventoUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -310,6 +313,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarEventosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarEventoUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarPontosReferenciaPorRotaResponse.datasource">

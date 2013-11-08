@@ -853,6 +853,20 @@ namespace Fusioness.Services
                 return new EventoUsuario();
             }
         }
+        
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public EventoUsuario AlterarEventoUsuario(EventoUsuario eventoUsuario)
+        {
+            try
+            {
+                return Facade.Instance.AlterarEventoUsuario(eventoUsuario);
+            }
+            catch (Exception)
+            {
+                return new EventoUsuario();
+            }
+        }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

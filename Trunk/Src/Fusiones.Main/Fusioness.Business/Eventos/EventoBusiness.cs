@@ -8,6 +8,7 @@ using Fusioness.Data.Repositories;
 using Fusioness.Entities;
 using Fusioness.Business.Coordenadas;
 using Fusioness.Business.Rotas;
+using Fusioness.Business.EventosUsuarios;
 
 namespace Fusioness.Business.Eventos
 {
@@ -44,6 +45,9 @@ namespace Fusioness.Business.Eventos
                     IRepository<Evento> repo = new EventoRepository(uow);
                     evento = repo.Insert(evento);
                     uow.Commit();
+
+                    EventoUsuarioBusiness eventoUsuarioBusiness = new EventoUsuarioBusiness();
+                    eventoUsuarioBusiness.InserirEventoUsuario(new EventoUsuario() { IdEvento = evento.IdEvento, IdUsuario = evento.IdUsuario });
                 }
                 return evento;
             }
@@ -158,9 +162,9 @@ namespace Fusioness.Business.Eventos
             List<Evento> listaEventosPublicos = new List<Evento>();
             List<Rota> listaRotas = new List<Rota>();
 
-            List<Coordenada> listCoo = coordenadaBusiness.ListarCoordenadasProximas(latitudeMin, latitudeMax, longitudeMin, longitudeMax);
+            List<Coordenada> listCoordenadas = coordenadaBusiness.ListarCoordenadasProximas(latitudeMin, latitudeMax, longitudeMin, longitudeMax);
 
-            var idRota = listCoo.Select(m => m.IdRota).Distinct();
+            var idRota = listCoordenadas.Select(m => m.IdRota).Distinct();
 
             foreach (var item in idRota)
             {
