@@ -15,5 +15,6 @@ namespace Fusioness.Entities
         public string UrlImagemPonto { get; set; }
         public virtual Rota Rota { get; set; }
         public virtual TipoCoordenada TipoCoordenada { get; set; }
+        public virtual byte[] byteImage { get; set; }
     }
 }

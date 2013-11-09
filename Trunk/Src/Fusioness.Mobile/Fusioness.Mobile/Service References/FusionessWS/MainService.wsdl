@@ -188,6 +188,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="UrlImagemPonto" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Rota" type="tns:Rota" />
               <s:element minOccurs="0" maxOccurs="1" name="TipoCoordenada" type="tns:TipoCoordenada" />
+              <s:element minOccurs="0" maxOccurs="1" name="byteImage" type="s:base64Binary" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -1021,6 +1022,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarConvitesFeitosPeloUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarConvitesFeitosPeloUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarConvitesFeitosPeloUsuarioResult" type="tns:ArrayOfContato" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="InserirEventoUsuario">
         <s:complexType>
           <s:sequence>
@@ -1414,6 +1429,12 @@
   <wsdl:message name="ListarConvitesDoUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarConvitesDoUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarConvitesFeitosPeloUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarConvitesFeitosPeloUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ListarConvitesFeitosPeloUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarConvitesFeitosPeloUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="InserirEventoUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:InserirEventoUsuario" />
   </wsdl:message>
@@ -1660,6 +1681,10 @@
     <wsdl:operation name="ListarConvitesDoUsuario">
       <wsdl:input message="tns:ListarConvitesDoUsuarioSoapIn" />
       <wsdl:output message="tns:ListarConvitesDoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarConvitesFeitosPeloUsuario">
+      <wsdl:input message="tns:ListarConvitesFeitosPeloUsuarioSoapIn" />
+      <wsdl:output message="tns:ListarConvitesFeitosPeloUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InserirEventoUsuario">
       <wsdl:input message="tns:InserirEventoUsuarioSoapIn" />
@@ -2163,6 +2188,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesDoUsuario">
       <soap:operation soapAction="http://tempuri.org/ListarConvitesDoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarConvitesFeitosPeloUsuario">
+      <soap:operation soapAction="http://tempuri.org/ListarConvitesFeitosPeloUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2697,6 +2731,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesDoUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarConvitesDoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarConvitesFeitosPeloUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ListarConvitesFeitosPeloUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

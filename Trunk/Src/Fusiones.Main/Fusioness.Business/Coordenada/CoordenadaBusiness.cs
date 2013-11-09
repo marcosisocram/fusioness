@@ -6,6 +6,7 @@ using Fusioness.Data;
 using Fusioness.Data.Contracts;
 using Fusioness.Data.Repositories;
 using Fusioness.Entities;
+using System.IO;
 
 namespace Fusioness.Business.Coordenadas
 {
@@ -51,10 +52,31 @@ namespace Fusioness.Business.Coordenadas
             }
         }
 
-        public List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas)
+        public List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas, string dirbase)
         {
             try
             {
+                foreach (var item in listaCoordenadas)
+                {
+                    if (item.byteImage != null)
+                    {
+                        string retorno = string.Empty;
+
+                        var directory = Path.Combine(dirbase, "images");
+                        var fname = String.Format("{0}/{1}{2}", directory, Path.GetFileNameWithoutExtension(Path.GetTempFileName()), Path.GetExtension("Mobile.jpg"));
+                        if (!Directory.Exists(directory))
+                        {
+                            Directory.CreateDirectory(directory);
+                        }
+                        var fs = File.OpenWrite(fname);
+                        fs.Write(item.byteImage, 0, item.byteImage.Count());
+                        fs.Close();
+                        retorno = Path.GetFileName(fname);
+                        item.UrlImagemPonto = retorno;
+                    }
+                }
+                
+
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Coordenada> repo = new CoordenadaRepository(uow);

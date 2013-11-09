@@ -9,12 +9,15 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Device.Location;
 using Fusioness.Mobile.Util;
+using Microsoft.Phone.Tasks;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Fusioness.Mobile.Views
 {
     public partial class SalvarPontoReferencia : PhoneApplicationPage
     {
-        GeoCoordinateWatcher watcherPonto;
+        GeoCoordinateWatcher watcherPonto;        
 
         public SalvarPontoReferencia()
         {
@@ -54,9 +57,11 @@ namespace Fusioness.Mobile.Views
             coordenada.IdTipoCoordenada = 2;
             coordenada.Latitude = geoCoordenada.Latitude;
             coordenada.Longitude = geoCoordenada.Longitude;
-            //coordenada.UrlImagemPonto = Global.imgUsuarioDefault;
             coordenada.NomePonto = this.txtNomePonto.Text.ToString();
             coordenada.DescricaoPonto = this.txtDescricao.Text.ToString();
+
+            byte[] bytes = Global.ConvertToBytes(this.imgEvento);
+            coordenada.byteImage = bytes;
 
             Global.fusCoordenadas.Add(coordenada);
 
@@ -83,6 +88,32 @@ namespace Fusioness.Mobile.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "Erro!", MessageBoxButton.OK);
+            }
+        }
+
+        private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            try
+            {
+                CameraCaptureTask camera = new CameraCaptureTask();
+                camera.Show();
+                camera.Completed += new EventHandler<PhotoResult>(camera_Completed);
+            }
+            catch(Exception)
+            {
+                //
+            }
+        }
+
+        private void camera_Completed(object sender, PhotoResult e)
+        {
+            try
+            {
+                this.imgEvento.SetSource(e.ChosenPhoto);
+            }
+            catch (Exception)
+            {
+                //
             }
         }
     }
