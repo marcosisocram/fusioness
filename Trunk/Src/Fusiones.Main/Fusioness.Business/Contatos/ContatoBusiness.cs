@@ -125,6 +125,14 @@ namespace Fusioness.Business.Contatos
             var convites = allContatos.Where(c => c.IdContato == usuario.IdUsuario && !meusContatos.Contains(c.IdUsuario));
             return convites.ToList();
         }
+
+        public List<Contato> ListarConvitesFeitosPeloUsuario(Usuario usuario)
+        {
+            var allContatos = ListarContatos();
+            var meusContatos = ListarContatosDoUsuario(usuario).Select(c => c.IdContato);
+            var convites = allContatos.Where(c => c.IdUsuario == usuario.IdUsuario && !meusContatos.Contains(c.IdContato));
+            return convites.ToList();
+        }
         #endregion
 
         #region Private

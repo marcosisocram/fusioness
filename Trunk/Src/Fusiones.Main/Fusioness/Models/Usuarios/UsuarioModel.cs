@@ -149,5 +149,12 @@ namespace Fusioness.Models.Usuarios
             var convites = Servico.ListarConvitesDoUsuario(this.UsuarioLogado);
             return convites.Any(c => c.IdUsuario == IdUsuarioDetalhar);
         }
+
+        public bool IsConviteJaEfetuado(int IdUsuarioDetalhar)
+        {
+            MainService Servico = new MainService();
+            var convitesFeitos = Servico.ListarConvitesFeitosPeloUsuario(this.UsuarioLogado);
+            return convitesFeitos.Any(c => c.IdContato == IdUsuarioDetalhar);
+        }
     }
 }

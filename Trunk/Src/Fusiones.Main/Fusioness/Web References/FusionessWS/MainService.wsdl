@@ -263,6 +263,8 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DataInicial" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="DataFinal" nillable="true" type="s:dateTime" />
               <s:element minOccurs="0" maxOccurs="1" name="Evento" type="tns:Evento" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
             </s:sequence>
@@ -1019,6 +1021,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarConvitesFeitosPeloUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarConvitesFeitosPeloUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarConvitesFeitosPeloUsuarioResult" type="tns:ArrayOfContato" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="InserirEventoUsuario">
         <s:complexType>
           <s:sequence>
@@ -1033,6 +1049,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AlterarEventoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventoUsuario" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarEventoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlterarEventoUsuarioResult" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ListarEventoUsuario">
         <s:complexType>
           <s:sequence>
@@ -1044,6 +1074,20 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ListarEventoUsuarioResult" type="tns:ArrayOfEventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarUsuariosEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarUsuariosEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarUsuariosEventoResult" type="tns:ArrayOfEventoUsuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1384,17 +1428,35 @@
   <wsdl:message name="ListarConvitesDoUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarConvitesDoUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarConvitesFeitosPeloUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarConvitesFeitosPeloUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ListarConvitesFeitosPeloUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarConvitesFeitosPeloUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="InserirEventoUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:InserirEventoUsuario" />
   </wsdl:message>
   <wsdl:message name="InserirEventoUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:InserirEventoUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="AlterarEventoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:AlterarEventoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="AlterarEventoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:AlterarEventoUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarEventoUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:ListarEventoUsuario" />
   </wsdl:message>
   <wsdl:message name="ListarEventoUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarEventoUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarUsuariosEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarUsuariosEvento" />
+  </wsdl:message>
+  <wsdl:message name="ListarUsuariosEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarUsuariosEventoResponse" />
   </wsdl:message>
   <wsdl:message name="ConvidarPorEmailSoapIn">
     <wsdl:part name="parameters" element="tns:ConvidarPorEmail" />
@@ -1619,13 +1681,25 @@
       <wsdl:input message="tns:ListarConvitesDoUsuarioSoapIn" />
       <wsdl:output message="tns:ListarConvitesDoUsuarioSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarConvitesFeitosPeloUsuario">
+      <wsdl:input message="tns:ListarConvitesFeitosPeloUsuarioSoapIn" />
+      <wsdl:output message="tns:ListarConvitesFeitosPeloUsuarioSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="InserirEventoUsuario">
       <wsdl:input message="tns:InserirEventoUsuarioSoapIn" />
       <wsdl:output message="tns:InserirEventoUsuarioSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AlterarEventoUsuario">
+      <wsdl:input message="tns:AlterarEventoUsuarioSoapIn" />
+      <wsdl:output message="tns:AlterarEventoUsuarioSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ListarEventoUsuario">
       <wsdl:input message="tns:ListarEventoUsuarioSoapIn" />
       <wsdl:output message="tns:ListarEventoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosEvento">
+      <wsdl:input message="tns:ListarUsuariosEventoSoapIn" />
+      <wsdl:output message="tns:ListarUsuariosEventoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ConvidarPorEmail">
       <wsdl:input message="tns:ConvidarPorEmailSoapIn" />
@@ -2120,6 +2194,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarConvitesFeitosPeloUsuario">
+      <soap:operation soapAction="http://tempuri.org/ListarConvitesFeitosPeloUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirEventoUsuario">
       <soap:operation soapAction="http://tempuri.org/InserirEventoUsuario" style="document" />
       <wsdl:input>
@@ -2129,8 +2212,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AlterarEventoUsuario">
+      <soap:operation soapAction="http://tempuri.org/AlterarEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarEventoUsuario">
       <soap:operation soapAction="http://tempuri.org/ListarEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosEvento">
+      <soap:operation soapAction="http://tempuri.org/ListarUsuariosEvento" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2636,6 +2737,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarConvitesFeitosPeloUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ListarConvitesFeitosPeloUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirEventoUsuario">
       <soap12:operation soapAction="http://tempuri.org/InserirEventoUsuario" style="document" />
       <wsdl:input>
@@ -2645,8 +2755,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AlterarEventoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/AlterarEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListarEventoUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosEvento">
+      <soap12:operation soapAction="http://tempuri.org/ListarUsuariosEvento" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2666,10 +2794,10 @@
   </wsdl:binding>
   <wsdl:service name="MainService">
     <wsdl:port name="MainServiceSoap" binding="tns:MainServiceSoap">
-      <soap:address location="http://localhost/Fusioness.Services/MainService.asmx" />
+      <soap:address location="http://127.0.0.1/Fusioness.Services/MainService.asmx" />
     </wsdl:port>
     <wsdl:port name="MainServiceSoap12" binding="tns:MainServiceSoap12">
-      <soap12:address location="http://localhost/Fusioness.Services/MainService.asmx" />
+      <soap12:address location="http://127.0.0.1/Fusioness.Services/MainService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -11,5 +11,7 @@ namespace Fusioness.Business.Contatos
         Contato AlterarContato(Contato contato);
         bool ExcluirContato(Contato contato);
         List<Contato> ListarConvitesDoUsuario(Usuario usuario);
+        List<Contato> ListarConvitesFeitosPeloUsuario(Usuario usuario);
+
     }
 }

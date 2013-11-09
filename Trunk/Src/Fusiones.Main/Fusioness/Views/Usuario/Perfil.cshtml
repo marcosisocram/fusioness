@@ -59,6 +59,10 @@
                                                 @Html.ActionLink("Aceitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario= Model.Usuario.IdUsuario, IsAceitar=true }, new { @class = "btn btn-success"})
                                                 @Html.ActionLink("Rejeitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario= Model.Usuario.IdUsuario, IsAceitar=false }, new { @class = "btn btn-danger" })
                                             }
+                                            else if(Model.IsConviteJaEfetuado(Model.Usuario.IdUsuario))
+                                            {
+                                                @Html.ActionLink("Aguardando resposta de amizade...", "", "", null, new { @class = "btn btn-warning", disabled = "disabled"})
+                                            }
                                             else
                                             {
                                                 @Html.ActionLink("Adicionar como amigo", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=true}, new { @class = "btn btn-primary btn-friend" })

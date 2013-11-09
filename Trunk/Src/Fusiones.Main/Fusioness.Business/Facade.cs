@@ -360,9 +360,15 @@ namespace Fusioness.Business
         {
             return ContatoBus.ExcluirContato(contato);
         }
+        
         public List<Contato> ListarConvitesDoUsuario(Usuario usuario)
         {
             return ContatoBus.ListarConvitesDoUsuario(usuario);
+        }
+        
+        public List<Contato> ListarConvitesFeitosPeloUsuario(Usuario usuario)
+        {
+            return ContatoBus.ListarConvitesFeitosPeloUsuario(usuario);
         }
         #endregion
 
