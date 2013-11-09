@@ -338,6 +338,7 @@ namespace Fusioness.Mobile.Views
             btSalvar.IsEnabled = false;
             btLimpar.IsEnabled = false;
             Global.fusCoordenadas.Clear();
+
             if (acao == Global.Acao.Criar)
             {
                 Mapa.MapElements.Clear();
@@ -349,6 +350,11 @@ namespace Fusioness.Mobile.Views
                 Mapa.Layers.RemoveAt(2);
             }
 
+            if (EventoId != -1)
+            {
+                iniciarEvento = true;
+                dataInicial = null;
+            }
         }
 
         private void btSalvar_Click(object sender, EventArgs e)

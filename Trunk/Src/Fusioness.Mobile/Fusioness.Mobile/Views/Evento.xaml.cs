@@ -135,5 +135,10 @@ namespace Fusioness.Mobile.Views
         {
 
         }
+
+        private void menuTempoEvento_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/TempoAtualDoEvento.xaml?EventoId=" + EventoId.ToString(), UriKind.Relative));
+        }
     }
 }

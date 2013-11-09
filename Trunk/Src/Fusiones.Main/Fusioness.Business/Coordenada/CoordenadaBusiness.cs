@@ -188,7 +188,7 @@ namespace Fusioness.Business.Coordenadas
                     IRepository<Rota> reporota = new RotaRepository(uow);
 
                     var listRota = reporota.GetWhere(c => c.IdRota == idRota || c.IdRotaOrigem == idRota).ToList();
-                    int somaMinutos = 0;
+                    double somaMinutos = 0;
 
                     foreach (var item in listRota)
 	                {
@@ -197,7 +197,7 @@ namespace Fusioness.Business.Coordenadas
                         DateTime minData = Convert.ToDateTime(listCoordenada.Min(u => u.Data));
                         DateTime maxData = Convert.ToDateTime(listCoordenada.Max(u => u.Data));
 
-                        somaMinutos += (maxData - minData).Minutes;
+                        somaMinutos += (maxData - minData).TotalMinutes;
                     }
 
                     if (listRota.Count > 0)
@@ -206,7 +206,7 @@ namespace Fusioness.Business.Coordenadas
                         if (totalMinutos >= 60)
                             return (totalMinutos) / 60.0;
                         else
-                            return totalMinutos;
+                            return Convert.ToDouble("0." + Math.Round(totalMinutos).ToString());
                     }
                     else
                         return somaMinutos;

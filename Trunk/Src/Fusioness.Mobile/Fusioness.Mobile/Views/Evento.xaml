@@ -87,6 +87,7 @@
             <shell:ApplicationBarIconButton x:Name="btComentar" IconUri="/Assets/Buttons/coment.png" Text="Comentar" Click="btComentar_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem x:Name="menuIniciar" Text="Iniciar Evento" Click="menuIniciar_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="menuTempoEvento" Text="Tempo atual do Evento" Click="menuTempoEvento_Click" />
                 <shell:ApplicationBarMenuItem x:Name="menuVisualizarRota" Text="Rota do Evento" Click="menuVisualizarRota_Click"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

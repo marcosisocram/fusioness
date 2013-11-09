@@ -6,6 +6,7 @@ using Fusioness.Data;
 using Fusioness.Data.Contracts;
 using Fusioness.Data.Repositories;
 using Fusioness.Entities;
+using Fusioness.Business.Usuarios;
 
 namespace Fusioness.Business.EventosUsuarios
 {
@@ -94,6 +95,15 @@ namespace Fusioness.Business.EventosUsuarios
                 {
                     IRepository<EventoUsuario> repo = new EventoUsuarioRepository(uow);
                     var usuariosEvento = repo.GetWhere(c => c.IdEvento == evento.IdEvento);
+
+                    List<int> idsUsuarios = usuariosEvento.Select(m => m.IdUsuario).ToList();
+                    UsuariosBusiness usuarioBusiness = new UsuariosBusiness();                    
+                    List<Usuario> usuariosEventos = usuarioBusiness.ObterUsuariosIds(idsUsuarios);
+
+                    foreach (var item in usuariosEvento)
+                    {
+                        item.Usuario = usuariosEventos.Where(c => c.IdUsuario == item.IdUsuario).FirstOrDefault();
+                    }
                     return usuariosEvento.ToList();
                 }
             }
@@ -136,6 +146,7 @@ namespace Fusioness.Business.EventosUsuarios
                 throw;
             }
         }
+
         #endregion
     }
 }

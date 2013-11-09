@@ -1063,6 +1063,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarUsuariosEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarUsuariosEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarUsuariosEventoResult" type="tns:ArrayOfEventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ConvidarPorEmail">
         <s:complexType>
           <s:sequence>
@@ -1418,6 +1432,12 @@
   <wsdl:message name="ListarEventoUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarEventoUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarUsuariosEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarUsuariosEvento" />
+  </wsdl:message>
+  <wsdl:message name="ListarUsuariosEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarUsuariosEventoResponse" />
+  </wsdl:message>
   <wsdl:message name="ConvidarPorEmailSoapIn">
     <wsdl:part name="parameters" element="tns:ConvidarPorEmail" />
   </wsdl:message>
@@ -1652,6 +1672,10 @@
     <wsdl:operation name="ListarEventoUsuario">
       <wsdl:input message="tns:ListarEventoUsuarioSoapIn" />
       <wsdl:output message="tns:ListarEventoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosEvento">
+      <wsdl:input message="tns:ListarUsuariosEventoSoapIn" />
+      <wsdl:output message="tns:ListarUsuariosEventoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ConvidarPorEmail">
       <wsdl:input message="tns:ConvidarPorEmailSoapIn" />
@@ -2166,6 +2190,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarEventoUsuario">
       <soap:operation soapAction="http://tempuri.org/ListarEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosEvento">
+      <soap:operation soapAction="http://tempuri.org/ListarUsuariosEvento" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2691,6 +2724,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarEventoUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosEvento">
+      <soap12:operation soapAction="http://tempuri.org/ListarUsuariosEvento" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
