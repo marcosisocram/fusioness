@@ -3055,6 +3055,8 @@ namespace Fusioness.FusionessWS {
         
         private TipoCoordenada tipoCoordenadaField;
         
+        private byte[] byteImageField;
+        
         /// <remarks/>
         public int IdCoordenada {
             get {
@@ -3164,6 +3166,17 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.tipoCoordenadaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] byteImage {
+            get {
+                return this.byteImageField;
+            }
+            set {
+                this.byteImageField = value;
             }
         }
     }

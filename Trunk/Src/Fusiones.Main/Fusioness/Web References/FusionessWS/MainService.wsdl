@@ -188,6 +188,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="UrlImagemPonto" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Rota" type="tns:Rota" />
               <s:element minOccurs="0" maxOccurs="1" name="TipoCoordenada" type="tns:TipoCoordenada" />
+              <s:element minOccurs="0" maxOccurs="1" name="byteImage" type="s:base64Binary" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
