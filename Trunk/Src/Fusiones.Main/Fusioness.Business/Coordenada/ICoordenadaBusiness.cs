@@ -6,7 +6,7 @@ namespace Fusioness.Business.Coordenadas
     public interface ICoordenadaBusiness
     {
         Coordenada InserirCoordenada(Coordenada coordenada);
-        List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas);
+        List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas, string dirBase);
         Coordenada AlterarCoordenada(Coordenada coordenada);
         void RemoverCoordenada(Coordenada coordenada);
         Coordenada ObterCoordenadaPorId(Coordenada coordenada);

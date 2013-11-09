@@ -20,6 +20,8 @@ namespace Fusioness.Data.Mapping
             this.Property(t => t.UrlImagemPonto)
                 .HasMaxLength(2455);
 
+            this.Ignore(t => t.byteImage);
+
             // Table & Column Mappings
             this.ToTable("Coordenada");
             this.Property(t => t.IdCoordenada).HasColumnName("IdCoordenada");

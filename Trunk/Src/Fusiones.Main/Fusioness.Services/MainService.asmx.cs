@@ -613,7 +613,8 @@ namespace Fusioness.Services
         {
             try
             {
-                return Facade.Instance.InserirListaCoordenadas(listaCoordenadas);
+                string dirBase = Server.MapPath("~");
+                return Facade.Instance.InserirListaCoordenadas(listaCoordenadas, dirBase);
             }
             catch
             {

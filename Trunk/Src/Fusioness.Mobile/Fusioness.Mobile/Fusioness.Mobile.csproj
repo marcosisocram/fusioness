@@ -304,6 +304,9 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarConvitesEventosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarConvitesFeitosPeloUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarCoordenadasPorRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

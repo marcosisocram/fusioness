@@ -302,9 +302,9 @@ namespace Fusioness.Business
 
         #region Coordenadas
 
-        public List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas)
+        public List<Coordenada> InserirListaCoordenadas(List<Coordenada> listaCoordenadas, string dirBase)
         {
-            return CoordenadaBus.InserirListaCoordenadas(listaCoordenadas);
+            return CoordenadaBus.InserirListaCoordenadas(listaCoordenadas, dirBase);
         }
 
         public List<Coordenada> ListarCoordenadasPorRota(Rota rota)

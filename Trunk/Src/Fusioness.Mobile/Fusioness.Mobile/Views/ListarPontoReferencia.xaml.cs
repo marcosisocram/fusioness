@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
 using Fusioness.Mobile.ViewModels;
 using Fusioness.Mobile.Util;
+using System.IO;
 
 namespace Fusioness.Mobile.Views
 {
