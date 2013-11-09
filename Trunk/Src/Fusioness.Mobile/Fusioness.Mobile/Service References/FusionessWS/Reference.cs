@@ -2050,6 +2050,11 @@ namespace Fusioness.Mobile.FusionessWS {
         
         Fusioness.Mobile.FusionessWS.ListarEventoUsuarioResponse EndListarEventoUsuario(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarUsuariosEvento", ReplyAction="*")]
+        System.IAsyncResult BeginListarUsuariosEvento(Fusioness.Mobile.FusionessWS.ListarUsuariosEventoRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponse EndListarUsuariosEvento(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConvidarPorEmail", ReplyAction="*")]
         System.IAsyncResult BeginConvidarPorEmail(Fusioness.Mobile.FusionessWS.ConvidarPorEmailRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -5818,6 +5823,74 @@ namespace Fusioness.Mobile.FusionessWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarUsuariosEventoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarUsuariosEvento", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarUsuariosEventoRequestBody Body;
+        
+        public ListarUsuariosEventoRequest() {
+        }
+        
+        public ListarUsuariosEventoRequest(Fusioness.Mobile.FusionessWS.ListarUsuariosEventoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarUsuariosEventoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Evento evento;
+        
+        public ListarUsuariosEventoRequestBody() {
+        }
+        
+        public ListarUsuariosEventoRequestBody(Fusioness.Mobile.FusionessWS.Evento evento) {
+            this.evento = evento;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarUsuariosEventoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarUsuariosEventoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponseBody Body;
+        
+        public ListarUsuariosEventoResponse() {
+        }
+        
+        public ListarUsuariosEventoResponse(Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarUsuariosEventoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.EventoUsuario> ListarUsuariosEventoResult;
+        
+        public ListarUsuariosEventoResponseBody() {
+        }
+        
+        public ListarUsuariosEventoResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.EventoUsuario> ListarUsuariosEventoResult) {
+            this.ListarUsuariosEventoResult = ListarUsuariosEventoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ConvidarPorEmailRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="ConvidarPorEmail", Namespace="http://tempuri.org/", Order=0)]
@@ -6892,6 +6965,25 @@ namespace Fusioness.Mobile.FusionessWS {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListarUsuariosEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListarUsuariosEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.EventoUsuario> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.EventoUsuario>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class MainServiceSoapClient : System.ServiceModel.ClientBase<Fusioness.Mobile.FusionessWS.MainServiceSoap>, Fusioness.Mobile.FusionessWS.MainServiceSoap {
         
         private BeginOperationDelegate onBeginHelloWorldDelegate;
@@ -7236,6 +7328,12 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onListarEventoUsuarioCompletedDelegate;
         
+        private BeginOperationDelegate onBeginListarUsuariosEventoDelegate;
+        
+        private EndOperationDelegate onEndListarUsuariosEventoDelegate;
+        
+        private System.Threading.SendOrPostCallback onListarUsuariosEventoCompletedDelegate;
+        
         private BeginOperationDelegate onBeginConvidarPorEmailDelegate;
         
         private EndOperationDelegate onEndConvidarPorEmailDelegate;
@@ -7408,6 +7506,8 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<AlterarEventoUsuarioCompletedEventArgs> AlterarEventoUsuarioCompleted;
         
         public event System.EventHandler<ListarEventoUsuarioCompletedEventArgs> ListarEventoUsuarioCompleted;
+        
+        public event System.EventHandler<ListarUsuariosEventoCompletedEventArgs> ListarUsuariosEventoCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ConvidarPorEmailCompleted;
         
@@ -10820,6 +10920,66 @@ namespace Fusioness.Mobile.FusionessWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarUsuariosEvento(Fusioness.Mobile.FusionessWS.ListarUsuariosEventoRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListarUsuariosEvento(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginListarUsuariosEvento(Fusioness.Mobile.FusionessWS.Evento evento, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ListarUsuariosEventoRequest inValue = new Fusioness.Mobile.FusionessWS.ListarUsuariosEventoRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarUsuariosEventoRequestBody();
+            inValue.Body.evento = evento;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarUsuariosEvento(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarUsuariosEvento(System.IAsyncResult result) {
+            return base.Channel.EndListarUsuariosEvento(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.EventoUsuario> EndListarUsuariosEvento(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarUsuariosEvento(result);
+            return retVal.Body.ListarUsuariosEventoResult;
+        }
+        
+        private System.IAsyncResult OnBeginListarUsuariosEvento(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.Evento evento = ((Fusioness.Mobile.FusionessWS.Evento)(inValues[0]));
+            return this.BeginListarUsuariosEvento(evento, callback, asyncState);
+        }
+        
+        private object[] OnEndListarUsuariosEvento(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.EventoUsuario> retVal = this.EndListarUsuariosEvento(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListarUsuariosEventoCompleted(object state) {
+            if ((this.ListarUsuariosEventoCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListarUsuariosEventoCompleted(this, new ListarUsuariosEventoCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListarUsuariosEventoAsync(Fusioness.Mobile.FusionessWS.Evento evento) {
+            this.ListarUsuariosEventoAsync(evento, null);
+        }
+        
+        public void ListarUsuariosEventoAsync(Fusioness.Mobile.FusionessWS.Evento evento, object userState) {
+            if ((this.onBeginListarUsuariosEventoDelegate == null)) {
+                this.onBeginListarUsuariosEventoDelegate = new BeginOperationDelegate(this.OnBeginListarUsuariosEvento);
+            }
+            if ((this.onEndListarUsuariosEventoDelegate == null)) {
+                this.onEndListarUsuariosEventoDelegate = new EndOperationDelegate(this.OnEndListarUsuariosEvento);
+            }
+            if ((this.onListarUsuariosEventoCompletedDelegate == null)) {
+                this.onListarUsuariosEventoCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarUsuariosEventoCompleted);
+            }
+            base.InvokeAsync(this.onBeginListarUsuariosEventoDelegate, new object[] {
+                        evento}, this.onEndListarUsuariosEventoDelegate, this.onListarUsuariosEventoCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginConvidarPorEmail(Fusioness.Mobile.FusionessWS.ConvidarPorEmailRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginConvidarPorEmail(request, callback, asyncState);
         }
@@ -11694,6 +11854,19 @@ namespace Fusioness.Mobile.FusionessWS {
             public Fusioness.Mobile.FusionessWS.ListarEventoUsuarioResponse EndListarEventoUsuario(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Fusioness.Mobile.FusionessWS.ListarEventoUsuarioResponse _result = ((Fusioness.Mobile.FusionessWS.ListarEventoUsuarioResponse)(base.EndInvoke("ListarEventoUsuario", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListarUsuariosEvento(Fusioness.Mobile.FusionessWS.ListarUsuariosEventoRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ListarUsuariosEvento", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponse EndListarUsuariosEvento(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponse _result = ((Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponse)(base.EndInvoke("ListarUsuariosEvento", _args, result)));
                 return _result;
             }
             
