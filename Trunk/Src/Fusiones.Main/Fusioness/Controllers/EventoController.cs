@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Fusioness.FusionessWS;
 using Fusioness.Models.Eventos;
+using TimeSpan = System.TimeSpan;
 
 namespace Fusioness.Controllers
 {
@@ -95,7 +96,7 @@ namespace Fusioness.Controllers
 
             var model = new EventoModel();
             model.Evento = Servico.ObterEventoPorId(new Evento { IdEvento = idEvento });
-
+            model.EventoUsuario = Servico.ObterEventoUsuario(model.Evento, UsuarioLogado) ?? new EventoUsuario();
             model.carregarParametrosView(UsuarioLogado, model.Evento);
 
             return View("InserirAlterarEvento", model);
@@ -109,6 +110,12 @@ namespace Fusioness.Controllers
             return RedirectToAction("index", new EventoModel());
         }
 
+        public JsonResult MeuTempoNoEvento(EventoUsuario eventoUsuario)
+        {
+            var tempoString = Servico.ObterMeuTempoNoEvento(eventoUsuario);
+            var tempo = TimeSpan.Parse(tempoString);
+            return Json(tempo.ToString(@"hh\:mm\:ss"));
+        }
         #endregion
 
         #region Convites

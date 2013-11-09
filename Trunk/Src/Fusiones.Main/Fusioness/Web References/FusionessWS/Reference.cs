@@ -148,6 +148,10 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarUsuariosEventoOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ObterEventoUsuarioOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ObterMeuTempoNoEventoOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ConvidarPorEmailOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -364,6 +368,12 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarUsuariosEventoCompletedEventHandler ListarUsuariosEventoCompleted;
+        
+        /// <remarks/>
+        public event ObterEventoUsuarioCompletedEventHandler ObterEventoUsuarioCompleted;
+        
+        /// <remarks/>
+        public event ObterMeuTempoNoEventoCompletedEventHandler ObterMeuTempoNoEventoCompleted;
         
         /// <remarks/>
         public event ConvidarPorEmailCompletedEventHandler ConvidarPorEmailCompleted;
@@ -2076,6 +2086,66 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarUsuariosEventoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarUsuariosEventoCompleted(this, new ListarUsuariosEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterEventoUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public EventoUsuario ObterEventoUsuario(Evento evento, Usuario usuario) {
+            object[] results = this.Invoke("ObterEventoUsuario", new object[] {
+                        evento,
+                        usuario});
+            return ((EventoUsuario)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterEventoUsuarioAsync(Evento evento, Usuario usuario) {
+            this.ObterEventoUsuarioAsync(evento, usuario, null);
+        }
+        
+        /// <remarks/>
+        public void ObterEventoUsuarioAsync(Evento evento, Usuario usuario, object userState) {
+            if ((this.ObterEventoUsuarioOperationCompleted == null)) {
+                this.ObterEventoUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterEventoUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("ObterEventoUsuario", new object[] {
+                        evento,
+                        usuario}, this.ObterEventoUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnObterEventoUsuarioOperationCompleted(object arg) {
+            if ((this.ObterEventoUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterEventoUsuarioCompleted(this, new ObterEventoUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterMeuTempoNoEvento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ObterMeuTempoNoEvento(EventoUsuario eventoUsuario) {
+            object[] results = this.Invoke("ObterMeuTempoNoEvento", new object[] {
+                        eventoUsuario});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterMeuTempoNoEventoAsync(EventoUsuario eventoUsuario) {
+            this.ObterMeuTempoNoEventoAsync(eventoUsuario, null);
+        }
+        
+        /// <remarks/>
+        public void ObterMeuTempoNoEventoAsync(EventoUsuario eventoUsuario, object userState) {
+            if ((this.ObterMeuTempoNoEventoOperationCompleted == null)) {
+                this.ObterMeuTempoNoEventoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterMeuTempoNoEventoOperationCompleted);
+            }
+            this.InvokeAsync("ObterMeuTempoNoEvento", new object[] {
+                        eventoUsuario}, this.ObterMeuTempoNoEventoOperationCompleted, userState);
+        }
+        
+        private void OnObterMeuTempoNoEventoOperationCompleted(object arg) {
+            if ((this.ObterMeuTempoNoEventoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterMeuTempoNoEventoCompleted(this, new ObterMeuTempoNoEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -5034,6 +5104,58 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((EventoUsuario[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ObterEventoUsuarioCompletedEventHandler(object sender, ObterEventoUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterEventoUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterEventoUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public EventoUsuario Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((EventoUsuario)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ObterMeuTempoNoEventoCompletedEventHandler(object sender, ObterMeuTempoNoEventoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterMeuTempoNoEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterMeuTempoNoEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }

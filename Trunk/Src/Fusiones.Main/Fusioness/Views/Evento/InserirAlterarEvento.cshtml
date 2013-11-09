@@ -1,4 +1,6 @@
-﻿@model Fusioness.Models.Eventos.EventoModel
+﻿@using Fusioness.Controllers
+@using Fusioness.FusionessWS
+@model Fusioness.Models.Eventos.EventoModel
 @{
     ViewBag.Title = "Inserir Evento";
     Layout = "~/Views/Shared/LayoutBase.cshtml";
@@ -37,8 +39,8 @@
     <div class="span12">
         <div class="card">
             <h2 class="card-heading simple">
-                @Html.ActionLink("Voltar", "Index", "Evento", new { @class = "pull-right btn btn-primary" })
-                Detalhes do evento:
+                Evento
+                @*<a href="@Url.Action("Index", "Evento")" class="pull-right btn btn-primary">Voltar</a>*@
             </h2>
             <div class="card-body" style="overflow: hidden">
                 <div style="float: left">
@@ -50,10 +52,6 @@
                                 @if (!Model.IsCadastroEvento)
                                 {
                                     <h3>@Model.Evento.Titulo</h3>
-                                    <h4>Data do Evento: @Model.Evento.Data.ToString("dd/MM/yyyy")</h4>
-                                    <h4>Tipo do Evento: @(Model.Evento.Publico ? "Público" : "Privado")</h4>
-                                    <p>@Model.Evento.Descricao</p>
-                                
                                     <p>
                                     @if (!Model.IsCadastroEvento)
                                     {
@@ -64,18 +62,24 @@
 
                                         if (!Model.SouDonoDoEvento(Model.Evento.IdEvento) && !Model.SouParticipanteDoEvento(Model.Evento.IdEvento))
                                         {
-                                            @Html.ActionLink("Participar", "Participe", "Evento", new { idEvento = Model.Evento.IdEvento}, new { @class = "btn btn-success pull-right"})
+                                            @Html.ActionLink("Participar", "Participe", "Evento", new { idEvento = Model.Evento.IdEvento }, new { @class = "btn btn-success pull-right" })
                                             
                                         }
 
                                         if (Model.SouParticipanteDoEvento(Model.Evento.IdEvento))
                                         {
-                                            @Html.ActionLink("Você já participa deste evento!", "", "", null, new { @class = "btn btn-warning pull-right", disabled = "disabled"})
+                                            @Html.ActionLink("Você já participa deste evento!", "", "", null, new { @class = "btn btn-warning pull-right", disabled = "disabled" })
                                         }
 
                                     }
-                                        
                                     </p>
+                                    <h4>Data do Evento: @Model.Evento.Data.ToString("dd/MM/yyyy")</h4>
+                                    <h4>Tipo do Evento: @(Model.Evento.Publico ? "Público" : "Privado")</h4>
+                                    if (Model.EventoUsuario.DataInicial != null && Model.EventoUsuario.DataInicial.HasValue)
+                                    {
+                                         <h4>@Html.Partial("_MeuTempoNoEvento", Model.EventoUsuario)</h4>
+                                    }
+                                    <p>@Model.Evento.Descricao</p>
                                 }
                             </div>
                         </li>

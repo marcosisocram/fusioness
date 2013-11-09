@@ -18,7 +18,6 @@ namespace Fusioness.Data.Mapping
             Property(t => t.IdEvento)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-
             // Table & Column Mappings
             ToTable("EventoUsuario");
             Property(t => t.IdUsuario).HasColumnName("IdUsuario");

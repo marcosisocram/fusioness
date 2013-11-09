@@ -64,6 +64,8 @@
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -187,6 +189,7 @@
     <Content Include="Views\Evento\Convites.cshtml" />
     <Content Include="Views\Usuario\Registrar.cshtml" />
     <Content Include="Views\Bicicleta\InserirAlterarBicicleta.cshtml" />
+    <Content Include="Views\Shared\_MeuTempoNoEvento.cshtml" />
     <Content Include="Web References\FusionessWS\Bicicleta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>

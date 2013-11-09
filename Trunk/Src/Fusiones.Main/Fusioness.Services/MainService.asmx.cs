@@ -909,6 +909,34 @@ namespace Fusioness.Services
                 return new List<EventoUsuario>();
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public EventoUsuario ObterEventoUsuario(Evento evento, Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ObterEventoUsuario(evento, usuario);
+            }
+            catch (Exception)
+            {
+                return new EventoUsuario();
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ObterMeuTempoNoEvento(EventoUsuario eventoUsuario)
+        {
+            try
+            {
+                return Facade.Instance.ObterMeuTempoNoEvento(eventoUsuario).ToString();
+            }
+            catch (Exception)
+            {
+                return new TimeSpan(0, 0, 0, 0, 0).ToString();
+            }
+        }
         #endregion
 
         #region Outros

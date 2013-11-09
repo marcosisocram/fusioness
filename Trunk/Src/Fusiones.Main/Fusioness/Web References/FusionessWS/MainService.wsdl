@@ -1091,6 +1091,35 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ObterEventoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterEventoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterEventoUsuarioResult" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterMeuTempoNoEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventoUsuario" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterMeuTempoNoEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterMeuTempoNoEventoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ConvidarPorEmail">
         <s:complexType>
           <s:sequence>
@@ -1458,6 +1487,18 @@
   <wsdl:message name="ListarUsuariosEventoSoapOut">
     <wsdl:part name="parameters" element="tns:ListarUsuariosEventoResponse" />
   </wsdl:message>
+  <wsdl:message name="ObterEventoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterEventoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ObterEventoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterEventoUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterMeuTempoNoEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterMeuTempoNoEvento" />
+  </wsdl:message>
+  <wsdl:message name="ObterMeuTempoNoEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterMeuTempoNoEventoResponse" />
+  </wsdl:message>
   <wsdl:message name="ConvidarPorEmailSoapIn">
     <wsdl:part name="parameters" element="tns:ConvidarPorEmail" />
   </wsdl:message>
@@ -1700,6 +1741,14 @@
     <wsdl:operation name="ListarUsuariosEvento">
       <wsdl:input message="tns:ListarUsuariosEventoSoapIn" />
       <wsdl:output message="tns:ListarUsuariosEventoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterEventoUsuario">
+      <wsdl:input message="tns:ObterEventoUsuarioSoapIn" />
+      <wsdl:output message="tns:ObterEventoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterMeuTempoNoEvento">
+      <wsdl:input message="tns:ObterMeuTempoNoEventoSoapIn" />
+      <wsdl:output message="tns:ObterMeuTempoNoEventoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ConvidarPorEmail">
       <wsdl:input message="tns:ConvidarPorEmailSoapIn" />
@@ -2232,6 +2281,24 @@
     </wsdl:operation>
     <wsdl:operation name="ListarUsuariosEvento">
       <soap:operation soapAction="http://tempuri.org/ListarUsuariosEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterEventoUsuario">
+      <soap:operation soapAction="http://tempuri.org/ObterEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterMeuTempoNoEvento">
+      <soap:operation soapAction="http://tempuri.org/ObterMeuTempoNoEvento" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2775,6 +2842,24 @@
     </wsdl:operation>
     <wsdl:operation name="ListarUsuariosEvento">
       <soap12:operation soapAction="http://tempuri.org/ListarUsuariosEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterEventoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ObterEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterMeuTempoNoEvento">
+      <soap12:operation soapAction="http://tempuri.org/ObterMeuTempoNoEvento" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

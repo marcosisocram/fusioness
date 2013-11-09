@@ -147,6 +147,31 @@ namespace Fusioness.Business.EventosUsuarios
             }
         }
 
+        public TimeSpan ObterMeuTempoNoEvento(EventoUsuario eventoUsuario)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    var tempoRetorno = new TimeSpan(0, 0, 0, 0, 0);
+                    IRepository<EventoUsuario> repo = new EventoUsuarioRepository(uow);
+                    var tempEventoUsuario = repo.GetWhere(c => c.IdUsuario == eventoUsuario.IdUsuario && c.IdEvento == eventoUsuario.IdEvento).FirstOrDefault();
+                    if (tempEventoUsuario != null && tempEventoUsuario.IdEvento > 0 && tempEventoUsuario.IdUsuario > 0)
+                    {
+                        if (tempEventoUsuario.DataInicial.HasValue)
+                        {
+                            if (tempEventoUsuario.DataFinal.HasValue) tempoRetorno = tempEventoUsuario.DataFinal.Value - tempEventoUsuario.DataInicial.Value;
+                            else tempoRetorno = DateTime.Now - tempEventoUsuario.DataInicial.Value;
+                        }
+                    }
+                    return tempoRetorno;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
     }
 }

@@ -389,7 +389,14 @@ namespace Fusioness.Business
         {
             return EventoUsuarioBus.ListarUsuariosEvento(evento);
         }
-        
+        public EventoUsuario ObterEventoUsuario(Evento evento, Usuario usuario)
+        {
+            return EventoUsuarioBus.ObterEventoUsuario(evento, usuario);
+        }
+        public TimeSpan ObterMeuTempoNoEvento(EventoUsuario eventoUsuario)
+        {
+            return EventoUsuarioBus.ObterMeuTempoNoEvento(eventoUsuario);
+        }
         #endregion
 
         #endregion

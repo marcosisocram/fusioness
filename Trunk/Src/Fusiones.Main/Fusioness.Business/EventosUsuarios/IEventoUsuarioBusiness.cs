@@ -15,5 +15,6 @@ namespace Fusioness.Business.EventosUsuarios
         List<EventoUsuario> ListarUsuariosEvento(Evento evento);
         List<EventoUsuario> ListarEventoUsuario(Usuario usuario);
         EventoUsuario ObterEventoUsuario(Evento evento, Usuario usuario);
+        TimeSpan ObterMeuTempoNoEvento(EventoUsuario eventoUsuario);
     }
 }
