@@ -162,8 +162,8 @@
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\font-awesome-ie7.min.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
-    <Content Include="Content\images\flag_green.png" />
-    <Content Include="Content\images\flag_red.png" />
+    <Content Include="Content\images\ball_green.png" />
+    <Content Include="Content\images\ball_red.png" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.js" />
