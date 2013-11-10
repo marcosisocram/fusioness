@@ -44,20 +44,27 @@
       }
 
       var firstCoordinate = flightPlanCoordinates[0];
-      //Adiciona flag para o início do trajeto
+      ////Adiciona flag para o início do trajeto
+      //var marker1 = new google.maps.Marker({
+      //    position: firstCoordinate,
+      //    map: map,
+      //    icon: flag_green
+        //});
+
+        //Adiciona flag para o início do trajeto
       var marker1 = new google.maps.Marker({
-          position: firstCoordinate,
+          position: new google.maps.LatLng(-25.363882,131.044922),
           map: map,
-          icon: flag_green
+          title: 'Uluru (Ayers Rock)'
       });
         
       var lastCoordinate = flightPlanCoordinates[(flightPlanCoordinates.length)-1];
       //Adiciona flag para o fim do trajeto
-      var marker2 = new google.maps.Marker({
-          position: flightPlanCoordinates[lastCoordinate],
-          map: map,
-          icon: flag_red
-      });
+      //var marker2 = new google.maps.Marker({
+      //    position: flightPlanCoordinates[lastCoordinate],
+      //    map: map,
+      //    icon: flag_red
+      //});
 
       map.fitBounds(bounds);
 

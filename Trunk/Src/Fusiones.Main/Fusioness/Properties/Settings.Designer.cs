@@ -46,10 +46,18 @@ namespace Fusioness.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://127.0.0.1/Fusioness.Services/MainService.asmx")]
+        #if DEBUG
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/Fusioness.Services/MainService.asmx")] 
+        #else
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fusionessapi.apphb.com/Fusioness.Services/MainService.asmx")]
+        #endif
         public string Fusioness_FusionessWS_MainService {
             get {
-                return ((string)(this["Fusioness_FusionessWS_MainService"]));
+                #if DEBUG
+                return ((string)(this["Fusioness_FusionessWS_MainService_Debug"]));
+                #else
+                return ((string)(this["Fusioness_FusionessWS_MainService_Release"]));
+                #endif
             }
         }
     }
