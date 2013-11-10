@@ -86,15 +86,8 @@ namespace Fusioness.Controllers
             string retorno = string.Empty;
             try
             {
-                if (image == null || image.ContentLength <= 0)
-                {
-                    retorno = "Não foi selecionado nenhum arquivo.";
-                }
-                else if (!image.ContentType.ToLower().Contains("image"))
-                {
-                    retorno = "O arquivo selecionado não é uma imagem.";
-                }
-                else
+                var validaImagem = new ValidarImagem(image);
+                if (validaImagem.IsImagemValida)
                 {
                     var ms = new MemoryStream();
                     image.InputStream.CopyTo(ms);
@@ -102,13 +95,17 @@ namespace Fusioness.Controllers
                     var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
                     string fs = Servico.InserirFotoUsuario(usuario, image.FileName, bytes);
                     usuario.UrlImagem = fs;
+                    ExibirModal("Imagem enviada com sucesso.");
+                }
+                else
+                {
+                    throw new Exception(validaImagem.Retorno);
                 }
             }
             catch(Exception e) 
             {
-                retorno = string.Format("Aconteceu um erro inesperado. Mensagem de erro: {0}.", e.Message);
+                ExibirModal(e.Message);
             }
-            if (!string.IsNullOrEmpty(retorno)) { ExibirModal(retorno); }
             return RedirectToAction("Index");
         }
 

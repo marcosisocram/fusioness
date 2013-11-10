@@ -47,8 +47,13 @@
                             @Html.ValidationMessage("Senha", new { style = "margin-left:10px" })
                         </li>
                         <li>
-                            @Html.LabelFor(m => m.NovaSenha)
-                            @Html.PasswordFor(m => m.NovaSenha) 
+                            @*@Html.LabelFor(m => m.NovaSenha )*@<label>Nova senha</label>
+                            @Html.PasswordFor(m => m.NovaSenha)
+                            @Html.ValidationMessage("NovaSenha", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            @*@Html.LabelFor(m => m.NovaSenhaRpt)*@<label>Repita Nova senha</label>
+                            @Html.PasswordFor(m => m.NovaSenhaRpt) 
                         </li>
                         <li>
                             @Html.LabelFor(m => m.Usuario.Email)

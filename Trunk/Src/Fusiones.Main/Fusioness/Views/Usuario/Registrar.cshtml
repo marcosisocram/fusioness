@@ -78,6 +78,10 @@
                             @Html.ValidationMessage("Senha", new { style = "margin-left:10px" })
                         </li>
                         <li>
+                            @*@Html.LabelFor(m => m.SenhaRpt)*@ <label>Repita a senha</label>
+                            @Html.PasswordFor(m => m.SenhaRpt) 
+                        </li>
+                        <li>
                             @Html.LabelFor(m => m.Usuario.Email)
                             @Html.TextBoxFor(m => m.Usuario.Email) 
                             @Html.ValidationMessage("Email", new { style = "margin-left:10px" })

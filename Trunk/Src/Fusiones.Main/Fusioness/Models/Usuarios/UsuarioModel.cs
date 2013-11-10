@@ -54,7 +54,9 @@ namespace Fusioness.Models.Usuarios
         public bool IsLoginOK { get; set; }
         public bool IsEmailOK { get; set; }
         public bool IsSenhaOK { get; set; }
+        public string SenhaRpt { get; set; }
         public string NovaSenha { get; set; }
+        public string NovaSenhaRpt { get; set; }
 
         public bool ValidarUsuario(ModelStateDictionary ModelState)
         {
@@ -82,6 +84,16 @@ namespace Fusioness.Models.Usuarios
             else if (!IsSenhaOK)
             {
                 ModelState.AddModelError("Senha", "A senha digitada não confere com a senha em nosso sistema");
+                retorno = false;
+            }
+            else if (!string.IsNullOrEmpty(SenhaRpt) && Usuario.Senha != SenhaRpt)
+            {
+                ModelState.AddModelError("Senha", "A senhas digitadas não são iguais");
+                retorno = false;
+            }
+            else if (!string.IsNullOrEmpty(NovaSenhaRpt) && NovaSenha != NovaSenhaRpt)
+            {
+                ModelState.AddModelError("NovaSenha", "A senhas digitadas não são iguais");
                 retorno = false;
             }
             if (string.IsNullOrWhiteSpace(Usuario.Email))
