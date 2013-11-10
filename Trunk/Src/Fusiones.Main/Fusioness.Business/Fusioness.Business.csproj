@@ -48,6 +48,8 @@
     <Compile Include="Contatos\IContatoBusiness.cs" />
     <Compile Include="ConvitesEventos\ConviteEventoBusiness.cs" />
     <Compile Include="ConvitesEventos\IConviteEventoBusiness.cs" />
+    <Compile Include="ConviteUsuarioEmails\ConviteUsuarioEmailBusiness.cs" />
+    <Compile Include="ConviteUsuarioEmails\IConviteUsuarioEmailBusiness.cs" />
     <Compile Include="Coordenada\CoordenadaBusiness.cs" />
     <Compile Include="Coordenada\ICoordenadaBusiness.cs" />
     <Compile Include="EventosUsuarios\EventoUsuarioBusiness.cs" />

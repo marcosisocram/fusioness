@@ -2151,25 +2151,27 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ConvidarPorEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void ConvidarPorEmail(string mail, string url) {
+        public void ConvidarPorEmail(string[] emails, string url, Usuario usuario) {
             this.Invoke("ConvidarPorEmail", new object[] {
-                        mail,
-                        url});
+                        emails,
+                        url,
+                        usuario});
         }
         
         /// <remarks/>
-        public void ConvidarPorEmailAsync(string mail, string url) {
-            this.ConvidarPorEmailAsync(mail, url, null);
+        public void ConvidarPorEmailAsync(string[] emails, string url, Usuario usuario) {
+            this.ConvidarPorEmailAsync(emails, url, usuario, null);
         }
         
         /// <remarks/>
-        public void ConvidarPorEmailAsync(string mail, string url, object userState) {
+        public void ConvidarPorEmailAsync(string[] emails, string url, Usuario usuario, object userState) {
             if ((this.ConvidarPorEmailOperationCompleted == null)) {
                 this.ConvidarPorEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConvidarPorEmailOperationCompleted);
             }
             this.InvokeAsync("ConvidarPorEmail", new object[] {
-                        mail,
-                        url}, this.ConvidarPorEmailOperationCompleted, userState);
+                        emails,
+                        url,
+                        usuario}, this.ConvidarPorEmailOperationCompleted, userState);
         }
         
         private void OnConvidarPorEmailOperationCompleted(object arg) {

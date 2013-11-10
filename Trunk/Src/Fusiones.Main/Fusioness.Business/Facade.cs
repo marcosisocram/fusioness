@@ -15,6 +15,10 @@ using Fusioness.Business.QualidadesRota;
 using Fusioness.Business.ComentariosEvento;
 using Fusioness.Business.Coordenadas;
 using Fusioness.Business.EventosUsuarios;
+using Fusioness.Business.ConviteUsuarioEmails;
+using System.Net;
+using System.Net.Mail;
+using System.Linq;
 
 namespace Fusioness.Business
 {
@@ -35,6 +39,7 @@ namespace Fusioness.Business
         private readonly IRespostaBusiness RespostaBus;
         private readonly IContatoBusiness ContatoBus;
         private readonly IEventoUsuarioBusiness EventoUsuarioBus;
+        private readonly IConviteUsuarioEmailBusiness ConviteUsuarioEmailBus;
 
         #endregion
 
@@ -63,6 +68,7 @@ namespace Fusioness.Business
             ComentarioEventoBus = new ComentarioEventoBusiness();
             RespostaBus = new RespostaBusiness();
             EventoUsuarioBus = new EventoUsuarioBusiness();
+            ConviteUsuarioEmailBus = new ConviteUsuarioEmailBusiness();
         }
 
         #endregion
@@ -399,6 +405,50 @@ namespace Fusioness.Business
         }
         #endregion
 
+        #region ConviteUsuarioEmail
+
+        public void ConvidarPorEmail(string[] emails, string url, Usuario usuario)
+        {
+            // envia e-mails
+            var fromAddress = new MailAddress("fusionessapp@gmail.com", "Convite Fusioness");
+            const string fromPassword = "Unibratec";
+            const string subject = "Venha fazer parte do Fusioness!";
+            string body = "Click no link para criar o seu perfil \n" + url;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            List<MailMessage> messages = new List<MailMessage>();
+            emails.ToList().ForEach(email =>
+            {
+                messages.Add(new MailMessage(fromAddress.Address, email, subject, body));
+            });
+            messages.ForEach(c => smtp.Send((c)));
+
+            //salva um registro no banco para cada e-mail convidado
+
+            List<ConviteUsuarioEmail> lst = new List<ConviteUsuarioEmail>();
+            emails.ToList().ForEach(email =>
+            {
+                var convite = new ConviteUsuarioEmail()
+                {
+                    IdUsuarioConvidou = usuario.IdUsuario,
+                    EmailConvidado =email,
+                    DataDoConvite=DateTime.Now
+                };
+                convite = ConviteUsuarioEmailBus.InserirConviteUsuarioEmail(convite);
+            });
+        }
+
         #endregion
+
+        #endregion
+
     }
 }

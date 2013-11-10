@@ -117,7 +117,6 @@
         </p>
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
         <button class="btn btn-primary" type="submit">Save changes</button>
     </div>
     }
@@ -132,12 +131,12 @@
         </div>
         <div class="modal-body">
             <p>
-                <input type="text" id="email" name="email" />
+                <input type="text" id="emails" name="emails" />
             </p>
         </div>
         <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             <button class="btn btn-primary" type="submit">Enviar email</button>
+            @Html.ActionLink("GMail", "ConvidarAmigosGMail", "Home", new { @class = "btn btn-primary" })
         </div>
     }
 </div>

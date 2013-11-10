@@ -940,33 +940,12 @@ namespace Fusioness.Services
         }
         #endregion
 
-        #region Outros
+        #region ConviteUsuarioEmail
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void ConvidarPorEmail(string mail, string url)
+        public void ConvidarPorEmail(string[] emails, string url,Usuario usuario)
         {
-            var fromAddress = new MailAddress("fusionessapp@gmail.com", "Convite Fusioness");
-            var toAddress = new MailAddress(mail, mail);
-            const string fromPassword = "Unibratec";
-            const string subject = "Venha fazer parte do Fusioness!";
-            string body = "Click no link para criar o seu perfil \n" + url;
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
-            var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            };
-
-            smtp.Send(message);
+            Facade.Instance.ConvidarPorEmail(emails, url, usuario);
         }
         #endregion
 

@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using Fusioness.Models.Home;
 using System.Linq;
 using System;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Fusioness.Controllers
 {
@@ -24,25 +26,56 @@ namespace Fusioness.Controllers
         }
 
 
-        public ActionResult ConvidarPorEmail(string email)
+        public async Task<ActionResult> ConvidarPorEmail(string emails)
         {
-            string retorno = string.Empty;
+            //string retorno = string.Empty;
+            //try
+            //{
+            //    if (System.Text.RegularExpressions.Regex.IsMatch(emails, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
+            //    {
+            //        string srt = HttpContext.Request.Url.PathAndQuery;
+            //        string url = HttpContext.Request.Url.AbsoluteUri.Replace(srt, "/");
+            //        Servico.ConvidarPorEmail(emails, url);
+            //    }
+            //    else 
+            //    {
+            //        ExibirModal("Formato de email invalido!");
+            //    }
+            //}
+            //catch(Exception e) 
+            //{
+            //    retorno = string.Format("Aconteceu um erro inesperado. Mensagem de erro: {0}.", e.Message);
+            //}
             try
             {
-                if (System.Text.RegularExpressions.Regex.IsMatch(email, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
+                if (String.IsNullOrWhiteSpace(emails))
+                {
+                    throw new Exception("E-mails em branco.");
+                }
+                char[] separador = new char[] { ',' };
+                var VetorEmails = emails.Split(separador, StringSplitOptions.RemoveEmptyEntries);
+                var EmailsInvalidos = VetorEmails.Where(c => !System.Text.RegularExpressions.Regex.IsMatch(c, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"));
+                if (EmailsInvalidos.Any())
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("São e-mails inválidos: ");
+                    EmailsInvalidos.ToList().ForEach(c =>
+                    {
+                        sb.AppendFormat("{0},", c);
+                    });
+                    throw new Exception(sb.ToString().TrimEnd(separador));
+                }
+                else
                 {
                     string srt = HttpContext.Request.Url.PathAndQuery;
                     string url = HttpContext.Request.Url.AbsoluteUri.Replace(srt, "/");
-                    Servico.ConvidarPorEmail(email, url);
+                    var task = Task.Run(() => Servico.ConvidarPorEmailAsync(VetorEmails, url,BaseController.ObterUsuarioLogado(HttpContext)));
                 }
-                else 
-                {
-                    ExibirModal("Formato de email invalido!");
-                }
+                ExibirModal("Continue convidando mais amigos para nossa rede.");
             }
-            catch(Exception e) 
+            catch (Exception e)
             {
-                retorno = string.Format("Aconteceu um erro inesperado. Mensagem de erro: {0}.", e.Message);
+                ExibirModal(e.Message);
             }
             return RedirectToAction("Index");
         }
@@ -76,6 +109,11 @@ namespace Fusioness.Controllers
                 retorno = string.Format("Aconteceu um erro inesperado. Mensagem de erro: {0}.", e.Message);
             }
             if (!string.IsNullOrEmpty(retorno)) { ExibirModal(retorno); }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ConvidarAmigosGMail()
+        {
             return RedirectToAction("Index");
         }
     }
