@@ -100,7 +100,7 @@ namespace Fusioness.Controllers
             if (eventosDoUsuario.Any())
             {
                 eventosDoUsuario = eventosDoUsuario.OrderBy(e => e.Data).ToList();
-                eventosDoUsuario = eventosDoUsuario.Where(e => e.Publico).ToList();
+                if(IdUsuario != UsuarioLogado.IdUsuario) eventosDoUsuario = eventosDoUsuario.Where(e => e.Publico).ToList();
                 model.UltimosEventos = eventosDoUsuario.Take(10).ToList();
             }
 
@@ -110,7 +110,7 @@ namespace Fusioness.Controllers
                 var idsEventos = comentarios.Select(e => e.IdEvento).Distinct().ToArray();
                 var eventosComentario = Servico.ListarEventos(idsEventos).ToList();
                 comentarios.ForEach(c => c.Evento = eventosComentario.First(e => e.IdEvento == c.IdEvento));
-                comentarios = comentarios.Where(c => c.Evento.Publico).ToList();
+                if (IdUsuario != UsuarioLogado.IdUsuario) comentarios = comentarios.Where(c => c.Evento.Publico).ToList();
                 comentarios = comentarios.OrderBy(c => c.Data).ToList();
                 comentarios.Reverse();
                 comentarios = comentarios.GroupBy(c => c.IdEvento).Select(c => c.First()).ToList();
