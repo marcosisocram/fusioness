@@ -147,7 +147,7 @@ namespace Fusioness.Controllers
 
         private bool CheckSenha(Usuario usuariologado, Usuario usuario)
         {
-            return usuariologado.Senha == usuario.Senha;
+            return usuariologado == null || usuariologado.Senha == usuario.Senha;
         }
     }
 }
