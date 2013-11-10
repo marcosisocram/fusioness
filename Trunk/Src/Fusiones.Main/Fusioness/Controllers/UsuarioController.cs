@@ -92,8 +92,31 @@ namespace Fusioness.Controllers
         [HttpGet]
         public ActionResult VerPerfilUsuario(int IdUsuario)
         {
+            if (IdUsuario <= 0) return RedirectToAction("Index", "Home");
             var model = new UsuarioModel();
             model.Usuario = Servico.ObterUsuariosIds(new int[] { IdUsuario }).FirstOrDefault();
+            
+            var eventosDoUsuario = Servico.ListarEventosPorUsuario(new Usuario {IdUsuario = IdUsuario}).ToList();
+            if (eventosDoUsuario.Any())
+            {
+                eventosDoUsuario = eventosDoUsuario.OrderBy(e => e.Data).ToList();
+                eventosDoUsuario = eventosDoUsuario.Where(e => e.Publico).ToList();
+                model.UltimosEventos = eventosDoUsuario.Take(10).ToList();
+            }
+
+            var comentarios = Servico.ListarComentariosPorUsuario(new Usuario {IdUsuario = IdUsuario}).ToList();
+            if (comentarios.Any())
+            {
+                var idsEventos = comentarios.Select(e => e.IdEvento).Distinct().ToArray();
+                var eventosComentario = Servico.ListarEventos(idsEventos).ToList();
+                comentarios.ForEach(c => c.Evento = eventosComentario.First(e => e.IdEvento == c.IdEvento));
+                comentarios = comentarios.Where(c => c.Evento.Publico).ToList();
+                comentarios = comentarios.OrderBy(c => c.Data).ToList();
+                comentarios.Reverse();
+                comentarios = comentarios.GroupBy(c => c.IdEvento).Select(c => c.First()).ToList();
+                model.UltimosComentarios = comentarios.Take(10).ToList();
+            }
+
             //eu posso visualizar meu proprio perfil
             model.UsuarioLogado = this.UsuarioLogado;
                                     

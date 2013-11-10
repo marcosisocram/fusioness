@@ -11,6 +11,10 @@ namespace Fusioness.Models.Usuarios
     {
         public string Mensagem { get; set; }
         private Usuario _Usuario;        
+
+        public IList<Evento> UltimosEventos { get; set; }
+        public IList<ComentarioEvento> UltimosComentarios { get; set; }
+
         public IEnumerable<SelectListItem> Sexos { get; set; }
 
         public Usuario UsuarioLogado { get; set; }

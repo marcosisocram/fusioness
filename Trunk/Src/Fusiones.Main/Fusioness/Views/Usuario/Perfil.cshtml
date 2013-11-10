@@ -1,80 +1,188 @@
-﻿@model Fusioness.Models.Usuarios.UsuarioModel
+﻿@using Fusioness.FusionessWS
+@model Fusioness.Models.Usuarios.UsuarioModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutBase.cshtml";
+    var urlTemp = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAEOCAYAAACkSI2SAAANmUlEQVR4Xu3cMW8USReG0TYIEAkhghARIhEixM8nIkKEEENsiQQSYFeDNFZvqXv69di+vuM9JJ++pTxVfar2cW97PGfn5+f/TP4QIECAQDuBM4FutycWRIAAgb8CAu0gECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGm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";
 }
-<style>
-    .btn-friend {
-        width: 149px;
-    }
-</style>
-<script>
 
-</script>
-<div class="row-fluid">
-    @using (Html.BeginForm("Perfil", "Usuario", FormMethod.Post))
-    {
-            @Html.HiddenFor(m => m.Usuario.IdUsuario)
-            <div class="span12">
-                <div class="card">
-                    <h2 class="card-heading simple">@Model.Usuario.Nome</h2>
+@section head
+{
+    <style>
+        .btn-friend {
+            width: 149px;
+        }
 
-                    <div style="height: 500px;" class="card-body">
-                        <table>
-                            <tr>
-                                <td>
-                                    <img src="@String.Format("{0}{1}", Fusioness.Controllers.BaseController.ObterUrlBaseAvatar(), Model.Usuario.UrlImagem)" alt="[usuario não possui foto]" title="Ver perfil de @Model.Usuario.Nome" style="height: 150px;width: 167px;"/>
-                                </td>
-                                <td>
-                                    <ul style="list-style: none;">
-                                        <li>
-                                            <label><b>E-mail:</b> @Model.Usuario.Email</label>
-                                        </li>
-                                        <li>
-                                            <label><b>Idade:</b> @Model.IdadeUsuario</label>
-                                        </li>
-                                        <li>
-                                            <label><b>Sexo:</b> @Model.SexoUsuario</label>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    @if (Model.IsMySelf(Model.Usuario.IdUsuario))
-                                    {
-                                        <!-- <span>Você é visto assim! :)</span>-->
-                                        @Html.ActionLink("Editar Perfil", "InserirAlterarUsuario", "Usuario", new { @class = "btn btn-primary btn-friend" })
-                                    }
-                                    else
-                                    {
-                                        if (Model.IsContato(Model.Usuario.IdUsuario))
-                                        {                                            
-                                            @Html.ActionLink("Desfazer amizade", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=false}, new { @class = "btn btn-danger btn-friend" })
-                                        }
-                                        else
-                                        {
-                                            if (Model.IsConvitePendente(Model.Usuario.IdUsuario))
-                                            { 
-                                                @Html.ActionLink("Aceitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario= Model.Usuario.IdUsuario, IsAceitar=true }, new { @class = "btn btn-success"})
-                                                @Html.ActionLink("Rejeitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario= Model.Usuario.IdUsuario, IsAceitar=false }, new { @class = "btn btn-danger" })
-                                            }
-                                            else if(Model.IsConviteJaEfetuado(Model.Usuario.IdUsuario))
-                                            {
-                                                @Html.ActionLink("Aguardando resposta de amizade...", "", "", null, new { @class = "btn btn-warning", disabled = "disabled"})
-                                            }
-                                            else
-                                            {
-                                                @Html.ActionLink("Adicionar como amigo", "AdicionarRemoverContato", "Contato", new { IdContato=@Model.Usuario.IdUsuario, IsAdd=true}, new { @class = "btn btn-primary btn-friend" })
-                                            }
-                                        }
-                                    }
-                                </td>
-                            </tr>
-                        </table>
+        #divDetalhesPerfil {
+            text-align: center;
+        }
+
+        .card {
+            height: 450px;
+        }
+
+        section {
+            margin-top: 10px;
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-top: 30px;
+            padding: 19px;
+            border: 1px solid #d8d8d8;
+            background-color: #ffffff;
+            border-top-width: 0;
+            border-bottom-width: 2px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
+
+            section > .page-header,
+            section > .lead {
+                color: #5a5a5a;
+            }
+
+            section > ul li {
+                margin-bottom: 5px;
+            }
+
+            section .containerEventos {
+                margin-left: 100px;
+            }
+
+            section .containerEventos .card.people:first-child {
+                margin-left: 20px;
+            }
+
+            .imagemEvento {
+            overflow: hidden;
+            -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+    </style>
+}
+
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="pull-left span4">
+            <div class="card">
+                <div class="card-body">
+                    <div style="width: 140px; height: 140px; margin: 0 auto;">
+                        <img class="img-circle" data-src="holder.js/140x140" alt="140x140" style="width: 140px;height: 140px;" src="@String.Format("{0}{1}", Fusioness.Controllers.BaseController.ObterUrlBaseAvatar(), Model.Usuario.UrlImagem)">
                     </div>
+                    <h2>@Model.Usuario.Nome</h2>
+                    <p>
+                        <strong>E-mail:</strong> @Model.Usuario.Email
+                    </p>
+                    <p>
+                        <strong>Idade:</strong> @Model.IdadeUsuario
+                    </p>
+                    <p>
+                        <strong>Sexo:</strong> @Model.SexoUsuario
+                    </p>
+                    <p>
+                        @if (Model.IsMySelf(Model.Usuario.IdUsuario))
+                        {
+                            <!-- <span>Você é visto assim! :)</span>-->
+                            @Html.ActionLink("Editar Perfil", "InserirAlterarUsuario", "Usuario", new { @class = "btn btn-primary btn-friend" })
+                        }
+                        else
+                        {
+                            if (Model.IsContato(Model.Usuario.IdUsuario))
+                            {                                            
+                            @Html.ActionLink("Desfazer amizade", "AdicionarRemoverContato", "Contato", new { IdContato = @Model.Usuario.IdUsuario, IsAdd = false }, new { @class = "btn btn-danger btn-friend" })
+                            }
+                            else
+                            {
+                                if (Model.IsConvitePendente(Model.Usuario.IdUsuario))
+                                { 
+                            @Html.ActionLink("Aceitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario = Model.Usuario.IdUsuario, IsAceitar = true }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Rejeitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario = Model.Usuario.IdUsuario, IsAceitar = false }, new { @class = "btn btn-danger" })
+                                }
+                                else if (Model.IsConviteJaEfetuado(Model.Usuario.IdUsuario))
+                                {
+                            <a href="#" class="btn btn-warning" disabled="disabled">Aguardando resposta de amizade...</a>
+                                }
+                                else
+                                {
+                            @Html.ActionLink("Adicionar como amigo", "AdicionarRemoverContato", "Contato", new { IdContato = @Model.Usuario.IdUsuario, IsAdd = true }, new { @class = "btn btn-primary btn-friend" })
+                                }
+                            }
+                        }
+                    </p>
                 </div>
             </div>
-    }
+        </div>
 
+        <div class="span8">
+            <section>
+                <div class="page-header">
+                    <h1>Ultimos Eventos<small></small></h1>
+                </div>
+
+                <div class="containerEventos">
+                    @if (Model.UltimosEventos != null && Model.UltimosEventos.Any())
+                    {
+                        foreach (var evento in Model.UltimosEventos)
+                        {
+                        <div class="card people">
+                            <div class="imagemEvento card-top blue" style="background-image: url(@(string.IsNullOrEmpty(evento.UrlImagem) ? urlTemp : evento.UrlImagem))">
+                                <a href="@Url.Action("Detalhar", "Evento", new { idEvento = evento.IdEvento })">
+                                    <div style="width: 100%;height: 100%;"></div>
+                                </a>
+                            </div>
+                            <div class="card-info">
+                                <a class="title" href="@Url.Action("Detalhar", "Evento", new { idEvento = evento.IdEvento })">@evento.Titulo</a>
+                                <div class="desc">
+                                    @if (string.IsNullOrWhiteSpace(evento.Descricao))
+                                    { <p>Não há descrição.</p> }
+                                    else
+                                    {
+                                        if (evento.Descricao.Length > 100)
+                                        { <p>@evento.Descricao.Substring(0, 100) ...</p> }
+                                        else
+                                        { <p>@evento.Descricao</p> }
+                                    }
+                                </div>
+                            </div>
+                            <div class="card-bottom">
+                                <a href="@Url.Action("Detalhar", "Evento", new { idEvento = evento.IdEvento })" class="btn">Ver
+                                </a>
+                            </div>
+                        </div>
+                        }
+                    }
+                    else
+                    {
+                        <h4 style="margin-left: -100px;">Não há participação em nenhum evento.</h4>
+                    }
+                </div>
+            </section>
+
+            <section>
+                <div class="page-header">
+                    <h1>Ultimos Comentários por Evento<small></small></h1>
+                </div>
+                @if (Model.UltimosComentarios != null && Model.UltimosComentarios.Any())
+                {
+                    <ul class="nav nav-list">
+                        @foreach (var comentario in Model.UltimosComentarios)
+                        {
+                            <li>
+                                @Html.ActionLink(@comentario.Descricao, "Detalhar", "Evento", new { idEvento = comentario.IdEvento }, new { })
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <h4>Não há comentário em nenhum evento.</h4>
+                }
+            </section>
+        </div>
+    </div>
 </div>
