@@ -20,11 +20,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://127.0.0.1/Fusioness.Services/MainService.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.1.2.4/MainService.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MainService.disco" MetadataType="Disco" ID="74871814-2226-4a7a-ac91-42e0161277db" SourceId="1" SourceUrl="http://127.0.0.1/Fusioness.Services/MainService.asmx?disco" />
-    <MetadataFile FileName="MainService.wsdl" MetadataType="Wsdl" ID="eb06bbb7-934a-46f1-9302-cb8dfffcc72b" SourceId="1" SourceUrl="http://127.0.0.1/Fusioness.Services/MainService.asmx?wsdl" />
+    <MetadataFile FileName="MainService1.wsdl" MetadataType="Wsdl" ID="e8cf2a1b-7d95-48d6-87fc-1669af3d23d9" SourceId="1" SourceUrl="http://10.1.2.4/MainService.asmx?wsdl" />
+    <MetadataFile FileName="MainService1.disco" MetadataType="Disco" ID="9117fe52-f3fb-4f61-a36f-3408d2f17de3" SourceId="1" SourceUrl="http://10.1.2.4/MainService.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

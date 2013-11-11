@@ -45,7 +45,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="5,5,0,5" Height="Auto">
                                     <!--Replace rectangle with image-->
                                     <Border BorderThickness="1" Margin="0,0" Width="50" BorderBrush="#3C8BFF" Height="50" VerticalAlignment="Top">
-                                        <Image Stretch="Fill">
+                                        <Image Stretch="UniformToFill">
                                             <Image.Source>
                                                 <BitmapImage UriSource="{Binding ContatoImagem}" 
                                                              CreateOptions="BackgroundCreation"/>
@@ -63,7 +63,7 @@
                                         <TextBlock Text="{Binding EventoDescricao}" TextWrapping="Wrap" Margin="5,5" Height="Auto" Foreground="#FFB9B9B9" />
                                     </StackPanel>
                                     <Border BorderThickness="1" Margin="10,10" Width="80" BorderBrush="#3C8BFF" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right">
-                                        <Image Stretch="Fill">
+                                        <Image Stretch="UniformToFill">
                                             <Image.Source>
                                                 <BitmapImage UriSource="{Binding EventoImagem}" 
                                                              CreateOptions="BackgroundCreation"/>
