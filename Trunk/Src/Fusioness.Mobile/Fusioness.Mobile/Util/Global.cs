@@ -14,6 +14,7 @@ namespace Fusioness.Mobile.Util
         public static FusionessWS.Usuario usuarioLogado;
         public static IList<FusionessWS.Coordenada> fusCoordenadas;
         public static string linkImagem = "http://fusionessapi.apphb.com/images/";
+        //public static string linkImagem = "http://10.1.2.4/images/";        
         //public static string linkImagem = "http://192.168.25.4/Fusioness.Services";
         public static string imgUsuarioDefault = "avatar.png";
         public static string imgEventoDefault = "Assets/ApplicationIcon.png";

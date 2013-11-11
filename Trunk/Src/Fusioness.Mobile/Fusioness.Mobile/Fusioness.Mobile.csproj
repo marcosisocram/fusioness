@@ -25,6 +25,8 @@
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -232,6 +234,9 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarEventoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarEventoUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.AlterarRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -301,6 +306,12 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarConvitesEventosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarConvitesFeitosPeloUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarConviteUsuarioEmailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarCoordenadasPorRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -343,6 +354,9 @@
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarUsuariosEventoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -359,6 +373,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterEventoPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterEventoUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterMeuTempoNoEventoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FusionessWS\Fusioness.Mobile.FusionessWS.ObterRotaPorIdResponse.datasource">
@@ -390,12 +410,12 @@
     </None>
     <None Include="Service References\FusionessWS\configuration91.svcinfo" />
     <None Include="Service References\FusionessWS\configuration.svcinfo" />
-    <None Include="Service References\FusionessWS\MainService1.wsdl" />
+    <None Include="Service References\FusionessWS\MainService.wsdl" />
     <None Include="Service References\FusionessWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\FusionessWS\MainService1.disco" />
+    <None Include="Service References\FusionessWS\MainService.disco" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -471,4 +491,5 @@
   </Target>
   -->
   <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
