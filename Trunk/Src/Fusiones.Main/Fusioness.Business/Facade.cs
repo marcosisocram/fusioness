@@ -445,10 +445,12 @@ namespace Fusioness.Business
                 convite = ConviteUsuarioEmailBus.InserirConviteUsuarioEmail(convite);
             });
         }
-
+        public List<ConviteUsuarioEmail> ListarConviteUsuarioEmails()
+        {
+            return ConviteUsuarioEmailBus.ListarConvites();
+        }
         #endregion
 
         #endregion
-
     }
 }

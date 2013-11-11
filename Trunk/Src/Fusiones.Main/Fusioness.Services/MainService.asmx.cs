@@ -947,6 +947,12 @@ namespace Fusioness.Services
         {
             Facade.Instance.ConvidarPorEmail(emails, url, usuario);
         }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ConviteUsuarioEmail> ListarConviteUsuarioEmails()
+        {
+            return Facade.Instance.ListarConviteUsuarioEmails();
+        }
         #endregion
 
         #region Util
