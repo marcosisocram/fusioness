@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="cdDBisBi8VDAZ3yhVj8ydg2TMrw=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="5rxKV/8XLl23r+ZahwAHDol3bZg=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="MainServiceSoap1">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="MainServiceSoap1" contract="FusionessWS.MainServiceSoap" bindingType="basicHttpBinding" address="http://127.0.0.1/Fusioness.Services/MainService.asmx" bindingConfiguration="MainServiceSoap1">
+    <endpoint name="MainServiceSoap1" contract="FusionessWS.MainServiceSoap" bindingType="basicHttpBinding" address="http://10.1.2.4/MainService.asmx" bindingConfiguration="MainServiceSoap1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://127.0.0.1/Fusioness.Services/MainService.asmx</serializedValue>
+          <serializedValue>http://10.1.2.4/MainService.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

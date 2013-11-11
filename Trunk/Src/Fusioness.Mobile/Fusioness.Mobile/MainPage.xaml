@@ -89,7 +89,7 @@
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
                                 <Border Margin="0,6" BorderThickness="1" Width="90" BorderBrush="#3C8BFF" Height="90" VerticalAlignment="Top">
-                                    <Image Stretch="Fill">
+                                    <Image Stretch="UniformToFill">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding EventoImagem}" 
                                                          CreateOptions="BackgroundCreation"/>
@@ -133,7 +133,7 @@
                                 </toolkit:ContextMenuService.ContextMenu>
                                 <!--Replace rectangle with image-->
                                 <Border BorderThickness="1" Width="70" BorderBrush="#3C8BFF" Height="70">
-                                    <Image Stretch="Fill">
+                                    <Image Stretch="UniformToFill">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding ContatoImagem}" 
                                                          CreateOptions="BackgroundCreation"/>
