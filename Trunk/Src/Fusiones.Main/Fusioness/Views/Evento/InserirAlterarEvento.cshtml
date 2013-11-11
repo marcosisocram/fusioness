@@ -39,8 +39,8 @@
     <div class="span12">
         <div class="card">
             <h2 class="card-heading simple">
-                Evento
-                @*<a href="@Url.Action("Index", "Evento")" class="pull-right btn btn-primary">Voltar</a>*@
+                @ViewBag.TituloPagina
+                <a href="@Url.Action("Index", "Evento")" class="pull-right btn btn-primary">Voltar</a>
             </h2>
             <div class="card-body" style="overflow: hidden">
                 <div style="float: left">
@@ -99,20 +99,25 @@
                                     <br />
                                     @Html.LabelFor(m => m.Evento.Titulo)
                                     @Html.TextBoxFor(m => m.Evento.Titulo, displayMode)
+                                    @Html.ValidationMessage("Título", new { style = "margin-left:10px" })
                                     <br />
                                     @Html.LabelFor(m => m.Evento.Publico, "Tipo do Evento")
                                     @Html.RadioButtonFor(m => m.Evento.Publico, "false", new { id = "privado" }) Privado
+
                                     <br />
                                     @Html.RadioButtonFor(m => m.Evento.Publico, "true", new { id = "publico" }) Público
                                     <br /><br />
                                     @Html.LabelFor(m => m.Evento.Data)
                                     @Html.TextBoxFor(m => m.Evento.Data, new { Value = Model.Evento.Data.ToString("dd/MM/yyyy"), @class = "datepicker" })
+                                    @Html.ValidationMessage("Data do Evento", new { style = "margin-left:10px" })
                                     <br />
                                     @Html.LabelFor(m => m.Evento.Descricao, "Descrição do Evento")
                                     @Html.TextAreaFor(m => m.Evento.Descricao, displayMode)
+                                    @Html.ValidationMessage("Descrição", new { style = "margin-left:10px" })
                                     <br />
                                     @Html.LabelFor(m => m.ListaRotas, "Rota:")
                                     @Html.DropDownListFor(m => m.Evento.IdRota, new SelectList(Model.ListaRotas, "IdRota", "Descricao"), displayMode)
+                                    @Html.ValidationMessage("Rota", new { style = "margin-left:10px" })
                                     <br />
                                     @Html.HiddenFor(m => m.Evento.IdEvento)
                                     <input type="submit" value="Salvar" class="btn btn-primary" />
@@ -152,7 +157,7 @@
                                 <tr>
                                     <th>Usuário que Comentou:</th>
                                     <th>Data do Comentário:</th>
-                                    <th></th>
+                                    <th>Descrição:</th>
                                 </tr>
                             </thead>
                             <tbody>
