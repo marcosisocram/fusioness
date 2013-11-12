@@ -58,6 +58,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ListarUsuariosPorNomeOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarUsuariosPorEmailOperationCompleted;
+        
         private System.Threading.SendOrPostCallback InserirRotaOperationCompleted;
         
         private System.Threading.SendOrPostCallback AlterarRotaOperationCompleted;
@@ -154,6 +156,18 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ConvidarPorEmailOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarConviteUsuarioEmailsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GerarTokenUsuarioSemSenhaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ListarUsuarioTokenSenhaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ObterUsuarioPorTokenOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AlterarUsuarioTokenSenhaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ObterUsuarioTokenSenhaPorTokenOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -233,6 +247,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ListarUsuariosPorNomeCompletedEventHandler ListarUsuariosPorNomeCompleted;
+        
+        /// <remarks/>
+        public event ListarUsuariosPorEmailCompletedEventHandler ListarUsuariosPorEmailCompleted;
         
         /// <remarks/>
         public event InserirRotaCompletedEventHandler InserirRotaCompleted;
@@ -377,6 +394,24 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ConvidarPorEmailCompletedEventHandler ConvidarPorEmailCompleted;
+        
+        /// <remarks/>
+        public event ListarConviteUsuarioEmailsCompletedEventHandler ListarConviteUsuarioEmailsCompleted;
+        
+        /// <remarks/>
+        public event GerarTokenUsuarioSemSenhaCompletedEventHandler GerarTokenUsuarioSemSenhaCompleted;
+        
+        /// <remarks/>
+        public event ListarUsuarioTokenSenhaCompletedEventHandler ListarUsuarioTokenSenhaCompleted;
+        
+        /// <remarks/>
+        public event ObterUsuarioPorTokenCompletedEventHandler ObterUsuarioPorTokenCompleted;
+        
+        /// <remarks/>
+        public event AlterarUsuarioTokenSenhaCompletedEventHandler AlterarUsuarioTokenSenhaCompleted;
+        
+        /// <remarks/>
+        public event ObterUsuarioTokenSenhaPorTokenCompletedEventHandler ObterUsuarioTokenSenhaPorTokenCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -787,6 +822,35 @@ namespace Fusioness.FusionessWS {
             if ((this.ListarUsuariosPorNomeCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarUsuariosPorNomeCompleted(this, new ListarUsuariosPorNomeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarUsuariosPorEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Usuario ListarUsuariosPorEmail(string email) {
+            object[] results = this.Invoke("ListarUsuariosPorEmail", new object[] {
+                        email});
+            return ((Usuario)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarUsuariosPorEmailAsync(string email) {
+            this.ListarUsuariosPorEmailAsync(email, null);
+        }
+        
+        /// <remarks/>
+        public void ListarUsuariosPorEmailAsync(string email, object userState) {
+            if ((this.ListarUsuariosPorEmailOperationCompleted == null)) {
+                this.ListarUsuariosPorEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarUsuariosPorEmailOperationCompleted);
+            }
+            this.InvokeAsync("ListarUsuariosPorEmail", new object[] {
+                        email}, this.ListarUsuariosPorEmailOperationCompleted, userState);
+        }
+        
+        private void OnListarUsuariosPorEmailOperationCompleted(object arg) {
+            if ((this.ListarUsuariosPorEmailCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarUsuariosPorEmailCompleted(this, new ListarUsuariosPorEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2151,31 +2215,204 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ConvidarPorEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void ConvidarPorEmail(string mail, string url) {
+        public void ConvidarPorEmail(string[] emails, string url, Usuario usuario) {
             this.Invoke("ConvidarPorEmail", new object[] {
-                        mail,
-                        url});
+                        emails,
+                        url,
+                        usuario});
         }
         
         /// <remarks/>
-        public void ConvidarPorEmailAsync(string mail, string url) {
-            this.ConvidarPorEmailAsync(mail, url, null);
+        public void ConvidarPorEmailAsync(string[] emails, string url, Usuario usuario) {
+            this.ConvidarPorEmailAsync(emails, url, usuario, null);
         }
         
         /// <remarks/>
-        public void ConvidarPorEmailAsync(string mail, string url, object userState) {
+        public void ConvidarPorEmailAsync(string[] emails, string url, Usuario usuario, object userState) {
             if ((this.ConvidarPorEmailOperationCompleted == null)) {
                 this.ConvidarPorEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConvidarPorEmailOperationCompleted);
             }
             this.InvokeAsync("ConvidarPorEmail", new object[] {
-                        mail,
-                        url}, this.ConvidarPorEmailOperationCompleted, userState);
+                        emails,
+                        url,
+                        usuario}, this.ConvidarPorEmailOperationCompleted, userState);
         }
         
         private void OnConvidarPorEmailOperationCompleted(object arg) {
             if ((this.ConvidarPorEmailCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ConvidarPorEmailCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarConviteUsuarioEmails", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ConviteUsuarioEmail[] ListarConviteUsuarioEmails() {
+            object[] results = this.Invoke("ListarConviteUsuarioEmails", new object[0]);
+            return ((ConviteUsuarioEmail[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarConviteUsuarioEmailsAsync() {
+            this.ListarConviteUsuarioEmailsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ListarConviteUsuarioEmailsAsync(object userState) {
+            if ((this.ListarConviteUsuarioEmailsOperationCompleted == null)) {
+                this.ListarConviteUsuarioEmailsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarConviteUsuarioEmailsOperationCompleted);
+            }
+            this.InvokeAsync("ListarConviteUsuarioEmails", new object[0], this.ListarConviteUsuarioEmailsOperationCompleted, userState);
+        }
+        
+        private void OnListarConviteUsuarioEmailsOperationCompleted(object arg) {
+            if ((this.ListarConviteUsuarioEmailsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarConviteUsuarioEmailsCompleted(this, new ListarConviteUsuarioEmailsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GerarTokenUsuarioSemSenha", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GerarTokenUsuarioSemSenha(Usuario usuario, string url) {
+            this.Invoke("GerarTokenUsuarioSemSenha", new object[] {
+                        usuario,
+                        url});
+        }
+        
+        /// <remarks/>
+        public void GerarTokenUsuarioSemSenhaAsync(Usuario usuario, string url) {
+            this.GerarTokenUsuarioSemSenhaAsync(usuario, url, null);
+        }
+        
+        /// <remarks/>
+        public void GerarTokenUsuarioSemSenhaAsync(Usuario usuario, string url, object userState) {
+            if ((this.GerarTokenUsuarioSemSenhaOperationCompleted == null)) {
+                this.GerarTokenUsuarioSemSenhaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGerarTokenUsuarioSemSenhaOperationCompleted);
+            }
+            this.InvokeAsync("GerarTokenUsuarioSemSenha", new object[] {
+                        usuario,
+                        url}, this.GerarTokenUsuarioSemSenhaOperationCompleted, userState);
+        }
+        
+        private void OnGerarTokenUsuarioSemSenhaOperationCompleted(object arg) {
+            if ((this.GerarTokenUsuarioSemSenhaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GerarTokenUsuarioSemSenhaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarUsuarioTokenSenha", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UsuarioTokenSenha[] ListarUsuarioTokenSenha() {
+            object[] results = this.Invoke("ListarUsuarioTokenSenha", new object[0]);
+            return ((UsuarioTokenSenha[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarUsuarioTokenSenhaAsync() {
+            this.ListarUsuarioTokenSenhaAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ListarUsuarioTokenSenhaAsync(object userState) {
+            if ((this.ListarUsuarioTokenSenhaOperationCompleted == null)) {
+                this.ListarUsuarioTokenSenhaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarUsuarioTokenSenhaOperationCompleted);
+            }
+            this.InvokeAsync("ListarUsuarioTokenSenha", new object[0], this.ListarUsuarioTokenSenhaOperationCompleted, userState);
+        }
+        
+        private void OnListarUsuarioTokenSenhaOperationCompleted(object arg) {
+            if ((this.ListarUsuarioTokenSenhaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarUsuarioTokenSenhaCompleted(this, new ListarUsuarioTokenSenhaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterUsuarioPorToken", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Usuario ObterUsuarioPorToken(string token) {
+            object[] results = this.Invoke("ObterUsuarioPorToken", new object[] {
+                        token});
+            return ((Usuario)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterUsuarioPorTokenAsync(string token) {
+            this.ObterUsuarioPorTokenAsync(token, null);
+        }
+        
+        /// <remarks/>
+        public void ObterUsuarioPorTokenAsync(string token, object userState) {
+            if ((this.ObterUsuarioPorTokenOperationCompleted == null)) {
+                this.ObterUsuarioPorTokenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterUsuarioPorTokenOperationCompleted);
+            }
+            this.InvokeAsync("ObterUsuarioPorToken", new object[] {
+                        token}, this.ObterUsuarioPorTokenOperationCompleted, userState);
+        }
+        
+        private void OnObterUsuarioPorTokenOperationCompleted(object arg) {
+            if ((this.ObterUsuarioPorTokenCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterUsuarioPorTokenCompleted(this, new ObterUsuarioPorTokenCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AlterarUsuarioTokenSenha", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UsuarioTokenSenha AlterarUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha) {
+            object[] results = this.Invoke("AlterarUsuarioTokenSenha", new object[] {
+                        usuariotokensenha});
+            return ((UsuarioTokenSenha)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AlterarUsuarioTokenSenhaAsync(UsuarioTokenSenha usuariotokensenha) {
+            this.AlterarUsuarioTokenSenhaAsync(usuariotokensenha, null);
+        }
+        
+        /// <remarks/>
+        public void AlterarUsuarioTokenSenhaAsync(UsuarioTokenSenha usuariotokensenha, object userState) {
+            if ((this.AlterarUsuarioTokenSenhaOperationCompleted == null)) {
+                this.AlterarUsuarioTokenSenhaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAlterarUsuarioTokenSenhaOperationCompleted);
+            }
+            this.InvokeAsync("AlterarUsuarioTokenSenha", new object[] {
+                        usuariotokensenha}, this.AlterarUsuarioTokenSenhaOperationCompleted, userState);
+        }
+        
+        private void OnAlterarUsuarioTokenSenhaOperationCompleted(object arg) {
+            if ((this.AlterarUsuarioTokenSenhaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AlterarUsuarioTokenSenhaCompleted(this, new AlterarUsuarioTokenSenhaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterUsuarioTokenSenhaPorToken", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UsuarioTokenSenha ObterUsuarioTokenSenhaPorToken(string token) {
+            object[] results = this.Invoke("ObterUsuarioTokenSenhaPorToken", new object[] {
+                        token});
+            return ((UsuarioTokenSenha)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterUsuarioTokenSenhaPorTokenAsync(string token) {
+            this.ObterUsuarioTokenSenhaPorTokenAsync(token, null);
+        }
+        
+        /// <remarks/>
+        public void ObterUsuarioTokenSenhaPorTokenAsync(string token, object userState) {
+            if ((this.ObterUsuarioTokenSenhaPorTokenOperationCompleted == null)) {
+                this.ObterUsuarioTokenSenhaPorTokenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterUsuarioTokenSenhaPorTokenOperationCompleted);
+            }
+            this.InvokeAsync("ObterUsuarioTokenSenhaPorToken", new object[] {
+                        token}, this.ObterUsuarioTokenSenhaPorTokenOperationCompleted, userState);
+        }
+        
+        private void OnObterUsuarioTokenSenhaPorTokenOperationCompleted(object arg) {
+            if ((this.ObterUsuarioTokenSenhaPorTokenCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterUsuarioTokenSenhaPorTokenCompleted(this, new ObterUsuarioTokenSenhaPorTokenCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3227,6 +3464,8 @@ namespace Fusioness.FusionessWS {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UsuarioTokenSenha))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConviteUsuarioEmail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Resposta))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ComentarioEvento))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EventoUsuario))]
@@ -3270,6 +3509,132 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.descricaoRetornoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class UsuarioTokenSenha : EntityBase {
+        
+        private int idField;
+        
+        private string tokenField;
+        
+        private System.DateTime dataDeGeracaoField;
+        
+        private int usuarioIDField;
+        
+        private bool jaUsadoField;
+        
+        /// <remarks/>
+        public int ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Token {
+            get {
+                return this.tokenField;
+            }
+            set {
+                this.tokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DataDeGeracao {
+            get {
+                return this.dataDeGeracaoField;
+            }
+            set {
+                this.dataDeGeracaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int UsuarioID {
+            get {
+                return this.usuarioIDField;
+            }
+            set {
+                this.usuarioIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool JaUsado {
+            get {
+                return this.jaUsadoField;
+            }
+            set {
+                this.jaUsadoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18058")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ConviteUsuarioEmail : EntityBase {
+        
+        private int idField;
+        
+        private int idUsuarioConvidouField;
+        
+        private string emailConvidadoField;
+        
+        private System.DateTime dataDoConviteField;
+        
+        /// <remarks/>
+        public int ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdUsuarioConvidou {
+            get {
+                return this.idUsuarioConvidouField;
+            }
+            set {
+                this.idUsuarioConvidouField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EmailConvidado {
+            get {
+                return this.emailConvidadoField;
+            }
+            set {
+                this.emailConvidadoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DataDoConvite {
+            get {
+                return this.dataDoConviteField;
+            }
+            set {
+                this.dataDoConviteField = value;
             }
         }
     }
@@ -4035,6 +4400,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Usuario[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarUsuariosPorEmailCompletedEventHandler(object sender, ListarUsuariosPorEmailCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarUsuariosPorEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarUsuariosPorEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Usuario Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Usuario)(this.results[0]));
             }
         }
     }
@@ -5176,6 +5567,140 @@ namespace Fusioness.FusionessWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void ConvidarPorEmailCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarConviteUsuarioEmailsCompletedEventHandler(object sender, ListarConviteUsuarioEmailsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarConviteUsuarioEmailsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarConviteUsuarioEmailsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ConviteUsuarioEmail[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ConviteUsuarioEmail[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void GerarTokenUsuarioSemSenhaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ListarUsuarioTokenSenhaCompletedEventHandler(object sender, ListarUsuarioTokenSenhaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarUsuarioTokenSenhaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarUsuarioTokenSenhaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UsuarioTokenSenha[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UsuarioTokenSenha[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ObterUsuarioPorTokenCompletedEventHandler(object sender, ObterUsuarioPorTokenCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterUsuarioPorTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterUsuarioPorTokenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Usuario Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Usuario)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AlterarUsuarioTokenSenhaCompletedEventHandler(object sender, AlterarUsuarioTokenSenhaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AlterarUsuarioTokenSenhaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AlterarUsuarioTokenSenhaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UsuarioTokenSenha Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UsuarioTokenSenha)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ObterUsuarioTokenSenhaPorTokenCompletedEventHandler(object sender, ObterUsuarioTokenSenhaPorTokenCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterUsuarioTokenSenhaPorTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterUsuarioTokenSenhaPorTokenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UsuarioTokenSenha Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UsuarioTokenSenha)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

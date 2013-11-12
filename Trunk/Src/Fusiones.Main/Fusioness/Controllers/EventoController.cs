@@ -18,6 +18,11 @@ namespace Fusioness.Controllers
             return View(model);
         }
 
+        public ActionResult ListarEventosQueParticipo(EventoModel model)
+        {
+            model.carregarParametrosViewEventosQueParticipo(UsuarioLogado, null);
+            return View("Index", model);
+        }
         public ActionResult ListarMeusEventos(EventoModel model)
         {
             model.carregarParametrosViewMeusEventos(UsuarioLogado, null);
@@ -46,33 +51,42 @@ namespace Fusioness.Controllers
         {
             model.Evento.IdUsuario = this.UsuarioLogado.IdUsuario;
 
-            if (model.Evento.IdEvento > 0)
+            if (model.ValidarEvento(ModelState))
             {
-                var eventoAlterado = Servico.AlterarEvento(model.Evento);
-                if (eventoAlterado != null && eventoAlterado.IdEvento > 0)
+
+                if (model.Evento.IdEvento > 0)
                 {
-                    ExibirModal("Evento alterado com sucesso.");
-                    model.Evento = eventoAlterado;
+                    var eventoAlterado = Servico.AlterarEvento(model.Evento);
+                    if (eventoAlterado != null && eventoAlterado.IdEvento > 0)
+                    {
+                        ExibirModal("Evento alterado com sucesso.");
+                        model.Evento = eventoAlterado;
+                        model.carregarParametrosView(this.UsuarioLogado, model.Evento);
+                        return View(model);
+                    }
+
+                    ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
                     model.carregarParametrosView(this.UsuarioLogado, model.Evento);
                     return View(model);
                 }
+                else
+                {
+                    var eventoCadastrado = Servico.InserirEvento(model.Evento);
 
-                ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
-                model.carregarParametrosView(this.UsuarioLogado, model.Evento);
-                return View(model);
+                    if (eventoCadastrado != null && eventoCadastrado.IdEvento > 0)
+                    {
+                        ExibirModal("Evento cadastrado com sucesso.");
+                        return RedirectToAction("Index");
+                    }
+
+                    ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
-                var eventoCadastrado = Servico.InserirEvento(model.Evento);
-
-                if (eventoCadastrado != null && eventoCadastrado.IdEvento > 0)
-                {
-                    ExibirModal("Evento cadastrado com sucesso.");
-                    return RedirectToAction("Index");
-                }
-
-                ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
-                return RedirectToAction("Index");
+                model.carregarParametrosView(this.UsuarioLogado, model.Evento);
+                return View(model);
             }
         }
 
@@ -87,6 +101,7 @@ namespace Fusioness.Controllers
             model.IsCadastroEvento = true;
             model.Evento.Data = DateTime.Now;
 
+            ViewBag.TituloPagina = "Cadastre seu evento:";
             return View("InserirAlterarEvento", model);
         }
 
@@ -99,6 +114,7 @@ namespace Fusioness.Controllers
             model.EventoUsuario = Servico.ObterEventoUsuario(model.Evento, UsuarioLogado) ?? new EventoUsuario();
             model.carregarParametrosView(UsuarioLogado, model.Evento);
 
+            ViewBag.TituloPagina = "Detalhes do evento:";
             return View("InserirAlterarEvento", model);
         }
 

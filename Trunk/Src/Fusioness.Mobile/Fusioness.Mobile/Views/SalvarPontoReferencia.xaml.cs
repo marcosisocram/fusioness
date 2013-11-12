@@ -109,7 +109,10 @@ namespace Fusioness.Mobile.Views
         {
             try
             {
-                this.imgEvento.SetSource(e.ChosenPhoto);
+                if (e.ChosenPhoto != null)
+                {
+                    this.imgEvento.SetSource(e.ChosenPhoto);
+                }
             }
             catch (Exception)
             {

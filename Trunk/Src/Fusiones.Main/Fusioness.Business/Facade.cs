@@ -15,6 +15,11 @@ using Fusioness.Business.QualidadesRota;
 using Fusioness.Business.ComentariosEvento;
 using Fusioness.Business.Coordenadas;
 using Fusioness.Business.EventosUsuarios;
+using Fusioness.Business.ConviteUsuarioEmails;
+using System.Net;
+using System.Net.Mail;
+using System.Linq;
+using Fusioness.Business.UsuarioTokenSenhas;
 
 namespace Fusioness.Business
 {
@@ -35,6 +40,8 @@ namespace Fusioness.Business
         private readonly IRespostaBusiness RespostaBus;
         private readonly IContatoBusiness ContatoBus;
         private readonly IEventoUsuarioBusiness EventoUsuarioBus;
+        private readonly IConviteUsuarioEmailBusiness ConviteUsuarioEmailBus;
+        private readonly IUsuarioTokenSenhaBusiness UsuarioTokenSenhaBus;
 
         #endregion
 
@@ -63,6 +70,8 @@ namespace Fusioness.Business
             ComentarioEventoBus = new ComentarioEventoBusiness();
             RespostaBus = new RespostaBusiness();
             EventoUsuarioBus = new EventoUsuarioBusiness();
+            ConviteUsuarioEmailBus = new ConviteUsuarioEmailBusiness();
+            UsuarioTokenSenhaBus = new UsuarioTokenSenhaBusiness();
         }
 
         #endregion
@@ -107,7 +116,11 @@ namespace Fusioness.Business
         public List<Usuario> ListarUsuariosPorNome(string nome, int idUsuario)
         {
             return UsuarioBus.ListarUsuariosPorNome(nome, idUsuario);
-        }        
+        }
+        public Usuario ListarUsuariosPorEmail(string email)
+        {
+            return UsuarioBus.ListarUsuariosPorEmail(email);
+        }
         #endregion
 
         #region ConviteEvento
@@ -396,6 +409,79 @@ namespace Fusioness.Business
         public TimeSpan ObterMeuTempoNoEvento(EventoUsuario eventoUsuario)
         {
             return EventoUsuarioBus.ObterMeuTempoNoEvento(eventoUsuario);
+        }
+        #endregion
+
+        #region ConviteUsuarioEmail
+
+        public void ConvidarPorEmail(string[] emails, string url, Usuario usuario)
+        {
+            // envia e-mails
+            const string subject = "Venha fazer parte do Fusioness!";
+            string body = "Click no link para criar o seu perfil \n" + url;
+            emails.ToList().ForEach(email =>
+            {
+                var ans = Fusioness.Business.Util.EmailUtil.EnviaEmail(email, subject, body);
+                //salva um registro no banco para cada e-mail convidado
+                if (ans)
+                {
+                    var convite = new ConviteUsuarioEmail()
+                    {
+                        IdUsuarioConvidou = usuario.IdUsuario,
+                        EmailConvidado = email,
+                        DataDoConvite = DateTime.Now
+                    };
+                    convite = ConviteUsuarioEmailBus.InserirConviteUsuarioEmail(convite);
+                }
+            });
+        }
+        public List<ConviteUsuarioEmail> ListarConviteUsuarioEmails()
+        {
+            return ConviteUsuarioEmailBus.ListarConvites();
+        }
+        #endregion
+
+        #region UsuarioTokenSenha
+        public void GerarTokenUsuarioSemSenha(Usuario usuario,string url)
+        {
+            var usuariotokensenha = new UsuarioTokenSenha()
+            {
+                UsuarioID=usuario.IdUsuario,
+                DataDeGeracao=DateTime.Now,
+                Token = Guid.NewGuid().ToString(),
+                JaUsado=false
+            };
+            usuariotokensenha = UsuarioTokenSenhaBus.InserirUsuarioTokenSenha(usuariotokensenha);
+            // envia e-mail com link para que o usuário gere a nova senha
+            string body = String.Format("Click no link para mudar a sua senha. \n Essa mensagem tem validade de sete dias. \n {0}Usuario/RecuperarMinhaSenha?Token={1}",url,usuariotokensenha.Token);
+            Fusioness.Business.Util.EmailUtil.EnviaEmail(usuario.Email, "Fusioness - recupere sua senha", body);
+        }
+        public List<UsuarioTokenSenha> ListarUsuarioTokenSenha()
+        {
+            return UsuarioTokenSenhaBus.ListarUsuarioTokenSenha();
+        }
+        public Usuario ObterUsuarioPorToken(string token)
+        {
+            Usuario ret = null;
+            try
+            {
+                var usertoken = UsuarioTokenSenhaBus.ObterUsuarioTokenSenhaPeloToken(token);
+                ret = ObterUsuarioPorId(new Usuario() { IdUsuario = usertoken.UsuarioID });
+            }
+            catch
+            {
+                ret = null;
+            }
+            return ret;
+
+        }
+        public UsuarioTokenSenha AlterarUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha)
+        {
+            return UsuarioTokenSenhaBus.AlterarUsuarioTokenSenha(usuariotokensenha);
+        }
+        public UsuarioTokenSenha ObterUsuarioTokenSenhaPorToken(string token)
+        {
+            return UsuarioTokenSenhaBus.ObterUsuarioTokenSenhaPeloToken(token);
         }
         #endregion
 

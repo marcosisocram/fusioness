@@ -81,7 +81,7 @@ namespace Fusioness.Business.Coordenadas
                 {
                     IRepository<Coordenada> repo = new CoordenadaRepository(uow);
                     
-                    IEnumerable<Coordenada> listaInserir = listaCoordenadas;
+                    List<Coordenada> listaInserir = listaCoordenadas;
                     
                     listaCoordenadas = repo.Insert(listaInserir).ToList();
                     uow.Commit();

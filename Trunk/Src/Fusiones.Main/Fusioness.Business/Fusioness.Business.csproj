@@ -48,8 +48,12 @@
     <Compile Include="Contatos\IContatoBusiness.cs" />
     <Compile Include="ConvitesEventos\ConviteEventoBusiness.cs" />
     <Compile Include="ConvitesEventos\IConviteEventoBusiness.cs" />
+    <Compile Include="ConviteUsuarioEmails\ConviteUsuarioEmailBusiness.cs" />
+    <Compile Include="ConviteUsuarioEmails\IConviteUsuarioEmailBusiness.cs" />
     <Compile Include="Coordenada\CoordenadaBusiness.cs" />
     <Compile Include="Coordenada\ICoordenadaBusiness.cs" />
+    <Compile Include="UsuarioTokenSenhas\UsuarioTokenSenhaBusiness.cs" />
+    <Compile Include="UsuarioTokenSenhas\IUsuarioTokenSenhaBusiness.cs" />
     <Compile Include="EventosUsuarios\EventoUsuarioBusiness.cs" />
     <Compile Include="EventosUsuarios\IEventoUsuarioBusiness.cs" />
     <Compile Include="QualidadeRota\IQualidadeRotaBusiness.cs" />
@@ -71,6 +75,7 @@
     <Compile Include="Usuarios\UsuariosBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ConnectionBuilder.cs" />
+    <Compile Include="Util\EmailUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\Fusioness.Entities.csproj">

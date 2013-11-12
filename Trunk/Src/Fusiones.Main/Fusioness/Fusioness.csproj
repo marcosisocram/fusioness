@@ -139,6 +139,7 @@
     <Compile Include="Models\Seguranca\FusionessIdentity.cs" />
     <Compile Include="Models\Seguranca\FusionessPrincipal.cs" />
     <Compile Include="Models\Seguranca\PermiteAnonimoAttribute.cs" />
+    <Compile Include="Models\Usuarios\RecuperarSenhaModel.cs" />
     <Compile Include="Models\Usuarios\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -216,6 +217,8 @@
     <Content Include="Web References\FusionessWS\EventoUsuario.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Views\Usuario\EsqueciMinhaSenha.cshtml" />
+    <Content Include="Views\Usuario\RecuperarMinhaSenha.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

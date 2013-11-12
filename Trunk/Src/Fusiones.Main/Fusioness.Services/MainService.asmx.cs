@@ -239,6 +239,20 @@ namespace Fusioness.Services
                 return new List<Usuario>();
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Usuario ListarUsuariosPorEmail(string email)
+        {
+            try
+            {
+                return Facade.Instance.ListarUsuariosPorEmail(email);
+            }
+            catch
+            {
+                return default(Usuario);
+            }
+        }
         #endregion
 
         #region Rotas
@@ -940,33 +954,18 @@ namespace Fusioness.Services
         }
         #endregion
 
-        #region Outros
+        #region ConviteUsuarioEmail
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void ConvidarPorEmail(string mail, string url)
+        public void ConvidarPorEmail(string[] emails, string url,Usuario usuario)
         {
-            var fromAddress = new MailAddress("fusionessapp@gmail.com", "Convite Fusioness");
-            var toAddress = new MailAddress(mail, mail);
-            const string fromPassword = "Unibratec";
-            const string subject = "Venha fazer parte do Fusioness!";
-            string body = "Click no link para criar o seu perfil \n" + url;
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
-            var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            };
-
-            smtp.Send(message);
+            Facade.Instance.ConvidarPorEmail(emails, url, usuario);
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ConviteUsuarioEmail> ListarConviteUsuarioEmails()
+        {
+            return Facade.Instance.ListarConviteUsuarioEmails();
         }
         #endregion
 
@@ -979,6 +978,39 @@ namespace Fusioness.Services
             return objeto;
         }
 
+        #endregion
+
+        #region UsuarioTokenSenha
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void GerarTokenUsuarioSemSenha(Usuario usuario, string url)
+        {
+            Facade.Instance.GerarTokenUsuarioSemSenha(usuario,url);
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<UsuarioTokenSenha> ListarUsuarioTokenSenha()
+        {
+            return Facade.Instance.ListarUsuarioTokenSenha();
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Usuario ObterUsuarioPorToken(string token)
+        {
+            return Facade.Instance.ObterUsuarioPorToken(token);
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public UsuarioTokenSenha AlterarUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha)
+        {
+            return Facade.Instance.AlterarUsuarioTokenSenha(usuariotokensenha);
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public UsuarioTokenSenha ObterUsuarioTokenSenhaPorToken(string token)
+        {
+            return Facade.Instance.ObterUsuarioTokenSenhaPorToken(token);
+        }
         #endregion
     }
 }

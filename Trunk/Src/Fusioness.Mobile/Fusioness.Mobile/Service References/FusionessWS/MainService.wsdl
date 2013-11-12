@@ -1092,17 +1092,79 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ConvidarPorEmail">
+      <s:element name="ObterEventoUsuario">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="mail" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ObterEventoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterEventoUsuarioResult" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterMeuTempoNoEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventoUsuario" type="tns:EventoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterMeuTempoNoEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterMeuTempoNoEventoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvidarPorEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="emails" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ConvidarPorEmailResponse">
         <s:complexType />
       </s:element>
+      <s:element name="ListarConviteUsuarioEmails">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarConviteUsuarioEmailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarConviteUsuarioEmailsResult" type="tns:ArrayOfConviteUsuarioEmail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfConviteUsuarioEmail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ConviteUsuarioEmail" nillable="true" type="tns:ConviteUsuarioEmail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ConviteUsuarioEmail">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdUsuarioConvidou" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="EmailConvidado" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="DataDoConvite" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -1459,11 +1521,29 @@
   <wsdl:message name="ListarUsuariosEventoSoapOut">
     <wsdl:part name="parameters" element="tns:ListarUsuariosEventoResponse" />
   </wsdl:message>
+  <wsdl:message name="ObterEventoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterEventoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ObterEventoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterEventoUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterMeuTempoNoEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterMeuTempoNoEvento" />
+  </wsdl:message>
+  <wsdl:message name="ObterMeuTempoNoEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterMeuTempoNoEventoResponse" />
+  </wsdl:message>
   <wsdl:message name="ConvidarPorEmailSoapIn">
     <wsdl:part name="parameters" element="tns:ConvidarPorEmail" />
   </wsdl:message>
   <wsdl:message name="ConvidarPorEmailSoapOut">
     <wsdl:part name="parameters" element="tns:ConvidarPorEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarConviteUsuarioEmailsSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarConviteUsuarioEmails" />
+  </wsdl:message>
+  <wsdl:message name="ListarConviteUsuarioEmailsSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarConviteUsuarioEmailsResponse" />
   </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="HelloWorld">
@@ -1702,9 +1782,21 @@
       <wsdl:input message="tns:ListarUsuariosEventoSoapIn" />
       <wsdl:output message="tns:ListarUsuariosEventoSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ObterEventoUsuario">
+      <wsdl:input message="tns:ObterEventoUsuarioSoapIn" />
+      <wsdl:output message="tns:ObterEventoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterMeuTempoNoEvento">
+      <wsdl:input message="tns:ObterMeuTempoNoEventoSoapIn" />
+      <wsdl:output message="tns:ObterMeuTempoNoEventoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ConvidarPorEmail">
       <wsdl:input message="tns:ConvidarPorEmailSoapIn" />
       <wsdl:output message="tns:ConvidarPorEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarConviteUsuarioEmails">
+      <wsdl:input message="tns:ListarConviteUsuarioEmailsSoapIn" />
+      <wsdl:output message="tns:ListarConviteUsuarioEmailsSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
@@ -2240,8 +2332,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ObterEventoUsuario">
+      <soap:operation soapAction="http://tempuri.org/ObterEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterMeuTempoNoEvento">
+      <soap:operation soapAction="http://tempuri.org/ObterMeuTempoNoEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ConvidarPorEmail">
       <soap:operation soapAction="http://tempuri.org/ConvidarPorEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarConviteUsuarioEmails">
+      <soap:operation soapAction="http://tempuri.org/ListarConviteUsuarioEmails" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2783,8 +2902,35 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ObterEventoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ObterEventoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterMeuTempoNoEvento">
+      <soap12:operation soapAction="http://tempuri.org/ObterMeuTempoNoEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ConvidarPorEmail">
       <soap12:operation soapAction="http://tempuri.org/ConvidarPorEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarConviteUsuarioEmails">
+      <soap12:operation soapAction="http://tempuri.org/ListarConviteUsuarioEmails" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

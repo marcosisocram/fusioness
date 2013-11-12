@@ -5,6 +5,7 @@ using System.Web;
 using System.Linq;
 using System.Collections.Generic;
 using Fusioness.FusionessWS;
+using System;
 
 
 namespace Fusioness.Controllers
@@ -123,6 +124,71 @@ namespace Fusioness.Controllers
             return View("Perfil",model);
         }
 
+        [PermiteAnonimo]
+        [HttpPost]
+        public ActionResult GerarTokenRecuperarSenha(string email)
+        {
+            try
+            {
+                var usuario = Servico.ListarUsuariosPorEmail(email);
+                if (string.IsNullOrWhiteSpace(email) || !System.Text.RegularExpressions.Regex.IsMatch(email, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
+                {
+                    ExibirModal("e-mail inválido.");
+                }
+                else if (usuario == null || usuario.IdUsuario == 0)
+                {
+                    ExibirModal("e-mail não cadastrado em nosso sistema.");
+                }
+                else
+                {
+                    string srt = HttpContext.Request.Url.PathAndQuery;
+                    string url = HttpContext.Request.Url.AbsoluteUri.Replace(srt, "/");
+                    Servico.GerarTokenUsuarioSemSenha(usuario, url);
+                    ExibirModal(String.Format("e-mail enviado para {0} com instruções para reset de password.", email));
+                }
+            }
+            catch (Exception e)
+            {
+                ExibirModal(e.Message);
+            }
+            return View("EsqueciMinhaSenha");
+        }
+
+        [PermiteAnonimo]
+        public ActionResult EsqueciMinhaSenha()
+        {
+            return View("EsqueciMinhaSenha");
+        }
+
+        [PermiteAnonimo]
+        [HttpGet]
+        public ActionResult RecuperarMinhaSenha(string token)
+        {
+            var model = new RecuperarSenhaModel();
+            model.Token = token;
+            model.Usuario = Servico.ObterUsuarioPorToken(token);
+            model.Isvalid = model.ValidaModel(true);
+            return View("RecuperarMinhaSenha",model);
+        }
+        [PermiteAnonimo]
+        [HttpPost]
+        public ActionResult RecuperarMinhaSenha(RecuperarSenhaModel model)
+        {
+            model.Usuario = Servico.ObterUsuarioPorToken(model.Token);
+            model.Isvalid = model.ValidaModel(false);
+            if (model.Isvalid)
+            {
+                var usertokensenha = Servico.ObterUsuarioTokenSenhaPorToken(model.Token);
+                usertokensenha.JaUsado = true;
+                usertokensenha = Servico.AlterarUsuarioTokenSenha(usertokensenha);
+                model.Usuario.Senha = model.NovaSenha;
+                model.Usuario = Servico.AlterarUsuario(model.Usuario);
+                model.IsSenhaNova = true;
+                model.Mensagem = "Senha alterada com sucesso. Clique voltar.";
+            }
+            return View("RecuperarMinhaSenha", model);
+        }
+
         private bool CheckEmail(Usuario[] usuarios,Usuario usuariologado, Usuario usuariomodel)
         {
             // se o e-mail já existir e não for do mesmo usuário que está mudando o perfil ret false
@@ -147,7 +213,7 @@ namespace Fusioness.Controllers
 
         private bool CheckSenha(Usuario usuariologado, Usuario usuario)
         {
-            return usuariologado.Senha == usuario.Senha;
+            return usuariologado == null || usuariologado.Senha == usuario.Senha;
         }
     }
 }

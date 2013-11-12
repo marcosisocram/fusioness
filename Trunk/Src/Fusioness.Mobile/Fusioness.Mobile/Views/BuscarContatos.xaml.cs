@@ -20,8 +20,7 @@ namespace Fusioness.Mobile.Views
 
         public BuscarContatos()
         {
-            InitializeComponent();
-            this.Contatos = new ObservableCollection<ItemViewModel>();
+            InitializeComponent();            
         }
 
         private void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
@@ -30,6 +29,7 @@ namespace Fusioness.Mobile.Views
             {
                 if (!String.IsNullOrEmpty(this.txtPesquisar.Text))
                 {
+                    this.Contatos = new ObservableCollection<ItemViewModel>();
                     FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                     servico.ListarUsuariosPorNomeAsync(this.txtPesquisar.Text.ToString(),Global.usuarioLogado.IdUsuario);
                     servico.ListarUsuariosPorNomeCompleted += servico_ListarUsuariosPorNomeCompleted;

@@ -16,5 +16,6 @@ namespace Fusioness.Business.Usuarios
         string InserirFotoUsuario(Usuario usuario, byte[] bytes, string filename, string dirbase);
         List<Usuario> ObterUsuariosIds(List<int> idsUsuario);
         List<Usuario> ListarUsuariosPorNome(string nome, int idUsuario);
+        Usuario ListarUsuariosPorEmail(string email);
     }
 }

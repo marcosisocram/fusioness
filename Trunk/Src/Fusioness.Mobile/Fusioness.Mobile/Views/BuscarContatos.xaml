@@ -39,7 +39,7 @@
                         <StackPanel Orientation="Horizontal" Margin="-10,5,0,0" Height="75" Width="432">
                             <!--Replace rectangle with image-->
                             <Border BorderThickness="1" Width="70" BorderBrush="#FF173779" Height="70">
-                                <Image>
+                                <Image Stretch="UniformToFill">
                                     <Image.Source>
                                         <BitmapImage UriSource="{Binding ContatoImagem}" 
                                                          CreateOptions="BackgroundCreation"/>

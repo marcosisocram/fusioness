@@ -44,7 +44,7 @@
                             </toolkit:ContextMenuService.ContextMenu>
                             <!--Replace rectangle with image-->
                             <Border BorderThickness="1" Width="100" BorderBrush="#FF173779" Height="100">
-                                <Image Stretch="Fill">
+                                <Image Stretch="UniformToFill">
                                     <Image.Source>
                                         <BitmapImage UriSource="{Binding PontoUrlImagem}" 
                                                          CreateOptions="BackgroundCreation"/>
