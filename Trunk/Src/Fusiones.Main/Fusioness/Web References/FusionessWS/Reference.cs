@@ -164,6 +164,10 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback ObterUsuarioPorTokenOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AlterarUsuarioTokenSenhaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ObterUsuarioTokenSenhaPorTokenOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -402,6 +406,12 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event ObterUsuarioPorTokenCompletedEventHandler ObterUsuarioPorTokenCompleted;
+        
+        /// <remarks/>
+        public event AlterarUsuarioTokenSenhaCompletedEventHandler AlterarUsuarioTokenSenhaCompleted;
+        
+        /// <remarks/>
+        public event ObterUsuarioTokenSenhaPorTokenCompletedEventHandler ObterUsuarioTokenSenhaPorTokenCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -2349,6 +2359,64 @@ namespace Fusioness.FusionessWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AlterarUsuarioTokenSenha", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UsuarioTokenSenha AlterarUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha) {
+            object[] results = this.Invoke("AlterarUsuarioTokenSenha", new object[] {
+                        usuariotokensenha});
+            return ((UsuarioTokenSenha)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AlterarUsuarioTokenSenhaAsync(UsuarioTokenSenha usuariotokensenha) {
+            this.AlterarUsuarioTokenSenhaAsync(usuariotokensenha, null);
+        }
+        
+        /// <remarks/>
+        public void AlterarUsuarioTokenSenhaAsync(UsuarioTokenSenha usuariotokensenha, object userState) {
+            if ((this.AlterarUsuarioTokenSenhaOperationCompleted == null)) {
+                this.AlterarUsuarioTokenSenhaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAlterarUsuarioTokenSenhaOperationCompleted);
+            }
+            this.InvokeAsync("AlterarUsuarioTokenSenha", new object[] {
+                        usuariotokensenha}, this.AlterarUsuarioTokenSenhaOperationCompleted, userState);
+        }
+        
+        private void OnAlterarUsuarioTokenSenhaOperationCompleted(object arg) {
+            if ((this.AlterarUsuarioTokenSenhaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AlterarUsuarioTokenSenhaCompleted(this, new AlterarUsuarioTokenSenhaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObterUsuarioTokenSenhaPorToken", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UsuarioTokenSenha ObterUsuarioTokenSenhaPorToken(string token) {
+            object[] results = this.Invoke("ObterUsuarioTokenSenhaPorToken", new object[] {
+                        token});
+            return ((UsuarioTokenSenha)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ObterUsuarioTokenSenhaPorTokenAsync(string token) {
+            this.ObterUsuarioTokenSenhaPorTokenAsync(token, null);
+        }
+        
+        /// <remarks/>
+        public void ObterUsuarioTokenSenhaPorTokenAsync(string token, object userState) {
+            if ((this.ObterUsuarioTokenSenhaPorTokenOperationCompleted == null)) {
+                this.ObterUsuarioTokenSenhaPorTokenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObterUsuarioTokenSenhaPorTokenOperationCompleted);
+            }
+            this.InvokeAsync("ObterUsuarioTokenSenhaPorToken", new object[] {
+                        token}, this.ObterUsuarioTokenSenhaPorTokenOperationCompleted, userState);
+        }
+        
+        private void OnObterUsuarioTokenSenhaPorTokenOperationCompleted(object arg) {
+            if ((this.ObterUsuarioTokenSenhaPorTokenCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ObterUsuarioTokenSenhaPorTokenCompleted(this, new ObterUsuarioTokenSenhaPorTokenCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -3461,6 +3529,8 @@ namespace Fusioness.FusionessWS {
         
         private int usuarioIDField;
         
+        private bool jaUsadoField;
+        
         /// <remarks/>
         public int ID {
             get {
@@ -3498,6 +3568,16 @@ namespace Fusioness.FusionessWS {
             }
             set {
                 this.usuarioIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool JaUsado {
+            get {
+                return this.jaUsadoField;
+            }
+            set {
+                this.jaUsadoField = value;
             }
         }
     }
@@ -5566,6 +5646,58 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Usuario)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AlterarUsuarioTokenSenhaCompletedEventHandler(object sender, AlterarUsuarioTokenSenhaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AlterarUsuarioTokenSenhaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AlterarUsuarioTokenSenhaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UsuarioTokenSenha Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UsuarioTokenSenha)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ObterUsuarioTokenSenhaPorTokenCompletedEventHandler(object sender, ObterUsuarioTokenSenhaPorTokenCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObterUsuarioTokenSenhaPorTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ObterUsuarioTokenSenhaPorTokenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UsuarioTokenSenha Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UsuarioTokenSenha)(this.results[0]));
             }
         }
     }

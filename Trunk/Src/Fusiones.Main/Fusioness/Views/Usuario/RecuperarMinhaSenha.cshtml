@@ -1,0 +1,92 @@
+﻿@model Fusioness.Models.Usuarios.RecuperarSenhaModel
+@{ 
+    ViewBag.Title = "Recupere sua senha";
+    Layout = "~/Views/Shared/_LayoutBaseAcesso.cshtml";
+}
+@section head
+{
+  <style type="text/css">
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #E5E5E5;
+    }
+
+    .form-signin {
+      border: 1px solid #D8D8D8;
+      border-bottom-width: 2px;
+      border-top-width: 0;
+      background-color: #FFF;
+      max-width: 350px;
+      padding: 19px 29px 29px;
+      margin: 0 auto 20px;
+      background-color: #fff;
+      border: 1px solid #F5F5F5;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+    }
+
+      .form-signin .form-signin-heading {
+        font-size: 24px;
+        font-weight: 300;
+      }
+
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+  </style>
+}
+<!-- LINHA 1 -->
+<div class="row-fluid">
+    <!-- BLOCK -->
+    <div class="span12">
+        <div class="card">
+            <h2 class="card-heading simple">
+                <span>Recupere sua senha</span>
+            </h2>
+            <div class="card-body">
+                @using (Html.BeginForm("RecuperarMinhaSenha", "Usuario", FormMethod.Post))
+                {
+                    <span>@Model.Mensagem</span>
+                    <br /><br />
+                    if(Model.Isvalid)
+                    {
+                    
+                            <ul style="list-style:none;">
+                                <li>
+                                    <label>Nova senha:</label>
+                                    @Html.PasswordFor(m=>m.NovaSenha)
+                                </li>
+                                <li>
+                                    <label>Repita senha:</label>
+                                    @Html.PasswordFor(m=>m.NovaSenhaRpt)
+                                </li>
+                            </ul>
+                            <br />
+                            <div class="form-actions">
+                                @if (Model.Isvalid && !Model.IsSenhaNova)
+                                {
+                                    <button type="submit" class="btn btn-primary">Go</button> 
+                                }
+                                <a class="btn " href="/Acesso">Voltar</a>
+                            </div>
+                            @Html.HiddenFor(m=>m.IsSenhaNova)
+                            @Html.HiddenFor(m=>m.Token)
+                     }
+                 }
+            </div>
+
+            
+        </div>
+    </div>
+</div>

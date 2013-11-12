@@ -56,7 +56,8 @@ namespace Fusioness.Business.UsuarioTokenSenhas
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<UsuarioTokenSenha> repo = new UsuarioTokenSenhaRepository(uow);
-                    return repo.GetWhere(c => c.Token.Equals(token, StringComparison.InvariantCultureIgnoreCase) && c.DataDeGeracao >= DateTime.Now.AddDays(-7)).FirstOrDefault();
+                    var DtLimite = DateTime.Now.AddDays(-7);
+                    return repo.GetWhere(c => c.Token.Equals(token, StringComparison.InvariantCultureIgnoreCase) && c.DataDeGeracao >= DtLimite && !c.JaUsado).FirstOrDefault();
                 }
             }
             catch (Exception)
@@ -72,6 +73,23 @@ namespace Fusioness.Business.UsuarioTokenSenhas
                 {
                     IRepository<UsuarioTokenSenha> repo = new UsuarioTokenSenhaRepository(uow);
                     usuariotokensenha = repo.Insert(usuariotokensenha);
+                    uow.Commit();
+                    return usuariotokensenha;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public UsuarioTokenSenha AlterarUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha)
+        {
+            try
+            {
+                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+                {
+                    IRepository<UsuarioTokenSenha> repo = new UsuarioTokenSenhaRepository(uow);
+                    usuariotokensenha = repo.Update(usuariotokensenha);
                     uow.Commit();
                     return usuariotokensenha;
                 }

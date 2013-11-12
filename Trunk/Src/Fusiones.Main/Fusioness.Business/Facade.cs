@@ -448,11 +448,12 @@ namespace Fusioness.Business
             {
                 UsuarioID=usuario.IdUsuario,
                 DataDeGeracao=DateTime.Now,
-                Token = Guid.NewGuid().ToString()
+                Token = Guid.NewGuid().ToString(),
+                JaUsado=false
             };
             usuariotokensenha = UsuarioTokenSenhaBus.InserirUsuarioTokenSenha(usuariotokensenha);
             // envia e-mail com link para que o usuário gere a nova senha
-            string body = String.Format("Click no link para mudar a sua senha. \n Essa mensagem tem validade de sete dias. \n {0}RecuperarMinhaSenha?Token={1}",url,usuariotokensenha.Token);
+            string body = String.Format("Click no link para mudar a sua senha. \n Essa mensagem tem validade de sete dias. \n {0}Usuario/RecuperarMinhaSenha?Token={1}",url,usuariotokensenha.Token);
             Fusioness.Business.Util.EmailUtil.EnviaEmail(usuario.Email, "Fusioness - recupere sua senha", body);
         }
         public List<UsuarioTokenSenha> ListarUsuarioTokenSenha()
@@ -473,6 +474,14 @@ namespace Fusioness.Business
             }
             return ret;
 
+        }
+        public UsuarioTokenSenha AlterarUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha)
+        {
+            return UsuarioTokenSenhaBus.AlterarUsuarioTokenSenha(usuariotokensenha);
+        }
+        public UsuarioTokenSenha ObterUsuarioTokenSenhaPorToken(string token)
+        {
+            return UsuarioTokenSenhaBus.ObterUsuarioTokenSenhaPeloToken(token);
         }
         #endregion
 

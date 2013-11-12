@@ -160,6 +160,35 @@ namespace Fusioness.Controllers
             return View("EsqueciMinhaSenha");
         }
 
+        [PermiteAnonimo]
+        [HttpGet]
+        public ActionResult RecuperarMinhaSenha(string token)
+        {
+            var model = new RecuperarSenhaModel();
+            model.Token = token;
+            model.Usuario = Servico.ObterUsuarioPorToken(token);
+            model.Isvalid = model.ValidaModel(true);
+            return View("RecuperarMinhaSenha",model);
+        }
+        [PermiteAnonimo]
+        [HttpPost]
+        public ActionResult RecuperarMinhaSenha(RecuperarSenhaModel model)
+        {
+            model.Usuario = Servico.ObterUsuarioPorToken(model.Token);
+            model.Isvalid = model.ValidaModel(false);
+            if (model.Isvalid)
+            {
+                var usertokensenha = Servico.ObterUsuarioTokenSenhaPorToken(model.Token);
+                usertokensenha.JaUsado = true;
+                usertokensenha = Servico.AlterarUsuarioTokenSenha(usertokensenha);
+                model.Usuario.Senha = model.NovaSenha;
+                model.Usuario = Servico.AlterarUsuario(model.Usuario);
+                model.IsSenhaNova = true;
+                model.Mensagem = "Senha alterada com sucesso. Clique voltar.";
+            }
+            return View("RecuperarMinhaSenha", model);
+        }
+
         private bool CheckEmail(Usuario[] usuarios,Usuario usuariologado, Usuario usuariomodel)
         {
             // se o e-mail já existir e não for do mesmo usuário que está mudando o perfil ret false

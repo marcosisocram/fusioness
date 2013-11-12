@@ -999,6 +999,18 @@ namespace Fusioness.Services
         {
             return Facade.Instance.ObterUsuarioPorToken(token);
         }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public UsuarioTokenSenha AlterarUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha)
+        {
+            return Facade.Instance.AlterarUsuarioTokenSenha(usuariotokensenha);
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public UsuarioTokenSenha ObterUsuarioTokenSenhaPorToken(string token)
+        {
+            return Facade.Instance.ObterUsuarioTokenSenhaPorToken(token);
+        }
         #endregion
     }
 }

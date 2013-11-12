@@ -23,6 +23,8 @@ namespace Fusioness.Data.Mapping
                 .IsRequired();
             this.Property(t => t.UsuarioID)
                 .IsRequired();
+            this.Property(t => t.JaUsado)
+                .IsRequired();
 
             // Table & Column Mappings
             this.ToTable("UsuarioTokenSenha");
@@ -30,6 +32,7 @@ namespace Fusioness.Data.Mapping
             this.Property(t => t.Token).HasColumnName("Token");
             this.Property(t => t.DataDeGeracao).HasColumnName("DataDeGeracao");
             this.Property(t => t.UsuarioID).HasColumnName("UsuarioID");
+            this.Property(t => t.JaUsado).HasColumnName("JaUsado");
         }
     }
 }

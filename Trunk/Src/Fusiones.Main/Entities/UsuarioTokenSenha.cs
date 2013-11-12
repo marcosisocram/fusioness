@@ -12,5 +12,6 @@ namespace Fusioness.Entities
         public string Token { get; set; }
         public DateTime DataDeGeracao { get; set; }
         public int UsuarioID { get; set; }
+        public bool JaUsado { get; set; }
     }
 }

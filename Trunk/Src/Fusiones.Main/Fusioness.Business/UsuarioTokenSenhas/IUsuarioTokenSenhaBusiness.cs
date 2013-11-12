@@ -13,5 +13,6 @@ namespace Fusioness.Business.UsuarioTokenSenhas
         List<UsuarioTokenSenha> ListarUsuarioTokenSenha();
         UsuarioTokenSenha ObterUsuarioTokenSenhaPeloToken(string token);
         UsuarioTokenSenha InserirUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha);
+        UsuarioTokenSenha AlterarUsuarioTokenSenha(UsuarioTokenSenha usuariotokensenha);
     }
 }
