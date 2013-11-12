@@ -202,9 +202,9 @@ namespace Fusioness.Mobile.Views
                    MessageBox.Show("Erro ao Salvar Rota.");
                }               
            }
-           catch (Exception)
+           catch (Exception ex)
            {
-               MessageBox.Show("Erro ao Salvar Rota.");
+               MessageBox.Show(ex.Message.ToString(), "Erro.", MessageBoxButton.OK);
            }
        }
 
@@ -221,12 +221,12 @@ namespace Fusioness.Mobile.Views
                }
                else
                {
-                   MessageBox.Show("Erro ao Salvar Rota.");
+                   MessageBox.Show("Erro ao Salvar Rota. Não Retornou nada.");
                }
            }
-           catch (Exception)
+           catch (Exception ex)
            {
-               MessageBox.Show("Erro ao Salvar Rota.");
+               MessageBox.Show(ex.InnerException.Message.ToString(), "Erro.", MessageBoxButton.OK);
            }
        }
 
