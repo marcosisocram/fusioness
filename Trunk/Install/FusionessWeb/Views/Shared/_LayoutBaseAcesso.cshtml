@@ -6,9 +6,10 @@
   <!-- Bootplus -->
   <link href="@Url.Content("~/Content/css/bootplus.min.css")" rel="stylesheet" media="screen">
   <link href="@Url.Content("~/Content/css/bootplus-responsive.min.css")" rel="stylesheet" media="screen">
-
+  <link href="@Url.Content("~/Content/css/datepicker.css")" rel="stylesheet" media="screen">
   <script src="@Url.Content("~/Content/js/jquery.js")"></script>
   <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+  <script src="@Url.Content("~/Content/js/bootstrap-datepicker.js")"></script>
 
   @RenderSection("head", false)
   <script type="text/javascript">
@@ -24,11 +25,29 @@
       if (mensagem.trim() !== '') {
         $(window).load(function () { $('#divModalGlobal').modal('show'); });
       }
+
+
+        //configuração do datepicker
+      $('.datepicker').datepicker({ format: "dd/mm/yyyy" });
+      $('form').submit(function () {
+          $('.datepicker', this).each(function () {
+              var valor = $(this).val();
+              if (typeof (valor) == 'undefined' || valor === '') {
+                  var dia = new Date().getDate();
+                  var mes = new Date().getMonth();
+                  var ano = new Date().getFullYear();
+                  $(this).val(dia + "/" + mes + "/" + ano);
+              }
+          });
+      });
     });
+
+      
   </script>
 </head>
-  <body>
+  <body style="background-image:url(http://fc07.deviantart.net/fs70/i/2013/118/c/1/bikes_by_takmaj-d63d6dn.jpg)">
     <div class="container">
+        <h1 style="text-align:center">Fusioness - A maior rede de ciclistas do mundo.</h1>
     @RenderBody()
     </div> <!-- /container -->
 

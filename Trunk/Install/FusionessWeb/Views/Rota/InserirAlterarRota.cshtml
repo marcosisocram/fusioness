@@ -4,36 +4,182 @@
     Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
 
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+    function initialize() {
+        var mapOptions = {
+        zoom: 3,
+        center: new google.maps.LatLng(0, -180),
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+
+      var flightPlanCoordinates = [
+        @foreach(var item in Model.ListaCoordenadas)
+        {
+            <text>
+                new google.maps.LatLng(@item.Latitude, @item.Longitude),
+            </text>
+        }  
+
+      ];
+      var flightPath = new google.maps.Polyline({
+        path: flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+      var markerBlue = {
+          url: '../../Content/images/marker_blue.png',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          // The anchor for this image is the base of the flagpole at 0,32.
+          origin: new google.maps.Point(0,0),
+      };
+
+      var markerGreen = {
+          url: '../../Content/images/marker_green.png',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          // The anchor for this image is the base of the flagpole at 0,32.
+          origin: new google.maps.Point(0,0),
+      };
+
+      var markerOrange = {
+          url: '../../Content/images/marker_orange.png',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          // The anchor for this image is the base of the flagpole at 0,32.
+          origin: new google.maps.Point(0,0),
+      };
+
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0; i < flightPlanCoordinates.length; i++) {
+          bounds.extend(flightPlanCoordinates[i]);
+      }
+
+      var firstCoordinate = flightPlanCoordinates[0];
+      //Adiciona flag para o início do trajeto
+      var marker1 = new google.maps.Marker({
+          position: firstCoordinate,
+          map: map,
+          icon: markerGreen,
+          title: 'Início do percurso'
+        });
+        
+      var lastCoordinate = flightPlanCoordinates[(flightPlanCoordinates.length)-1];
+      //Adiciona flag para o fim do trajeto
+      var marker2 = new google.maps.Marker({
+          position: lastCoordinate,
+          map: map,
+          icon: markerBlue,
+          title: 'Fim do percurso'
+      });
+
+        @{int count = 0;}
+        @foreach (var item in Model.ListaPontosReferencia)
+       {
+           
+            <text>
+                var @("contentString" + count)  = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h5>@item.NomePonto.ToUpper()</h5>'+
+                    '<div id="bodyContent">'+
+                    '<p><img width="250px" src="../../Content/images/@item.UrlImagemPonto" class="img-rounded"/></p>'+
+                    '<p>@item.DescricaoPonto</p>'+
+                    '</div>'+
+                    '</div>';
+                var @("infoWindow" + count) = new google.maps.InfoWindow({
+                    content: @("contentString" + count),
+                    maxWidth: 300
+                });
+                var @("position" + count) = new google.maps.LatLng(@item.Latitude, @item.Longitude);
+                var @("marker" + count) = new google.maps.Marker({
+                    position: @("position" + count),
+                    map: map,
+                    icon: markerOrange,
+                    title: '@WebUtility.HtmlDecode(item.NomePonto)'
+                });
+                google.maps.event.addListener(@("marker" + count), 'click', function() {
+                    @("infoWindow" + count).open(map,@("marker" + count));
+                })
+            </text>
+            count++;
+       }
+
+      map.fitBounds(bounds);
+
+      flightPath.setMap(map);
+    }
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 <!-- LINHA 1 -->
 <div class="row-fluid">
     <!-- BLOCK -->
     <div class="span12">
         <div class="card">
-            <h2 class="card-heading simple">Cadastre sua rota!</h2>
-            <div class="card-body">
-                @using (Html.BeginForm("InserirAlterarRota", "Rota", FormMethod.Post))
-                {
-                    @Html.LabelFor(m => m.Rota.Descricao,"Descrição:")
-                    @Html.TextBoxFor(m => m.Rota.Descricao)
-                    <br />
-                    @Html.LabelFor(m => m.TiposDeRotas,"Tipo da Rota:")
-                    @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
-                    <br />
-                    @Html.LabelFor(m => m.TiposDePista, "Tipo da Pista:")
-                    @Html.DropDownListFor(m => m.Rota.IdTipoPista, new SelectList(Model.TiposDePista, "IdTipoPista", "Descricao"))
-                    <br />
-                    @Html.LabelFor(m => m.TiposDeDificuldade, "Nível de Dificuldade:")
-                    @Html.DropDownListFor(m => m.Rota.IdDificuldade, new SelectList(Model.TiposDeDificuldade, "IdDificuldade", "Descricao"))
-                    <br />
-                    @Html.LabelFor(m => m.TiposDeQualidade, "Nível de Qualidade:")
-                    @Html.DropDownListFor(m => m.Rota.IdQualidadeRota, new SelectList(Model.TiposDeQualidade, "IdQualidadeRota", "Descricao"))
-                    <br />
-                    @Html.HiddenFor(m => m.Rota.IdRota)
-                    <input type="submit" value="Enviar" />
-                }
+            <h2 class="card-heading simple">
+                @Html.ActionLink("Voltar", "Index", "Evento", new { @class = "pull-right btn btn-primary" })
+                Detalhes do evento:
+            </h2>
+            <div class="card-body" style="overflow: hidden">
+                <div style="float: left">
+                    <ul class="thumbnails">
+                        <li class="span9">
+                            <div id="map-canvas" class="thumbnail" style="width:400px;height:400px;"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="thumbnails">
+                        <li class="span5">
+                            <div class="thumbnail">
+                            @using (Html.BeginForm("InserirAlterarRota", "Rota", FormMethod.Post))
+                            {
+                    
+                                    <ul style="list-style:none;">
+                                    <li>
+                                        @Html.LabelFor(m => m.Rota.Descricao,"Descrição:")
+                                        @Html.TextBoxFor(m => m.Rota.Descricao)
+                                        @Html.ValidationMessage("Descrição", new { style = "margin-left:10px" })
+                                    </li>
+                                    <li>
+                                        @Html.LabelFor(m => m.TiposDeRotas,"Tipo da Rota:")
+                                        @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
+                            
+                                    </li>
+                                    <li>
+                                        @Html.LabelFor(m => m.TiposDePista, "Tipo da Pista:")
+                                        @Html.DropDownListFor(m => m.Rota.IdTipoPista, new SelectList(Model.TiposDePista, "IdTipoPista", "Descricao"))
+                                    </li>
+                                    <li>
+                                        @Html.LabelFor(m => m.TiposDeDificuldade, "Nível de Dificuldade:")
+                                        @Html.DropDownListFor(m => m.Rota.IdDificuldade, new SelectList(Model.TiposDeDificuldade, "IdDificuldade", "Descricao"))
+                                    </li>
+                                    <li>
+                                        @Html.LabelFor(m => m.TiposDeQualidade, "Nível de Qualidade:")
+                                        @Html.DropDownListFor(m => m.Rota.IdQualidadeRota, new SelectList(Model.TiposDeQualidade, "IdQualidadeRota", "Descricao"))
+                                    </li>
+                                </ul>
+                                <br />
+                                @Html.HiddenFor(m => m.Rota.IdRota)
+
+                                <input type="submit" value="Salvar" class="btn btn-primary" />
+                            }
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
     <!-- END BLOCK -->
+    
 </div>
 <!-- END LINHA 2 -->

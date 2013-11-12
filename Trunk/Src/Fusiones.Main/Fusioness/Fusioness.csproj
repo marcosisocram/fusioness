@@ -220,6 +220,7 @@
     </Content>
     <Content Include="Views\Usuario\EsqueciMinhaSenha.cshtml" />
     <Content Include="Views\Usuario\RecuperarMinhaSenha.cshtml" />
+    <None Include="Properties\PublishProfiles\FusionessWeb.pubxml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

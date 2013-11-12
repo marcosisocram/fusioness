@@ -6,42 +6,58 @@
 
 <!-- LINHA 1 -->
 <div class="row-fluid">
-  <!-- BLOCK -->
-  <div class="span12">
-    <div class="card">
-      <h2 class="card-heading simple">Convites de Eventos</h2>
-      <div class="card-body">
-          <table class="table table-hover">
-              <thead>
-                  <th></th>
-                  <th>Título</th>
-                  <th>Data</th>
-                  <th></th>
-              </thead>
-              <tbody>
-                @foreach (var item in Model.ListaEventos)
-                {
-                <tr>
-                    <td>@item.IdEvento</td>
-                    <td>@item.Titulo</td>
-                    <td>@item.Data</td>
-                    <td>
-                        @if (!Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).IdResposta.HasValue)
+    <!-- BLOCK -->
+    <div class="span12">
+        <div class="card">
+            <h2 class="card-heading simple">Convites de Eventos</h2>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <th></th>
+                        <th>Título</th>
+                        <th>Data</th>
+                        <th>Resposta</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ListaEventos)
                         {
-                            @Html.ActionLink("Rejeitar", "ResponderConviteEvento", "Evento", new {idEvento = item.IdEvento, aceito = false}, new {@class = "btn btn-danger"})
-                            @Html.ActionLink("Aceitar", "ResponderConviteEvento", "Evento", new {idEvento = item.IdEvento, aceito = true}, new {@class = "btn btn-primary"})
+                            var convite = Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento);
+                            var label = string.Empty;
+                            if (convite.IdResposta.HasValue)
+                            {
+                                if (convite.IdResposta.Value == 1) { label = "label-important"; }
+                                else if (convite.IdResposta.Value == 2) { label = "label-success"; }
+                                else { label = "label-warning"; }
+                            }
+                    
+                            <tr>
+                                <td>@item.IdEvento</td>
+                                <td>@item.Titulo</td>
+                                <td>@item.Data.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <p class="label @label">@(Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).Resposta.Descricao)</p>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        @foreach (var resposta in Model.RespostasPossiveis)
+                                        {
+                            
+                                            @Html.ActionLink(
+                                                resposta.Descricao, "ResponderConviteEvento", "Evento"
+                                                , new { idEvento = item.IdEvento, idResposta = resposta.IdResposta }
+                                                , new { @class = resposta.IdResposta == 1 ? "btn btn-danger" : (resposta.IdResposta == 2 ? "btn btn-success" : "btn btn-warning"), onclick = "ExibirCarregando()" }
+                                            )
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
                         }
-                        else
-                        {
-                            @(Model.ListaConviteEventos.First(c => c.IdEvento == item.IdEvento).Resposta.Descricao)
-                        }
-                    </td>
-                </tr>
-                }
-              </tbody>
-          </table>
-      </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- END BLOCK -->
-</div><!-- END LINHA 1 -->
+    <!-- END BLOCK -->
+</div>
+<!-- END LINHA 1 -->

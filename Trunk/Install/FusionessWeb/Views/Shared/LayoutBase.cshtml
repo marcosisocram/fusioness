@@ -1,124 +1,219 @@
-﻿<!DOCTYPE html>
+﻿@using Fusioness.Controllers
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Fusioness - A rede social dos ciclistas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootplus -->
-  <link href="@Url.Content("~/Content/css/bootplus.min.css")" rel="stylesheet" media="screen">
-  <link href="@Url.Content("~/Content/css/bootplus-responsive.min.css")" rel="stylesheet" media="screen">
+    <title>Fusioness - A rede social dos ciclistas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootplus -->
+    <link href="@Url.Content("~/Content/css/bootplus.min.css")" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/Content/css/bootplus-responsive.min.css")" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/Content/css/datepicker.css")" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/Content/css/font-awesome-ie7.min.css")" rel="stylesheet" media="screen">
+    <script src="@Url.Content("~/Content/js/jquery.js")"></script>
+    <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/bootstrap-datepicker.js")"></script>
 
-  <script src="@Url.Content("~/Content/js/jquery.js")"></script>
-  <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
-
-  <style type="text/css">
-    body {
-      padding-top: 46px;
-      padding-bottom: 40px;
-    }
-  </style>
-  <script type="text/javascript">
+    <style type="text/css">
+        body {
+            padding-top: 46px;
+            padding-bottom: 40px;
+        }
+        #divBg {
+            position:fixed;top:0;left:0;height: 100%;width: 100%;
+            filter: blur(10px); -webkit-filter: blur(10px); -moz-filter: blur(10px); -ms-filter: blur(10px);
+            -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;
+            overflow: hidden;
+        }
+        #divBg *{height: 100%;width: 100%;}
+        #divGeneralContainer{position: relative;}
+        footer { color: white; }
+    </style>
+    <script type="text/javascript">
     @{
-      var titulo = TempData["MODAL_TITLE"] != null ? TempData["MODAL_TITLE"].ToString() : string.Empty;
-      var mensagem = TempData["MODAL_CONTENT"] != null ? TempData["MODAL_CONTENT"].ToString() : string.Empty;
-      var largura = TempData["MODAL_WIDTH"] != null ? TempData["MODAL_WIDTH"].ToString() : string.Empty;
+        var titulo = TempData["MODAL_TITLE"] != null ? TempData["MODAL_TITLE"].ToString() : string.Empty;
+        var mensagem = TempData["MODAL_CONTENT"] != null ? TempData["MODAL_CONTENT"].ToString() : string.Empty;
+        var largura = TempData["MODAL_WIDTH"] != null ? TempData["MODAL_WIDTH"].ToString() : string.Empty;
     }
 
-    $(document).ready(function () {
-      //configuração do modal
-      var mensagem = '@mensagem';
-      if (mensagem.trim() !== '') {
-        $(window).load(function () { $('#divModalGlobal').modal('show'); });
-      }
+        $(document).ready(function () {
+            var mensagem = '@mensagem';
+
+            //Geolocation do browser
+            navigator.geolocation.getCurrentPosition(showPosition, positionError);
+
+            function showPosition(position) {
+                var coordinates = position.coords;
+                var link = '/Evento/Explore?latitude=' + coordinates.latitude + '&longitude=' + coordinates.longitude;
+                $('#explore').attr('href', link);
+            }
+
+            function positionError(position) {
+                $('#explore').attr('href', '#');
+                $('#explore').attr('title', 'Para utilizar todos os recursos do sistema, favor habilitar a geolocalização');
+                $('#explore').text('Explore (Habilitar Geolocalização)');
+            }
+        //configuração do modal
+        if (mensagem.trim() !== '') { $(window).load(function () { $('#divModalGlobal').modal('show'); }); }
+
+        //configuração do loading...
+        $('#modalLoading').modal('hide');
+
+        //configuração do datepicker
+        $('.datepicker').prop('readonly', 'readonly').datepicker({ format: "dd/mm/yyyy" });
+        $('form').submit(function () {
+            $('.datepicker', this).each(function () {
+                var valor = $(this).val();
+                if (typeof (valor) == 'undefined' || valor === '') {
+                    var dia = new Date().getDate();
+                    var mes = new Date().getMonth();
+                    var ano = new Date().getFullYear();
+                    $(this).val(dia + "/" + mes + "/" + ano);
+                }
+            });
+        });
+            
+        atualizaBG();
     });
-  </script>
-  @RenderSection("head", false)
+
+    function ExibirCarregando() {
+        $('#modalLoading').modal('show');
+    }
+    
+    function EsconderCarregando() {
+        $('#modalLoading').modal('hide');
+    }
+
+    function atualizaBG() {
+        var images = new Array(
+              'http://farm8.staticflickr.com/7267/7135478979_1c0ae5439d_b.jpg'
+            , 'http://farm5.staticflickr.com/4136/4880793331_aeb4689f41_b.jpg'
+            , 'http://farm5.staticflickr.com/4043/4278490275_58c4ab24bc_b.jpg'
+            , 'http://farm5.staticflickr.com/4072/4279237474_ac916cf197_b.jpg'
+            , 'http://farm4.staticflickr.com/3605/3364365765_019447bf8c_b.jpg'
+            , 'http://farm4.staticflickr.com/3166/2810154261_96a13f511d_b.jpg'
+            , 'http://farm2.staticflickr.com/1258/5102136387_6d790d3996_b.jpg'
+            , 'http://farm5.staticflickr.com/4135/4777468952_f09eb3c4b7_b.jpg'
+            , 'http://farm5.staticflickr.com/4044/4257646587_0e98af3ed5_b.jpg'
+        );
+
+        var img = images[parseInt(Math.random() * images.length)];
+        $('#divBg').css({'background-image' : 'url('+img+')'});
+    }
+    </script>
+    @RenderSection("head", false)
 </head>
 <body>
-  <!-- Menu Superior -->
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="brand" href="#">Fusioness</a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-            @Html.MenuItem("Home", "Index", "Home")
-            @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
-            @Html.MenuItem("Contatos", "Index", "Contato")
-            @Html.MenuItem("Rotas", "Index", "Rota")
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos</a>
-                <ul class="dropdown-menu">
-                    @Html.MenuItem("Lista de Eventos", "Index", "Evento")
-                    @Html.MenuItem("Lista de Convites", "Convites", "Evento")
-                </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-              <ul class="dropdown-menu">
-                @Html.MenuItem("Home", "Index", "Home")
-                @Html.MenuItem("Bicicletas", "Index", "Bicicleta")
-                @Html.MenuItem("Contatos", "Index", "Contato")
-                @Html.MenuItem("Rotas", "Index", "Rota")
-                @Html.MenuItem("Eventos", "Index", "Evento")
-              </ul>
-            </li>
-          </ul>
-          <ul class="pull-right nav">
-            <li class="dropdown">
-              @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>*@
-              <ul class="dropdown-menu">
-                @Html.MenuItem("Perfil", "ACTION", "CONTROLLER")
-                @Html.MenuItem("Configurações", "ACTION", "CONTROLLER")
-                <li class="divider"></li>
-                <li>
-                  @Html.ActionLink("Efetuar Logout", "Sair", "Acesso")
-                </li>
-              </ul>
-            </li>
-          </ul>
-          
+    <div id="divBg"></div> 
+    <div id="divGeneralContainer">
+        <!-- Menu Superior -->
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="@(Url.Action("Index", "Home"))">Fusioness</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            @Html.MenuItem("Home", "Index", "Home")
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bicicleta</a>
+                                <ul class="dropdown-menu">
+                                    @Html.MenuItem("Nova Bicicleta", "InserirAlterarBicicleta", "Bicicleta")
+                                    @Html.MenuItem("Minhas Bicicletas", "Index", "Bicicleta")
+                                </ul>
+                            </li>
+                            @*@Html.MenuItem("Contatos", "Index", "Contato")*@
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contatos</a>
+                                <ul class="dropdown-menu">
+                                    @Html.MenuItem("Meus Contatos", "MeusContatos", "Contato")
+                                    @Html.MenuItem("Buscar Contatos", "Index", "Contato")
+                                </ul>
+                            </li>
+                            @Html.MenuItem("Rotas", "Index", "Rota")
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos</a>
+                                <ul class="dropdown-menu">
+                                    @Html.MenuItem("Criar Meu Evento", "InserirAlterarEvento", "Evento")
+                                    @Html.MenuItem("Eventos que Criei", "ListarMeusEventos", "Evento")
+                                    @Html.MenuItem("Eventos que Participo", "ListarEventosQueParticipo", "Evento")
+                                    @Html.MenuItem("Lista de Convites", "VerConvitesEvento", "Evento")
+                                    <li><a id="explore" href="#">Explorar Eventos</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="pull-right nav-collapse collapse">
+                            <ul class="nav">
+                                @if (BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext) != null)
+                            {
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, @BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).Nome</a>
+                                    <ul class="dropdown-menu">
+
+                                        <li><a href="/Usuario/VerPerfilUsuario?IdUsuario=@BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext).IdUsuario" > Perfil </a></li>                                        
+                                        @Html.MenuItem("Editar Perfil", "InserirAlterarUsuario", "Usuario")
+                                        <li class="divider"></li>
+                                        <li>
+                                            @Html.MenuItem("Efetuar Logout", "Sair", "Acesso")
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
         </div>
-        <!--/.nav-collapse -->
-      </div>
+
+        <div class="container">
+            @RenderBody()
+
+            <footer>
+                <p>&copy; Fusioness 2013</p>
+            </footer>
+
+        </div>
+        <!-- /container -->
+
+        <!-- MODAL -->
+        <div id="divModalGlobal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">@titulo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            @mensagem
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!--  LOADING  -->
+        <div class="modal hide" id="modalLoading" data-backdrop="static" data-keyboard="false">
+            <div class="modal-header">
+                <h1>Carregando...</h1>
+            </div>
+            <div class="modal-body">
+                <div class="progress progress-striped active">
+                    <div class="bar" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div class="container">
-    @RenderBody()
-
-    <footer>
-      <p>&copy; Fusioness 2013</p>
-    </footer>
-
-  </div>
-  <!-- /container -->
-
-  <!-- MODAL -->
-  <div id="divModalGlobal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">@titulo</h4>
-        </div>
-        <div class="modal-body">
-          <p>
-            @mensagem
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
 </body>
 </html>

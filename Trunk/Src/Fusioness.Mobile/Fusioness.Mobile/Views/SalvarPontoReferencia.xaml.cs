@@ -95,7 +95,7 @@ namespace Fusioness.Mobile.Views
         {
             try
             {
-                CameraCaptureTask camera = new CameraCaptureTask();
+                CameraCaptureTask camera = new CameraCaptureTask();                
                 camera.Show();
                 camera.Completed += new EventHandler<PhotoResult>(camera_Completed);
             }
