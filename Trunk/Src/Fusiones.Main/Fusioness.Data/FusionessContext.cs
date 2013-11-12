@@ -23,6 +23,7 @@ namespace Fusioness.Data
         public DbSet<TipoRota> TipoRotas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<ConviteUsuarioEmail> ConviteUsuarioEmails { get; set; }
+        public DbSet<UsuarioTokenSenha> UsuarioTokenSenhas { get; set; }
         #endregion
 
         #region Constructor
@@ -54,6 +55,7 @@ namespace Fusioness.Data
             modelBuilder.Configurations.Add(new TipoRotaMap());
             modelBuilder.Configurations.Add(new UsuarioMap());
             modelBuilder.Configurations.Add(new ConviteUsuarioEmailMap());
+            modelBuilder.Configurations.Add(new UsuarioTokenSenhaMap());
         }
         #endregion
         #endregion

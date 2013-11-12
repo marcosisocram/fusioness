@@ -14,9 +14,18 @@ namespace Fusioness.Controllers
         public ActionResult Index(IndexModel model)
         {
             var usuario = BaseController.ObterUsuarioLogado(HttpContext);
-            var convites = Servico.ListarConvitesDoUsuario(usuario);
+            var ConvitesAmizade = Servico.ListarConvitesDoUsuario(usuario);
+            var ConvitesEvento = Servico.ObterConvitesEventosDoUsuario(usuario);
             model = new IndexModel();
-            model.ConvitesNaoConfirmados = Servico.ObterUsuariosIds(convites.Select(c => c.IdUsuario).ToArray()).ToList();
+            model.ConvitesNaoConfirmados = Servico.ObterUsuariosIds(ConvitesAmizade.Select(c => c.IdUsuario).ToArray()).ToList();
+            if (ConvitesEvento.Any())
+            {
+                model.EventosNaoConfirmados = Servico.ListarEventos(ConvitesEvento.Select(c => c.IdEvento).ToArray()).ToList();
+            }
+            else
+            {
+                model.EventosNaoConfirmados = null;
+            }
             return View(model);
         }
 
@@ -28,24 +37,6 @@ namespace Fusioness.Controllers
 
         public async Task<ActionResult> ConvidarPorEmail(string emails)
         {
-            //string retorno = string.Empty;
-            //try
-            //{
-            //    if (System.Text.RegularExpressions.Regex.IsMatch(emails, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
-            //    {
-            //        string srt = HttpContext.Request.Url.PathAndQuery;
-            //        string url = HttpContext.Request.Url.AbsoluteUri.Replace(srt, "/");
-            //        Servico.ConvidarPorEmail(emails, url);
-            //    }
-            //    else 
-            //    {
-            //        ExibirModal("Formato de email invalido!");
-            //    }
-            //}
-            //catch(Exception e) 
-            //{
-            //    retorno = string.Format("Aconteceu um erro inesperado. Mensagem de erro: {0}.", e.Message);
-            //}
             try
             {
                 if (String.IsNullOrWhiteSpace(emails))

@@ -54,6 +54,39 @@
             </div>
         </div>
     }
+
+@if (Model.EventosNaoConfirmados != null && Model.EventosNaoConfirmados.Count > 0) 
+    {
+        <div class="row-fluid">
+            <div class="span12">
+            <div class="card">
+                <h2 class="card-heading simple">
+                    Você possui <span class="badge badge-success">@Model.EventosNaoConfirmados.Count</span> convite(s) para eventos!</h2>
+                <div class="card-body">
+                    <table style="margin-bottom:10px;">
+                        @foreach (var evento in Model.EventosNaoConfirmados)
+	                    {
+		                    <tr>
+                                <td>
+                                    @Html.ActionLink("Evento: " + @evento.Titulo, "Detalhar", "Evento", new { idEvento=evento.IdEvento }, new { @class = "btn btn-info" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Aceitar Convite", "ResponderConviteEvento", "Evento", new {  idEvento=evento.IdEvento, idResposta=2 }, new { @class = "btn btn-success" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Rejeitar Convite", "ResponderConviteEvento", "Evento", new {  idEvento=evento.IdEvento, idResposta=1 }, new { @class = "btn btn-danger" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Ai! Estou indeciso...", "ResponderConviteEvento", "Evento", new {  idEvento=evento.IdEvento, idResposta=3 }, new { @class = "btn btn-warning" })
+                                </td>
+		                    </tr>
+	                    }
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    }
 <!-- LINHA 1 -->
 <div class="row-fluid">
   <!-- BLOCK -->

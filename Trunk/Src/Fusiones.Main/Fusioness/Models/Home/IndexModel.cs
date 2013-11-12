@@ -9,5 +9,6 @@ namespace Fusioness.Models.Home
     {
         public Usuario User { get; set; }
         public List<Usuario> ConvitesNaoConfirmados { get; set; }
+        public List<Evento> EventosNaoConfirmados { get; set; }
     }
 }

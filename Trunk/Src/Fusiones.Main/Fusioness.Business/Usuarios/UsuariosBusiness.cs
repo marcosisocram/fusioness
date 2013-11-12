@@ -132,43 +132,7 @@ namespace Fusioness.Business.Usuarios
             }
             
         }
-        /*
-        #region Contato
-        public Contato InserirContato(Contato contato)
-        {
-            try
-            {
-                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
-                {
-                    IRepository<Contato> repo = new ContatoRepository(uow);
-                    contato = repo.Insert(contato);
-                    uow.Commit();
-                }
-                return contato;
-            }
-            catch (Exception)
-            {
-                return default(Contato);
-            }
-        }
-        public List<Usuario> ListarContatosPorUsuario(Usuario usuario)
-        {
-            try
-            {
-                using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
-                {
-                    IRepository<Usuario> repo = new UsuarioRepository(uow);
-                    repo.GetWhere(c => c.IdUsuario != usuario.IdUsuario);
-                    return repo.GetAll().ToList();
-                }
-            }
-            catch (Exception)
-            {
-                return new List<Usuario>();
-            }
-        }
 
-        #endregion*/
         public List<Usuario> ObterUsuariosIds(List<int> idsUsuario)
         {
             if (idsUsuario == null || !idsUsuario.Any()) return new List<Usuario>();
@@ -188,7 +152,14 @@ namespace Fusioness.Business.Usuarios
                 return new UsuarioRepository(uow).GetWhere(u => u.Nome.Contains(nome) && u.IdUsuario != idUsuario).ToList();
             }
         }
-        
+
+        public Usuario ListarUsuariosPorEmail(string email)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                return new UsuarioRepository(uow).GetWhere(u=>u.Email.Equals(email,StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            }
+        }
         #endregion
     }
 }

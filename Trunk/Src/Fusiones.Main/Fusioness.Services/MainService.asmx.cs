@@ -239,6 +239,20 @@ namespace Fusioness.Services
                 return new List<Usuario>();
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Usuario ListarUsuariosPorEmail(string email)
+        {
+            try
+            {
+                return Facade.Instance.ListarUsuariosPorEmail(email);
+            }
+            catch
+            {
+                return default(Usuario);
+            }
+        }
         #endregion
 
         #region Rotas
@@ -964,6 +978,27 @@ namespace Fusioness.Services
             return objeto;
         }
 
+        #endregion
+
+        #region UsuarioTokenSenha
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void GerarTokenUsuarioSemSenha(Usuario usuario, string url)
+        {
+            Facade.Instance.GerarTokenUsuarioSemSenha(usuario,url);
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<UsuarioTokenSenha> ListarUsuarioTokenSenha()
+        {
+            return Facade.Instance.ListarUsuarioTokenSenha();
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public Usuario ObterUsuarioPorToken(string token)
+        {
+            return Facade.Instance.ObterUsuarioPorToken(token);
+        }
         #endregion
     }
 }

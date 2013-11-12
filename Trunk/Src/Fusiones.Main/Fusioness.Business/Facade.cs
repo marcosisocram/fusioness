@@ -19,6 +19,7 @@ using Fusioness.Business.ConviteUsuarioEmails;
 using System.Net;
 using System.Net.Mail;
 using System.Linq;
+using Fusioness.Business.UsuarioTokenSenhas;
 
 namespace Fusioness.Business
 {
@@ -40,6 +41,7 @@ namespace Fusioness.Business
         private readonly IContatoBusiness ContatoBus;
         private readonly IEventoUsuarioBusiness EventoUsuarioBus;
         private readonly IConviteUsuarioEmailBusiness ConviteUsuarioEmailBus;
+        private readonly IUsuarioTokenSenhaBusiness UsuarioTokenSenhaBus;
 
         #endregion
 
@@ -69,6 +71,7 @@ namespace Fusioness.Business
             RespostaBus = new RespostaBusiness();
             EventoUsuarioBus = new EventoUsuarioBusiness();
             ConviteUsuarioEmailBus = new ConviteUsuarioEmailBusiness();
+            UsuarioTokenSenhaBus = new UsuarioTokenSenhaBusiness();
         }
 
         #endregion
@@ -113,7 +116,11 @@ namespace Fusioness.Business
         public List<Usuario> ListarUsuariosPorNome(string nome, int idUsuario)
         {
             return UsuarioBus.ListarUsuariosPorNome(nome, idUsuario);
-        }        
+        }
+        public Usuario ListarUsuariosPorEmail(string email)
+        {
+            return UsuarioBus.ListarUsuariosPorEmail(email);
+        }
         #endregion
 
         #region ConviteEvento
@@ -410,44 +417,62 @@ namespace Fusioness.Business
         public void ConvidarPorEmail(string[] emails, string url, Usuario usuario)
         {
             // envia e-mails
-            var fromAddress = new MailAddress("fusionessapp@gmail.com", "Convite Fusioness");
-            const string fromPassword = "Unibratec";
             const string subject = "Venha fazer parte do Fusioness!";
             string body = "Click no link para criar o seu perfil \n" + url;
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
-            List<MailMessage> messages = new List<MailMessage>();
             emails.ToList().ForEach(email =>
             {
-                messages.Add(new MailMessage(fromAddress.Address, email, subject, body));
-            });
-            messages.ForEach(c => smtp.Send((c)));
-
-            //salva um registro no banco para cada e-mail convidado
-
-            List<ConviteUsuarioEmail> lst = new List<ConviteUsuarioEmail>();
-            emails.ToList().ForEach(email =>
-            {
-                var convite = new ConviteUsuarioEmail()
+                var ans = Fusioness.Business.Util.EmailUtil.EnviaEmail(email, subject, body);
+                //salva um registro no banco para cada e-mail convidado
+                if (ans)
                 {
-                    IdUsuarioConvidou = usuario.IdUsuario,
-                    EmailConvidado =email,
-                    DataDoConvite=DateTime.Now
-                };
-                convite = ConviteUsuarioEmailBus.InserirConviteUsuarioEmail(convite);
+                    var convite = new ConviteUsuarioEmail()
+                    {
+                        IdUsuarioConvidou = usuario.IdUsuario,
+                        EmailConvidado = email,
+                        DataDoConvite = DateTime.Now
+                    };
+                    convite = ConviteUsuarioEmailBus.InserirConviteUsuarioEmail(convite);
+                }
             });
         }
         public List<ConviteUsuarioEmail> ListarConviteUsuarioEmails()
         {
             return ConviteUsuarioEmailBus.ListarConvites();
+        }
+        #endregion
+
+        #region UsuarioTokenSenha
+        public void GerarTokenUsuarioSemSenha(Usuario usuario,string url)
+        {
+            var usuariotokensenha = new UsuarioTokenSenha()
+            {
+                UsuarioID=usuario.IdUsuario,
+                DataDeGeracao=DateTime.Now,
+                Token = Guid.NewGuid().ToString()
+            };
+            usuariotokensenha = UsuarioTokenSenhaBus.InserirUsuarioTokenSenha(usuariotokensenha);
+            // envia e-mail com link para que o usuário gere a nova senha
+            string body = String.Format("Click no link para mudar a sua senha. \n Essa mensagem tem validade de sete dias. \n {0}RecuperarMinhaSenha?Token={1}",url,usuariotokensenha.Token);
+            Fusioness.Business.Util.EmailUtil.EnviaEmail(usuario.Email, "Fusioness - recupere sua senha", body);
+        }
+        public List<UsuarioTokenSenha> ListarUsuarioTokenSenha()
+        {
+            return UsuarioTokenSenhaBus.ListarUsuarioTokenSenha();
+        }
+        public Usuario ObterUsuarioPorToken(string token)
+        {
+            Usuario ret = null;
+            try
+            {
+                var usertoken = UsuarioTokenSenhaBus.ObterUsuarioTokenSenhaPeloToken(token);
+                ret = ObterUsuarioPorId(new Usuario() { IdUsuario = usertoken.UsuarioID });
+            }
+            catch
+            {
+                ret = null;
+            }
+            return ret;
+
         }
         #endregion
 
