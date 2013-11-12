@@ -22,49 +22,14 @@ namespace Fusioness.Properties {
                 return defaultInstance;
             }
         }
-
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-#if DEBUG
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/Fusioness.Services/MainService.asmx")]
-#else
-        [global::System.Configuration.DefaultSettingValueAttribute("http://fusionessapi.apphb.com/Fusioness.Services/MainService.asmx")]
-#endif
-        public string Fusioness_FusionessWS_MainService
-        {
-            get
-            {
-#if DEBUG
-                return ((string)(this["Fusioness_FusionessWS_MainService_Debug"]));
-#else
-                return ((string)(this["Fusioness_FusionessWS_MainService_Release"]));
-#endif
-
-            }
-        }
-
+        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/Fusioness.Services/MainService.asmx")]
-        public string Fusioness_FusionessWS_MainService_Debug
-        {
-            get
-            {
-                return ((string)(this["Fusioness_FusionessWS_MainService_Debug"]));
-            }
-        }
-
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://fusionessapi.apphb.com/Fusioness.Services/MainService.asmx")]
-        public string Fusioness_FusionessWS_MainService_Release
-        {
-            get
-            {
-                return ((string)(this["Fusioness_FusionessWS_MainService_Release"]));
+        public string Fusioness_FusionessWS_MainService {
+            get {
+                return ((string)(this["Fusioness_FusionessWS_MainService"]));
             }
         }
     }

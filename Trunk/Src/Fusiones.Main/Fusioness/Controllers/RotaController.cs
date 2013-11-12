@@ -29,6 +29,7 @@ namespace Fusioness.Controllers
             model.Rota = new Rota() { IdRota = Id };
             model.Rota = Servico.ObterRotaPorId(model.Rota);
             model.ListaCoordenadas = Servico.ListarCoordenadasPorRota(model.Rota);
+            model.ListaPontosReferencia = Servico.ListarPontosReferenciaPorRota(model.Rota);
 
             return View("InserirAlterarRota", model);
         }

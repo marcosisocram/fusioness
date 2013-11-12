@@ -98,7 +98,7 @@ namespace Fusioness.Models.Eventos
         public void carregarParametrosViewExplore(Usuario usuarioLogado, Evento eventoSelecionado, double latitudeAtual, double longitudeAtual)
         {
             MainService Servico = new MainService();
-            ListaEventos = Servico.ListarEventosComDistancia(latitudeAtual, longitudeAtual);
+            ListaEventos = Servico.ListarEventosComDistancia(latitudeAtual, longitudeAtual).Where(e => e.IdUsuario != usuarioLogado.IdUsuario).ToList();
             CarregarParametrosComunsView(Servico, usuarioLogado, eventoSelecionado);
         }
 

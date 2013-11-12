@@ -12,7 +12,7 @@
         center: new google.maps.LatLng(0, -180),
         disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.TERRAIN
-      };
+        };
 
       var map = new google.maps.Map(document.getElementById('map-canvas'),
           mapOptions);
@@ -34,6 +34,27 @@
         strokeWeight: 2
       });
 
+      var markerBlue = {
+          url: '../../Content/images/marker_blue.png',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          // The anchor for this image is the base of the flagpole at 0,32.
+          origin: new google.maps.Point(0,0),
+      };
+
+      var markerGreen = {
+          url: '../../Content/images/marker_green.png',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          // The anchor for this image is the base of the flagpole at 0,32.
+          origin: new google.maps.Point(0,0),
+      };
+
+      var markerOrange = {
+          url: '../../Content/images/marker_orange.png',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          // The anchor for this image is the base of the flagpole at 0,32.
+          origin: new google.maps.Point(0,0),
+      };
+
       var bounds = new google.maps.LatLngBounds();
       for (var i = 0; i < flightPlanCoordinates.length; i++) {
           bounds.extend(flightPlanCoordinates[i]);
@@ -44,6 +65,7 @@
       var marker1 = new google.maps.Marker({
           position: firstCoordinate,
           map: map,
+          icon: markerGreen,
           title: 'Início do percurso'
         });
         
@@ -52,8 +74,41 @@
       var marker2 = new google.maps.Marker({
           position: lastCoordinate,
           map: map,
+          icon: markerBlue,
           title: 'Fim do percurso'
       });
+
+        @{int count = 0;}
+        @foreach (var item in Model.ListaPontosReferencia)
+       {
+           
+            <text>
+                var @("contentString" + count)  = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h5>@item.NomePonto.ToUpper()</h5>'+
+                    '<div id="bodyContent">'+
+                    '<p><img width="250px" src="../../Content/images/@item.UrlImagemPonto" class="img-rounded"/></p>'+
+                    '<p>@item.DescricaoPonto</p>'+
+                    '</div>'+
+                    '</div>';
+                var @("infoWindow" + count) = new google.maps.InfoWindow({
+                    content: @("contentString" + count),
+                    maxWidth: 300
+                });
+                var @("position" + count) = new google.maps.LatLng(@item.Latitude, @item.Longitude);
+                var @("marker" + count) = new google.maps.Marker({
+                    position: @("position" + count),
+                    map: map,
+                    icon: markerOrange,
+                    title: '@WebUtility.HtmlDecode(item.NomePonto)'
+                });
+                google.maps.event.addListener(@("marker" + count), 'click', function() {
+                    @("infoWindow" + count).open(map,@("marker" + count));
+                })
+            </text>
+            count++;
+       }
 
       map.fitBounds(bounds);
 

@@ -14,7 +14,8 @@ namespace Fusioness.Models.Rotas
         public IList<Dificuldade> TiposDeDificuldade { get; set; }
         public IList<QualidadeRota> TiposDeQualidade{ get; set; }
         public IList<Rota> ListaRotas { get; set; }
-        public IList<Coordenada> ListaCoordenadas { get; set; }
+        public IList<Coordenada> ListaCoordenadas { get; set; }        
+        public IList<Coordenada> ListaPontosReferencia { get; set; }
 
         public bool ValidarRota(ModelStateDictionary ModelState)
         {
