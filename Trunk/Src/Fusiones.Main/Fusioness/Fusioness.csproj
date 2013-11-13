@@ -221,6 +221,9 @@
     <Content Include="Views\Usuario\EsqueciMinhaSenha.cshtml" />
     <Content Include="Views\Usuario\RecuperarMinhaSenha.cshtml" />
     <None Include="Properties\PublishProfiles\FusionessWeb.pubxml" />
+    <Content Include="Web References\FusionessWS\ConviteUsuarioEmail.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -253,6 +256,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\FusionessWS\Usuario.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\FusionessWS\UsuarioTokenSenha.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
   </ItemGroup>

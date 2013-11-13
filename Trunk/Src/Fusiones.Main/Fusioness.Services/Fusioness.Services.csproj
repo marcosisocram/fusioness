@@ -52,7 +52,9 @@
     <Content Include="images\bike.jpg" />
     <Content Include="images\tmp4984.jpg" />
     <Content Include="MainService.asmx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainService.asmx.cs">
