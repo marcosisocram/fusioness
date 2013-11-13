@@ -58,9 +58,9 @@ namespace Fusioness.Mobile.Views
                 servico.ListarQualidadesRotaAsync();
                 servico.ListarQualidadesRotaCompleted += servico_ListarQualidadesRotaCompleted;
             }
-            catch(Exception)
+            catch (Exception)
             {
-                MessageBox.Show("Serviço indisponível no momento!","Alerta!",MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -72,16 +72,23 @@ namespace Fusioness.Mobile.Views
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (acao == Global.Acao.Visualizar)
+            try
             {
-                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-                this.txtDescricao.IsEnabled = false;
-                rotaPai = new FusionessWS.Rota();
-                rotaPai.IdRota = RotaId;
-                servico.ObterRotaPorIdAsync(rotaPai);
-                servico.ObterRotaPorIdCompleted += servico_ObterRotaPorIdCompleted;
-                servico.ConsultarDuracaoRotaAsync(RotaId);
-                servico.ConsultarDuracaoRotaCompleted += servico_ConsultarDuracaoRotaCompleted;
+                if (acao == Global.Acao.Visualizar)
+                {
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                    this.txtDescricao.IsEnabled = false;
+                    rotaPai = new FusionessWS.Rota();
+                    rotaPai.IdRota = RotaId;
+                    servico.ObterRotaPorIdAsync(rotaPai);
+                    servico.ObterRotaPorIdCompleted += servico_ObterRotaPorIdCompleted;
+                    servico.ConsultarDuracaoRotaAsync(RotaId);
+                    servico.ConsultarDuracaoRotaCompleted += servico_ConsultarDuracaoRotaCompleted;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -92,90 +99,118 @@ namespace Fusioness.Mobile.Views
                 FusionessWS.Rota rota = e.Result;
                 this.txtDescricao.Text = rota.Descricao;
             }
-            catch(Exception)
+            catch (Exception)
             {
-                MessageBox.Show("Serviço indisponível");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
 
         }       
 
         void servico_ListarTiposPistaCompleted(object sender, FusionessWS.ListarTiposPistaCompletedEventArgs e)
         {
-            IList<FusionessWS.TipoPista> tipoPistas = e.Result;
-            foreach (var item in tipoPistas)
+            try
             {
-                this.TipoPista.Add(new ItemViewModel()
-                {                     
-                    TipoPistaId = item.IdTipoPista,
-                    TipoPistaDescricao = item.Descricao
-                });
-            }
+                IList<FusionessWS.TipoPista> tipoPistas = e.Result;
+                foreach (var item in tipoPistas)
+                {
+                    this.TipoPista.Add(new ItemViewModel()
+                    {
+                        TipoPistaId = item.IdTipoPista,
+                        TipoPistaDescricao = item.Descricao
+                    });
+                }
 
-            this.lpkTipoPista.ItemsSource = this.TipoPista;
+                this.lpkTipoPista.ItemsSource = this.TipoPista;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }        
 
         void servico_ListarDificuldadesCompleted(object sender, FusionessWS.ListarDificuldadesCompletedEventArgs e)
         {
-            IList<FusionessWS.Dificuldade> dificuldades = e.Result;
-            foreach (var item in dificuldades)
+            try
             {
-                this.Dificuldade.Add(new ItemViewModel()
-                {                     
-                    DificuldadeId = item.IdDificuldade,
-                    DificuldadeDescricao = item.Descricao
-                });
-            }
+                IList<FusionessWS.Dificuldade> dificuldades = e.Result;
+                foreach (var item in dificuldades)
+                {
+                    this.Dificuldade.Add(new ItemViewModel()
+                    {
+                        DificuldadeId = item.IdDificuldade,
+                        DificuldadeDescricao = item.Descricao
+                    });
+                }
 
-            this.lpkDificuldade.ItemsSource = Dificuldade;
+                this.lpkDificuldade.ItemsSource = Dificuldade;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         void servico_ListarQualidadesRotaCompleted(object sender, FusionessWS.ListarQualidadesRotaCompletedEventArgs e)
         {
-            IList<FusionessWS.QualidadeRota> qualidades = e.Result;
-            foreach (var item in qualidades)
+            try
             {
-                this.Qualidade.Add(new ItemViewModel()
-                {                     
-                    QualidadeId = item.IdQualidadeRota,
-                    QualidadeDescricao = item.Descricao
-                });
+                IList<FusionessWS.QualidadeRota> qualidades = e.Result;
+                foreach (var item in qualidades)
+                {
+                    this.Qualidade.Add(new ItemViewModel()
+                    {
+                        QualidadeId = item.IdQualidadeRota,
+                        QualidadeDescricao = item.Descricao
+                    });
+                }
+                this.lpkQualidade.ItemsSource = Qualidade;
             }
-            this.lpkQualidade.ItemsSource = Qualidade;
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
        private void btSalvar_Click(object sender, EventArgs e)
        {
-           if (!NetworkInterface.GetIsNetworkAvailable())
-               MessageBox.Show("Ative sua rede Wi-Fi ou conecte com a Rede Móvel para executar esta ação!");
-           else
+           try
            {
-               if (String.IsNullOrEmpty(this.txtDescricao.Text))
-               {
-                   MessageBox.Show("Informe o Nome da Rota!");
-                   this.txtDescricao.Focus();
-               }
+               if (!NetworkInterface.GetIsNetworkAvailable())
+                   MessageBox.Show("Ative sua rede Wi-Fi ou conecte com a Rede Móvel para executar esta ação!");
                else
                {
-                   var tipoPista = (this.lpkTipoPista as ListPicker).SelectedItem as ItemViewModel;
-                   var dificuldade = (this.lpkDificuldade as ListPicker).SelectedItem as ItemViewModel;
-                   var qualidade = (this.lpkQualidade as ListPicker).SelectedItem as ItemViewModel;
-
-                   FusionessWS.Rota rota = new FusionessWS.Rota();
-                   rota.Descricao = this.txtDescricao.Text;
-                   rota.IdUsuario = Global.usuarioLogado.IdUsuario;
-                   rota.IdTipoPista = tipoPista.TipoPistaId;
-                   rota.IdDificuldade = dificuldade.DificuldadeId;
-                   rota.IdQualidadeRota = qualidade.QualidadeId;
-
-                   if (acao == Global.Acao.Criar)
-                       rota.IdTipoRota = 1;
+                   if (String.IsNullOrEmpty(this.txtDescricao.Text))
+                   {
+                       MessageBox.Show("Informe o Nome da Rota!");
+                       this.txtDescricao.Focus();
+                   }
                    else
-                       rota.IdTipoRota = 2;
+                   {
+                       var tipoPista = (this.lpkTipoPista as ListPicker).SelectedItem as ItemViewModel;
+                       var dificuldade = (this.lpkDificuldade as ListPicker).SelectedItem as ItemViewModel;
+                       var qualidade = (this.lpkQualidade as ListPicker).SelectedItem as ItemViewModel;
 
-                   FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-                   servico.InserirRotaAsync(rota);
-                   servico.InserirRotaCompleted += servico_InserirRotaCompleted;
+                       FusionessWS.Rota rota = new FusionessWS.Rota();
+                       rota.Descricao = this.txtDescricao.Text;
+                       rota.IdUsuario = Global.usuarioLogado.IdUsuario;
+                       rota.IdTipoPista = tipoPista.TipoPistaId;
+                       rota.IdDificuldade = dificuldade.DificuldadeId;
+                       rota.IdQualidadeRota = qualidade.QualidadeId;
+
+                       if (acao == Global.Acao.Criar)
+                           rota.IdTipoRota = 1;
+                       else
+                           rota.IdTipoRota = 2;
+
+                       FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                       servico.InserirRotaAsync(rota);
+                       servico.InserirRotaCompleted += servico_InserirRotaCompleted;
+                   }
                }
+           }
+           catch (Exception)
+           {
+               MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
            }
        }
 
@@ -200,11 +235,11 @@ namespace Fusioness.Mobile.Views
                else
                {
                    MessageBox.Show("Erro ao Salvar Rota.");
-               }               
+               }
            }
-           catch (Exception ex)
+           catch (Exception)
            {
-               MessageBox.Show(ex.Message.ToString(), "Erro.", MessageBoxButton.OK);
+               MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
            }
        }
 
@@ -216,7 +251,7 @@ namespace Fusioness.Mobile.Views
 
                if (coordenadas != null)
                {
-                   MessageBox.Show("Rota Salva com sucesso.");
+                   MessageBox.Show("Rota Salva com sucesso.");                   
                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));                   
                }
                else
@@ -224,9 +259,9 @@ namespace Fusioness.Mobile.Views
                    MessageBox.Show("Erro ao Salvar Rota. Não Retornou nada.");
                }
            }
-           catch (Exception ex)
+           catch (Exception)
            {
-               MessageBox.Show(ex.InnerException.Message.ToString(), "Erro.", MessageBoxButton.OK);
+               MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
            }
        }
 

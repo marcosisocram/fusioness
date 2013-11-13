@@ -44,15 +44,21 @@ namespace Fusioness.Mobile.Views
         /// </summary>
         public void LoadData()
         {
-            this.Comentarios = new ObservableCollection<ItemViewModel>();
+            try
+            {
+                this.Comentarios = new ObservableCollection<ItemViewModel>();
 
-            evento.IdEvento = EventoId;
+                evento.IdEvento = EventoId;
 
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
 
-            servico.ObterEventoPorIdAsync(evento);
-            servico.ObterEventoPorIdCompleted += servico_ObterEventoPorIdCompleted;
-            
+                servico.ObterEventoPorIdAsync(evento);
+                servico.ObterEventoPorIdCompleted += servico_ObterEventoPorIdCompleted;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         void servico_ObterEventoPorIdCompleted(object sender, FusionessWS.ObterEventoPorIdCompletedEventArgs e)
@@ -86,33 +92,40 @@ namespace Fusioness.Mobile.Views
 
                     FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                     servico.ListarComentariosPorEventoAsync(evento);
-                    servico.ListarComentariosPorEventoCompleted += servico_ListarComentariosPorEventoCompleted;                    
+                    servico.ListarComentariosPorEventoCompleted += servico_ListarComentariosPorEventoCompleted;
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Erro ao carregar evento!");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
                 NavigationService.GoBack();
             }
         }
 
         void servico_ListarComentariosPorEventoCompleted(object sender, FusionessWS.ListarComentariosPorEventoCompletedEventArgs e)
         {
-            IList<FusionessWS.ComentarioEvento> comentarios = e.Result;
-            if (comentarios != null)
+            try
             {
-                foreach (var item in comentarios)
+                IList<FusionessWS.ComentarioEvento> comentarios = e.Result;
+                if (comentarios != null)
                 {
-                    this.Comentarios.Add(new ItemViewModel()
+                    foreach (var item in comentarios)
                     {
-                        ComentarioId = item.IdComentarioEvento,
-                        ComentarioDescricao = item.Descricao,
-                        ContatoId = item.IdUsuario,
-                        ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? Global.imgUsuarioDefault : item.Usuario.UrlImagem),
-                        ContatoNome = item.Usuario.Nome
-                    });
+                        this.Comentarios.Add(new ItemViewModel()
+                        {
+                            ComentarioId = item.IdComentarioEvento,
+                            ComentarioDescricao = item.Descricao,
+                            ContatoId = item.IdUsuario,
+                            ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? Global.imgUsuarioDefault : item.Usuario.UrlImagem),
+                            ContatoNome = item.Usuario.Nome
+                        });
+                    }
+                    llsComentario.ItemsSource = this.Comentarios;
                 }
-                llsComentario.ItemsSource = this.Comentarios;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 

@@ -32,15 +32,22 @@ namespace Fusioness.Mobile.Views
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Eventos = new ObservableCollection<ItemViewModel>();
-
-            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
+            try
             {
-                MovementThreshold = 20
-            };
-            watcher.PositionChanged += this.watcher_PositionChanged;
-            watcher.StatusChanged += this.watcher_StatusChanged;
-            watcher.Start();         
+                this.Eventos = new ObservableCollection<ItemViewModel>();
+
+                watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
+                {
+                    MovementThreshold = 20
+                };
+                watcher.PositionChanged += this.watcher_PositionChanged;
+                watcher.StatusChanged += this.watcher_StatusChanged;
+                watcher.Start();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         #region Geolocation
@@ -49,7 +56,7 @@ namespace Fusioness.Mobile.Views
         {
             try
             {
-                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();  
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                 GeoCoordinate geoCoordenada = e.Position.Location;
 
                 double latitudeMin = geoCoordenada.Latitude - Global.coordenadaRange;
@@ -58,12 +65,12 @@ namespace Fusioness.Mobile.Views
                 double longitudeMax = geoCoordenada.Longitude + Global.coordenadaRange;
 
                 watcher.Stop();
-                servico.ListarEventosProximosAsync(latitudeMin, latitudeMax,longitudeMin,longitudeMax);
+                servico.ListarEventosProximosAsync(latitudeMin, latitudeMax, longitudeMin, longitudeMax);
                 servico.ListarEventosProximosCompleted += servico_ListarEventosProximosCompleted;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message.ToString(), "Erro!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
                 
@@ -81,9 +88,9 @@ namespace Fusioness.Mobile.Views
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message.ToString(), "Erro!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -111,7 +118,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -143,7 +150,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -157,12 +164,12 @@ namespace Fusioness.Mobile.Views
                 }
                 else
                 {
-                    MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+                    MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
     }

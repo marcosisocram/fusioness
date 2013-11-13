@@ -27,13 +27,20 @@ namespace Fusioness.Mobile.Views
 
         private void btEnviar_Click(object sender, RoutedEventArgs e)
         {
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+            try
+            {
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
 
-            usuario.Login = txtLogin.Text.ToString();
-            usuario.Senha = txtSenha.Password.ToString();
-            
-            servico.ValidarLogonUsuarioAsync(usuario);
-            servico.ValidarLogonUsuarioCompleted += servico_ValidarLogonUsuarioCompleted;            
+                usuario.Login = txtLogin.Text.ToString();
+                usuario.Senha = txtSenha.Password.ToString();
+
+                servico.ValidarLogonUsuarioAsync(usuario);
+                servico.ValidarLogonUsuarioCompleted += servico_ValidarLogonUsuarioCompleted;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         void servico_ValidarLogonUsuarioCompleted(object sender, FusionessWS.ValidarLogonUsuarioCompletedEventArgs e)

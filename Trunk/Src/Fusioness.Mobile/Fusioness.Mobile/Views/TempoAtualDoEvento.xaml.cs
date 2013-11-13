@@ -47,50 +47,64 @@ namespace Fusioness.Mobile.Views
 
         private void Carregar()
         {
-            this.Contatos = new ObservableCollection<ItemViewModel>();
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+            try
+            {
+                this.Contatos = new ObservableCollection<ItemViewModel>();
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
 
-            servico.ListarUsuariosEventoAsync(new FusionessWS.Evento() { IdEvento = EventoId });
-            servico.ListarUsuariosEventoCompleted += servico_ListarUsuariosEventoCompleted;
+                servico.ListarUsuariosEventoAsync(new FusionessWS.Evento() { IdEvento = EventoId });
+                servico.ListarUsuariosEventoCompleted += servico_ListarUsuariosEventoCompleted;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         void servico_ListarUsuariosEventoCompleted(object sender, FusionessWS.ListarUsuariosEventoCompletedEventArgs e)
         {
-            IList<FusionessWS.EventoUsuario> listEventoUsuario = e.Result;
-
-            if (listEventoUsuario != null)
+            try
             {
-                DateTime dataAtual = DateTime.Now;
-                foreach (var item in listEventoUsuario)
+                IList<FusionessWS.EventoUsuario> listEventoUsuario = e.Result;
+
+                if (listEventoUsuario != null)
                 {
-                    DateTime dateInicial;
-                    int horas = 0;
-                    int Minutos = 0;
-
-                    if (item.DataInicial != null)
+                    DateTime dataAtual = DateTime.Now;
+                    foreach (var item in listEventoUsuario)
                     {
-                        dateInicial = Convert.ToDateTime(item.DataInicial);
-                        if (item.DataFinal != null)
+                        DateTime dateInicial;
+                        int horas = 0;
+                        int Minutos = 0;
+
+                        if (item.DataInicial != null)
                         {
-                            DateTime dataFinal = Convert.ToDateTime(item.DataFinal);
-                            horas = (dataFinal - dateInicial).Hours;
-                            Minutos = (dataFinal - dateInicial).Minutes;
+                            dateInicial = Convert.ToDateTime(item.DataInicial);
+                            if (item.DataFinal != null)
+                            {
+                                DateTime dataFinal = Convert.ToDateTime(item.DataFinal);
+                                horas = (dataFinal - dateInicial).Hours;
+                                Minutos = (dataFinal - dateInicial).Minutes;
+                            }
+                            else
+                            {
+                                horas = (dataAtual - dateInicial).Hours;
+                                Minutos = (dataAtual - dateInicial).Minutes;
+                            }
                         }
-                        else
+
+                        this.Contatos.Add(new ItemViewModel()
                         {
-                            horas = (dataAtual - dateInicial).Hours;
-                            Minutos = (dataAtual - dateInicial).Minutes;
-                        }
+                            ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? Global.imgUsuarioDefault : item.Usuario.UrlImagem),
+                            ContatoTempo = horas.ToString("#0:") + Minutos.ToString("#00h"),
+                            ContatoNome = item.Usuario.Nome
+                        });
                     }
-
-                    this.Contatos.Add(new ItemViewModel()
-                    {
-                        ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? Global.imgUsuarioDefault : item.Usuario.UrlImagem),
-                        ContatoTempo = horas.ToString("#0:") + Minutos.ToString("#00h"),
-                        ContatoNome = item.Usuario.Nome
-                    });
+                    llsContatos.ItemsSource = Contatos;
                 }
-                llsContatos.ItemsSource = Contatos;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 

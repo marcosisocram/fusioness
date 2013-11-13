@@ -478,6 +478,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarUsuariosPorEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarUsuariosPorEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarUsuariosPorEmailResult" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="InserirRota">
         <s:complexType>
           <s:sequence>
@@ -551,6 +565,20 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ListarRotasPorUsuarioResult" type="tns:ArrayOfRota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarRotasRealizadasPorUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarRotasRealizadasPorUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarRotasRealizadasPorUsuarioResult" type="tns:ArrayOfRota" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1165,6 +1193,87 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="GerarTokenUsuarioSemSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="tns:Usuario" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GerarTokenUsuarioSemSenhaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarUsuarioTokenSenha">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarUsuarioTokenSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarUsuarioTokenSenhaResult" type="tns:ArrayOfUsuarioTokenSenha" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUsuarioTokenSenha">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UsuarioTokenSenha" nillable="true" type="tns:UsuarioTokenSenha" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UsuarioTokenSenha">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="DataDeGeracao" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="UsuarioID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="JaUsado" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ObterUsuarioPorToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterUsuarioPorTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterUsuarioPorTokenResult" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarUsuarioTokenSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuariotokensenha" type="tns:UsuarioTokenSenha" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlterarUsuarioTokenSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlterarUsuarioTokenSenhaResult" type="tns:UsuarioTokenSenha" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterUsuarioTokenSenhaPorToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterUsuarioTokenSenhaPorTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterUsuarioTokenSenhaPorTokenResult" type="tns:UsuarioTokenSenha" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -1251,6 +1360,12 @@
   <wsdl:message name="ListarUsuariosPorNomeSoapOut">
     <wsdl:part name="parameters" element="tns:ListarUsuariosPorNomeResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarUsuariosPorEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarUsuariosPorEmail" />
+  </wsdl:message>
+  <wsdl:message name="ListarUsuariosPorEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarUsuariosPorEmailResponse" />
+  </wsdl:message>
   <wsdl:message name="InserirRotaSoapIn">
     <wsdl:part name="parameters" element="tns:InserirRota" />
   </wsdl:message>
@@ -1286,6 +1401,12 @@
   </wsdl:message>
   <wsdl:message name="ListarRotasPorUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarRotasPorUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarRotasRealizadasPorUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarRotasRealizadasPorUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ListarRotasRealizadasPorUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarRotasRealizadasPorUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="InserirComentarioEventoSoapIn">
     <wsdl:part name="parameters" element="tns:InserirComentarioEvento" />
@@ -1545,6 +1666,36 @@
   <wsdl:message name="ListarConviteUsuarioEmailsSoapOut">
     <wsdl:part name="parameters" element="tns:ListarConviteUsuarioEmailsResponse" />
   </wsdl:message>
+  <wsdl:message name="GerarTokenUsuarioSemSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:GerarTokenUsuarioSemSenha" />
+  </wsdl:message>
+  <wsdl:message name="GerarTokenUsuarioSemSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:GerarTokenUsuarioSemSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarUsuarioTokenSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarUsuarioTokenSenha" />
+  </wsdl:message>
+  <wsdl:message name="ListarUsuarioTokenSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarUsuarioTokenSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterUsuarioPorTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterUsuarioPorToken" />
+  </wsdl:message>
+  <wsdl:message name="ObterUsuarioPorTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterUsuarioPorTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlterarUsuarioTokenSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:AlterarUsuarioTokenSenha" />
+  </wsdl:message>
+  <wsdl:message name="AlterarUsuarioTokenSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:AlterarUsuarioTokenSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterUsuarioTokenSenhaPorTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterUsuarioTokenSenhaPorToken" />
+  </wsdl:message>
+  <wsdl:message name="ObterUsuarioTokenSenhaPorTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterUsuarioTokenSenhaPorTokenResponse" />
+  </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -1602,6 +1753,10 @@
       <wsdl:input message="tns:ListarUsuariosPorNomeSoapIn" />
       <wsdl:output message="tns:ListarUsuariosPorNomeSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosPorEmail">
+      <wsdl:input message="tns:ListarUsuariosPorEmailSoapIn" />
+      <wsdl:output message="tns:ListarUsuariosPorEmailSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="InserirRota">
       <wsdl:input message="tns:InserirRotaSoapIn" />
       <wsdl:output message="tns:InserirRotaSoapOut" />
@@ -1625,6 +1780,10 @@
     <wsdl:operation name="ListarRotasPorUsuario">
       <wsdl:input message="tns:ListarRotasPorUsuarioSoapIn" />
       <wsdl:output message="tns:ListarRotasPorUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarRotasRealizadasPorUsuario">
+      <wsdl:input message="tns:ListarRotasRealizadasPorUsuarioSoapIn" />
+      <wsdl:output message="tns:ListarRotasRealizadasPorUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InserirComentarioEvento">
       <wsdl:input message="tns:InserirComentarioEventoSoapIn" />
@@ -1798,6 +1957,26 @@
       <wsdl:input message="tns:ListarConviteUsuarioEmailsSoapIn" />
       <wsdl:output message="tns:ListarConviteUsuarioEmailsSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GerarTokenUsuarioSemSenha">
+      <wsdl:input message="tns:GerarTokenUsuarioSemSenhaSoapIn" />
+      <wsdl:output message="tns:GerarTokenUsuarioSemSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuarioTokenSenha">
+      <wsdl:input message="tns:ListarUsuarioTokenSenhaSoapIn" />
+      <wsdl:output message="tns:ListarUsuarioTokenSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterUsuarioPorToken">
+      <wsdl:input message="tns:ObterUsuarioPorTokenSoapIn" />
+      <wsdl:output message="tns:ObterUsuarioPorTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlterarUsuarioTokenSenha">
+      <wsdl:input message="tns:AlterarUsuarioTokenSenhaSoapIn" />
+      <wsdl:output message="tns:AlterarUsuarioTokenSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterUsuarioTokenSenhaPorToken">
+      <wsdl:input message="tns:ObterUsuarioTokenSenhaPorTokenSoapIn" />
+      <wsdl:output message="tns:ObterUsuarioTokenSenhaPorTokenSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1927,6 +2106,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosPorEmail">
+      <soap:operation soapAction="http://tempuri.org/ListarUsuariosPorEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirRota">
       <soap:operation soapAction="http://tempuri.org/InserirRota" style="document" />
       <wsdl:input>
@@ -1974,6 +2162,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarRotasPorUsuario">
       <soap:operation soapAction="http://tempuri.org/ListarRotasPorUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarRotasRealizadasPorUsuario">
+      <soap:operation soapAction="http://tempuri.org/ListarRotasRealizadasPorUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2368,6 +2565,51 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GerarTokenUsuarioSemSenha">
+      <soap:operation soapAction="http://tempuri.org/GerarTokenUsuarioSemSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuarioTokenSenha">
+      <soap:operation soapAction="http://tempuri.org/ListarUsuarioTokenSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterUsuarioPorToken">
+      <soap:operation soapAction="http://tempuri.org/ObterUsuarioPorToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarUsuarioTokenSenha">
+      <soap:operation soapAction="http://tempuri.org/AlterarUsuarioTokenSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterUsuarioTokenSenhaPorToken">
+      <soap:operation soapAction="http://tempuri.org/ObterUsuarioTokenSenhaPorToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -2497,6 +2739,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarUsuariosPorEmail">
+      <soap12:operation soapAction="http://tempuri.org/ListarUsuariosPorEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirRota">
       <soap12:operation soapAction="http://tempuri.org/InserirRota" style="document" />
       <wsdl:input>
@@ -2544,6 +2795,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListarRotasPorUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarRotasPorUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarRotasRealizadasPorUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ListarRotasRealizadasPorUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2931,6 +3191,51 @@
     </wsdl:operation>
     <wsdl:operation name="ListarConviteUsuarioEmails">
       <soap12:operation soapAction="http://tempuri.org/ListarConviteUsuarioEmails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GerarTokenUsuarioSemSenha">
+      <soap12:operation soapAction="http://tempuri.org/GerarTokenUsuarioSemSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarUsuarioTokenSenha">
+      <soap12:operation soapAction="http://tempuri.org/ListarUsuarioTokenSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterUsuarioPorToken">
+      <soap12:operation soapAction="http://tempuri.org/ObterUsuarioPorToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlterarUsuarioTokenSenha">
+      <soap12:operation soapAction="http://tempuri.org/AlterarUsuarioTokenSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterUsuarioTokenSenhaPorToken">
+      <soap12:operation soapAction="http://tempuri.org/ObterUsuarioTokenSenhaPorToken" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

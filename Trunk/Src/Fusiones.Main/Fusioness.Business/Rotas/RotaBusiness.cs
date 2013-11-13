@@ -103,11 +103,20 @@ namespace Fusioness.Business.Rotas
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<Rota> repo = new RotaRepository(uow);
-                var rotas = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario);
+                var rotas = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario && c.IdRotaOrigem == null).OrderBy(c => c.Descricao);
                 return rotas.ToList();
             }
         }
 
+        public List<Rota> ListarRotasRealizadasPorUsuario(Usuario usuario)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                IRepository<Rota> repo = new RotaRepository(uow);
+                var rotas = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario && c.IdRotaOrigem != null);
+                return rotas.ToList();
+            }
+        }
         #endregion
     }
 }

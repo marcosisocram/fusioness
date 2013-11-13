@@ -25,35 +25,49 @@ namespace Fusioness.Mobile.Views
 
         private void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            try
             {
-                if (!String.IsNullOrEmpty(this.txtPesquisar.Text))
+                if (e.Key == Key.Enter)
                 {
-                    this.Contatos = new ObservableCollection<ItemViewModel>();
-                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-                    servico.ListarUsuariosPorNomeAsync(this.txtPesquisar.Text.ToString(),Global.usuarioLogado.IdUsuario);
-                    servico.ListarUsuariosPorNomeCompleted += servico_ListarUsuariosPorNomeCompleted;
+                    if (!String.IsNullOrEmpty(this.txtPesquisar.Text))
+                    {
+                        this.Contatos = new ObservableCollection<ItemViewModel>();
+                        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                        servico.ListarUsuariosPorNomeAsync(this.txtPesquisar.Text.ToString(), Global.usuarioLogado.IdUsuario);
+                        servico.ListarUsuariosPorNomeCompleted += servico_ListarUsuariosPorNomeCompleted;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
         void servico_ListarUsuariosPorNomeCompleted(object sender, FusionessWS.ListarUsuariosPorNomeCompletedEventArgs e)
         {
-            IList<FusionessWS.Usuario> usuarios = e.Result;
-            if (usuarios != null)
+            try
             {
-                foreach (var item in usuarios)
+                IList<FusionessWS.Usuario> usuarios = e.Result;
+                if (usuarios != null)
                 {
-                    this.Contatos.Add(new ItemViewModel()
+                    foreach (var item in usuarios)
                     {
-                        ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.UrlImagem)) ? Global.imgUsuarioDefault : item.UrlImagem),   
-                        ContatoId = item.IdUsuario,
-                        ContatoNome = item.Nome
-                    });
+                        this.Contatos.Add(new ItemViewModel()
+                        {
+                            ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.UrlImagem)) ? Global.imgUsuarioDefault : item.UrlImagem),
+                            ContatoId = item.IdUsuario,
+                            ContatoNome = item.Nome
+                        });
+                    }
+                    llsContatos.ItemsSource = this.Contatos;
                 }
-                llsContatos.ItemsSource = this.Contatos;
+                this.Focus();
             }
-            this.Focus();
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         private void llsContatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -75,9 +89,9 @@ namespace Fusioness.Mobile.Views
                     servico.InserirContatoCompleted += servico_InserirContatoCompleted;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message.ToString(),"Erro",MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -87,13 +101,13 @@ namespace Fusioness.Mobile.Views
             {
                 if (e.Result != null)
                 {
-                    MessageBox.Show("Contato adicionado com sucesso.");
+                    MessageBox.Show("Contato adicionado com sucesso.");                    
                     NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message.ToString(), "Erro", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
     }

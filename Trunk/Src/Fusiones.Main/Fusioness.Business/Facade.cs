@@ -205,6 +205,10 @@ namespace Fusioness.Business
         {
             return RotaBus.ListarRotasPorUsuario(usuario);
         }
+        public List<Rota> ListarRotasRealizadasPorUsuario(Usuario usuario)
+        {
+            return RotaBus.ListarRotasRealizadasPorUsuario(usuario);
+        }
         
         #endregion
 

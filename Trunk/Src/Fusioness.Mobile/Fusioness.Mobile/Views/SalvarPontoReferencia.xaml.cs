@@ -31,44 +31,58 @@ namespace Fusioness.Mobile.Views
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(this.txtNomePonto.Text))
+            try
             {
-                MessageBox.Show("Informe o nome do Ponto de Referência!");
-                this.txtNomePonto.Focus();
-            }
-            else
-            {
-                watcherPonto = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
+                if (String.IsNullOrEmpty(this.txtNomePonto.Text))
                 {
-                    MovementThreshold = 20
-                };
-                watcherPonto.PositionChanged += this.watcher_PositionChanged;
-                watcherPonto.StatusChanged += this.watcher_StatusChanged;
-                watcherPonto.Start();
+                    MessageBox.Show("Informe o nome do Ponto de Referência!");
+                    this.txtNomePonto.Focus();
+                }
+                else
+                {
+                    watcherPonto = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
+                    {
+                        MovementThreshold = 20
+                    };
+                    watcherPonto.PositionChanged += this.watcher_PositionChanged;
+                    watcherPonto.StatusChanged += this.watcher_StatusChanged;
+                    watcherPonto.Start();
+                }            
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
         private void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
-            GeoCoordinate geoCoordenada = e.Position.Location;
-            FusionessWS.Coordenada coordenada = new FusionessWS.Coordenada();
+            try
+            {
+                GeoCoordinate geoCoordenada = e.Position.Location;
+                FusionessWS.Coordenada coordenada = new FusionessWS.Coordenada();
 
-            coordenada.Data = DateTime.Now;
-            coordenada.IdTipoCoordenada = 2;
-            coordenada.Latitude = geoCoordenada.Latitude;
-            coordenada.Longitude = geoCoordenada.Longitude;
-            coordenada.NomePonto = this.txtNomePonto.Text.ToString();
-            coordenada.DescricaoPonto = this.txtDescricao.Text.ToString();
+                coordenada.Data = DateTime.Now;
+                coordenada.IdTipoCoordenada = 2;
+                coordenada.Latitude = geoCoordenada.Latitude;
+                coordenada.Longitude = geoCoordenada.Longitude;
+                coordenada.NomePonto = this.txtNomePonto.Text.ToString();
+                coordenada.DescricaoPonto = this.txtDescricao.Text.ToString();
 
-            byte[] bytes = Global.ConvertToBytes(this.imgEvento);
-            coordenada.byteImage = bytes;
+                byte[] bytes = Global.ConvertToBytes(this.imgEvento);
+                coordenada.byteImage = bytes;
 
-            Global.fusCoordenadas.Add(coordenada);
+                Global.fusCoordenadas.Add(coordenada);
 
-            MessageBox.Show("Ponto de Referência Adicionado com Sucesso!");
-            watcherPonto.Stop();
+                MessageBox.Show("Ponto de Referência Adicionado com Sucesso!");
+                watcherPonto.Stop();
 
-            NavigationService.GoBack();
+                NavigationService.GoBack();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         private void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
@@ -85,9 +99,9 @@ namespace Fusioness.Mobile.Views
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message.ToString(), "Erro!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 

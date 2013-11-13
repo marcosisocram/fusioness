@@ -341,6 +341,20 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Rota> ListarRotasRealizadasPorUsuario(Usuario usuario)
+        {
+            try
+            {
+                return Facade.Instance.ListarRotasRealizadasPorUsuario(usuario);
+            }
+            catch
+            {
+                return new List<Rota>();
+            }
+        }
+        
         #endregion
 
         #region ComentarioEvento

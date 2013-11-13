@@ -27,25 +27,41 @@ namespace Fusioness.Mobile
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //this.llsRota.ItemsSource.Clear();
-            App.ViewModel.LoadData();
+            try
+            {
+                while (this.NavigationService.BackStack.Any())
+                {
+                    this.NavigationService.RemoveBackEntry();
+                }
+                App.ViewModel.LoadData();                
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
 
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-
-            servico.ObterConvitesEventosDoUsuarioAsync(Global.usuarioLogado);
-            servico.ObterConvitesEventosDoUsuarioCompleted += servico_ObterConvitesEventosDoUsuarioCompleted;
+                servico.ObterConvitesEventosDoUsuarioAsync(Global.usuarioLogado);
+                servico.ObterConvitesEventosDoUsuarioCompleted += servico_ObterConvitesEventosDoUsuarioCompleted;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         void servico_ObterConvitesEventosDoUsuarioCompleted(object sender, FusionessWS.ObterConvitesEventosDoUsuarioCompletedEventArgs e)
         {
-            IList<FusionessWS.ConviteEvento> convites = e.Result;
-            if (convites.Count > 0)
+            try
             {
-                this.imgConvites.Visibility = System.Windows.Visibility.Visible;
+                IList<FusionessWS.ConviteEvento> convites = e.Result;
+                if (convites.Count > 0)
+                {
+                    this.imgConvites.Visibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    this.imgConvites.Visibility = System.Windows.Visibility.Collapsed;
+                }
             }
-            else
+            catch (Exception)
             {
-                this.imgConvites.Visibility = System.Windows.Visibility.Collapsed;
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -99,7 +115,7 @@ namespace Fusioness.Mobile
             }
             catch (Exception)
             {
-                MessageBox.Show("Erro ao Excluir Rota!");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -119,7 +135,7 @@ namespace Fusioness.Mobile
             }
             catch (Exception)
             {
-                MessageBox.Show("Erro ao Excluir Rota!");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -138,6 +154,20 @@ namespace Fusioness.Mobile
         private void imgConvites_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/ConvitesRecebidos.xaml", UriKind.Relative));
+        }
+
+        private void PhoneApplicationPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Deseja Sair do Aplicativo?", "Atenção", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.Cancel)
+                e.Cancel = true;
+        }
+
+        private void llsRotasRealizadas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var res = (sender as LongListSelector).SelectedItem as ItemViewModel;
+
+            NavigationService.Navigate(new Uri("/Views/VisualizarRota.xaml?RotaId=" + res.RotaId.ToString(), UriKind.Relative));
         }
     }
 }

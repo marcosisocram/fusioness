@@ -35,33 +35,47 @@ namespace Fusioness.Mobile.Views
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(this.txtComentario.Text.ToString()))
+            try
             {
-                FusionessWS.ComentarioEvento comentario = new FusionessWS.ComentarioEvento();
-                comentario.IdEvento = EventoId;
-                comentario.IdUsuario = Global.usuarioLogado.IdUsuario;
-                comentario.Descricao = this.txtComentario.Text.ToString();
-                comentario.Data = DateTime.Now;
-                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-                servico.InserirComentarioEventoAsync(comentario);
-                servico.InserirComentarioEventoCompleted += servico_InserirComentarioEventoCompleted;
+                if (!String.IsNullOrEmpty(this.txtComentario.Text.ToString()))
+                {
+                    FusionessWS.ComentarioEvento comentario = new FusionessWS.ComentarioEvento();
+                    comentario.IdEvento = EventoId;
+                    comentario.IdUsuario = Global.usuarioLogado.IdUsuario;
+                    comentario.Descricao = this.txtComentario.Text.ToString();
+                    comentario.Data = DateTime.Now;
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                    servico.InserirComentarioEventoAsync(comentario);
+                    servico.InserirComentarioEventoCompleted += servico_InserirComentarioEventoCompleted;
+                }
+                else
+                {
+                    MessageBox.Show("Adicione um Comentário!", "Alerta!", MessageBoxButton.OK);
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Adicione um Comentário!","Alerta!",MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
         void servico_InserirComentarioEventoCompleted(object sender, FusionessWS.InserirComentarioEventoCompletedEventArgs e)
         {
-            FusionessWS.ComentarioEvento comentario = e.Result;
-            if (comentario != null)
+            try
             {
-                NavigationService.Navigate(new Uri("/Views/Evento.xaml?EventoId=" + EventoId.ToString(), UriKind.Relative));
+                FusionessWS.ComentarioEvento comentario = e.Result;
+                if (comentario != null)
+                {
+                    NavigationService.Navigate(new Uri("/Views/Evento.xaml?EventoId=" + EventoId.ToString(), UriKind.Relative));
+                }
+                else
+                {
+                    MessageBox.Show("Não foi possivél adicionar seu comentário, Verifique sua conexão com a internet!", "Alerta!", MessageBoxButton.OK);
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Não foi possivél adicionar seu comentário, Verifique sua conexão com a internet!", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 

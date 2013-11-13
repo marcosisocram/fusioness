@@ -33,6 +33,7 @@ namespace Fusioness.Mobile.FusionessWS {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.EventoUsuario))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.ComentarioEvento))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.ConviteUsuarioEmail))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.UsuarioTokenSenha))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.Bicicleta))]
     public partial class EntityBase : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1743,6 +1744,87 @@ namespace Fusioness.Mobile.FusionessWS {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UsuarioTokenSenha", Namespace="http://tempuri.org/")]
+    public partial class UsuarioTokenSenha : Fusioness.Mobile.FusionessWS.EntityBase {
+        
+        private int IDField;
+        
+        private string TokenField;
+        
+        private System.DateTime DataDeGeracaoField;
+        
+        private int UsuarioIDField;
+        
+        private bool JaUsadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Token {
+            get {
+                return this.TokenField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TokenField, value) != true)) {
+                    this.TokenField = value;
+                    this.RaisePropertyChanged("Token");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.DateTime DataDeGeracao {
+            get {
+                return this.DataDeGeracaoField;
+            }
+            set {
+                if ((this.DataDeGeracaoField.Equals(value) != true)) {
+                    this.DataDeGeracaoField = value;
+                    this.RaisePropertyChanged("DataDeGeracao");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public int UsuarioID {
+            get {
+                return this.UsuarioIDField;
+            }
+            set {
+                if ((this.UsuarioIDField.Equals(value) != true)) {
+                    this.UsuarioIDField = value;
+                    this.RaisePropertyChanged("UsuarioID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public bool JaUsado {
+            get {
+                return this.JaUsadoField;
+            }
+            set {
+                if ((this.JaUsadoField.Equals(value) != true)) {
+                    this.JaUsadoField = value;
+                    this.RaisePropertyChanged("JaUsado");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Bicicleta", Namespace="http://tempuri.org/")]
     public partial class Bicicleta : Fusioness.Mobile.FusionessWS.EntityBase {
         
@@ -1923,6 +2005,11 @@ namespace Fusioness.Mobile.FusionessWS {
         
         Fusioness.Mobile.FusionessWS.ListarUsuariosPorNomeResponse EndListarUsuariosPorNome(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarUsuariosPorEmail", ReplyAction="*")]
+        System.IAsyncResult BeginListarUsuariosPorEmail(Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailResponse EndListarUsuariosPorEmail(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/InserirRota", ReplyAction="*")]
         System.IAsyncResult BeginInserirRota(Fusioness.Mobile.FusionessWS.InserirRotaRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -1952,6 +2039,11 @@ namespace Fusioness.Mobile.FusionessWS {
         System.IAsyncResult BeginListarRotasPorUsuario(Fusioness.Mobile.FusionessWS.ListarRotasPorUsuarioRequest request, System.AsyncCallback callback, object asyncState);
         
         Fusioness.Mobile.FusionessWS.ListarRotasPorUsuarioResponse EndListarRotasPorUsuario(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarRotasRealizadasPorUsuario", ReplyAction="*")]
+        System.IAsyncResult BeginListarRotasRealizadasPorUsuario(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponse EndListarRotasRealizadasPorUsuario(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/InserirComentarioEvento", ReplyAction="*")]
         System.IAsyncResult BeginInserirComentarioEvento(Fusioness.Mobile.FusionessWS.InserirComentarioEventoRequest request, System.AsyncCallback callback, object asyncState);
@@ -2167,6 +2259,31 @@ namespace Fusioness.Mobile.FusionessWS {
         System.IAsyncResult BeginListarConviteUsuarioEmails(Fusioness.Mobile.FusionessWS.ListarConviteUsuarioEmailsRequest request, System.AsyncCallback callback, object asyncState);
         
         Fusioness.Mobile.FusionessWS.ListarConviteUsuarioEmailsResponse EndListarConviteUsuarioEmails(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/GerarTokenUsuarioSemSenha", ReplyAction="*")]
+        System.IAsyncResult BeginGerarTokenUsuarioSemSenha(Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaResponse EndGerarTokenUsuarioSemSenha(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarUsuarioTokenSenha", ReplyAction="*")]
+        System.IAsyncResult BeginListarUsuarioTokenSenha(Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaResponse EndListarUsuarioTokenSenha(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ObterUsuarioPorToken", ReplyAction="*")]
+        System.IAsyncResult BeginObterUsuarioPorToken(Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenResponse EndObterUsuarioPorToken(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/AlterarUsuarioTokenSenha", ReplyAction="*")]
+        System.IAsyncResult BeginAlterarUsuarioTokenSenha(Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaResponse EndAlterarUsuarioTokenSenha(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ObterUsuarioTokenSenhaPorToken", ReplyAction="*")]
+        System.IAsyncResult BeginObterUsuarioTokenSenhaPorToken(Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenResponse EndObterUsuarioTokenSenhaPorToken(System.IAsyncResult result);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -3131,6 +3248,74 @@ namespace Fusioness.Mobile.FusionessWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarUsuariosPorEmailRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarUsuariosPorEmail", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailRequestBody Body;
+        
+        public ListarUsuariosPorEmailRequest() {
+        }
+        
+        public ListarUsuariosPorEmailRequest(Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarUsuariosPorEmailRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string email;
+        
+        public ListarUsuariosPorEmailRequestBody() {
+        }
+        
+        public ListarUsuariosPorEmailRequestBody(string email) {
+            this.email = email;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarUsuariosPorEmailResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarUsuariosPorEmailResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailResponseBody Body;
+        
+        public ListarUsuariosPorEmailResponse() {
+        }
+        
+        public ListarUsuariosPorEmailResponse(Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarUsuariosPorEmailResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Usuario ListarUsuariosPorEmailResult;
+        
+        public ListarUsuariosPorEmailResponseBody() {
+        }
+        
+        public ListarUsuariosPorEmailResponseBody(Fusioness.Mobile.FusionessWS.Usuario ListarUsuariosPorEmailResult) {
+            this.ListarUsuariosPorEmailResult = ListarUsuariosPorEmailResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class InserirRotaRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="InserirRota", Namespace="http://tempuri.org/", Order=0)]
@@ -3518,6 +3703,74 @@ namespace Fusioness.Mobile.FusionessWS {
         
         public ListarRotasPorUsuarioResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> ListarRotasPorUsuarioResult) {
             this.ListarRotasPorUsuarioResult = ListarRotasPorUsuarioResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarRotasRealizadasPorUsuarioRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarRotasRealizadasPorUsuario", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioRequestBody Body;
+        
+        public ListarRotasRealizadasPorUsuarioRequest() {
+        }
+        
+        public ListarRotasRealizadasPorUsuarioRequest(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarRotasRealizadasPorUsuarioRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Usuario usuario;
+        
+        public ListarRotasRealizadasPorUsuarioRequestBody() {
+        }
+        
+        public ListarRotasRealizadasPorUsuarioRequestBody(Fusioness.Mobile.FusionessWS.Usuario usuario) {
+            this.usuario = usuario;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarRotasRealizadasPorUsuarioResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarRotasRealizadasPorUsuarioResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponseBody Body;
+        
+        public ListarRotasRealizadasPorUsuarioResponse() {
+        }
+        
+        public ListarRotasRealizadasPorUsuarioResponse(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarRotasRealizadasPorUsuarioResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> ListarRotasRealizadasPorUsuarioResult;
+        
+        public ListarRotasRealizadasPorUsuarioResponseBody() {
+        }
+        
+        public ListarRotasRealizadasPorUsuarioResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> ListarRotasRealizadasPorUsuarioResult) {
+            this.ListarRotasRealizadasPorUsuarioResult = ListarRotasRealizadasPorUsuarioResult;
         }
     }
     
@@ -6333,6 +6586,336 @@ namespace Fusioness.Mobile.FusionessWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GerarTokenUsuarioSemSenhaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GerarTokenUsuarioSemSenha", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaRequestBody Body;
+        
+        public GerarTokenUsuarioSemSenhaRequest() {
+        }
+        
+        public GerarTokenUsuarioSemSenhaRequest(Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GerarTokenUsuarioSemSenhaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Usuario usuario;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string url;
+        
+        public GerarTokenUsuarioSemSenhaRequestBody() {
+        }
+        
+        public GerarTokenUsuarioSemSenhaRequestBody(Fusioness.Mobile.FusionessWS.Usuario usuario, string url) {
+            this.usuario = usuario;
+            this.url = url;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GerarTokenUsuarioSemSenhaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GerarTokenUsuarioSemSenhaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaResponseBody Body;
+        
+        public GerarTokenUsuarioSemSenhaResponse() {
+        }
+        
+        public GerarTokenUsuarioSemSenhaResponse(Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GerarTokenUsuarioSemSenhaResponseBody {
+        
+        public GerarTokenUsuarioSemSenhaResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarUsuarioTokenSenhaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarUsuarioTokenSenha", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaRequestBody Body;
+        
+        public ListarUsuarioTokenSenhaRequest() {
+        }
+        
+        public ListarUsuarioTokenSenhaRequest(Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class ListarUsuarioTokenSenhaRequestBody {
+        
+        public ListarUsuarioTokenSenhaRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarUsuarioTokenSenhaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarUsuarioTokenSenhaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaResponseBody Body;
+        
+        public ListarUsuarioTokenSenhaResponse() {
+        }
+        
+        public ListarUsuarioTokenSenhaResponse(Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarUsuarioTokenSenhaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.UsuarioTokenSenha> ListarUsuarioTokenSenhaResult;
+        
+        public ListarUsuarioTokenSenhaResponseBody() {
+        }
+        
+        public ListarUsuarioTokenSenhaResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.UsuarioTokenSenha> ListarUsuarioTokenSenhaResult) {
+            this.ListarUsuarioTokenSenhaResult = ListarUsuarioTokenSenhaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObterUsuarioPorTokenRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObterUsuarioPorToken", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenRequestBody Body;
+        
+        public ObterUsuarioPorTokenRequest() {
+        }
+        
+        public ObterUsuarioPorTokenRequest(Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObterUsuarioPorTokenRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string token;
+        
+        public ObterUsuarioPorTokenRequestBody() {
+        }
+        
+        public ObterUsuarioPorTokenRequestBody(string token) {
+            this.token = token;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObterUsuarioPorTokenResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObterUsuarioPorTokenResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenResponseBody Body;
+        
+        public ObterUsuarioPorTokenResponse() {
+        }
+        
+        public ObterUsuarioPorTokenResponse(Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObterUsuarioPorTokenResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Usuario ObterUsuarioPorTokenResult;
+        
+        public ObterUsuarioPorTokenResponseBody() {
+        }
+        
+        public ObterUsuarioPorTokenResponseBody(Fusioness.Mobile.FusionessWS.Usuario ObterUsuarioPorTokenResult) {
+            this.ObterUsuarioPorTokenResult = ObterUsuarioPorTokenResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AlterarUsuarioTokenSenhaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AlterarUsuarioTokenSenha", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaRequestBody Body;
+        
+        public AlterarUsuarioTokenSenhaRequest() {
+        }
+        
+        public AlterarUsuarioTokenSenhaRequest(Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class AlterarUsuarioTokenSenhaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.UsuarioTokenSenha usuariotokensenha;
+        
+        public AlterarUsuarioTokenSenhaRequestBody() {
+        }
+        
+        public AlterarUsuarioTokenSenhaRequestBody(Fusioness.Mobile.FusionessWS.UsuarioTokenSenha usuariotokensenha) {
+            this.usuariotokensenha = usuariotokensenha;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AlterarUsuarioTokenSenhaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AlterarUsuarioTokenSenhaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaResponseBody Body;
+        
+        public AlterarUsuarioTokenSenhaResponse() {
+        }
+        
+        public AlterarUsuarioTokenSenhaResponse(Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class AlterarUsuarioTokenSenhaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.UsuarioTokenSenha AlterarUsuarioTokenSenhaResult;
+        
+        public AlterarUsuarioTokenSenhaResponseBody() {
+        }
+        
+        public AlterarUsuarioTokenSenhaResponseBody(Fusioness.Mobile.FusionessWS.UsuarioTokenSenha AlterarUsuarioTokenSenhaResult) {
+            this.AlterarUsuarioTokenSenhaResult = AlterarUsuarioTokenSenhaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObterUsuarioTokenSenhaPorTokenRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObterUsuarioTokenSenhaPorToken", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenRequestBody Body;
+        
+        public ObterUsuarioTokenSenhaPorTokenRequest() {
+        }
+        
+        public ObterUsuarioTokenSenhaPorTokenRequest(Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObterUsuarioTokenSenhaPorTokenRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string token;
+        
+        public ObterUsuarioTokenSenhaPorTokenRequestBody() {
+        }
+        
+        public ObterUsuarioTokenSenhaPorTokenRequestBody(string token) {
+            this.token = token;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObterUsuarioTokenSenhaPorTokenResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObterUsuarioTokenSenhaPorTokenResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenResponseBody Body;
+        
+        public ObterUsuarioTokenSenhaPorTokenResponse() {
+        }
+        
+        public ObterUsuarioTokenSenhaPorTokenResponse(Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObterUsuarioTokenSenhaPorTokenResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.UsuarioTokenSenha ObterUsuarioTokenSenhaPorTokenResult;
+        
+        public ObterUsuarioTokenSenhaPorTokenResponseBody() {
+        }
+        
+        public ObterUsuarioTokenSenhaPorTokenResponseBody(Fusioness.Mobile.FusionessWS.UsuarioTokenSenha ObterUsuarioTokenSenhaPorTokenResult) {
+            this.ObterUsuarioTokenSenhaPorTokenResult = ObterUsuarioTokenSenhaPorTokenResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface MainServiceSoapChannel : Fusioness.Mobile.FusionessWS.MainServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -6605,6 +7188,25 @@ namespace Fusioness.Mobile.FusionessWS {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListarUsuariosPorEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListarUsuariosPorEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public Fusioness.Mobile.FusionessWS.Usuario Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((Fusioness.Mobile.FusionessWS.Usuario)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class InserirRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -6686,6 +7288,25 @@ namespace Fusioness.Mobile.FusionessWS {
         private object[] results;
         
         public ListarRotasPorUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListarRotasRealizadasPorUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListarRotasRealizadasPorUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -7441,6 +8062,82 @@ namespace Fusioness.Mobile.FusionessWS {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListarUsuarioTokenSenhaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListarUsuarioTokenSenhaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.UsuarioTokenSenha> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.UsuarioTokenSenha>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ObterUsuarioPorTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ObterUsuarioPorTokenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public Fusioness.Mobile.FusionessWS.Usuario Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((Fusioness.Mobile.FusionessWS.Usuario)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AlterarUsuarioTokenSenhaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public AlterarUsuarioTokenSenhaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public Fusioness.Mobile.FusionessWS.UsuarioTokenSenha Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((Fusioness.Mobile.FusionessWS.UsuarioTokenSenha)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ObterUsuarioTokenSenhaPorTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ObterUsuarioTokenSenhaPorTokenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public Fusioness.Mobile.FusionessWS.UsuarioTokenSenha Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((Fusioness.Mobile.FusionessWS.UsuarioTokenSenha)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class MainServiceSoapClient : System.ServiceModel.ClientBase<Fusioness.Mobile.FusionessWS.MainServiceSoap>, Fusioness.Mobile.FusionessWS.MainServiceSoap {
         
         private BeginOperationDelegate onBeginHelloWorldDelegate;
@@ -7527,6 +8224,12 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onListarUsuariosPorNomeCompletedDelegate;
         
+        private BeginOperationDelegate onBeginListarUsuariosPorEmailDelegate;
+        
+        private EndOperationDelegate onEndListarUsuariosPorEmailDelegate;
+        
+        private System.Threading.SendOrPostCallback onListarUsuariosPorEmailCompletedDelegate;
+        
         private BeginOperationDelegate onBeginInserirRotaDelegate;
         
         private EndOperationDelegate onEndInserirRotaDelegate;
@@ -7562,6 +8265,12 @@ namespace Fusioness.Mobile.FusionessWS {
         private EndOperationDelegate onEndListarRotasPorUsuarioDelegate;
         
         private System.Threading.SendOrPostCallback onListarRotasPorUsuarioCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginListarRotasRealizadasPorUsuarioDelegate;
+        
+        private EndOperationDelegate onEndListarRotasRealizadasPorUsuarioDelegate;
+        
+        private System.Threading.SendOrPostCallback onListarRotasRealizadasPorUsuarioCompletedDelegate;
         
         private BeginOperationDelegate onBeginInserirComentarioEventoDelegate;
         
@@ -7821,6 +8530,36 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onListarConviteUsuarioEmailsCompletedDelegate;
         
+        private BeginOperationDelegate onBeginGerarTokenUsuarioSemSenhaDelegate;
+        
+        private EndOperationDelegate onEndGerarTokenUsuarioSemSenhaDelegate;
+        
+        private System.Threading.SendOrPostCallback onGerarTokenUsuarioSemSenhaCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginListarUsuarioTokenSenhaDelegate;
+        
+        private EndOperationDelegate onEndListarUsuarioTokenSenhaDelegate;
+        
+        private System.Threading.SendOrPostCallback onListarUsuarioTokenSenhaCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginObterUsuarioPorTokenDelegate;
+        
+        private EndOperationDelegate onEndObterUsuarioPorTokenDelegate;
+        
+        private System.Threading.SendOrPostCallback onObterUsuarioPorTokenCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginAlterarUsuarioTokenSenhaDelegate;
+        
+        private EndOperationDelegate onEndAlterarUsuarioTokenSenhaDelegate;
+        
+        private System.Threading.SendOrPostCallback onAlterarUsuarioTokenSenhaCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginObterUsuarioTokenSenhaPorTokenDelegate;
+        
+        private EndOperationDelegate onEndObterUsuarioTokenSenhaPorTokenDelegate;
+        
+        private System.Threading.SendOrPostCallback onObterUsuarioTokenSenhaPorTokenCompletedDelegate;
+        
         private BeginOperationDelegate onBeginOpenDelegate;
         
         private EndOperationDelegate onEndOpenDelegate;
@@ -7902,6 +8641,8 @@ namespace Fusioness.Mobile.FusionessWS {
         
         public event System.EventHandler<ListarUsuariosPorNomeCompletedEventArgs> ListarUsuariosPorNomeCompleted;
         
+        public event System.EventHandler<ListarUsuariosPorEmailCompletedEventArgs> ListarUsuariosPorEmailCompleted;
+        
         public event System.EventHandler<InserirRotaCompletedEventArgs> InserirRotaCompleted;
         
         public event System.EventHandler<AlterarRotaCompletedEventArgs> AlterarRotaCompleted;
@@ -7913,6 +8654,8 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<ListarRotasCompletedEventArgs> ListarRotasCompleted;
         
         public event System.EventHandler<ListarRotasPorUsuarioCompletedEventArgs> ListarRotasPorUsuarioCompleted;
+        
+        public event System.EventHandler<ListarRotasRealizadasPorUsuarioCompletedEventArgs> ListarRotasRealizadasPorUsuarioCompleted;
         
         public event System.EventHandler<InserirComentarioEventoCompletedEventArgs> InserirComentarioEventoCompleted;
         
@@ -7999,6 +8742,16 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ConvidarPorEmailCompleted;
         
         public event System.EventHandler<ListarConviteUsuarioEmailsCompletedEventArgs> ListarConviteUsuarioEmailsCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> GerarTokenUsuarioSemSenhaCompleted;
+        
+        public event System.EventHandler<ListarUsuarioTokenSenhaCompletedEventArgs> ListarUsuarioTokenSenhaCompleted;
+        
+        public event System.EventHandler<ObterUsuarioPorTokenCompletedEventArgs> ObterUsuarioPorTokenCompleted;
+        
+        public event System.EventHandler<AlterarUsuarioTokenSenhaCompletedEventArgs> AlterarUsuarioTokenSenhaCompleted;
+        
+        public event System.EventHandler<ObterUsuarioTokenSenhaPorTokenCompletedEventArgs> ObterUsuarioTokenSenhaPorTokenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -8854,6 +9607,66 @@ namespace Fusioness.Mobile.FusionessWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarUsuariosPorEmail(Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListarUsuariosPorEmail(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginListarUsuariosPorEmail(string email, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailRequest inValue = new Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailRequestBody();
+            inValue.Body.email = email;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarUsuariosPorEmail(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarUsuariosPorEmail(System.IAsyncResult result) {
+            return base.Channel.EndListarUsuariosPorEmail(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private Fusioness.Mobile.FusionessWS.Usuario EndListarUsuariosPorEmail(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarUsuariosPorEmail(result);
+            return retVal.Body.ListarUsuariosPorEmailResult;
+        }
+        
+        private System.IAsyncResult OnBeginListarUsuariosPorEmail(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string email = ((string)(inValues[0]));
+            return this.BeginListarUsuariosPorEmail(email, callback, asyncState);
+        }
+        
+        private object[] OnEndListarUsuariosPorEmail(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.Usuario retVal = this.EndListarUsuariosPorEmail(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListarUsuariosPorEmailCompleted(object state) {
+            if ((this.ListarUsuariosPorEmailCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListarUsuariosPorEmailCompleted(this, new ListarUsuariosPorEmailCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListarUsuariosPorEmailAsync(string email) {
+            this.ListarUsuariosPorEmailAsync(email, null);
+        }
+        
+        public void ListarUsuariosPorEmailAsync(string email, object userState) {
+            if ((this.onBeginListarUsuariosPorEmailDelegate == null)) {
+                this.onBeginListarUsuariosPorEmailDelegate = new BeginOperationDelegate(this.OnBeginListarUsuariosPorEmail);
+            }
+            if ((this.onEndListarUsuariosPorEmailDelegate == null)) {
+                this.onEndListarUsuariosPorEmailDelegate = new EndOperationDelegate(this.OnEndListarUsuariosPorEmail);
+            }
+            if ((this.onListarUsuariosPorEmailCompletedDelegate == null)) {
+                this.onListarUsuariosPorEmailCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarUsuariosPorEmailCompleted);
+            }
+            base.InvokeAsync(this.onBeginListarUsuariosPorEmailDelegate, new object[] {
+                        email}, this.onEndListarUsuariosPorEmailDelegate, this.onListarUsuariosPorEmailCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginInserirRota(Fusioness.Mobile.FusionessWS.InserirRotaRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginInserirRota(request, callback, asyncState);
         }
@@ -9206,6 +10019,66 @@ namespace Fusioness.Mobile.FusionessWS {
             }
             base.InvokeAsync(this.onBeginListarRotasPorUsuarioDelegate, new object[] {
                         usuario}, this.onEndListarRotasPorUsuarioDelegate, this.onListarRotasPorUsuarioCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarRotasRealizadasPorUsuario(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListarRotasRealizadasPorUsuario(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginListarRotasRealizadasPorUsuario(Fusioness.Mobile.FusionessWS.Usuario usuario, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioRequest inValue = new Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioRequestBody();
+            inValue.Body.usuario = usuario;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarRotasRealizadasPorUsuario(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarRotasRealizadasPorUsuario(System.IAsyncResult result) {
+            return base.Channel.EndListarRotasRealizadasPorUsuario(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> EndListarRotasRealizadasPorUsuario(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarRotasRealizadasPorUsuario(result);
+            return retVal.Body.ListarRotasRealizadasPorUsuarioResult;
+        }
+        
+        private System.IAsyncResult OnBeginListarRotasRealizadasPorUsuario(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.Usuario usuario = ((Fusioness.Mobile.FusionessWS.Usuario)(inValues[0]));
+            return this.BeginListarRotasRealizadasPorUsuario(usuario, callback, asyncState);
+        }
+        
+        private object[] OnEndListarRotasRealizadasPorUsuario(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> retVal = this.EndListarRotasRealizadasPorUsuario(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListarRotasRealizadasPorUsuarioCompleted(object state) {
+            if ((this.ListarRotasRealizadasPorUsuarioCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListarRotasRealizadasPorUsuarioCompleted(this, new ListarRotasRealizadasPorUsuarioCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListarRotasRealizadasPorUsuarioAsync(Fusioness.Mobile.FusionessWS.Usuario usuario) {
+            this.ListarRotasRealizadasPorUsuarioAsync(usuario, null);
+        }
+        
+        public void ListarRotasRealizadasPorUsuarioAsync(Fusioness.Mobile.FusionessWS.Usuario usuario, object userState) {
+            if ((this.onBeginListarRotasRealizadasPorUsuarioDelegate == null)) {
+                this.onBeginListarRotasRealizadasPorUsuarioDelegate = new BeginOperationDelegate(this.OnBeginListarRotasRealizadasPorUsuario);
+            }
+            if ((this.onEndListarRotasRealizadasPorUsuarioDelegate == null)) {
+                this.onEndListarRotasRealizadasPorUsuarioDelegate = new EndOperationDelegate(this.OnEndListarRotasRealizadasPorUsuario);
+            }
+            if ((this.onListarRotasRealizadasPorUsuarioCompletedDelegate == null)) {
+                this.onListarRotasRealizadasPorUsuarioCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarRotasRealizadasPorUsuarioCompleted);
+            }
+            base.InvokeAsync(this.onBeginListarRotasRealizadasPorUsuarioDelegate, new object[] {
+                        usuario}, this.onEndListarRotasRealizadasPorUsuarioDelegate, this.onListarRotasRealizadasPorUsuarioCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -11772,6 +12645,304 @@ namespace Fusioness.Mobile.FusionessWS {
             base.InvokeAsync(this.onBeginListarConviteUsuarioEmailsDelegate, null, this.onEndListarConviteUsuarioEmailsDelegate, this.onListarConviteUsuarioEmailsCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginGerarTokenUsuarioSemSenha(Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGerarTokenUsuarioSemSenha(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginGerarTokenUsuarioSemSenha(Fusioness.Mobile.FusionessWS.Usuario usuario, string url, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaRequest inValue = new Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaRequestBody();
+            inValue.Body.usuario = usuario;
+            inValue.Body.url = url;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginGerarTokenUsuarioSemSenha(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndGerarTokenUsuarioSemSenha(System.IAsyncResult result) {
+            return base.Channel.EndGerarTokenUsuarioSemSenha(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private void EndGerarTokenUsuarioSemSenha(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndGerarTokenUsuarioSemSenha(result);
+        }
+        
+        private System.IAsyncResult OnBeginGerarTokenUsuarioSemSenha(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.Usuario usuario = ((Fusioness.Mobile.FusionessWS.Usuario)(inValues[0]));
+            string url = ((string)(inValues[1]));
+            return this.BeginGerarTokenUsuarioSemSenha(usuario, url, callback, asyncState);
+        }
+        
+        private object[] OnEndGerarTokenUsuarioSemSenha(System.IAsyncResult result) {
+            this.EndGerarTokenUsuarioSemSenha(result);
+            return null;
+        }
+        
+        private void OnGerarTokenUsuarioSemSenhaCompleted(object state) {
+            if ((this.GerarTokenUsuarioSemSenhaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GerarTokenUsuarioSemSenhaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GerarTokenUsuarioSemSenhaAsync(Fusioness.Mobile.FusionessWS.Usuario usuario, string url) {
+            this.GerarTokenUsuarioSemSenhaAsync(usuario, url, null);
+        }
+        
+        public void GerarTokenUsuarioSemSenhaAsync(Fusioness.Mobile.FusionessWS.Usuario usuario, string url, object userState) {
+            if ((this.onBeginGerarTokenUsuarioSemSenhaDelegate == null)) {
+                this.onBeginGerarTokenUsuarioSemSenhaDelegate = new BeginOperationDelegate(this.OnBeginGerarTokenUsuarioSemSenha);
+            }
+            if ((this.onEndGerarTokenUsuarioSemSenhaDelegate == null)) {
+                this.onEndGerarTokenUsuarioSemSenhaDelegate = new EndOperationDelegate(this.OnEndGerarTokenUsuarioSemSenha);
+            }
+            if ((this.onGerarTokenUsuarioSemSenhaCompletedDelegate == null)) {
+                this.onGerarTokenUsuarioSemSenhaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGerarTokenUsuarioSemSenhaCompleted);
+            }
+            base.InvokeAsync(this.onBeginGerarTokenUsuarioSemSenhaDelegate, new object[] {
+                        usuario,
+                        url}, this.onEndGerarTokenUsuarioSemSenhaDelegate, this.onGerarTokenUsuarioSemSenhaCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarUsuarioTokenSenha(Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListarUsuarioTokenSenha(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginListarUsuarioTokenSenha(System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaRequest inValue = new Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaRequestBody();
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarUsuarioTokenSenha(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarUsuarioTokenSenha(System.IAsyncResult result) {
+            return base.Channel.EndListarUsuarioTokenSenha(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.UsuarioTokenSenha> EndListarUsuarioTokenSenha(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarUsuarioTokenSenha(result);
+            return retVal.Body.ListarUsuarioTokenSenhaResult;
+        }
+        
+        private System.IAsyncResult OnBeginListarUsuarioTokenSenha(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginListarUsuarioTokenSenha(callback, asyncState);
+        }
+        
+        private object[] OnEndListarUsuarioTokenSenha(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.UsuarioTokenSenha> retVal = this.EndListarUsuarioTokenSenha(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListarUsuarioTokenSenhaCompleted(object state) {
+            if ((this.ListarUsuarioTokenSenhaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListarUsuarioTokenSenhaCompleted(this, new ListarUsuarioTokenSenhaCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListarUsuarioTokenSenhaAsync() {
+            this.ListarUsuarioTokenSenhaAsync(null);
+        }
+        
+        public void ListarUsuarioTokenSenhaAsync(object userState) {
+            if ((this.onBeginListarUsuarioTokenSenhaDelegate == null)) {
+                this.onBeginListarUsuarioTokenSenhaDelegate = new BeginOperationDelegate(this.OnBeginListarUsuarioTokenSenha);
+            }
+            if ((this.onEndListarUsuarioTokenSenhaDelegate == null)) {
+                this.onEndListarUsuarioTokenSenhaDelegate = new EndOperationDelegate(this.OnEndListarUsuarioTokenSenha);
+            }
+            if ((this.onListarUsuarioTokenSenhaCompletedDelegate == null)) {
+                this.onListarUsuarioTokenSenhaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarUsuarioTokenSenhaCompleted);
+            }
+            base.InvokeAsync(this.onBeginListarUsuarioTokenSenhaDelegate, null, this.onEndListarUsuarioTokenSenhaDelegate, this.onListarUsuarioTokenSenhaCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginObterUsuarioPorToken(Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginObterUsuarioPorToken(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginObterUsuarioPorToken(string token, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenRequest inValue = new Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenRequestBody();
+            inValue.Body.token = token;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginObterUsuarioPorToken(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndObterUsuarioPorToken(System.IAsyncResult result) {
+            return base.Channel.EndObterUsuarioPorToken(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private Fusioness.Mobile.FusionessWS.Usuario EndObterUsuarioPorToken(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndObterUsuarioPorToken(result);
+            return retVal.Body.ObterUsuarioPorTokenResult;
+        }
+        
+        private System.IAsyncResult OnBeginObterUsuarioPorToken(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string token = ((string)(inValues[0]));
+            return this.BeginObterUsuarioPorToken(token, callback, asyncState);
+        }
+        
+        private object[] OnEndObterUsuarioPorToken(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.Usuario retVal = this.EndObterUsuarioPorToken(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnObterUsuarioPorTokenCompleted(object state) {
+            if ((this.ObterUsuarioPorTokenCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ObterUsuarioPorTokenCompleted(this, new ObterUsuarioPorTokenCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ObterUsuarioPorTokenAsync(string token) {
+            this.ObterUsuarioPorTokenAsync(token, null);
+        }
+        
+        public void ObterUsuarioPorTokenAsync(string token, object userState) {
+            if ((this.onBeginObterUsuarioPorTokenDelegate == null)) {
+                this.onBeginObterUsuarioPorTokenDelegate = new BeginOperationDelegate(this.OnBeginObterUsuarioPorToken);
+            }
+            if ((this.onEndObterUsuarioPorTokenDelegate == null)) {
+                this.onEndObterUsuarioPorTokenDelegate = new EndOperationDelegate(this.OnEndObterUsuarioPorToken);
+            }
+            if ((this.onObterUsuarioPorTokenCompletedDelegate == null)) {
+                this.onObterUsuarioPorTokenCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnObterUsuarioPorTokenCompleted);
+            }
+            base.InvokeAsync(this.onBeginObterUsuarioPorTokenDelegate, new object[] {
+                        token}, this.onEndObterUsuarioPorTokenDelegate, this.onObterUsuarioPorTokenCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginAlterarUsuarioTokenSenha(Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginAlterarUsuarioTokenSenha(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginAlterarUsuarioTokenSenha(Fusioness.Mobile.FusionessWS.UsuarioTokenSenha usuariotokensenha, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaRequest inValue = new Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaRequestBody();
+            inValue.Body.usuariotokensenha = usuariotokensenha;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginAlterarUsuarioTokenSenha(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndAlterarUsuarioTokenSenha(System.IAsyncResult result) {
+            return base.Channel.EndAlterarUsuarioTokenSenha(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private Fusioness.Mobile.FusionessWS.UsuarioTokenSenha EndAlterarUsuarioTokenSenha(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndAlterarUsuarioTokenSenha(result);
+            return retVal.Body.AlterarUsuarioTokenSenhaResult;
+        }
+        
+        private System.IAsyncResult OnBeginAlterarUsuarioTokenSenha(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.UsuarioTokenSenha usuariotokensenha = ((Fusioness.Mobile.FusionessWS.UsuarioTokenSenha)(inValues[0]));
+            return this.BeginAlterarUsuarioTokenSenha(usuariotokensenha, callback, asyncState);
+        }
+        
+        private object[] OnEndAlterarUsuarioTokenSenha(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.UsuarioTokenSenha retVal = this.EndAlterarUsuarioTokenSenha(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnAlterarUsuarioTokenSenhaCompleted(object state) {
+            if ((this.AlterarUsuarioTokenSenhaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.AlterarUsuarioTokenSenhaCompleted(this, new AlterarUsuarioTokenSenhaCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void AlterarUsuarioTokenSenhaAsync(Fusioness.Mobile.FusionessWS.UsuarioTokenSenha usuariotokensenha) {
+            this.AlterarUsuarioTokenSenhaAsync(usuariotokensenha, null);
+        }
+        
+        public void AlterarUsuarioTokenSenhaAsync(Fusioness.Mobile.FusionessWS.UsuarioTokenSenha usuariotokensenha, object userState) {
+            if ((this.onBeginAlterarUsuarioTokenSenhaDelegate == null)) {
+                this.onBeginAlterarUsuarioTokenSenhaDelegate = new BeginOperationDelegate(this.OnBeginAlterarUsuarioTokenSenha);
+            }
+            if ((this.onEndAlterarUsuarioTokenSenhaDelegate == null)) {
+                this.onEndAlterarUsuarioTokenSenhaDelegate = new EndOperationDelegate(this.OnEndAlterarUsuarioTokenSenha);
+            }
+            if ((this.onAlterarUsuarioTokenSenhaCompletedDelegate == null)) {
+                this.onAlterarUsuarioTokenSenhaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnAlterarUsuarioTokenSenhaCompleted);
+            }
+            base.InvokeAsync(this.onBeginAlterarUsuarioTokenSenhaDelegate, new object[] {
+                        usuariotokensenha}, this.onEndAlterarUsuarioTokenSenhaDelegate, this.onAlterarUsuarioTokenSenhaCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginObterUsuarioTokenSenhaPorToken(Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginObterUsuarioTokenSenhaPorToken(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginObterUsuarioTokenSenhaPorToken(string token, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenRequest inValue = new Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenRequestBody();
+            inValue.Body.token = token;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginObterUsuarioTokenSenhaPorToken(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndObterUsuarioTokenSenhaPorToken(System.IAsyncResult result) {
+            return base.Channel.EndObterUsuarioTokenSenhaPorToken(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private Fusioness.Mobile.FusionessWS.UsuarioTokenSenha EndObterUsuarioTokenSenhaPorToken(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndObterUsuarioTokenSenhaPorToken(result);
+            return retVal.Body.ObterUsuarioTokenSenhaPorTokenResult;
+        }
+        
+        private System.IAsyncResult OnBeginObterUsuarioTokenSenhaPorToken(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string token = ((string)(inValues[0]));
+            return this.BeginObterUsuarioTokenSenhaPorToken(token, callback, asyncState);
+        }
+        
+        private object[] OnEndObterUsuarioTokenSenhaPorToken(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.UsuarioTokenSenha retVal = this.EndObterUsuarioTokenSenhaPorToken(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnObterUsuarioTokenSenhaPorTokenCompleted(object state) {
+            if ((this.ObterUsuarioTokenSenhaPorTokenCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ObterUsuarioTokenSenhaPorTokenCompleted(this, new ObterUsuarioTokenSenhaPorTokenCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ObterUsuarioTokenSenhaPorTokenAsync(string token) {
+            this.ObterUsuarioTokenSenhaPorTokenAsync(token, null);
+        }
+        
+        public void ObterUsuarioTokenSenhaPorTokenAsync(string token, object userState) {
+            if ((this.onBeginObterUsuarioTokenSenhaPorTokenDelegate == null)) {
+                this.onBeginObterUsuarioTokenSenhaPorTokenDelegate = new BeginOperationDelegate(this.OnBeginObterUsuarioTokenSenhaPorToken);
+            }
+            if ((this.onEndObterUsuarioTokenSenhaPorTokenDelegate == null)) {
+                this.onEndObterUsuarioTokenSenhaPorTokenDelegate = new EndOperationDelegate(this.OnEndObterUsuarioTokenSenhaPorToken);
+            }
+            if ((this.onObterUsuarioTokenSenhaPorTokenCompletedDelegate == null)) {
+                this.onObterUsuarioTokenSenhaPorTokenCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnObterUsuarioTokenSenhaPorTokenCompleted);
+            }
+            base.InvokeAsync(this.onBeginObterUsuarioTokenSenhaPorTokenDelegate, new object[] {
+                        token}, this.onEndObterUsuarioTokenSenhaPorTokenDelegate, this.onObterUsuarioTokenSenhaPorTokenCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -12030,6 +13201,19 @@ namespace Fusioness.Mobile.FusionessWS {
                 return _result;
             }
             
+            public System.IAsyncResult BeginListarUsuariosPorEmail(Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ListarUsuariosPorEmail", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailResponse EndListarUsuariosPorEmail(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailResponse _result = ((Fusioness.Mobile.FusionessWS.ListarUsuariosPorEmailResponse)(base.EndInvoke("ListarUsuariosPorEmail", _args, result)));
+                return _result;
+            }
+            
             public System.IAsyncResult BeginInserirRota(Fusioness.Mobile.FusionessWS.InserirRotaRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
@@ -12105,6 +13289,19 @@ namespace Fusioness.Mobile.FusionessWS {
             public Fusioness.Mobile.FusionessWS.ListarRotasPorUsuarioResponse EndListarRotasPorUsuario(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Fusioness.Mobile.FusionessWS.ListarRotasPorUsuarioResponse _result = ((Fusioness.Mobile.FusionessWS.ListarRotasPorUsuarioResponse)(base.EndInvoke("ListarRotasPorUsuario", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListarRotasRealizadasPorUsuario(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ListarRotasRealizadasPorUsuario", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponse EndListarRotasRealizadasPorUsuario(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponse _result = ((Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponse)(base.EndInvoke("ListarRotasRealizadasPorUsuario", _args, result)));
                 return _result;
             }
             
@@ -12664,6 +13861,71 @@ namespace Fusioness.Mobile.FusionessWS {
             public Fusioness.Mobile.FusionessWS.ListarConviteUsuarioEmailsResponse EndListarConviteUsuarioEmails(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Fusioness.Mobile.FusionessWS.ListarConviteUsuarioEmailsResponse _result = ((Fusioness.Mobile.FusionessWS.ListarConviteUsuarioEmailsResponse)(base.EndInvoke("ListarConviteUsuarioEmails", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGerarTokenUsuarioSemSenha(Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("GerarTokenUsuarioSemSenha", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaResponse EndGerarTokenUsuarioSemSenha(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaResponse _result = ((Fusioness.Mobile.FusionessWS.GerarTokenUsuarioSemSenhaResponse)(base.EndInvoke("GerarTokenUsuarioSemSenha", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListarUsuarioTokenSenha(Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ListarUsuarioTokenSenha", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaResponse EndListarUsuarioTokenSenha(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaResponse _result = ((Fusioness.Mobile.FusionessWS.ListarUsuarioTokenSenhaResponse)(base.EndInvoke("ListarUsuarioTokenSenha", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginObterUsuarioPorToken(Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ObterUsuarioPorToken", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenResponse EndObterUsuarioPorToken(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenResponse _result = ((Fusioness.Mobile.FusionessWS.ObterUsuarioPorTokenResponse)(base.EndInvoke("ObterUsuarioPorToken", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginAlterarUsuarioTokenSenha(Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("AlterarUsuarioTokenSenha", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaResponse EndAlterarUsuarioTokenSenha(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaResponse _result = ((Fusioness.Mobile.FusionessWS.AlterarUsuarioTokenSenhaResponse)(base.EndInvoke("AlterarUsuarioTokenSenha", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginObterUsuarioTokenSenhaPorToken(Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ObterUsuarioTokenSenhaPorToken", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenResponse EndObterUsuarioTokenSenhaPorToken(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenResponse _result = ((Fusioness.Mobile.FusionessWS.ObterUsuarioTokenSenhaPorTokenResponse)(base.EndInvoke("ObterUsuarioTokenSenhaPorToken", _args, result)));
                 return _result;
             }
         }

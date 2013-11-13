@@ -30,33 +30,47 @@ namespace Fusioness.Mobile.Views
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-            this.Convites = new ObservableCollection<ItemViewModel>();
+            try
+            {
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                this.Convites = new ObservableCollection<ItemViewModel>();
 
-            servico.ObterConvitesEventosDoUsuarioAsync(Global.usuarioLogado);
-            servico.ObterConvitesEventosDoUsuarioCompleted += servico_ObterConvitesEventosDoUsuarioCompleted;
+                servico.ObterConvitesEventosDoUsuarioAsync(Global.usuarioLogado);
+                servico.ObterConvitesEventosDoUsuarioCompleted += servico_ObterConvitesEventosDoUsuarioCompleted;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         void servico_ObterConvitesEventosDoUsuarioCompleted(object sender, FusionessWS.ObterConvitesEventosDoUsuarioCompletedEventArgs e)
         {
-            IList<FusionessWS.ConviteEvento> listConvites = e.Result;
-            if (listConvites != null)
+            try
             {
-                foreach (var item in listConvites)
+                IList<FusionessWS.ConviteEvento> listConvites = e.Result;
+                if (listConvites != null)
                 {
-                    this.Convites.Add(new ItemViewModel()
+                    foreach (var item in listConvites)
                     {
-                        ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? Global.imgUsuarioDefault : item.Usuario.UrlImagem),
-                        ContatoNome = item.Usuario.Nome,
-                        ContatoId = item.IdUsuario,
-                        EventoId = item.IdEvento,
-                        EventoTitulo = item.Evento.Titulo,
-                        EventoDescricao = item.Evento.Descricao,
-                        EventoImagem = ((String.IsNullOrEmpty(item.Evento.UrlImagem)) ? Global.imgEventoDefault : Global.linkImagem + item.Evento.UrlImagem)
-                    });
+                        this.Convites.Add(new ItemViewModel()
+                        {
+                            ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? Global.imgUsuarioDefault : item.Usuario.UrlImagem),
+                            ContatoNome = item.Usuario.Nome,
+                            ContatoId = item.IdUsuario,
+                            EventoId = item.IdEvento,
+                            EventoTitulo = item.Evento.Titulo,
+                            EventoDescricao = item.Evento.Descricao,
+                            EventoImagem = ((String.IsNullOrEmpty(item.Evento.UrlImagem)) ? Global.imgEventoDefault : Global.linkImagem + item.Evento.UrlImagem)
+                        });
+                    }
+                    llsConvites.ItemsSource = this.Convites;
                 }
-                llsConvites.ItemsSource = this.Convites;
-            }            
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }       
         }
 
         private void btnAceitar_Click(object sender, RoutedEventArgs e)
@@ -75,31 +89,45 @@ namespace Fusioness.Mobile.Views
 
         private void ResponderConvite(int idResposta)
         {
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-
-            FusionessWS.ConviteEvento convite = new FusionessWS.ConviteEvento()
+            try
             {
-                IdUsuario = Item.ContatoId,
-                IdContato = Global.usuarioLogado.IdUsuario,
-                IdEvento = Item.EventoId                
-            };
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
 
-            FusionessWS.Resposta resposta = new FusionessWS.Resposta()
+                FusionessWS.ConviteEvento convite = new FusionessWS.ConviteEvento()
+                {
+                    IdUsuario = Item.ContatoId,
+                    IdContato = Global.usuarioLogado.IdUsuario,
+                    IdEvento = Item.EventoId
+                };
+
+                FusionessWS.Resposta resposta = new FusionessWS.Resposta()
+                {
+                    IdResposta = idResposta
+                };
+
+                servico.ResponderConviteEventoAsync(convite, resposta);
+                servico.ResponderConviteEventoCompleted += servico_ResponderConviteEventoCompleted;
+            }
+            catch (Exception)
             {
-                IdResposta = idResposta
-            };
-
-            servico.ResponderConviteEventoAsync(convite,resposta);
-            servico.ResponderConviteEventoCompleted += servico_ResponderConviteEventoCompleted;
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         void servico_ResponderConviteEventoCompleted(object sender, FusionessWS.ResponderConviteEventoCompletedEventArgs e)
         {
-            if (e.Result != null)
+            try
             {
-                this.llsConvites.ItemsSource.Remove(Item);
+                if (e.Result != null)
+                {
+                    this.llsConvites.ItemsSource.Remove(Item);
+                }
+                else
+                {
+                    MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                }
             }
-            else
+            catch (Exception)
             {
                 MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }

@@ -128,11 +128,18 @@ namespace Fusioness.Mobile.Views
 
         private void Visualizar()
         {
-            FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
-            FusionessWS.Rota rota = new FusionessWS.Rota();
-            rota.IdRota = RotaId;
-            servico.ListarCoordenadasPorRotaAsync(rota);
-            servico.ListarCoordenadasPorRotaCompleted += servico_ListarCoordenadasPorRotaCompleted;
+            try
+            {
+                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                FusionessWS.Rota rota = new FusionessWS.Rota();
+                rota.IdRota = RotaId;
+                servico.ListarCoordenadasPorRotaAsync(rota);
+                servico.ListarCoordenadasPorRotaCompleted += servico_ListarCoordenadasPorRotaCompleted;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         private void exibirPontos()
@@ -234,9 +241,9 @@ namespace Fusioness.Mobile.Views
 
                 Global.fusCoordenadas.Add(coordenada);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message.ToString(), "Erro!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -254,9 +261,9 @@ namespace Fusioness.Mobile.Views
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message.ToString(), "Erro!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -312,7 +319,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -327,7 +334,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -390,7 +397,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível realizar esta ação verifique sua conexão com a internet");
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -410,34 +417,41 @@ namespace Fusioness.Mobile.Views
 
         private void menuExibirPontos_Click(object sender, EventArgs e)
         {
-            ApplicationBarMenuItem menuExibirPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[2];
-
-            if (menuExibirPontos.Text == "Exibir pontos de referência")
+            try
             {
-                menuExibirPontos.Text = "Ocultar pontos de referência";
+                ApplicationBarMenuItem menuExibirPontos = (ApplicationBarMenuItem)ApplicationBar.MenuItems[2];
 
-                if (RotaId != -1)
+                if (menuExibirPontos.Text == "Exibir pontos de referência")
                 {
-                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                    menuExibirPontos.Text = "Ocultar pontos de referência";
 
-                    FusionessWS.Rota rota = new FusionessWS.Rota() { IdRota = RotaId };
-                    servico.ListarPontosReferenciaPorRotaAsync(rota);
-                    servico.ListarPontosReferenciaPorRotaCompleted += servico_ListarPontosReferenciaPorRotaCompleted;
+                    if (RotaId != -1)
+                    {
+                        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
+                        FusionessWS.Rota rota = new FusionessWS.Rota() { IdRota = RotaId };
+                        servico.ListarPontosReferenciaPorRotaAsync(rota);
+                        servico.ListarPontosReferenciaPorRotaCompleted += servico_ListarPontosReferenciaPorRotaCompleted;
+                    }
+                    else
+                    {
+                        exibirPontos();
+                    }
                 }
                 else
                 {
-                    exibirPontos();
+                    menuExibirPontos.Text = "Exibir pontos de referência";
+
+                    foreach (var item in mapLayerPontosRef)
+                    {
+                        Mapa.Layers.Remove(item);
+                    }
+                    mapLayerPontosRef.Clear();
                 }
             }
-            else
+            catch (Exception)
             {
-                menuExibirPontos.Text = "Exibir pontos de referência";
-
-                foreach (var item in mapLayerPontosRef)
-                {
-                    Mapa.Layers.Remove(item);
-                }
-                mapLayerPontosRef.Clear();
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         } 
 
@@ -447,13 +461,20 @@ namespace Fusioness.Mobile.Views
         
         void servico_ListarPontosReferenciaPorRotaCompleted(object sender, FusionessWS.ListarPontosReferenciaPorRotaCompletedEventArgs e)
         {
-            IList<FusionessWS.Coordenada> listCoordenadas = e.Result;
-
-            foreach (var item in listCoordenadas)
+            try
             {
-                var mapLayer = adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png");
-                Mapa.Layers.Add(mapLayer);
-                mapLayerPontosRef.Add(mapLayer);
+                IList<FusionessWS.Coordenada> listCoordenadas = e.Result;
+
+                foreach (var item in listCoordenadas)
+                {
+                    var mapLayer = adicionar_MapLayer(new GeoCoordinate(item.Latitude, item.Longitude), "/Assets/pontoref.png");
+                    Mapa.Layers.Add(mapLayer);
+                    mapLayerPontosRef.Add(mapLayer);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -499,25 +520,32 @@ namespace Fusioness.Mobile.Views
                     MessageBox.Show("Error ao visualizar rota!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message.ToString(), "Erro", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
         void servico_ObterRotaPorIdCompleted(object sender, FusionessWS.ObterRotaPorIdCompletedEventArgs e)
         {
-            FusionessWS.Rota rota = e.Result;
-            if (rota != null)
+            try
             {
-                if (rota.IdRotaOrigem != null)
+                FusionessWS.Rota rota = e.Result;
+                if (rota != null)
                 {
-                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRotaOrigem.ToString(), UriKind.Relative));
+                    if (rota.IdRotaOrigem != null)
+                    {
+                        NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRotaOrigem.ToString(), UriKind.Relative));
+                    }
+                    else
+                    {
+                        NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRota.ToString(), UriKind.Relative));
+                    }
                 }
-                else
-                {
-                    NavigationService.Navigate(new Uri("/Views/SalvarRota.xaml?RotaId=" + rota.IdRota.ToString(), UriKind.Relative));
-                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
         

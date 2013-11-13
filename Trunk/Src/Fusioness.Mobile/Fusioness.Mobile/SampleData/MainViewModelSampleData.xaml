@@ -13,6 +13,15 @@
         <vm:ItemViewModel RotaNome="design six"/>
     </vm:MainViewModel.Rotas>
 
+    <vm:MainViewModel.RotasRealizadas>
+        <vm:ItemViewModel RotaNome="design one" RotaId="1"/>
+        <vm:ItemViewModel RotaNome="design one"/>
+        <vm:ItemViewModel RotaNome="design three"/>
+        <vm:ItemViewModel RotaNome="design two"/>
+        <vm:ItemViewModel RotaNome="design one"/>
+        <vm:ItemViewModel RotaNome="design three"/>
+    </vm:MainViewModel.RotasRealizadas>
+    
     <vm:MainViewModel.Eventos>
         <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Arrumadinho de Santo Amaro novo" EventoData="11/10/2013" EventoDescricao="Descrição do Evento Descrição do Evento Descrição do Evento" />
         <vm:ItemViewModel EventoImagem="/Assets/ApplicationIcon.png" EventoTitulo="Dictumst" EventoData="11/10/2013" EventoDescricao="Descrição do Evento Descrição do Evento Descrição do Evento" />

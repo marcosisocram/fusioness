@@ -21,6 +21,7 @@ namespace Fusioness.Mobile.ViewModels
         /// A collection for ItemViewModel objects.
         /// </summary>
         public ObservableCollection<ItemViewModel> Rotas { get; private set; }
+        public ObservableCollection<ItemViewModel> RotasRealizadas { get; private set; }
         public ObservableCollection<ItemViewModel> Eventos { get; private set; }
         public ObservableCollection<ItemViewModel> Contatos { get; private set; }
 
@@ -68,6 +69,7 @@ namespace Fusioness.Mobile.ViewModels
         public void LoadData()
         {            
             this.Rotas = new ObservableCollection<ItemViewModel>();
+            this.RotasRealizadas = new ObservableCollection<ItemViewModel>();
             this.Eventos = new ObservableCollection<ItemViewModel>();
             this.Contatos = new ObservableCollection<ItemViewModel>();
 
@@ -76,10 +78,26 @@ namespace Fusioness.Mobile.ViewModels
             servico.ListarRotasPorUsuarioCompleted += servico_ListarRotasPorUsuarioCompleted;
             servico.ListarEventosPorUsuarioAsync(Global.usuarioLogado);
             servico.ListarEventosPorUsuarioCompleted += servico_ListarEventosPorUsuarioCompleted;
+            servico.ListarRotasRealizadasPorUsuarioAsync(Global.usuarioLogado);
+            servico.ListarRotasRealizadasPorUsuarioCompleted += servico_ListarRotasRealizadasPorUsuarioCompleted;
             servico.ListarContatosDoUsuarioAsync(Global.usuarioLogado);
             servico.ListarContatosDoUsuarioCompleted += servico_ListarContatosDoUsuarioCompleted;
             
             this.IsDataLoaded = true;
+        }
+
+        void servico_ListarRotasRealizadasPorUsuarioCompleted(object sender, FusionessWS.ListarRotasRealizadasPorUsuarioCompletedEventArgs e)
+        {
+            IList<FusionessWS.Rota> rotas = e.Result;
+
+            foreach (var item in rotas)
+            {
+                this.RotasRealizadas.Add(new ItemViewModel()
+                {
+                    RotaId = item.IdRota,
+                    RotaNome = item.Descricao.ToString()
+                });
+            } 
         }
 
         void servico_ListarContatosDoUsuarioCompleted(object sender, FusionessWS.ListarContatosDoUsuarioCompletedEventArgs e)

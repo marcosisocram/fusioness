@@ -35,19 +35,26 @@ namespace Fusioness.Mobile.Views
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Pontos = new ObservableCollection<ItemViewModel>();
-
-            if (RotaId != -1)
+            try
             {
-                FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                this.Pontos = new ObservableCollection<ItemViewModel>();
 
-                FusionessWS.Rota rota = new FusionessWS.Rota() { IdRota = RotaId };
-                servico.ListarPontosReferenciaPorRotaAsync(rota);
-                servico.ListarPontosReferenciaPorRotaCompleted += servico_ListarPontosReferenciaPorRotaCompleted;
+                if (RotaId != -1)
+                {
+                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
+                    FusionessWS.Rota rota = new FusionessWS.Rota() { IdRota = RotaId };
+                    servico.ListarPontosReferenciaPorRotaAsync(rota);
+                    servico.ListarPontosReferenciaPorRotaCompleted += servico_ListarPontosReferenciaPorRotaCompleted;
+                }
+                else
+                {
+                    exibirPontos();
+                }            
             }
-            else
+            catch (Exception)
             {
-                exibirPontos();
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
         public ListarPontoReferencia()
@@ -57,39 +64,53 @@ namespace Fusioness.Mobile.Views
 
         void servico_ListarPontosReferenciaPorRotaCompleted(object sender, FusionessWS.ListarPontosReferenciaPorRotaCompletedEventArgs e)
         {
-            IList<FusionessWS.Coordenada> listCoordenadas = e.Result;
-
-            foreach (var item in listCoordenadas)
+            try
             {
-                this.Pontos.Add(new ItemViewModel()
-                {
-                    PontoUrlImagem = ((String.IsNullOrEmpty(item.UrlImagemPonto)) ? Global.imgEventoDefault : Global.linkImagem + item.UrlImagemPonto),  
-                    CoordenadaId = item.IdCoordenada,
-                    PontoNome = item.NomePonto,
-                    PontoDescricao = item.DescricaoPonto
-                });
-            }
+                IList<FusionessWS.Coordenada> listCoordenadas = e.Result;
 
-            llsPontosRef.ItemsSource = Pontos;
+                foreach (var item in listCoordenadas)
+                {
+                    this.Pontos.Add(new ItemViewModel()
+                    {
+                        PontoUrlImagem = ((String.IsNullOrEmpty(item.UrlImagemPonto)) ? Global.imgEventoDefault : Global.linkImagem + item.UrlImagemPonto),
+                        CoordenadaId = item.IdCoordenada,
+                        PontoNome = item.NomePonto,
+                        PontoDescricao = item.DescricaoPonto
+                    });
+                }
+
+                llsPontosRef.ItemsSource = Pontos;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         private void exibirPontos()
         {
-            for (int i = 0; i < Global.fusCoordenadas.Count; i++)
+            try
             {
-                if (Global.fusCoordenadas[i].IdTipoCoordenada == 2)
+                for (int i = 0; i < Global.fusCoordenadas.Count; i++)
                 {
-                    this.Pontos.Add(new ItemViewModel()
+                    if (Global.fusCoordenadas[i].IdTipoCoordenada == 2)
                     {
-                        PontoUrlImagem = ((String.IsNullOrEmpty(Global.fusCoordenadas[i].UrlImagemPonto)) ? Global.imgEventoDefault : Global.linkImagem + Global.fusCoordenadas[i].UrlImagemPonto),   
-                        CoordenadaId = i,
-                        PontoNome = Global.fusCoordenadas[i].NomePonto,
-                        PontoDescricao = Global.fusCoordenadas[i].DescricaoPonto
-                    });
+                        this.Pontos.Add(new ItemViewModel()
+                        {
+                            PontoUrlImagem = ((String.IsNullOrEmpty(Global.fusCoordenadas[i].UrlImagemPonto)) ? Global.imgEventoDefault : Global.linkImagem + Global.fusCoordenadas[i].UrlImagemPonto),
+                            CoordenadaId = i,
+                            PontoNome = Global.fusCoordenadas[i].NomePonto,
+                            PontoDescricao = Global.fusCoordenadas[i].DescricaoPonto
+                        });
+                    }
                 }
+
+                llsPontosRef.ItemsSource = Pontos;
             }
-            
-            llsPontosRef.ItemsSource = Pontos;
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
         }
 
         private void btVoltar_Click(object sender, EventArgs e)
@@ -99,24 +120,31 @@ namespace Fusioness.Mobile.Views
 
         private void Excluir_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Deseja Excluir Este Ponto?", "Alerta!", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
+            try
             {
-                Item = (sender as MenuItem).DataContext as ItemViewModel;
-
-                if (RotaId != -1)
+                MessageBoxResult result = MessageBox.Show("Deseja Excluir Este Ponto?", "Alerta!", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
                 {
-                    FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+                    Item = (sender as MenuItem).DataContext as ItemViewModel;
 
-                    FusionessWS.Coordenada coordenada = new FusionessWS.Coordenada() { IdCoordenada = Item.CoordenadaId };
-                    servico.RemoverCoordenadaAsync(coordenada);
-                    servico.RemoverCoordenadaCompleted += servico_RemoverCoordenadaCompleted;
+                    if (RotaId != -1)
+                    {
+                        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
+
+                        FusionessWS.Coordenada coordenada = new FusionessWS.Coordenada() { IdCoordenada = Item.CoordenadaId };
+                        servico.RemoverCoordenadaAsync(coordenada);
+                        servico.RemoverCoordenadaCompleted += servico_RemoverCoordenadaCompleted;
+                    }
+                    else
+                    {
+                        Global.fusCoordenadas.RemoveAt(Item.CoordenadaId);
+                        llsPontosRef.ItemsSource.Remove(Item);
+                    }
                 }
-                else
-                {
-                    Global.fusCoordenadas.RemoveAt(Item.CoordenadaId);
-                    llsPontosRef.ItemsSource.Remove(Item);
-                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
