@@ -17,6 +17,11 @@ namespace Fusioness.Mobile.Views
     {
         int EventoId = -1;
         public ObservableCollection<ItemViewModel> Contatos { get; private set; }
+        /*
+         * 
+         * Melhor tempo / Media do tempo
+         * quantidade de usuarios
+        */
 
         public TempoAtualDoEvento()
         {
@@ -75,6 +80,7 @@ namespace Fusioness.Mobile.Views
                         DateTime dateInicial;
                         int horas = 0;
                         int Minutos = 0;
+                        double TotalMinutos = 0;
 
                         if (item.DataInicial != null)
                         {
@@ -84,11 +90,13 @@ namespace Fusioness.Mobile.Views
                                 DateTime dataFinal = Convert.ToDateTime(item.DataFinal);
                                 horas = (dataFinal - dateInicial).Hours;
                                 Minutos = (dataFinal - dateInicial).Minutes;
+                                TotalMinutos = (dataFinal - dateInicial).TotalMinutes;
                             }
                             else
                             {
                                 horas = (dataAtual - dateInicial).Hours;
                                 Minutos = (dataAtual - dateInicial).Minutes;
+                                TotalMinutos = (dataAtual - dateInicial).TotalMinutes;
                             }
                         }
 
@@ -96,10 +104,20 @@ namespace Fusioness.Mobile.Views
                         {
                             ContatoImagem = Global.linkImagem + ((String.IsNullOrEmpty(item.Usuario.UrlImagem)) ? Global.imgUsuarioDefault : item.Usuario.UrlImagem),
                             ContatoTempo = horas.ToString("#0:") + Minutos.ToString("#00h"),
-                            ContatoNome = item.Usuario.Nome
+                            ContatoNome = item.Usuario.Nome,
+                            ContatoTotalMinuto = TotalMinutos
                         });
                     }
                     llsContatos.ItemsSource = Contatos;
+
+                    var usuariosAtivos = Contatos.Where(c => c.ContatoTotalMinuto > 0).ToList();
+                    var MelhorTempo = usuariosAtivos.OrderBy(o => o.ContatoTotalMinuto).Take(3).ToList();
+                    llsMelhorTempo.ItemsSource = MelhorTempo;
+
+                    double tempoMedio = (usuariosAtivos.Sum(s => s.ContatoTotalMinuto)) / usuariosAtivos.Count;
+                    this.lblTempoMedio.Text = "Tempo Médio: " 
+                        + TimeSpan.FromMinutes(tempoMedio).Hours.ToString() + ":" 
+                        + TimeSpan.FromMinutes(tempoMedio).Minutes.ToString() + "h";
                 }
             }
             catch (Exception)
