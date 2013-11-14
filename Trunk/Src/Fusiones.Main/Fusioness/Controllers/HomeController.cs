@@ -18,6 +18,9 @@ namespace Fusioness.Controllers
             var ConvitesEvento = Servico.ObterConvitesEventosDoUsuario(usuario);
             model = new IndexModel();
             model.ConvitesNaoConfirmados = Servico.ObterUsuariosIds(ConvitesAmizade.Select(c => c.IdUsuario).ToArray()).ToList();
+
+            model.User = usuario;
+            
             if (ConvitesEvento.Any())
             {
                 model.EventosNaoConfirmados = Servico.ListarEventos(ConvitesEvento.Select(c => c.IdEvento).ToArray()).ToList();
@@ -72,33 +75,7 @@ namespace Fusioness.Controllers
         }
         
 
-        public ActionResult EnviarImagem(HttpPostedFileBase image)
-        {
-            string retorno = string.Empty;
-            try
-            {
-                var validaImagem = new ValidarImagem(image);
-                if (validaImagem.IsImagemValida)
-                {
-                    var ms = new MemoryStream();
-                    image.InputStream.CopyTo(ms);
-                    byte[] bytes = ms.ToArray();
-                    var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
-                    string fs = Servico.InserirFotoUsuario(usuario, image.FileName, bytes);
-                    usuario.UrlImagem = fs;
-                    ExibirModal("Imagem enviada com sucesso.");
-                }
-                else
-                {
-                    throw new Exception(validaImagem.Retorno);
-                }
-            }
-            catch(Exception e) 
-            {
-                ExibirModal(e.Message);
-            }
-            return RedirectToAction("Index");
-        }
+     
 
         public ActionResult ConvidarAmigosGMail()
         {

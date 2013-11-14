@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Fusioness.FusionessWS;
 using System;
+using System.IO;
 
 
 namespace Fusioness.Controllers
@@ -122,6 +123,34 @@ namespace Fusioness.Controllers
             model.UsuarioLogado = this.UsuarioLogado;
                                     
             return View("Perfil",model);
+        }
+
+        public ActionResult EnviarImagem(HttpPostedFileBase image)
+        {
+            string retorno = string.Empty;
+            try
+            {
+                var validaImagem = new ValidarImagem(image);
+                if (validaImagem.IsImagemValida)
+                {
+                    var ms = new MemoryStream();
+                    image.InputStream.CopyTo(ms);
+                    byte[] bytes = ms.ToArray();
+                    var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
+                    string fs = Servico.InserirFotoUsuario(usuario, image.FileName, bytes);
+                    usuario.UrlImagem = fs;
+                    ExibirModal("Imagem enviada com sucesso.");
+                }
+                else
+                {
+                    throw new Exception(validaImagem.Retorno);
+                }
+            }
+            catch (Exception e)
+            {
+                ExibirModal(e.Message);
+            }
+            return RedirectToAction("Index");
         }
 
         [PermiteAnonimo]

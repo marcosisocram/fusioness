@@ -12,6 +12,8 @@ namespace Fusioness.Controllers
         {
             model = new ContatoModel();
             model.ListaDeUsuarios = Servico.ListarUsuarios().OrderBy(x => x.Nome).ToArray();
+            ViewBag.Titulo = "Lista de amigos:";
+
             return View(model);
         }
 
@@ -57,8 +59,10 @@ namespace Fusioness.Controllers
             var model = new ContatoModel();
             var usuario = BaseController.ObterUsuarioLogado(HttpContext);
             var MeusContatos = Servico.ListarContatosDoUsuario(usuario);
-            var usuarios = Servico.ObterUsuariosIds(MeusContatos.Select(c => c.IdContato).ToArray()).OrderBy(x => x.Nome).ToArray();
-            model.ListaDeUsuarios = usuarios;
+            model.ListaDeAmigos = Servico.ObterUsuariosIds(MeusContatos.Select(c => c.IdContato).ToArray()).OrderBy(x => x.Nome).ToArray();
+            model.ListaDeUsuarios = model.ListaDeAmigos;
+            ViewBag.Titulo = "Lista de amigos:";
+
             return View("index", model);
         }
 

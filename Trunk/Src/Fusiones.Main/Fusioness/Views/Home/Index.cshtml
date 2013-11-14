@@ -4,9 +4,6 @@
   Layout = "~/Views/Shared/LayoutBase.cshtml";
 }
 <script type="text/javascript">
-    function ExibirModalMudarImagem() {
-        $("#modalEditarImagem").modal('show');
-    }
     function ExibirModalConvidarProEmail() {
         $("#modalConvidarPorEmail").modal('show');
     }
@@ -14,14 +11,28 @@
         var url = '/Evento/BuscarEventos/?palavra=' + $('#txtBuscaEventos').val();
         window.location = url;
     }
+
+    function VerPerfilUsuario(idusuario) {
+        window.location = '/Usuario/VerPerfilUsuario?IdUsuario=' + idusuario;
+    }
 </script>
 
 <!-- FOTO -->
-<div class="span12" style="width:150px; height:150px; overflow:hidden;">
-    <!-- @Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext) -->
-    <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();"/>
+
+<div class="card people">
+    <div class="card-top blue">
+        <a href="javascript:void(0);">
+            <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" title="Sua Foto" />
+        </a>
+    </div>
+    <div class="card-info">
+        <a class="title" id="lblNomeDoUsuario" href="/Usuario/VerPerfilUsuario?IdUsuario=@Model.User.IdUsuario">@Model.User.Nome</a>
+    </div>
+    <div class="card-bottom">
+        <button class="btn btn-block" onclick="VerPerfilUsuario(@Model.User.IdUsuario);">Ver Perfil</button>
+    </div>
 </div>
-<a href="/Usuario">Editar perfil</a>
+
 @if (Model.ConvitesNaoConfirmados != null && Model.ConvitesNaoConfirmados.Count > 0) 
     {
         <div class="row-fluid">
@@ -136,24 +147,6 @@
   </div>
   <!-- END BLOCK -->
 </div> <!-- END LINHA 2 -->
-
-<div id="modalEditarImagem" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-    @using (Html.BeginForm("EnviarImagem", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Selecione a imagem</h3>
-    </div>
-    <div class="modal-body">
-        <p>
-            <input type="file" id="image" name="image" />
-        </p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="submit">Save changes</button>
-    </div>
-    }
-</div>
 
 <div id="modalConvidarPorEmail" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
     @using (Html.BeginForm("ConvidarPorEmail", "Home", FormMethod.Post))

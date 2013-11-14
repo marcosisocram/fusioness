@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Fusioness.FusionessWS;
 using Fusioness.Models.Eventos;
 using TimeSpan = System.TimeSpan;
+using System.Web;
+using System.IO;
 
 namespace Fusioness.Controllers
 {
@@ -46,6 +48,31 @@ namespace Fusioness.Controllers
             return View("Index",model);
         }
 
+        private void EnviarImagem(HttpPostedFileBase image, Evento evento)
+        {
+            string retorno = string.Empty;
+            try
+            {
+                var validaImagem = new ValidarImagem(image);
+                if (validaImagem.IsImagemValida)
+                {
+                    var ms = new MemoryStream();
+                    image.InputStream.CopyTo(ms);
+                    byte[] bytes = ms.ToArray();
+                    string fs = Servico.InserirFotoEvento(evento, image.FileName, bytes);
+                    evento.UrlImagem = fs;
+                }
+                else
+                {
+                    throw new Exception(validaImagem.Retorno);
+                }
+            }
+            catch (Exception e)
+            {
+                ExibirModal(e.Message);
+            }
+        }
+
         [HttpPost]
         public ActionResult InserirAlterarEvento(EventoModel model)
         {
@@ -53,15 +80,19 @@ namespace Fusioness.Controllers
 
             if (model.ValidarEvento(ModelState))
             {
-
                 if (model.Evento.IdEvento > 0)
                 {
                     var eventoAlterado = Servico.AlterarEvento(model.Evento);
+
+                    HttpPostedFileBase imagem = Request.Files["image"];
+                    EnviarImagem(imagem, eventoAlterado);
+
                     if (eventoAlterado != null && eventoAlterado.IdEvento > 0)
                     {
                         ExibirModal("Evento alterado com sucesso.");
                         model.Evento = eventoAlterado;
                         model.carregarParametrosView(this.UsuarioLogado, model.Evento);
+                        
                         return View(model);
                     }
 
@@ -72,6 +103,9 @@ namespace Fusioness.Controllers
                 else
                 {
                     var eventoCadastrado = Servico.InserirEvento(model.Evento);
+
+                    HttpPostedFileBase imagem = Request.Files["image"];
+                    EnviarImagem(imagem, eventoCadastrado);
 
                     if (eventoCadastrado != null && eventoCadastrado.IdEvento > 0)
                     {

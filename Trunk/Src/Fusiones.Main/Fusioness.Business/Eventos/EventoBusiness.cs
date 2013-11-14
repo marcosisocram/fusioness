@@ -9,6 +9,7 @@ using Fusioness.Entities;
 using Fusioness.Business.Coordenadas;
 using Fusioness.Business.Rotas;
 using Fusioness.Business.EventosUsuarios;
+using System.IO;
 
 namespace Fusioness.Business.Eventos
 {
@@ -36,6 +37,31 @@ namespace Fusioness.Business.Eventos
 
         #region Methods
 
+        public string InserirFotoEvento(Evento evento, byte[] bytes, string filename, string dirbase)
+        {
+            try
+            {
+                string retorno = string.Empty;
+                var directory = Path.Combine(dirbase, "images");
+                var fname = String.Format("{0}/{1}{2}", directory, Path.GetFileNameWithoutExtension(Path.GetTempFileName()), Path.GetExtension(filename));
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                var fs = File.OpenWrite(fname);
+                fs.Write(bytes, 0, bytes.Count());
+                fs.Close();
+                retorno = Path.GetFileName(fname);
+                evento.UrlImagem = retorno;
+                evento = AlterarEvento(evento);
+                return retorno;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+
+        }
         public Evento InserirEvento(Evento evento)
         {
             try
@@ -64,8 +90,8 @@ namespace Fusioness.Business.Eventos
                 using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
                 {
                     IRepository<Evento> repo = new EventoRepository(uow);
-                    if (evento.UrlImagem.StartsWith("data:image/png;"))
-                        evento.UrlImagem = string.Empty;
+                    //if (evento.UrlImagem.StartsWith("data:image/png;"))
+                        //evento.UrlImagem = string.Empty;
                     evento = repo.Update(evento);
                     uow.Commit();
                 }

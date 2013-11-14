@@ -17,5 +17,7 @@ namespace Fusioness.Business.Eventos
         List<Evento> ListarEventosPorUsuario(Usuario usuario);
         List<Evento> ListarEventosComDistancia(double latitudeAtual, double longitudeAtual);
         List<Evento> ListarEventosProximos(double latitudeMin, double latitudeMax, double longitudeMin, double longitudeMax);
+        string InserirFotoEvento(Evento evento, byte[] bytes, string filename, string dirbase);
+
     }
 }
