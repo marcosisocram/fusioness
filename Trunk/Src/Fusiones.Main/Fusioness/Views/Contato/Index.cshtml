@@ -32,8 +32,10 @@
         var key = $('#txtBusca').val();        
 
         $('.card .people').each(function () {
+            if (!key) {
+                $(this).css('display', 'none');
                 
-            if (key !== null || key.trim() !== '') {
+            }else if (key !== null || key.trim() !== '') {
                 var lbl = $(this).find('#lblNomeDoUsuario').first();
                 if (!($(lbl).text().toLowerCase().indexOf(key.toLowerCase()) >= 0)) {
                     $(this).css('display', 'none');                    
@@ -81,7 +83,7 @@
             @foreach (var usuario in Model.ListaDeUsuarios)
             {
 
-                <div class="card people" >
+                <div class="card people" style="display: none;" >
                    <div class="card-top blue">
                       <a href="javascript:void(0);">
                          <img src="@String.Format("{0}{1}", Fusioness.Controllers.BaseController.ObterUrlBaseAvatar(), usuario.UrlImagem)" alt="[usuario não possui foto]"/>
