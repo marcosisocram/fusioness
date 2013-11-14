@@ -38,7 +38,8 @@ namespace Fusioness.Controllers
                     {
                         model.Bicicleta = bicicletaAlterada;
                         ExibirModal("Sua bicicleta foi alterada!");
-                        return RedirectToAction("Index");
+                        return View("InserirImagemBicicleta", model);
+                        //return RedirectToAction("Index");
                     }
                     else
                     {
@@ -49,12 +50,13 @@ namespace Fusioness.Controllers
                 else
                 {
                     model.Bicicleta.UrlImagem = "bike.jpg";
-                    var bicicletaCadastrada = Servico.InserirBicicleta(model.Bicicleta);
+                    model.Bicicleta = Servico.InserirBicicleta(model.Bicicleta);
 
-                    if (bicicletaCadastrada.StatusRetorno == 0)
+                    if (model.Bicicleta.StatusRetorno == 0)
                     {
-                        ExibirModal("Sua bicicleta foi cadastrada com sucesso!");
-                        return RedirectToAction("Index");
+                        ExibirModal("Sua bicicleta foi cadastrada com sucesso!");                        
+                        return View("InserirImagemBicicleta", model);
+                        //return RedirectToAction("Index");
                     }
                     else
                     {
@@ -70,6 +72,7 @@ namespace Fusioness.Controllers
             }
         }
 
+        
         [HttpGet]
         public ActionResult InserirAlterarBicicleta()
         {
@@ -96,29 +99,29 @@ namespace Fusioness.Controllers
             if (bicicletaRemover.StatusRetorno == 0)
             {
                 ExibirModal("Sua bicicleta foi excluída... Cadastre logo outra!");
-                return RedirectToAction("index", model);    
+                return RedirectToAction("index", model);
             }
             else
             {
                 ExibirModal("Ocorreu algum erro na exclusão de sua bicicleta, tente novamente.");
-                return RedirectToAction("index", model);       
+                return RedirectToAction("index", model);
             }
         }
 
-        public ActionResult EnviarImagem(HttpPostedFileBase image, int idbicicleta)
+        public ActionResult EnviarImagem(BicicletaModel model)
         {
             string retorno = string.Empty;
             try
             {
-                var validaImagem = new ValidarImagem(image);
+                var validaImagem = new ValidarImagem(model.ImagemBicicleta);
                 if (validaImagem.IsImagemValida)
                 {
                     var ms = new MemoryStream();
-                    image.InputStream.CopyTo(ms);
+                    model.ImagemBicicleta.InputStream.CopyTo(ms);
                     byte[] bytes = ms.ToArray();
-                    var bicicleta = Servico.ObterBicicletaPorId(new Bicicleta() { IdBicicleta = idbicicleta });
-                    bicicleta = Servico.InserirFotoBicicleta(bicicleta, image.FileName, bytes);
-                    ExibirModal("Imagem enviada com sucesso.");
+                    var bicicleta = Servico.ObterBicicletaPorId(new Bicicleta() { IdBicicleta = model.Bicicleta.IdBicicleta });
+                    bicicleta = Servico.InserirFotoBicicleta(bicicleta, model.ImagemBicicleta.FileName, bytes);
+                    ExibirModal("A Imagem da sua bicicleta foi cadastrada com sucesso!");
                 }
                 else
                 {
