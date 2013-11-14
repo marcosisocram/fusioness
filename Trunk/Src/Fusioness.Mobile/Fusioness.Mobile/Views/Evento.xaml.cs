@@ -146,7 +146,7 @@ namespace Fusioness.Mobile.Views
 
         private void menuVisualizarRota_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Views/VisualizarRota.xaml?RotaId=" + RotaId.ToString(), UriKind.Relative));
         }
 
         private void menuTempoEvento_Click(object sender, EventArgs e)

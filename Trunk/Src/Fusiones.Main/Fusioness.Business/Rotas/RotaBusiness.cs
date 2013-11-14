@@ -113,7 +113,7 @@ namespace Fusioness.Business.Rotas
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<Rota> repo = new RotaRepository(uow);
-                var rotas = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario && c.IdRotaOrigem != null);
+                var rotas = repo.GetWhere(c => c.IdUsuario == usuario.IdUsuario && c.IdRotaOrigem != null).OrderByDescending(o => o.IdRota);
                 return rotas.ToList();
             }
         }

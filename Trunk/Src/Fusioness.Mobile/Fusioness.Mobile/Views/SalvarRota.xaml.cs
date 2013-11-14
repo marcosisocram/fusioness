@@ -200,7 +200,10 @@ namespace Fusioness.Mobile.Views
                        if (acao == Global.Acao.Criar)
                            rota.IdTipoRota = 1;
                        else
+                       {
                            rota.IdTipoRota = 2;
+                           rota.IdRotaOrigem = RotaId;
+                       }
 
                        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                        servico.InserirRotaAsync(rota);

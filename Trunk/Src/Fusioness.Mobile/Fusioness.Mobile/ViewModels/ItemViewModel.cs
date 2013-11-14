@@ -393,6 +393,26 @@ namespace Fusioness.Mobile.ViewModels
             }
         }
 
+        private double _contatoTotalMinuto;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public double ContatoTotalMinuto
+        {
+            get
+            {
+                return _contatoTotalMinuto;
+            }
+            set
+            {
+                if (value != _contatoTotalMinuto)
+                {
+                    _contatoTotalMinuto = value;
+                    NotifyPropertyChanged("ContatoTotalMinuto");
+                }
+            }
+        }
         #endregion
 
         #region ComentarioEvento

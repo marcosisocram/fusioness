@@ -46,12 +46,12 @@
             </phone:Panorama.Background>
 
             <!--Panorama item three-->
-            <phone:PanoramaItem x:Name="pnItemRota" Header="Rotas" Height="497" VerticalAlignment="Top">
+            <phone:PanoramaItem x:Name="pnItemRota" Header="Rotas" Height="503" VerticalAlignment="Top">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector x:Name="llsRota" VerticalAlignment="Top" Height="412" Margin="14,-38,0,-1" ItemsSource="{Binding Rotas}" SelectionChanged="llsRota_SelectionChanged">
+                <phone:LongListSelector x:Name="llsRota" VerticalAlignment="Top" Height="400" Margin="14,-20,0,-1" ItemsSource="{Binding Rotas}" SelectionChanged="llsRota_SelectionChanged">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,-6,13,12" Height="auto" >
+                            <StackPanel Margin="0,-5,13,12" Height="auto" >
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu Background="#FF272727" Foreground="{x:Null}">
                                         <toolkit:MenuItem Header="Excluir" Click="Excluir_Click" Background="{x:Null}" Foreground="White"/>
@@ -65,9 +65,9 @@
             </phone:PanoramaItem>
 
             <!--Panorama item one-->
-            <phone:PanoramaItem x:Name="pnItemEvento" Header="Eventos" Height="497" VerticalAlignment="Top">
+            <phone:PanoramaItem x:Name="pnItemEvento" Header="Eventos" Height="503" VerticalAlignment="Top">
                 <!--Double line list with image placeholder and text wrapping using a floating header that scrolls with the content-->
-                <phone:LongListSelector x:Name="llsEvento" VerticalAlignment="Top" Height="412" Margin="3,-38,0,-1" ItemsSource="{Binding Eventos}" SelectionChanged="llsEvento_SelectionChanged">
+                <phone:LongListSelector x:Name="llsEvento" VerticalAlignment="Top" Height="404" Margin="3,-25,0,0" ItemsSource="{Binding Eventos}" SelectionChanged="llsEvento_SelectionChanged">
                     <!--<phone:LongListSelector.ListHeaderTemplate>
                         <DataTemplate>
                             <Grid Margin="12,0,0,38">
@@ -88,7 +88,7 @@
                                         <toolkit:MenuItem Header="Convidar" Click="Convidar_Click" Background="{x:Null}" Foreground="White"/>
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
-                                <Border Margin="0,6" BorderThickness="1" Width="90" BorderBrush="#3C8BFF" Height="90" VerticalAlignment="Top">
+                                <Border Margin="0,0" BorderThickness="1" Width="90" BorderBrush="#3C8BFF" Height="90" VerticalAlignment="Top">
                                     <Image Stretch="UniformToFill">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding EventoImagem}" 
@@ -107,12 +107,12 @@
             </phone:PanoramaItem>
 
             <!--Panorama item three-->
-            <phone:PanoramaItem x:Name="pnItemRecentes" Header="Realizadas" Height="497" VerticalAlignment="Top">
+            <phone:PanoramaItem x:Name="pnItemRecentes" Header="Realizadas" Height="503" VerticalAlignment="Top">
                 <!--Single line list with text wrapping-->
-                <phone:LongListSelector x:Name="llsRotasRealizadas" VerticalAlignment="Top" Height="412" Margin="14,-38,0,-1" ItemsSource="{Binding RotasRealizadas}" SelectionChanged="llsRotasRealizadas_SelectionChanged">
+                <phone:LongListSelector x:Name="llsRotasRealizadas" VerticalAlignment="Top" Height="400" Margin="14,-20,0,-1" ItemsSource="{Binding RotasRealizadas}" SelectionChanged="llsRotasRealizadas_SelectionChanged">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,-6,13,12" Height="auto">
+                            <StackPanel Margin="0,-5,13,12" Height="auto">
                                 <TextBlock Text="{Binding RotaNome}" TextWrapping="Wrap" FontSize="30"/>
                             </StackPanel>
                         </DataTemplate>
@@ -121,11 +121,11 @@
             </phone:PanoramaItem>
 
             <!--Panorama item two-->
-            <phone:PanoramaItem x:Name="pnItemContatos" Header="Contatos" Height="497" VerticalAlignment="Top">
-                <phone:LongListSelector x:Name="llsContatos" VerticalAlignment="Top" Height="412" Margin="3,-38,0,-1" ItemsSource="{Binding Contatos}">
+            <phone:PanoramaItem x:Name="pnItemContatos" Header="Contatos" Height="505" VerticalAlignment="Top">
+                <phone:LongListSelector x:Name="llsContatos" VerticalAlignment="Top" Height="406" Margin="3,-25,0,0" ItemsSource="{Binding Contatos}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="8,2,-37,4" Height="75" Width="432">
+                            <StackPanel Orientation="Horizontal" Margin="8,5,0,4" Height="75" Width="432">
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu Background="#FF272727" Foreground="{x:Null}">
                                         <toolkit:MenuItem Header="Remover" Click="Excluir_Contato_Click" Background="{x:Null}" Foreground="White"/>
