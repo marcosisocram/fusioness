@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Fusioness.FusionessWS;
 using System.Web.Mvc;
+using System.Web;
 
 namespace Fusioness.Models.Bicicletas
 {
@@ -11,6 +12,7 @@ namespace Fusioness.Models.Bicicletas
         public string Mensagem { get; set; }
         public Bicicleta Bicicleta { get; set; }
         public List<Bicicleta> ListaBicicletasPorUsuario { get; set; }
+        public HttpPostedFileBase ImagemBicicleta { get; set; }
 
         public bool ValidarBicicleta(ModelStateDictionary ModelState)
         {
