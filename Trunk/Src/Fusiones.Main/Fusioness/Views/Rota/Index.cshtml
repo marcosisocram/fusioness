@@ -10,6 +10,12 @@
     <div class="card">
       <h2 class="card-heading simple">Lista de Rotas</h2>
       <div class="card-body">
+
+          @if (Model.ListaRotas != null && Model.ListaRotas.Count == 0)
+          {
+               <h2 class="card-heading simple">Nenhuma rota encontrada aqui...</h2>
+          }
+
         <table class="table table-hover">
             <thead>
                 <th>Código da Rota</th>

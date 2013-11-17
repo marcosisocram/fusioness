@@ -69,6 +69,19 @@ namespace Fusioness.Controllers
             {
                 return string.Empty;
             }
+        }
+
+        public static string ObterUrlImagemCompleta(string urlImagem)
+        {
+            try
+            {
+                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir"];
+                return String.Format("{0}{1}", ObterUrlBaseAvatar(), urlImagem);
+            }
+            catch
+            {
+                return string.Empty;
+            }
 
         }
 

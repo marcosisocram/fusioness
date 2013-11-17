@@ -1,4 +1,6 @@
-﻿@model Fusioness.Models.Eventos.EventoModel
+﻿@using Fusioness.Controllers
+@using Fusioness.FusionessWS
+@model Fusioness.Models.Eventos.EventoModel
 @{
     ViewBag.Title = "Eventos";
     Layout = "~/Views/Shared/LayoutBase.cshtml";
@@ -44,7 +46,7 @@
             <div class="card-body" style="overflow: hidden">
                 @foreach (var item in Model.ListaEventos)
                 {
-                    string enderecoImage = string.IsNullOrEmpty(item.UrlImagem) ? urlTemp : item.UrlImagem;
+                    string enderecoImage = string.IsNullOrEmpty(item.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(item.UrlImagem);
                     
                     <ul class="thumbnails" style="float: left; width: 350px; height: 450px;">
                         <li style="width: 100%; height: 100%;">

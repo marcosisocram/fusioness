@@ -314,6 +314,11 @@ namespace Fusioness.Business
         {
             return EventoBus.ListarEventosProximos(latitudeMin, latitudeMax, longitudeMin, longitudeMax);
         }
+
+        public string InserirFotoEvento(Evento evento, byte[] bytes, string filename, string dirbase)
+        {
+            return EventoBus.InserirFotoEvento(evento, bytes, filename, dirbase);
+        }
         
         #endregion
 

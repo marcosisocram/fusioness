@@ -631,6 +631,23 @@ namespace Fusioness.Services
             }
         }
 
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string InserirFotoEvento(Evento evento, string filename, byte[] bytes)
+        {
+            try
+            {
+                string dirBase = Server.MapPath("~");
+                return Facade.Instance.InserirFotoEvento(evento, bytes, filename, dirBase);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
+
         #endregion
 
         #region Coordenadas

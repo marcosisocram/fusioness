@@ -8,5 +8,6 @@ namespace Fusioness.Models.Contatos
         public string Mensagem { get; set; }
         public Usuario UsuarioSelecionado { get; set; }
         public IList<Usuario> ListaDeUsuarios { get; set; }
+        public IList<Usuario> ListaDeAmigos{ get; set; }
     }
 }

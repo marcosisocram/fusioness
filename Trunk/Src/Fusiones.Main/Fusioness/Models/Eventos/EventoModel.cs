@@ -132,6 +132,7 @@ namespace Fusioness.Models.Eventos
                 ListaEventosUsuarioQueParticipo = servico.ListarEventoUsuario(usuarioLogado);
                 ListaComentariosQueSouDono = servico.ListarComentariosPorUsuario(usuarioLogado);
                 Comentario.IdEvento = eventoSelecionado.IdEvento;
+                this.EventoUsuario = servico.ObterEventoUsuario(this.Evento, usuarioLogado) ?? new EventoUsuario();
             }
 
             var idsContatos = servico.ListarContatosDoUsuario(usuarioLogado).ToList().Select(c => c.IdContato).ToList();

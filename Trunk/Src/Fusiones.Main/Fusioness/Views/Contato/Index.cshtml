@@ -52,33 +52,29 @@
         
     }
 </script>
-@*<div class="row">
-    @foreach (var usuario in Model.ListaDeUsuarios)
-    {
-        <div class="col-md-1">
-            <div class="span12" style="width: 150px; height: 250px; overflow: hidden; cursor: pointer" onclick="VerPerfilUsuario(@usuario.IdUsuario);">
-                <label style="font-weight: bold;">@usuario.Nome</label>
-                <img src="@String.Format("{0}{1}", Fusioness.Controllers.BaseController.ObterUrlBaseAvatar(), usuario.UrlImagem)" alt="[usuario não possui foto]" title="Ver perfil de @usuario.Nome"/>
-            </div>
-        </div>
-    }
-</div>*@
 
 <div class="row-fluid">
   <!-- BLOCK -->
   <div class="span12">
     <div class="card">
-      <h2 class="card-heading simple">Lista de Usuários</h2>
-        
+      <h2 class="card-heading simple">@ViewBag.Titulo</h2>
                
       <!-- <div class="searchbox" style="padding:5px;">
           <input id="txtBusca" type="text" name="busca" placeholder="filtre por nome" onchange="FiltrarPorNome();">
           <img src="/Content/images/search_lens.png" style="width:16px;" onclick="FiltrarPorNome();"/>
       </div> -->
+
       <div class="card-body" style="overflow:hidden">
-            <div class="search">
-                <input id="txtBusca" type="text" class="input-xlarge" name="busca" placeholder="Filtre Por Nome" onkeyup="FiltrarPorNome();">          
-            </div>
+            
+          @if (Model.ListaDeAmigos != null && Model.ListaDeAmigos.Count == 0)
+          {
+              <h2 class="card-heading simple">Nada encontrado aqui... Tem certeza que tem amigos cadastrados em sua rede? Adicione-os!!</h2>
+          }else
+          {
+              <div class="search">
+                  <input id="txtBusca" type="text" class="input-xlarge" name="busca" placeholder="Filtre Por Nome" onkeyup="FiltrarPorNome();">
+              </div>
+          }
 
             @foreach (var usuario in Model.ListaDeUsuarios)
             {

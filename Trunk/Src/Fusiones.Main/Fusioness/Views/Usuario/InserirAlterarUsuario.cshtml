@@ -8,6 +8,27 @@
         $("#modalEditarImagem").modal('show');
     }
 </script>
+
+
+<div id="modalEditarImagem" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    @using (Html.BeginForm("EnviarImagem", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Selecione a imagem</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                @
+                <input type="file" id="image" name="image" />
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Save changes</button>
+        </div>
+    }
+</div>
+
 <!-- LINHA 1 -->
 <div class="row-fluid">
     <!-- BLOCK -->
@@ -25,7 +46,10 @@
             </h2>
             <div class="card-body">
 
-                
+                <div class="span12" style="width:150px; height:150px; overflow:hidden; float:right">
+                    <!-- @Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext) -->
+                    <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" alt="[foto perfil]" title="Clique para editar" style="cursor:pointer;" onclick="ExibirModalMudarImagem();" />
+                </div>
                 
                 @using (Html.BeginForm("InserirAlterarUsuario", "Usuario", FormMethod.Post))
                 {

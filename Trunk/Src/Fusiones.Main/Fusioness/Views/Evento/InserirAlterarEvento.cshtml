@@ -47,7 +47,7 @@
                     <ul class="thumbnails">
                         <li class="span9">
                             <div class="thumbnail">
-                                <img data-src="holder.js/300x200" src="@(string.IsNullOrEmpty(Model.Evento.UrlImagem) ? urlTemp : Model.Evento.UrlImagem)" alt="Imagem do Evento">
+                                <img data-src="holder.js/300x200" src="@(string.IsNullOrEmpty(Model.Evento.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(Model.Evento.UrlImagem))" alt="Imagem do Evento">
                                 
                                 @if (!Model.IsCadastroEvento)
                                 {
@@ -88,14 +88,15 @@
                 <div>
                     @if (Model.SouDonoDoEvento(Model.Evento.IdEvento) || Model.IsCadastroEvento)
                     {
-                        using (Html.BeginForm("InserirAlterarEvento", "Evento", FormMethod.Post))
+                        using (Html.BeginForm("InserirAlterarEvento", "Evento", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             object displayMode = (Model.SouDonoDoEvento(Model.Evento.IdEvento)) || Model.IsCadastroEvento ? (object)new { style = "width:95%" } : (object)new { disabled = "disabled", style = "width:95%" };
                         <ul class="thumbnails">
                             <li class="span5">
                                 <div class="thumbnail">
+                                    
                                     @Html.LabelFor(m => m.Evento.UrlImagem, "Imagem do Evento")
-                                    @Html.TextBoxFor(m => m.Evento.UrlImagem, displayMode)
+                                    <input type="file" id="image" name="image" />
                                     <br />
                                     @Html.LabelFor(m => m.Evento.Titulo)
                                     @Html.TextBoxFor(m => m.Evento.Titulo, displayMode)

@@ -22,6 +22,11 @@
       <h2 class="card-heading simple">Minhas bicicletas</h2>
       <div class="card-body">
 
+          @if (Model.ListaBicicletasPorUsuario.Count == 0)
+          {
+               <h2 class="card-heading simple">Ops, ainda não tem bicicleta cadastrada? Cadastre logo a sua...</h2>
+          }
+
           @foreach (var bicicleta in Model.ListaBicicletasPorUsuario)
           {
               
