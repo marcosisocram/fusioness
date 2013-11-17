@@ -59,10 +59,28 @@ namespace Fusioness.Mobile.Views
 
                 servico.ListarUsuariosEventoAsync(new FusionessWS.Evento() { IdEvento = EventoId });
                 servico.ListarUsuariosEventoCompleted += servico_ListarUsuariosEventoCompleted;
+                servico.ObterEventoPorIdAsync(new FusionessWS.Evento() { IdEvento = EventoId });
+                servico.ObterEventoPorIdCompleted += servico_ObterEventoPorIdCompleted;
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+            }
+        }
+
+        void servico_ObterEventoPorIdCompleted(object sender, FusionessWS.ObterEventoPorIdCompletedEventArgs e)
+        {
+            try
+            {
+                FusionessWS.Evento evento = e.Result;
+                if (evento != null)
+                {
+                    this.lblDistancia.Text = "Distância: " + evento.Distancia.ToString("#0.00 Km").Replace(".", ",");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -114,15 +132,24 @@ namespace Fusioness.Mobile.Views
                     var MelhorTempo = usuariosAtivos.OrderBy(o => o.ContatoTotalMinuto).Take(3).ToList();
                     llsMelhorTempo.ItemsSource = MelhorTempo;
 
-                    double tempoMedio = (usuariosAtivos.Sum(s => s.ContatoTotalMinuto)) / usuariosAtivos.Count;
-                    this.lblTempoMedio.Text = "Tempo Médio: " 
-                        + TimeSpan.FromMinutes(tempoMedio).Hours.ToString() + ":" 
-                        + TimeSpan.FromMinutes(tempoMedio).Minutes.ToString() + "h";
+                    if (usuariosAtivos.Count > 0)
+                    {
+                        double tempoMedio = (usuariosAtivos.Sum(s => s.ContatoTotalMinuto)) / usuariosAtivos.Count;
+                        this.lblTempoMedio.Text = "Tempo Médio: "
+                            + TimeSpan.FromMinutes(tempoMedio).Hours.ToString() + ":"
+                            + TimeSpan.FromMinutes(tempoMedio).Minutes.ToString() + "h";
+                    }
+                    else
+                    {
+                        this.lblTempoMedio.Text = "Tempo Médio: 0h";
+                    }
+
+                    this.lblQtdPaticipantes.Text = "Participantes: " + listEventoUsuario.Count.ToString();                    
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 

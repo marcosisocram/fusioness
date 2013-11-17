@@ -27,7 +27,7 @@
 
         <phone:Panorama HorizontalAlignment="Left" Height="643" Margin="10,52,0,0" VerticalAlignment="Top" Width="460">
             <!--Tempo Atual Do Evento-->
-            <phone:PanoramaItem Margin="0,0" Height="645" VerticalAlignment="Top" HorizontalAlignment="Left" Width="460">
+            <phone:PanoramaItem Margin="0,0" Height="645" VerticalAlignment="Top" HorizontalAlignment="Left" Width="428">
                 <Grid x:Name="PanelTempoAtual" Margin="0,-30,10,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -37,10 +37,10 @@
 
                     <TextBlock Grid.Row="0" HorizontalAlignment="Left" Height="39" Margin="10,10,0,0" TextWrapping="Wrap" Text="Tempo Atual do Evento" VerticalAlignment="Top" Width="408" TextAlignment="Center" FontSize="30"/>
 
-                    <phone:LongListSelector Grid.Row="1" x:Name="llsContatos" VerticalAlignment="Top" Height="570" Margin="0,20,0,0" ItemsSource="{Binding Contatos}" Grid.RowSpan="2">
+                    <phone:LongListSelector Grid.Row="1" x:Name="llsContatos" VerticalAlignment="Top" Height="570" Margin="0,20,-12,0" ItemsSource="{Binding Contatos}" Grid.RowSpan="2">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Margin="6,15,0,0">
+                                <StackPanel Orientation="Horizontal" Margin="6,15,-10,0">
                                     <!--Replace rectangle with image-->
                                     <Border BorderThickness="1" Width="70" BorderBrush="#3C8BFF" Height="70">
                                         <Image Stretch="UniformToFill">
@@ -50,7 +50,7 @@
                                             </Image.Source>
                                         </Image>
                                     </Border>
-                                    <StackPanel Width="380">
+                                    <StackPanel Width="342">
                                         <TextBlock Text="{Binding ContatoNome}" TextWrapping="Wrap" FontSize="28" Margin="8,0,0,0" Foreground="#3C8BFF" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                                         <TextBlock Text="{Binding ContatoTempo}" TextWrapping="Wrap" FontSize="20" Margin="8,0,0,0" Foreground="#FFB9B9B9" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                                     </StackPanel>
@@ -62,9 +62,10 @@
             </phone:PanoramaItem>
 
             <!--Melhor Tempo-->
-            <phone:PanoramaItem Margin="0,0" Height="645" VerticalAlignment="Top" HorizontalAlignment="Left" Width="460">
+            <phone:PanoramaItem Margin="0,0" Height="645" VerticalAlignment="Top" HorizontalAlignment="Left" Width="428">
                 <Grid x:Name="PanelMelhorTempo" Margin="0,-30,10,0">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -72,12 +73,14 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" HorizontalAlignment="Left" Height="39" Margin="10,10,0,0" TextWrapping="Wrap" Text="Melhor Tempo" VerticalAlignment="Top" Width="408" TextAlignment="Center" FontSize="30"/>
-                    <TextBlock x:Name="lblTempoMedio" Grid.Row="1" HorizontalAlignment="Left" Height="39" Margin="10,10,0,0" TextWrapping="Wrap" Text="Tempo Médio" VerticalAlignment="Top" Width="408" TextAlignment="Left" FontSize="22" Foreground="#FFB9B9B9"/>
+                    <TextBlock x:Name="lblTempoMedio" Grid.Row="1" HorizontalAlignment="Left" Height="39" Margin="10,20,0,0" TextWrapping="Wrap" Text="Tempo Médio" VerticalAlignment="Top" Width="408" TextAlignment="Left" FontSize="22" Foreground="#FFB9B9B9"/>
+                    <TextBlock x:Name="lblQtdPaticipantes" Grid.Row="2" HorizontalAlignment="Left" Height="39" Margin="10,0,0,0" TextWrapping="Wrap" Text="Participantes" VerticalAlignment="Top" Width="408" TextAlignment="Left" FontSize="22" Foreground="#FFB9B9B9"/>
+                    <TextBlock x:Name="lblDistancia" Grid.Row="3" HorizontalAlignment="Left" Height="39" Margin="10,0,0,0" TextWrapping="Wrap" Text="Distancia" VerticalAlignment="Top" Width="408" TextAlignment="Left" FontSize="22" Foreground="#FFB9B9B9"/>
 
-                    <phone:LongListSelector Grid.Row="2" x:Name="llsMelhorTempo" VerticalAlignment="Top" Height="521" Margin="0,20,0,0" ItemsSource="{Binding Contatos}" Grid.RowSpan="2">
+                    <phone:LongListSelector Grid.Row="4" x:Name="llsMelhorTempo" VerticalAlignment="Top" Height="423" Margin="0,20,-12,0" ItemsSource="{Binding Contatos}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Margin="6,15,0,0">
+                                <StackPanel Orientation="Horizontal" Margin="6,15,-10,0">
                                     <!--Replace rectangle with image-->
                                     <Border BorderThickness="1" Width="70" BorderBrush="#3C8BFF" Height="70">
                                         <Image Stretch="UniformToFill">
@@ -87,7 +90,7 @@
                                             </Image.Source>
                                         </Image>
                                     </Border>
-                                    <StackPanel Width="380">
+                                    <StackPanel Width="340">
                                         <TextBlock Text="{Binding ContatoNome}" TextWrapping="Wrap" FontSize="28" Margin="8,0,0,0" Foreground="#3C8BFF" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                                         <TextBlock Text="{Binding ContatoTempo}" TextWrapping="Wrap" FontSize="20" Margin="8,0,0,0" Foreground="#FFB9B9B9" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                                     </StackPanel>

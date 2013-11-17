@@ -18,6 +18,7 @@ using Microsoft.Phone.Maps.Services;
 using System.Text;
 using Fusioness.Mobile.Util;
 using System.Collections.ObjectModel;
+using Microsoft.Phone.Maps.Toolkit;
 
 namespace Fusioness.Mobile.Views
 {
@@ -138,7 +139,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -171,7 +172,6 @@ namespace Fusioness.Mobile.Views
 
             mapOverlay.Content = image;
             mapLayer.Add(mapOverlay);
-
             return mapLayer;
         } 
         
@@ -243,7 +243,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -263,7 +263,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -319,7 +319,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -334,7 +334,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -397,7 +397,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -451,7 +451,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         } 
 
@@ -474,7 +474,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -522,7 +522,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -545,11 +545,23 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
         
         #endregion
+
+        private void Mapa_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            /*
+            GeoCoordinate asd = this.Mapa.ConvertViewportPointToGeoCoordinate(e.GetPosition(this.Mapa));
+
+            Pushpin pushpin = (Pushpin)this.FindName("MyPushpin");
+            pushpin.Content = "MyPositin\nÉ Assim mesmo!";
+            pushpin.Visibility = System.Windows.Visibility.Visible;
+            pushpin.GeoCoordinate = new GeoCoordinate(asd.Latitude, asd.Longitude);
+            */
+        }
   
     }
 

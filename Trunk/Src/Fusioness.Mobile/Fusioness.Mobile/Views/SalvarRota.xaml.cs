@@ -60,7 +60,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -88,7 +88,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -101,7 +101,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
 
         }       
@@ -124,7 +124,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }        
 
@@ -146,7 +146,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -167,7 +167,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -213,7 +213,7 @@ namespace Fusioness.Mobile.Views
            }
            catch (Exception)
            {
-               MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+               MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
            }
        }
 
@@ -242,7 +242,7 @@ namespace Fusioness.Mobile.Views
            }
            catch (Exception)
            {
-               MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+               MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
            }
        }
 
@@ -264,7 +264,7 @@ namespace Fusioness.Mobile.Views
            }
            catch (Exception)
            {
-               MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+               MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
            }
        }
 

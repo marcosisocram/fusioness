@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using Fusioness.Mobile.ViewModels;
 using Fusioness.Mobile.Util;
 using System.IO;
+using System.Windows.Media;
 
 namespace Fusioness.Mobile.Views
 {
@@ -57,7 +58,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 
@@ -88,7 +89,31 @@ namespace Fusioness.Mobile.Views
                     }
                     RotaId = evento.IdRota;
                     this.lbTituloEvento.Text = evento.Titulo;
-                    //EventoData = evento.Data.ToString("dd/MM/yyyy");
+                    this.lblData.Text = "Data: " + evento.Data.ToString("dd/MM/yyyy");
+                    this.lblDistancia.Text = "Distância: " + evento.Distancia.ToString("#0.00 Km").Replace(".", ",");
+
+                    if (evento.Data < DateTime.Now)
+                    {
+                        this.lblStatus.Text = "Finalizado";
+                        this.lblStatus.Foreground = new SolidColorBrush(new Color()
+                        {
+                            A = 255 /*Opacity*/,
+                            R = 191 /*Red*/,
+                            G = 45 /*Green*/,
+                            B = 44 /*Blue*/
+                        }); 
+                    }
+                    else
+                    {
+                        this.lblStatus.Text = "Não Iniciado";
+                        this.lblStatus.Foreground = new SolidColorBrush(new Color()
+                        {
+                            A = 255 /*Opacity*/,
+                            R = 0 /*Red*/,
+                            G = 255 /*Green*/,
+                            B = 0 /*Blue*/
+                        }); 
+                    }
 
                     FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                     servico.ListarComentariosPorEventoAsync(evento);
@@ -97,7 +122,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
                 NavigationService.GoBack();
             }
         }
@@ -125,7 +150,7 @@ namespace Fusioness.Mobile.Views
             }
             catch (Exception)
             {
-                MessageBox.Show("Não foi possível enviar sua resposta, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
+                MessageBox.Show("Não foi possível executar esta ação, Verifique sua conexão com a internet", "Alerta!", MessageBoxButton.OK);
             }
         }
 

@@ -101,7 +101,19 @@ namespace Fusioness.Business.Eventos
         {
             using (IUnityOfWork ouw = new EFUnityOfWork(_ConnectionString))
             {
-                return new EventoRepository(ouw).GetByKey(new Evento { IdEvento = evento.IdEvento });
+                evento = new EventoRepository(ouw).GetByKey(new Evento { IdEvento = evento.IdEvento });
+
+                if (evento != null)
+                {
+                    RotaBusiness rotaBusiness = new RotaBusiness();
+                    CoordenadaBusiness coordenadaBusiness = new CoordenadaBusiness();
+
+                    Rota rota = rotaBusiness.ObterRotaPorId(new Rota() { IdRota = evento.IdRota });
+                    Coordenada pontoDePartida = coordenadaBusiness.ListarCoordenadasPorRota(rota).First();
+                    Coordenada pontoFinal = coordenadaBusiness.ListarCoordenadasPorRota(rota).Last();
+                    evento.Distancia = CalculateCoordinateDistance(pontoDePartida.Latitude, pontoDePartida.Longitude, pontoFinal.Latitude, pontoFinal.Longitude);
+                }
+                return evento;
             }
         }
 
