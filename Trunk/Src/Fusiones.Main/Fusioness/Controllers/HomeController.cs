@@ -21,9 +21,9 @@ namespace Fusioness.Controllers
 
             model.User = usuario;
             
-            if (ConvitesEvento.Any())
+            if (ConvitesEvento.Any(c => !c.IdResposta.HasValue))
             {
-                model.EventosNaoConfirmados = Servico.ListarEventos(ConvitesEvento.Select(c => c.IdEvento).ToArray()).ToList();
+                model.EventosNaoConfirmados = Servico.ListarEventos(ConvitesEvento.Where(c => !c.IdResposta.HasValue).Select(c => c.IdEvento).ToArray()).ToList();
             }
             else
             {

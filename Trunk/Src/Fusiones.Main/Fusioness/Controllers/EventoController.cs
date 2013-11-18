@@ -171,15 +171,22 @@ namespace Fusioness.Controllers
         #region Convites
         public ActionResult VerConvitesEvento(EventoModel model)
         {
-            model.RespostasPossiveis = Servico.ListarRespostas();
-            model.ListaConviteEventos = Servico.ObterConvitesEventosDoUsuario(UsuarioLogado);
+            try
+            {
+                model.RespostasPossiveis = Servico.ListarRespostas();
+                model.ListaConviteEventos = Servico.ObterConvitesEventosDoUsuario(UsuarioLogado);
 
-            foreach (var convite in model.ListaConviteEventos)
-                convite.Resposta = convite.IdResposta.HasValue ? model.RespostasPossiveis.First(r => r.IdResposta == convite.IdResposta) : new Resposta{Descricao = "Sem resposta"};
+                foreach (var convite in model.ListaConviteEventos)
+                    convite.Resposta = convite.IdResposta.HasValue ? model.RespostasPossiveis.First(r => r.IdResposta == convite.IdResposta) : new Resposta { Descricao = "Sem resposta" };
 
-            if (model.ListaConviteEventos.Any())
-                model.ListaEventos = Servico.ListarEventos(model.ListaConviteEventos.Select(c => c.IdEvento).ToArray());
-            return View("Convites", model);
+                if (model.ListaConviteEventos.Any())
+                    model.ListaEventos = Servico.ListarEventos(model.ListaConviteEventos.Select(c => c.IdEvento).ToArray());
+                return View("Convites", model);
+            }
+            catch (Exception)
+            {
+                return View("Convites", new EventoModel());
+            }
         }
 
 

@@ -42,11 +42,15 @@ namespace Fusioness.Business.ConvitesEventos
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<ConviteEvento> repo = new ConviteEventoRepository(uow);
-                IQueryable<ConviteEvento> convites = repo.GetWhere(c => c.IdContato == convidado.IdUsuario && c.IdResposta == null);
+                IQueryable<ConviteEvento> convites = repo.GetWhere(c => c.IdContato == convidado.IdUsuario);
+                if (convites.Any())
+                {
+                    preencherUsuarioConvite(convites);
+                    preencherEventoConvite(convites);
+                    return convites.ToList().Where(c => c.Evento.Data.Date.CompareTo(DateTime.Now.Date) >= 0).ToList();
+                }
 
-                preencherUsuarioConvite(convites);
-                preencherEventoConvite(convites);
-                return convites.ToList();
+                return new List<ConviteEvento>();
             }
         }
 
