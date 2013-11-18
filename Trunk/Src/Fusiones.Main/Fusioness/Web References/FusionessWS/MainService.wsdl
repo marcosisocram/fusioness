@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="HelloWorld">
@@ -916,6 +916,26 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="RemoverImagemPontoDeReferencia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="coordenada" type="tns:Coordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverImagemPontoDeReferenciaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoverPontoDeReferencia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="coordenada" type="tns:Coordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverPontoDeReferenciaResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="ListarConvitesEventos">
         <s:complexType />
       </s:element>
@@ -1568,6 +1588,18 @@
   <wsdl:message name="ConsultarDuracaoRotaSoapOut">
     <wsdl:part name="parameters" element="tns:ConsultarDuracaoRotaResponse" />
   </wsdl:message>
+  <wsdl:message name="RemoverImagemPontoDeReferenciaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverImagemPontoDeReferencia" />
+  </wsdl:message>
+  <wsdl:message name="RemoverImagemPontoDeReferenciaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverImagemPontoDeReferenciaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoverPontoDeReferenciaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverPontoDeReferencia" />
+  </wsdl:message>
+  <wsdl:message name="RemoverPontoDeReferenciaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverPontoDeReferenciaResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarConvitesEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarConvitesEventos" />
   </wsdl:message>
@@ -1902,6 +1934,14 @@
     <wsdl:operation name="ConsultarDuracaoRota">
       <wsdl:input message="tns:ConsultarDuracaoRotaSoapIn" />
       <wsdl:output message="tns:ConsultarDuracaoRotaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverImagemPontoDeReferencia">
+      <wsdl:input message="tns:RemoverImagemPontoDeReferenciaSoapIn" />
+      <wsdl:output message="tns:RemoverImagemPontoDeReferenciaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverPontoDeReferencia">
+      <wsdl:input message="tns:RemoverPontoDeReferenciaSoapIn" />
+      <wsdl:output message="tns:RemoverPontoDeReferenciaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesEventos">
       <wsdl:input message="tns:ListarConvitesEventosSoapIn" />
@@ -2413,6 +2453,24 @@
     </wsdl:operation>
     <wsdl:operation name="ConsultarDuracaoRota">
       <soap:operation soapAction="http://tempuri.org/ConsultarDuracaoRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverImagemPontoDeReferencia">
+      <soap:operation soapAction="http://tempuri.org/RemoverImagemPontoDeReferencia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverPontoDeReferencia">
+      <soap:operation soapAction="http://tempuri.org/RemoverPontoDeReferencia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3055,6 +3113,24 @@
     </wsdl:operation>
     <wsdl:operation name="ConsultarDuracaoRota">
       <soap12:operation soapAction="http://tempuri.org/ConsultarDuracaoRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverImagemPontoDeReferencia">
+      <soap12:operation soapAction="http://tempuri.org/RemoverImagemPontoDeReferencia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverPontoDeReferencia">
+      <soap12:operation soapAction="http://tempuri.org/RemoverPontoDeReferencia" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -94,6 +94,23 @@ namespace Fusioness.Business.Coordenadas
             }
         }
 
+        public void RemoverImagem(Coordenada coordenada)
+        {
+            Coordenada c = ObterCoordenadaPorId(coordenada);
+            c.UrlImagemPonto = "";
+            AlterarCoordenada(c);
+        }
+
+        public void RemoverPontoDeReferencia(Coordenada coordenada)
+        {
+            Coordenada c = ObterCoordenadaPorId(coordenada);
+            c.IdTipoCoordenada = 1;
+            c.DescricaoPonto = "";
+            c.NomePonto = "";
+            c.UrlImagemPonto = "";
+            AlterarCoordenada(c);
+        }
+
         public Coordenada AlterarCoordenada(Coordenada coordenada)
         {
             try

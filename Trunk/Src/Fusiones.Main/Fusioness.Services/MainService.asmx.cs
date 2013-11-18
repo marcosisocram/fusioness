@@ -723,6 +723,34 @@ namespace Fusioness.Services
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverImagemPontoDeReferencia(Coordenada coordenada)
+        {
+            try
+            {
+                Facade.Instance.RemoverImagemPontoDeReferencia(coordenada);
+            }
+            catch
+            {
+                //log
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void RemoverPontoDeReferencia(Coordenada coordenada)
+        {
+            try
+            {
+                Facade.Instance.RemoverPontoDeReferencia(coordenada);
+            }
+            catch
+            {
+                //log
+            }
+        }
+
         #endregion
 
         #region ConviteEvento

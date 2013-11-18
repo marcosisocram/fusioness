@@ -164,6 +164,16 @@
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\font-awesome-ie7.min.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\images\Background\bg01.jpg" />
+    <Content Include="Content\images\Background\bg02.jpg" />
+    <Content Include="Content\images\Background\bg03.jpg" />
+    <Content Include="Content\images\Background\bg04.jpg" />
+    <Content Include="Content\images\Background\bg05.jpg" />
+    <Content Include="Content\images\Background\bg06.jpg" />
+    <Content Include="Content\images\Background\bg07.jpg" />
+    <Content Include="Content\images\Background\bg08.jpg" />
+    <Content Include="Content\images\Background\bg09.jpg" />
+    <Content Include="Content\images\Background\bg_login.jpg" />
     <Content Include="Content\images\marker_blue.png" />
     <Content Include="Content\images\marker_green.png" />
     <Content Include="Content\images\marker_orange.png" />
