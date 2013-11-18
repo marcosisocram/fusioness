@@ -18,7 +18,7 @@
           mapOptions);
 
       var flightPlanCoordinates = [
-        @foreach(var item in Model.ListaCoordenadas)
+        @foreach (var item in Model.ListaCoordenadas)
         {
             <text>
                 new google.maps.LatLng(@item.Latitude, @item.Longitude),
@@ -80,21 +80,18 @@
 
         @{int count = 0;}
         @foreach (var item in Model.ListaPontosReferencia)
-       {
-           
+        {
             <text>
-                var @("contentString" + count)  = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h5>@item.NomePonto.ToUpper()</h5>'+
-                    '<div id="bodyContent">'+
-                    '<p><img width="250px" src="../../Content/images/@item.UrlImagemPonto" class="img-rounded"/></p>'+
-                    '<p>@item.DescricaoPonto</p>'+
-                    '</div>'+
-                    '</div>';
+        var @("contentString" + count)  = 
+            @Html.Raw(string.Format("\'<div id=\"content\"><div id=\"siteNotice\"></div><h5>{0} - <a href=\"/Rota/RemoverPontoDeReferencia/{1}\">Deletar</a></h5><div id=\"bodyContent\">{2}<p>{3}</p></div></div>\'",
+            item.NomePonto.ToUpper(),
+            item.IdCoordenada,
+            string.IsNullOrEmpty(item.UrlImagemPonto) ? "" : "<img width=\"250px\" src=\"../../Content/images/"+@item.UrlImagemPonto+"\" class=\"img-rounded\"/><p><a href=\"/Rota/RemoverImagem/"+item.IdCoordenada+"\">Remover Imagem</a></p>",
+                 item.DescricaoPonto));
+
                 var @("infoWindow" + count) = new google.maps.InfoWindow({
                     content: @("contentString" + count),
-                    maxWidth: 300
+                    maxWidth: 200
                 });
                 var @("position" + count) = new google.maps.LatLng(@item.Latitude, @item.Longitude);
                 var @("marker" + count) = new google.maps.Marker({
@@ -108,7 +105,7 @@
                 })
             </text>
             count++;
-       }
+        }
 
       map.fitBounds(bounds);
 
@@ -144,12 +141,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
                     
                                     <ul style="list-style:none;">
                                     <li>
-                                        @Html.LabelFor(m => m.Rota.Descricao,"Descrição:")
+                                        @Html.LabelFor(m => m.Rota.Descricao, "Descrição:")
                                         @Html.TextBoxFor(m => m.Rota.Descricao)
                                         @Html.ValidationMessage("Descrição", new { style = "margin-left:10px" })
                                     </li>
                                     <li>
-                                        @Html.LabelFor(m => m.TiposDeRotas,"Tipo da Rota:")
+                                        @Html.LabelFor(m => m.TiposDeRotas, "Tipo da Rota:")
                                         @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
                             
                                     </li>
@@ -168,7 +165,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                                 </ul>
                                 <br />
                                 @Html.HiddenFor(m => m.Rota.IdRota)
-
+                                <a href="/Rota/RemoverPontoDeReferencia/">Deletar Ponto</a>
                                 <input type="submit" value="Salvar" class="btn btn-primary" />
                             }
                             </div>

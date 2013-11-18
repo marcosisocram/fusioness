@@ -14,5 +14,7 @@ namespace Fusioness.Business.Coordenadas
         List<Coordenada> ListarCoordenadasPorRota(Rota rota);
         List<Coordenada> ListarPontosReferenciaPorRota(Rota rota);
         double ConsultarDuracaoRota(int idRota);
+        void RemoverImagem(Coordenada coordenada);
+        void RemoverPontoDeReferencia(Coordenada coordenada);
     }
 }

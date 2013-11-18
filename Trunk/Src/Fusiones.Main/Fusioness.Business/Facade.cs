@@ -344,6 +344,16 @@ namespace Fusioness.Business
             CoordenadaBus.RemoverCoordenada(coordenada);
         }
 
+        public void RemoverImagemPontoDeReferencia(Coordenada coordenada)
+        {
+            CoordenadaBus.RemoverImagem(coordenada);
+        }
+
+        public void RemoverPontoDeReferencia(Coordenada coordenada)
+        {
+            CoordenadaBus.RemoverPontoDeReferencia(coordenada);
+        }
+
         public double ConsultarDuracaoRota(int idRota)
         {
             return CoordenadaBus.ConsultarDuracaoRota(idRota);

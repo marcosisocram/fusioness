@@ -83,6 +83,18 @@ namespace Fusioness.Controllers
             return View(model); 
         }
 
+        public ActionResult RemoverPontoDeReferencia(int id)
+        {
+            Servico.RemoverPontoDeReferencia(new Coordenada() { IdCoordenada = id });
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult RemoverImagem(int id)
+        {
+            Servico.RemoverImagemPontoDeReferencia(new Coordenada() { IdCoordenada = id });
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
         private void criarCoordenadas(RotaModel model)
         {
             // ----------------------------Código MOCK apenas para ver se cadastra coordenadas corretamente.--------------------------
