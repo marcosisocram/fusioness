@@ -40,11 +40,34 @@ namespace Fusioness.Controllers
             return View("Index", model);
         }
 
+        public JsonResult BuscarEventosPorTitulo(string txtTitulo, string latitude, string longitude)
+        {
+            if (string.IsNullOrWhiteSpace(txtTitulo)) return Json(null);
+            var meusEventos = Servico.ListarEventosPorUsuario(UsuarioLogado);
+            var eventos = Servico.ListarEventosPorTitulo(txtTitulo, true);
+            
+            if (!string.IsNullOrWhiteSpace(latitude) && !string.IsNullOrWhiteSpace(longitude)) { /* verificar a necessidade de implementação */ }
+
+            var listaRetorno = eventos.Select(e => new
+            {
+                Id = e.IdEvento,
+                UrlImagem = ObterUrlImagemCompleta(e.UrlImagem), 
+                e.Titulo, 
+                e.Descricao,
+                Distancia = e.Distancia > 0 ? string.Format(" - {0} KM", e.Distancia) : string.Empty,
+                SouDono = meusEventos.Any(meu => meu.IdEvento == e.IdEvento)
+            }).ToList();
+
+            return Json(listaRetorno);
+        }
+
         public ActionResult Explore(EventoModel model)
         {
             double latitude = Double.Parse(Request.QueryString["latitude"]);
             double longitude = Double.Parse(Request.QueryString["longitude"]);
             model.carregarParametrosViewExplore(UsuarioLogado, null, latitude, longitude);
+            model.ExibirPesquisa = true;
+
             return View("Index",model);
         }
 

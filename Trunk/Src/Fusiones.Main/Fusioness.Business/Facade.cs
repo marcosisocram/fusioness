@@ -300,6 +300,11 @@ namespace Fusioness.Business
         {
             return EventoBus.ListarEventos(ids);
         }
+
+        public List<Evento> ListarEventosPorTitulo(string titulo, bool apenasPublico)
+        {
+            return EventoBus.ListarEventosPorTitulo(titulo, apenasPublico);
+        }
         public List<Evento> ListarEventosPorUsuario(Usuario usuario)
         {
             return EventoBus.ListarEventosPorUsuario(usuario);

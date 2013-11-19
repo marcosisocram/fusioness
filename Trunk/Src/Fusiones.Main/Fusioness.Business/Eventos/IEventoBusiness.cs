@@ -14,6 +14,7 @@ namespace Fusioness.Business.Eventos
         void RemoverEvento(Evento evento);
         Evento ObterEventoPorId(Evento evento);
         List<Evento> ListarEventos(params int[] ids);
+        List<Evento> ListarEventosPorTitulo(string titulo, bool apenasPublico);
         List<Evento> ListarEventosPorUsuario(Usuario usuario);
         List<Evento> ListarEventosComDistancia(double latitudeAtual, double longitudeAtual);
         List<Evento> ListarEventosProximos(double latitudeMin, double latitudeMax, double longitudeMin, double longitudeMax);

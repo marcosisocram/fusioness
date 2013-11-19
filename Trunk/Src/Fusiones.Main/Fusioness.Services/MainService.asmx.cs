@@ -647,7 +647,19 @@ namespace Fusioness.Services
             }
         }
 
-
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Evento> ListarEventosPorTitulo(string titulo, bool apenasPublico)
+        {
+            try
+            {
+                return Facade.Instance.ListarEventosPorTitulo(titulo, apenasPublico);
+            }
+            catch
+            {
+                return new List<Evento>();
+            }
+        }
         #endregion
 
         #region Coordenadas
