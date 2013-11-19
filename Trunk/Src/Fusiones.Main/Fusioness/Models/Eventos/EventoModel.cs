@@ -14,6 +14,7 @@ namespace Fusioness.Models.Eventos
         public IList<Evento> ListaEventos { get; set; }
         public IList<Evento> ListaEventosQueSouDono { get; set; }
         public IList<EventoUsuario> ListaEventosUsuarioQueParticipo { get; set; }
+        public IList<EventoUsuario> ListaUsuariosQueParticipamDoEvento { get; set; }
         
         public EventoUsuario EventoUsuario { get; set; }
 
@@ -86,6 +87,7 @@ namespace Fusioness.Models.Eventos
             ListaEventos = new List<Evento>();
             ListaEventosQueSouDono = new List<Evento>();
             ListaEventosUsuarioQueParticipo = new List<EventoUsuario>();
+            ListaUsuariosQueParticipamDoEvento = new List<EventoUsuario>();
             
             ListaConviteEventos = new List<ConviteEvento>();
             RespostasPossiveis = new List<Resposta>();
@@ -130,6 +132,7 @@ namespace Fusioness.Models.Eventos
             {
                 ListaComentariosEvento = servico.ListarComentariosPorEvento(eventoSelecionado);
                 ListaEventosUsuarioQueParticipo = servico.ListarEventoUsuario(usuarioLogado);
+                ListaUsuariosQueParticipamDoEvento = servico.ListarUsuariosEvento(eventoSelecionado);
                 ListaComentariosQueSouDono = servico.ListarComentariosPorUsuario(usuarioLogado);
                 Comentario.IdEvento = eventoSelecionado.IdEvento;
                 this.EventoUsuario = servico.ObterEventoUsuario(this.Evento, usuarioLogado) ?? new EventoUsuario();

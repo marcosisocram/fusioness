@@ -186,6 +186,42 @@
                     </ul>
                 }
 
+
+
+                <div style="float: none">
+
+                    <div class="modal-header">
+                        <h3>Usuários que já estão participando deste evento:</h3>
+                    </div>
+
+                    <table>
+                        <tbody>
+
+                            <tr>
+                                @foreach (var eventoUsuario in Model.ListaUsuariosQueParticipamDoEvento)
+                                {
+                                    <td><img src="@BaseController.ObterUrlImagemCompleta(@eventoUsuario.Usuario.UrlImagem)" width="50" height="60" title="@eventoUsuario.Usuario.Nome" /></td>
+                                }
+                            </tr>
+
+                        <tbody>
+                    </table>
+                </div>
+
+                <ul class="thumbnails">
+                    <li class="span5"></li>
+                </ul>
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
