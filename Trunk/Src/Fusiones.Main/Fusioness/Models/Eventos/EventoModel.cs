@@ -15,6 +15,7 @@ namespace Fusioness.Models.Eventos
         public IList<Evento> ListaEventosQueSouDono { get; set; }
         public IList<EventoUsuario> ListaEventosUsuarioQueParticipo { get; set; }
         public IList<EventoUsuario> ListaUsuariosQueParticipamDoEvento { get; set; }
+        public bool ExibirPesquisa { get; set; }
         
         public EventoUsuario EventoUsuario { get; set; }
 

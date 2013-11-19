@@ -152,6 +152,20 @@ namespace Fusioness.Business.Eventos
             }
         }
 
+        public List<Evento> ListarEventosPorTitulo(string titulo, bool apenasPublico)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                titulo = titulo ?? string.Empty;
+                var repo = new EventoRepository(uow);
+                var eventos = apenasPublico
+                    ? repo.GetWhere(e => e.Titulo.Contains(titulo) && e.Publico == true).ToList() 
+                    : repo.GetWhere(e => e.Titulo.Contains(titulo)).ToList();
+
+                return eventos;
+            }
+        }
+
         public List<Evento> ListarEventosPorUsuario(Usuario usuario)
         {
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))

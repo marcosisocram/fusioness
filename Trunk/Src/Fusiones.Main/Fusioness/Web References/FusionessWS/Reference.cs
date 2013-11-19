@@ -112,6 +112,8 @@ namespace Fusioness.FusionessWS {
         
         private System.Threading.SendOrPostCallback InserirFotoEventoOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarEventosPorTituloOperationCompleted;
+        
         private System.Threading.SendOrPostCallback InserirListaCoordenadasOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarCoordenadasPorRotaOperationCompleted;
@@ -336,6 +338,9 @@ namespace Fusioness.FusionessWS {
         
         /// <remarks/>
         public event InserirFotoEventoCompletedEventHandler InserirFotoEventoCompleted;
+        
+        /// <remarks/>
+        public event ListarEventosPorTituloCompletedEventHandler ListarEventosPorTituloCompleted;
         
         /// <remarks/>
         public event InserirListaCoordenadasCompletedEventHandler InserirListaCoordenadasCompleted;
@@ -1624,6 +1629,37 @@ namespace Fusioness.FusionessWS {
             if ((this.InserirFotoEventoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.InserirFotoEventoCompleted(this, new InserirFotoEventoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarEventosPorTitulo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Evento[] ListarEventosPorTitulo(string titulo, bool apenasPublico) {
+            object[] results = this.Invoke("ListarEventosPorTitulo", new object[] {
+                        titulo,
+                        apenasPublico});
+            return ((Evento[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarEventosPorTituloAsync(string titulo, bool apenasPublico) {
+            this.ListarEventosPorTituloAsync(titulo, apenasPublico, null);
+        }
+        
+        /// <remarks/>
+        public void ListarEventosPorTituloAsync(string titulo, bool apenasPublico, object userState) {
+            if ((this.ListarEventosPorTituloOperationCompleted == null)) {
+                this.ListarEventosPorTituloOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarEventosPorTituloOperationCompleted);
+            }
+            this.InvokeAsync("ListarEventosPorTitulo", new object[] {
+                        titulo,
+                        apenasPublico}, this.ListarEventosPorTituloOperationCompleted, userState);
+        }
+        
+        private void OnListarEventosPorTituloOperationCompleted(object arg) {
+            if ((this.ListarEventosPorTituloCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarEventosPorTituloCompleted(this, new ListarEventosPorTituloCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -5174,6 +5210,32 @@ namespace Fusioness.FusionessWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
+    public delegate void ListarEventosPorTituloCompletedEventHandler(object sender, ListarEventosPorTituloCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarEventosPorTituloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarEventosPorTituloCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Evento[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Evento[])(this.results[0]));
             }
         }
     }

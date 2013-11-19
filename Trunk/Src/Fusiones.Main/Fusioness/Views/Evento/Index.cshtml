@@ -10,8 +10,11 @@
 @section head{
     <style type="text/css">
         h4{font-weight:bold;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
-         .card .card-body{padding: 20px}
+        .card .card-body{padding: 20px}
         .thumbnails{margin:10px 0}
+        ul.thumbnails{float: left; width: 350px; height: 450px;}
+        ul.thumbnails li{width: 100%; height: 100%;}
+        div.thumbnail{margin: 5px; height: 100%}
         .imgContainer {
             width: 100%;
             height: 200px;
@@ -34,7 +37,87 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        div.input-append { margin: 25px 0 -30px 55px; }
+        div.input-append #txtBusca{width:260px}
     </style>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlImagePadrao = '@urlTemp';
+            var lat = '';
+            var lon = '';
+            navigator.geolocation.getCurrentPosition(setarPosicao);
+            
+            $('#btPesquisar').click(function () { filtrarPorTitulo($('#txtBusca').val()); });
+            
+            function filtrarPorTitulo(titulo)
+            {
+                console.log('Filtrou', titulo);
+                if (titulo) {
+                    ExibirCarregando();
+                    $.ajax({
+                        url: '@Url.Action("BuscarEventosPorTitulo", "Evento")',
+                        data: { txtTitulo: titulo, latitude : lat, longitude : lon },
+                        type: "post",
+                        dataType: "json",
+                        timeout: 10000,
+                        success: function(data) { 
+                            if (data && data.length > 0) {
+                                console.log(data);
+                                $('div.card-body').html('');
+                                $(data).each(function(i, o) { adicionarEvento(o.UrlImagem, o.Titulo, o.Distancia, o.Descricao, o.Id, o.SouDono); });
+                            }
+                        },
+                        error: function(x, t, m) {
+                            if(t==="timeout") {
+                                console.log('fail', "timeout");
+                            } else {
+                                console.log('fail', t);
+                            }
+                        }
+                    }).always(function () { EsconderCarregando(); });
+                }
+            }
+
+            function adicionarEvento(urlImageBG, titulo, distancia, descricao, idEvento, souDono) {
+                if (typeof urlImageBG === "undefined" || urlImageBG.length <= 0) urlImageBG = urlImagePadrao;
+                
+                var ulModel = $('<ul>').addClass('thumbnails');
+                var li = $('<li>');
+                var divThumb = $('<div>').addClass('thumbnail');
+                var divImgContainer = $('<div>').addClass('imgContainer').css({ 'background-image': 'url(' + urlImageBG + ')' });
+                var h4Titulo = $('<h4>').html(titulo + distancia);
+                var pDescricao = $('<p>').addClass('descricaoContainer').html(descricao);
+                var pBtnGroup = $('<p>');
+                var divBtnGroup = $('<div>').addClass('btn-group');
+                var aDetalhes = $('<a>').addClass('btn btn-primary').attr('href', '@Url.Action("Detalhar", "Evento")?idEvento=' + idEvento).html('Detalhes');
+                var aExcluir = $('<a>').addClass('btn btn-danger').attr('href', '@Url.Action("ExcluirEvento", "Evento")?idEvento=' + idEvento).html('Excluir');
+
+                divBtnGroup.append(aDetalhes);
+                if (souDono) divBtnGroup.append(aExcluir);
+
+                ulModel.append(
+                    li.append(
+                        divThumb.append([
+                            divImgContainer,
+                            h4Titulo,
+                            pDescricao,
+                            pBtnGroup.append(
+                                divBtnGroup
+                            )
+                        ])
+                    )
+                );
+
+                $('div.card-body').append(ulModel);
+            }
+
+            function setarPosicao(posicao) {
+                lat = posicao.latitude;
+                lon = posicao.longitude;
+            }
+        });
+    </script>
 }
 
 <!-- LINHA 1 -->
@@ -43,14 +126,21 @@
     <div class="span12">
         <div class="card">
             <h2 class="card-heading simple">Lista de Eventos</h2>
+            @if (Model.ExibirPesquisa)
+            {
+                <div class="search input-append">
+                    <input class="span2" id="txtBusca" type="text">
+                    <button id="btPesquisar" class="btn" type="button">Pesquisar</button>
+                </div>
+            }
             <div class="card-body" style="overflow: hidden">
                 @foreach (var item in Model.ListaEventos)
                 {
                     string enderecoImage = string.IsNullOrEmpty(item.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(item.UrlImagem);
                     
-                    <ul class="thumbnails" style="float: left; width: 350px; height: 450px;">
-                        <li style="width: 100%; height: 100%;">
-                            <div class="thumbnail" style="margin: 5px; height: 100%">
+                    <ul class="thumbnails">
+                        <li>
+                            <div class="thumbnail">
                                 <div class="imgContainer" style="background-image: url(@enderecoImage)"></div>
                                 <h4>@item.Titulo @if (item.Distancia != null){ <text> - </text> @item.Distancia <text> KM</text>}</h4>
                                 <p class="descricaoContainer">@(item.Descricao)</p>
