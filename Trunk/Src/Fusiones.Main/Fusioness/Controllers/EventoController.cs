@@ -133,11 +133,11 @@ namespace Fusioness.Controllers
                     if (eventoCadastrado != null && eventoCadastrado.IdEvento > 0)
                     {
                         ExibirModal("Evento cadastrado com sucesso.");
-                        return RedirectToAction("Index");
+                        return RedirectToAction("ListarMeusEventos");
                     }
 
-                    ExibirModal("Não foi possível efetuar a alteração. Por favor verifique se preencheu corretamente os campos.");
-                    return RedirectToAction("Index");
+                    ExibirModal("Não foi possível efetuar o cadastro. Por favor verifique se preencheu corretamente os campos.");
+                    return View(model);
                 }
             }
             else
@@ -180,7 +180,7 @@ namespace Fusioness.Controllers
             Servico.RemoverEvento(new Evento { IdEvento = idEvento });
             ExibirModal("Evento excluído com sucesso.");
 
-            return RedirectToAction("index", new EventoModel());
+            return RedirectToAction("ListarMeusEventos", new EventoModel());
         }
 
         public JsonResult MeuTempoNoEvento(EventoUsuario eventoUsuario)

@@ -31,6 +31,30 @@
             });
         });
     </script>
+    <style>
+        #tableUsuariosEvento .divImgUsuario {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+        .imgEvento {
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+    </style>
 }
 
 <!-- LINHA 1 -->
@@ -47,7 +71,7 @@
                     <ul class="thumbnails">
                         <li class="span9">
                             <div class="thumbnail">
-                                <img data-src="holder.js/300x200" src="@(string.IsNullOrEmpty(Model.Evento.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(Model.Evento.UrlImagem))" alt="Imagem do Evento">
+                                <div class="imgEvento" style="background-image: url('@(string.IsNullOrEmpty(Model.Evento.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(Model.Evento.UrlImagem))')"></div>
                                 
                                 @if (!Model.IsCadastroEvento)
                                 {
@@ -73,8 +97,8 @@
 
                                     }
                                     </p>
-                                    <h4>Data do Evento: @Model.Evento.Data.ToString("dd/MM/yyyy")</h4>
-                                    <h4>Tipo do Evento: @(Model.Evento.Publico ? "Público" : "Privado")</h4>
+                                    <p>Data do Evento: @Model.Evento.Data.ToString("dd/MM/yyyy")</p>
+                                    <p>Tipo do Evento: @(Model.Evento.Publico ? "Público" : "Privado")</p>
                                     if (Model.EventoUsuario.DataInicial != null && Model.EventoUsuario.DataInicial.HasValue)
                                     {
                                          <h4>@Html.Partial("_MeuTempoNoEvento", Model.EventoUsuario)</h4>
@@ -94,7 +118,6 @@
                         <ul class="thumbnails">
                             <li class="span5">
                                 <div class="thumbnail">
-                                    
                                     @Html.LabelFor(m => m.Evento.UrlImagem, "Imagem do Evento")
                                     <input type="file" id="image" name="image" />
                                     <br />
@@ -187,20 +210,25 @@
                 }
 
 
-
-                <div style="float: none">
+                @if (!Model.IsCadastroEvento)
+                {
+                  <div style="float: none">
 
                     <div class="modal-header">
                         <h3>Usuários que já estão participando deste evento:</h3>
                     </div>
 
-                    <table>
+                    <table id="tableUsuariosEvento">
                         <tbody>
 
                             <tr>
                                 @foreach (var eventoUsuario in Model.ListaUsuariosQueParticipamDoEvento)
                                 {
-                                    <td><img src="@BaseController.ObterUrlImagemCompleta(@eventoUsuario.Usuario.UrlImagem)" width="50" height="60" title="@eventoUsuario.Usuario.Nome" /></td>
+                                    <td>
+                                        <a href="#" title="@eventoUsuario.Usuario.Nome">
+                                            <div class="divImgUsuario" style="background-image: url('@BaseController.ObterUrlImagemCompleta(@eventoUsuario.Usuario.UrlImagem)')"></div>
+                                        </a>                                        
+                                    </td>
                                 }
                             </tr>
 
@@ -210,7 +238,9 @@
 
                 <ul class="thumbnails">
                     <li class="span5"></li>
-                </ul>
+                </ul>  
+                }
+                
 
 
 

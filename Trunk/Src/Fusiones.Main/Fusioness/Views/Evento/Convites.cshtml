@@ -10,6 +10,10 @@
     <div class="span12">
         <div class="card">
             <h2 class="card-heading simple">Convites de Eventos</h2>
+            
+            @if (Model.ListaEventos.Count != 0)
+            {
+            
             <div class="card-body">
                 <table class="table table-hover">
                     <thead>
@@ -55,7 +59,15 @@
                         }
                     </tbody>
                 </table>
-            </div>
+            </div>    
+            }
+            else
+            {
+                <div class="card-body">
+                    <h2 class="card-heading simple">Nenhum convite por aqui? Faça mais amigos...</h2>
+                </div>
+            }
+
         </div>
     </div>
     <!-- END BLOCK -->
