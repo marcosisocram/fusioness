@@ -17,8 +17,7 @@ namespace Fusioness.Controllers
             model.ListaBicicletasPorUsuario = bicicletas.ToList();
             return View("index", model);
         }
-
-
+        
         public ActionResult InserirAlterarBicicleta(BicicletaModel model)
         {
             var usuario = BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext);
@@ -31,15 +30,27 @@ namespace Fusioness.Controllers
                 model.Bicicleta.IdUsuario = usuario.IdUsuario;
 
                 if (model.Bicicleta.IdBicicleta > 0)
-                {                    
-                    var bicicletaAlterada = Servico.AlterarBicicleta(model.Bicicleta);
-
+                {
+                    model.Bicicleta = Servico.AlterarBicicleta(model.Bicicleta);                    
+                    
                     if (model.Bicicleta.StatusRetorno == 0)
                     {
-                        model.Bicicleta = bicicletaAlterada;
-                        ExibirModal("Sua bicicleta foi alterada!");
-                        return View("InserirImagemBicicleta", model);
-                        //return RedirectToAction("Index");
+                        string msg = "";
+                        if (model.ImagemBicicleta != null && model.ImagemBicicleta.ContentLength > 0)
+                        {
+                            if (InserirFotoBicicleta(model))
+                            {
+                                ExibirModal("Sua bicicleta foi alterada!");
+                            }
+                        }
+                        else
+                        {
+                            ExibirModal("Sua bicicleta foi alterada!");
+                        }
+                        
+                        
+                        //return View("InserirImagemBicicleta", model);
+                        return RedirectToAction("Index");
                     }
                     else
                     {
@@ -50,17 +61,18 @@ namespace Fusioness.Controllers
                 else
                 {
                     model.Bicicleta.UrlImagem = "bike.jpg";
-                    model.Bicicleta = Servico.InserirBicicleta(model.Bicicleta);
+                    model.Bicicleta = Servico.InserirBicicleta(model.Bicicleta);                   
 
-                    if (model.Bicicleta.StatusRetorno == 0)
+                    if (model.Bicicleta.StatusRetorno == 0 && InserirFotoBicicleta(model))
                     {
-                        ExibirModal("Sua bicicleta foi cadastrada com sucesso!");                        
-                        return View("InserirImagemBicicleta", model);
-                        //return RedirectToAction("Index");
+                        
+                        ExibirModal("Sua bicicleta foi cadastrada com sucesso!");
+                        //return View("InserirImagemBicicleta", model);
+                        return RedirectToAction("Index");
                     }
                     else
                     {
-                        ExibirModal("Não foi possível efetuar a alteração, tente novamente!");
+                        ExibirModal("Não foi possível efetuar o cadastro, tente novamente!");
                         return View(model);
                     }
 
@@ -108,7 +120,7 @@ namespace Fusioness.Controllers
             }
         }
 
-        public ActionResult EnviarImagem(BicicletaModel model)
+        /*public ActionResult EnviarImagem(BicicletaModel model)
         {
             string retorno = string.Empty;
             try
@@ -133,6 +145,33 @@ namespace Fusioness.Controllers
                 ExibirModal(e.Message);
             }
             return RedirectToAction("Index");
+        }*/
+
+        private bool InserirFotoBicicleta(BicicletaModel model)
+        {
+            //string retorno = string.Empty;
+            try
+            {
+                var validaImagem = new ValidarImagem(model.ImagemBicicleta);
+                if (validaImagem.IsImagemValida)
+                {
+                    var ms = new MemoryStream();
+                    model.ImagemBicicleta.InputStream.CopyTo(ms);
+                    byte[] bytes = ms.ToArray();
+                    var bicicleta = Servico.ObterBicicletaPorId(new Bicicleta() { IdBicicleta = model.Bicicleta.IdBicicleta });
+                    bicicleta = Servico.InserirFotoBicicleta(bicicleta, model.ImagemBicicleta.FileName, bytes);
+                    return true;
+                }
+                else
+                {
+                    throw new Exception(validaImagem.Retorno);
+                }
+            }
+            catch (Exception e)
+            {
+                ExibirModal(e.Message);
+                return false;
+            }
         }
-    }
+    }    
 }

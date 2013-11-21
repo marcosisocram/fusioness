@@ -18,7 +18,7 @@
                 Cadastre suas bicicletas para que todos saibam quais máquinas você tem a disposição para aquele próximo evento.
             </h5>       
             <div class="card-body">
-                @using (Html.BeginForm("InserirAlterarBicicleta", "Bicicleta", FormMethod.Post))
+                @using (Html.BeginForm("InserirAlterarBicicleta", "Bicicleta", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.LabelFor(m => m.Bicicleta.Modelo)
                     @Html.TextBoxFor(m => m.Bicicleta.Modelo)
@@ -31,9 +31,15 @@
                     @Html.ValidationMessage("Marca", new { style = "margin-left:10px" })
 
                     <br />
+                    
+                    <label for="ImagemBicicleta">Imagem</label>
+                    @Html.TextBoxFor(m => m.ImagemBicicleta, new { type = "file"})
+                    
+                    <br />
+                    
                     @Html.HiddenFor(m => m.Bicicleta.IdBicicleta)
                     @Html.HiddenFor(m => m.Bicicleta.UrlImagem)
-                    <input type="submit" value="Avançar" class="btn btn-primary" />
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
                 }
                    
 

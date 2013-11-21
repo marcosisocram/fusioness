@@ -234,7 +234,6 @@
     <Content Include="Web References\FusionessWS\ConviteUsuarioEmail.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Views\Bicicleta\InserirImagemBicicleta.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
