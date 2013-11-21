@@ -117,6 +117,18 @@ namespace Fusioness.Business.Rotas
                 return rotas.ToList();
             }
         }
+
+        public List<Rota> ListarRotasRealizadasPorRotaOriginal(Rota rota)
+        {
+            using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
+            {
+                IRepository<Rota> repo = new RotaRepository(uow);
+                // && c.IdRotaOrigem != null
+                var rotas = repo.GetWhere(c => c.IdRotaOrigem == rota.IdRota).OrderByDescending(o => o.IdRotaOrigem);
+                return rotas.ToList();
+            }
+        }
+
         #endregion
     }
 }
