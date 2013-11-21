@@ -12,6 +12,7 @@ namespace Fusioness.Business.Rotas
         Rota ObterRotaPorId(Rota rota);
         List<Rota> ListarRotas();
         List<Rota> ListarRotasPorUsuario(Usuario usuario);
-        List<Rota> ListarRotasRealizadasPorUsuario(Usuario usuario);        
+        List<Rota> ListarRotasRealizadasPorUsuario(Usuario usuario);
+        List<Rota> ListarRotasRealizadasPorRotaOriginal(Rota rota);
     }
 }

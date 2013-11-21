@@ -354,6 +354,20 @@ namespace Fusioness.Services
                 return new List<Rota>();
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<Rota> ListarRotasRealizadasPorRotaOriginal(Rota rota)
+        {
+            try
+            {
+                return Facade.Instance.ListarRotasRealizadasPorRotaOriginal(rota);
+            }
+            catch
+            {
+                return new List<Rota>();
+            }
+        }
         
         #endregion
 
