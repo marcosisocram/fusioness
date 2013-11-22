@@ -62,8 +62,6 @@
     <Compile Include="Dificuldades\DificuldadeBusiness.cs" />
     <Compile Include="TiposPista\ITipoPistaBusiness.cs" />
     <Compile Include="TiposPista\TipoPistaBusiness.cs" />
-    <Compile Include="TiposRota\TipoRotaBusiness.cs" />
-    <Compile Include="TiposRota\ITipoRotaBusiness.cs" />
     <Compile Include="Rotas\IRotaBusiness.cs" />
     <Compile Include="Rotas\RotaBusiness.cs" />
     <Compile Include="Eventos\IEventoBusiness.cs" />

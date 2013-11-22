@@ -56,7 +56,6 @@
     <Compile Include="ComentarioEvento.cs" />
     <Compile Include="TipoCoordenada.cs" />
     <Compile Include="TipoPista.cs" />
-    <Compile Include="TipoRota.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuarioTokenSenha.cs" />
   </ItemGroup>

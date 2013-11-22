@@ -459,24 +459,6 @@ namespace Fusioness.Services
 
         #endregion
 
-        #region TipoRota
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<TipoRota> ListarTiposRota()
-        {
-            try
-            {
-                return Facade.Instance.ListarTiposRota();
-            }
-            catch
-            {
-                return new List<TipoRota>();
-            }
-        }
-
-        #endregion
-
         #region TipoPista
 
         [WebMethod]

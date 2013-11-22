@@ -146,11 +146,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
                                         @Html.ValidationMessage("Descrição", new { style = "margin-left:10px" })
                                     </li>
                                     <li>
-                                        @Html.LabelFor(m => m.TiposDeRotas, "Tipo da Rota:")
-                                        @Html.DropDownListFor(m => m.Rota.IdTipoRota, new SelectList(Model.TiposDeRotas, "IdTipoRota", "Descricao"))
-                            
-                                    </li>
-                                    <li>
                                         @Html.LabelFor(m => m.TiposDePista, "Tipo da Pista:")
                                         @Html.DropDownListFor(m => m.Rota.IdTipoPista, new SelectList(Model.TiposDePista, "IdTipoPista", "Descricao"))
                                     </li>

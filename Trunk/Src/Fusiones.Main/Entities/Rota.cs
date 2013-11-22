@@ -13,7 +13,6 @@ namespace Fusioness.Entities
         public int IdRota { get; set; }
         public int IdUsuario { get; set; }
         public int? IdTipoPista { get; set; }
-        public int IdTipoRota { get; set; }
         public int? IdDificuldade { get; set; }
         public int? IdQualidadeRota { get; set; }
         public int? IdRotaOrigem { get; set; }        
@@ -23,7 +22,6 @@ namespace Fusioness.Entities
         public virtual List<Evento> Eventos { get; set; }
         public virtual QualidadeRota QualidadeRota { get; set; }
         public virtual TipoPista TipoPista { get; set; }
-        public virtual TipoRota TipoRota { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

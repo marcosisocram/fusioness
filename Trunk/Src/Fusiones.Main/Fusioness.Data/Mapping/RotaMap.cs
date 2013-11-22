@@ -18,7 +18,6 @@ namespace Fusioness.Data.Mapping
             this.Property(t => t.IdRotaOrigem).HasColumnName("IdRotaOrigem");            
             this.Property(t => t.IdUsuario).HasColumnName("IdUsuario");
             this.Property(t => t.IdTipoPista).HasColumnName("IdTipoPista");
-            this.Property(t => t.IdTipoRota).HasColumnName("IdTipoRota");
             this.Property(t => t.IdDificuldade).HasColumnName("IdDificuldade");
             this.Property(t => t.IdQualidadeRota).HasColumnName("IdQualidadeRota");
             this.Property(t => t.Descricao).HasColumnName("Descricao");
@@ -33,9 +32,6 @@ namespace Fusioness.Data.Mapping
             this.HasOptional(t => t.TipoPista)
                 .WithMany(t => t.Rotas)
                 .HasForeignKey(d => d.IdTipoPista);
-            this.HasRequired(t => t.TipoRota)
-                .WithMany(t => t.Rotas)
-                .HasForeignKey(d => d.IdTipoRota);
             this.HasRequired(t => t.Usuario)
                 .WithMany(t => t.Rotas)
                 .HasForeignKey(d => d.IdUsuario);

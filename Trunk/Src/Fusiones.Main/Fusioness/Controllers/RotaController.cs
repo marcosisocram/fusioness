@@ -1,7 +1,13 @@
-﻿using System.Web.Mvc;
-using Fusioness.Models.Rotas;
-using Fusioness.FusionessWS;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using Fusioness.FusionessWS;
+using Fusioness.Models.Rotas;
+using TimeSpan = System.TimeSpan;
+using System.Web;
+using System.IO;
 
 
 namespace Fusioness.Controllers
@@ -15,18 +21,51 @@ namespace Fusioness.Controllers
             // Carrega os parâmetros (listas) a serem exibidas na view e 
             // preenche alguns atributos em Rota que não vêm populados pelo serviço.
             model.carregarParametrosView();
-            model.carregarAtributos();
-            
+
+            ViewBag.Titulo = "Rotas Originais";
+
             return View(model);
         }
 
-        public ActionResult Detalhar(int Id = 0)
+        public ActionResult ListarRotasRealizadas(RotaModel model)
+        {
+            model.ListaRotasOriginais = Servico.ListarRotasPorUsuario(this.UsuarioLogado);
+            model.ListaRotas = Servico.ListarRotasRealizadasPorUsuario(this.UsuarioLogado);
+            // Carrega os parâmetros (listas) a serem exibidas na view e 
+            // preenche alguns atributos em Rota que não vêm populados pelo serviço.
+            model.carregarParametrosView();
+
+            model.ExibirFiltro = true;
+
+            ViewBag.Titulo = "Rotas Realizadas";
+
+            return View("Index", model);
+        }
+
+        public JsonResult ListarRotasPorRota(int id)
+        {
+            if (id == 0) return Json(null);
+
+            var rotas = Servico.ListarRotasRealizadasPorRotaOriginal(new Rota { IdRota = id });
+
+            var listaRetorno = rotas.Select(r => new
+            {
+                Id = r.IdRota,
+                UrlImagem = "",
+                r.Descricao,
+            }).ToList();
+
+            return Json(listaRetorno);
+
+        }
+
+        public ActionResult Detalhar(int idRota = 0)
         {
             RotaModel model = new RotaModel();
 
             model.carregarParametrosView();
 
-            model.Rota = new Rota() { IdRota = Id };
+            model.Rota = new Rota() { IdRota = idRota };
             model.Rota = Servico.ObterRotaPorId(model.Rota);
             model.ListaCoordenadas = Servico.ListarCoordenadasPorRota(model.Rota);
             model.ListaPontosReferencia = Servico.ListarPontosReferenciaPorRota(model.Rota);
@@ -51,8 +90,6 @@ namespace Fusioness.Controllers
                 {
                     model.Rota = Servico.InserirRota(model.Rota);
                     msg = "Rota cadastrada com sucesso.";
-                    // Criando as coordenadas fake.
-                    //criarCoordenadas(model);
                 }
 
                 if (model.Rota == null || model.Rota.IdRota <= 0)
@@ -93,30 +130,6 @@ namespace Fusioness.Controllers
         {
             Servico.RemoverImagemPontoDeReferencia(new Coordenada() { IdCoordenada = id });
             return Redirect(Request.UrlReferrer.ToString());
-        }
-
-        private void criarCoordenadas(RotaModel model)
-        {
-            // ----------------------------Código MOCK apenas para ver se cadastra coordenadas corretamente.--------------------------
-            Coordenada c1 = new Coordenada();
-            c1.Latitude = -8.05076226;
-            c1.Longitude = -34.87983403;
-
-            Coordenada c2 = new Coordenada();
-            c2.Latitude = -8.03076226;
-            c2.Longitude = -35.87983403;
-
-            List<Coordenada> listaCoordenadas = new List<Coordenada>();
-            listaCoordenadas.Add(c1);
-            listaCoordenadas.Add(c2);
-
-            c1.IdRota = model.Rota.IdRota;
-            c2.IdRota = model.Rota.IdRota;
-
-            Servico.InserirListaCoordenadas(listaCoordenadas.ToArray());
-
-            // ---------------------------Fim do código MOCK------------------------------------------------------------------------
-
         }
 
     }

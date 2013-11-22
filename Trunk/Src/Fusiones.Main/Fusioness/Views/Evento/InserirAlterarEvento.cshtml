@@ -72,36 +72,36 @@
                         <li class="span9">
                             <div class="thumbnail">
                                 <div class="imgEvento" style="background-image: url('@(string.IsNullOrEmpty(Model.Evento.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(Model.Evento.UrlImagem))')"></div>
-                                
+
                                 @if (!Model.IsCadastroEvento)
                                 {
                                     <h3>@Model.Evento.Titulo</h3>
                                     <p>
-                                    @if (!Model.IsCadastroEvento)
-                                    {
-                                        if (Model.ListaDeContatosDoUsuario.Any())
+                                        @if (!Model.IsCadastroEvento)
                                         {
-                                            <a href="#divAmigos" class="btn btn-info" data-toggle="modal">Convidar Amigos</a>    
-                                        }
+                                            if (Model.ListaDeContatosDoUsuario.Any())
+                                            {
+                                                <a href="#divAmigos" class="btn btn-info" data-toggle="modal">Convidar Amigos</a>
+                                            }
 
-                                        if (!Model.SouDonoDoEvento(Model.Evento.IdEvento) && !Model.SouParticipanteDoEvento(Model.Evento.IdEvento))
-                                        {
-                                            @Html.ActionLink("Participar", "Participe", "Evento", new { idEvento = Model.Evento.IdEvento }, new { @class = "btn btn-success pull-right" })
-                                            
-                                        }
+                                            if (!Model.SouDonoDoEvento(Model.Evento.IdEvento) && !Model.SouParticipanteDoEvento(Model.Evento.IdEvento))
+                                            {
+                                                @Html.ActionLink("Participar", "Participe", "Evento", new { idEvento = Model.Evento.IdEvento }, new { @class = "btn btn-success pull-right" })
 
-                                        if (Model.SouParticipanteDoEvento(Model.Evento.IdEvento))
-                                        {
-                                            @Html.ActionLink("Você já participa deste evento!", "", "", null, new { @class = "btn btn-warning pull-right", disabled = "disabled" })
-                                        }
+                                            }
 
-                                    }
+                                            if (Model.SouParticipanteDoEvento(Model.Evento.IdEvento))
+                                            {
+                                                @Html.ActionLink("Você já participa deste evento!", "", "", null, new { @class = "btn btn-warning pull-right", disabled = "disabled" })
+                                            }
+
+                                        }
                                     </p>
                                     <p>Data do Evento: @Model.Evento.Data.ToString("dd/MM/yyyy")</p>
                                     <p>Tipo do Evento: @(Model.Evento.Publico ? "Público" : "Privado")</p>
                                     if (Model.EventoUsuario.DataInicial != null && Model.EventoUsuario.DataInicial.HasValue)
                                     {
-                                         <h4>@Html.Partial("_MeuTempoNoEvento", Model.EventoUsuario)</h4>
+                                        <h4>@Html.Partial("_MeuTempoNoEvento", Model.EventoUsuario)</h4>
                                     }
                                     <p>@Model.Evento.Descricao</p>
                                 }

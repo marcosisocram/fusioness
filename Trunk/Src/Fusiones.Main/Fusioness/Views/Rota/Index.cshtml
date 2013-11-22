@@ -30,7 +30,7 @@
 
             ul.thumbnails li {
                 width: 100%;
-                height: 100%;
+                height: 100%; 
             }
 
         div.thumbnail {
@@ -84,28 +84,30 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var urlImagePadrao = '@urlTemp';
-            var lat = '';
-            var lon = '';
-            navigator.geolocation.getCurrentPosition(setarPosicao);
 
-            $('#btPesquisar').click(function () { filtrarPorTitulo($('#txtBusca').val()); });
+            $('#ddlTipoRotas').change(function () {
+                var value = $(this).val();
+                filtrarPorRota(value);
+            });
 
-            function filtrarPorTitulo(titulo)
+            function filtrarPorRota(IdRota)
             {
-                console.log('Filtrou', titulo);
-                if (titulo) {
+                console.log('Filtrou', IdRota);
+                if (IdRota) {
                     ExibirCarregando();
                     $.ajax({
-                        url: '@Url.Action("BuscarEventosPorTitulo", "Evento")',
-                        data: { txtTitulo: titulo, latitude : lat, longitude : lon },
+                        url: '@Url.Action("ListarRotasPorRota", "Rota")',
+                        data: { id: IdRota},
                         type: "post",
                         dataType: "json",
                         timeout: 10000,
-                        success: function(data) {
+                        success: function (data) {
                             if (data && data.length > 0) {
                                 console.log(data);
                                 $('div.card-body').html('');
-                                $(data).each(function(i, o) { adicionarEvento(o.UrlImagem, o.Titulo, o.Distancia, o.Descricao, o.Id, o.SouDono); });
+                                $(data).each(function (i, o) { adicionarRota(o.UrlImagem, o.Descricao, o.Id); });
+                            } else {
+                                $('div.card-body').html('<h4>Ops, você ainda não fez essa rota uma 2ª vez...</h4>');
                             }
                         },
                         error: function(x, t, m) {
@@ -119,29 +121,28 @@
                 }
             }
 
-            function adicionarEvento(urlImageBG, titulo, distancia, descricao, idEvento, souDono) {
+            function adicionarRota(urlImageBG, descricao, idRota) {
+
                 if (typeof urlImageBG === "undefined" || urlImageBG.length <= 0) urlImageBG = urlImagePadrao;
 
                 var ulModel = $('<ul>').addClass('thumbnails');
                 var li = $('<li>');
                 var divThumb = $('<div>').addClass('thumbnail');
                 var divImgContainer = $('<div>').addClass('imgContainer').css({ 'background-image': 'url(' + urlImageBG + ')' });
-                var h4Titulo = $('<h4>').html(titulo + distancia);
-                var pDescricao = $('<p>').addClass('descricaoContainer').html(descricao);
+                var h4Titulo = $('<h4>').html(descricao);
                 var pBtnGroup = $('<p>');
                 var divBtnGroup = $('<div>').addClass('btn-group');
-                var aDetalhes = $('<a>').addClass('btn btn-primary').attr('href', '@Url.Action("Detalhar", "Evento")?idEvento=' + idEvento).html('Detalhes');
-                var aExcluir = $('<a>').addClass('btn btn-danger').attr('href', '@Url.Action("ExcluirEvento", "Evento")?idEvento=' + idEvento).html('Excluir');
+                var aDetalhes = $('<a>').addClass('btn btn-primary').attr('href', '@Url.Action("Detalhar", "Rota")?idRota=' + idRota).html('Detalhes');
+                var aExcluir = $('<a>').addClass('btn btn-danger').attr('href', '@Url.Action("ExcluirRota", "Rota")?idRota=' + idRota).html('Excluir');
 
                 divBtnGroup.append(aDetalhes);
-                if (souDono) divBtnGroup.append(aExcluir);
+                divBtnGroup.append(aExcluir);
 
                 ulModel.append(
                     li.append(
                         divThumb.append([
                             divImgContainer,
                             h4Titulo,
-                            pDescricao,
                             pBtnGroup.append(
                                 divBtnGroup
                             )
@@ -152,10 +153,6 @@
                 $('div.card-body').append(ulModel);
             }
 
-            function setarPosicao(posicao) {
-                lat = posicao.latitude;
-                lon = posicao.longitude;
-            }
         });
     </script>
 }
@@ -166,14 +163,42 @@
   <!-- BLOCK -->
   <div class="span12">
     <div class="card">
-      <h2 class="card-heading simple">Lista de Rotas</h2>
+      <h2 class="card-heading simple">@ViewBag.Titulo</h2>
      
-    
-    
+        @{  
+            var texto = "";
+
+            if (Model.ListaRotas.Count == 0)
+            {
+                texto = "Xii... Parece que você ainda não refez nenhuma rota previamente cadastrada. Pegue uma que gostou e refaça!";
+            }
+            else
+            {
+                if (!Model.ExibirFiltro)
+                {
+                    texto = "Aqui você pode ver as rotas geradas pela 1ª vez que executou o seu trajeto. São suas rotas originais!";
+                }
+                else
+                {
+                    texto = "Depois que você faz uma rota pela 2ª vez, ela passa a ser uma rota realizada. Veja aqui e filtre pelas rotas originais.";
+
+                    <div class="search input-append">
+                        @Html.LabelFor(m => m.ListaRotas, "Filtre por Rota:")
+                        @Html.DropDownListFor(m => m.Rota.IdRota, new SelectList(Model.ListaRotasOriginais, "IdRota", "Descricao"), "Selecione", new { id = "ddlTipoRotas" })
+                    </div>
+
+                }
+            }
+        }
+
         <div class="card-body" style="overflow: hidden">
+            <h4>@texto</h4>
+        </div>
+
+        <div class="card-body" style="overflow: hidden">
+            
             @foreach (var item in Model.ListaRotas)
             {
-
                 string enderecoImage = urlTemp;
 
                     <ul class="thumbnails">
@@ -181,7 +206,6 @@
                             <div class="thumbnail">
                                 <div class="imgContainer" style="background-image: url(@enderecoImage)"></div>
                                 <h4>@item.Descricao</h4>
-                                    <p class="descricaoContainer">@(item.Descricao)</p>
                                     <div class="btn-group">
                                     @Html.ActionLink("Detalhes", "Detalhar", "Rota", new { idRota = item.IdRota }, new { @class = "btn btn-primary" })
                                     @Html.ActionLink("Excluir", "ExcluirRota", "Rota", new { idRota = item.IdRota}, new { @class = "btn btn-danger" })

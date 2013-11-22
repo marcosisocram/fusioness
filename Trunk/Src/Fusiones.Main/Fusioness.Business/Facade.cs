@@ -8,7 +8,6 @@ using Fusioness.Entities;
 using Fusioness.Business.Bicicletas;
 using Fusioness.Business.Eventos;
 using Fusioness.Business.Rotas;
-using Fusioness.Business.TiposRota;
 using Fusioness.Business.TiposPista;
 using Fusioness.Business.Dificuldades;
 using Fusioness.Business.QualidadesRota;
@@ -31,7 +30,6 @@ namespace Fusioness.Business
         private readonly IRotaBusiness RotaBus;
         private readonly IConviteEventoBusiness ConviteEventoBus;
         private readonly IBicicletaBusiness BicicletaBus;
-        private readonly ITipoRotaBusiness TipoRotaBus;
         private readonly ITipoPistaBusiness TipoPistaBus;
         private readonly IDificuldadeBusiness DificuldadeBus;
         private readonly IQualidadeRotaBusiness QualidadeRotaBus;
@@ -60,7 +58,6 @@ namespace Fusioness.Business
             ConviteEventoBus = new ConviteEventoBusiness();
             BicicletaBus = new BicicletaBusiness();
             RotaBus = new RotaBusiness();
-            TipoRotaBus = new TipoRotaBusiness();
             EventoBus = new EventoBusiness();
             TipoPistaBus = new TipoPistaBusiness();
             DificuldadeBus = new DificuldadeBusiness();
@@ -247,14 +244,6 @@ namespace Fusioness.Business
         public List<ComentarioEvento> ListarComentariosPorUsuario(Usuario usuario)
         {
             return ComentarioEventoBus.ListarComentariosPorUsuario(usuario);
-        }
-
-        #endregion
-
-        #region TipoRota
-        public List<TipoRota> ListarTiposRota()
-        {
-            return TipoRotaBus.ListarTiposRota();
         }
 
         #endregion

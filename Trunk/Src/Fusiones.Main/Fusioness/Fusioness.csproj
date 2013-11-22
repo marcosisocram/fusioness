@@ -262,9 +262,6 @@
     <Content Include="Web References\FusionessWS\TipoPista.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\FusionessWS\TipoRota.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
     <Content Include="Web References\FusionessWS\Usuario.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>

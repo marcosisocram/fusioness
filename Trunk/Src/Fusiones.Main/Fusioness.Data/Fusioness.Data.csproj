@@ -63,7 +63,6 @@
     <Compile Include="Mapping\ComentarioEventoMap.cs" />
     <Compile Include="Mapping\TipoCoordenadaMap.cs" />
     <Compile Include="Mapping\TipoPistaMap.cs" />
-    <Compile Include="Mapping\TipoRotaMap.cs" />
     <Compile Include="Mapping\UsuarioMap.cs" />
     <Compile Include="Mapping\UsuarioTokenSenhaMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +80,6 @@
     <Compile Include="Repositories\DificuldadeRepository.cs" />
     <Compile Include="Repositories\TipoPistaRepository.cs" />
     <Compile Include="Repositories\RotaRepository.cs" />
-    <Compile Include="Repositories\TipoRotaRepository.cs" />
     <Compile Include="Repositories\RespostaRepository.cs" />
     <Compile Include="Repositories\EventoRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
