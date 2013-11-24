@@ -197,13 +197,8 @@ namespace Fusioness.Mobile.Views
                        rota.IdDificuldade = dificuldade.DificuldadeId;
                        rota.IdQualidadeRota = qualidade.QualidadeId;
 
-                       if (acao == Global.Acao.Criar)
-                           rota.IdTipoRota = 1;
-                       else
-                       {
-                           rota.IdTipoRota = 2;
+                       if (acao == Global.Acao.Visualizar)
                            rota.IdRotaOrigem = RotaId;
-                       }
 
                        FusionessWS.MainServiceSoapClient servico = new FusionessWS.MainServiceSoapClient();
                        servico.InserirRotaAsync(rota);

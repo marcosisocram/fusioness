@@ -152,7 +152,6 @@
               <s:element minOccurs="1" maxOccurs="1" name="IdRota" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdUsuario" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdTipoPista" nillable="true" type="s:int" />
-              <s:element minOccurs="1" maxOccurs="1" name="IdTipoRota" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdDificuldade" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdQualidadeRota" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="IdRotaOrigem" nillable="true" type="s:int" />
@@ -162,7 +161,6 @@
               <s:element minOccurs="0" maxOccurs="1" name="Eventos" type="tns:ArrayOfEvento" />
               <s:element minOccurs="0" maxOccurs="1" name="QualidadeRota" type="tns:QualidadeRota" />
               <s:element minOccurs="0" maxOccurs="1" name="TipoPista" type="tns:TipoPista" />
-              <s:element minOccurs="0" maxOccurs="1" name="TipoRota" type="tns:TipoRota" />
               <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="tns:Usuario" />
             </s:sequence>
           </s:extension>
@@ -236,17 +234,6 @@
           <s:extension base="tns:EntityBase">
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="IdTipoPista" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="TipoRota">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:EntityBase">
-            <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="IdTipoRota" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Rotas" type="tns:ArrayOfRota" />
             </s:sequence>
@@ -582,6 +569,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ListarRotasRealizadasPorRotaOriginal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rota" type="tns:Rota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarRotasRealizadasPorRotaOriginalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarRotasRealizadasPorRotaOriginalResult" type="tns:ArrayOfRota" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="InserirComentarioEvento">
         <s:complexType>
           <s:sequence>
@@ -662,21 +663,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ListarTiposRota">
-        <s:complexType />
-      </s:element>
-      <s:element name="ListarTiposRotaResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListarTiposRotaResult" type="tns:ArrayOfTipoRota" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="ArrayOfTipoRota">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="TipoRota" nillable="true" type="tns:TipoRota" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="ListarTiposPista">
         <s:complexType />
       </s:element>
@@ -834,6 +820,37 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="InserirFotoEvento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="evento" type="tns:Evento" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bytes" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserirFotoEventoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InserirFotoEventoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarEventosPorTitulo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="titulo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="apenasPublico" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarEventosPorTituloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarEventosPorTituloResult" type="tns:ArrayOfEvento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="InserirListaCoordenadas">
         <s:complexType>
           <s:sequence>
@@ -899,6 +916,26 @@
             <s:element minOccurs="1" maxOccurs="1" name="ConsultarDuracaoRotaResult" type="s:double" />
           </s:sequence>
         </s:complexType>
+      </s:element>
+      <s:element name="RemoverImagemPontoDeReferencia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="coordenada" type="tns:Coordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverImagemPontoDeReferenciaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoverPontoDeReferencia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="coordenada" type="tns:Coordenada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoverPontoDeReferenciaResponse">
+        <s:complexType />
       </s:element>
       <s:element name="ListarConvitesEventos">
         <s:complexType />
@@ -1408,6 +1445,12 @@
   <wsdl:message name="ListarRotasRealizadasPorUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarRotasRealizadasPorUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarRotasRealizadasPorRotaOriginalSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarRotasRealizadasPorRotaOriginal" />
+  </wsdl:message>
+  <wsdl:message name="ListarRotasRealizadasPorRotaOriginalSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarRotasRealizadasPorRotaOriginalResponse" />
+  </wsdl:message>
   <wsdl:message name="InserirComentarioEventoSoapIn">
     <wsdl:part name="parameters" element="tns:InserirComentarioEvento" />
   </wsdl:message>
@@ -1443,12 +1486,6 @@
   </wsdl:message>
   <wsdl:message name="ListarComentariosPorUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:ListarComentariosPorUsuarioResponse" />
-  </wsdl:message>
-  <wsdl:message name="ListarTiposRotaSoapIn">
-    <wsdl:part name="parameters" element="tns:ListarTiposRota" />
-  </wsdl:message>
-  <wsdl:message name="ListarTiposRotaSoapOut">
-    <wsdl:part name="parameters" element="tns:ListarTiposRotaResponse" />
   </wsdl:message>
   <wsdl:message name="ListarTiposPistaSoapIn">
     <wsdl:part name="parameters" element="tns:ListarTiposPista" />
@@ -1516,6 +1553,18 @@
   <wsdl:message name="ListarEventosProximosSoapOut">
     <wsdl:part name="parameters" element="tns:ListarEventosProximosResponse" />
   </wsdl:message>
+  <wsdl:message name="InserirFotoEventoSoapIn">
+    <wsdl:part name="parameters" element="tns:InserirFotoEvento" />
+  </wsdl:message>
+  <wsdl:message name="InserirFotoEventoSoapOut">
+    <wsdl:part name="parameters" element="tns:InserirFotoEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarEventosPorTituloSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarEventosPorTitulo" />
+  </wsdl:message>
+  <wsdl:message name="ListarEventosPorTituloSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarEventosPorTituloResponse" />
+  </wsdl:message>
   <wsdl:message name="InserirListaCoordenadasSoapIn">
     <wsdl:part name="parameters" element="tns:InserirListaCoordenadas" />
   </wsdl:message>
@@ -1545,6 +1594,18 @@
   </wsdl:message>
   <wsdl:message name="ConsultarDuracaoRotaSoapOut">
     <wsdl:part name="parameters" element="tns:ConsultarDuracaoRotaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoverImagemPontoDeReferenciaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverImagemPontoDeReferencia" />
+  </wsdl:message>
+  <wsdl:message name="RemoverImagemPontoDeReferenciaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverImagemPontoDeReferenciaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoverPontoDeReferenciaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoverPontoDeReferencia" />
+  </wsdl:message>
+  <wsdl:message name="RemoverPontoDeReferenciaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoverPontoDeReferenciaResponse" />
   </wsdl:message>
   <wsdl:message name="ListarConvitesEventosSoapIn">
     <wsdl:part name="parameters" element="tns:ListarConvitesEventos" />
@@ -1785,6 +1846,10 @@
       <wsdl:input message="tns:ListarRotasRealizadasPorUsuarioSoapIn" />
       <wsdl:output message="tns:ListarRotasRealizadasPorUsuarioSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarRotasRealizadasPorRotaOriginal">
+      <wsdl:input message="tns:ListarRotasRealizadasPorRotaOriginalSoapIn" />
+      <wsdl:output message="tns:ListarRotasRealizadasPorRotaOriginalSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="InserirComentarioEvento">
       <wsdl:input message="tns:InserirComentarioEventoSoapIn" />
       <wsdl:output message="tns:InserirComentarioEventoSoapOut" />
@@ -1808,10 +1873,6 @@
     <wsdl:operation name="ListarComentariosPorUsuario">
       <wsdl:input message="tns:ListarComentariosPorUsuarioSoapIn" />
       <wsdl:output message="tns:ListarComentariosPorUsuarioSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="ListarTiposRota">
-      <wsdl:input message="tns:ListarTiposRotaSoapIn" />
-      <wsdl:output message="tns:ListarTiposRotaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarTiposPista">
       <wsdl:input message="tns:ListarTiposPistaSoapIn" />
@@ -1857,6 +1918,14 @@
       <wsdl:input message="tns:ListarEventosProximosSoapIn" />
       <wsdl:output message="tns:ListarEventosProximosSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="InserirFotoEvento">
+      <wsdl:input message="tns:InserirFotoEventoSoapIn" />
+      <wsdl:output message="tns:InserirFotoEventoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosPorTitulo">
+      <wsdl:input message="tns:ListarEventosPorTituloSoapIn" />
+      <wsdl:output message="tns:ListarEventosPorTituloSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="InserirListaCoordenadas">
       <wsdl:input message="tns:InserirListaCoordenadasSoapIn" />
       <wsdl:output message="tns:InserirListaCoordenadasSoapOut" />
@@ -1876,6 +1945,14 @@
     <wsdl:operation name="ConsultarDuracaoRota">
       <wsdl:input message="tns:ConsultarDuracaoRotaSoapIn" />
       <wsdl:output message="tns:ConsultarDuracaoRotaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverImagemPontoDeReferencia">
+      <wsdl:input message="tns:RemoverImagemPontoDeReferenciaSoapIn" />
+      <wsdl:output message="tns:RemoverImagemPontoDeReferenciaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoverPontoDeReferencia">
+      <wsdl:input message="tns:RemoverPontoDeReferenciaSoapIn" />
+      <wsdl:output message="tns:RemoverPontoDeReferenciaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ListarConvitesEventos">
       <wsdl:input message="tns:ListarConvitesEventosSoapIn" />
@@ -2178,6 +2255,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarRotasRealizadasPorRotaOriginal">
+      <soap:operation soapAction="http://tempuri.org/ListarRotasRealizadasPorRotaOriginal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirComentarioEvento">
       <soap:operation soapAction="http://tempuri.org/InserirComentarioEvento" style="document" />
       <wsdl:input>
@@ -2225,15 +2311,6 @@
     </wsdl:operation>
     <wsdl:operation name="ListarComentariosPorUsuario">
       <soap:operation soapAction="http://tempuri.org/ListarComentariosPorUsuario" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarTiposRota">
-      <soap:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2340,6 +2417,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InserirFotoEvento">
+      <soap:operation soapAction="http://tempuri.org/InserirFotoEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosPorTitulo">
+      <soap:operation soapAction="http://tempuri.org/ListarEventosPorTitulo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirListaCoordenadas">
       <soap:operation soapAction="http://tempuri.org/InserirListaCoordenadas" style="document" />
       <wsdl:input>
@@ -2378,6 +2473,24 @@
     </wsdl:operation>
     <wsdl:operation name="ConsultarDuracaoRota">
       <soap:operation soapAction="http://tempuri.org/ConsultarDuracaoRota" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverImagemPontoDeReferencia">
+      <soap:operation soapAction="http://tempuri.org/RemoverImagemPontoDeReferencia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverPontoDeReferencia">
+      <soap:operation soapAction="http://tempuri.org/RemoverPontoDeReferencia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2811,6 +2924,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListarRotasRealizadasPorRotaOriginal">
+      <soap12:operation soapAction="http://tempuri.org/ListarRotasRealizadasPorRotaOriginal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirComentarioEvento">
       <soap12:operation soapAction="http://tempuri.org/InserirComentarioEvento" style="document" />
       <wsdl:input>
@@ -2858,15 +2980,6 @@
     </wsdl:operation>
     <wsdl:operation name="ListarComentariosPorUsuario">
       <soap12:operation soapAction="http://tempuri.org/ListarComentariosPorUsuario" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ListarTiposRota">
-      <soap12:operation soapAction="http://tempuri.org/ListarTiposRota" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2973,6 +3086,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InserirFotoEvento">
+      <soap12:operation soapAction="http://tempuri.org/InserirFotoEvento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosPorTitulo">
+      <soap12:operation soapAction="http://tempuri.org/ListarEventosPorTitulo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InserirListaCoordenadas">
       <soap12:operation soapAction="http://tempuri.org/InserirListaCoordenadas" style="document" />
       <wsdl:input>
@@ -3011,6 +3142,24 @@
     </wsdl:operation>
     <wsdl:operation name="ConsultarDuracaoRota">
       <soap12:operation soapAction="http://tempuri.org/ConsultarDuracaoRota" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverImagemPontoDeReferencia">
+      <soap12:operation soapAction="http://tempuri.org/RemoverImagemPontoDeReferencia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoverPontoDeReferencia">
+      <soap12:operation soapAction="http://tempuri.org/RemoverPontoDeReferencia" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -29,7 +29,6 @@ namespace Fusioness.Mobile.FusionessWS {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.Dificuldade))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.QualidadeRota))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.TipoPista))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.TipoRota))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.EventoUsuario))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.ComentarioEvento))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Fusioness.Mobile.FusionessWS.ConviteUsuarioEmail))]
@@ -808,8 +807,6 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Nullable<int> IdTipoPistaField;
         
-        private int IdTipoRotaField;
-        
         private System.Nullable<int> IdDificuldadeField;
         
         private System.Nullable<int> IdQualidadeRotaField;
@@ -827,8 +824,6 @@ namespace Fusioness.Mobile.FusionessWS {
         private Fusioness.Mobile.FusionessWS.QualidadeRota QualidadeRotaField;
         
         private Fusioness.Mobile.FusionessWS.TipoPista TipoPistaField;
-        
-        private Fusioness.Mobile.FusionessWS.TipoRota TipoRotaField;
         
         private Fusioness.Mobile.FusionessWS.Usuario UsuarioField;
         
@@ -872,19 +867,6 @@ namespace Fusioness.Mobile.FusionessWS {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
-        public int IdTipoRota {
-            get {
-                return this.IdTipoRotaField;
-            }
-            set {
-                if ((this.IdTipoRotaField.Equals(value) != true)) {
-                    this.IdTipoRotaField = value;
-                    this.RaisePropertyChanged("IdTipoRota");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
         public System.Nullable<int> IdDificuldade {
             get {
                 return this.IdDificuldadeField;
@@ -897,7 +879,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
         public System.Nullable<int> IdQualidadeRota {
             get {
                 return this.IdQualidadeRotaField;
@@ -910,7 +892,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
         public System.Nullable<int> IdRotaOrigem {
             get {
                 return this.IdRotaOrigemField;
@@ -923,7 +905,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public string Descricao {
             get {
                 return this.DescricaoField;
@@ -936,7 +918,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Coordenada> Coordenadas {
             get {
                 return this.CoordenadasField;
@@ -949,7 +931,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
         public Fusioness.Mobile.FusionessWS.Dificuldade Dificuldade {
             get {
                 return this.DificuldadeField;
@@ -962,7 +944,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
         public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> Eventos {
             get {
                 return this.EventosField;
@@ -975,7 +957,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
         public Fusioness.Mobile.FusionessWS.QualidadeRota QualidadeRota {
             get {
                 return this.QualidadeRotaField;
@@ -988,7 +970,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
         public Fusioness.Mobile.FusionessWS.TipoPista TipoPista {
             get {
                 return this.TipoPistaField;
@@ -1001,20 +983,7 @@ namespace Fusioness.Mobile.FusionessWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
-        public Fusioness.Mobile.FusionessWS.TipoRota TipoRota {
-            get {
-                return this.TipoRotaField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TipoRotaField, value) != true)) {
-                    this.TipoRotaField = value;
-                    this.RaisePropertyChanged("TipoRota");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
         public Fusioness.Mobile.FusionessWS.Usuario Usuario {
             get {
                 return this.UsuarioField;
@@ -1387,57 +1356,6 @@ namespace Fusioness.Mobile.FusionessWS {
                 if ((this.IdTipoPistaField.Equals(value) != true)) {
                     this.IdTipoPistaField = value;
                     this.RaisePropertyChanged("IdTipoPista");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string Descricao {
-            get {
-                return this.DescricaoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DescricaoField, value) != true)) {
-                    this.DescricaoField = value;
-                    this.RaisePropertyChanged("Descricao");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> Rotas {
-            get {
-                return this.RotasField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RotasField, value) != true)) {
-                    this.RotasField = value;
-                    this.RaisePropertyChanged("Rotas");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TipoRota", Namespace="http://tempuri.org/")]
-    public partial class TipoRota : Fusioness.Mobile.FusionessWS.EntityBase {
-        
-        private int IdTipoRotaField;
-        
-        private string DescricaoField;
-        
-        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> RotasField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public int IdTipoRota {
-            get {
-                return this.IdTipoRotaField;
-            }
-            set {
-                if ((this.IdTipoRotaField.Equals(value) != true)) {
-                    this.IdTipoRotaField = value;
-                    this.RaisePropertyChanged("IdTipoRota");
                 }
             }
         }
@@ -2045,6 +1963,11 @@ namespace Fusioness.Mobile.FusionessWS {
         
         Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorUsuarioResponse EndListarRotasRealizadasPorUsuario(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarRotasRealizadasPorRotaOriginal", ReplyAction="*")]
+        System.IAsyncResult BeginListarRotasRealizadasPorRotaOriginal(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalResponse EndListarRotasRealizadasPorRotaOriginal(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/InserirComentarioEvento", ReplyAction="*")]
         System.IAsyncResult BeginInserirComentarioEvento(Fusioness.Mobile.FusionessWS.InserirComentarioEventoRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -2074,11 +1997,6 @@ namespace Fusioness.Mobile.FusionessWS {
         System.IAsyncResult BeginListarComentariosPorUsuario(Fusioness.Mobile.FusionessWS.ListarComentariosPorUsuarioRequest request, System.AsyncCallback callback, object asyncState);
         
         Fusioness.Mobile.FusionessWS.ListarComentariosPorUsuarioResponse EndListarComentariosPorUsuario(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarTiposRota", ReplyAction="*")]
-        System.IAsyncResult BeginListarTiposRota(Fusioness.Mobile.FusionessWS.ListarTiposRotaRequest request, System.AsyncCallback callback, object asyncState);
-        
-        Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse EndListarTiposRota(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarTiposPista", ReplyAction="*")]
         System.IAsyncResult BeginListarTiposPista(Fusioness.Mobile.FusionessWS.ListarTiposPistaRequest request, System.AsyncCallback callback, object asyncState);
@@ -2135,6 +2053,16 @@ namespace Fusioness.Mobile.FusionessWS {
         
         Fusioness.Mobile.FusionessWS.ListarEventosProximosResponse EndListarEventosProximos(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/InserirFotoEvento", ReplyAction="*")]
+        System.IAsyncResult BeginInserirFotoEvento(Fusioness.Mobile.FusionessWS.InserirFotoEventoRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.InserirFotoEventoResponse EndInserirFotoEvento(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarEventosPorTitulo", ReplyAction="*")]
+        System.IAsyncResult BeginListarEventosPorTitulo(Fusioness.Mobile.FusionessWS.ListarEventosPorTituloRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.ListarEventosPorTituloResponse EndListarEventosPorTitulo(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/InserirListaCoordenadas", ReplyAction="*")]
         System.IAsyncResult BeginInserirListaCoordenadas(Fusioness.Mobile.FusionessWS.InserirListaCoordenadasRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -2159,6 +2087,16 @@ namespace Fusioness.Mobile.FusionessWS {
         System.IAsyncResult BeginConsultarDuracaoRota(int idRota, System.AsyncCallback callback, object asyncState);
         
         double EndConsultarDuracaoRota(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/RemoverImagemPontoDeReferencia", ReplyAction="*")]
+        System.IAsyncResult BeginRemoverImagemPontoDeReferencia(Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaResponse EndRemoverImagemPontoDeReferencia(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/RemoverPontoDeReferencia", ReplyAction="*")]
+        System.IAsyncResult BeginRemoverPontoDeReferencia(Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaResponse EndRemoverPontoDeReferencia(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ListarConvitesEventos", ReplyAction="*")]
         System.IAsyncResult BeginListarConvitesEventos(Fusioness.Mobile.FusionessWS.ListarConvitesEventosRequest request, System.AsyncCallback callback, object asyncState);
@@ -3778,6 +3716,74 @@ namespace Fusioness.Mobile.FusionessWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarRotasRealizadasPorRotaOriginalRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarRotasRealizadasPorRotaOriginal", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalRequestBody Body;
+        
+        public ListarRotasRealizadasPorRotaOriginalRequest() {
+        }
+        
+        public ListarRotasRealizadasPorRotaOriginalRequest(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarRotasRealizadasPorRotaOriginalRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Rota rota;
+        
+        public ListarRotasRealizadasPorRotaOriginalRequestBody() {
+        }
+        
+        public ListarRotasRealizadasPorRotaOriginalRequestBody(Fusioness.Mobile.FusionessWS.Rota rota) {
+            this.rota = rota;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarRotasRealizadasPorRotaOriginalResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarRotasRealizadasPorRotaOriginalResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalResponseBody Body;
+        
+        public ListarRotasRealizadasPorRotaOriginalResponse() {
+        }
+        
+        public ListarRotasRealizadasPorRotaOriginalResponse(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarRotasRealizadasPorRotaOriginalResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> ListarRotasRealizadasPorRotaOriginalResult;
+        
+        public ListarRotasRealizadasPorRotaOriginalResponseBody() {
+        }
+        
+        public ListarRotasRealizadasPorRotaOriginalResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> ListarRotasRealizadasPorRotaOriginalResult) {
+            this.ListarRotasRealizadasPorRotaOriginalResult = ListarRotasRealizadasPorRotaOriginalResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class InserirComentarioEventoRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="InserirComentarioEvento", Namespace="http://tempuri.org/", Order=0)]
@@ -4172,67 +4178,6 @@ namespace Fusioness.Mobile.FusionessWS {
         
         public ListarComentariosPorUsuarioResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.ComentarioEvento> ListarComentariosPorUsuarioResult) {
             this.ListarComentariosPorUsuarioResult = ListarComentariosPorUsuarioResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ListarTiposRotaRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarTiposRota", Namespace="http://tempuri.org/", Order=0)]
-        public Fusioness.Mobile.FusionessWS.ListarTiposRotaRequestBody Body;
-        
-        public ListarTiposRotaRequest() {
-        }
-        
-        public ListarTiposRotaRequest(Fusioness.Mobile.FusionessWS.ListarTiposRotaRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class ListarTiposRotaRequestBody {
-        
-        public ListarTiposRotaRequestBody() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ListarTiposRotaResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarTiposRotaResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Fusioness.Mobile.FusionessWS.ListarTiposRotaResponseBody Body;
-        
-        public ListarTiposRotaResponse() {
-        }
-        
-        public ListarTiposRotaResponse(Fusioness.Mobile.FusionessWS.ListarTiposRotaResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class ListarTiposRotaResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.TipoRota> ListarTiposRotaResult;
-        
-        public ListarTiposRotaResponseBody() {
-        }
-        
-        public ListarTiposRotaResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.TipoRota> ListarTiposRotaResult) {
-            this.ListarTiposRotaResult = ListarTiposRotaResult;
         }
     }
     
@@ -4976,6 +4921,154 @@ namespace Fusioness.Mobile.FusionessWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class InserirFotoEventoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="InserirFotoEvento", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.InserirFotoEventoRequestBody Body;
+        
+        public InserirFotoEventoRequest() {
+        }
+        
+        public InserirFotoEventoRequest(Fusioness.Mobile.FusionessWS.InserirFotoEventoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class InserirFotoEventoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Evento evento;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string filename;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public byte[] bytes;
+        
+        public InserirFotoEventoRequestBody() {
+        }
+        
+        public InserirFotoEventoRequestBody(Fusioness.Mobile.FusionessWS.Evento evento, string filename, byte[] bytes) {
+            this.evento = evento;
+            this.filename = filename;
+            this.bytes = bytes;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class InserirFotoEventoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="InserirFotoEventoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.InserirFotoEventoResponseBody Body;
+        
+        public InserirFotoEventoResponse() {
+        }
+        
+        public InserirFotoEventoResponse(Fusioness.Mobile.FusionessWS.InserirFotoEventoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class InserirFotoEventoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string InserirFotoEventoResult;
+        
+        public InserirFotoEventoResponseBody() {
+        }
+        
+        public InserirFotoEventoResponseBody(string InserirFotoEventoResult) {
+            this.InserirFotoEventoResult = InserirFotoEventoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarEventosPorTituloRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarEventosPorTitulo", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarEventosPorTituloRequestBody Body;
+        
+        public ListarEventosPorTituloRequest() {
+        }
+        
+        public ListarEventosPorTituloRequest(Fusioness.Mobile.FusionessWS.ListarEventosPorTituloRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarEventosPorTituloRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string titulo;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public bool apenasPublico;
+        
+        public ListarEventosPorTituloRequestBody() {
+        }
+        
+        public ListarEventosPorTituloRequestBody(string titulo, bool apenasPublico) {
+            this.titulo = titulo;
+            this.apenasPublico = apenasPublico;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarEventosPorTituloResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarEventosPorTituloResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.ListarEventosPorTituloResponseBody Body;
+        
+        public ListarEventosPorTituloResponse() {
+        }
+        
+        public ListarEventosPorTituloResponse(Fusioness.Mobile.FusionessWS.ListarEventosPorTituloResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ListarEventosPorTituloResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> ListarEventosPorTituloResult;
+        
+        public ListarEventosPorTituloResponseBody() {
+        }
+        
+        public ListarEventosPorTituloResponseBody(System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> ListarEventosPorTituloResult) {
+            this.ListarEventosPorTituloResult = ListarEventosPorTituloResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class InserirListaCoordenadasRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="InserirListaCoordenadas", Namespace="http://tempuri.org/", Order=0)]
@@ -5234,6 +5327,128 @@ namespace Fusioness.Mobile.FusionessWS {
     public partial class RemoverCoordenadaResponseBody {
         
         public RemoverCoordenadaResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RemoverImagemPontoDeReferenciaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RemoverImagemPontoDeReferencia", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaRequestBody Body;
+        
+        public RemoverImagemPontoDeReferenciaRequest() {
+        }
+        
+        public RemoverImagemPontoDeReferenciaRequest(Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class RemoverImagemPontoDeReferenciaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Coordenada coordenada;
+        
+        public RemoverImagemPontoDeReferenciaRequestBody() {
+        }
+        
+        public RemoverImagemPontoDeReferenciaRequestBody(Fusioness.Mobile.FusionessWS.Coordenada coordenada) {
+            this.coordenada = coordenada;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RemoverImagemPontoDeReferenciaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RemoverImagemPontoDeReferenciaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaResponseBody Body;
+        
+        public RemoverImagemPontoDeReferenciaResponse() {
+        }
+        
+        public RemoverImagemPontoDeReferenciaResponse(Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class RemoverImagemPontoDeReferenciaResponseBody {
+        
+        public RemoverImagemPontoDeReferenciaResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RemoverPontoDeReferenciaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RemoverPontoDeReferencia", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaRequestBody Body;
+        
+        public RemoverPontoDeReferenciaRequest() {
+        }
+        
+        public RemoverPontoDeReferenciaRequest(Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class RemoverPontoDeReferenciaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Fusioness.Mobile.FusionessWS.Coordenada coordenada;
+        
+        public RemoverPontoDeReferenciaRequestBody() {
+        }
+        
+        public RemoverPontoDeReferenciaRequestBody(Fusioness.Mobile.FusionessWS.Coordenada coordenada) {
+            this.coordenada = coordenada;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RemoverPontoDeReferenciaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RemoverPontoDeReferenciaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaResponseBody Body;
+        
+        public RemoverPontoDeReferenciaResponse() {
+        }
+        
+        public RemoverPontoDeReferenciaResponse(Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class RemoverPontoDeReferenciaResponseBody {
+        
+        public RemoverPontoDeReferenciaResponseBody() {
         }
     }
     
@@ -7321,6 +7536,25 @@ namespace Fusioness.Mobile.FusionessWS {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListarRotasRealizadasPorRotaOriginalCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListarRotasRealizadasPorRotaOriginalCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class InserirComentarioEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -7410,25 +7644,6 @@ namespace Fusioness.Mobile.FusionessWS {
             get {
                 base.RaiseExceptionIfNecessary();
                 return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.ComentarioEvento>)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ListarTiposRotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public ListarTiposRotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.TipoRota> Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.TipoRota>)(this.results[0]));
             }
         }
     }
@@ -7611,6 +7826,44 @@ namespace Fusioness.Mobile.FusionessWS {
         private object[] results;
         
         public ListarEventosProximosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class InserirFotoEventoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public InserirFotoEventoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListarEventosPorTituloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListarEventosPorTituloCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -8272,6 +8525,12 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onListarRotasRealizadasPorUsuarioCompletedDelegate;
         
+        private BeginOperationDelegate onBeginListarRotasRealizadasPorRotaOriginalDelegate;
+        
+        private EndOperationDelegate onEndListarRotasRealizadasPorRotaOriginalDelegate;
+        
+        private System.Threading.SendOrPostCallback onListarRotasRealizadasPorRotaOriginalCompletedDelegate;
+        
         private BeginOperationDelegate onBeginInserirComentarioEventoDelegate;
         
         private EndOperationDelegate onEndInserirComentarioEventoDelegate;
@@ -8307,12 +8566,6 @@ namespace Fusioness.Mobile.FusionessWS {
         private EndOperationDelegate onEndListarComentariosPorUsuarioDelegate;
         
         private System.Threading.SendOrPostCallback onListarComentariosPorUsuarioCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginListarTiposRotaDelegate;
-        
-        private EndOperationDelegate onEndListarTiposRotaDelegate;
-        
-        private System.Threading.SendOrPostCallback onListarTiposRotaCompletedDelegate;
         
         private BeginOperationDelegate onBeginListarTiposPistaDelegate;
         
@@ -8380,6 +8633,18 @@ namespace Fusioness.Mobile.FusionessWS {
         
         private System.Threading.SendOrPostCallback onListarEventosProximosCompletedDelegate;
         
+        private BeginOperationDelegate onBeginInserirFotoEventoDelegate;
+        
+        private EndOperationDelegate onEndInserirFotoEventoDelegate;
+        
+        private System.Threading.SendOrPostCallback onInserirFotoEventoCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginListarEventosPorTituloDelegate;
+        
+        private EndOperationDelegate onEndListarEventosPorTituloDelegate;
+        
+        private System.Threading.SendOrPostCallback onListarEventosPorTituloCompletedDelegate;
+        
         private BeginOperationDelegate onBeginInserirListaCoordenadasDelegate;
         
         private EndOperationDelegate onEndInserirListaCoordenadasDelegate;
@@ -8409,6 +8674,18 @@ namespace Fusioness.Mobile.FusionessWS {
         private EndOperationDelegate onEndConsultarDuracaoRotaDelegate;
         
         private System.Threading.SendOrPostCallback onConsultarDuracaoRotaCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginRemoverImagemPontoDeReferenciaDelegate;
+        
+        private EndOperationDelegate onEndRemoverImagemPontoDeReferenciaDelegate;
+        
+        private System.Threading.SendOrPostCallback onRemoverImagemPontoDeReferenciaCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginRemoverPontoDeReferenciaDelegate;
+        
+        private EndOperationDelegate onEndRemoverPontoDeReferenciaDelegate;
+        
+        private System.Threading.SendOrPostCallback onRemoverPontoDeReferenciaCompletedDelegate;
         
         private BeginOperationDelegate onBeginListarConvitesEventosDelegate;
         
@@ -8657,6 +8934,8 @@ namespace Fusioness.Mobile.FusionessWS {
         
         public event System.EventHandler<ListarRotasRealizadasPorUsuarioCompletedEventArgs> ListarRotasRealizadasPorUsuarioCompleted;
         
+        public event System.EventHandler<ListarRotasRealizadasPorRotaOriginalCompletedEventArgs> ListarRotasRealizadasPorRotaOriginalCompleted;
+        
         public event System.EventHandler<InserirComentarioEventoCompletedEventArgs> InserirComentarioEventoCompleted;
         
         public event System.EventHandler<AlterarComentarioEventoCompletedEventArgs> AlterarComentarioEventoCompleted;
@@ -8668,8 +8947,6 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<ListarComentariosPorEventoCompletedEventArgs> ListarComentariosPorEventoCompleted;
         
         public event System.EventHandler<ListarComentariosPorUsuarioCompletedEventArgs> ListarComentariosPorUsuarioCompleted;
-        
-        public event System.EventHandler<ListarTiposRotaCompletedEventArgs> ListarTiposRotaCompleted;
         
         public event System.EventHandler<ListarTiposPistaCompletedEventArgs> ListarTiposPistaCompleted;
         
@@ -8693,6 +8970,10 @@ namespace Fusioness.Mobile.FusionessWS {
         
         public event System.EventHandler<ListarEventosProximosCompletedEventArgs> ListarEventosProximosCompleted;
         
+        public event System.EventHandler<InserirFotoEventoCompletedEventArgs> InserirFotoEventoCompleted;
+        
+        public event System.EventHandler<ListarEventosPorTituloCompletedEventArgs> ListarEventosPorTituloCompleted;
+        
         public event System.EventHandler<InserirListaCoordenadasCompletedEventArgs> InserirListaCoordenadasCompleted;
         
         public event System.EventHandler<ListarCoordenadasPorRotaCompletedEventArgs> ListarCoordenadasPorRotaCompleted;
@@ -8702,6 +8983,10 @@ namespace Fusioness.Mobile.FusionessWS {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> RemoverCoordenadaCompleted;
         
         public event System.EventHandler<ConsultarDuracaoRotaCompletedEventArgs> ConsultarDuracaoRotaCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> RemoverImagemPontoDeReferenciaCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> RemoverPontoDeReferenciaCompleted;
         
         public event System.EventHandler<ListarConvitesEventosCompletedEventArgs> ListarConvitesEventosCompleted;
         
@@ -10082,6 +10367,66 @@ namespace Fusioness.Mobile.FusionessWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarRotasRealizadasPorRotaOriginal(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListarRotasRealizadasPorRotaOriginal(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginListarRotasRealizadasPorRotaOriginal(Fusioness.Mobile.FusionessWS.Rota rota, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalRequest inValue = new Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalRequestBody();
+            inValue.Body.rota = rota;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarRotasRealizadasPorRotaOriginal(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarRotasRealizadasPorRotaOriginal(System.IAsyncResult result) {
+            return base.Channel.EndListarRotasRealizadasPorRotaOriginal(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> EndListarRotasRealizadasPorRotaOriginal(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarRotasRealizadasPorRotaOriginal(result);
+            return retVal.Body.ListarRotasRealizadasPorRotaOriginalResult;
+        }
+        
+        private System.IAsyncResult OnBeginListarRotasRealizadasPorRotaOriginal(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.Rota rota = ((Fusioness.Mobile.FusionessWS.Rota)(inValues[0]));
+            return this.BeginListarRotasRealizadasPorRotaOriginal(rota, callback, asyncState);
+        }
+        
+        private object[] OnEndListarRotasRealizadasPorRotaOriginal(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Rota> retVal = this.EndListarRotasRealizadasPorRotaOriginal(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListarRotasRealizadasPorRotaOriginalCompleted(object state) {
+            if ((this.ListarRotasRealizadasPorRotaOriginalCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListarRotasRealizadasPorRotaOriginalCompleted(this, new ListarRotasRealizadasPorRotaOriginalCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListarRotasRealizadasPorRotaOriginalAsync(Fusioness.Mobile.FusionessWS.Rota rota) {
+            this.ListarRotasRealizadasPorRotaOriginalAsync(rota, null);
+        }
+        
+        public void ListarRotasRealizadasPorRotaOriginalAsync(Fusioness.Mobile.FusionessWS.Rota rota, object userState) {
+            if ((this.onBeginListarRotasRealizadasPorRotaOriginalDelegate == null)) {
+                this.onBeginListarRotasRealizadasPorRotaOriginalDelegate = new BeginOperationDelegate(this.OnBeginListarRotasRealizadasPorRotaOriginal);
+            }
+            if ((this.onEndListarRotasRealizadasPorRotaOriginalDelegate == null)) {
+                this.onEndListarRotasRealizadasPorRotaOriginalDelegate = new EndOperationDelegate(this.OnEndListarRotasRealizadasPorRotaOriginal);
+            }
+            if ((this.onListarRotasRealizadasPorRotaOriginalCompletedDelegate == null)) {
+                this.onListarRotasRealizadasPorRotaOriginalCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarRotasRealizadasPorRotaOriginalCompleted);
+            }
+            base.InvokeAsync(this.onBeginListarRotasRealizadasPorRotaOriginalDelegate, new object[] {
+                        rota}, this.onEndListarRotasRealizadasPorRotaOriginalDelegate, this.onListarRotasRealizadasPorRotaOriginalCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginInserirComentarioEvento(Fusioness.Mobile.FusionessWS.InserirComentarioEventoRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginInserirComentarioEvento(request, callback, asyncState);
         }
@@ -10437,63 +10782,6 @@ namespace Fusioness.Mobile.FusionessWS {
             }
             base.InvokeAsync(this.onBeginListarComentariosPorUsuarioDelegate, new object[] {
                         usuario}, this.onEndListarComentariosPorUsuarioDelegate, this.onListarComentariosPorUsuarioCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarTiposRota(Fusioness.Mobile.FusionessWS.ListarTiposRotaRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginListarTiposRota(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private System.IAsyncResult BeginListarTiposRota(System.AsyncCallback callback, object asyncState) {
-            Fusioness.Mobile.FusionessWS.ListarTiposRotaRequest inValue = new Fusioness.Mobile.FusionessWS.ListarTiposRotaRequest();
-            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarTiposRotaRequestBody();
-            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarTiposRota(inValue, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarTiposRota(System.IAsyncResult result) {
-            return base.Channel.EndListarTiposRota(result);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.TipoRota> EndListarTiposRota(System.IAsyncResult result) {
-            Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarTiposRota(result);
-            return retVal.Body.ListarTiposRotaResult;
-        }
-        
-        private System.IAsyncResult OnBeginListarTiposRota(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginListarTiposRota(callback, asyncState);
-        }
-        
-        private object[] OnEndListarTiposRota(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.TipoRota> retVal = this.EndListarTiposRota(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnListarTiposRotaCompleted(object state) {
-            if ((this.ListarTiposRotaCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.ListarTiposRotaCompleted(this, new ListarTiposRotaCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void ListarTiposRotaAsync() {
-            this.ListarTiposRotaAsync(null);
-        }
-        
-        public void ListarTiposRotaAsync(object userState) {
-            if ((this.onBeginListarTiposRotaDelegate == null)) {
-                this.onBeginListarTiposRotaDelegate = new BeginOperationDelegate(this.OnBeginListarTiposRota);
-            }
-            if ((this.onEndListarTiposRotaDelegate == null)) {
-                this.onEndListarTiposRotaDelegate = new EndOperationDelegate(this.OnEndListarTiposRota);
-            }
-            if ((this.onListarTiposRotaCompletedDelegate == null)) {
-                this.onListarTiposRotaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarTiposRotaCompleted);
-            }
-            base.InvokeAsync(this.onBeginListarTiposRotaDelegate, null, this.onEndListarTiposRotaDelegate, this.onListarTiposRotaCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -11158,6 +11446,135 @@ namespace Fusioness.Mobile.FusionessWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginInserirFotoEvento(Fusioness.Mobile.FusionessWS.InserirFotoEventoRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginInserirFotoEvento(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginInserirFotoEvento(Fusioness.Mobile.FusionessWS.Evento evento, string filename, byte[] bytes, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.InserirFotoEventoRequest inValue = new Fusioness.Mobile.FusionessWS.InserirFotoEventoRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.InserirFotoEventoRequestBody();
+            inValue.Body.evento = evento;
+            inValue.Body.filename = filename;
+            inValue.Body.bytes = bytes;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginInserirFotoEvento(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.InserirFotoEventoResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndInserirFotoEvento(System.IAsyncResult result) {
+            return base.Channel.EndInserirFotoEvento(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private string EndInserirFotoEvento(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.InserirFotoEventoResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndInserirFotoEvento(result);
+            return retVal.Body.InserirFotoEventoResult;
+        }
+        
+        private System.IAsyncResult OnBeginInserirFotoEvento(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.Evento evento = ((Fusioness.Mobile.FusionessWS.Evento)(inValues[0]));
+            string filename = ((string)(inValues[1]));
+            byte[] bytes = ((byte[])(inValues[2]));
+            return this.BeginInserirFotoEvento(evento, filename, bytes, callback, asyncState);
+        }
+        
+        private object[] OnEndInserirFotoEvento(System.IAsyncResult result) {
+            string retVal = this.EndInserirFotoEvento(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnInserirFotoEventoCompleted(object state) {
+            if ((this.InserirFotoEventoCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.InserirFotoEventoCompleted(this, new InserirFotoEventoCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void InserirFotoEventoAsync(Fusioness.Mobile.FusionessWS.Evento evento, string filename, byte[] bytes) {
+            this.InserirFotoEventoAsync(evento, filename, bytes, null);
+        }
+        
+        public void InserirFotoEventoAsync(Fusioness.Mobile.FusionessWS.Evento evento, string filename, byte[] bytes, object userState) {
+            if ((this.onBeginInserirFotoEventoDelegate == null)) {
+                this.onBeginInserirFotoEventoDelegate = new BeginOperationDelegate(this.OnBeginInserirFotoEvento);
+            }
+            if ((this.onEndInserirFotoEventoDelegate == null)) {
+                this.onEndInserirFotoEventoDelegate = new EndOperationDelegate(this.OnEndInserirFotoEvento);
+            }
+            if ((this.onInserirFotoEventoCompletedDelegate == null)) {
+                this.onInserirFotoEventoCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnInserirFotoEventoCompleted);
+            }
+            base.InvokeAsync(this.onBeginInserirFotoEventoDelegate, new object[] {
+                        evento,
+                        filename,
+                        bytes}, this.onEndInserirFotoEventoDelegate, this.onInserirFotoEventoCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginListarEventosPorTitulo(Fusioness.Mobile.FusionessWS.ListarEventosPorTituloRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListarEventosPorTitulo(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginListarEventosPorTitulo(string titulo, bool apenasPublico, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.ListarEventosPorTituloRequest inValue = new Fusioness.Mobile.FusionessWS.ListarEventosPorTituloRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.ListarEventosPorTituloRequestBody();
+            inValue.Body.titulo = titulo;
+            inValue.Body.apenasPublico = apenasPublico;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginListarEventosPorTitulo(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.ListarEventosPorTituloResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndListarEventosPorTitulo(System.IAsyncResult result) {
+            return base.Channel.EndListarEventosPorTitulo(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> EndListarEventosPorTitulo(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.ListarEventosPorTituloResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndListarEventosPorTitulo(result);
+            return retVal.Body.ListarEventosPorTituloResult;
+        }
+        
+        private System.IAsyncResult OnBeginListarEventosPorTitulo(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string titulo = ((string)(inValues[0]));
+            bool apenasPublico = ((bool)(inValues[1]));
+            return this.BeginListarEventosPorTitulo(titulo, apenasPublico, callback, asyncState);
+        }
+        
+        private object[] OnEndListarEventosPorTitulo(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Fusioness.Mobile.FusionessWS.Evento> retVal = this.EndListarEventosPorTitulo(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListarEventosPorTituloCompleted(object state) {
+            if ((this.ListarEventosPorTituloCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListarEventosPorTituloCompleted(this, new ListarEventosPorTituloCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListarEventosPorTituloAsync(string titulo, bool apenasPublico) {
+            this.ListarEventosPorTituloAsync(titulo, apenasPublico, null);
+        }
+        
+        public void ListarEventosPorTituloAsync(string titulo, bool apenasPublico, object userState) {
+            if ((this.onBeginListarEventosPorTituloDelegate == null)) {
+                this.onBeginListarEventosPorTituloDelegate = new BeginOperationDelegate(this.OnBeginListarEventosPorTitulo);
+            }
+            if ((this.onEndListarEventosPorTituloDelegate == null)) {
+                this.onEndListarEventosPorTituloDelegate = new EndOperationDelegate(this.OnEndListarEventosPorTitulo);
+            }
+            if ((this.onListarEventosPorTituloCompletedDelegate == null)) {
+                this.onListarEventosPorTituloCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListarEventosPorTituloCompleted);
+            }
+            base.InvokeAsync(this.onBeginListarEventosPorTituloDelegate, new object[] {
+                        titulo,
+                        apenasPublico}, this.onEndListarEventosPorTituloDelegate, this.onListarEventosPorTituloCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginInserirListaCoordenadas(Fusioness.Mobile.FusionessWS.InserirListaCoordenadasRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginInserirListaCoordenadas(request, callback, asyncState);
         }
@@ -11439,6 +11856,122 @@ namespace Fusioness.Mobile.FusionessWS {
             }
             base.InvokeAsync(this.onBeginConsultarDuracaoRotaDelegate, new object[] {
                         idRota}, this.onEndConsultarDuracaoRotaDelegate, this.onConsultarDuracaoRotaCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginRemoverImagemPontoDeReferencia(Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRemoverImagemPontoDeReferencia(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginRemoverImagemPontoDeReferencia(Fusioness.Mobile.FusionessWS.Coordenada coordenada, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaRequest inValue = new Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaRequestBody();
+            inValue.Body.coordenada = coordenada;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginRemoverImagemPontoDeReferencia(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndRemoverImagemPontoDeReferencia(System.IAsyncResult result) {
+            return base.Channel.EndRemoverImagemPontoDeReferencia(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private void EndRemoverImagemPontoDeReferencia(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndRemoverImagemPontoDeReferencia(result);
+        }
+        
+        private System.IAsyncResult OnBeginRemoverImagemPontoDeReferencia(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.Coordenada coordenada = ((Fusioness.Mobile.FusionessWS.Coordenada)(inValues[0]));
+            return this.BeginRemoverImagemPontoDeReferencia(coordenada, callback, asyncState);
+        }
+        
+        private object[] OnEndRemoverImagemPontoDeReferencia(System.IAsyncResult result) {
+            this.EndRemoverImagemPontoDeReferencia(result);
+            return null;
+        }
+        
+        private void OnRemoverImagemPontoDeReferenciaCompleted(object state) {
+            if ((this.RemoverImagemPontoDeReferenciaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.RemoverImagemPontoDeReferenciaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void RemoverImagemPontoDeReferenciaAsync(Fusioness.Mobile.FusionessWS.Coordenada coordenada) {
+            this.RemoverImagemPontoDeReferenciaAsync(coordenada, null);
+        }
+        
+        public void RemoverImagemPontoDeReferenciaAsync(Fusioness.Mobile.FusionessWS.Coordenada coordenada, object userState) {
+            if ((this.onBeginRemoverImagemPontoDeReferenciaDelegate == null)) {
+                this.onBeginRemoverImagemPontoDeReferenciaDelegate = new BeginOperationDelegate(this.OnBeginRemoverImagemPontoDeReferencia);
+            }
+            if ((this.onEndRemoverImagemPontoDeReferenciaDelegate == null)) {
+                this.onEndRemoverImagemPontoDeReferenciaDelegate = new EndOperationDelegate(this.OnEndRemoverImagemPontoDeReferencia);
+            }
+            if ((this.onRemoverImagemPontoDeReferenciaCompletedDelegate == null)) {
+                this.onRemoverImagemPontoDeReferenciaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRemoverImagemPontoDeReferenciaCompleted);
+            }
+            base.InvokeAsync(this.onBeginRemoverImagemPontoDeReferenciaDelegate, new object[] {
+                        coordenada}, this.onEndRemoverImagemPontoDeReferenciaDelegate, this.onRemoverImagemPontoDeReferenciaCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Fusioness.Mobile.FusionessWS.MainServiceSoap.BeginRemoverPontoDeReferencia(Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRemoverPontoDeReferencia(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginRemoverPontoDeReferencia(Fusioness.Mobile.FusionessWS.Coordenada coordenada, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaRequest inValue = new Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaRequest();
+            inValue.Body = new Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaRequestBody();
+            inValue.Body.coordenada = coordenada;
+            return ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).BeginRemoverPontoDeReferencia(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaResponse Fusioness.Mobile.FusionessWS.MainServiceSoap.EndRemoverPontoDeReferencia(System.IAsyncResult result) {
+            return base.Channel.EndRemoverPontoDeReferencia(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private void EndRemoverPontoDeReferencia(System.IAsyncResult result) {
+            Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaResponse retVal = ((Fusioness.Mobile.FusionessWS.MainServiceSoap)(this)).EndRemoverPontoDeReferencia(result);
+        }
+        
+        private System.IAsyncResult OnBeginRemoverPontoDeReferencia(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Fusioness.Mobile.FusionessWS.Coordenada coordenada = ((Fusioness.Mobile.FusionessWS.Coordenada)(inValues[0]));
+            return this.BeginRemoverPontoDeReferencia(coordenada, callback, asyncState);
+        }
+        
+        private object[] OnEndRemoverPontoDeReferencia(System.IAsyncResult result) {
+            this.EndRemoverPontoDeReferencia(result);
+            return null;
+        }
+        
+        private void OnRemoverPontoDeReferenciaCompleted(object state) {
+            if ((this.RemoverPontoDeReferenciaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.RemoverPontoDeReferenciaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void RemoverPontoDeReferenciaAsync(Fusioness.Mobile.FusionessWS.Coordenada coordenada) {
+            this.RemoverPontoDeReferenciaAsync(coordenada, null);
+        }
+        
+        public void RemoverPontoDeReferenciaAsync(Fusioness.Mobile.FusionessWS.Coordenada coordenada, object userState) {
+            if ((this.onBeginRemoverPontoDeReferenciaDelegate == null)) {
+                this.onBeginRemoverPontoDeReferenciaDelegate = new BeginOperationDelegate(this.OnBeginRemoverPontoDeReferencia);
+            }
+            if ((this.onEndRemoverPontoDeReferenciaDelegate == null)) {
+                this.onEndRemoverPontoDeReferenciaDelegate = new EndOperationDelegate(this.OnEndRemoverPontoDeReferencia);
+            }
+            if ((this.onRemoverPontoDeReferenciaCompletedDelegate == null)) {
+                this.onRemoverPontoDeReferenciaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRemoverPontoDeReferenciaCompleted);
+            }
+            base.InvokeAsync(this.onBeginRemoverPontoDeReferenciaDelegate, new object[] {
+                        coordenada}, this.onEndRemoverPontoDeReferenciaDelegate, this.onRemoverPontoDeReferenciaCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -13305,6 +13838,19 @@ namespace Fusioness.Mobile.FusionessWS {
                 return _result;
             }
             
+            public System.IAsyncResult BeginListarRotasRealizadasPorRotaOriginal(Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ListarRotasRealizadasPorRotaOriginal", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalResponse EndListarRotasRealizadasPorRotaOriginal(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalResponse _result = ((Fusioness.Mobile.FusionessWS.ListarRotasRealizadasPorRotaOriginalResponse)(base.EndInvoke("ListarRotasRealizadasPorRotaOriginal", _args, result)));
+                return _result;
+            }
+            
             public System.IAsyncResult BeginInserirComentarioEvento(Fusioness.Mobile.FusionessWS.InserirComentarioEventoRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
@@ -13380,19 +13926,6 @@ namespace Fusioness.Mobile.FusionessWS {
             public Fusioness.Mobile.FusionessWS.ListarComentariosPorUsuarioResponse EndListarComentariosPorUsuario(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Fusioness.Mobile.FusionessWS.ListarComentariosPorUsuarioResponse _result = ((Fusioness.Mobile.FusionessWS.ListarComentariosPorUsuarioResponse)(base.EndInvoke("ListarComentariosPorUsuario", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginListarTiposRota(Fusioness.Mobile.FusionessWS.ListarTiposRotaRequest request, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("ListarTiposRota", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse EndListarTiposRota(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse _result = ((Fusioness.Mobile.FusionessWS.ListarTiposRotaResponse)(base.EndInvoke("ListarTiposRota", _args, result)));
                 return _result;
             }
             
@@ -13539,6 +14072,32 @@ namespace Fusioness.Mobile.FusionessWS {
                 return _result;
             }
             
+            public System.IAsyncResult BeginInserirFotoEvento(Fusioness.Mobile.FusionessWS.InserirFotoEventoRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("InserirFotoEvento", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.InserirFotoEventoResponse EndInserirFotoEvento(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.InserirFotoEventoResponse _result = ((Fusioness.Mobile.FusionessWS.InserirFotoEventoResponse)(base.EndInvoke("InserirFotoEvento", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListarEventosPorTitulo(Fusioness.Mobile.FusionessWS.ListarEventosPorTituloRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ListarEventosPorTitulo", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.ListarEventosPorTituloResponse EndListarEventosPorTitulo(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.ListarEventosPorTituloResponse _result = ((Fusioness.Mobile.FusionessWS.ListarEventosPorTituloResponse)(base.EndInvoke("ListarEventosPorTitulo", _args, result)));
+                return _result;
+            }
+            
             public System.IAsyncResult BeginInserirListaCoordenadas(Fusioness.Mobile.FusionessWS.InserirListaCoordenadasRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
@@ -13601,6 +14160,32 @@ namespace Fusioness.Mobile.FusionessWS {
             public double EndConsultarDuracaoRota(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 double _result = ((double)(base.EndInvoke("ConsultarDuracaoRota", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginRemoverImagemPontoDeReferencia(Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("RemoverImagemPontoDeReferencia", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaResponse EndRemoverImagemPontoDeReferencia(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaResponse _result = ((Fusioness.Mobile.FusionessWS.RemoverImagemPontoDeReferenciaResponse)(base.EndInvoke("RemoverImagemPontoDeReferencia", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginRemoverPontoDeReferencia(Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("RemoverPontoDeReferencia", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaResponse EndRemoverPontoDeReferencia(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaResponse _result = ((Fusioness.Mobile.FusionessWS.RemoverPontoDeReferenciaResponse)(base.EndInvoke("RemoverPontoDeReferencia", _args, result)));
                 return _result;
             }
             
