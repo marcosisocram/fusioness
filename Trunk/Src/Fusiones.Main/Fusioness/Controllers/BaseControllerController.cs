@@ -62,7 +62,11 @@ namespace Fusioness.Controllers
         {
             try
             {
-                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir"];
+#if DEBUG
+                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir_Debug"];
+#else
+                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir_Release"];
+#endif
                 return urlService;
             }
             catch
@@ -75,7 +79,11 @@ namespace Fusioness.Controllers
         {
             try
             {
-                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir"];
+#if DEBUG
+                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir_Debug"];
+#else
+                var urlService = ConfigurationSettings.AppSettings["WebServiceHostPlusImagesDir_Release"];
+#endif
                 return String.Format("{0}{1}", ObterUrlBaseAvatar(), urlImagem);
             }
             catch
