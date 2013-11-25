@@ -35,7 +35,7 @@ namespace Fusioness.Controllers
                     
                     if (model.Bicicleta.StatusRetorno == 0)
                     {
-                        string msg = "";
+                        
                         if (model.ImagemBicicleta != null && model.ImagemBicicleta.ContentLength > 0)
                         {
                             if (InserirFotoBicicleta(model))
@@ -63,10 +63,21 @@ namespace Fusioness.Controllers
                     model.Bicicleta.UrlImagem = "bike.jpg";
                     model.Bicicleta = Servico.InserirBicicleta(model.Bicicleta);                   
 
-                    if (model.Bicicleta.StatusRetorno == 0 && InserirFotoBicicleta(model))
+                    if (model.Bicicleta.StatusRetorno == 0)
                     {
-                        
-                        ExibirModal("Sua bicicleta foi cadastrada com sucesso!");
+
+                        if (model.ImagemBicicleta != null && model.ImagemBicicleta.ContentLength > 0)
+                        {
+                            if (InserirFotoBicicleta(model))
+                            {
+                                ExibirModal("Sua bicicleta foi cadastrada com sucesso!");
+                            }
+                        }
+                        else
+                        {
+                            ExibirModal("Sua bicicleta foi cadastrada com sucesso!");
+                        }
+                                                
                         //return View("InserirImagemBicicleta", model);
                         return RedirectToAction("Index");
                     }
