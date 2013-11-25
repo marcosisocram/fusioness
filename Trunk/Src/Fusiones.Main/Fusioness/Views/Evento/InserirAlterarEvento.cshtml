@@ -148,7 +148,15 @@
                                     <p>Tipo do Evento: @(Model.Evento.Publico ? "Público" : "Privado")</p>
                                     if (Model.EventoUsuario.DataInicial != null && Model.EventoUsuario.DataInicial.HasValue)
                                     {
-                                        <h4>@Html.Partial("_MeuTempoNoEvento", Model.EventoUsuario)</h4>
+                                        <p>@Html.Partial("_MeuTempoNoEvento", Model.EventoUsuario)</p>
+                                    }
+                                    else if (Model.SouParticipanteDoEvento(Model.Evento.IdEvento))
+                                    {
+                                        <p>Ainda não iniciei a corrida.</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Ainda não participo deste evento.</p>
                                     }
                                     <p>@Model.Evento.Descricao</p>
                                 }
