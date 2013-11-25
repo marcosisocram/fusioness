@@ -8,28 +8,69 @@
 }
 
 @section head{
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script language="javascript">
-        $(document).ready(function() {
-            $('#btConvidarAmigos').click(function() {
-                var form = $('#btConvidarAmigos').closest('form');
-                var mensagemOk = "Convite(s) feito(s).";
-                var mensagemFail = "Oops, não foi possível efetuar o(s) convite(s)."
-                var modalClone = $('#divModalGlobal').clone();
-                modalClone.find('.modal-title').html("Informação do Convite.");
-                ExibirCarregando();
-                $.post(form.prop('action'), form.serialize(), function (data) {
-                    if (data) modalClone.find('.modal-body').html(mensagemOk);
-                    else modalClone.find('.modal-body').html(mensagemFail);
-                    modalClone.modal('show');
-                }).fail(function () {
-                    modalClone.find('.modal-body').html(mensagemFail);
-                    modalClone.modal('show');
-                }).done(function() {
-                    $('#divAmigos').modal('hide');
-                    EsconderCarregando();
+
+            $(document).ready(function () {
+                $('#btConvidarAmigos').click(function() {
+                    var form = $('#btConvidarAmigos').closest('form');
+                    var mensagemOk = "Convite(s) feito(s).";
+                    var mensagemFail = "Oops, não foi possível efetuar o(s) convite(s)."
+                    var modalClone = $('#divModalGlobal').clone();
+                    modalClone.find('.modal-title').html("Informação do Convite.");
+                    ExibirCarregando();
+                    $.post(form.prop('action'), form.serialize(), function (data) {
+                        if (data) modalClone.find('.modal-body').html(mensagemOk);
+                        else modalClone.find('.modal-body').html(mensagemFail);
+                        modalClone.modal('show');
+                    }).fail(function () {
+                        modalClone.find('.modal-body').html(mensagemFail);
+                        modalClone.modal('show');
+                    }).done(function() {
+                        $('#divAmigos').modal('hide');
+                        EsconderCarregando();
+                    });
                 });
+
+                $('#Evento_IdRota').change(function() {  
+                    var mensagemFail = "Oops, não foi possível efetuar a operação."
+                    var modalClone = $('#divModalGlobal').clone();
+                    var idRota = $(this).val();
+                    var initialize;
+                    modalClone.find('.modal-title').html("Carregando");
+                    if (idRota == "") {
+                        $('.rotaEvento').html("");
+                    }
+                    else {
+                        ExibirCarregando();
+                        $.ajax(
+                                {
+                                    type: "POST",
+                                    url: "/Rota/GetMapaRota",
+                                    data: "idRota=" + idRota,
+                                    dataType: "html",
+                                    success: function (result) {
+                                        try {
+                                            $('.rotaEvento').attr('id', 'map-canvas-' + idRota);
+                                            initialize = eval(((result.substring(result.indexOf('\n') + 1)).replace(/\r?\n?[^\r\n]*$/, "")));
+                                            initialize();
+                                            EsconderCarregando();
+                                        } catch (e) {
+                                            EsconderCarregando();
+                                        }
+
+                                    },
+                                    error: function (result) {
+                                        EsconderCarregando();
+                                        modalClone.find('.modal-body').html(mensagemFail);
+                                        modalClone.modal('show');
+                                    }
+                                });
+                    }
+                });
+
             });
-        });
+
     </script>
     <style>
         #tableUsuariosEvento .divImgUsuario {
@@ -44,7 +85,7 @@
             background-position: 50% 50%;
         }
         .imgEvento {
-            width: 500px;
+            width: 350px;
             height: 300px;
             overflow: hidden;
             -webkit-background-size: cover;
@@ -70,8 +111,14 @@
                 <div style="float: left">
                     <ul class="thumbnails">
                         <li class="span9">
-                            <div class="thumbnail">
+                            <div class="thumbnail" style="width:360px;">
+                                <h4>Imagem Selecionada</h4>
+
                                 <div class="imgEvento" style="background-image: url('@(string.IsNullOrEmpty(Model.Evento.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(Model.Evento.UrlImagem))')"></div>
+                                
+                                <br />
+                                <h4>Rota Selecionada</h4>
+                                <div class="rotaEvento" id="#" style="width:350px;height:360px;"></div>
 
                                 @if (!Model.IsCadastroEvento)
                                 {
@@ -101,7 +148,15 @@
                                     <p>Tipo do Evento: @(Model.Evento.Publico ? "Público" : "Privado")</p>
                                     if (Model.EventoUsuario.DataInicial != null && Model.EventoUsuario.DataInicial.HasValue)
                                     {
-                                        <h4>@Html.Partial("_MeuTempoNoEvento", Model.EventoUsuario)</h4>
+                                        <p>@Html.Partial("_MeuTempoNoEvento", Model.EventoUsuario)</p>
+                                    }
+                                    else if (Model.SouParticipanteDoEvento(Model.Evento.IdEvento))
+                                    {
+                                        <p>Ainda não iniciei a corrida.</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Ainda não participo deste evento.</p>
                                     }
                                     <p>@Model.Evento.Descricao</p>
                                 }
@@ -140,7 +195,7 @@
                                     @Html.ValidationMessage("Descrição", new { style = "margin-left:10px" })
                                     <br />
                                     @Html.LabelFor(m => m.ListaRotas, "Rota:")
-                                    @Html.DropDownListFor(m => m.Evento.IdRota, new SelectList(Model.ListaRotas, "IdRota", "Descricao"), displayMode)
+                                    @Html.DropDownListFor(m => m.Evento.IdRota, new SelectList(Model.ListaRotas, "IdRota", "Descricao"),"---Selecione uma Rota ---", displayMode)
                                     @Html.ValidationMessage("Rota", new { style = "margin-left:10px" })
                                     <br />
                                     @Html.HiddenFor(m => m.Evento.IdEvento)

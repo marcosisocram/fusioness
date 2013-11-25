@@ -22,6 +22,11 @@ namespace Fusioness.Controllers
             // preenche alguns atributos em Rota que não vêm populados pelo serviço.
             model.carregarParametrosView();
 
+            foreach (var item in model.ListaRotas)
+            {
+                item.Coordenadas = Servico.ListarCoordenadasPorRota(item);
+            }
+
             ViewBag.Titulo = "Rotas Originais";
 
             return View(model);
@@ -67,8 +72,8 @@ namespace Fusioness.Controllers
 
             model.Rota = new Rota() { IdRota = idRota };
             model.Rota = Servico.ObterRotaPorId(model.Rota);
-            model.ListaCoordenadas = Servico.ListarCoordenadasPorRota(model.Rota);
-            model.ListaPontosReferencia = Servico.ListarPontosReferenciaPorRota(model.Rota);
+            model.Rota.Coordenadas = Servico.ListarCoordenadasPorRota(model.Rota);
+            //model.ListaPontosReferencia = Servico.ListarPontosReferenciaPorRota(model.Rota);
 
             return View("InserirAlterarRota", model);
         }
@@ -111,6 +116,15 @@ namespace Fusioness.Controllers
            
         }
 
+        [HttpPost]
+        public ActionResult GetMapaRota(string idRota)
+        {
+            Fusioness.FusionessWS.Rota rota = new Fusioness.FusionessWS.Rota();
+            rota = Servico.ObterRotaPorId(new Rota() { IdRota = Int32.Parse(idRota)});
+            rota.Coordenadas = Servico.ListarCoordenadasPorRota(rota);
+            return PartialView("_MapPartialNoReferencePoints", rota); 
+        }
+
         // Este método é chamado no momento que será cadastrada uma rota.
         [HttpGet]
         public ActionResult InserirAlterarRota()
@@ -131,6 +145,8 @@ namespace Fusioness.Controllers
             Servico.RemoverImagemPontoDeReferencia(new Coordenada() { IdCoordenada = id });
             return Redirect(Request.UrlReferrer.ToString());
         }
+
+
 
     }
 }

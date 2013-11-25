@@ -234,6 +234,8 @@
     <Content Include="Web References\FusionessWS\ConviteUsuarioEmail.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Views\Rota\_MapPartial.cshtml" />
+    <Content Include="Views\Rota\_MapPartialNoReferencePoints.cshtml" />
     <None Include="Web References\FusionessWS\MainService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
