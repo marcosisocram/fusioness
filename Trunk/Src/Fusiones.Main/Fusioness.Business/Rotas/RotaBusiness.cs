@@ -123,7 +123,7 @@ namespace Fusioness.Business.Rotas
             using (IUnityOfWork uow = new EFUnityOfWork(_ConnectionString))
             {
                 IRepository<Rota> repo = new RotaRepository(uow);
-                // && c.IdRotaOrigem != null
+                // && c.IdRotaOrigem != null                
                 var rotas = repo.GetWhere(c => c.IdRotaOrigem == rota.IdRota).OrderByDescending(o => o.IdRotaOrigem);
                 return rotas.ToList();
             }

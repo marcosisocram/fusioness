@@ -200,12 +200,14 @@
             @foreach (var item in Model.ListaRotas)
             {
                 string enderecoImage = urlTemp;
+                
 
                     <ul class="thumbnails">
                         <li>
                             <div class="thumbnail">
                                 <div class="imgContainer" style="background-image: url(@enderecoImage)"></div>
                                 <h4>@item.Descricao</h4>
+                                <h5>@Model.TempoMedio(item.IdRota,  @Fusioness.Controllers.BaseController.ObterUsuarioLogado(Request.RequestContext.HttpContext))</h5>
                                     <div class="btn-group">
                                     @Html.ActionLink("Detalhes", "Detalhar", "Rota", new { idRota = item.IdRota }, new { @class = "btn btn-primary" })
                                     @Html.ActionLink("Excluir", "ExcluirRota", "Rota", new { idRota = item.IdRota}, new { @class = "btn btn-danger" })
