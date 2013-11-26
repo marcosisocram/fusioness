@@ -1,0 +1,120 @@
+﻿@model Fusioness.Models.Usuarios.UsuarioModel
+@{ 
+    ViewBag.Title = "Cadastre-se";
+    Layout = "~/Views/Shared/_LayoutBaseAcesso.cshtml";
+}
+@section head
+{
+  <style type="text/css">
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #E5E5E5;
+    }
+
+    .form-signin {
+      border: 1px solid #D8D8D8;
+      border-bottom-width: 2px;
+      border-top-width: 0;
+      background-color: #FFF;
+      max-width: 350px;
+      padding: 19px 29px 29px;
+      margin: 0 auto 20px;
+      background-color: #fff;
+      border: 1px solid #F5F5F5;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+    }
+
+      .form-signin .form-signin-heading {
+        font-size: 24px;
+        font-weight: 300;
+      }
+
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+  </style>
+}
+<!-- LINHA 1 -->
+<div class="row-fluid">
+    <!-- BLOCK -->
+    <div class="span12">
+        <div class="card">
+            <h2 class="card-heading simple">
+                <span>Registre-se!</span>
+            </h2>
+            <div class="card-body">
+
+                
+                
+                @using (Html.BeginForm("Registrar", "Usuario", FormMethod.Post))
+                {
+                    <ul style="list-style:none;">
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Nome)
+                            @Html.TextBoxFor(m => m.Usuario.Nome)
+                            @Html.ValidationMessage("Nome", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Login)
+                            @Html.TextBoxFor(m => m.Usuario.Login) 
+                            @Html.ValidationMessage("Login", new { style = "margin-left:10px" })
+                            
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Senha)
+                            @Html.PasswordFor(m => m.Usuario.Senha) 
+                            @Html.ValidationMessage("Senha", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            @*@Html.LabelFor(m => m.SenhaRpt)*@ <label>Repita a senha</label>
+                            @Html.PasswordFor(m => m.SenhaRpt) 
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Usuario.Email)
+                            @Html.TextBoxFor(m => m.Usuario.Email) 
+                            @Html.ValidationMessage("Email", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+                            <label for="Usuario_DataDeNascimento">Data De Nascimento</label>
+                            @*Html.LabelFor(m => m.Usuario.DataDeNascimento)*@
+                            
+                            @Html.TextBoxFor(m => m.Usuario.DataDeNascimento, new { Value = "", @class = "datepicker"})
+                            @Html.ValidationMessage("Idade", new { style = "margin-left:10px" })
+                        </li>
+                        <li>
+
+                            @Html.LabelFor(m => m.Usuario.Sexo)
+                            @Html.DropDownListFor(m => m.Usuario.Sexo, Model.Sexos, "Selecione o sexo")
+                            @Html.ValidationMessage("Sexo", new { style = "margin-left:10px" })                                                        
+                            
+                        </li>
+                    </ul>
+                    <br />
+                    @Html.HiddenFor(m => m.Usuario.IdUsuario)
+                    @Html.HiddenFor(m => m.Usuario.UrlImagem)
+                   <div class="form-actions">
+                      <button type="submit" class="btn btn-primary">Registrar</button>
+                      <a class="btn " href="/Acesso">Voltar</a>
+                    </div>                    
+                }
+                
+            </div>
+
+            
+        </div>
+    </div>
+    <!-- END BLOCK -->
+</div>
+<!-- END LINHA 2 -->

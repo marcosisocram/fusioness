@@ -1,0 +1,25 @@
+﻿@model Fusioness.FusionessWS.EventoUsuario
+@if (Model.DataInicial != null && Model.DataInicial.HasValue)
+{
+    <div id="divMeuTempoNoEvento">
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var campoTempo = $('#divMeuTempoNoEvento #textoMeuTempoNoEvento');
+                atualizaTempo(campoTempo);
+
+                function atualizaTempo(campoTempo) {
+                    if (campoTempo) {
+                        var urlMeuTempo = location.protocol + "//" + location.host + "/" + "@Url.Action("MeuTempoNoEvento", "Evento")";
+                        $.post(urlMeuTempo, { "eventoUsuario.IdUsuario": @Model.IdUsuario, "eventoUsuario.IdEvento": @Model.IdEvento }, function(data) {
+                            $(campoTempo).text(data);
+                        }).fail(function() {
+                            $(campoTempo).text("00:00:00");
+                        });
+                    }
+                }
+            });
+        </script>
+    
+        <span>Meu Tempo: </span><strong id="textoMeuTempoNoEvento">00:00:00</strong>
+    </div>
+}

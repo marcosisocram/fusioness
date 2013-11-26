@@ -1,0 +1,106 @@
+﻿@model Fusioness.FusionessWS.Rota
+function initializeMap@(Model.IdRota) () {
+    var mapOptions = {
+    zoom: 3,
+    center: new google.maps.LatLng(0, -180),
+    disableDefaultUI: false,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+
+    var map = new google.maps.Map(document.getElementById('map-canvas-@(Model.IdRota)'),
+        mapOptions);
+
+    var flightPlanCoordinates = [
+    @foreach (var item in Model.Coordenadas)
+    {
+        <text>
+            new google.maps.LatLng(@item.Latitude, @item.Longitude),
+        </text>
+    }  
+
+    ];
+    var flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+    });
+
+    var markerBlue = {
+        url: '../../Content/images/marker_blue.png',
+        // This marker is 20 pixels wide by 32 pixels tall.
+        // The anchor for this image is the base of the flagpole at 0,32.
+        origin: new google.maps.Point(0,0),
+    };
+
+    var markerGreen = {
+        url: '../../Content/images/marker_green.png',
+        // This marker is 20 pixels wide by 32 pixels tall.
+        // The anchor for this image is the base of the flagpole at 0,32.
+        origin: new google.maps.Point(0,0),
+    };
+
+    var markerOrange = {
+        url: '../../Content/images/marker_orange.png',
+        // This marker is 20 pixels wide by 32 pixels tall.
+        // The anchor for this image is the base of the flagpole at 0,32.
+        origin: new google.maps.Point(0,0),
+    };
+
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < flightPlanCoordinates.length; i++) {
+        bounds.extend(flightPlanCoordinates[i]);
+    }
+
+    var firstCoordinate = flightPlanCoordinates[0];
+    //Adiciona flag para o início do trajeto
+    var marker1 = new google.maps.Marker({
+        position: firstCoordinate,
+        map: map,
+        icon: markerGreen,
+        title: 'Início do percurso'
+    });
+        
+    var lastCoordinate = flightPlanCoordinates[(flightPlanCoordinates.length)-1];
+    //Adiciona flag para o fim do trajeto
+    var marker2 = new google.maps.Marker({
+        position: lastCoordinate,
+        map: map,
+        icon: markerBlue,
+        title: 'Fim do percurso'
+    });
+
+    @{int count = 0;}
+    @foreach (var item in Model.Coordenadas.Where(c => c.IdTipoCoordenada == 2))
+    {
+        <text>
+    var @("contentString" + count)  = 
+        @Html.Raw(string.Format("\'<div id=\"content\"><div id=\"siteNotice\"></div><h5>{0} - <a class=\"deleteButton\" href=\"/Rota/RemoverPontoDeReferencia/{1}\" onclick=\"javascript:return confirm(\\'Tem certeza que quer deletar o ponto de referência?\\')\">Deletar</a></h5><div id=\"bodyContent\">{2}<p>{3}</p></div></div>\'",
+        item.NomePonto.ToUpper(),
+        item.IdCoordenada,
+        string.IsNullOrEmpty(item.UrlImagemPonto) ? "" : "<img width=\"250px\" src=\""+Fusioness.Controllers.BaseController.ObterUrlBaseAvatar()+item.UrlImagemPonto+"\" class=\"img-rounded\"/><p><a class=\"deleteButton\" href=\"/Rota/RemoverImagem/"+item.IdCoordenada+"\" onclick=\"javascript:return confirm(\\'Tem certeza que quer deletar a imagem?\\')\">Remover Imagem</a></p>",
+                item.DescricaoPonto));
+
+            var @("infoWindow" + count) = new google.maps.InfoWindow({
+                content: @("contentString" + count),
+                maxWidth: 200
+            });
+            var @("position" + count) = new google.maps.LatLng(@item.Latitude, @item.Longitude);
+            var @("marker" + count) = new google.maps.Marker({
+                position: @("position" + count),
+                map: map,
+                icon: markerOrange,
+                title: '@WebUtility.HtmlDecode(item.NomePonto)'
+            });
+            google.maps.event.addListener(@("marker" + count), 'click', function() {
+                @("infoWindow" + count).open(map,@("marker" + count));
+            })
+        </text>
+        count++;
+    }
+
+    map.fitBounds(bounds);
+
+    flightPath.setMap(map);
+}

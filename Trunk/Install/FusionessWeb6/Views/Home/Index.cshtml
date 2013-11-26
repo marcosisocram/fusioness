@@ -1,0 +1,156 @@
+﻿@model Fusioness.Models.Home.IndexModel
+@{
+  ViewBag.Title = "Index";
+  Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+<script type="text/javascript">
+    function ExibirModalConvidarProEmail() {
+        $("#modalConvidarPorEmail").modal('show');
+    }
+    function BuscarEvento() {
+        var url = '/Evento/BuscarEventos/?palavra=' + $('#txtBuscaEventos').val();
+        window.location = url;
+    }
+
+    function VerPerfilUsuario(idusuario) {
+        window.location = '/Usuario/VerPerfilUsuario?IdUsuario=' + idusuario;
+    }
+</script>
+
+<!-- FOTO -->
+
+<div class="card people">
+    <div class="card-top blue">
+        <a href="javascript:void(0);">
+            <img src="@Fusioness.Controllers.BaseController.ObterImagemUsuarioLogado(Request.RequestContext.HttpContext)" title="Sua Foto" />
+        </a>
+    </div>
+    <div class="card-info">
+        <a class="title" id="lblNomeDoUsuario" href="/Usuario/VerPerfilUsuario?IdUsuario=@Model.User.IdUsuario">@Model.User.Nome</a>
+    </div>
+    <div class="card-bottom">
+        <button class="btn btn-primary" onclick="VerPerfilUsuario(@Model.User.IdUsuario);">Ver Perfil</button>
+    </div>
+</div>
+
+@if (Model.ConvitesNaoConfirmados != null && Model.ConvitesNaoConfirmados.Count > 0) 
+    {
+        <div class="row-fluid">
+            <div class="span12">
+            <div class="card">
+                <h2 class="card-heading simple">
+                    Você possui <span class="badge badge-success">@Model.ConvitesNaoConfirmados.Count</span> convite(s) de amizade!</h2>
+                <div class="card-body">
+                    <table style="margin-bottom:10px;">
+                        @foreach (var usuario in Model.ConvitesNaoConfirmados)
+	                    {
+		                    <tr>
+                               <!-- <td>
+                                    @usuario.Nome
+                                </td> -->
+                                <td>
+                                    @Html.ActionLink("Quem te convida: " + @usuario.Nome, "VerPerfilUsuario", "Usuario", new { IdUsuario=usuario.IdUsuario }, new { @class = "btn btn-info" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Aceitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario=usuario.IdUsuario, IsAceitar=true }, new { @class = "btn btn-success" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Rejeitar Convite", "AceitarRejeitarConvite", "Contato", new { IdUsuario=usuario.IdUsuario, IsAceitar=false }, new { @class = "btn btn-danger" })
+                                </td>
+		                    </tr>
+	                    }
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    }
+
+@if (Model.EventosNaoConfirmados != null && Model.EventosNaoConfirmados.Count > 0) 
+    {
+        <div class="row-fluid">
+            <div class="span12">
+            <div class="card">
+                <h2 class="card-heading simple">
+                    Você possui <span class="badge badge-success">@Model.EventosNaoConfirmados.Count</span> convite(s) para eventos!</h2>
+                <div class="card-body">
+                    <table style="margin-bottom:10px;">
+                        @foreach (var evento in Model.EventosNaoConfirmados)
+	                    {
+		                    <tr>
+                                <td>
+                                    @Html.ActionLink("Evento: " + @evento.Titulo, "Detalhar", "Evento", new { idEvento=evento.IdEvento }, new { @class = "btn btn-info" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Aceitar Convite", "ResponderConviteEvento", "Evento", new {  idEvento=evento.IdEvento, idResposta=2 }, new { @class = "btn btn-success" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Rejeitar Convite", "ResponderConviteEvento", "Evento", new {  idEvento=evento.IdEvento, idResposta=1 }, new { @class = "btn btn-danger" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Ai! Estou indeciso...", "ResponderConviteEvento", "Evento", new {  idEvento=evento.IdEvento, idResposta=3 }, new { @class = "btn btn-warning" })
+                                </td>
+		                    </tr>
+	                    }
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    }
+<!-- LINHA 1 -->
+<div class="row-fluid">
+  <!-- BLOCK -->
+  <div class="span12">
+    <div class="card">
+      <h2 class="card-heading simple">Bem vindo à maior rede social de ciclistas que você já viu...</h2>
+      <div class="card-body">
+        <p>Conecte-se agora mesmo a milhares de outros apaixonados por ciclismo. Interaja, proponha rotas e crie eventos.</p>
+        <p><a class="btn" href="/Contato">Clique e encontre amigos!</a></p>
+          <p><a class="btn" onclick="ExibirModalConvidarProEmail()" href="#">Clique e convide amigos por e-mail!</a></p>
+      </div>
+    </div>
+  </div>
+  <!-- END BLOCK -->
+</div><!-- END LINHA 2 -->
+
+<!-- LINHA 2 -->
+<div class="row-fluid">
+  
+  <!-- BLOCK -->
+  <div class="span5">
+    <div class="card">
+      <h2 class="card-heading simple">Buscar Eventos</h2>
+      <div class="card-body" style="margin-bottom: 20px;">
+        @*@using (Html.BeginForm("DoSomething", "Home", FormMethod.Post, new { @class = "form-search" }))
+        {
+          Html.LabelFor(m => m.User.Nome)
+          @Html.TextBoxFor(m => m.User.Nome, new { @placeholder = "Nome", @class = "input-medium search-query" })                 
+          <input type="submit" class="btn btn-primary" value="Pesquisar" onclick="GoToEvento(); return false;"/>
+        }*@
+          <input id="txtBuscaEventos" type="text" class="input-medium search-query" name="busca" placeholder="Busque eventos">
+          <input type="submit" class="btn btn-primary" value="Pesquisar" onclick="BuscarEvento();"/>   
+      </div>
+    </div>
+  </div>
+  <!-- END BLOCK -->
+  
+</div> <!-- END LINHA 2 -->
+
+<div id="modalConvidarPorEmail" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    @using (Html.BeginForm("ConvidarPorEmail", "Home", FormMethod.Post))
+    {
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Digite os emails separados por virgula</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                <input type="text" id="emails" name="emails" />
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Enviar email</button>
+        </div>
+    }
+</div>

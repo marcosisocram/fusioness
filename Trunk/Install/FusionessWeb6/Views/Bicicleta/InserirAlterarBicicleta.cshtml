@@ -1,0 +1,52 @@
+﻿@model Fusioness.Models.Bicicletas.BicicletaModel
+@{
+    ViewBag.Title = "Inserir Bicicleta";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+}
+
+<!-- LINHA 1 -->
+<div class="row-fluid">
+    <!-- BLOCK -->
+    <div class="span12">
+        <div class="card">     
+             <h2 class="card-heading simple">
+                @Html.ActionLink("Voltar", "Index", "Evento", new { @class = "pull-right btn btn-primary" })
+                Detalhes da Bike:
+            </h2>       
+
+             <h5 style="font-size:13px; font-style:italic" class="card-heading simple">
+                Cadastre suas bicicletas para que todos saibam quais máquinas você tem a disposição para aquele próximo evento.
+            </h5>       
+            <div class="card-body">
+                @using (Html.BeginForm("InserirAlterarBicicleta", "Bicicleta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.LabelFor(m => m.Bicicleta.Modelo)
+                    @Html.TextBoxFor(m => m.Bicicleta.Modelo)
+                    @Html.ValidationMessage("Modelo", new { style = "margin-left:10px" })
+
+                    <br />
+    
+                    @Html.LabelFor(m => m.Bicicleta.Marca)
+                    @Html.TextBoxFor(m => m.Bicicleta.Marca)
+                    @Html.ValidationMessage("Marca", new { style = "margin-left:10px" })
+
+                    <br />
+                    
+                    <label for="ImagemBicicleta">Imagem</label>
+                    @Html.TextBoxFor(m => m.ImagemBicicleta, new { type = "file"})
+                    
+                    <br />
+                    
+                    @Html.HiddenFor(m => m.Bicicleta.IdBicicleta)
+                    @Html.HiddenFor(m => m.Bicicleta.UrlImagem)
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                }
+                   
+
+            </div>
+            <div class="card-body"></div>
+        </div>           
+    </div>
+    <!-- END BLOCK -->
+</div>
+<!-- END LINHA 2 -->

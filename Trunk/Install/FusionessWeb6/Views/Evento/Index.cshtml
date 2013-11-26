@@ -1,0 +1,174 @@
+﻿@using Fusioness.Controllers
+@using Fusioness.FusionessWS
+@model Fusioness.Models.Eventos.EventoModel
+@{
+    ViewBag.Title = "Eventos";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";
+    var urlTemp = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAEOCAYAAACkSI2SAAANmUlEQVR4Xu3cMW8USReG0TYIEAkhghARIhEixM8nIkKEEENsiQQSYFeDNFZvqXv69di+vuM9JJ++pTxVfar2cW97PGfn5+f/TP4QIECAQDuBM4FutycWRIAAgb8CAu0gECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M4AAQIEmgoIdNONsSwCBAgItDNAgACBpgIC3XRjLIsAAQIC7QwQIECgqYBAN90YyyJAgIBAOwMECBBoKiDQTTfGsggQICDQzgABAgSaCgh0042xLAIECAi0M0CAAIGmAgLddGMsiwABAgLtDBAgQKCpgEA33RjLIkCAgEA7AwQIEGgqINBNN8ayCBAgINDOAAECBJoKCHTTjbEsAgQICLQzQIAAgaYCAt10YyyLAAECAu0MECBAoKmAQDfdGMsiQICAQDsDBAgQaCog0E03xrIIECAg0M5AJPD79+/p/fv30+5/93+ePHkyvXnz5uDXf/78efr27dvFmLOzs+ndu3fT48ePF7/uz58/04cPH6YfP35c/P2jR4+mt2/fTg8ePIjWujXo/Px8+vTp07Sba/9nt65Xr15Nz549u/hnS9e89tpL11VxLVvX6u9PW0CgT3v/Slb/9evX6cuXL4tzrQV3KU7zF3jx4sX08uXL/7zmUjjnAT0U9hTi48eP026etT/zbzpXCXTFtaTXbNzpCgj06e5dycqTSC3dSW+FcLwr3gr67mKveid96BvN0jeP5Nr3X/f06dPp9evXf/9vxbWUbL5Jbl1AoG99C3ovYB61+d3y/NHFeBc93j3u75bX/vlOYJxn/7hh/jVLjyFSvTGa89iPIU6+EczXNX6DuulrSa/ZuNMXEOjT38MbvYL5nfD8scQ8amM45/EeYzd/vfld59o/313cob9LL36M8PiIZR7VrUDPY7/0iOemryW9ZuNOX0CgT38Pb+UKxjvb/fPh8U51HuG1hY5fM8ZzHvz93ep4Nz6f55i77ssEer6e8fqOuZZb2UCTnoSAQJ/ENvVa5KEILwXq+/fvFz+Y23q3xNLfr8Vz6THL7u53/i6Q5BvEeJd+6N0p4385jD+4PPRfFuOjnK079V67bjW3ISDQt6F+wnOOP/wbA5j+YG3+dcdGbembwcOHDy/ecZIGcO2Z8dI2Hbp73o0/9lpO+EhY+g0KCPQN4t61l156d8J4x5sGev51V4naPK67ON+/f3/6+fPnlP5AcXxnx1XungX6rp34278egb79PTjJFaxFdQz0Woh3F72P4VUCPT6e2GMmjzbGOG/dcc/Hr4X8qtdykofBom9MQKBvjPbuv/BSsMZAH3oL2j6I9+7du/gtxcs8g94LH/M2ufE3HLd+K3Lrh39LaznmWu7+qXGFlxEQ6MtoGfsfgaUf3u0eMRz6IV3yNcm7OOYLWfoFlKXfVNx/zRjnQ2PXwrv2W41bIV96R4pjRWBNQKCdjVWBrfcOr73fef6DxOQOevcZG8e+d3jtmffar6Bf5geCa98Eth6FHHstjiKBUUCgnYlVgfFucB698X3I8xCPd7T758Hj6619zfzRwNZ7mscY/vr16+ItfeM3h63XOnQULnPn6zcJ/Ut1XQICfV2Sd/R1ks+vGJ+1Jp9Fccy7P8Y716VfQ9+9g2P+SXXzxxdbnw+y38KlO+TL/DZj8k6WrbvwO3qcXNYlBQT6kmD/x+HjM9vRYOkZ7lakrvppdoee9c5jur/rH8N9aB+3PsgpeWbt0+z+j/+mXP81C/T1m97JV1wKTnIXON61XtfnQR/6vI+lxy/Pnz9f/cjUccOuI9C71/R50HfyX4XSixLoUm6TESBAIBcQ6NzKSAIECJQKCHQpt8kIECCQCwh0bmUkAQIESgUEupTbZAQIEMgFBDq3MpIAAQKlAgJdym0yAgQI5AICnVsZSYAAgVIBgS7lNhkBAgRyAYHOrYwkQIBAqYBAl3KbjAABArmAQOdWRhIgQKBUQKBLuU1GgACBXECgcysjCRAgUCog0KXcJiNAgEAuINC5lZEECBAoFRDoUm6TESBAIBcQ6NzKSAIECJQKCHQpt8kIECCQCwh0bmUkAQIESgUEupTbZAQIEMgFBDq3MpIAAQKlAgJdym0yAgQI5AICnVsZSYAAgVIBgS7lNhkBAgRyAYHOrYwkQIBAqYBAl3KbjAABArmAQOdWRhIgQKBUQKBLuU1GgACBXECgcysjCRAgUCog0KXcJiNAgEAuINC5lZEECBAoFRDoUm6TESBAIBcQ6NzKSAIECJQKCHQpt8kIECCQCwh0bmUkAQIESgUEupTbZAQIEMgFBDq3MpIAAQKlAgJdym0yAgQI5AICnVsZSYAAgVIBgS7lNhkBAgRyAYHOrYwkQIBAqYBAl3KbjAABArmAQOdWRhIgQKBUQKBLuU1GgACBXECgcysjCRAgUCog0KXcJiNAgEAuINC5lZEECBAoFRDoUm6TESBAIBcQ6NzKSAIECJQKCHQpt8kIECCQCwh0bmUkAQIESgUEupTbZAQIEMgFBDq3MpIAAQKlAgJdym0yAgQI5AICnVsZSYAAgVIBgS7lNhkBAgRyAYHOrYwkQIBAqYBAl3KbjAABArmAQOdWRhIgQKBUQKBLuU1GgACBXECgcysjCRAgUCog0KXcJiNAgEAuINC5lZEECBAoFRDoUm6TESBAIBcQ6NzKSAIECJQKCHQpt8kIECCQCwh0bmUkAQIESgUEupTbZAQIEMgFBDq3MpIAAQKlAgJdym0yAgQI5AICnVsZSYAAgVIBgS7lNhkBAgRyAYHOrYwkQIBAqYBAl3KbjAABArmAQOdWRhIgQKBUQKBLuU1GgACBXECgcysjCRAgUCog0KXcJiNAgEAuINC5lZEECBAoFRDoUm6TESBAIBcQ6NzKSAIECJQKCHQpt8kIECCQCwh0bmUkAQIESgUEupTbZAQIEMgFBDq3MpIAAQKlAgJdym0yAgQI5AICnVsZSYAAgVIBgS7lNhkBAgRyAYHOrYwkQIBAqYBAl3KbjAABArmAQOdWRhIgQKBUQKBLuU1GgACBXECgcysjCRAgUCog0KXcJiNAgEAuINC5lZEECBAoFRDoUm6TESBAIBcQ6NzKSAIECJQKCHQpt8kIECCQCwh0bmUkAQIESgUEupTbZAQIEMgFBDq3MpIAAQKlAgJdym0yAgQI5AICnVsZSYAAgVIBgS7lNhkBAgRyAYHOrYwkQIBAqYBAl3KbjAABArmAQOdWRhIgQKBUQKBLuU1GgACBXECgcysjCRAgUCog0KXcJiNAgEAuINC5lZEECBAoFRDoUm6TESBAIBcQ6NzKSAIECJQKCHQpt8kIECCQCwh0bmUkAQIESgUEupTbZAQIEMgFBDq3MpIAAQKlAgJdym0yAgQI5AICnVsZSYAAgVIBgS7lNhkBAgRyAYHOrYwkQIBAqYBAl3KbjAABArmAQOdWRhIgQKBUQKBLuU1GgACBXECgcysjCRAgUCog0KXcJiNAgEAu8C/aKZGFxTQf2AAAAABJRU5ErkJggg==";
+}
+
+@section head{
+    <style type="text/css">
+        h4{font-weight:bold;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+        .card .card-body{padding: 20px}
+        .thumbnails{margin:10px 0}
+        ul.thumbnails{float: left; width: 350px; height: 450px;}
+        ul.thumbnails li{width: 100%; height: 100%;}
+        div.thumbnail{margin: 5px; height: 100%}
+        .imgContainer {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+        .thumbnail{position: relative;}
+        .btn-group{position: absolute;right: 10px;bottom: 10px;}
+
+        .descricaoContainer{
+            max-width: 100%;
+            max-height: 160px;
+            display: block; /* Fallback for non-webkit */
+            display: -webkit-box;
+            margin: 0 auto;
+            -webkit-line-clamp:8;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        div.input-append { margin: 25px 0 -30px 55px; }
+        div.input-append #txtBusca{width:260px}
+    </style>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlImagePadrao = '@urlTemp';
+            var lat = '';
+            var lon = '';
+            navigator.geolocation.getCurrentPosition(setarPosicao);
+            
+            $('#btPesquisar').click(function () { filtrarPorTitulo($('#txtBusca').val()); });
+            
+            function filtrarPorTitulo(titulo)
+            {
+                console.log('Filtrou', titulo);
+                if (titulo) {
+                    ExibirCarregando();
+                    $.ajax({
+                        url: '@Url.Action("BuscarEventosPorTitulo", "Evento")',
+                        data: { txtTitulo: titulo, latitude : lat, longitude : lon },
+                        type: "post",
+                        dataType: "json",
+                        timeout: 10000,
+                        success: function(data) { 
+                            if (data && data.length > 0) {
+                                console.log(data);
+                                $('div.card-body').html('');
+                                $(data).each(function(i, o) { adicionarEvento(o.UrlImagem, o.Titulo, o.Distancia, o.Descricao, o.Id, o.SouDono); });
+                            }
+                        },
+                        error: function(x, t, m) {
+                            if(t==="timeout") {
+                                console.log('fail', "timeout");
+                            } else {
+                                console.log('fail', t);
+                            }
+                        }
+                    }).always(function () { EsconderCarregando(); });
+                }
+            }
+
+            function adicionarEvento(urlImageBG, titulo, distancia, descricao, idEvento, souDono) {
+                if (typeof urlImageBG === "undefined" || urlImageBG.length <= 0) urlImageBG = urlImagePadrao;
+                
+                var ulModel = $('<ul>').addClass('thumbnails');
+                var li = $('<li>');
+                var divThumb = $('<div>').addClass('thumbnail');
+                var divImgContainer = $('<div>').addClass('imgContainer').css({ 'background-image': 'url(' + urlImageBG + ')' });
+                var h4Titulo = $('<h4>').html(titulo + distancia);
+                var pDescricao = $('<p>').addClass('descricaoContainer').html(descricao);
+                var pBtnGroup = $('<p>');
+                var divBtnGroup = $('<div>').addClass('btn-group');
+                var aDetalhes = $('<a>').addClass('btn btn-primary').attr('href', '@Url.Action("Detalhar", "Evento")?idEvento=' + idEvento).html('Detalhes');
+                var aExcluir = $('<a>').addClass('btn btn-danger').attr('href', '@Url.Action("ExcluirEvento", "Evento")?idEvento=' + idEvento).html('Excluir');
+
+                divBtnGroup.append(aDetalhes);
+                if (souDono) divBtnGroup.append(aExcluir);
+
+                ulModel.append(
+                    li.append(
+                        divThumb.append([
+                            divImgContainer,
+                            h4Titulo,
+                            pDescricao,
+                            pBtnGroup.append(
+                                divBtnGroup
+                            )
+                        ])
+                    )
+                );
+
+                $('div.card-body').append(ulModel);
+            }
+
+            function setarPosicao(posicao) {
+                lat = posicao.latitude;
+                lon = posicao.longitude;
+            }
+        });
+    </script>
+}
+
+<!-- LINHA 1 -->
+<div class="row-fluid">
+    <!-- BLOCK -->
+    <div class="span12">
+        <div class="card">
+            <h2 class="card-heading simple">Lista de Eventos</h2>
+            @if (Model.ExibirPesquisa)
+            {
+                <div class="search input-append">
+                    <input class="span2" id="txtBusca" type="text">
+                    <button id="btPesquisar" class="btn" type="button">Pesquisar</button>
+                </div>
+            }
+            <div class="card-body" style="overflow: hidden">
+                @foreach (var item in Model.ListaEventos)
+                {
+                    string enderecoImage = string.IsNullOrEmpty(item.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(item.UrlImagem);
+                    
+                    <ul class="thumbnails">
+                        <li>
+                            <div class="thumbnail">
+                                <div class="imgContainer" style="background-image: url(@enderecoImage)"></div>
+                                <h4>@item.Titulo @if (item.Distancia != null){ <text> - </text> @item.Distancia <text> KM</text>}</h4>
+                                <p class="descricaoContainer">@(item.Descricao)</p>
+                                <p>
+                                    <div class="btn-group">
+                                        @Html.ActionLink("Detalhes", "Detalhar", "Evento", new { idEvento = item.IdEvento }, new { @class = "btn btn-primary" })
+                                        @if (Model.SouDonoDoEvento(item.IdEvento))
+                                        {
+                                            <!--<a href="#divExclusao" class="btn btn-danger" data-toggle="modal">Excluir Evento</a>-->
+                                            @Html.ActionLink("Excluir", "ExcluirEvento", "Evento", new { idEvento = item.IdEvento }, new { @class = "btn btn-danger" })
+                                        }
+                                    </div>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- END BLOCK -->
+</div>
+<!-- END LINHA 2 -->
+
+<!-- LINHA 2 -->
+<div class="row-fluid"></div>
+
+<!-- BLOCK -->
+
+
+

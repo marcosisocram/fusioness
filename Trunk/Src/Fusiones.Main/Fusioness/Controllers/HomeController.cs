@@ -37,7 +37,6 @@ namespace Fusioness.Controllers
             return RedirectToAction("index");
         }
 
-
         public async Task<ActionResult> ConvidarPorEmail(string emails)
         {
             try
@@ -71,14 +70,6 @@ namespace Fusioness.Controllers
             {
                 ExibirModal(e.Message);
             }
-            return RedirectToAction("Index");
-        }
-        
-
-     
-
-        public ActionResult ConvidarAmigosGMail()
-        {
             return RedirectToAction("Index");
         }
     }

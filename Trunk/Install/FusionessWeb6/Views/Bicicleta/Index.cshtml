@@ -1,0 +1,64 @@
+﻿@model Fusioness.Models.Bicicletas.BicicletaModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutBase.cshtml";    
+}
+
+@section head{
+    <style type="text/css">
+        h4{font-weight:bold;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+         .card .card-body {padding: 20px; }
+        .btn-group{ position: absolute;right: 10px;bottom: 10px; }
+        .card.people {width: 200px;}
+        .card.people:first-child {margin-left: 20px;}
+        .card.people .card-top { width: 210px; }
+    </style>
+}
+
+<!-- LINHA 1 -->
+<div class="row-fluid">
+  <!-- BLOCK -->
+  <div class="span12">
+    <div class="card">
+      <h2 class="card-heading simple">Minhas bicicletas</h2>
+      <div class="card-body">
+
+          @if (Model.ListaBicicletasPorUsuario.Count == 0)
+          {
+               <h2 class="card-heading simple">Ops, ainda não tem bicicleta cadastrada? Cadastre logo a sua...</h2>
+          }
+
+          @foreach (var bicicleta in Model.ListaBicicletasPorUsuario)
+          {
+              
+              <div class="card people">
+                   <div class="card-top blue">
+                      <a href="javascript:void(0);">
+                         <img src="@String.Format("{0}{1}", Fusioness.Controllers.BaseController.ObterUrlBaseAvatar(), bicicleta.UrlImagem)" alt="[usuario não possui foto]"/>
+                      </a>
+                   </div>
+                   <div class="card-info">
+                      <a class="title" href="javascript:void(0);"></a>
+                      <div class="desc">
+                          <label><b>Modelo:</b> @bicicleta.Modelo</label>                          
+                          <label><b>Marca: </b> @bicicleta.Marca</label>                          
+                      </div>
+                   </div>
+                  <div class="btn-group">
+                        @Html.ActionLink("Editar", "Detalhar", "Bicicleta", new { IdBicicleta = bicicleta.IdBicicleta }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Excluir", "ExcluirBicicleta", "Bicicleta", new { IdBicicleta = bicicleta.IdBicicleta }, new { @class = "btn btn-danger" })
+                </div>
+                </div> 
+              
+              
+                                          
+          }        
+      </div>
+    </div>
+      
+    </div>
+  <!-- END BLOCK -->
+</div><!-- END LINHA 2 -->
+
+<!-- LINHA 2 -->
+<div class="row-fluid"></div>
