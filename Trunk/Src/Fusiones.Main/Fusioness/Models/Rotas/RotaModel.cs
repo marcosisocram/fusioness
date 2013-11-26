@@ -40,10 +40,11 @@ namespace Fusioness.Models.Rotas
             TiposDeQualidade = Servico.ListarQualidadesRota();
         }
         
-        public double TempoMedio(int idRota)
+        public string TempoMedio(int idRota)
         {
             MainService Servico = new MainService();
-            return Servico.ConsultarDuracaoRota(idRota);
+            var tempo = Servico.ConsultarDuracaoRota(idRota);
+            return tempo.ToString();
         }
      
     }
