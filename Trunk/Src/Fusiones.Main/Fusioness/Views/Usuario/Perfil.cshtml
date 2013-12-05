@@ -1,4 +1,5 @@
 ﻿@using Fusioness.FusionessWS
+@using Fusioness.Controllers
 @model Fusioness.Models.Usuarios.UsuarioModel
 @{
     ViewBag.Title = "Index";
@@ -130,7 +131,7 @@
                         foreach (var evento in Model.UltimosEventos)
                         {
                         <div class="card people">
-                            <div class="imagemEvento card-top blue" style="background-image: url(@(string.IsNullOrEmpty(evento.UrlImagem) ? urlTemp : evento.UrlImagem))">
+                            <div class="imagemEvento card-top blue" style="background-image: url(@(string.IsNullOrEmpty(evento.UrlImagem) ? urlTemp : @BaseController.ObterUrlImagemCompleta(evento.UrlImagem)))">
                                 <a href="@Url.Action("Detalhar", "Evento", new { idEvento = evento.IdEvento })">
                                     <div style="width: 100%;height: 100%;"></div>
                                 </a>
