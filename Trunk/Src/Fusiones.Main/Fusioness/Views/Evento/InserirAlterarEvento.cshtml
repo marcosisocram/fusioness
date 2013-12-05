@@ -14,7 +14,7 @@
         $(document).ready(function () {
 
             // Chamando função de carregamento de rota.
-            carregarRota();
+            carregarRota(@Model.Evento.IdRota);
 
             $('#btConvidarAmigos').click(function () {
                 var form = $('#btConvidarAmigos').closest('form');
@@ -37,18 +37,16 @@
             });
 
             $('#Evento_IdRota').change(function () {
-                carregarRota();
+                carregarRota($(this).val());
             });
-
-            
 
         });
 
-        function carregarRota()
+        function carregarRota(idRota)
         {
             var mensagemFail = "Oops, não foi possível efetuar a operação."
             var modalClone = $('#divModalGlobal').clone();
-            var idRota = $('#Evento_IdRota').val();
+
             var initialize;
             modalClone.find('.modal-title').html("Carregando");
             if (idRota == "") {
@@ -349,7 +347,7 @@
                             {
                                 <tr>
                                     <td><input type="checkbox" name="idsAmigos" value="@amigo.IdUsuario" /></td>
-                                    <td><img src="@amigo.UrlImagem" width="25" height="25" /></td>
+                                    <td><img src="@BaseController.ObterUrlImagemCompleta(amigo.UrlImagem)" width="25" height="25" /></td>
                                     <td>@amigo.Nome</td>
                                 </tr>
                             }
