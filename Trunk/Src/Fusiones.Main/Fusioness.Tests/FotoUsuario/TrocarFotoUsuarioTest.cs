@@ -12,6 +12,7 @@ namespace Fusioness.Tests.AdcFotosUsuario
         [TestMethod]
         public void TrocarFoto()
         {            
+		//comentar teste para dar build
             /*var usuarioBus = new UsuariosBusiness();
             var usuario = new Usuario() { IdUsuario = 4 };
             usuario = usuarioBus.ObterUsuarioPorId(usuario); // Previamente cadastrado
